@@ -1,0 +1,66 @@
+{
+  "slug": "branch-naming",
+  "title": "Branch Naming Conventions",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Branch names might seem trivial, but on a team with dozens of branches, good naming makes the difference between order and chaos. Swipe right for GOOD branch names and left for BAD ones.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Branch Names = Folder Labels",
+      "body": "Imagine a filing cabinet where every folder is labeled \"stuff\" or \"misc.\" You'd never find anything. Now imagine folders labeled \"2024-taxes,\" \"car-insurance,\" \"medical-receipts.\" Instantly useful. Branch names work the same way -- good names make a project manageable, bad names create chaos."
+    },
+    {
+      "type": "text",
+      "title": "The Naming Convention",
+      "body": "Most teams use a **prefix/description** pattern:\n\n- `feature/user-authentication` -- Adding something new\n- `fix/login-crash` -- Fixing a bug\n- `hotfix/security-patch` -- Urgent production fix\n\nUse lowercase letters, hyphens instead of spaces, and keep it short but descriptive."
+    },
+    {
+      "type": "text",
+      "title": "Common Mistakes to Avoid",
+      "body": "- **No spaces or capitals** -- Some tools handle them poorly\n- **No vague names** -- `my-branch` or `test123` tells nobody anything\n- **No novels** -- Keep it under 30 characters when possible\n- **No special characters** -- Stick to letters, numbers, hyphens, and forward slashes"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Name branches with a prefix and short description using lowercase and hyphens -- like `feature/dark-mode` or `fix/login-crash`."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "feature/user-authentication",
+        "isGoodPractice": true,
+        "explanation": "This follows a clear convention: a category prefix (feature/) followed by a descriptive name using hyphens. Anyone on the team can tell at a glance that this branch adds a new feature related to user authentication."
+      },
+      {
+        "id": "card-2",
+        "content": "my-branch",
+        "isGoodPractice": false,
+        "explanation": "Whose branch? What does it do? When a project has 50 branches, 'my-branch' tells nobody anything. Use a descriptive name that explains what the branch is for, like 'feature/dark-mode' or 'fix/login-crash'."
+      },
+      {
+        "id": "card-3",
+        "content": "fix/header-overflow-on-mobile",
+        "isGoodPractice": true,
+        "explanation": "Great name! The 'fix/' prefix indicates it's a bug fix, and the description clearly explains what bug is being fixed. A teammate can review the pull request and immediately understand the context."
+      },
+      {
+        "id": "card-4",
+        "content": "test123",
+        "isGoodPractice": false,
+        "explanation": "This looks like a throwaway name. Even for experiments, use something like 'experiment/new-api-approach'. Names like 'test123' pile up as mystery branches that nobody is willing to delete because nobody knows what they contain."
+      },
+      {
+        "id": "card-5",
+        "content": "Feature/Add New Dashboard With Updated Charts And User Preferences",
+        "isGoodPractice": false,
+        "explanation": "Branch names shouldn't have spaces or capital letters (some systems handle them poorly). Keep it short and use hyphens: 'feature/dashboard-redesign'. The pull request description is where long explanations go."
+      }
+    ],
+    "glossaryTerms": ["branch", "branch-naming", "feature-branch"]
+  }
+}

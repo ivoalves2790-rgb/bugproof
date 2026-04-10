@@ -1,0 +1,74 @@
+{
+  "slug": "error-types-js",
+  "title": "JavaScript Error Types",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "JavaScript has several built-in error types and each one tells you something different about what went wrong. Knowing the type helps you fix bugs faster. For each statement, swipe RIGHT if it's correct or LEFT if it's wrong.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Error Types Are Like Medical Symptoms",
+      "body": "When you go to a doctor, they don't just say 'you're sick.' They identify the type: a cold, a sprain, an allergy. JavaScript errors work the same way. Each error type tells you a different category of problem, which points you toward a different kind of fix."
+    },
+    {
+      "type": "text",
+      "title": "The Four Main Error Types",
+      "body": "JavaScript has four error types you'll see most often:\n\n1. **SyntaxError** -- your code has a grammar mistake and can't even run\n2. **ReferenceError** -- you used a variable name that doesn't exist\n3. **TypeError** -- you tried an operation on the wrong kind of value\n4. **RangeError** -- a number is outside the allowed range"
+    },
+    {
+      "type": "code_example",
+      "title": "Spotting the Difference",
+      "language": "javascript",
+      "code": "// SyntaxError: missing closing bracket\nfunction greet( { console.log('hi'); }\n\n// ReferenceError: variable doesn't exist\nconsole.log(userName);\n\n// TypeError: wrong operation for this type\nconst num = 42;\nnum.toUpperCase();",
+      "annotation": "Each error type points to a different kind of mistake. SyntaxError means broken grammar, ReferenceError means a missing name, TypeError means a mismatched operation."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The error type is your first clue. SyntaxError means check your punctuation. ReferenceError means check your variable names. TypeError means you're using a value in a way it doesn't support."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A ReferenceError means you used a variable name that doesn't exist.",
+        "isGoodPractice": true,
+        "explanation": "ReferenceError happens when JavaScript can't find the variable you're referring to. Common causes: typos in variable names, using a variable before declaring it, or forgetting to import something. Example: console.log(userName) when you named it 'username' (lowercase n)."
+      },
+      {
+        "id": "card-2",
+        "content": "A TypeError means you used the wrong type of quotes around a string.",
+        "isGoodPractice": false,
+        "explanation": "TypeError means you tried to do something with a value that doesn't support that operation. For example, calling .map() on a number, or trying to invoke something that isn't a function. Wrong quotes would cause a SyntaxError, not a TypeError."
+      },
+      {
+        "id": "card-3",
+        "content": "A SyntaxError means JavaScript couldn't even understand your code enough to run it.",
+        "isGoodPractice": true,
+        "explanation": "SyntaxError is like a grammar error in English -- JavaScript can't parse what you wrote. Missing brackets, extra commas, forgetting to close a string -- these all prevent the code from running at all. The code never executes; it fails at the parsing stage."
+      },
+      {
+        "id": "card-4",
+        "content": "TypeError: x is not a function means the variable x doesn't exist.",
+        "isGoodPractice": false,
+        "explanation": "If x didn't exist, you'd get a ReferenceError. 'x is not a function' means x DOES exist, but it's not a function -- maybe it's a string, a number, or undefined. A common cause: you imported something incorrectly and it came in as undefined, then you tried to call it with parentheses."
+      },
+      {
+        "id": "card-5",
+        "content": "RangeError usually means a number is outside the allowed range, like an invalid array length.",
+        "isGoodPractice": true,
+        "explanation": "RangeError fires when a value isn't in the set or range of allowed values. Common examples: creating an array with a negative length (new Array(-1)), infinite recursion that blows the call stack, or passing an invalid radix to Number.toString()."
+      },
+      {
+        "id": "card-6",
+        "content": "All JavaScript errors will crash your program and stop it completely.",
+        "isGoodPractice": false,
+        "explanation": "Errors only crash the current execution path. In a browser, one error in a click handler doesn't crash the whole page. In Node.js, unhandled errors in async code might not crash the process. And try-catch blocks can handle errors gracefully without crashing anything."
+      }
+    ],
+    "glossaryTerms": ["ReferenceError", "TypeError", "SyntaxError", "RangeError"]
+  }
+}

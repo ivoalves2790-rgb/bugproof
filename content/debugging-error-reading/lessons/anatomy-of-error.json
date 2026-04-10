@@ -1,0 +1,60 @@
+{
+  "slug": "anatomy-of-error",
+  "title": "Anatomy of an Error Message",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "A developer is trying to display a user's name on a profile page, but the app crashes. The error says: TypeError: Cannot read properties of undefined (reading 'name'). The bug is in how they access the user data.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Reading an Error Like a Mailing Address",
+      "body": "A mailing address has parts: name, street, city, zip. An error message has parts too: the error type, the description, the file name, and the line number. Just like you read an address from top to bottom to find a house, you read an error message piece by piece to find the bug."
+    },
+    {
+      "type": "text",
+      "title": "The Three Parts of Every Error",
+      "body": "Every error message has three key pieces:\n\n1. **Error type** -- the category (like `TypeError` or `ReferenceError`)\n2. **Error description** -- what specifically went wrong (like \"Cannot read properties of undefined\")\n3. **Location** -- the file and line number where the crash happened\n\nThe description is the most important part. It tells you exactly what your code tried to do that didn't work."
+    },
+    {
+      "type": "code_example",
+      "title": "Decoding 'Cannot read properties of undefined'",
+      "language": "javascript",
+      "code": "const user = undefined;\nconsole.log(user.name); // TypeError: Cannot read properties of undefined (reading 'name')",
+      "annotation": "This error means you tried to access .name on something that is undefined. The fix is to check if the value exists before accessing its properties."
+    },
+    {
+      "type": "text",
+      "title": "Optional Chaining to the Rescue",
+      "body": "JavaScript has a shortcut called **optional chaining** (`?.`). Instead of `data.user.name`, you write `data.user?.name`. The `?.` says: \"if the thing before me is undefined or null, just return undefined instead of crashing.\" It's a safe way to access nested properties."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "When you see 'Cannot read properties of undefined,' it means you tried to access a property on something that doesn't exist yet. Use optional chaining (?.) or a guard check to handle missing data safely."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "function displayProfile(data) {", "isBuggy": false },
+      { "line": 2, "text": "  const header = document.getElementById('header');", "isBuggy": false },
+      { "line": 3, "text": "  header.textContent = data.user.name;", "isBuggy": true },
+      { "line": 4, "text": "}", "isBuggy": false },
+      { "line": 5, "text": "", "isBuggy": false },
+      { "line": 6, "text": "// Called with API response that has no user key", "isBuggy": false },
+      { "line": 7, "text": "displayProfile({ status: 'ok' });", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "The error says: TypeError: Cannot read properties of undefined (reading 'name'). The function is called with data that has no 'user' key. Tap the line that crashes.",
+    "fixes": [
+      { "id": "a", "text": "header.textContent = data.user?.name || 'Unknown';", "isCorrect": true },
+      { "id": "b", "text": "header.textContent = data.name;", "isCorrect": false },
+      { "id": "c", "text": "header.textContent = data.user.name || 'Unknown';", "isCorrect": false },
+      { "id": "d", "text": "header.textContent = data?.name;", "isCorrect": false }
+    ],
+    "explanation": "The error 'Cannot read properties of undefined (reading 'name')' tells you exactly what happened: something is undefined, and you tried to access '.name' on it. Here, data.user is undefined because the API response has no 'user' key. The fix uses optional chaining (?.) -- the question mark dot says 'if this is undefined, just stop here and return undefined instead of crashing.' The fallback '|| Unknown' provides a default value.",
+    "glossaryTerms": ["TypeError", "undefined", "optional-chaining"]
+  }
+}

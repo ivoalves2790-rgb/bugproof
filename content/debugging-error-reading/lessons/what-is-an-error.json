@@ -1,0 +1,74 @@
+{
+  "slug": "what-is-an-error",
+  "title": "What is an Error?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Errors aren't punishment -- they're messages from your computer trying to help you fix a problem. But a lot of beginners have the wrong idea about what errors mean. Swipe RIGHT if the statement is true, or LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Errors Are Like Check Engine Lights",
+      "body": "When your car's check engine light turns on, it doesn't mean the car is destroyed. It means the car detected a problem and is telling you about it. Error messages work the same way -- they're your code's way of saying 'something went wrong, here's what I know about it.'"
+    },
+    {
+      "type": "text",
+      "title": "What Actually Happens When Code Errors",
+      "body": "When your program hits a line it can't execute, it **stops running** at that point and creates an error message. The message includes:\n\n1. The **type** of error (what category of problem)\n2. A **description** (what specifically went wrong)\n3. The **location** (which file and line number)\n\nYour job is to read these three pieces and use them to find the fix."
+    },
+    {
+      "type": "code_example",
+      "title": "A Typical Error Message",
+      "language": "text",
+      "code": "TypeError: Cannot read properties of undefined (reading 'name')\n    at getUser (app.js:15)\n    at main (app.js:42)",
+      "annotation": "This error tells you three things: the type is TypeError, the problem is that something is undefined, and it happened at line 15 of app.js."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Errors are helpful messages, not punishments. Every error tells you what went wrong, what type of mistake it is, and exactly where to look. Read the message before trying to fix anything."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "An error message means you broke something permanently.",
+        "isGoodPractice": false,
+        "explanation": "Errors almost never break anything permanently. They're just your program saying 'I got confused and stopped.' You can fix the problem and run the code again. Think of errors as a pause button, not a self-destruct button."
+      },
+      {
+        "id": "card-2",
+        "content": "Error messages usually tell you which file and line number caused the problem.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the most useful parts of an error message. The file path and line number point you directly to where the problem happened. Always look for these first -- they save you from hunting through hundreds of lines of code."
+      },
+      {
+        "id": "card-3",
+        "content": "If your code has no errors, it's definitely working correctly.",
+        "isGoodPractice": false,
+        "explanation": "No errors just means your code didn't crash. It could still have logic bugs -- like a calculator that runs without errors but gives wrong answers. Errors catch syntax and runtime problems, but they can't tell if your logic is wrong."
+      },
+      {
+        "id": "card-4",
+        "content": "Experienced developers see errors every single day.",
+        "isGoodPractice": true,
+        "explanation": "Even senior developers with decades of experience see errors constantly. The difference is they don't panic -- they read the message, understand it, and fix the issue quickly. Seeing errors is a normal part of programming, not a sign you're bad at it."
+      },
+      {
+        "id": "card-5",
+        "content": "You should read the error message before trying to fix anything.",
+        "isGoodPractice": true,
+        "explanation": "This is the number one debugging rule. Most beginners skip the error message and start guessing at fixes. The error message is literally trying to tell you what went wrong. Read it first, and you'll fix things much faster."
+      },
+      {
+        "id": "card-6",
+        "content": "Red text in the console always means something is seriously wrong.",
+        "isGoodPractice": false,
+        "explanation": "Red text can mean different things. Some are critical errors that crash your app. Others are warnings about minor issues or even just deprecation notices about features that will be removed in the future. Always read the actual text, not just the color."
+      }
+    ],
+    "glossaryTerms": ["error", "runtime-error", "syntax-error"]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "what-makes-an-app-slow",
+  "title": "What Makes an App Slow?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Every app you've ever rage-quit was probably slow. But what actually makes an app feel slow? It's not always what you'd guess. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Performance = Restaurant Speed",
+      "body": "Imagine ordering food at a restaurant. A slow experience could be caused by many things: a slow kitchen, too many customers, a waiter who takes forever to bring the menu, or a cook who makes every dish from scratch instead of prepping ingredients ahead of time. **App performance** works the same way -- slowness can come from the network, the server, the browser, or your code."
+    },
+    {
+      "type": "text",
+      "title": "The Three Bottlenecks",
+      "body": "Most performance problems fall into three buckets:\n\n1. **Network** -- Too much data being sent, too many requests, slow server responses\n2. **Rendering** -- The browser struggling to paint pixels on screen\n3. **Computation** -- Your code doing too much work (heavy loops, unnecessary calculations)\n\nThe fix depends on which bucket the problem lives in."
+    },
+    {
+      "type": "text",
+      "title": "Perceived vs Actual Speed",
+      "body": "Here's a secret: **how fast your app feels** matters more than how fast it actually is. A page that shows a loading skeleton in 200ms and fills in data at 2 seconds *feels* faster than a blank page that loads everything at 1.5 seconds. Users hate staring at nothing."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Slow apps are caused by network problems, rendering bottlenecks, or heavy computation. How fast it feels to the user matters just as much as actual load time."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Loading a 5MB image for a tiny thumbnail is a common performance mistake.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the most common performance killers. If you display an image at 100x100 pixels, there's no reason to download a 5MB full-resolution file. Resize and compress images to match their display size."
+      },
+      {
+        "id": "card-2",
+        "content": "More JavaScript always means a slower page.",
+        "isGoodPractice": false,
+        "explanation": "It's not just the amount of JavaScript -- it's when and how it loads. A 500KB script that loads after the page is visible causes less perceived slowness than a 50KB script that blocks the page from rendering. Code splitting and lazy loading let you have lots of JavaScript without slowing the initial load."
+      },
+      {
+        "id": "card-3",
+        "content": "A loading spinner or skeleton screen can make an app feel faster even if load time is the same.",
+        "isGoodPractice": true,
+        "explanation": "Perceived performance is real performance from the user's perspective. Showing immediate visual feedback (a skeleton, spinner, or placeholder content) tells users something is happening. A blank screen with no feedback feels broken, even if it loads faster overall."
+      },
+      {
+        "id": "card-4",
+        "content": "Making 50 small API requests is just as fast as making 1 larger request.",
+        "isGoodPractice": false,
+        "explanation": "Each HTTP request has overhead: DNS lookup, TCP connection, TLS handshake, and round-trip latency. 50 requests means 50 times that overhead. Combining requests (or using techniques like batching and GraphQL) can dramatically reduce total load time."
+      },
+      {
+        "id": "card-5",
+        "content": "Performance optimization should always be the first thing you do when building an app.",
+        "isGoodPractice": false,
+        "explanation": "This is a classic trap called premature optimization. Build something that works first, then measure where the actual bottlenecks are, then optimize those specific spots. Guessing at performance problems wastes time and often optimizes the wrong thing."
+      }
+    ],
+    "glossaryTerms": ["perceived-performance", "bottleneck", "premature-optimization"]
+  }
+}

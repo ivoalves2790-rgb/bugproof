@@ -1,0 +1,9 @@
+{
+  "slug": "refactoring",
+  "title": "Refactoring",
+  "description": "Safely restructuring code without breaking things",
+  "order": 5,
+  "courseSlug": "code-organization",
+  "tier": "advanced",
+  "lessons": []
+}

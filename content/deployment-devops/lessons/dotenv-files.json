@@ -1,0 +1,57 @@
+{
+  "slug": "dotenv-files",
+  "title": "The .env File",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "A .env file is where you store environment variables locally. A developer's app can't connect to the database after cloning the repo. Their .env file is set up wrong. Find the bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": ".env = Your Private Settings File",
+      "body": "Think of a .env file like the settings page on your phone. It's personal to your device -- your wifi password, your email account, your preferences. You wouldn't copy your phone settings to someone else's phone. Similarly, each developer and each server has its own .env file with settings specific to that environment."
+    },
+    {
+      "type": "text",
+      "title": "The .env File Format",
+      "body": "A .env file is super simple -- just key=value pairs, one per line:\n\n- No spaces around the `=` sign\n- No quotes needed (usually)\n- Lines starting with `#` are comments\n- The file lives in your project's root directory\n- The filename is literally `.env` (starting with a dot)"
+    },
+    {
+      "type": "code_example",
+      "title": "A Typical .env File",
+      "language": "bash",
+      "code": "# Database\nDATABASE_URL=postgresql://localhost:5432/myapp\n\n# API Keys\nSTRIPE_SECRET_KEY=sk_test_abc123\nNEXT_PUBLIC_API_URL=https://api.example.com\n\n# App Settings\nNODE_ENV=development\nPORT=3000",
+      "annotation": "Note: Variables prefixed with NEXT_PUBLIC_ are exposed to the browser in Next.js. All others stay server-side only."
+    },
+    {
+      "type": "text",
+      "title": "The Golden Rule: Never Commit .env",
+      "body": "Your .env file contains secrets. **Always** add it to `.gitignore` so it never gets pushed to GitHub. Instead, create a `.env.example` file that shows which variables are needed (without the actual values) so other developers know what to set up."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The .env file stores environment variables locally as KEY=VALUE pairs. Never commit it to Git -- always add .env to your .gitignore file."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# .env file", "isBuggy": false },
+      { "line": 2, "text": "DATABASE_URL = postgresql://localhost:5432/myapp", "isBuggy": true },
+      { "line": 3, "text": "API_KEY=sk_live_abc123", "isBuggy": false },
+      { "line": 4, "text": "NODE_ENV=development", "isBuggy": false }
+    ],
+    "correctBuggyLine": 2,
+    "prompt": "The developer cloned the repo, created a .env file, but the app says DATABASE_URL is undefined. Look at the .env file and find what's wrong.",
+    "fixes": [
+      { "id": "a", "text": "DATABASE_URL=postgresql://localhost:5432/myapp", "isCorrect": true },
+      { "id": "b", "text": "export DATABASE_URL=postgresql://localhost:5432/myapp", "isCorrect": false },
+      { "id": "c", "text": "\"DATABASE_URL\": \"postgresql://localhost:5432/myapp\"", "isCorrect": false },
+      { "id": "d", "text": "DATABASE_URL: postgresql://localhost:5432/myapp", "isCorrect": false }
+    ],
+    "explanation": "The spaces around the = sign are the problem! In .env files, there should be NO spaces around the equals sign. 'DATABASE_URL = value' sets a variable called 'DATABASE_URL ' (with a trailing space) to ' value' (with a leading space), or more commonly, the parser just fails to read it. The correct format is 'DATABASE_URL=value' with no spaces.",
+    "glossaryTerms": ["dotenv", "gitignore", "environment-variable"]
+  }
+}

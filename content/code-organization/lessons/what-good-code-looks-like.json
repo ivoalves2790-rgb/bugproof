@@ -1,0 +1,63 @@
+{
+  "slug": "what-good-code-looks-like",
+  "title": "What Good Code Looks Like",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "This function works perfectly -- it processes an order, sends an email, and updates the database. But it violates a core principle of clean code. Find the line where the problem starts.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Good Code = Good Writing",
+      "body": "Good code is like good writing: each paragraph covers one topic, sentences are clear, and there's a logical flow. You don't need to be a genius to write good code, just like you don't need to be Shakespeare to write a clear email. The goal is that someone else (or future you) can read it without getting confused."
+    },
+    {
+      "type": "text",
+      "title": "The Single Responsibility Principle",
+      "body": "The most important rule of clean code: **each function should do one thing**.\n\nAsk yourself: 'Can I describe what this function does without using the word AND?' If not, it's doing too much.\n\n- 'This function validates the form' -- good, one thing\n- 'This function validates the form AND sends the email AND updates the database' -- bad, three things"
+    },
+    {
+      "type": "code_example",
+      "title": "One Function, One Job",
+      "language": "javascript",
+      "code": "// BAD: Does three things\nfunction processOrder(order) {\n  // 40 lines of validation...\n  // 30 lines of payment processing...\n  // 20 lines of email sending...\n}\n\n// GOOD: Each function does one thing\nfunction processOrder(order) {\n  validateOrder(order);\n  chargePayment(order);\n  sendConfirmationEmail(order);\n}",
+      "annotation": "The good version reads like a table of contents. You can understand the entire flow at a glance. If the email sending breaks, you know exactly where to look: sendConfirmationEmail()."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Good code has functions that do one thing, variables that describe their contents, and a structure you can navigate without a map. The single responsibility principle -- each function does one thing -- is the foundation of clean code."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "function handleCheckout(cart, user) {", "isBuggy": false },
+      { "line": 2, "text": "  let total = 0;", "isBuggy": false },
+      { "line": 3, "text": "  for (let item of cart.items) {", "isBuggy": true },
+      { "line": 4, "text": "    if (item.quantity < 1) throw new Error('Invalid quantity');", "isBuggy": false },
+      { "line": 5, "text": "    total += item.price * item.quantity;", "isBuggy": false },
+      { "line": 6, "text": "    if (item.price > 1000) {", "isBuggy": false },
+      { "line": 7, "text": "      sendEmail(user.email, 'High-value item in cart');", "isBuggy": false },
+      { "line": 8, "text": "    }", "isBuggy": false },
+      { "line": 9, "text": "    db.query('UPDATE inventory SET stock = stock - ?', [item.quantity]);", "isBuggy": false },
+      { "line": 10, "text": "  }", "isBuggy": false },
+      { "line": 11, "text": "  const charge = stripe.charge(user.paymentMethod, total);", "isBuggy": false },
+      { "line": 12, "text": "  db.query('INSERT INTO orders VALUES (?)', [charge.id]);", "isBuggy": false },
+      { "line": 13, "text": "  sendEmail(user.email, 'Order confirmed: ' + charge.id);", "isBuggy": false },
+      { "line": 14, "text": "  return charge;", "isBuggy": false },
+      { "line": 15, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "This function validates items, calculates totals, sends emails, updates inventory, processes payment, creates an order, AND sends a confirmation -- all in one loop starting at line 3. Which line marks the start of the 'doing too much' problem?",
+    "fixes": [
+      { "id": "a", "text": "const validatedItems = validateCartItems(cart.items);\nconst total = calculateTotal(validatedItems);\nupdateInventory(validatedItems);\nconst charge = processPayment(user, total);\ncreateOrder(charge, user);\nsendConfirmation(user, charge);", "isCorrect": true },
+      { "id": "b", "text": "// Add comments explaining each section of the loop", "isCorrect": false },
+      { "id": "c", "text": "try { /* same code */ } catch(e) { /* handle error */ }", "isCorrect": false },
+      { "id": "d", "text": "for (let i = 0; i < cart.items.length; i++) {", "isCorrect": false }
+    ],
+    "explanation": "The loop starting at line 3 mixes validation, calculation, email sending, and database updates. If the payment fails on line 11, the inventory is already decremented and a notification email was already sent -- you can't undo those. The fix is splitting into separate functions: validate first, then calculate, then update inventory, then charge, then confirm. Option B (comments) doesn't fix the tangled logic. Option C (try-catch) doesn't separate the concerns. Option D changes loop syntax but not structure.",
+    "glossaryTerms": ["single-responsibility", "separation-of-concerns", "function-decomposition"]
+  }
+}

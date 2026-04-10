@@ -1,0 +1,16 @@
+{
+  "slug": "tables-and-schemas",
+  "title": "Tables & Schemas",
+  "description": "Learn how to structure your data into tables with columns, data types, and constraints that keep your data clean and consistent",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "tables-are-spreadsheets", "title": "Tables Are Like Spreadsheets", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "columns-and-data-types", "title": "Columns & Data Types", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "primary-keys", "title": "Primary Keys: Every Row's ID", "type": "incident_response", "order": 3, "difficulty": 1 },
+    { "slug": "not-null-and-defaults", "title": "NOT NULL & Default Values", "type": "bug_hunt", "order": 4, "difficulty": 1 },
+    { "slug": "creating-a-table", "title": "Creating Your First Table", "type": "terminal_sim", "order": 5, "difficulty": 1 },
+    { "slug": "schema-design-thinking", "title": "Thinking in Schemas", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

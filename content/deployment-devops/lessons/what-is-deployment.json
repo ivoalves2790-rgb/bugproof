@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-deployment",
+  "title": "What is Deployment?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "You've built your app and it runs great on your laptop. But how does it get from your machine to the actual internet where anyone can use it? That process is called deployment. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Deployment = Moving Day",
+      "body": "Imagine you've been cooking amazing meals in your home kitchen. Deployment is like opening a restaurant -- you're taking what works at home and setting it up so the public can enjoy it too. You need a location (server), a way for people to find you (domain name), and everything has to work even when 100 customers show up at once."
+    },
+    {
+      "type": "text",
+      "title": "What Deployment Actually Means",
+      "body": "Deployment is the process of taking your code from your computer and putting it on a server connected to the internet. Once deployed, anyone with the URL can visit your app.\n\nThe basic idea is simple:\n\n1. You write code on your computer\n2. You push that code to a server\n3. The server runs your code 24/7\n4. People visit your URL and see your app"
+    },
+    {
+      "type": "text",
+      "title": "Why It's Not Just Copy-Paste",
+      "body": "You can't just copy your project folder to a server and call it done. Your code needs to be **built** (optimized for speed), **configured** (connected to databases and services), and **served** (set up to handle web traffic). Modern tools automate most of this, but understanding what's happening helps when things go wrong."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Deployment is the process of putting your app on a server so anyone on the internet can use it. It involves building, configuring, and serving your code."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Deployment means putting your app on a server so people can access it through the internet.",
+        "isGoodPractice": true,
+        "explanation": "That's exactly what deployment is! You take code from your local computer and put it on a server that's always connected to the internet, so anyone with the URL can use your app."
+      },
+      {
+        "id": "card-2",
+        "content": "You need to manually copy every file to a server using USB drives to deploy.",
+        "isGoodPractice": false,
+        "explanation": "While this was sort of how things worked decades ago, modern deployment uses Git and automated tools. You push your code, and the platform handles the rest -- no USB drives needed!"
+      },
+      {
+        "id": "card-3",
+        "content": "Once deployed, your app runs on someone else's computer (a server) instead of yours.",
+        "isGoodPractice": true,
+        "explanation": "Exactly right. When you deploy, your code runs on a server in a data center somewhere. That server is always on, always connected, and can handle many visitors at once -- unlike your laptop."
+      },
+      {
+        "id": "card-4",
+        "content": "You only need to deploy once and your app will automatically update whenever you change your code.",
+        "isGoodPractice": false,
+        "explanation": "Changing code on your laptop doesn't automatically update the server. You need to deploy again each time you want changes to go live. However, CI/CD pipelines can automate this process (we'll learn about those later)."
+      },
+      {
+        "id": "card-5",
+        "content": "Your app can work perfectly on your computer but fail completely when deployed.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the most common problems in deployment! Differences between your local setup and the server -- missing environment variables, different software versions, or missing files -- can cause your app to break even though it works fine locally."
+      }
+    ],
+    "glossaryTerms": ["deployment", "server", "production"]
+  }
+}

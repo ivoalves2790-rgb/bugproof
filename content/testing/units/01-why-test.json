@@ -1,0 +1,16 @@
+{
+  "slug": "why-test",
+  "title": "Why Test?",
+  "description": "What tests are, why they matter, and how to think about testing",
+  "order": 1,
+  "courseSlug": "testing",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-tests", "title": "What Are Tests?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "why-tests-matter", "title": "Why Tests Matter", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "manual-vs-automated", "title": "Manual vs Automated Testing", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "testing-pyramid", "title": "The Testing Pyramid", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "without-tests", "title": "What Happens Without Tests", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "test-driven-thinking", "title": "Test-Driven Thinking", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "slug": "database-tools",
+  "title": "Database Tools & GUIs",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "You've just joined a team and need to look at the production database to debug an issue. But you've never connected to a remote database before. Let's walk through the process and learn about the tools developers use.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Database Tools = Different Ways to Read a Book",
+      "body": "You can read a book by going to the library (command line), using an e-reader (database GUI), or having someone read it to you (ORM in your code). All three get you the same content, just in different ways. Database tools are the same -- different interfaces to the same data."
+    },
+    {
+      "type": "text",
+      "title": "Three Ways to Access a Database",
+      "body": "Developers typically use one of these:\n\n1. **Command line** (`psql` for PostgreSQL, `sqlite3` for SQLite) -- fast, powerful, but text-only\n2. **GUI tools** (TablePlus, DBeaver, pgAdmin) -- visual, great for exploring data\n3. **From your code** (using an ORM or query builder) -- how your app accesses the database\n\nMost developers use a GUI for exploring and the command line or code for making changes."
+    },
+    {
+      "type": "text",
+      "title": "Connection Strings",
+      "body": "To connect to a database, you need a **connection string** -- an address that tells your tool where the database is:\n\n`postgresql://username:password@hostname:5432/database_name`\n\nThis includes: the database type, your login credentials, the server address, the port number, and which database to open. This string is usually stored in an environment variable for security."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "You can access a database through the command line, a visual GUI tool, or from your application code. Connection strings tell your tools where the database lives. Never hardcode connection strings in your source code -- use environment variables."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your team lead says: 'A user reports they can't see their orders. Check the database to see if their data exists. The connection info is in the .env file.' What's your first step?",
+        "choices": [
+          { "id": "a", "text": "Check the .env file for the database connection string", "nextNode": "found-env", "score": 10 },
+          { "id": "b", "text": "Open the production code and look for the database URL in the source files", "nextNode": "wrong-source", "score": 3 },
+          { "id": "c", "text": "Ask the team lead for the password", "nextNode": "partial-ask", "score": 5 }
+        ]
+      },
+      "found-env": {
+        "narrative": "You find the .env file with: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. Now you need to connect. Which tool do you use?",
+        "choices": [
+          { "id": "a", "text": "Use a GUI tool like TablePlus -- easier to browse and search data visually", "nextNode": "gui-choice", "score": 10 },
+          { "id": "b", "text": "Use the psql command line tool", "nextNode": "cli-choice", "score": 8 },
+          { "id": "c", "text": "Write a quick script in your app code to query the database", "nextNode": "code-choice", "score": 5 }
+        ]
+      },
+      "wrong-source": {
+        "narrative": "Connection strings should NEVER be in source code -- they contain passwords! The standard practice is to store them in .env files (which are not committed to git) or in environment variables set on the server. Check the .env file instead.",
+        "choices": [
+          { "id": "a", "text": "Right, check the .env file for the connection string", "nextNode": "found-env", "score": 5 }
+        ]
+      },
+      "partial-ask": {
+        "narrative": "That works, but the connection info should already be documented in the .env file -- that's the standard place teams store database credentials. Check there first so you don't need to bother your lead.",
+        "choices": [
+          { "id": "a", "text": "Let me check the .env file first", "nextNode": "found-env", "score": 7 }
+        ]
+      },
+      "gui-choice": {
+        "narrative": "You paste the connection string into TablePlus and connect. You can see all the tables visually. You navigate to the 'orders' table, search for the user's ID, and find... zero orders. But the 'users' table shows the user exists. What do you check next?",
+        "choices": [
+          { "id": "a", "text": "Check if the user's ID in the orders table matches their actual user ID", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Check if the orders table is empty for everyone", "nextNode": "end-good", "score": 7 }
+        ]
+      },
+      "cli-choice": {
+        "narrative": "You run psql with the connection string and connect. You query: SELECT * FROM orders WHERE user_id = 42; and get zero results. The user exists in the users table but has no orders. A GUI would have made browsing easier, but the command line works too!",
+        "choices": [
+          { "id": "a", "text": "Check if the user_id in recent orders matches this user", "nextNode": "end-great", "score": 10 }
+        ]
+      },
+      "code-choice": {
+        "narrative": "Writing code for a one-time query is overkill. A GUI tool or command line lets you explore data interactively, which is much faster for debugging. Save code-based queries for your application logic.",
+        "choices": [
+          { "id": "a", "text": "Let me use a GUI tool instead for quick exploration", "nextNode": "gui-choice", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "You discover the user recently changed their email and re-registered, creating a new account with user_id 87. Their old orders are linked to user_id 42. The data is there -- it's just linked to their old account! You report the finding to the team.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Great investigation! You found the connection string in the .env file (the right place), used an appropriate tool to connect, and diagnosed a user_id mismatch. This kind of database detective work is a daily task for backend developers."
+      },
+      "end-good": {
+        "narrative": "You check and other users DO have orders -- it's just this specific user who has none. That rules out a system-wide problem and points to a user-specific issue. Good systematic thinking!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Good approach! Checking whether the problem is user-specific or system-wide is a smart debugging strategy. The next step would be to look at related data (like the user's account history) to find why their orders are missing."
+      }
+    },
+    "glossaryTerms": ["connection-string", "gui", "psql", "environment-variable"]
+  }
+}

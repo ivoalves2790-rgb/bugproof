@@ -1,0 +1,16 @@
+{
+  "slug": "migrations",
+  "title": "Migrations & Evolution",
+  "description": "Learn how to safely change your database structure over time without losing data or breaking your app",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-migrations", "title": "Why Migrations Exist", "type": "swipe_to_judge", "order": 1, "difficulty": 2 },
+    { "slug": "writing-a-migration", "title": "Writing Your First Migration", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "alter-table", "title": "ALTER TABLE: Changing Structure", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "data-migrations", "title": "Data Migrations", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "rollbacks", "title": "Rolling Back Mistakes", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "migration-best-practices", "title": "Migration Best Practices", "type": "swipe_to_judge", "order": 6, "difficulty": 3 }
+  ]
+}

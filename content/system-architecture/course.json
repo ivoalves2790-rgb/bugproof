@@ -1,0 +1,17 @@
+{
+  "slug": "system-architecture",
+  "title": "System Architecture",
+  "description": "Frontend, backend, databases, APIs, and how requests flow",
+  "longDescription": "Every app you use has invisible plumbing behind the scenes. When you tap a button, a chain of events happens: your browser sends a request, a server processes it, a database stores or retrieves data, and a response comes back. This course reveals that hidden machinery. You'll understand how frontends and backends work together, what APIs actually are, how data flows through a system, and how to design apps that don't fall apart as they grow.",
+  "icon": "server",
+  "color": "#45B7D1",
+  "prerequisites": [],
+  "units": [
+    { "slug": "how-the-web-works", "title": "How the Web Works", "order": 1 },
+    { "slug": "frontend-backend", "title": "Frontend vs Backend", "order": 2 },
+    { "slug": "apis", "title": "APIs & Data Flow", "order": 3 },
+    { "slug": "databases-in-architecture", "title": "Databases in Architecture", "order": 4 },
+    { "slug": "scaling-patterns", "title": "Scaling & Patterns", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

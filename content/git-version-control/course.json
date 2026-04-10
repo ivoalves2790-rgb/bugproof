@@ -1,0 +1,22 @@
+{
+  "slug": "git-version-control",
+  "title": "Git & Version Control",
+  "description": "Commits, branches, merging, and undoing mistakes",
+  "longDescription": "Git is the backbone of modern software development. Whether you're working solo or on a team, Git tracks every change you make so you can experiment freely, collaborate without chaos, and recover from mistakes. This course takes you from zero to confident: you'll learn what Git actually does under the hood, how to save and organize your work with commits, create parallel timelines with branches, combine work with merges, sync with remote repositories like GitHub, and undo just about anything that goes wrong. By the end, you'll stop fearing the command line and start using Git like a safety net for your code.",
+  "icon": "git-branch",
+  "color": "#F05032",
+  "prerequisites": [],
+  "units": [
+    { "slug": "basics", "title": "Git Basics", "order": 1 },
+    { "slug": "branching", "title": "Branching", "order": 2 },
+    { "slug": "merging", "title": "Merging", "order": 3 },
+    { "slug": "remotes", "title": "Remotes & GitHub", "order": 4 },
+    { "slug": "undoing", "title": "Undoing Changes", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "quick-performance-wins",
+  "title": "Quick Performance Wins",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "You've inherited a slow React project and need to find quick performance wins. Let's use some command-line tools to measure the current state and apply fixes that make an immediate difference.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Low-Hanging Fruit First",
+      "body": "Before you renovate the whole kitchen, check if the fridge door is just left open. Most slow apps have a few obvious problems that account for 80% of the slowness. Fix those first and you'll see dramatic improvement with minimal effort. These are your **quick wins**."
+    },
+    {
+      "type": "text",
+      "title": "The Top Quick Wins",
+      "body": "The fastest ways to speed up most web apps:\n\n1. **Compress images** -- often cuts page weight by 50-80%\n2. **Enable gzip/brotli compression** -- shrinks text files (HTML, CSS, JS) by 60-80%\n3. **Add caching headers** -- returning visitors don't re-download unchanged files\n4. **Remove unused CSS/JS** -- many projects ship code nobody uses\n5. **Defer non-critical scripts** -- let the page render before loading analytics and widgets"
+    },
+    {
+      "type": "code_example",
+      "title": "Checking Your Bundle Size",
+      "language": "bash",
+      "code": "# See what's in your JavaScript bundle\nnpx webpack-bundle-analyzer dist/stats.json\n\n# Or for a quick size check\ndu -sh dist/\nls -lh dist/static/js/",
+      "annotation": "Understanding what's in your bundle is the first step. Often you'll find huge libraries being imported when only a small part is needed."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Quick performance wins include compressing images, enabling server compression, adding cache headers, removing unused code, and deferring non-critical scripts. Measure first, then fix the biggest problems."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["package.json", "src/", "public/images/hero.png", "dist/"],
+    "steps": [
+      {
+        "instruction": "First, let's check how big the production build is. Run the build command and see the output sizes.",
+        "expectedCommand": "npm run build",
+        "acceptAlternatives": ["yarn build", "npx next build"],
+        "output": "Creating an optimized production build...\n\nCompiled successfully.\n\nFile sizes after gzip:\n\n  582.4 KB  dist/static/js/main.chunk.js\n  124.8 KB  dist/static/js/vendors.chunk.js\n  8.2 KB    dist/static/css/main.css\n\nTotal bundle: 715.4 KB (gzipped)",
+        "hint": "Run the standard build command for a Node.js project: npm run build"
+      },
+      {
+        "instruction": "582 KB for main.chunk.js is massive! Let's analyze what's inside the bundle to find what's taking up space.",
+        "expectedCommand": "npx source-map-explorer dist/static/js/main.chunk.js",
+        "acceptAlternatives": ["npx webpack-bundle-analyzer dist/stats.json"],
+        "output": "Results:\n  moment.js          234.2 KB (40.2%)\n  lodash             142.8 KB (24.5%)\n  react-icons (all)   98.4 KB (16.9%)\n  app code            82.1 KB (14.1%)\n  other               24.9 KB  (4.3%)",
+        "hint": "Use npx source-map-explorer to analyze a JavaScript bundle file and see what's inside."
+      },
+      {
+        "instruction": "Moment.js is 234 KB -- over 40% of the bundle! It's a date library that includes locale data for every language. Let's replace it with a lightweight alternative. Install date-fns instead.",
+        "expectedCommand": "npm install date-fns",
+        "acceptAlternatives": ["yarn add date-fns", "npm i date-fns"],
+        "output": "added 1 package in 2.1s\n\n1 package is looking for funding\n  run `npm fund` for details",
+        "hint": "Install the date-fns package which is a modern, lightweight alternative to Moment.js."
+      },
+      {
+        "instruction": "Now let's also check the hero image size. Large unoptimized images are one of the most common performance killers.",
+        "expectedCommand": "ls -lh public/images/hero.png",
+        "acceptAlternatives": ["du -h public/images/hero.png"],
+        "output": "-rw-r--r--  1 user  staff  4.2M  public/images/hero.png",
+        "hint": "Use 'ls -lh' to see the file size in human-readable format."
+      },
+      {
+        "instruction": "4.2 MB for a single image! Let's convert it to WebP format with compression. This typically cuts image size by 70-80%.",
+        "expectedCommand": "npx sharp-cli --input public/images/hero.png --output public/images/hero.webp --quality 80",
+        "acceptAlternatives": ["npx @squoosh/cli --webp '{\"quality\": 80}' public/images/hero.png"],
+        "output": "Converted: hero.png -> hero.webp\nOriginal: 4.2 MB\nOptimized: 380 KB (91% smaller)",
+        "hint": "Use an image optimization tool to convert the PNG to WebP format. Try npx sharp-cli."
+      }
+    ],
+    "completionMessage": "Great work! By replacing Moment.js with date-fns and compressing the hero image, you've already cut over 4 MB from the page. The JavaScript bundle shrank by 40%, and the image went from 4.2 MB to 380 KB. These two quick wins alone would noticeably improve load time for every user.",
+    "glossaryTerms": ["bundle-size", "tree-shaking", "image-optimization", "webp"]
+  }
+}

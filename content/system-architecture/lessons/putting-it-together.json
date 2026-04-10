@@ -1,0 +1,91 @@
+{
+  "slug": "putting-it-together",
+  "title": "A Request's Full Journey",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "You type 'www.coolshop.com' into your browser and press Enter. A LOT happens behind the scenes. Let's trace the full journey from keystroke to rendered page.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Full Journey = Ordering Delivery Food",
+      "body": "When you order delivery: (1) you look up the restaurant's number (DNS), (2) you call them (TCP connection), (3) you place your order (HTTP request), (4) the kitchen makes your food (server processing), (5) the driver brings it back (HTTP response), (6) you eat it (browser renders the page). Every website visit follows this same flow."
+    },
+    {
+      "type": "text",
+      "title": "The Complete Lifecycle",
+      "body": "Here's what happens when you type a URL and press Enter:\n\n1. **DNS Lookup** -- your browser finds the server's IP address\n2. **TCP Connection** -- your browser opens a connection to that IP\n3. **HTTP Request** -- your browser sends 'GET / HTTP/1.1'\n4. **Server Processing** -- the server builds the page\n5. **HTTP Response** -- the server sends back HTML\n6. **Rendering** -- your browser paints the page on screen"
+    },
+    {
+      "type": "text",
+      "title": "It's Not Just One Request",
+      "body": "The first HTML file often references other files: CSS stylesheets, JavaScript files, images, and fonts. Your browser reads the HTML and sends **additional requests** for each of these resources. A single page load might involve 50-100 separate HTTP requests, all happening in parallel."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Loading a web page involves DNS lookup, establishing a connection, sending an HTTP request, server processing, receiving the response, and rendering. A single page often triggers dozens of follow-up requests for CSS, JavaScript, and images."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You type www.coolshop.com into your browser and press Enter. What's the very first thing that needs to happen?",
+        "choices": [
+          { "id": "a", "text": "DNS lookup -- find the IP address for coolshop.com", "nextNode": "after-dns", "score": 10 },
+          { "id": "b", "text": "Send an HTTP request for the homepage", "nextNode": "wrong-http-first", "score": 3 },
+          { "id": "c", "text": "Start rendering the page", "nextNode": "wrong-render-first", "score": 1 }
+        ]
+      },
+      "after-dns": {
+        "narrative": "DNS resolves coolshop.com to 93.184.216.34. Now your browser knows WHERE to send the request. What happens next?",
+        "choices": [
+          { "id": "a", "text": "Open a TCP connection to the server at that IP address", "nextNode": "after-tcp", "score": 10 },
+          { "id": "b", "text": "Send the HTTP request immediately", "nextNode": "close-tcp", "score": 5 }
+        ]
+      },
+      "wrong-http-first": {
+        "narrative": "You can't send a request yet -- you don't know WHERE to send it. Your browser only knows the name 'coolshop.com,' not the actual address. First, DNS has to translate that name into an IP address.",
+        "choices": [
+          { "id": "a", "text": "Right, DNS lookup first to get the IP address", "nextNode": "after-dns", "score": 5 }
+        ]
+      },
+      "wrong-render-first": {
+        "narrative": "There's nothing to render yet! Your browser hasn't received any HTML. First it needs to find the server, connect to it, request the page, and receive the response. Only then can it start rendering.",
+        "choices": [
+          { "id": "a", "text": "OK, we need to find the server first with DNS", "nextNode": "after-dns", "score": 5 }
+        ]
+      },
+      "after-tcp": {
+        "narrative": "The TCP connection is established (this includes the TLS handshake for HTTPS). Now your browser sends: GET / HTTP/1.1. The server processes the request and sends back HTML. Your browser starts rendering but notices the HTML references a CSS file and 3 images. What happens?",
+        "choices": [
+          { "id": "a", "text": "The browser sends additional HTTP requests for each of those files", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "The server automatically sends all the files at once", "nextNode": "end-ok", "score": 4 }
+        ]
+      },
+      "close-tcp": {
+        "narrative": "Close! Your browser does send the HTTP request, but first it needs to establish a TCP connection -- a reliable channel between your computer and the server. Think of it like dialing a phone number before speaking. The TCP handshake ensures both sides are ready to communicate.",
+        "choices": [
+          { "id": "a", "text": "Got it -- TCP connection first, then the HTTP request", "nextNode": "after-tcp", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "The browser parses the HTML, discovers it needs style.css, logo.png, hero.jpg, and promo.png, and fires off requests for all of them. Modern browsers send these in parallel for speed. Once everything arrives, the page is fully rendered.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "You traced the complete journey: DNS lookup, TCP connection, HTTP request, server response, and follow-up requests for additional assets. This is exactly what happens every time you visit any website. Understanding this flow helps you debug loading issues -- if a page is slow, you can figure out which step is the bottleneck."
+      },
+      "end-ok": {
+        "narrative": "Actually, the server only sends what was specifically requested. The browser has to discover it needs those extra files by reading the HTML, then send separate requests for each one. Modern HTTP/2 can be smarter about this, but the browser still drives the process.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "You got most of the flow right! The key insight is that loading a page usually involves many requests, not just one. The initial HTML is just the starting point -- it references CSS, JavaScript, images, and fonts that each require their own request."
+      }
+    },
+    "glossaryTerms": ["dns", "tcp", "http-request", "rendering"]
+  }
+}

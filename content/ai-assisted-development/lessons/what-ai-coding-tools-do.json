@@ -1,0 +1,66 @@
+{
+  "slug": "what-ai-coding-tools-do",
+  "title": "What AI Coding Tools Actually Do",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "ai-basics",
+  "courseSlug": "ai-assisted-development",
+  "intro": "AI coding tools like ChatGPT, Claude, and Copilot are everywhere -- but there are a lot of misconceptions about what they actually do. Swipe right if the statement is TRUE, left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "AI Is Like a Very Fast Autocomplete",
+      "body": "You know how your phone suggests the next word when you're texting? AI coding tools work the same way, but for code. They predict what code should come next based on patterns they've seen in millions of code examples. They don't actually 'think' about your problem -- they pattern-match."
+    },
+    {
+      "type": "text",
+      "title": "What AI Coding Tools Actually Do",
+      "body": "AI coding tools are trained on huge amounts of public code and documentation. When you give them a prompt, they:\n\n1. Look at the patterns in your request\n2. **Predict** what code would most likely follow\n3. Generate that code token by token\n\nThey don't run your code, test it, or truly understand it. They produce what **looks correct** based on similar examples they were trained on."
+    },
+    {
+      "type": "text",
+      "title": "What This Means for You",
+      "body": "Since AI predicts rather than understands, it's great at **common patterns** (things it's seen many times) and weaker at **unusual logic** (things specific to your project). It can write a perfect React component but might get your custom business rules wrong. Always verify the output."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "AI coding tools are powerful pattern matchers, not thinking machines. They generate code that looks right based on training data. You still need to review, test, and understand what they produce."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "AI coding tools understand your code the same way a human developer does.",
+        "isGoodPractice": false,
+        "explanation": "AI doesn't 'understand' code. It predicts the most likely next tokens based on patterns in its training data. It can produce remarkably good code, but it has no real comprehension of what the code does or why. That's why it can write code that looks perfect but has subtle logic errors."
+      },
+      {
+        "id": "card-2",
+        "content": "AI coding tools are trained on massive amounts of public code and documentation.",
+        "isGoodPractice": true,
+        "explanation": "These models are trained on billions of lines of code from public repositories, documentation, tutorials, and forums. That's why they're great at common patterns -- they've seen thousands of examples of how to write a React component or a Python function."
+      },
+      {
+        "id": "card-3",
+        "content": "AI can run your code and test it before giving you an answer.",
+        "isGoodPractice": false,
+        "explanation": "Most AI coding tools generate code without executing it. They predict what correct code looks like based on patterns, but they don't compile, run, or test it. That's why you might get code that looks right but fails when you actually run it. Some newer tools are starting to add code execution, but it's not the default."
+      },
+      {
+        "id": "card-4",
+        "content": "AI tools can help you write code in languages you've never used before.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the best use cases for AI coding tools. If you know Python and need to write something in JavaScript, AI can translate your intent. You still need to verify the output, but AI dramatically lowers the barrier to working in unfamiliar languages."
+      },
+      {
+        "id": "card-5",
+        "content": "AI remembers everything you've ever asked it across all your conversations.",
+        "isGoodPractice": false,
+        "explanation": "AI models start fresh with each new conversation. They have no memory of previous sessions. Within a single conversation, they can only remember what fits in their 'context window' -- a limited amount of text. This is why you sometimes need to re-explain your project setup."
+      }
+    ],
+    "glossaryTerms": ["llm", "context-window", "token"]
+  }
+}

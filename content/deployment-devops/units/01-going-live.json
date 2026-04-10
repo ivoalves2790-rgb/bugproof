@@ -1,0 +1,16 @@
+{
+  "slug": "going-live",
+  "title": "Going Live",
+  "description": "What deployment means, hosting platforms, and your first deploy",
+  "order": 1,
+  "courseSlug": "deployment-devops",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-is-deployment", "title": "What is Deployment?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "hosting-platforms", "title": "Hosting Platforms", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "the-deploy-process", "title": "The Deploy Process", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "build-vs-dev", "title": "Build vs Dev Mode", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "production-builds", "title": "What is a Production Build?", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "first-deploy", "title": "Your First Deploy", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

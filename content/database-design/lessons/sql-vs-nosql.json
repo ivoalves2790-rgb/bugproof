@@ -1,0 +1,66 @@
+{
+  "slug": "sql-vs-nosql",
+  "title": "SQL vs NoSQL",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "There are two big families of databases: SQL (structured tables) and NoSQL (flexible documents). There's a lot of debate about which is 'better,' but both have their place. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SQL = Spreadsheet, NoSQL = Notebook",
+      "body": "**SQL databases** are like a spreadsheet -- every row has the same columns, everything is structured and predictable. **NoSQL databases** are like a notebook -- each page can have different content, and you're free to organize things however you want. Spreadsheets are great when you know your structure; notebooks are great when every entry is different."
+    },
+    {
+      "type": "text",
+      "title": "SQL Databases (Relational)",
+      "body": "SQL databases store data in **tables** with fixed columns:\n\n1. **PostgreSQL** -- the most popular for new projects\n2. **MySQL** -- used by WordPress, Facebook, Twitter\n3. **SQLite** -- lightweight, great for small apps and mobile\n\nYou talk to them using **SQL** (Structured Query Language). They're great when your data has clear structure and relationships."
+    },
+    {
+      "type": "text",
+      "title": "NoSQL Databases",
+      "body": "NoSQL databases store data more flexibly:\n\n1. **MongoDB** -- stores JSON-like documents (most popular NoSQL)\n2. **Redis** -- stores key-value pairs in memory (super fast)\n3. **Firebase** -- real-time document database by Google\n\nThey're great when each record might have different fields, or when you need extreme speed or flexibility."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "SQL databases use structured tables and are great for data with clear relationships. NoSQL databases are more flexible and great for varied data or extreme speed. Most beginners should start with SQL (PostgreSQL) because structured thinking helps you learn good data design habits."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "SQL databases store data in tables with rows and columns, like a spreadsheet.",
+        "isGoodPractice": true,
+        "explanation": "Every SQL table has a fixed set of columns (like a spreadsheet header), and each row is one record. For example, a 'users' table might have columns for id, name, email, and created_at. Every user row has exactly those columns."
+      },
+      {
+        "id": "card-2",
+        "content": "NoSQL databases are always faster than SQL databases.",
+        "isGoodPractice": false,
+        "explanation": "Performance depends on the use case, not the database type. SQL databases with proper indexes can be incredibly fast. NoSQL databases can be faster for certain patterns (like caching with Redis) but slower for complex queries with joins. The 'best' database depends on what your app needs."
+      },
+      {
+        "id": "card-3",
+        "content": "In a NoSQL database like MongoDB, different documents in the same collection can have different fields.",
+        "isGoodPractice": true,
+        "explanation": "This is a key feature of document databases. One user document might have a 'phone' field while another doesn't. This flexibility is useful when your data doesn't always have the same shape. SQL databases require every row to have the same columns."
+      },
+      {
+        "id": "card-4",
+        "content": "You should always choose NoSQL for modern web applications.",
+        "isGoodPractice": false,
+        "explanation": "SQL databases (especially PostgreSQL) are the most common choice for web applications and are used by most startups and tech companies. They're reliable, well-understood, and handle most use cases perfectly. NoSQL is a great tool for specific situations, not a default choice."
+      },
+      {
+        "id": "card-5",
+        "content": "SQL stands for Structured Query Language -- it's the language used to talk to relational databases.",
+        "isGoodPractice": true,
+        "explanation": "SQL is a standard language supported by all relational databases (PostgreSQL, MySQL, SQLite, etc.). You write SQL commands like SELECT, INSERT, UPDATE, and DELETE to interact with your data. Learning SQL is one of the most valuable skills in software development."
+      }
+    ],
+    "glossaryTerms": ["sql", "nosql", "relational-database", "document-database"]
+  }
+}

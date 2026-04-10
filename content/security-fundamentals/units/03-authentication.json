@@ -1,0 +1,16 @@
+{
+  "slug": "authentication",
+  "title": "Authentication & Authorization",
+  "description": "Passwords, tokens, sessions, and who gets access to what",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "authn-vs-authz", "title": "Authentication vs Authorization", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "password-storage", "title": "Storing Passwords Safely", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "session-hijacking", "title": "Session Hijacking Incident", "type": "incident_response", "order": 3, "difficulty": 3 },
+    { "slug": "jwt-basics", "title": "JSON Web Tokens", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "broken-access", "title": "Broken Access Control", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "oauth-flow", "title": "OAuth in Practice", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

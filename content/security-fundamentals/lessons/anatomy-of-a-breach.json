@@ -1,0 +1,100 @@
+{
+  "slug": "anatomy-of-a-breach",
+  "title": "Anatomy of a Data Breach",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "security-mindset",
+  "courseSlug": "security-fundamentals",
+  "intro": "It's 2 AM and your phone is blowing up. A user just tweeted a screenshot showing they can see other users' private data on your app. This is a real security incident. Every decision you make in the next few minutes matters.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "A Data Breach Is Like a Burst Pipe",
+      "body": "When a pipe bursts in your house, the first thing you do is shut off the water -- not mop the floor, not call the plumber, not post on social media. In a data breach, your first move is the same: stop the leak before doing anything else."
+    },
+    {
+      "type": "text",
+      "title": "The Four Steps of Incident Response",
+      "body": "When a security breach happens, follow these steps in order:\n\n1. **Contain** -- stop the leak immediately (disable the endpoint, revoke the key)\n2. **Assess** -- check logs to see how much data was accessed\n3. **Notify** -- tell affected users and your team\n4. **Fix** -- patch the vulnerability and add safeguards to prevent it from happening again"
+    },
+    {
+      "type": "code_example",
+      "title": "A Common API Vulnerability",
+      "language": "javascript",
+      "code": "// VULNERABLE: anyone can access any user's data\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// FIXED: check that the requester owns this data\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Forbidden' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
+      "annotation": "The vulnerable version lets anyone fetch any user's data just by changing the ID in the URL. The fix adds authentication and checks that you can only access your own data."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "In a breach, contain first, then assess scope, notify users, and fix the root cause. Every API endpoint needs authorization checks -- never assume the frontend will prevent unauthorized access."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You see the tweet: a user navigated to /api/users/42 and got back another user's full profile including email, phone number, and hashed password. Your API is leaking private data. What's your first move?",
+        "choices": [
+          { "id": "a", "text": "Immediately restrict the vulnerable API endpoint", "nextNode": "restrict-endpoint", "score": 10 },
+          { "id": "b", "text": "Reply to the tweet thanking them for the report", "nextNode": "reply-tweet", "score": 3 },
+          { "id": "c", "text": "Check if any other endpoints have the same problem", "nextNode": "check-others-first", "score": 5 }
+        ]
+      },
+      "restrict-endpoint": {
+        "narrative": "Good -- stop the bleeding first. You add authentication checks to the endpoint so only authenticated users can access their own data. The immediate leak is plugged. What's your next step?",
+        "choices": [
+          { "id": "a", "text": "Check your server logs to see how many users' data was accessed", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Go back to sleep -- the fix is deployed", "nextNode": "ignore-scope", "score": 0 },
+          { "id": "c", "text": "Audit all other API endpoints for the same vulnerability", "nextNode": "audit-endpoints", "score": 7 }
+        ]
+      },
+      "reply-tweet": {
+        "narrative": "Acknowledging the report publicly is fine, but the endpoint is still leaking data while you compose tweets. Every minute it stays open, more user data could be scraped. Containment first, communication second.",
+        "choices": [
+          { "id": "a", "text": "Right -- let me restrict the endpoint first", "nextNode": "restrict-endpoint", "score": 5 }
+        ]
+      },
+      "check-others-first": {
+        "narrative": "Checking scope is smart, but the reported endpoint is actively leaking data right now. An attacker could be scraping every user's profile while you're auditing. Plug the known leak first, then investigate the scope.",
+        "choices": [
+          { "id": "a", "text": "Restrict the reported endpoint first, then check others", "nextNode": "restrict-endpoint", "score": 7 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "Your logs show 347 requests to /api/users/{id} with sequential IDs from a single IP address in the past 6 hours. Someone was systematically scraping user profiles. This means the data of up to 347 users may be compromised. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Notify affected users and your team, then audit all endpoints", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Block the attacker's IP and call it done", "nextNode": "end-mediocre", "score": 3 }
+        ]
+      },
+      "audit-endpoints": {
+        "narrative": "You find 3 more endpoints with the same problem -- no authorization checks. You fix them all. But you haven't yet determined how much data was already accessed.",
+        "choices": [
+          { "id": "a", "text": "Check the logs to determine the scope of the breach", "nextNode": "check-logs", "score": 8 }
+        ]
+      },
+      "ignore-scope": {
+        "narrative": "The endpoint is fixed, but you have no idea how much data was already leaked, whether other endpoints have the same issue, or whether affected users need to be notified. In many jurisdictions, failing to report a data breach is illegal. This isn't over.",
+        "choices": [
+          { "id": "a", "text": "You're right -- let me investigate the full scope", "nextNode": "check-logs", "score": 3 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You contained the leak, determined the scope, notified affected users, audited all endpoints, and added authorization checks across the board. You also added rate limiting to prevent future scraping attempts. Your team sets up automated security testing to catch this class of bug before it ships.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Textbook incident response: contain, assess scope, notify, remediate, and improve. The key insight is that authorization (who can access what) must be checked on every API endpoint, not just the frontend. This vulnerability is called Broken Object Level Authorization (BOLA) and it's the #1 item on the OWASP API Security Top 10."
+      },
+      "end-mediocre": {
+        "narrative": "Blocking one IP is like locking one door while leaving the windows open. The attacker can use a different IP, VPN, or proxy. You haven't notified affected users, haven't checked for other vulnerable endpoints, and may be violating data breach notification laws.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "IP blocking is not a security fix -- it's a speed bump. The real fix was the authorization check you added to the endpoint. But incident response doesn't end at containment: you need to assess the full scope, notify affected users, audit for similar issues, and put safeguards in place to prevent recurrence."
+      }
+    },
+    "glossaryTerms": ["data-breach", "authorization", "bola", "incident-response", "rate-limiting"]
+  }
+}

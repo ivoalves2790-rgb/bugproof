@@ -1,0 +1,68 @@
+{
+  "slug": "dom-manipulation-costs",
+  "title": "DOM Manipulation Costs",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "The DOM (Document Object Model) is how JavaScript talks to the page. But touching the DOM is expensive -- it's the slowest thing your JavaScript can do. Understanding why helps you avoid common pitfalls. Swipe RIGHT for true, LEFT for false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The DOM = A Building Blueprint",
+      "body": "Imagine the DOM as a building's blueprint. Every time you change the blueprint (add a room, move a wall), the construction crew has to stop, read the changes, figure out what's affected, and rebuild. If you hand them 100 tiny changes one at a time, they rebuild 100 times. If you batch all 100 changes into one revised blueprint, they rebuild once. That's why **batching DOM changes** is so important."
+    },
+    {
+      "type": "text",
+      "title": "Why DOM Access is Slow",
+      "body": "The DOM lives in a different part of the browser than JavaScript. Every time JS accesses or modifies the DOM, it's crossing a bridge between two systems. This bridge has a toll:\n\n1. **Reading** (e.g., element.offsetHeight) forces the browser to calculate the current layout\n2. **Writing** (e.g., element.style.color = 'red') marks the layout as dirty, requiring recalculation\n3. **Reading then writing in a loop** is the worst -- each read forces layout calculation, then each write invalidates it again"
+    },
+    {
+      "type": "code_example",
+      "title": "Layout Thrashing",
+      "language": "javascript",
+      "code": "// BAD: Forces layout recalculation on every iteration\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ reads layout each time!\n}\n\n// GOOD: Read once, then write in a batch\nconst width = container.offsetWidth; // one read\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // only writes\n}",
+      "annotation": "The bad version reads offsetWidth inside the loop, which forces the browser to recalculate layout on every iteration because the previous write (style.width) invalidated it. This is called 'layout thrashing.'"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "DOM manipulation is expensive because JavaScript and the DOM are separate systems. Batch your reads and writes, avoid reading layout properties in loops, and let frameworks like React handle DOM updates efficiently."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Reading element.offsetHeight inside a loop that also changes styles causes layout thrashing.",
+        "isGoodPractice": true,
+        "explanation": "Each write (style change) invalidates the layout. Each read (offsetHeight) forces the browser to recalculate the layout from scratch. Alternating read-write in a loop means the browser recalculates layout on every iteration instead of once at the end. This is called layout thrashing and it can freeze the browser."
+      },
+      {
+        "id": "card-2",
+        "content": "Using document.getElementById is always faster than querySelector.",
+        "isGoodPractice": false,
+        "explanation": "While getElementById is optimized for IDs and is technically faster, the difference is negligible in practice -- both return in microseconds. The real performance cost isn't finding elements, it's what you do with them afterward (changing styles, adding children, forcing layouts). Focus on batching DOM writes, not micro-optimizing selectors."
+      },
+      {
+        "id": "card-3",
+        "content": "Creating elements in a document fragment and appending once is faster than appending elements one by one.",
+        "isGoodPractice": true,
+        "explanation": "Each time you append a child to a visible DOM node, the browser must recalculate layout and repaint. Appending 100 elements means 100 recalculations. A DocumentFragment is an invisible container -- you build your elements in it, then append the whole fragment at once. One append, one recalculation."
+      },
+      {
+        "id": "card-4",
+        "content": "React's virtual DOM completely eliminates the cost of DOM manipulation.",
+        "isGoodPractice": false,
+        "explanation": "React's virtual DOM reduces unnecessary DOM manipulation by diffing what changed, but it doesn't eliminate the cost. React still has to update the real DOM eventually. The virtual DOM helps by batching updates and only changing what's different, but poorly written React code (excessive re-renders, huge lists without virtualization) can still cause performance issues."
+      },
+      {
+        "id": "card-5",
+        "content": "Using CSS transforms for animations is faster than changing top/left positions.",
+        "isGoodPractice": true,
+        "explanation": "CSS transforms (translate, scale, rotate) are handled by the GPU and don't trigger layout recalculation. Changing top/left forces the browser to recalculate the position of the element and everything around it. For smooth 60fps animations, always use transform instead of position properties."
+      }
+    ],
+    "glossaryTerms": ["dom", "layout-thrashing", "virtual-dom", "document-fragment", "repaint"]
+  }
+}

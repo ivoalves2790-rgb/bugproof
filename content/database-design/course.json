@@ -1,0 +1,17 @@
+{
+  "slug": "database-design",
+  "title": "Database Design",
+  "description": "Schemas, relationships, migrations, and queries",
+  "longDescription": "Every app needs to store data somewhere — user accounts, posts, orders, settings. A database is that somewhere, and how you organize it determines whether your app is fast and reliable or slow and buggy. This course teaches you to think about data: how to structure tables, create relationships between them, write queries to get data back, and evolve your database as your app grows with migrations.",
+  "icon": "database",
+  "color": "#96CEB4",
+  "prerequisites": [],
+  "units": [
+    { "slug": "what-are-databases", "title": "What Are Databases?", "order": 1 },
+    { "slug": "tables-and-schemas", "title": "Tables & Schemas", "order": 2 },
+    { "slug": "relationships", "title": "Relationships", "order": 3 },
+    { "slug": "queries", "title": "Writing Queries", "order": 4 },
+    { "slug": "migrations", "title": "Migrations & Evolution", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "why-apps-need-databases",
+  "title": "Why Apps Need Databases",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Every app stores data somewhere. But why can't we just save everything in a regular file? Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "A Database Is Like a Filing Cabinet",
+      "body": "Imagine you run a business. You COULD throw all your papers into one big box. But finding anything would be a nightmare. A **filing cabinet** organizes papers into labeled drawers and folders so you can find exactly what you need instantly. A database does the same thing for your app's data."
+    },
+    {
+      "type": "text",
+      "title": "What Happens Without a Database?",
+      "body": "You could store data in a text file or JSON file. But this breaks down fast:\n\n1. **Speed** -- reading through a giant file to find one record is slow\n2. **Concurrency** -- what if two users try to write at the same time?\n3. **Safety** -- what if the app crashes mid-write and corrupts the file?\n4. **Querying** -- how do you find all orders over $50 from last Tuesday?\n\nDatabases solve all of these problems."
+    },
+    {
+      "type": "text",
+      "title": "What a Database Gives You",
+      "body": "A database is specialized software designed to store and retrieve data efficiently. It gives you:\n\n1. **Fast lookups** -- find records in milliseconds, even with millions of rows\n2. **Safe writes** -- data is never half-written or corrupted\n3. **Queries** -- ask complex questions about your data\n4. **Concurrency** -- handles thousands of users reading and writing simultaneously"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Databases are specialized software for storing, organizing, and retrieving data. They're faster, safer, and more powerful than storing data in flat files. Any app that needs to remember something needs a database."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A database is just a fancy name for saving data in a JSON file.",
+        "isGoodPractice": false,
+        "explanation": "A database is much more than a file. It's specialized software that handles fast searching, safe writes, concurrent access from multiple users, and complex queries. A JSON file can't do any of that reliably at scale."
+      },
+      {
+        "id": "card-2",
+        "content": "Databases can find specific records among millions of rows in milliseconds.",
+        "isGoodPractice": true,
+        "explanation": "Databases use clever data structures called indexes (like a book's index) to jump directly to the data you need instead of scanning every row. That's why even huge databases feel instant when you search."
+      },
+      {
+        "id": "card-3",
+        "content": "If your app only has a few users, you don't need a database -- a file is fine.",
+        "isGoodPractice": false,
+        "explanation": "Even small apps benefit from databases. What happens when your file gets corrupted? When two requests happen simultaneously? When you need to find records by different criteria? Databases handle all of this. The overhead of using one is minimal compared to the problems it prevents."
+      },
+      {
+        "id": "card-4",
+        "content": "Databases can handle thousands of users reading and writing data at the same time.",
+        "isGoodPractice": true,
+        "explanation": "This is called concurrency, and it's one of the main reasons databases exist. They use locks, transactions, and other mechanisms to ensure that simultaneous reads and writes don't corrupt data or give inconsistent results."
+      },
+      {
+        "id": "card-5",
+        "content": "If the power goes out while a database is writing, the data could end up half-written and corrupted.",
+        "isGoodPractice": false,
+        "explanation": "Databases use a feature called transactions to prevent this. A transaction is 'all or nothing' -- either the entire write completes successfully, or nothing changes at all. If power is lost mid-write, the database rolls back to the last safe state on restart."
+      }
+    ],
+    "glossaryTerms": ["database", "query", "concurrency", "transaction"]
+  }
+}

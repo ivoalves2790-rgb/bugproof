@@ -1,0 +1,68 @@
+{
+  "slug": "trust-no-input",
+  "title": "Trust No Input",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "security-mindset",
+  "courseSlug": "security-fundamentals",
+  "intro": "The #1 rule of security: never trust user input. But it's not just form fields -- data can arrive from URLs, cookies, headers, APIs, and even your own database if it was populated by users. Swipe right if the practice is SECURE, or left if it's INSECURE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Input Is Like Mail From Strangers",
+      "body": "You wouldn't open a mystery package left on your doorstep and plug it into your computer. User input is the same -- it could be a friendly message, or it could be something malicious. Every piece of data that comes from outside your code needs to be inspected before you trust it."
+    },
+    {
+      "type": "text",
+      "title": "Where Dangerous Input Hides",
+      "body": "User input isn't just form fields. It includes:\n\n1. **URL parameters** -- anything after the `?` in a web address\n2. **Cookies and headers** -- sent with every request\n3. **API responses** -- data from external services\n4. **Database values** -- if users put data in, it could contain attacks\n\nAny data you didn't write yourself should be treated as potentially harmful."
+    },
+    {
+      "type": "code_example",
+      "title": "Unsafe vs Safe Input Handling",
+      "language": "javascript",
+      "code": "// UNSAFE: directly using URL input in HTML\nconst name = req.query.name;\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;\n\n// SAFE: escape the input first\nconst name = escapeHtml(req.query.name);\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;",
+      "annotation": "Without escaping, an attacker could set name to a script tag and run malicious code in your users' browsers. Always sanitize or escape output."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Never trust any data from outside your code. Validate input on the server side, escape output before displaying it, and use whitelists (allowed values) instead of blacklists (blocked values)."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Using the value from a URL query parameter directly in your HTML without escaping it.",
+        "isGoodPractice": false,
+        "explanation": "This is the classic setup for a reflected XSS attack. An attacker crafts a URL like yoursite.com/?name=<script>stealCookies()</script> and tricks a user into clicking it. The script runs in the victim's browser with full access to their session. Always sanitize and escape output."
+      },
+      {
+        "id": "card-2",
+        "content": "Validating form input on both the client side (browser) AND the server side.",
+        "isGoodPractice": true,
+        "explanation": "Client-side validation improves user experience, but it can be completely bypassed -- anyone can open DevTools and modify the request. Server-side validation is the real security boundary. You need both: client for UX, server for security."
+      },
+      {
+        "id": "card-3",
+        "content": "Checking the file extension (.jpg, .png) to verify an uploaded file is safe.",
+        "isGoodPractice": false,
+        "explanation": "File extensions are trivially faked. An attacker can upload malware.php renamed to profile.jpg. Proper file validation checks the actual file content (magic bytes), restricts file size, stores uploads outside the web root, and uses a Content-Disposition header to prevent execution."
+      },
+      {
+        "id": "card-4",
+        "content": "Using a whitelist of allowed characters for username input instead of trying to block bad characters.",
+        "isGoodPractice": true,
+        "explanation": "Whitelisting (allow only these characters) is far safer than blacklisting (block these bad characters). Attackers constantly find creative ways around blacklists with encoding tricks and edge cases. If you define 'only letters, numbers, and underscores are allowed,' there's no room for injection."
+      },
+      {
+        "id": "card-5",
+        "content": "Trusting data from your own database without sanitizing it before rendering in HTML.",
+        "isGoodPractice": false,
+        "explanation": "If user-submitted data made it into your database, it could contain malicious scripts. This is called stored XSS -- the payload lives in your database and attacks every user who views that data. Always escape output regardless of where the data comes from."
+      }
+    ],
+    "glossaryTerms": ["xss", "input-validation", "sanitization", "whitelist"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "environment-config",
+  "title": "Environment & Config",
+  "description": "Environment variables, secrets, and configuration across environments",
+  "order": 2,
+  "courseSlug": "deployment-devops",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-env-variables", "title": "What Are Environment Variables?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "dotenv-files", "title": "The .env File", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "secrets-management", "title": "Secrets Management", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "dev-staging-production", "title": "Dev vs Staging vs Production", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "config-patterns", "title": "Configuration Patterns", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "works-on-my-machine", "title": "Works on My Machine", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

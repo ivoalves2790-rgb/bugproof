@@ -1,0 +1,8 @@
+{
+  "slug": "testing-in-practice",
+  "title": "Testing in Practice",
+  "description": "Real-world testing workflows, CI integration, and testing culture",
+  "order": 5,
+  "courseSlug": "testing",
+  "tier": "advanced"
+}

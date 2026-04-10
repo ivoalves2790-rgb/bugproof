@@ -1,0 +1,16 @@
+{
+  "slug": "undoing",
+  "title": "Undoing Changes",
+  "description": "Revert commits, unstage files, and recover from mistakes",
+  "order": 5,
+  "courseSlug": "git-version-control",
+  "tier": "advanced",
+  "lessons": [
+    { "slug": "undoing-overview", "title": "Ways to Undo in Git", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "unstaging-files", "title": "Unstaging Files", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "amending-commits", "title": "Amending Commits", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "revert-vs-reset", "title": "Revert vs Reset", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "accidental-force-push", "title": "The Accidental Force Push", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "recovering-lost-work", "title": "Recovering Lost Work", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

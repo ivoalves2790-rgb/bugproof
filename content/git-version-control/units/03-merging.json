@@ -1,0 +1,16 @@
+{
+  "slug": "merging",
+  "title": "Merging",
+  "description": "Combine work from different branches and resolve conflicts",
+  "order": 3,
+  "courseSlug": "git-version-control",
+  "tier": "intermediate",
+  "lessons": [
+    { "slug": "what-is-merging", "title": "What is Merging?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "fast-forward-merge", "title": "Fast-Forward Merges", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "merge-conflicts", "title": "Understanding Merge Conflicts", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "resolving-conflicts", "title": "Resolving Merge Conflicts", "type": "terminal_sim", "order": 4, "difficulty": 3 },
+    { "slug": "merge-gone-wrong", "title": "When a Merge Goes Wrong", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "merge-vs-rebase", "title": "Merge vs Rebase", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

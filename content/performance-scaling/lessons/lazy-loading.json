@@ -1,0 +1,68 @@
+{
+  "slug": "lazy-loading",
+  "title": "Lazy Loading",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "Why load something the user can't see yet? Lazy loading means only loading resources when they're actually needed. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Lazy Loading = Netflix Streaming",
+      "body": "Netflix doesn't download an entire movie before you press play. It loads just enough to start, then keeps loading more as you watch. **Lazy loading** is the same idea applied to web pages -- don't load images, components, or data until the user actually needs them."
+    },
+    {
+      "type": "text",
+      "title": "What Can Be Lazy Loaded?",
+      "body": "Almost anything on a page can be lazy loaded:\n\n1. **Images** -- Only load images when they scroll into view (use `loading=\"lazy\"`)\n2. **Components** -- Only load heavy components when the user navigates to them (React.lazy, dynamic imports)\n3. **Data** -- Only fetch data when the user opens a section or tab\n4. **Third-party scripts** -- Load analytics, chat widgets, etc. after the main content"
+    },
+    {
+      "type": "code_example",
+      "title": "Lazy Loading Images",
+      "language": "html",
+      "code": "<!-- Loads immediately (good for hero/above-fold images) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Lazy loads when user scrolls near it -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
+      "annotation": "The browser's built-in loading='lazy' attribute delays loading until the image is close to the viewport. No JavaScript needed!"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Lazy loading delays resources until they're needed, reducing initial page load. Use loading='lazy' on images below the fold, dynamic imports for heavy components, and defer third-party scripts."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "You should lazy load the hero image at the top of the page.",
+        "isGoodPractice": false,
+        "explanation": "The hero image is the first thing users see -- it's 'above the fold.' Lazy loading it would actually make it load LATER, hurting perceived performance. Only lazy load images that are below the viewport on initial load. Give hero images high priority with fetchpriority='high'."
+      },
+      {
+        "id": "card-2",
+        "content": "The browser's built-in loading='lazy' attribute works without any JavaScript library.",
+        "isGoodPractice": true,
+        "explanation": "Modern browsers natively support loading='lazy' on img and iframe elements. The browser automatically delays loading until the element is near the viewport. No Intersection Observer code or third-party library needed."
+      },
+      {
+        "id": "card-3",
+        "content": "Lazy loading a component means the code for it isn't downloaded until it's needed.",
+        "isGoodPractice": true,
+        "explanation": "When you use React.lazy() or dynamic import(), the bundler splits that component into a separate JavaScript file. That file is only downloaded when the component is first rendered. This is called code splitting and it reduces the initial bundle users must download."
+      },
+      {
+        "id": "card-4",
+        "content": "Lazy loading makes every page load faster with no downsides.",
+        "isGoodPractice": false,
+        "explanation": "Lazy loading delays when things load, which means if a user scrolls quickly, they might see a flash of empty space before content appears. It also adds small loading delays when navigating to lazy-loaded sections. The key is to lazy load non-critical content, not everything."
+      },
+      {
+        "id": "card-5",
+        "content": "A product page with 100 images should lazy load at least the ones below the fold.",
+        "isGoodPractice": true,
+        "explanation": "Loading 100 images upfront would be extremely slow. Lazy loading images that aren't visible yet means the browser only downloads the first few visible images immediately. As the user scrolls, more images load just-in-time. This can cut initial load time by 80% or more."
+      }
+    ],
+    "glossaryTerms": ["lazy-loading", "above-the-fold", "intersection-observer", "dynamic-import"]
+  }
+}

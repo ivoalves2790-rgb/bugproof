@@ -1,0 +1,93 @@
+{
+  "slug": "without-tests",
+  "title": "What Happens Without Tests",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "You're working on a growing e-commerce app with zero tests. The team keeps shipping features fast, but lately things keep breaking. A simple CSS change just broke the entire checkout flow. Experience firsthand what happens when you skip testing.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "No Tests = Driving Without Mirrors",
+      "body": "Driving without side mirrors seems fine... until you need to change lanes. You have no idea what's behind you or beside you. Without tests, you can't see what your code changes might hit. Every change is a lane change with no mirrors -- you might be fine, or you might crash into something you didn't even know was there."
+    },
+    {
+      "type": "text",
+      "title": "The Slow Decay of an Untested Codebase",
+      "body": "At first, no tests seems fine -- the app is small and you know every line. But as it grows:\n\n1. **Week 1**: Small app, you remember everything. No bugs.\n2. **Month 3**: App is bigger. Bugs slip in occasionally.\n3. **Month 6**: Nobody remembers how old code works. Changes break things.\n4. **Year 1**: Everyone is afraid to touch anything. New features take 3x longer because of unexpected breakage."
+    },
+    {
+      "type": "text",
+      "title": "The Fear Factor",
+      "body": "The worst consequence of no tests is **fear**. Developers become afraid to change code because they don't know what will break. Instead of cleaning up messy code, they add workarounds on top. Instead of refactoring, they copy-paste. The codebase gets worse and worse because nobody dares to improve it."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Without tests, codebases slowly decay. Developers become afraid to change code, bugs slip through to production, and every new feature risks breaking old ones."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your e-commerce app has 50 pages and zero tests. You need to update the currency formatting function to support euros. It's used in dozens of places: product pages, cart, checkout, receipts, and admin reports. How do you approach this?",
+        "choices": [
+          { "id": "a", "text": "Change the function and manually check every page it's used on", "nextNode": "manual-check", "score": 5 },
+          { "id": "b", "text": "Write tests for the formatting function first, then change it", "nextNode": "write-tests-first", "score": 10 },
+          { "id": "c", "text": "Create a new function instead of modifying the existing one", "nextNode": "duplicate", "score": 3 }
+        ]
+      },
+      "manual-check": {
+        "narrative": "You spend 2 hours manually clicking through the app. Product pages look fine. Cart looks fine. You deploy. Monday morning, you discover that the admin report page (which you forgot to check) is showing prices as NaN. The finance team has been exporting broken reports all weekend.",
+        "choices": [
+          { "id": "a", "text": "Fix the admin report and add tests so this doesn't happen again", "nextNode": "end-learned", "score": 7 },
+          { "id": "b", "text": "Fix the admin report and move on", "nextNode": "end-poor", "score": 3 }
+        ]
+      },
+      "write-tests-first": {
+        "narrative": "You write 8 tests for the currency formatter: dollars, euros, zero amounts, negative amounts, large numbers, missing currency, null values, and the admin report format. Then you update the function. 6 tests pass, 2 fail -- the admin report format and null handling broke. You fix them in 5 minutes. What do you do next?",
+        "choices": [
+          { "id": "a", "text": "Run all tests one more time, then deploy with confidence", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Also manually spot-check a few pages just to be safe", "nextNode": "end-great", "score": 10 }
+        ]
+      },
+      "duplicate": {
+        "narrative": "Now you have two formatting functions doing almost the same thing. Some pages use the old one, some use the new one. In 3 months, someone will change one and forget about the other. This is how untested codebases get worse over time -- people are afraid to modify existing code, so they duplicate it instead.",
+        "choices": [
+          { "id": "a", "text": "Actually, let me write tests for the original function and modify it properly", "nextNode": "write-tests-first", "score": 5 }
+        ]
+      },
+      "end-learned": {
+        "narrative": "You fix the report and write tests. This one bug cost the finance team a weekend of bad data. If you'd had tests, those 2 seconds of test runtime would have caught this before it ever reached production.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "At least you learned the lesson! Manual testing missed the admin report because it's easy to forget pages you don't use often. Tests check everything automatically, every time. Write the tests now and you'll never have this problem again."
+      },
+      "end-poor": {
+        "narrative": "You fix the immediate problem but don't add tests. The next time someone changes the formatting function, the same thing will likely happen again -- maybe in a different page you forgot to check. Without tests, you're just playing whack-a-mole with bugs.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Fixing the bug without adding tests means you'll keep hitting the same kind of problem. The 15 minutes it takes to write tests for this function would prevent hours of debugging in the future."
+      },
+      "end-good": {
+        "narrative": "All 8 tests pass. You deploy with confidence, knowing that every format -- dollars, euros, edge cases -- has been verified. If anyone modifies this function in the future, the tests will immediately catch any problems.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "This is the right approach! Writing tests before modifying shared code is called 'test-first' and it's incredibly effective. The tests caught 2 bugs in 2 seconds that would have taken hours to discover manually."
+      },
+      "end-great": {
+        "narrative": "Tests + a quick manual check is the gold standard. Tests verify the logic, and your manual check catches visual issues the tests might miss (like formatting looking weird on the page). You deploy confidently.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Best of both worlds! Automated tests caught the logic bugs, and your manual spot-check verified the visual presentation. This combination is what professional teams use for critical changes."
+      }
+    },
+    "glossaryTerms": ["regression", "test-first", "codebase-decay"]
+  }
+}

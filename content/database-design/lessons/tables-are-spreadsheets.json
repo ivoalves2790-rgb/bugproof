@@ -1,0 +1,68 @@
+{
+  "slug": "tables-are-spreadsheets",
+  "title": "Tables Are Like Spreadsheets",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "If you've ever used a spreadsheet, you already understand the basics of database tables. Rows, columns, cells -- the concepts are the same. But databases add important rules that spreadsheets don't have. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "A Table = A Very Strict Spreadsheet",
+      "body": "A database table is like a spreadsheet with strict rules. In Google Sheets, you can put anything anywhere -- numbers in a name column, text in an age column. A database table says: 'The name column ONLY accepts text. The age column ONLY accepts numbers. And every row MUST have an ID.' These rules prevent messy, inconsistent data."
+    },
+    {
+      "type": "text",
+      "title": "Tables, Rows, and Columns",
+      "body": "A database table has three parts:\n\n1. **Columns** (also called fields) -- define what KIND of data is stored (name, email, age)\n2. **Rows** (also called records) -- each row is one item (one user, one product, one order)\n3. **Cells** -- the intersection of a row and column (user #5's email)\n\nA 'users' table might have columns for id, name, email, and created_at, with one row per user."
+    },
+    {
+      "type": "code_example",
+      "title": "A Table Visualized",
+      "language": "text",
+      "code": "users table:\n+----+----------+---------------------+------------+\n| id | name     | email               | created_at |\n+----+----------+---------------------+------------+\n|  1 | Alice    | alice@example.com   | 2024-01-15 |\n|  2 | Bob      | bob@example.com     | 2024-02-20 |\n|  3 | Charlie  | charlie@example.com | 2024-03-10 |\n+----+----------+---------------------+------------+",
+      "annotation": "Each column has a name and a data type. Each row is one user. The 'id' column uniquely identifies each row. This looks just like a spreadsheet, but with enforced rules about what data can go in each column."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A database table is like a strict spreadsheet: columns define the type of data, rows hold individual records, and rules ensure data stays clean and consistent."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Each row in a database table represents one record (like one user or one product).",
+        "isGoodPractice": true,
+        "explanation": "Just like a spreadsheet where each row is one entry, each database row is one complete record. A users table has one row per user, a products table has one row per product, and so on."
+      },
+      {
+        "id": "card-2",
+        "content": "In a database table, you can put any type of data in any column, just like a spreadsheet.",
+        "isGoodPractice": false,
+        "explanation": "Unlike spreadsheets, database columns enforce data types. If a column is defined as INTEGER, you can't put text in it. If it's VARCHAR (text), you can't put a date in it. This strictness prevents data quality problems that are common in spreadsheets."
+      },
+      {
+        "id": "card-3",
+        "content": "A database can have many tables that are related to each other.",
+        "isGoodPractice": true,
+        "explanation": "Most databases have multiple tables. An e-commerce database might have users, products, orders, and reviews tables. These tables can reference each other -- for example, an order row points to which user placed it and which products are in it."
+      },
+      {
+        "id": "card-4",
+        "content": "You should put all your app's data in a single large table to keep things simple.",
+        "isGoodPractice": false,
+        "explanation": "Putting everything in one table creates a mess. Imagine a table with user name, user email, order date, product name, product price all in one row -- you'd repeat the user's name for every order they make. Separate tables for users, orders, and products avoid this repetition and keep data organized."
+      },
+      {
+        "id": "card-5",
+        "content": "The term 'schema' refers to the structure of your database -- what tables exist and what columns they have.",
+        "isGoodPractice": true,
+        "explanation": "A schema is like a blueprint for your database. It defines all the tables, their columns, data types, and rules. When someone asks 'What's the schema?' they want to know the structure -- not the actual data, just the shape of the containers that hold the data."
+      }
+    ],
+    "glossaryTerms": ["table", "row", "column", "schema"]
+  }
+}

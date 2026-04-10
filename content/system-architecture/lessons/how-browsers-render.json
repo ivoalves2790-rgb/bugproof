@@ -1,0 +1,85 @@
+{
+  "slug": "how-browsers-render",
+  "title": "How Browsers Render Pages",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "Your team's website loads but shows a blank white screen for 3 seconds before the content appears. Users are complaining. You need to understand how browsers render pages to find the bottleneck.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Rendering = Building a House",
+      "body": "A browser renders a page like building a house. First the **frame** goes up (HTML structure). Then the **paint and wallpaper** (CSS styling). Then the **furniture and appliances** (JavaScript interactivity). If any step is blocked, the whole build pauses -- just like a house can't be painted until the walls are up."
+    },
+    {
+      "type": "text",
+      "title": "The Rendering Pipeline",
+      "body": "When your browser receives HTML, it follows these steps:\n\n1. **Parse HTML** -- builds the DOM (Document Object Model), a tree of elements\n2. **Parse CSS** -- figures out what styles apply to each element\n3. **Layout** -- calculates the size and position of every element\n4. **Paint** -- draws pixels to the screen\n5. **Composite** -- layers everything together\n\nIf CSS or JavaScript files are still loading, steps 2-5 can be blocked."
+    },
+    {
+      "type": "text",
+      "title": "Render-Blocking Resources",
+      "body": "Some files **block rendering** -- the browser won't paint anything until they're loaded:\n\n- **CSS files** block rendering because the browser won't show unstyled content\n- **JavaScript in the `<head>`** blocks parsing because it might modify the page\n\nThat's why large CSS files or slow-loading scripts cause the dreaded 'white screen' while the page loads."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Browsers parse HTML into a DOM, apply CSS styles, calculate layouts, and paint pixels. CSS and JavaScript files can block this process, causing slow page loads. Understanding this pipeline helps you fix performance problems."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Users report a 3-second white screen before your website appears. You open Chrome DevTools and check the Network tab. You see that a 2MB JavaScript file (bundle.js) is loading in the <head> of the page. This file takes 2.8 seconds to download. What's the problem?",
+        "choices": [
+          { "id": "a", "text": "The JavaScript file in the <head> is blocking the browser from rendering anything", "nextNode": "correct-blocking", "score": 10 },
+          { "id": "b", "text": "The server is too slow to respond", "nextNode": "wrong-server", "score": 3 },
+          { "id": "c", "text": "The HTML file itself is too large", "nextNode": "wrong-html", "score": 2 }
+        ]
+      },
+      "correct-blocking": {
+        "narrative": "Exactly! A <script> tag in the <head> blocks the browser from rendering until the script downloads and executes. A 2MB file taking 2.8 seconds means users see nothing for almost 3 seconds. How should we fix this?",
+        "choices": [
+          { "id": "a", "text": "Move the script to the bottom of <body> or add the 'defer' attribute", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Make the JavaScript file smaller", "nextNode": "end-good", "score": 7 },
+          { "id": "c", "text": "Remove JavaScript entirely", "nextNode": "wrong-remove", "score": 2 }
+        ]
+      },
+      "wrong-server": {
+        "narrative": "The Network tab shows the server responds in 200ms -- that's fast. The delay is on the client side: the browser is waiting for a large JavaScript file to finish downloading before it renders anything. The file is the bottleneck, not the server.",
+        "choices": [
+          { "id": "a", "text": "So the JavaScript file is blocking the browser from rendering", "nextNode": "correct-blocking", "score": 5 }
+        ]
+      },
+      "wrong-html": {
+        "narrative": "The HTML file is only 15KB and loads in 100ms. The problem is the 2MB JavaScript file referenced in the <head> -- the browser stops rendering while it downloads and parses that script.",
+        "choices": [
+          { "id": "a", "text": "The JavaScript in the head is the render-blocking problem", "nextNode": "correct-blocking", "score": 5 }
+        ]
+      },
+      "wrong-remove": {
+        "narrative": "The site needs JavaScript for interactivity. But it doesn't need to block the page from showing content while the JS loads. There's a middle ground -- let the HTML and CSS render first while JavaScript loads in the background.",
+        "choices": [
+          { "id": "a", "text": "Load the script with defer so it doesn't block rendering", "nextNode": "end-great", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "You add 'defer' to the script tag: <script defer src='bundle.js'>. Now the browser renders the HTML and CSS immediately while the JavaScript downloads in the background. The white screen is gone -- users see content right away, and JavaScript kicks in once it's ready.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "You identified that a render-blocking script in the <head> was causing the white screen and fixed it with the 'defer' attribute. This is one of the most common performance wins in web development. The 'defer' attribute tells the browser to download the script in the background and run it after the HTML is parsed."
+      },
+      "end-good": {
+        "narrative": "Making the file smaller helps, but even a smaller file in the <head> will block rendering. The best fix is combining both: make it smaller AND add 'defer' so it doesn't block rendering at all.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Reducing file size is always good, but the core issue is that scripts in the <head> block rendering. Adding 'defer' or moving the script to the bottom of <body> would eliminate the white screen regardless of file size."
+      }
+    },
+    "glossaryTerms": ["rendering", "dom", "render-blocking", "defer"]
+  }
+}

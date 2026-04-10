@@ -1,0 +1,16 @@
+{
+  "slug": "data-protection",
+  "title": "Protecting Data",
+  "description": "Encryption, HTTPS, secure storage, and keeping user data safe",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "encryption-basics", "title": "Encryption Basics", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "https-everywhere", "title": "HTTPS & TLS", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "data-breach-response", "title": "Data Breach Response", "type": "incident_response", "order": 3, "difficulty": 3 },
+    { "slug": "hashing-vs-encryption", "title": "Hashing vs Encryption", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "secure-api-keys", "title": "Managing API Keys", "type": "terminal_sim", "order": 5, "difficulty": 2 },
+    { "slug": "sensitive-data-exposure", "title": "Sensitive Data in Logs", "type": "bug_hunt", "order": 6, "difficulty": 2 }
+  ]
+}

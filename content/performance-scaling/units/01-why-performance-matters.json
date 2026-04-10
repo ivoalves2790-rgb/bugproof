@@ -1,0 +1,16 @@
+{
+  "slug": "why-performance-matters",
+  "title": "Why Performance Matters",
+  "description": "What makes apps slow, loading waterfalls, and Core Web Vitals",
+  "order": 1,
+  "courseSlug": "performance-scaling",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-makes-an-app-slow", "title": "What Makes an App Slow?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "the-loading-waterfall", "title": "The Loading Waterfall", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "render-blocking-resources", "title": "Render-Blocking Resources", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "core-web-vitals", "title": "Core Web Vitals Explained", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "how-slow-apps-lose-users", "title": "How Slow Apps Lose Users", "type": "incident_response", "order": 5, "difficulty": 1 },
+    { "slug": "quick-performance-wins", "title": "Quick Performance Wins", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

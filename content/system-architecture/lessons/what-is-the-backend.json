@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-the-backend",
+  "title": "What is the Backend?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "The backend is the hidden part of an application -- the server, the database, and all the logic the user never sees directly. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Backend Is Like the Kitchen",
+      "body": "Remember the restaurant? The **kitchen** is the backend. Customers (users) never see it, but it's where the real work happens -- taking orders, preparing food, managing inventory, and making sure everything is safe to eat. The waiter (API) carries requests from the dining room (frontend) to the kitchen (backend) and back."
+    },
+    {
+      "type": "text",
+      "title": "What the Backend Does",
+      "body": "The backend is code that runs on a **server** -- a computer you control. It handles:\n\n1. **Business logic** -- rules like 'users can't buy more than 5 items'\n2. **Data storage** -- saving to and reading from databases\n3. **Authentication** -- checking passwords and managing login sessions\n4. **Security** -- keeping secrets safe and validating all input\n5. **Heavy processing** -- sending emails, resizing images, running reports"
+    },
+    {
+      "type": "text",
+      "title": "Common Backend Languages",
+      "body": "The backend can be written in many languages:\n\n1. **JavaScript** (Node.js) -- same language as the frontend\n2. **Python** (Django, Flask) -- popular for its readability\n3. **Ruby** (Rails) -- famous for rapid development\n4. **Java** (Spring) -- common in large enterprises\n5. **Go** -- fast, used for high-performance services\n\nUnlike the frontend (which must use JavaScript in browsers), you can pick any language for the backend."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The backend is the code that runs on a server. It handles business logic, data storage, authentication, and security. Users never see backend code, which is why it's safe for sensitive operations like processing payments."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "The backend runs on a server, not in the user's browser.",
+        "isGoodPractice": true,
+        "explanation": "Backend code runs on a computer (server) that you control, typically in a data center or cloud provider. Users interact with it indirectly through API requests, but they never see or run the actual backend code."
+      },
+      {
+        "id": "card-2",
+        "content": "Password checking should happen on the backend, not the frontend.",
+        "isGoodPractice": true,
+        "explanation": "If you check passwords in frontend code, anyone could open DevTools, read the password comparison logic, and bypass it. The backend is the only safe place to handle authentication because users can't see or modify server-side code."
+      },
+      {
+        "id": "card-3",
+        "content": "You need to use the same programming language for both frontend and backend.",
+        "isGoodPractice": false,
+        "explanation": "The frontend and backend can use completely different languages. The only language browsers understand is JavaScript (for the frontend), but the backend can use Python, Ruby, Java, Go, or any other language. They communicate through HTTP, which is language-agnostic."
+      },
+      {
+        "id": "card-4",
+        "content": "The backend is responsible for saving user data permanently in a database.",
+        "isGoodPractice": true,
+        "explanation": "When a user signs up, submits a form, or posts a comment, the frontend sends that data to the backend, which validates it and stores it in a database. The backend is the gatekeeper for all data that needs to persist."
+      },
+      {
+        "id": "card-5",
+        "content": "Every website needs a backend.",
+        "isGoodPractice": false,
+        "explanation": "Simple static websites (like a personal portfolio with just HTML and CSS) don't need a backend at all. They're just files served directly to the browser. You only need a backend when you have dynamic data, user accounts, or server-side processing."
+      }
+    ],
+    "glossaryTerms": ["backend", "server", "business-logic", "authentication"]
+  }
+}

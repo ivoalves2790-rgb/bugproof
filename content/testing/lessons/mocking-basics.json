@@ -1,0 +1,93 @@
+{
+  "slug": "mocking-basics",
+  "title": "Mocking Basics",
+  "type": "incident_response",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Your function calls an external API. You can't (and shouldn't) call the real API in your tests -- it's slow, costs money, and might be down. Mocking lets you fake external dependencies. A test suite is hitting a real API and causing problems. Figure out the solution.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Mocking = Using a Stunt Double",
+      "body": "In a movie, dangerous scenes use stunt doubles instead of the real actor. The stunt double looks the same, acts the same role, but you control exactly what happens. **Mocking** is using a stunt double for your code's dependencies. Instead of calling a real API, you create a fake version that returns exactly what you want."
+    },
+    {
+      "type": "text",
+      "title": "Why Mock?",
+      "body": "You mock dependencies because:\n\n1. **Speed** -- Real API calls take 100ms+. Mocks take 0ms.\n2. **Reliability** -- Real APIs can be down or rate-limited. Mocks always work.\n3. **Control** -- You can simulate errors, empty responses, and edge cases.\n4. **Cost** -- Some APIs charge per request. Don't waste money on tests.\n5. **Isolation** -- You're testing YOUR code, not the API."
+    },
+    {
+      "type": "code_example",
+      "title": "Before and After Mocking",
+      "language": "javascript",
+      "code": "// WITHOUT mocking: calls real API (slow, unreliable)\ntest('displays weather', async () => {\n  const weather = await fetchWeather('NYC'); // Real API call!\n  expect(weather.temp).toBeDefined();\n});\n\n// WITH mocking: fake the API response (fast, reliable)\ntest('displays weather', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'sunny'\n  });\n  const weather = await fetchWeather('NYC'); // Returns fake data!\n  expect(weather.temp).toBe(72);\n});",
+      "annotation": "The mock returns fake data instantly. Your test runs in milliseconds and works even when the API is down."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Mocking replaces real dependencies (APIs, databases) with fake versions you control. This makes tests fast, reliable, and able to simulate any scenario including errors."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your team's test suite was running fine until today. Now 5 tests are failing with 'Error: Request timeout -- api.weather.com did not respond'. The tests call a real weather API. The API appears to be having an outage. Your CI/CD pipeline is blocked -- no deploys until tests pass. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Mock the weather API in tests so they don't depend on the real service", "nextNode": "mock-api", "score": 10 },
+          { "id": "b", "text": "Skip the failing tests until the API comes back online", "nextNode": "skip-tests", "score": 3 },
+          { "id": "c", "text": "Wait for the API to come back and re-run the tests", "nextNode": "wait", "score": 1 }
+        ]
+      },
+      "mock-api": {
+        "narrative": "Good thinking! You replace the real API calls with mocks. Now the tests always return predictable data. But a teammate asks: 'If we mock the API, how do we know our code actually works with the real API?' Good question. What's your answer?",
+        "choices": [
+          { "id": "a", "text": "Unit tests use mocks for speed; a few integration tests can test the real API separately", "nextNode": "correct-strategy", "score": 10 },
+          { "id": "b", "text": "We don't -- mocks are always sufficient", "nextNode": "overconfident", "score": 4 }
+        ]
+      },
+      "skip-tests": {
+        "narrative": "You skip the tests and deploy. An hour later, you discover that a code change accidentally broke the weather display -- the function now crashes on the API response format. If the tests hadn't been skipped, they would have caught this (even with mocks that return the expected format).",
+        "choices": [
+          { "id": "a", "text": "Okay, let me set up mocks instead of skipping tests", "nextNode": "mock-api", "score": 5 }
+        ]
+      },
+      "wait": {
+        "narrative": "Three hours later, the API is still down. Your team can't deploy any code. One developer finished an urgent bug fix but it's stuck in the pipeline. Tests that depend on external services will always eventually block you like this.",
+        "choices": [
+          { "id": "a", "text": "Let me mock the API so we're not dependent on it", "nextNode": "mock-api", "score": 3 }
+        ]
+      },
+      "correct-strategy": {
+        "narrative": "Perfect! You set up the mock to return realistic data:\n\njest.mock('./weatherApi', () => ({\n  getWeather: jest.fn(() => Promise.resolve({ temp: 72, condition: 'sunny' }))\n}));\n\nYou also keep 2 integration tests that run against the real API in a separate test suite (not blocking deploys). How do you handle testing error scenarios?",
+        "choices": [
+          { "id": "a", "text": "Create different mocks for success, error, and empty responses", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Just test the success case -- errors are rare", "nextNode": "end-okay", "score": 5 }
+        ]
+      },
+      "overconfident": {
+        "narrative": "Mocks are great for unit tests, but they can't verify that your code works with the REAL API's actual response format. If the API changes its response structure, your mocks won't catch it. A few integration tests against the real API (in a non-blocking test suite) provide that confidence.",
+        "choices": [
+          { "id": "a", "text": "Got it -- use mocks for unit tests but keep a few integration tests for the real API", "nextNode": "end-okay", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You create three mock scenarios: success (temp: 72), API error (status 500), and empty response (no data). Your tests now cover all paths -- happy path, error handling, and edge cases. The test suite runs in 0.5 seconds instead of 30 seconds and never fails due to API outages.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent! You used mocks to make tests fast and reliable, created multiple mock scenarios to test different paths, and kept integration tests separate for real API verification. This is exactly how professional teams handle external dependencies in tests."
+      },
+      "end-okay": {
+        "narrative": "The mock unblocks your pipeline and tests pass again. But only testing the success path means your error handling code is untested. What happens when the API returns a 500 error? Your users might see a crash instead of a friendly error message.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Mocking the API was the right call, but only testing the happy path is risky. Always mock error scenarios too -- API errors, timeouts, and unexpected responses. These are the situations where your app is most likely to crash in production."
+      }
+    },
+    "glossaryTerms": ["mock", "dependency", "integration-test"]
+  }
+}

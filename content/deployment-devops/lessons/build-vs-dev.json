@@ -1,0 +1,54 @@
+{
+  "slug": "build-vs-dev",
+  "title": "Build vs Dev Mode",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "When you run your app locally, you're in 'development mode'. But production uses a completely different 'build mode'. A developer's deploy is failing because they mixed up the two. Find the bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Dev Mode = Rehearsal, Build Mode = Opening Night",
+      "body": "Think of a theater production. **Dev mode** is rehearsal -- the lights are on, you can stop and restart, someone is reading you notes, and it's okay if things aren't perfect. **Build mode** is opening night -- everything is polished, optimized, and running at full speed for the audience. You wouldn't rehearse in front of a crowd, and you wouldn't perform opening night with the house lights on."
+    },
+    {
+      "type": "text",
+      "title": "What Changes Between Modes",
+      "body": "**Development mode** (`npm run dev`):\n- Fast reloading when you change code\n- Detailed error messages with line numbers\n- No optimization -- loads slowly but starts fast\n- Shows helpful warnings in the console\n\n**Production build** (`npm run build`):\n- Code is minified (compressed to be tiny)\n- Images are optimized\n- Unused code is removed (tree-shaking)\n- Error messages are generic (for security)"
+    },
+    {
+      "type": "code_example",
+      "title": "The Two Commands",
+      "language": "bash",
+      "code": "# Development: start a local server with hot reloading\nnpm run dev\n\n# Production: create an optimized build\nnpm run build\nnpm start        # serve the built version",
+      "annotation": "Always test `npm run build` locally before deploying. If it fails on your machine, it will fail on the server too."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Dev mode is for coding (fast feedback, detailed errors). Build mode is for production (optimized, compressed, fast for users). Always run `npm run build` before deploying."
+    }
+  ],
+  "exercise": {
+    "language": "json",
+    "code": [
+      { "line": 1, "text": "// package.json scripts", "isBuggy": false },
+      { "line": 2, "text": "\"scripts\": {", "isBuggy": false },
+      { "line": 3, "text": "  \"dev\": \"next dev\",", "isBuggy": false },
+      { "line": 4, "text": "  \"build\": \"next build\",", "isBuggy": false },
+      { "line": 5, "text": "  \"start\": \"next dev\"", "isBuggy": true },
+      { "line": 6, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "The app deploys successfully but runs extremely slowly in production and shows detailed error messages to users. The hosting platform runs 'npm run build' then 'npm start'. Find the line causing the problem.",
+    "fixes": [
+      { "id": "a", "text": "\"start\": \"next start\"", "isCorrect": true },
+      { "id": "b", "text": "\"start\": \"next build\"", "isCorrect": false },
+      { "id": "c", "text": "\"start\": \"next dev --production\"", "isCorrect": false },
+      { "id": "d", "text": "\"start\": \"node server.js\"", "isCorrect": false }
+    ],
+    "explanation": "The 'start' script should run 'next start' to serve the optimized production build. Instead, it's running 'next dev' which starts a development server -- slow, unoptimized, and showing detailed error messages to users. The build step ran fine, but the app is serving the dev version instead of the built version.",
+    "glossaryTerms": ["dev-mode", "production-build", "npm-scripts"]
+  }
+}

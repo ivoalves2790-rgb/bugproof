@@ -1,0 +1,69 @@
+{
+  "slug": "test-driven-thinking",
+  "title": "Test-Driven Thinking",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Before you even write test code, you can start thinking like a tester. Test-driven thinking means asking 'how would I verify this works?' before you build something. Let's practice this mindset.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Thinking Like a Tester = Asking 'What Could Go Wrong?'",
+      "body": "When you cross a street, you automatically check for cars. You don't just walk out blindly. **Test-driven thinking** is the same instinct applied to code. Before writing a function, you think: what inputs could break this? What should happen with weird data? What if the user does something unexpected?"
+    },
+    {
+      "type": "text",
+      "title": "The Test-Driven Mindset",
+      "body": "Before writing any code, ask yourself:\n\n1. **What should this function do?** -- Define the expected behavior\n2. **What are the normal inputs?** -- The typical use case\n3. **What are the edge cases?** -- Empty strings, zero, null, negative numbers\n4. **What should happen when things go wrong?** -- Error messages, defaults, fallbacks\n\nIf you can answer these questions, you can write tests."
+    },
+    {
+      "type": "code_example",
+      "title": "Thinking Through a Function",
+      "language": "javascript",
+      "code": "// Task: write a function that calculates a tip\n// Test-driven thinking:\n// - calculateTip(100, 15) should return 15\n// - calculateTip(100, 0) should return 0\n// - calculateTip(0, 15) should return 0\n// - calculateTip(-50, 15) should... throw an error?\n// - calculateTip(100, 150) should... is a 150% tip valid?",
+      "annotation": "Notice how thinking about tests BEFORE writing code helps you design a better function. You discover edge cases early."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Test-driven thinking means defining expected behavior before writing code. Ask: what should this do, what are the edge cases, and what should happen when things go wrong?"
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["src/utils.js", "tests/utils.test.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "You need to build a password validator. Before writing any code, let's think about what to test. First, run the test suite to see the current state.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "PASS  tests/utils.test.js\n\nTest Suites: 1 passed, 1 total\nTests:       0 total\nTime:        0.5s\n\nNo tests found. Your test file is empty -- time to add some!",
+        "hint": "Run the test suite with the standard npm command for testing."
+      },
+      {
+        "instruction": "Now let's think test-first. Open the test file to write our expectations BEFORE writing the actual function. View the test file.",
+        "expectedCommand": "cat tests/utils.test.js",
+        "acceptAlternatives": ["less tests/utils.test.js", "more tests/utils.test.js"],
+        "output": "// tests/utils.test.js\n// TODO: Add tests for validatePassword()\n//\n// Think about:\n// - What makes a valid password?\n// - What should be rejected?\n// - Edge cases?",
+        "hint": "Use 'cat' to view the contents of the test file."
+      },
+      {
+        "instruction": "The test file has prompts to think about. Now run the tests again -- they should fail since we haven't written the function yet. This is the TDD way: write failing tests first.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "FAIL  tests/utils.test.js\n  validatePassword\n    ✗ rejects passwords shorter than 8 characters (2ms)\n    ✗ accepts passwords 8 characters or longer (1ms)\n    ✗ rejects passwords without a number (1ms)\n    ✗ handles empty string input (1ms)\n\nTests: 4 failed, 4 total\nTime: 0.8s\n\nAll tests failing -- exactly what we want! Now write the function to make them pass.",
+        "hint": "Run npm test again to see the failing tests."
+      },
+      {
+        "instruction": "The tests are failing as expected. This is the Red-Green-Refactor cycle: Red (tests fail), Green (write code to pass), Refactor (clean up). Now let's check what the actual validator function looks like.",
+        "expectedCommand": "cat src/utils.js",
+        "acceptAlternatives": ["less src/utils.js", "more src/utils.js"],
+        "output": "// src/utils.js\n\nfunction validatePassword(password) {\n  // TODO: implement this function\n  // It should:\n  // - Return false if password is less than 8 characters\n  // - Return false if password has no numbers\n  // - Return true if it passes all checks\n}\n\nmodule.exports = { validatePassword };",
+        "hint": "Use 'cat' to view the source code file."
+      }
+    ],
+    "completionMessage": "You've practiced test-driven thinking! The key insight is: thinking about tests before code forces you to clearly define what 'working' means. You discovered edge cases (empty string, no numbers) before writing a single line of implementation code.",
+    "glossaryTerms": ["tdd", "red-green-refactor", "edge-case"]
+  }
+}

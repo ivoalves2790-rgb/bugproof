@@ -1,0 +1,16 @@
+{
+  "slug": "frontend-performance",
+  "title": "Frontend Performance",
+  "description": "Image optimization, lazy loading, code splitting, and rendering performance",
+  "order": 2,
+  "courseSlug": "performance-scaling",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "image-optimization", "title": "Image Optimization", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "lazy-loading", "title": "Lazy Loading", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "code-splitting", "title": "Code Splitting", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "bundle-size", "title": "Bundle Size", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "rendering-performance", "title": "Rendering Performance", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "dom-manipulation-costs", "title": "DOM Manipulation Costs", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

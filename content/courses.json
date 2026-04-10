@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "git-version-control",
+    "title": "Git & Version Control",
+    "description": "Commits, branches, merging, and undoing mistakes",
+    "icon": "git-branch",
+    "order": 1,
+    "unitCount": 5,
+    "lessonCount": 30,
+    "color": "#F05032"
+  },
+  {
+    "slug": "debugging-error-reading",
+    "title": "Debugging & Error Reading",
+    "description": "Stack traces, console, and systematic debugging",
+    "icon": "bug",
+    "order": 2,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#FF6B6B"
+  },
+  {
+    "slug": "security-fundamentals",
+    "title": "Security Fundamentals",
+    "description": "XSS, SQL injection, auth, API keys, OWASP basics",
+    "icon": "shield",
+    "order": 3,
+    "unitCount": 6,
+    "lessonCount": 32,
+    "color": "#4ECDC4"
+  },
+  {
+    "slug": "system-architecture",
+    "title": "System Architecture",
+    "description": "Frontend, backend, databases, APIs, and how requests flow",
+    "icon": "server",
+    "order": 4,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#45B7D1"
+  },
+  {
+    "slug": "database-design",
+    "title": "Database Design",
+    "description": "Schemas, relationships, migrations, and queries",
+    "icon": "database",
+    "order": 5,
+    "unitCount": 5,
+    "lessonCount": 30,
+    "color": "#96CEB4"
+  },
+  {
+    "slug": "deployment-devops",
+    "title": "Deployment & DevOps",
+    "description": "Hosting, env vars, CI/CD, domains, and DNS",
+    "icon": "cloud",
+    "order": 6,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#FECA57"
+  },
+  {
+    "slug": "testing",
+    "title": "Testing",
+    "description": "Why test, what to test, unit/integration/e2e basics",
+    "icon": "check-circle",
+    "order": 7,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#A29BFE"
+  },
+  {
+    "slug": "performance-scaling",
+    "title": "Performance & Scaling",
+    "description": "N+1 queries, caching, lazy loading, profiling",
+    "icon": "zap",
+    "order": 8,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#FD79A8"
+  },
+  {
+    "slug": "code-organization",
+    "title": "Code Organization",
+    "description": "File structure, naming, separation of concerns",
+    "icon": "folder-code",
+    "order": 9,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#00B894"
+  },
+  {
+    "slug": "ai-assisted-development",
+    "title": "AI-Assisted Development",
+    "description": "Prompting for better code, reviewing AI output",
+    "icon": "bot",
+    "order": 10,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#E17055"
+  }
+]

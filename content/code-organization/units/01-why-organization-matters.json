@@ -1,0 +1,16 @@
+{
+  "slug": "why-organization-matters",
+  "title": "Why Organization Matters",
+  "description": "Spaghetti code vs clean code, the cost of disorganization, and your first refactor",
+  "order": 1,
+  "courseSlug": "code-organization",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "spaghetti-vs-clean", "title": "Spaghetti Code vs Clean Code", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "why-ai-generates-messy-code", "title": "Why AI Generates Messy Code", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "cost-of-disorganization", "title": "The Cost of Disorganization", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "what-good-code-looks-like", "title": "What Good Code Looks Like", "type": "bug_hunt", "order": 4, "difficulty": 1 },
+    { "slug": "reading-other-peoples-code", "title": "Reading Other People's Code", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "your-first-refactor", "title": "Your First Refactor", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

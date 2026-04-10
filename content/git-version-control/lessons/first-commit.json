@@ -1,0 +1,69 @@
+{
+  "slug": "first-commit",
+  "title": "Your First Commit",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "A commit is like a save point in a video game. It captures a snapshot of your project at a specific moment. Let's create your very first one.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Commits = Save Points",
+      "body": "In a video game, you save your progress so you can come back to that exact spot if something goes wrong. A **commit** in Git works the same way -- it's a snapshot of your entire project at one moment in time. You can always go back to any save point."
+    },
+    {
+      "type": "text",
+      "title": "The 3-Step Workflow",
+      "body": "Making a commit is a three-step process:\n\n1. **Stage** -- Pick which files you want to include in this save point (`git add`)\n2. **Commit** -- Take the snapshot with a short message describing what changed (`git commit`)\n3. **Push** -- Upload your save point to GitHub so it's backed up online (`git push`)\n\nFor now, we'll focus on steps 1 and 2."
+    },
+    {
+      "type": "code_example",
+      "title": "The Commands You'll Use",
+      "language": "bash",
+      "code": "git init                          # Start tracking this folder\ngit add .                         # Stage all files\ngit status                        # See what's staged\ngit commit -m \"Initial commit\"    # Save the snapshot",
+      "annotation": "Don't worry about memorizing these -- you'll practice each one in the exercise."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A commit is a save point for your project -- stage your changes with `git add`, then save them with `git commit -m \"your message\"`."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["index.html", "style.css"],
+    "steps": [
+      {
+        "instruction": "First, initialize a new Git repository in this folder. This tells Git to start tracking changes here.",
+        "expectedCommand": "git init",
+        "acceptAlternatives": [],
+        "output": "Initialized empty Git repository in ~/my-project/.git/",
+        "hint": "The command is 'git' followed by a short word meaning 'initialize' or 'start'."
+      },
+      {
+        "instruction": "Now add both files to the staging area. The staging area is like a shopping cart -- you pick what you want to include before checking out.",
+        "expectedCommand": "git add .",
+        "acceptAlternatives": ["git add --all", "git add -A", "git add index.html style.css"],
+        "output": "",
+        "hint": "Use 'git add' followed by a dot (.) to add everything in the current folder."
+      },
+      {
+        "instruction": "Check the status to see what's staged and ready to commit.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\n\tnew file:   index.html\n\tnew file:   style.css",
+        "hint": "The command is 'git status' -- it shows the current state of your working directory."
+      },
+      {
+        "instruction": "Everything looks good. Now save this snapshot with a descriptive message.",
+        "expectedCommand": "git commit -m \"Initial commit\"",
+        "acceptAlternatives": ["git commit -m \"initial commit\"", "git commit -m \"first commit\"", "git commit -m \"Initial Commit\""],
+        "output": "[main (root-commit) a1b2c3d] Initial commit\n 2 files changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 index.html\n create mode 100644 style.css",
+        "hint": "Use 'git commit -m' followed by your message in quotes. Try something like \"Initial commit\"."
+      }
+    ],
+    "completionMessage": "You just made your first commit! This save point is now permanently recorded in your Git history. You can always come back to this exact state of your project.",
+    "glossaryTerms": ["git-init", "staging-area", "commit"]
+  }
+}

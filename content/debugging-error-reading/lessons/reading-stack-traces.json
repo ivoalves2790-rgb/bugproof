@@ -1,0 +1,108 @@
+{
+  "slug": "reading-stack-traces",
+  "title": "Reading Stack Traces",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Your app just crashed and the console is showing a scary wall of text called a 'stack trace.' Don't panic -- every line in that trace is a breadcrumb leading you to the bug. Let's learn to read it.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "A Stack Trace Is Like a Trail of Breadcrumbs",
+      "body": "Imagine you walk through five rooms and trip in the last one. A stack trace is like a list of every room you walked through, in order, with the room you tripped in listed first. It shows the chain of function calls that led to the crash."
+    },
+    {
+      "type": "text",
+      "title": "How to Read a Stack Trace",
+      "body": "A stack trace reads **top to bottom**:\n\n1. The **top line** is where the error actually happened -- start here\n2. Each line below it shows which function called the one above it\n3. **Skip framework lines** (like react-dom or node internals) -- focus on YOUR files\n\nThe top line of your own code is almost always where the bug is."
+    },
+    {
+      "type": "code_example",
+      "title": "A Real Stack Trace",
+      "language": "text",
+      "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- YOUR code, start here\n    at renderWithHooks (react-dom.js:14985)  <-- framework, skip\n    at App (src/App.jsx:22)               <-- YOUR code, called UserCard",
+      "annotation": "Start at the top line that mentions YOUR files (UserCard.jsx:8). That's where the crash happened. App.jsx:22 is where UserCard was called from."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Read stack traces from the top. The first line with your own file name is where the bug is. Skip lines from frameworks and libraries -- the problem is almost never in their code."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your React app crashes with this error:\n\nTypeError: Cannot read properties of null (reading 'map')\n    at ProductList (src/components/ProductList.jsx:12)\n    at renderWithHooks (react-dom.development.js:14985)\n    at mountIndeterminateComponent (react-dom.development.js:17811)\n    at App (src/App.jsx:8)\n\nWhere do you look first?",
+        "choices": [
+          { "id": "a", "text": "The top of the stack trace: ProductList.jsx line 12", "nextNode": "correct-top", "score": 10 },
+          { "id": "b", "text": "The bottom of the stack trace: App.jsx line 8", "nextNode": "wrong-bottom", "score": 3 },
+          { "id": "c", "text": "The react-dom lines -- the error is probably in React itself", "nextNode": "wrong-framework", "score": 1 }
+        ]
+      },
+      "correct-top": {
+        "narrative": "Right! The first line of your code in the stack trace is usually where the problem is. You open ProductList.jsx and see line 12:\n\nconst items = products.map(p => <li>{p.name}</li>);\n\nThe error says 'null' has no '.map'. What does this tell you?",
+        "choices": [
+          { "id": "a", "text": "The 'products' variable is null when this line runs", "nextNode": "found-null", "score": 10 },
+          { "id": "b", "text": "The .map() function is broken", "nextNode": "wrong-map", "score": 2 },
+          { "id": "c", "text": "The <li> element is causing the crash", "nextNode": "wrong-li", "score": 1 }
+        ]
+      },
+      "wrong-bottom": {
+        "narrative": "Stack traces read top-to-bottom, where the top is the most recent call -- the place where the error actually happened. The bottom is where the chain of function calls started. Start at the top and look for YOUR files (not framework code).",
+        "choices": [
+          { "id": "a", "text": "OK, let me look at the top: ProductList.jsx line 12", "nextNode": "correct-top", "score": 5 }
+        ]
+      },
+      "wrong-framework": {
+        "narrative": "Lines from node_modules or framework files like react-dom are almost never the source of your bug. They show up in the trace because your code called into the framework, which then hit the error. Skip framework lines and look for YOUR source files.",
+        "choices": [
+          { "id": "a", "text": "OK, let me focus on my own files in the trace", "nextNode": "correct-top", "score": 5 }
+        ]
+      },
+      "found-null": {
+        "narrative": "Exactly! The error message 'Cannot read properties of null (reading 'map')' is telling you that you called .map() on something that is null. The variable 'products' is null. Now, how do you fix this?",
+        "choices": [
+          { "id": "a", "text": "Add a check: if products is null, show a loading state or empty list", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Initialize products to an empty array as a default", "nextNode": "end-okay", "score": 7 },
+          { "id": "c", "text": "Wrap it in a try-catch block", "nextNode": "end-trycatch", "score": 4 }
+        ]
+      },
+      "wrong-map": {
+        "narrative": "The .map() function works fine -- it's a built-in JavaScript array method. The problem is what you're calling .map() ON. The error says you're calling .map() on null, meaning the variable before .map() has a null value.",
+        "choices": [
+          { "id": "a", "text": "So 'products' must be null when this line runs", "nextNode": "found-null", "score": 5 }
+        ]
+      },
+      "wrong-li": {
+        "narrative": "The JSX elements inside .map() aren't the problem. The crash happens before the .map() callback even runs. Look at the error message again: it says 'null' has no property 'map'. The thing you're calling .map() on is null.",
+        "choices": [
+          { "id": "a", "text": "So the products variable is null", "nextNode": "found-null", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You add a guard check:\n\nif (!products) return <p>Loading...</p>;\n\nNow the component shows a loading message while products is null (like during the initial API fetch), and renders the list once data arrives. The crash is gone.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Great debugging! You read the stack trace top-to-bottom, focused on your own files (not framework code), decoded the error message to understand that 'products' was null, and added a proper guard check. This pattern -- checking for null before using data -- is something you'll do constantly in real apps."
+      },
+      "end-okay": {
+        "narrative": "Setting a default empty array (const items = (products || []).map(...)) prevents the crash. But it might hide the fact that your data hasn't loaded yet. A loading state would give users better feedback.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 15,
+        "feedback": "You correctly identified the null variable and prevented the crash. The default empty array works, but a loading state would be even better for user experience. Still, solid debugging -- you read the stack trace, found the right file and line, and understood the null issue."
+      },
+      "end-trycatch": {
+        "narrative": "A try-catch hides the error but doesn't actually fix it. The component still won't show any products. It's better to handle the null case explicitly with a loading state or default value.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "You found the right problem, but try-catch is usually a band-aid. It silences the error without actually handling the null state. Next time, add a proper check for null and show a meaningful fallback (like a loading indicator) instead of just catching and ignoring the error."
+      }
+    },
+    "glossaryTerms": ["stack-trace", "null", "call-stack"]
+  }
+}

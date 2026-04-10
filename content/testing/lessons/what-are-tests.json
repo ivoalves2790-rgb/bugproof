@@ -1,0 +1,68 @@
+{
+  "slug": "what-are-tests",
+  "title": "What Are Tests?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Before you write a single test, let's clear up what tests actually are and what they aren't. There are a lot of misconceptions out there. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tests = Spell Checker for Your Code",
+      "body": "You know how a spell checker automatically underlines misspelled words as you type? You don't have to manually re-read every sentence -- the spell checker does it for you. **Tests** are like a spell checker for your code. They automatically check that your code does what it's supposed to do, so you don't have to manually verify everything yourself every time you make a change."
+    },
+    {
+      "type": "text",
+      "title": "What Tests Actually Are",
+      "body": "A test is a small piece of code that:\n\n1. **Sets up** a scenario (give this input...)\n2. **Runs** some code (call this function...)\n3. **Checks** the result (expect this output...)\n\nIf the result matches what you expected, the test **passes**. If it doesn't, the test **fails** and tells you exactly what went wrong."
+    },
+    {
+      "type": "code_example",
+      "title": "Your First Look at a Test",
+      "language": "javascript",
+      "code": "// The function we want to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// The test\ntest('adds 2 + 3 to equal 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
+      "annotation": "This test calls add(2, 3) and checks if the result is 5. If someone accidentally breaks the add function, this test will catch it."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tests are code that checks your other code. They set up a scenario, run a function, and verify the result matches what you expected."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Tests are code that automatically verifies your other code works correctly.",
+        "isGoodPractice": true,
+        "explanation": "Exactly right! Tests are just code that runs your functions with known inputs and checks that the outputs are correct. They automate the checking process."
+      },
+      {
+        "id": "card-2",
+        "content": "You only need tests for large, complex projects with big teams.",
+        "isGoodPractice": false,
+        "explanation": "Even small solo projects benefit from tests. If your project has logic (calculations, form validation, data processing), tests save you time by catching bugs before users do. The smaller the project, the faster the tests run."
+      },
+      {
+        "id": "card-3",
+        "content": "A passing test means 'this specific behavior works correctly right now'.",
+        "isGoodPractice": true,
+        "explanation": "Tests verify specific behaviors. If add(2, 3) returns 5, the test passes. It doesn't guarantee the entire app is bug-free -- just that this particular thing works as expected."
+      },
+      {
+        "id": "card-4",
+        "content": "Tests guarantee your app has zero bugs.",
+        "isGoodPractice": false,
+        "explanation": "Tests can only check what you tell them to check. They dramatically reduce bugs, but they can't catch everything. You might miss edge cases, or the test itself might have the wrong expectation. Tests are a safety net, not a guarantee."
+      },
+      {
+        "id": "card-5",
+        "content": "Tests run automatically and give you instant feedback when something breaks.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the biggest benefits! You make a change, run your tests, and within seconds you know if anything broke. Without tests, you'd have to manually click through your entire app to check."
+      }
+    ],
+    "glossaryTerms": ["test", "assertion", "test-runner"]
+  }
+}

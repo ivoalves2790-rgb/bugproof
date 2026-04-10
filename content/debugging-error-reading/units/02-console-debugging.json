@@ -1,0 +1,16 @@
+{
+  "slug": "console-debugging",
+  "title": "Console & DevTools",
+  "description": "Master console.log, browser DevTools, and other tools to see what your code is actually doing",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "console-log-basics", "title": "Console.log Basics", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "beyond-console-log", "title": "Beyond console.log", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "strategic-logging", "title": "Strategic Logging", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "opening-devtools", "title": "Opening Browser DevTools", "type": "terminal_sim", "order": 4, "difficulty": 1 },
+    { "slug": "network-tab-basics", "title": "The Network Tab", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "elements-inspector", "title": "Inspecting Elements", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

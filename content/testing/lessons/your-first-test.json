@@ -1,0 +1,69 @@
+{
+  "slug": "your-first-test",
+  "title": "Your First Test",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "It's time to write a test from scratch. You have a function that validates email addresses, and you need to write tests to make sure it works correctly. Let's set up Jest and write your first real test.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Your First Test = Your First Recipe",
+      "body": "Writing your first test is like following a recipe for the first time. The ingredients are simple (a function to test, some inputs, and expected outputs), and the steps are always the same (arrange, act, assert). Once you've done it once, you can do it for any function."
+    },
+    {
+      "type": "text",
+      "title": "Setting Up Jest",
+      "body": "To start testing with Jest, you need:\n\n1. Install Jest: `npm install --save-dev jest`\n2. Add a test script to package.json: `\"test\": \"jest\"`\n3. Create a test file with `.test.js` extension\n4. Run tests with: `npm test`\n\nJest automatically finds and runs all files ending in `.test.js`."
+    },
+    {
+      "type": "code_example",
+      "title": "The Test File Structure",
+      "language": "javascript",
+      "code": "// tests/email.test.js\nconst { isValidEmail } = require('../src/email');\n\ndescribe('isValidEmail', () => {\n  test('returns true for valid emails', () => {\n    expect(isValidEmail('user@example.com')).toBe(true);\n  });\n\n  test('returns false for emails without @', () => {\n    expect(isValidEmail('userexample.com')).toBe(false);\n  });\n});",
+      "annotation": "'describe' groups related tests together. Each 'test' checks one specific behavior. This structure makes test output easy to read."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Set up Jest with `npm install --save-dev jest`, write test files ending in `.test.js`, group tests with `describe()`, and run them with `npm test`."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/email-validator",
+    "initialFiles": ["src/email.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "First, let's look at the email validation function we need to test.",
+        "expectedCommand": "cat src/email.js",
+        "acceptAlternatives": ["less src/email.js", "more src/email.js"],
+        "output": "// src/email.js\n\nfunction isValidEmail(email) {\n  if (!email || typeof email !== 'string') return false;\n  const parts = email.split('@');\n  if (parts.length !== 2) return false;\n  if (parts[0].length === 0) return false;\n  if (!parts[1].includes('.')) return false;\n  return true;\n}\n\nmodule.exports = { isValidEmail };",
+        "hint": "Use 'cat' to view the email.js source file."
+      },
+      {
+        "instruction": "Install Jest as a development dependency so we can write and run tests.",
+        "expectedCommand": "npm install --save-dev jest",
+        "acceptAlternatives": ["npm i --save-dev jest", "npm install -D jest", "npm i -D jest"],
+        "output": "added 1 package in 2s\n\n1 package is looking for funding\n  run `npm fund` for details",
+        "hint": "Install 'jest' as a dev dependency using npm."
+      },
+      {
+        "instruction": "Now run the tests. Jest will look for test files automatically.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "PASS  tests/email.test.js\n  isValidEmail\n    ✓ returns true for valid email (2ms)\n    ✓ returns false for email without @ (1ms)\n    ✓ returns false for email without domain (1ms)\n    ✓ returns false for null input (1ms)\n    ✓ returns false for empty string (1ms)\n\nTest Suites: 1 passed, 1 total\nTests:       5 passed, 5 total\nTime:        0.6s",
+        "hint": "Run the tests with npm test."
+      },
+      {
+        "instruction": "All 5 tests pass! Let's run the tests in watch mode so they re-run automatically whenever you change a file.",
+        "expectedCommand": "npm test -- --watch",
+        "acceptAlternatives": ["npx jest --watch"],
+        "output": "PASS  tests/email.test.js\n  isValidEmail\n    ✓ returns true for valid email (2ms)\n    ✓ returns false for email without @ (1ms)\n    ✓ returns false for email without domain (1ms)\n    ✓ returns false for null input (1ms)\n    ✓ returns false for empty string (1ms)\n\nTest Suites: 1 passed, 1 total\nTests:       5 passed, 5 total\n\nWatch Usage\n › Press f to run only failed tests.\n › Press q to quit watch mode.\n › Press Enter to trigger a test run.",
+        "hint": "Add the --watch flag to run tests automatically when files change."
+      }
+    ],
+    "completionMessage": "You just set up and ran a real test suite! Watch mode is especially powerful -- save a file and your tests run instantly. This tight feedback loop is why developers love automated testing.",
+    "glossaryTerms": ["jest", "describe", "watch-mode"]
+  }
+}

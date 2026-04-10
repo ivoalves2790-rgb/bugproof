@@ -1,0 +1,69 @@
+{
+  "slug": "testing-functions",
+  "title": "Testing Functions",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Time to write real tests! You'll test a simple utility function using Jest, the most popular JavaScript testing framework. Follow along and run your tests to see them pass and fail.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Testing = Quality Control on an Assembly Line",
+      "body": "In a factory, quality control checks each product against specifications: is it the right size? The right weight? Does it work? **Testing functions** is the same idea. You check: does this function return the right output for a given input? Does it handle weird inputs gracefully?"
+    },
+    {
+      "type": "text",
+      "title": "Jest: The Testing Framework",
+      "body": "**Jest** is the most popular testing framework for JavaScript. It provides:\n\n- `test()` -- Define a test case\n- `expect()` -- Start an assertion\n- `.toBe()` -- Check exact equality\n- `.toEqual()` -- Check deep equality (for objects/arrays)\n- `.toBeTruthy()` / `.toBeFalsy()` -- Check truthiness"
+    },
+    {
+      "type": "code_example",
+      "title": "A Complete Test File",
+      "language": "javascript",
+      "code": "const { isEven, double, clamp } = require('./math');\n\ntest('isEven returns true for even numbers', () => {\n  expect(isEven(4)).toBe(true);\n  expect(isEven(0)).toBe(true);\n});\n\ntest('isEven returns false for odd numbers', () => {\n  expect(isEven(3)).toBe(false);\n  expect(isEven(7)).toBe(false);\n});\n\ntest('double multiplies by 2', () => {\n  expect(double(5)).toBe(10);\n  expect(double(0)).toBe(0);\n});",
+      "annotation": "Each test has a descriptive name that reads like a sentence. When a test fails, the name tells you exactly what broke."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Test functions by calling them with known inputs and checking the output with expect(). Use descriptive test names that explain what should happen."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["src/math.js", "tests/math.test.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "Let's look at the function we need to test. View the source file.",
+        "expectedCommand": "cat src/math.js",
+        "acceptAlternatives": ["less src/math.js", "more src/math.js"],
+        "output": "// src/math.js\n\nfunction clamp(value, min, max) {\n  if (value < min) return min;\n  if (value > max) return max;\n  return value;\n}\n\nmodule.exports = { clamp };",
+        "hint": "Use 'cat' to view the math.js source file."
+      },
+      {
+        "instruction": "The clamp function keeps a number within a range. Now let's view the test file to see what tests are written.",
+        "expectedCommand": "cat tests/math.test.js",
+        "acceptAlternatives": ["less tests/math.test.js", "more tests/math.test.js"],
+        "output": "const { clamp } = require('../src/math');\n\ntest('returns the value when within range', () => {\n  expect(clamp(5, 1, 10)).toBe(5);\n});\n\ntest('returns min when value is below range', () => {\n  expect(clamp(-5, 1, 10)).toBe(1);\n});\n\ntest('returns max when value is above range', () => {\n  expect(clamp(15, 1, 10)).toBe(10);\n});",
+        "hint": "Use 'cat' to view the test file."
+      },
+      {
+        "instruction": "Three tests covering the three cases of the clamp function. Run the tests to see if they pass.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "PASS  tests/math.test.js\n  ✓ returns the value when within range (2ms)\n  ✓ returns min when value is below range (1ms)\n  ✓ returns max when value is above range (1ms)\n\nTest Suites: 1 passed, 1 total\nTests:       3 passed, 3 total\nTime:        0.8s",
+        "hint": "Run the tests using the standard npm test command."
+      },
+      {
+        "instruction": "All three tests pass! The clamp function works correctly. Now let's see what happens if there's a bug -- run the tests with the --verbose flag for detailed output.",
+        "expectedCommand": "npm test -- --verbose",
+        "acceptAlternatives": ["npx jest --verbose"],
+        "output": "PASS  tests/math.test.js\n  ✓ returns the value when within range (2ms)\n  ✓ returns min when value is below range (1ms)\n  ✓ returns max when value is above range (1ms)\n\n---------|---------|----------|---------|---------|\nFile     | % Stmts | % Branch | % Funcs | % Lines |\n---------|---------|----------|---------|---------|\nmath.js  |     100 |      100 |     100 |     100 |\n---------|---------|----------|---------|---------|\n\nTest Suites: 1 passed, 1 total\nTests:       3 passed, 3 total",
+        "hint": "Add the --verbose flag to see more detail about each test."
+      }
+    ],
+    "completionMessage": "You just ran real unit tests! Three tests covered all three paths of the clamp function: within range, below minimum, and above maximum. This gives you 100% code coverage -- every line of the function was tested.",
+    "glossaryTerms": ["jest", "expect", "test-case"]
+  }
+}

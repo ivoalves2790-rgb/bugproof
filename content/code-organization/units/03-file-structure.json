@@ -1,0 +1,9 @@
+{
+  "slug": "file-structure",
+  "title": "File Structure",
+  "description": "Organizing files and folders for maintainable projects",
+  "order": 3,
+  "courseSlug": "code-organization",
+  "tier": "intermediate",
+  "lessons": []
+}

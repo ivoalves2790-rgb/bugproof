@@ -1,0 +1,54 @@
+{
+  "slug": "branch-workflow-bug",
+  "title": "Branch Workflow Mistakes",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "A developer is trying to create a feature branch, do some work, and merge it back. But they made a common mistake that beginners often run into. Can you spot it?",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Feature Branch Workflow = Assembly Line",
+      "body": "Imagine a car factory. The main assembly line produces finished cars. When engineers want to test a new engine design, they don't experiment on the main line -- they set up a **side workstation**, build and test the engine there, and only install it on the main line once it's proven to work. That's the feature branch workflow."
+    },
+    {
+      "type": "text",
+      "title": "How Teams Use Branches",
+      "body": "Here's the typical workflow:\n\n1. **Create a branch** from main for your feature\n2. **Make commits** on your feature branch as you work\n3. **Switch back to main** when the feature is done\n4. **Merge** your feature branch into main\n\nThe key rule: you must be **standing on the branch that receives the changes** when you merge."
+    },
+    {
+      "type": "code_example",
+      "title": "The Correct Merge Workflow",
+      "language": "bash",
+      "code": "git checkout -b feature/payments   # Create & switch to feature branch\n# ... do your work, make commits ...\ngit checkout main                  # Switch BACK to main\ngit merge feature/payments         # Merge feature INTO main",
+      "annotation": "The merge direction matters! You stand on main and pull the feature in -- not the other way around."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "To merge a feature into main, first switch to main with `git checkout main`, then run `git merge feature/your-branch` -- always stand on the receiving branch."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "git checkout -b feature/payments", "isBuggy": false },
+      { "line": 2, "text": "# ... make changes to payment.js ...", "isBuggy": false },
+      { "line": 3, "text": "git add payment.js", "isBuggy": false },
+      { "line": 4, "text": "git commit -m \"Add payment processing\"", "isBuggy": false },
+      { "line": 5, "text": "git merge main", "isBuggy": true },
+      { "line": 6, "text": "git push origin feature/payments", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "The developer wants to merge their feature branch INTO main, but they're doing it backwards. Tap the buggy line.",
+    "fixes": [
+      { "id": "a", "text": "git checkout main && git merge feature/payments", "isCorrect": true },
+      { "id": "b", "text": "git merge feature/payments", "isCorrect": false },
+      { "id": "c", "text": "git merge --force main", "isCorrect": false },
+      { "id": "d", "text": "git rebase main", "isCorrect": false }
+    ],
+    "explanation": "When you run 'git merge main' while on the feature branch, you're merging main INTO your feature branch -- the opposite of what was intended. To merge your feature INTO main, you need to first switch to main with 'git checkout main', then run 'git merge feature/payments'. Think of it this way: you always stand on the branch that receives the changes.",
+    "glossaryTerms": ["merge", "branch", "git-checkout"]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "slug": "reading-other-peoples-code",
+  "title": "Reading Other People's Code",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "You just joined a new team and need to fix a bug in code you've never seen before. The original developer left the company. No documentation. Let's practice the skill of reading unfamiliar code.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Reading Code = Exploring a New City",
+      "body": "When you visit a new city, you don't read every street sign in order. You get a map, find the landmarks, and navigate from there. **Reading unfamiliar code** works the same way -- start with the big picture (file structure, main entry point), identify landmarks (key functions, data flow), then zoom into the specific area you need."
+    },
+    {
+      "type": "text",
+      "title": "The Strategy for Reading Unfamiliar Code",
+      "body": "Follow this order when diving into a new codebase:\n\n1. **File structure** -- Look at folder names to understand the project's shape\n2. **Entry point** -- Find where the app starts (index.js, App.js, main.py)\n3. **Data flow** -- Trace how data moves: where it comes from, where it's transformed, where it's displayed\n4. **The specific area** -- Once you understand the big picture, zoom into the file relevant to your task"
+    },
+    {
+      "type": "code_example",
+      "title": "Clues in File Structure",
+      "language": "text",
+      "code": "src/\n  components/     <- UI pieces\n    Header.jsx\n    ProductCard.jsx\n  hooks/          <- Custom React hooks\n    useAuth.js\n    useProducts.js\n  api/            <- Server communication\n    auth.js\n    products.js\n  utils/          <- Helper functions\n    formatPrice.js\n    validateEmail.js",
+      "annotation": "Even without reading any code, this file structure tells you a lot: the app has products and authentication, the UI is in components/, data fetching is in api/, and shared logic is in utils/."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Reading unfamiliar code is a skill, not a talent. Start with the file structure, find the entry point, trace the data flow, then zoom into the specific area you need. Don't try to understand everything at once."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Bug report: 'Users see the wrong price on the product detail page. The price shows $0 instead of the actual price.'\n\nYou've never seen this codebase before. The project has this structure:\n\nsrc/\n  components/ (Header, ProductList, ProductDetail, Cart)\n  hooks/ (useAuth, useProducts, useCart)\n  api/ (auth.js, products.js, orders.js)\n  utils/ (formatPrice.js, validators.js)\n\nWhere do you start?",
+        "choices": [
+          { "id": "a", "text": "Open ProductDetail component since that's where the bug is visible", "nextNode": "open-detail", "score": 10 },
+          { "id": "b", "text": "Open api/products.js to check if the API returns the right price", "nextNode": "open-api", "score": 6 },
+          { "id": "c", "text": "Start at App.js and read through the entire codebase", "nextNode": "read-all", "score": 2 }
+        ]
+      },
+      "open-detail": {
+        "narrative": "You open ProductDetail.jsx and see:\n\nconst { product } = useProducts(id);\nreturn <h2>{product.name}</h2>\n       <p>{formatPrice(product.price)}</p>\n\nThe component uses useProducts() hook and formatPrice() utility. The data flows: API -> hook -> component -> formatter. Where's the $0 coming from?",
+        "choices": [
+          { "id": "a", "text": "Check formatPrice() in utils/ -- maybe it's formatting the price wrong", "nextNode": "check-format", "score": 8 },
+          { "id": "b", "text": "Check useProducts() hook -- maybe it's not passing the price correctly", "nextNode": "check-hook", "score": 10 }
+        ]
+      },
+      "open-api": {
+        "narrative": "The API function looks correct -- it fetches from /api/products/:id and returns the full product object. But the bug might be between the API response and what the component displays. You need to trace the data through the hook to see if something transforms it along the way.",
+        "choices": [
+          { "id": "a", "text": "Check the component that displays the price to trace the data flow", "nextNode": "open-detail", "score": 7 }
+        ]
+      },
+      "read-all": {
+        "narrative": "30 minutes later, you've read 400 lines of unrelated code about authentication and cart logic. You still haven't looked at anything related to product prices. Reading everything is too slow when you have a specific bug to find.",
+        "choices": [
+          { "id": "a", "text": "Focus on the product detail page where the bug actually appears", "nextNode": "open-detail", "score": 5 }
+        ]
+      },
+      "check-format": {
+        "narrative": "formatPrice(price) converts a number to a dollar string: '$' + price.toFixed(2). It works correctly with any number. If price is 0, it returns '$0.00'. The formatter isn't the problem -- it's displaying whatever value it receives. The issue is upstream.",
+        "choices": [
+          { "id": "a", "text": "Check the useProducts hook to see what value it passes as price", "nextNode": "check-hook", "score": 8 }
+        ]
+      },
+      "check-hook": {
+        "narrative": "You open useProducts.js and find:\n\nconst product = {\n  name: data.name,\n  price: data.price_cents,\n  image: data.image_url\n};\n\nThe API returns price_cents (e.g., 2999 for $29.99) but the hook assigns it directly to price without converting. formatPrice() then shows $2999.00 -- wait, the bug report says $0. You check the API response and realize for a new product, price_cents is null, and null.toFixed(2) would crash. There must be a fallback. You search and find: price: data.price_cents || 0. What's the real fix?",
+        "choices": [
+          { "id": "a", "text": "Convert cents to dollars: price: (data.price_cents || 0) / 100", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Just remove the || 0 fallback so null prices show an error instead", "nextNode": "end-partial", "score": 4 }
+        ]
+      },
+      "end-good": {
+        "narrative": "The price was in cents from the API but displayed as dollars without conversion. For a $29.99 product, data.price_cents is 2999, and it was showing $2,999.00. For new products with null prices, the || 0 fallback made it show $0.00. Dividing by 100 fixes both cases.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent code reading! You traced the data flow from component -> hook -> API and found the unit mismatch (cents vs dollars). The strategy worked: start where the bug is visible, trace the data backward, and check each transformation step. This is exactly how experienced developers navigate unfamiliar code."
+      },
+      "end-partial": {
+        "narrative": "Removing the fallback would cause a crash (null.toFixed) instead of showing $0. That's worse than the original bug. The real problem is the cents-to-dollars conversion missing in the hook.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "You found the right area but missed the root cause. The || 0 fallback was hiding the null issue, but the real problem is that price_cents needs to be divided by 100 to convert to dollars. When reading unfamiliar code, always check the data at each step: what does the API return, what does the hook transform, what does the component expect?"
+      }
+    },
+    "glossaryTerms": ["data-flow", "debugging", "code-reading", "entry-point"]
+  }
+}

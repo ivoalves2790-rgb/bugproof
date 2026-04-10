@@ -1,0 +1,16 @@
+{
+  "slug": "prompting",
+  "title": "Prompting for Better Code",
+  "description": "How to write prompts that produce useful, working code instead of vague or broken output",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "ai-assisted-development",
+  "lessons": [
+    { "slug": "good-vs-bad-prompts", "title": "Good vs Bad Prompts", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "be-specific", "title": "Be Specific, Get Specific", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "provide-context", "title": "Giving AI the Right Context", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "iterative-prompting", "title": "Iterating on AI Output", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "breaking-down-problems", "title": "Breaking Down Big Problems", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "prompt-patterns", "title": "Prompt Patterns That Work", "type": "swipe_to_judge", "order": 6, "difficulty": 3 }
+  ]
+}

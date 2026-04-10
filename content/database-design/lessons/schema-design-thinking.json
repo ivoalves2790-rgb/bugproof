@@ -1,0 +1,72 @@
+{
+  "slug": "schema-design-thinking",
+  "title": "Thinking in Schemas",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "Schema design is about deciding how to organize your data BEFORE you write any code. Good decisions now save you from painful rewrites later. Swipe RIGHT if the design practice is GOOD, LEFT if it's BAD.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Schema Design = Organizing a Closet",
+      "body": "Before filling a closet, you decide: shirts here, pants there, shoes on the bottom. If you just throw everything in randomly, finding anything later is a nightmare. **Schema design** is organizing your database closet -- deciding what tables you need, what columns each has, and how they relate to each other, BEFORE you start filling them with data."
+    },
+    {
+      "type": "text",
+      "title": "Questions to Ask When Designing a Schema",
+      "body": "Before creating tables, ask:\n\n1. **What things does my app deal with?** (users, products, orders = separate tables)\n2. **What do I need to know about each thing?** (user: name, email, password = columns)\n3. **How do these things relate?** (a user HAS many orders = relationship)\n4. **What must always have a value?** (name = NOT NULL, bio = optional)\n5. **What must be unique?** (email = UNIQUE, name = can duplicate)"
+    },
+    {
+      "type": "text",
+      "title": "One Table Per 'Thing'",
+      "body": "The most important rule: **each type of thing gets its own table**.\n\n- Users go in a `users` table\n- Products go in a `products` table\n- Orders go in an `orders` table\n\nDon't mash everything into one giant table. If you find yourself repeating the same data in multiple rows (like the user's name appearing in every order), that's a sign you need a separate table."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Good schema design means one table per type of thing, the right columns with the right data types, NOT NULL on required fields, and UNIQUE on fields that shouldn't duplicate. Think about your schema before writing code."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Creating separate tables for users, products, and orders in an e-commerce app.",
+        "isGoodPractice": true,
+        "explanation": "Each type of 'thing' (entity) deserves its own table. Users, products, and orders have different attributes and different lifecycles. Separating them keeps data organized and avoids repetition."
+      },
+      {
+        "id": "card-2",
+        "content": "Storing a user's street, city, state, and zip all in one column called 'address'.",
+        "isGoodPractice": false,
+        "explanation": "Cramming multiple values into one column makes it impossible to query by city or state separately. What if you want to find all users in California? You'd have to do messy text searches. Use separate columns for street, city, state, and zip so you can query each independently."
+      },
+      {
+        "id": "card-3",
+        "content": "Adding a created_at timestamp column to every table.",
+        "isGoodPractice": true,
+        "explanation": "Knowing when a record was created is almost always useful -- for debugging, auditing, sorting, and analytics. Adding created_at (and often updated_at) to every table is a widely-followed best practice that costs almost nothing but provides enormous value."
+      },
+      {
+        "id": "card-4",
+        "content": "Creating columns named 'data1', 'data2', 'data3' for future use.",
+        "isGoodPractice": false,
+        "explanation": "Generic column names make your database impossible to understand. What does 'data2' contain? Nobody knows! Name columns descriptively (first_name, order_total, shipping_date). If you need new columns later, you can add them with ALTER TABLE."
+      },
+      {
+        "id": "card-5",
+        "content": "Using an auto-incrementing integer as the primary key for each table.",
+        "isGoodPractice": true,
+        "explanation": "Auto-incrementing integers (SERIAL in PostgreSQL, AUTOINCREMENT in SQLite) are the most common and practical choice for primary keys. They're unique, never change, and are generated automatically. Some teams prefer UUIDs for distributed systems, but auto-incrementing integers are the standard starting point."
+      },
+      {
+        "id": "card-6",
+        "content": "Storing the number of orders a user has made as a column in the users table.",
+        "isGoodPractice": false,
+        "explanation": "This number can be calculated by counting rows in the orders table: SELECT COUNT(*) FROM orders WHERE user_id = 42. Storing calculated values means you have to keep them in sync -- every time an order is added or deleted, you'd have to update the users table too. That's error-prone. Let the database calculate it on the fly."
+      }
+    ],
+    "glossaryTerms": ["schema", "normalization", "entity", "constraint"]
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "slug": "dns-the-internets-phonebook",
+  "title": "DNS: The Internet's Phone Book",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Your friend says 'My website is down! Nobody can reach it!' You'll investigate and discover how DNS -- the system that translates domain names into IP addresses -- actually works.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "DNS Is Like a Phone Book",
+      "body": "Imagine you want to call a pizza place. You know its name ('Mario's Pizza') but not its phone number. So you look it up in a phone book. **DNS** (Domain Name System) works exactly like this. You know the name (`google.com`) and DNS looks up the number (`142.250.80.46`) so your browser can connect."
+    },
+    {
+      "type": "text",
+      "title": "Why Do We Need DNS?",
+      "body": "Computers find each other using **IP addresses** -- numbers like `192.168.1.1`. But humans are terrible at remembering numbers. DNS lets us use friendly names like `youtube.com` instead of `142.250.190.78`. Every time you visit a website, a DNS lookup happens first -- your browser asks 'What's the IP address for this name?'"
+    },
+    {
+      "type": "text",
+      "title": "The DNS Lookup Process",
+      "body": "When you type `example.com`, here's what happens:\n\n1. Your browser checks its **cache** -- did I look this up recently?\n2. If not, it asks your **router** (your home Wi-Fi)\n3. If the router doesn't know, it asks your **ISP's DNS server**\n4. If nobody knows, it goes all the way to the **root DNS servers** that know everything\n5. The answer travels back down the chain and gets cached for next time"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "DNS translates human-readable domain names (like google.com) into machine-readable IP addresses (like 142.250.80.46). Without DNS, you'd have to memorize numbers for every website."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your friend just launched their website at www.coolstore.com. They say: 'I bought the domain an hour ago and pointed it to my server, but when I type the URL I get an error: DNS_PROBE_FINISHED_NXDOMAIN.' What does this error mean?",
+        "choices": [
+          { "id": "a", "text": "DNS couldn't find an IP address for that domain name", "nextNode": "correct-dns", "score": 10 },
+          { "id": "b", "text": "The server is down and not responding", "nextNode": "wrong-server-down", "score": 3 },
+          { "id": "c", "text": "The website code has a bug", "nextNode": "wrong-code-bug", "score": 1 }
+        ]
+      },
+      "correct-dns": {
+        "narrative": "Correct! NXDOMAIN means 'Non-Existent Domain' -- DNS looked up coolstore.com but couldn't find any IP address for it. Your friend says they updated the DNS settings at their domain registrar an hour ago. What's likely happening?",
+        "choices": [
+          { "id": "a", "text": "DNS changes take time to spread across the internet (propagation)", "nextNode": "correct-propagation", "score": 10 },
+          { "id": "b", "text": "They probably typed the wrong IP address in the DNS settings", "nextNode": "possible-typo", "score": 5 },
+          { "id": "c", "text": "The domain registrar is broken", "nextNode": "wrong-registrar", "score": 2 }
+        ]
+      },
+      "wrong-server-down": {
+        "narrative": "Not quite. If the server were down, you'd get a different error -- like a timeout or connection refused. The NXDOMAIN error happens earlier in the process: your browser can't even find WHERE the server is. It's a DNS problem, not a server problem.",
+        "choices": [
+          { "id": "a", "text": "So DNS couldn't find the IP address for the domain name?", "nextNode": "correct-dns", "score": 5 }
+        ]
+      },
+      "wrong-code-bug": {
+        "narrative": "A code bug would only matter if your browser could actually reach the server. The NXDOMAIN error happens before any connection is made -- your browser is still trying to figure out WHERE to send the request. It's stuck at the DNS step.",
+        "choices": [
+          { "id": "a", "text": "OK, so it's a DNS problem -- the domain name can't be resolved", "nextNode": "correct-dns", "score": 5 }
+        ]
+      },
+      "correct-propagation": {
+        "narrative": "Exactly! DNS propagation can take up to 48 hours. DNS servers around the world cache results and don't check for updates immediately. Your friend should wait a few more hours. In the meantime, what can they do to verify their settings are correct?",
+        "choices": [
+          { "id": "a", "text": "Use a DNS lookup tool to check if the records are set correctly", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Just wait and hope for the best", "nextNode": "end-ok", "score": 5 }
+        ]
+      },
+      "possible-typo": {
+        "narrative": "That's possible! But since they just made the change, the more likely reason is DNS propagation -- it takes time for DNS changes to spread across the internet. DNS servers cache results and only refresh periodically, which can take minutes to 48 hours.",
+        "choices": [
+          { "id": "a", "text": "So we should wait for propagation and also double-check the settings", "nextNode": "end-great", "score": 7 }
+        ]
+      },
+      "wrong-registrar": {
+        "narrative": "Domain registrars almost never go down entirely. The much more common issue is DNS propagation -- when you update DNS records, it takes time for all the DNS servers around the world to get the new information.",
+        "choices": [
+          { "id": "a", "text": "So we need to wait for the DNS changes to propagate", "nextNode": "correct-propagation", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "You use an online DNS checker and confirm the A record is pointing to the right IP address. The checker shows some DNS servers already have the new record while others still show the old one. Classic propagation! You tell your friend to wait a few more hours.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Great work! You identified that NXDOMAIN means DNS can't find the domain, understood that DNS propagation takes time, and suggested using a lookup tool to verify settings. DNS issues are one of the most common problems when launching a new website."
+      },
+      "end-ok": {
+        "narrative": "Waiting will probably work, but it's better to verify the DNS settings are correct first. If there's a typo in the IP address, waiting won't help. Using a DNS lookup tool takes 10 seconds and gives you peace of mind.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "You correctly identified DNS propagation as the issue, but being proactive about checking DNS records is a good habit. Always verify your settings with a DNS lookup tool rather than just waiting and hoping."
+      }
+    },
+    "glossaryTerms": ["dns", "ip-address", "domain", "dns-propagation"]
+  }
+}

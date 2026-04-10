@@ -1,0 +1,16 @@
+{
+  "slug": "relationships",
+  "title": "Relationships",
+  "description": "Connect your tables together with foreign keys and understand one-to-many, many-to-many, and one-to-one relationships",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-relationships", "title": "Why Tables Need Relationships", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "foreign-keys", "title": "Foreign Keys: Connecting Tables", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "one-to-many", "title": "One-to-Many Relationships", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "many-to-many", "title": "Many-to-Many Relationships", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "join-tables", "title": "JOIN: Querying Across Tables", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "normalization-basics", "title": "Normalization Basics", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

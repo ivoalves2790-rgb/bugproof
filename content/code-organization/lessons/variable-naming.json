@@ -1,0 +1,58 @@
+{
+  "slug": "variable-naming",
+  "title": "Variable Naming",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "naming-things",
+  "courseSlug": "code-organization",
+  "intro": "This code works perfectly but is impossible to understand because of terrible variable names. Every variable is named with single letters or meaningless words. Find the worst offender -- the variable whose name gives you zero clue about what it contains.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Variable Names = Labels on Boxes",
+      "body": "Imagine moving to a new house. You pack everything in boxes. Box labeled 'Kitchen - Plates' is easy to unpack. Box labeled 'stuff' or 'x' means you have to open it and dig through to find what you need. **Variable names are labels on boxes** -- good names tell you what's inside without opening the box."
+    },
+    {
+      "type": "text",
+      "title": "Rules for Good Variable Names",
+      "body": "A good variable name answers the question 'what does this contain?' without reading any other code:\n\n1. **Describe the content** -- `userEmail` not `str` or `e`\n2. **Be specific** -- `selectedProductId` not `id` or `data`\n3. **Use full words** -- `firstName` not `fn` or `fName`\n4. **Match the type** -- plurals for arrays (`users`), singular for single items (`user`)\n5. **Avoid meaningless names** -- never use `temp`, `data`, `info`, `stuff`, `thing`"
+    },
+    {
+      "type": "code_example",
+      "title": "Before and After Naming",
+      "language": "javascript",
+      "code": "// BAD: What do these even mean?\nconst d = getData();\nconst f = d.filter(x => x.a > 5);\nconst r = f.map(x => x.n);\n\n// GOOD: You can read this like English\nconst products = fetchProducts();\nconst expensiveProducts = products.filter(p => p.price > 5);\nconst productNames = expensiveProducts.map(p => p.name);",
+      "annotation": "The good version tells a story: get products, filter expensive ones, extract their names. The bad version is a puzzle you have to solve."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Variable names should describe what they contain. Use full words, be specific, match plurals to arrays, and never use meaningless names like temp, data, or x. Code is read 10x more than it's written -- invest 2 seconds in a good name to save 2 minutes of confusion later."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "async function process(d) {", "isBuggy": false },
+      { "line": 2, "text": "  const r = await fetch('/api/users');", "isBuggy": false },
+      { "line": 3, "text": "  const data = await r.json();", "isBuggy": false },
+      { "line": 4, "text": "  const x = data.filter(i => i.age >= 18);", "isBuggy": true },
+      { "line": 5, "text": "  const temp = x.map(i => ({", "isBuggy": false },
+      { "line": 6, "text": "    n: i.firstName + ' ' + i.lastName,", "isBuggy": false },
+      { "line": 7, "text": "    e: i.email", "isBuggy": false },
+      { "line": 8, "text": "  }));", "isBuggy": false },
+      { "line": 9, "text": "  return temp;", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "Every variable in this function has a bad name, but line 4 is the worst. The variable 'x' holds filtered adult users but gives absolutely no hint of that. Which line has the worst variable name?",
+    "fixes": [
+      { "id": "a", "text": "const adultUsers = data.filter(user => user.age >= 18);", "isCorrect": true },
+      { "id": "b", "text": "const x2 = data.filter(i => i.age >= 18);", "isCorrect": false },
+      { "id": "c", "text": "const filteredData = data.filter(i => i.age >= 18);", "isCorrect": false },
+      { "id": "d", "text": "const arr = data.filter(i => i.age >= 18);", "isCorrect": false }
+    ],
+    "explanation": "The variable 'x' holds users who are 18 or older, so 'adultUsers' describes exactly what it contains. Option B (x2) is just as meaningless. Option C (filteredData) says it's filtered but not WHAT was filtered or WHY -- it's vague. Option D (arr) just says it's an array, which the brackets already tell you. Good names answer: 'what does this contain AND why is it special?'",
+    "glossaryTerms": ["variable-naming", "readability", "self-documenting-code"]
+  }
+}

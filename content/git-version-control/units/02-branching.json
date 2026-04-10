@@ -1,0 +1,16 @@
+{
+  "slug": "branching",
+  "title": "Branching",
+  "description": "Create parallel timelines to work on features without breaking things",
+  "order": 2,
+  "courseSlug": "git-version-control",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-branches", "title": "What Are Branches?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "creating-branches", "title": "Creating Branches", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "switching-branches", "title": "Switching Branches", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "branch-naming", "title": "Branch Naming Conventions", "type": "swipe_to_judge", "order": 4, "difficulty": 1 },
+    { "slug": "branch-workflow-bug", "title": "Branch Workflow Mistakes", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "detached-head", "title": "The Detached HEAD Mystery", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

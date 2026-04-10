@@ -1,0 +1,66 @@
+{
+  "slug": "context-window",
+  "title": "The Context Window",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "ai-basics",
+  "courseSlug": "ai-assisted-development",
+  "intro": "The context window is the amount of text an AI can 'see' at once -- your prompt, the conversation history, and its response all have to fit inside it. Understanding this limit is key to getting good results. Swipe right for TRUE, left for FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Context Window Is Like a Desk",
+      "body": "Imagine you can only fit a certain number of papers on your desk at once. If you pile on too many, older ones fall off the edge. The context window works the same way -- it can hold a limited amount of text. Once it's full, the AI starts 'forgetting' what you said earlier."
+    },
+    {
+      "type": "text",
+      "title": "What Counts Toward the Context Window",
+      "body": "Everything in the conversation takes up space:\n\n1. **Your messages** -- every prompt you send\n2. **AI's responses** -- its answers use space too\n3. **Pasted code** -- large code blocks eat up context fast\n4. **System instructions** -- hidden setup text the tool uses\n\nThe context window includes ALL of this, not just your last message."
+    },
+    {
+      "type": "text",
+      "title": "How to Work Within the Limit",
+      "body": "To get the best results:\n\n1. Include **only relevant code**, not your entire codebase\n2. **Start fresh conversations** when the AI seems confused\n3. **Repeat key instructions** in long conversations\n4. Paste **error messages and stack traces** -- they're high-value context"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The context window is finite and includes everything -- your prompts, AI responses, and pasted code. Keep it focused on what's relevant, and start a fresh conversation if the AI seems confused."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Pasting your entire 10,000-line codebase into a prompt will always give better results than pasting just the relevant 50 lines.",
+        "isGoodPractice": false,
+        "explanation": "More context isn't always better. Flooding the context window with irrelevant code can confuse the AI and push important information out. It's better to include only the files and functions relevant to your question. Think of it like explaining a problem to a colleague -- you give them the relevant context, not your entire hard drive."
+      },
+      {
+        "id": "card-2",
+        "content": "If the AI seems to 'forget' instructions you gave earlier in a long conversation, the context window is likely the reason.",
+        "isGoodPractice": true,
+        "explanation": "As a conversation gets longer, earlier messages may get pushed out of the context window or receive less attention from the model. This is why AI can seem to 'forget' rules you set at the beginning. For long conversations, periodically repeat key instructions or start a fresh conversation."
+      },
+      {
+        "id": "card-3",
+        "content": "You should include error messages and stack traces when asking AI to help debug.",
+        "isGoodPractice": true,
+        "explanation": "Error messages are extremely valuable context. They tell the AI exactly what went wrong, where it happened, and often hint at why. A prompt like 'my code is broken' gives AI nothing to work with, but pasting the actual error message gives it a precise starting point."
+      },
+      {
+        "id": "card-4",
+        "content": "The context window only counts the words you type, not the AI's response.",
+        "isGoodPractice": false,
+        "explanation": "The context window includes everything: your messages, the AI's responses, any code you pasted, and system instructions. The AI's own responses take up context space too. In a long back-and-forth conversation, the AI's previous answers can consume a large chunk of the available window."
+      },
+      {
+        "id": "card-5",
+        "content": "Starting a new conversation can fix problems where the AI seems confused or stuck in a loop.",
+        "isGoodPractice": true,
+        "explanation": "A fresh conversation resets the context window completely. If the AI is referencing its own wrong answers from earlier in the thread, or if the conversation has become too long and cluttered, starting over with a clean, well-crafted prompt often produces much better results."
+      }
+    ],
+    "glossaryTerms": ["context-window", "token", "prompt"]
+  }
+}

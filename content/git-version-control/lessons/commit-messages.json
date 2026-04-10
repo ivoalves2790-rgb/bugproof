@@ -1,0 +1,68 @@
+{
+  "slug": "commit-messages",
+  "title": "Writing Good Commit Messages",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Commit messages are notes to your future self (and your teammates). A good message explains WHAT changed and WHY. Swipe right for GOOD commit messages and left for BAD ones.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Commit Messages = Labels on Moving Boxes",
+      "body": "Imagine you're moving to a new apartment. You could just tape boxes shut and hope for the best, or you could label each one: \"Kitchen -- plates and bowls\" or \"Bedroom -- winter clothes.\" Commit messages are those labels. Future you (or your teammate) will thank you when they need to find something."
+    },
+    {
+      "type": "text",
+      "title": "What Makes a Good Message?",
+      "body": "A good commit message answers: **what changed and why?** Keep it short (under 50 characters for the first line), start with a verb, and be specific. The convention is to use **imperative mood** -- write it like a command.\n\n- **Good:** \"Fix login button not responding on mobile\"\n- **Bad:** \"fixed stuff\" or \"WIP\" or \"asdfjkl\""
+    },
+    {
+      "type": "code_example",
+      "title": "Good vs Bad Examples",
+      "language": "bash",
+      "code": "# Good messages:\ngit commit -m \"Add email validation to signup form\"\ngit commit -m \"Fix crash when user uploads empty file\"\ngit commit -m \"Remove deprecated payment API calls\"\n\n# Bad messages:\ngit commit -m \"fix stuff\"\ngit commit -m \"WIP\"\ngit commit -m \"changes\"",
+      "annotation": "Notice the good messages start with a verb (Add, Fix, Remove) and describe a specific change."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Write commit messages like a note to your future self -- start with a verb, be specific, and explain what changed in under 50 characters."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "git commit -m \"Fix login button not responding on mobile Safari\"",
+        "isGoodPractice": true,
+        "explanation": "This is a great commit message. It says exactly what was fixed (login button), what the problem was (not responding), and where it happened (mobile Safari). Anyone reading the log will understand this immediately."
+      },
+      {
+        "id": "card-2",
+        "content": "git commit -m \"fix stuff\"",
+        "isGoodPractice": false,
+        "explanation": "What stuff? This message is useless three days from now. When you're searching through history to find when a bug was introduced, 'fix stuff' tells you nothing. Always describe what you changed and why."
+      },
+      {
+        "id": "card-3",
+        "content": "git commit -m \"WIP\"",
+        "isGoodPractice": false,
+        "explanation": "WIP (Work In Progress) as a permanent commit message is a problem. It tells no one what changed. If you need to save work-in-progress, at least say what you were working on: 'WIP: Add user profile page layout'."
+      },
+      {
+        "id": "card-4",
+        "content": "git commit -m \"Add email validation to signup form\"",
+        "isGoodPractice": true,
+        "explanation": "Short, clear, and descriptive. It starts with a verb (Add), says what was added (email validation), and where (signup form). This is the gold standard for commit messages."
+      },
+      {
+        "id": "card-5",
+        "content": "git commit -m \"asdfjkl\"",
+        "isGoodPractice": false,
+        "explanation": "Keyboard smash is never a commit message. Every commit is a permanent part of your project's history. Treat it like a note to your future self who has forgotten everything about today."
+      }
+    ],
+    "glossaryTerms": ["commit", "commit-message"]
+  }
+}

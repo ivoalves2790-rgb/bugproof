@@ -1,0 +1,66 @@
+{
+  "slug": "spaghetti-vs-clean",
+  "title": "Spaghetti Code vs Clean Code",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "Some code is a joy to work with. Other code makes you want to quit and become a farmer. The difference usually isn't about clever algorithms -- it's about organization. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Code = Kitchen",
+      "body": "Imagine two kitchens. In the first, every utensil has a place, ingredients are labeled, and recipes are in a binder. In the second, everything is piled on the counter, spices are in random drawers, and there's no recipe in sight. Both kitchens can make dinner, but which one do you want to cook in every day? **Code organization** is the difference between these two kitchens."
+    },
+    {
+      "type": "text",
+      "title": "What is Spaghetti Code?",
+      "body": "**Spaghetti code** is code where everything is tangled together:\n\n- Functions are 500 lines long and do 12 different things\n- Variables are named `x`, `temp`, `data2`\n- The same logic is copied and pasted in 6 places\n- You change one thing and three unrelated features break\n\nIt's called spaghetti because if you try to pull on one strand, the whole plate comes with it."
+    },
+    {
+      "type": "text",
+      "title": "What Makes Code Clean?",
+      "body": "Clean code isn't about perfection. It follows a few practical rules:\n\n1. **Each function does one thing** -- and its name says what that thing is\n2. **Variables describe their contents** -- `userEmail` not `str1`\n3. **Files are small and focused** -- one component per file, not everything in one mega-file\n4. **No copy-paste** -- shared logic lives in one place\n5. **You can find things** -- the file structure makes sense"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Spaghetti code tangles everything together, making changes risky and finding things hard. Clean code keeps things separate, well-named, and easy to navigate. You don't need perfection -- just consistent organization."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A 500-line function that handles user registration, email sending, and database updates is well-organized because everything is in one place.",
+        "isGoodPractice": false,
+        "explanation": "Having everything in one place isn't organization -- it's a junk drawer. A 500-line function doing three different things is hard to test, hard to debug, and hard to modify. If the email sending breaks, you have to read through 500 lines to find it. Each task should be its own function."
+      },
+      {
+        "id": "card-2",
+        "content": "If your code works correctly, it doesn't matter how it's organized.",
+        "isGoodPractice": false,
+        "explanation": "Code that works today still needs to be changed tomorrow. You'll need to add features, fix bugs, and onboard new developers. Disorganized code that 'works' becomes a nightmare the moment anyone needs to change it. Most of a developer's time is spent reading code, not writing it."
+      },
+      {
+        "id": "card-3",
+        "content": "Breaking a large function into smaller, well-named functions makes code easier to understand.",
+        "isGoodPractice": true,
+        "explanation": "Small functions with clear names act like chapter headings in a book. Instead of reading 200 lines to understand what happens during checkout, you see: validateCart(), calculateTotal(), processPayment(), sendConfirmation(). You can understand the flow at a glance and dive into details only when needed."
+      },
+      {
+        "id": "card-4",
+        "content": "Copying and pasting code is faster than creating a reusable function.",
+        "isGoodPractice": false,
+        "explanation": "It's faster right now, but it creates a maintenance nightmare. When you find a bug in the copied code, you have to fix it everywhere it was pasted. Miss one spot and you have inconsistent behavior. A reusable function means fixing the bug once, in one place, and every caller gets the fix."
+      },
+      {
+        "id": "card-5",
+        "content": "Clean code takes longer to write initially but saves time in the long run.",
+        "isGoodPractice": true,
+        "explanation": "Writing a clear variable name takes 2 extra seconds. Finding a bug in code full of names like 'x' and 'temp' takes 2 extra hours. Clean code is an investment: a little more effort upfront saves enormous time when debugging, adding features, or when someone else needs to understand your code."
+      }
+    ],
+    "glossaryTerms": ["spaghetti-code", "clean-code", "refactoring"]
+  }
+}

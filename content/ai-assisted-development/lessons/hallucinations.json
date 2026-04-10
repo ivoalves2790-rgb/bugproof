@@ -1,0 +1,54 @@
+{
+  "slug": "hallucinations",
+  "title": "AI Hallucinations",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "ai-basics",
+  "courseSlug": "ai-assisted-development",
+  "intro": "You asked AI to write a function that fetches user data from an API and formats it. The code looks clean and professional, but the AI hallucinated -- it used a method that doesn't exist. Find the bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Hallucinations Are Like Confidently Wrong Directions",
+      "body": "Imagine asking someone for directions and they confidently say 'turn left on Oak Street' -- but Oak Street doesn't exist. They're not lying; they genuinely think it's there. AI hallucinations are the same: the AI invents methods, libraries, or APIs that sound real but don't exist."
+    },
+    {
+      "type": "text",
+      "title": "What AI Hallucinations Look Like",
+      "body": "Common hallucinations include:\n\n1. **Fake methods** -- like `.toTitleCase()` in JavaScript (doesn't exist)\n2. **Invented libraries** -- referencing npm packages that were never published\n3. **Wrong API signatures** -- using a real function but with the wrong parameters\n4. **Made-up config options** -- settings that sound right but aren't supported\n\nThe dangerous part is that hallucinated code **looks completely normal** until you try to run it."
+    },
+    {
+      "type": "code_example",
+      "title": "Spotting a Hallucination",
+      "language": "javascript",
+      "code": "// AI-generated code with a hallucination\nconst name = 'john doe';\nconst formatted = name.toTitleCase(); // This method doesn't exist!\n\n// What actually works in JavaScript\nconst formatted = name.charAt(0).toUpperCase() + name.slice(1);",
+      "annotation": "JavaScript strings have no toTitleCase() method. The AI invented it because it sounds like it should exist. Always verify that methods and APIs are real before using AI-generated code."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "AI can confidently use methods and libraries that don't exist. When you get AI-generated code, verify that every method, library, and API call is real by checking the official documentation."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "async function getFormattedUser(userId) {", "isBuggy": false },
+      { "line": 2, "text": "  const response = await fetch(`/api/users/${userId}`);", "isBuggy": false },
+      { "line": 3, "text": "  const data = await response.json();", "isBuggy": false },
+      { "line": 4, "text": "  const fullName = data.name.toTitleCase();", "isBuggy": true },
+      { "line": 5, "text": "  return { fullName, email: data.email };", "isBuggy": false },
+      { "line": 6, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "The AI generated this function, but one line uses a method that doesn't actually exist in JavaScript. Tap the line with the hallucinated API.",
+    "fixes": [
+      { "id": "a", "text": "  const fullName = data.name.charAt(0).toUpperCase() + data.name.slice(1);", "isCorrect": true },
+      { "id": "b", "text": "  const fullName = data.name.titleCase();", "isCorrect": false },
+      { "id": "c", "text": "  const fullName = data.name.toUpperCase();", "isCorrect": false },
+      { "id": "d", "text": "  const fullName = String.titleCase(data.name);", "isCorrect": false }
+    ],
+    "explanation": "JavaScript has no built-in 'toTitleCase()' method on strings. This is a classic AI hallucination -- the method sounds like it should exist, and it does in some other languages, but not in standard JavaScript. The AI confidently used it because it has seen similar patterns. Always verify that methods and APIs actually exist in your language before using AI-generated code.",
+    "glossaryTerms": ["hallucination", "api", "runtime-error"]
+  }
+}

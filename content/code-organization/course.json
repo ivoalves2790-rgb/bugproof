@@ -1,0 +1,17 @@
+{
+  "slug": "code-organization",
+  "title": "Code Organization",
+  "description": "File structure, naming, separation of concerns",
+  "longDescription": "AI can write code, but it can't organize a codebase. As your project grows, good structure is the difference between 'I can find and change anything in 5 minutes' and 'I'm afraid to touch anything'. This course teaches practical code organization: how to name things, when to split files, how to separate concerns, and how to refactor without breaking everything.",
+  "icon": "folder-code",
+  "color": "#00B894",
+  "prerequisites": [],
+  "units": [
+    { "slug": "why-organization-matters", "title": "Why Organization Matters", "order": 1 },
+    { "slug": "naming-things", "title": "Naming Things", "order": 2 },
+    { "slug": "file-structure", "title": "File Structure", "order": 3 },
+    { "slug": "separation-of-concerns", "title": "Separation of Concerns", "order": 4 },
+    { "slug": "refactoring", "title": "Refactoring", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

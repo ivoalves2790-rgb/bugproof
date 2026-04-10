@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "a-git-1",
+      "text": "You accidentally committed a file with your API key. How do you remove it from the last commit?",
+      "context": "A commit is like saving your code at a point in time. An API key is a secret password for external services.",
+      "courseSlug": "git-version-control",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "Delete the file and push again" },
+        { "id": "b", "text": "Use git reset to undo the commit, remove the file, recommit", "isCorrect": true },
+        { "id": "c", "text": "It's fine, nobody will notice" },
+        { "id": "d", "text": "Delete the entire repository and start over" }
+      ],
+      "explanation": "git reset --soft HEAD~1 undoes the last commit while keeping your changes. You can then remove the file and recommit safely."
+    },
+    {
+      "id": "a-debug-1",
+      "text": "Your app shows a blank white screen. What's the FIRST thing you should check?",
+      "context": "When an app breaks, there are clues that tell you what went wrong — if you know where to look.",
+      "courseSlug": "debugging-error-reading",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "Rewrite the entire component" },
+        { "id": "b", "text": "Ask AI to fix it" },
+        { "id": "c", "text": "Open the browser console to check for error messages", "isCorrect": true },
+        { "id": "d", "text": "Restart your computer" }
+      ],
+      "explanation": "The browser console (F12) shows error messages that tell you exactly what went wrong and where. Always check errors before making changes."
+    },
+    {
+      "id": "a-sec-1",
+      "text": "Which of these is the MOST dangerous security mistake in a web app?",
+      "context": "Security means protecting your app and users from people trying to do bad things with it.",
+      "courseSlug": "security-fundamentals",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "Using a slow font" },
+        { "id": "b", "text": "Storing API keys in your frontend JavaScript code", "isCorrect": true },
+        { "id": "c", "text": "Not having a dark mode" },
+        { "id": "d", "text": "Using too many images" }
+      ],
+      "explanation": "API keys in frontend code are visible to anyone who views your page source. Attackers can steal them and run up charges on your accounts."
+    },
+    {
+      "id": "a-arch-1",
+      "text": "When a user clicks 'Submit' on a login form, what happens?",
+      "context": "Frontend is what users see in their browser. Backend is the server that processes requests.",
+      "courseSlug": "system-architecture",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "The password is checked right in the browser" },
+        { "id": "b", "text": "The browser sends a request to the backend, which checks the password against the database", "isCorrect": true },
+        { "id": "c", "text": "The form emails the password to the developer" },
+        { "id": "d", "text": "JavaScript verifies the password locally" }
+      ],
+      "explanation": "Login credentials must be verified on the server (backend), not in the browser. The browser sends an HTTP request, the server checks the database, and responds with success or failure."
+    },
+    {
+      "id": "a-db-1",
+      "text": "You have a 'users' table and a 'posts' table. How do you connect them so each post belongs to a user?",
+      "context": "A database table is like a spreadsheet. A foreign key is a column that points to a row in another table.",
+      "courseSlug": "database-design",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "Store the user's name in each post row" },
+        { "id": "b", "text": "Create a separate 'connections' table" },
+        { "id": "c", "text": "Add a user_id column to the posts table that references the users table", "isCorrect": true },
+        { "id": "d", "text": "Put all posts inside the users table" }
+      ],
+      "explanation": "A foreign key (user_id in posts) creates a relationship between tables. This is the standard way to connect related data in a relational database."
+    },
+    {
+      "id": "a-deploy-1",
+      "text": "Your app works perfectly on your computer but crashes when deployed. What's the most likely cause?",
+      "context": "Deploying means putting your app on the internet so others can use it. Environment variables are settings that differ between your computer and the server.",
+      "courseSlug": "deployment-devops",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "The internet is broken" },
+        { "id": "b", "text": "Missing environment variables on the server", "isCorrect": true },
+        { "id": "c", "text": "The server doesn't have a monitor" },
+        { "id": "d", "text": "Your code only works on Macs" }
+      ],
+      "explanation": "Environment variables (database URLs, API keys, etc.) exist on your local machine but need to be configured separately on the server. This is the #1 cause of 'works on my machine' problems."
+    },
+    {
+      "id": "a-test-1",
+      "text": "Why do developers write tests for their code?",
+      "context": "Tests are code that automatically checks if your other code works correctly.",
+      "courseSlug": "testing",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "Because their boss makes them" },
+        { "id": "b", "text": "To make the code run faster" },
+        { "id": "c", "text": "To catch bugs automatically when code changes, before users see them", "isCorrect": true },
+        { "id": "d", "text": "Tests are optional and not really needed" }
+      ],
+      "explanation": "Tests verify your code works correctly every time you make a change. Without tests, you're manually checking everything — and humans miss things."
+    },
+    {
+      "id": "a-perf-1",
+      "text": "Your page loads 100 users, then makes a separate database query for each user's profile picture. What's this called?",
+      "context": "A database query is a request to get data. Making too many queries makes your app slow.",
+      "courseSlug": "performance-scaling",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "Smart loading" },
+        { "id": "b", "text": "The N+1 query problem", "isCorrect": true },
+        { "id": "c", "text": "Parallel processing" },
+        { "id": "d", "text": "Lazy loading" }
+      ],
+      "explanation": "The N+1 problem: 1 query to get the list + N queries for each item's details. The fix: use a JOIN or batch query to get everything in 1-2 queries."
+    },
+    {
+      "id": "a-org-1",
+      "text": "Your 500-line file handles database queries, API routing, AND HTML rendering. What principle does this violate?",
+      "context": "Code organization is about keeping your codebase clean and maintainable.",
+      "courseSlug": "code-organization",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "The DRY principle" },
+        { "id": "b", "text": "Separation of concerns", "isCorrect": true },
+        { "id": "c", "text": "Object-oriented programming" },
+        { "id": "d", "text": "The open-closed principle" }
+      ],
+      "explanation": "Separation of concerns means each file/module should do ONE thing. Database logic, API handling, and rendering should be in separate files."
+    },
+    {
+      "id": "a-ai-1",
+      "text": "AI generated a function that uses a library method you've never seen. What should you do?",
+      "context": "AI coding tools sometimes generate code that looks correct but uses APIs or methods that don't actually exist.",
+      "courseSlug": "ai-assisted-development",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "Trust it — AI knows all the libraries" },
+        { "id": "b", "text": "Check the library's official documentation to verify the method exists", "isCorrect": true },
+        { "id": "c", "text": "Run it and hope for the best" },
+        { "id": "d", "text": "Ask a different AI to verify" }
+      ],
+      "explanation": "AI 'hallucinates' — it can generate realistic-looking code that uses APIs or methods that don't exist. Always verify unfamiliar code against official docs."
+    },
+    {
+      "id": "a-git-2",
+      "text": "What does 'git pull origin main' do?",
+      "context": "A remote is a copy of your code stored on the internet (like GitHub). 'origin' is the default name for your remote.",
+      "courseSlug": "git-version-control",
+      "difficulty": 1,
+      "options": [
+        { "id": "a", "text": "Deletes the main branch" },
+        { "id": "b", "text": "Downloads and merges the latest changes from the remote main branch", "isCorrect": true },
+        { "id": "c", "text": "Creates a new branch called main" },
+        { "id": "d", "text": "Pushes your changes to GitHub" }
+      ],
+      "explanation": "git pull = git fetch + git merge. It downloads the latest changes from the remote (origin) main branch and merges them into your local branch."
+    },
+    {
+      "id": "a-debug-2",
+      "text": "You see: 'TypeError: Cannot read properties of undefined (reading \"name\")'. What does this mean?",
+      "context": "TypeError means you're trying to do something with a value that doesn't support it. 'undefined' means a variable has no value.",
+      "courseSlug": "debugging-error-reading",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "The variable 'name' doesn't exist anywhere" },
+        { "id": "b", "text": "You're trying to access .name on something that is undefined", "isCorrect": true },
+        { "id": "c", "text": "JavaScript doesn't support the 'name' property" },
+        { "id": "d", "text": "Your database is missing a name column" }
+      ],
+      "explanation": "This means you have something like `user.name` where `user` is `undefined`. Check where `user` is supposed to come from — it might not be loaded yet, or a function returned nothing."
+    },
+    {
+      "id": "a-sec-2",
+      "text": "A user types '<script>alert(1)</script>' into your comment box and other users see an alert popup. What vulnerability is this?",
+      "context": "When user input is displayed without cleaning it, attackers can inject code that runs in other users' browsers.",
+      "courseSlug": "security-fundamentals",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "SQL Injection" },
+        { "id": "b", "text": "Cross-Site Scripting (XSS)", "isCorrect": true },
+        { "id": "c", "text": "Man-in-the-middle attack" },
+        { "id": "d", "text": "Brute force attack" }
+      ],
+      "explanation": "XSS (Cross-Site Scripting) happens when an attacker injects JavaScript that runs in other users' browsers. The fix: sanitize all user input before displaying it."
+    },
+    {
+      "id": "a-ai-2",
+      "text": "Which prompt will give you BETTER results from an AI coding tool?",
+      "courseSlug": "ai-assisted-development",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "Make a login page" },
+        { "id": "b", "text": "Create a Next.js login page with email/password fields, form validation, Supabase auth, error messages, and redirect to /dashboard on success", "isCorrect": true },
+        { "id": "c", "text": "Do the login thing" },
+        { "id": "d", "text": "Auth please" }
+      ],
+      "explanation": "Specific, detailed prompts get better results. Include the framework, features, error handling, and expected behavior. The more context AI has, the better its output."
+    },
+    {
+      "id": "a-deploy-2",
+      "text": "What is a CI/CD pipeline?",
+      "context": "CI = Continuous Integration. CD = Continuous Deployment. A pipeline is a series of automated steps.",
+      "courseSlug": "deployment-devops",
+      "difficulty": 2,
+      "options": [
+        { "id": "a", "text": "A physical pipe that connects servers" },
+        { "id": "b", "text": "A programming language for deployment" },
+        { "id": "c", "text": "Automated processes that test and deploy your code when you push changes", "isCorrect": true },
+        { "id": "d", "text": "A way to send emails to your team" }
+      ],
+      "explanation": "CI/CD automates the boring parts: when you push code, it automatically runs tests (CI) and deploys to production if tests pass (CD). No manual steps needed."
+    }
+  ]
+}

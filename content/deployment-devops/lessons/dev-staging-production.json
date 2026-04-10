@@ -1,0 +1,68 @@
+{
+  "slug": "dev-staging-production",
+  "title": "Dev vs Staging vs Production",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Professional teams don't just have 'my laptop' and 'the live site'. They have multiple environments for testing at different stages. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Environments = Dress Rehearsal Stages",
+      "body": "Think of a Broadway show. You don't go straight from reading the script to performing for an audience. There are stages: **table reads** (development), **dress rehearsals** (staging), and **opening night** (production). Each stage catches different problems, and you'd rather catch them before the audience sees them."
+    },
+    {
+      "type": "text",
+      "title": "The Three Environments",
+      "body": "Most teams use three environments:\n\n1. **Development** -- Your local machine. You can break things freely, experiment, and debug with detailed errors.\n2. **Staging** -- A copy of production used for final testing. Same server setup, same database structure, but with test data. Only your team can see it.\n3. **Production** -- The real deal. Actual users, real data, real money. Bugs here affect real people."
+    },
+    {
+      "type": "code_example",
+      "title": "Different Config Per Environment",
+      "language": "bash",
+      "code": "# Development (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Production (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
+      "annotation": "Notice how development uses localhost and test keys, while production uses real servers and live API keys."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Development is for building, staging is for testing, production is for users. Each environment has its own config to prevent test data from mixing with real data."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Staging should be as similar to production as possible -- same server type, same database engine.",
+        "isGoodPractice": true,
+        "explanation": "The whole point of staging is to catch problems before production. If staging is different from production, bugs can slip through. Same server, same database, same configuration -- just with test data."
+      },
+      {
+        "id": "card-2",
+        "content": "It's fine to test new features directly in production since you can always roll back.",
+        "isGoodPractice": false,
+        "explanation": "Testing in production means real users see your bugs. Even with rollbacks, users might experience errors, lost data, or downtime. Always test in staging first -- that's what it's for."
+      },
+      {
+        "id": "card-3",
+        "content": "Your development environment should use test API keys, never real production keys.",
+        "isGoodPractice": true,
+        "explanation": "Using real API keys in development is dangerous. You might accidentally send real emails, charge real credit cards, or modify real data. Test keys exist specifically for development and staging."
+      },
+      {
+        "id": "card-4",
+        "content": "Small projects with only one developer don't need a staging environment.",
+        "isGoodPractice": true,
+        "explanation": "For small personal projects, going straight from development to production is fine. Staging adds complexity that's only worth it when multiple people are deploying or when bugs in production have serious consequences."
+      },
+      {
+        "id": "card-5",
+        "content": "You should use your production database for staging so the test data is realistic.",
+        "isGoodPractice": false,
+        "explanation": "Never connect staging to your production database! A bug in staging could delete or corrupt real user data. Use a separate database with sample data that mimics production without containing real user information."
+      }
+    ],
+    "glossaryTerms": ["development-environment", "staging", "production"]
+  }
+}

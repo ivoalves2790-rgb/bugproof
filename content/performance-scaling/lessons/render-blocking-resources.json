@@ -1,0 +1,58 @@
+{
+  "slug": "render-blocking-resources",
+  "title": "Render-Blocking Resources",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "A page shows a blank white screen for 3 seconds before anything appears. The HTML is fine and the server responds quickly -- the problem is in the <head> tag. Render-blocking resources are preventing the browser from showing anything. Find the line causing the worst delay.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Render-Blocking = Traffic Jam at the Gate",
+      "body": "Imagine a concert venue where everyone has to go through a single gate. Even though thousands of people are ready, only one line moves at a time. **Render-blocking resources** work the same way -- the browser finds a CSS file or JavaScript file in the <head> and stops everything to download and process it before showing any content to the user."
+    },
+    {
+      "type": "text",
+      "title": "What Blocks Rendering?",
+      "body": "Two types of resources block rendering by default:\n\n1. **CSS files** -- The browser won't show anything until all CSS in the <head> is loaded, because it doesn't want content to flash unstyled\n2. **JavaScript files** -- Scripts in the <head> without 'async' or 'defer' block HTML parsing completely\n\nThe more blocking resources you have, the longer users stare at a blank screen."
+    },
+    {
+      "type": "code_example",
+      "title": "Blocking vs Non-Blocking",
+      "language": "html",
+      "code": "<!-- BLOCKING: Browser stops everything to load this -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- NON-BLOCKING: Browser continues while loading -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
+      "annotation": "The 'defer' attribute downloads the script in parallel and runs it after HTML parsing. The 'async' attribute downloads in parallel and runs as soon as it's ready."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Render-blocking resources (CSS and JS in the <head> without async/defer) force the browser to stop and wait before showing anything. Add 'defer' or 'async' to scripts, and only put critical CSS in the <head>."
+    }
+  ],
+  "exercise": {
+    "language": "html",
+    "code": [
+      { "line": 1, "text": "<head>", "isBuggy": false },
+      { "line": 2, "text": "  <meta charset=\"UTF-8\">", "isBuggy": false },
+      { "line": 3, "text": "  <title>My App</title>", "isBuggy": false },
+      { "line": 4, "text": "  <link rel=\"stylesheet\" href=\"/styles.css\">", "isBuggy": false },
+      { "line": 5, "text": "  <script src=\"/vendor/jquery.min.js\"></script>", "isBuggy": false },
+      { "line": 6, "text": "  <script src=\"/vendor/lodash.full.js\"></script>", "isBuggy": true },
+      { "line": 7, "text": "  <script src=\"/analytics.js\"></script>", "isBuggy": false },
+      { "line": 8, "text": "  <script src=\"/chat-widget.js\"></script>", "isBuggy": false },
+      { "line": 9, "text": "  <link rel=\"stylesheet\" href=\"/print-styles.css\">", "isBuggy": false },
+      { "line": 10, "text": "</head>", "isBuggy": false }
+    ],
+    "correctBuggyLine": 6,
+    "prompt": "Four JavaScript files load in the <head> without async or defer, blocking all rendering. The biggest offender is a massive utility library loaded synchronously. Which line causes the worst delay?",
+    "fixes": [
+      { "id": "a", "text": "<script src=\"/vendor/lodash.full.js\" defer></script>", "isCorrect": true },
+      { "id": "b", "text": "<script src=\"/vendor/lodash.min.js\"></script>", "isCorrect": false },
+      { "id": "c", "text": "<!-- removed lodash entirely -->", "isCorrect": false },
+      { "id": "d", "text": "<script src=\"/vendor/lodash.full.js\" type=\"module\"></script>", "isCorrect": false }
+    ],
+    "explanation": "Loading the full unminified Lodash library synchronously in the <head> is the worst offender. It's a large file that blocks everything. Adding 'defer' lets the browser download it in parallel while continuing to parse the HTML and show content. Option B (minified) is smaller but still blocking. Option C removes functionality you might need. Option D changes it to a module, which defers by default but may break non-module code that depends on it. The cleanest fix is 'defer', which downloads in parallel and runs after HTML parsing.",
+    "glossaryTerms": ["render-blocking", "defer", "async", "critical-rendering-path"]
+  }
+}

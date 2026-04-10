@@ -1,0 +1,16 @@
+{
+  "slug": "ai-basics",
+  "title": "How AI Coding Tools Work",
+  "description": "What AI coding assistants actually do under the hood, their strengths, their limits, and the key concepts you need to use them effectively",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "ai-assisted-development",
+  "lessons": [
+    { "slug": "what-ai-coding-tools-do", "title": "What AI Coding Tools Actually Do", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "context-window", "title": "The Context Window", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "hallucinations", "title": "AI Hallucinations", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "ai-strengths", "title": "Where AI Shines", "type": "swipe_to_judge", "order": 4, "difficulty": 1 },
+    { "slug": "ai-weaknesses", "title": "Where AI Struggles", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "ai-tool-setup", "title": "Setting Up Your AI Workflow", "type": "terminal_sim", "order": 6, "difficulty": 1 }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "slug": "status-codes",
+  "title": "HTTP Status Codes",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "A developer is building error handling for their app, but they mixed up some HTTP status codes. The code uses the wrong status code for a 'not found' error, which will confuse any frontend that reads the response.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Status Codes Are Like Traffic Lights",
+      "body": "Just as a traffic light tells you green/yellow/red, HTTP status codes tell your browser what happened. **2xx** (green) = success. **3xx** (yellow) = redirect, go somewhere else. **4xx** (red for you) = you made a mistake. **5xx** (red for them) = the server broke. The first digit tells you the category instantly."
+    },
+    {
+      "type": "text",
+      "title": "The Most Common Status Codes",
+      "body": "You'll see these all the time:\n\n1. **200 OK** -- everything worked\n2. **201 Created** -- a new resource was created (like after signing up)\n3. **301 Moved Permanently** -- this page moved, go here instead\n4. **400 Bad Request** -- you sent something the server doesn't understand\n5. **401 Unauthorized** -- you need to log in first\n6. **403 Forbidden** -- you're logged in but don't have permission\n7. **404 Not Found** -- this page doesn't exist\n8. **500 Internal Server Error** -- something broke on the server"
+    },
+    {
+      "type": "code_example",
+      "title": "Using Status Codes in Express.js",
+      "language": "javascript",
+      "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'User not found' });\n  }\n  res.status(200).json(user);\n});",
+      "annotation": "The server explicitly sets the status code. 404 tells the browser 'this user doesn't exist' while 200 means 'here's the user you asked for.' The frontend can check these codes to decide what to show."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "HTTP status codes are 3-digit numbers that tell the browser what happened. 2xx means success, 4xx means the client made a mistake, and 5xx means the server broke. Always use the right code so frontends can handle errors properly."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "app.get('/products/:id', (req, res) => {", "isBuggy": false },
+      { "line": 2, "text": "  const product = db.findProduct(req.params.id);", "isBuggy": false },
+      { "line": 3, "text": "  if (!product) {", "isBuggy": false },
+      { "line": 4, "text": "    return res.status(200).json({ error: 'Product not found' });", "isBuggy": true },
+      { "line": 5, "text": "  }", "isBuggy": false },
+      { "line": 6, "text": "  res.status(200).json(product);", "isBuggy": false },
+      { "line": 7, "text": "});", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "The frontend checks the status code to know if the request succeeded. But when a product isn't found, the server sends status 200 (OK) with an error message. The frontend thinks everything is fine and tries to display a product that doesn't exist. Find the buggy line.",
+    "fixes": [
+      { "id": "a", "text": "return res.status(404).json({ error: 'Product not found' });", "isCorrect": true },
+      { "id": "b", "text": "return res.status(500).json({ error: 'Product not found' });", "isCorrect": false },
+      { "id": "c", "text": "return res.status(200).json({ found: false });", "isCorrect": false },
+      { "id": "d", "text": "return res.status(401).json({ error: 'Product not found' });", "isCorrect": false }
+    ],
+    "explanation": "Status code 200 means 'OK, everything worked.' Sending 200 with an error message is contradictory -- the frontend sees 200 and thinks the request succeeded. Status 404 means 'Not Found,' which is exactly what happened. The frontend can check for 404 and show a 'product not found' page instead of trying to render undefined data.",
+    "glossaryTerms": ["status-code", "404", "200", "http-response"]
+  }
+}

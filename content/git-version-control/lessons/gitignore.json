@@ -1,0 +1,83 @@
+{
+  "slug": "gitignore",
+  "title": "Ignoring Files with .gitignore",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Not every file belongs in Git. Secret API keys, giant dependency folders, and system files should be ignored. The .gitignore file tells Git which files to pretend don't exist.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": ".gitignore = The Bouncer at the Door",
+      "body": "Imagine a bouncer at a club with a list of people who aren't allowed in. The `.gitignore` file is that list -- it tells Git which files to completely ignore. Those files won't show up in `git status`, won't get staged, and won't get committed. They're invisible to Git."
+    },
+    {
+      "type": "text",
+      "title": "Why Ignore Files?",
+      "body": "Some files should **never** be committed:\n\n- **Secret files** (`.env`) -- Contain API keys and passwords. Committing them is a security disaster.\n- **Dependencies** (`node_modules/`) -- Can contain thousands of files and are always regenerated from `package.json`.\n- **OS files** (`.DS_Store`, `Thumbs.db`) -- System junk that clutters up your repo."
+    },
+    {
+      "type": "code_example",
+      "title": "How .gitignore Works",
+      "language": "bash",
+      "code": "# .gitignore file contents:\n.env              # Ignore this exact file\nnode_modules/     # Ignore this entire folder\n*.log             # Ignore all files ending in .log\n.DS_Store         # Ignore macOS system files",
+      "annotation": "Each line is a pattern. You can use `*` as a wildcard and `/` for folders. Lines starting with `#` are comments."
+    },
+    {
+      "type": "code_example",
+      "title": "Commands You'll Use",
+      "language": "bash",
+      "code": "echo \".env\" > .gitignore          # Create .gitignore with one rule\necho \"node_modules/\" >> .gitignore # Append another rule\ngit status                         # Verify ignored files are hidden",
+      "annotation": "Use `>` to create/overwrite and `>>` to append. Always run `git status` after to confirm it worked."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The `.gitignore` file tells Git which files to skip -- always ignore secrets, dependencies, and OS files from the very start of a project."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["app.js", "config.js", ".env", "node_modules/", "package.json", ".DS_Store"],
+    "steps": [
+      {
+        "instruction": "Run git status to see all the files Git is tracking. Notice that .env (which contains secret keys) and node_modules/ (a huge dependency folder) are listed.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\n\t.DS_Store\n\t.env\n\tapp.js\n\tconfig.js\n\tnode_modules/\n\tpackage.json\n\nnothing added to commit (use \"git add\" to track)",
+        "hint": "Type 'git status' to see the current state of your working directory."
+      },
+      {
+        "instruction": "Create a .gitignore file that tells Git to ignore the .env file. This file contains secret API keys that should never be committed.",
+        "expectedCommand": "echo \".env\" > .gitignore",
+        "acceptAlternatives": ["echo '.env' > .gitignore"],
+        "output": "",
+        "hint": "Use 'echo' to write text to a file: echo \".env\" > .gitignore"
+      },
+      {
+        "instruction": "Now add node_modules/ to the .gitignore as well. This folder can contain thousands of files and is always recreated from package.json.",
+        "expectedCommand": "echo \"node_modules/\" >> .gitignore",
+        "acceptAlternatives": ["echo 'node_modules/' >> .gitignore", "echo \"node_modules\" >> .gitignore"],
+        "output": "",
+        "hint": "Use '>>' (double arrow) to append to the file instead of overwriting it: echo \"node_modules/\" >> .gitignore"
+      },
+      {
+        "instruction": "Add .DS_Store to .gitignore too. These are macOS system files that clutter up repositories.",
+        "expectedCommand": "echo \".DS_Store\" >> .gitignore",
+        "acceptAlternatives": ["echo '.DS_Store' >> .gitignore"],
+        "output": "",
+        "hint": "Append .DS_Store to .gitignore using >> just like the last step."
+      },
+      {
+        "instruction": "Now run git status again. The ignored files should no longer appear.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\n\t.gitignore\n\tapp.js\n\tconfig.js\n\tpackage.json\n\nnothing added to commit (use \"git add\" to track)",
+        "hint": "Type 'git status' to verify the ignored files are hidden."
+      }
+    ],
+    "completionMessage": "The .env, node_modules/, and .DS_Store files are now invisible to Git. Your secrets stay secret, your repository stays small, and your teammates won't see your system files. Always set up .gitignore at the start of a project!",
+    "glossaryTerms": ["gitignore", "env-file", "node-modules"]
+  }
+}

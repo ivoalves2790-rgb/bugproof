@@ -1,0 +1,58 @@
+{
+  "slug": "client-vs-server",
+  "title": "Client-Side vs Server-Side",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "A junior developer put sensitive logic in the wrong place -- they're checking if a user has admin access on the client side (in the browser), which means any user could bypass it with DevTools.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Client = Your Computer, Server = Their Computer",
+      "body": "**Client-side** means code running on the user's device (their browser). **Server-side** means code running on a server you control. The key difference? The user can see and modify anything client-side. It's like the difference between a lock on YOUR door (server -- you control it) vs giving someone a padlock they can pick open (client -- they control it)."
+    },
+    {
+      "type": "text",
+      "title": "What Should Run Where?",
+      "body": "**Client-side** (browser) is good for:\n- Visual effects and animations\n- Form input validation (for quick user feedback)\n- Navigating between views\n\n**Server-side** (server) is required for:\n- Authentication and authorization checks\n- Database operations\n- Payment processing\n- Any security-sensitive logic"
+    },
+    {
+      "type": "code_example",
+      "title": "The Danger of Client-Side Security",
+      "language": "javascript",
+      "code": "// BAD: Client-side admin check\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Anyone can open DevTools and type:\n// user.role = 'admin'\n\n// GOOD: Server-side admin check\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Forbidden' });\n  }\n  res.json(adminData);\n});",
+      "annotation": "Client-side checks are for UX (hiding buttons), but the real security must happen on the server where the user can't tamper with it."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Client-side code runs in the browser and can be inspected or modified by users. Server-side code runs on your server and is safe from tampering. Security checks must ALWAYS happen server-side."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "// Frontend code (runs in the browser)", "isBuggy": false },
+      { "line": 2, "text": "async function deleteUser(userId) {", "isBuggy": false },
+      { "line": 3, "text": "  const currentUser = JSON.parse(localStorage.getItem('user'));", "isBuggy": false },
+      { "line": 4, "text": "  if (currentUser.role === 'admin') {", "isBuggy": true },
+      { "line": 5, "text": "    await fetch(`/api/users/${userId}`, { method: 'DELETE' });", "isBuggy": false },
+      { "line": 6, "text": "    alert('User deleted!');", "isBuggy": false },
+      { "line": 7, "text": "  } else {", "isBuggy": false },
+      { "line": 8, "text": "    alert('Only admins can delete users');", "isBuggy": false },
+      { "line": 9, "text": "  }", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "This code checks admin permissions on the client side (in the browser). Any user could open DevTools, change their role in localStorage to 'admin', and delete other users. Find the line where the insecure check happens.",
+    "fixes": [
+      { "id": "a", "text": "Remove the client-side check and let the server's /api/users/:id endpoint verify admin permissions", "isCorrect": true },
+      { "id": "b", "text": "Encrypt the role value in localStorage so users can't change it", "isCorrect": false },
+      { "id": "c", "text": "Use sessionStorage instead of localStorage for better security", "isCorrect": false },
+      { "id": "d", "text": "Check currentUser.isAdmin instead of currentUser.role", "isCorrect": false }
+    ],
+    "explanation": "Any check in browser JavaScript can be bypassed. LocalStorage can be edited freely in DevTools. The client-side check on line 4 is only useful for UX (hiding the delete button from non-admins), but the REAL authorization must happen on the server. The /api/users/:id DELETE endpoint must verify the requesting user is actually an admin before deleting anyone.",
+    "glossaryTerms": ["client-side", "server-side", "authorization", "localStorage"]
+  }
+}

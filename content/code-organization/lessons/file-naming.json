@@ -1,0 +1,76 @@
+{
+  "slug": "file-naming",
+  "title": "File Naming",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "naming-things",
+  "courseSlug": "code-organization",
+  "intro": "A project has files named things like 'stuff.js', 'utils2.js', and 'final_FINAL_v3.js'. Let's rename them properly so anyone can find what they're looking for.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "File Names = Labels on Filing Cabinet Drawers",
+      "body": "Imagine a filing cabinet where the drawers are labeled 'misc', 'stuff', 'things', and 'other'. You'd have to open every drawer to find anything. Now imagine labels like 'Tax Documents 2024', 'Client Contracts', 'Employee Records'. **Good file names** are like clear drawer labels -- they tell you what's inside without opening the file."
+    },
+    {
+      "type": "text",
+      "title": "File Naming Rules",
+      "body": "Follow these rules and you'll never lose a file:\n\n1. **Name files after what they contain** -- `UserProfile.jsx` not `Component3.jsx`\n2. **One concept per file** -- A file called `utils.js` with 50 functions needs to be split\n3. **Match the export** -- If the file exports a `ProductCard` component, name it `ProductCard.jsx`\n4. **Use consistent casing** -- PascalCase for components (`UserCard.jsx`), camelCase or kebab-case for utilities (`formatDate.js` or `format-date.js`)\n5. **Never use version numbers** -- `app_v2_final.js` is a sign things have gone wrong"
+    },
+    {
+      "type": "code_example",
+      "title": "Bad vs Good File Names",
+      "language": "text",
+      "code": "BAD:                         GOOD:\nstuff.js                     authHelpers.js\nutils2.js                    dateFormatters.js\nComponent3.jsx               ShoppingCart.jsx\nfinal_FINAL_v3.js            checkoutFlow.js\nnew_stuff_backup.js          paymentValidation.js\ntest.js                      userAuth.test.js",
+      "annotation": "Every good file name tells you what the file contains. No guessing, no opening files to check, no mystery."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "File names should describe their contents. Use PascalCase for React components, camelCase for utilities, and never use vague names like utils, stuff, or version numbers. If you can't name a file clearly, it probably contains too many unrelated things."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project/src",
+    "initialFiles": ["stuff.js", "utils2.js", "Component1.jsx", "Component2.jsx", "helpers.js", "misc.js"],
+    "steps": [
+      {
+        "instruction": "stuff.js contains functions for formatting prices and currencies. Rename it to something descriptive.",
+        "expectedCommand": "mv stuff.js priceFormatters.js",
+        "acceptAlternatives": ["mv stuff.js formatPrice.js", "mv stuff.js currencyHelpers.js", "mv stuff.js priceUtils.js"],
+        "output": "",
+        "hint": "Use 'mv oldname newname' to rename a file. Name it after what it contains: price/currency formatting functions."
+      },
+      {
+        "instruction": "utils2.js has date formatting functions. The original utils.js was deleted months ago. Rename utils2.js to something meaningful.",
+        "expectedCommand": "mv utils2.js dateFormatters.js",
+        "acceptAlternatives": ["mv utils2.js formatDate.js", "mv utils2.js dateUtils.js", "mv utils2.js dateHelpers.js"],
+        "output": "",
+        "hint": "Rename to describe the contents (date formatting), not a generic name with a number."
+      },
+      {
+        "instruction": "Component1.jsx is actually the navigation bar component. Rename it to match what it is.",
+        "expectedCommand": "mv Component1.jsx NavigationBar.jsx",
+        "acceptAlternatives": ["mv Component1.jsx Navbar.jsx", "mv Component1.jsx NavBar.jsx", "mv Component1.jsx Navigation.jsx"],
+        "output": "",
+        "hint": "React components use PascalCase. Name it after what it renders: the navigation bar."
+      },
+      {
+        "instruction": "Component2.jsx is the user profile page. Rename it properly.",
+        "expectedCommand": "mv Component2.jsx UserProfile.jsx",
+        "acceptAlternatives": ["mv Component2.jsx ProfilePage.jsx", "mv Component2.jsx UserProfilePage.jsx"],
+        "output": "",
+        "hint": "Name the component file after what it displays: the user profile."
+      },
+      {
+        "instruction": "Let's verify all the renames look good. List the files in the current directory.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": ["ls -la", "ls -l"],
+        "output": "NavigationBar.jsx\nUserProfile.jsx\ndateFormatters.js\nhelpers.js\nmisc.js\npriceFormatters.js",
+        "hint": "Use 'ls' to list files in the current directory."
+      }
+    ],
+    "completionMessage": "Much better! Now anyone looking at this folder can immediately tell what each file contains. No more opening files to see what's inside. helpers.js and misc.js still need attention -- they probably contain mixed functions that should be split into specific files too.",
+    "glossaryTerms": ["file-naming", "pascal-case", "camel-case", "kebab-case"]
+  }
+}

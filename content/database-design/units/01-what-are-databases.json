@@ -1,0 +1,16 @@
+{
+  "slug": "what-are-databases",
+  "title": "What Are Databases?",
+  "description": "Understand why apps need databases and the difference between storing data in files vs a dedicated database system",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-apps-need-databases", "title": "Why Apps Need Databases", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "what-is-a-database", "title": "What is a Database?", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "sql-vs-nosql", "title": "SQL vs NoSQL", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "your-first-sql", "title": "Your First SQL Command", "type": "terminal_sim", "order": 4, "difficulty": 1 },
+    { "slug": "crud-operations", "title": "CRUD: The Four Operations", "type": "bug_hunt", "order": 5, "difficulty": 1 },
+    { "slug": "database-tools", "title": "Database Tools & GUIs", "type": "incident_response", "order": 6, "difficulty": 1 }
+  ]
+}

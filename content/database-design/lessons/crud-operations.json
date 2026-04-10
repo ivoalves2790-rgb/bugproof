@@ -1,0 +1,54 @@
+{
+  "slug": "crud-operations",
+  "title": "CRUD: The Four Operations",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "A developer is writing SQL to update a user's email address, but their query changes EVERY user's email instead of just one. This is a classic (and terrifying) mistake with the UPDATE command.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "CRUD = The Four Things You Do With Data",
+      "body": "Think of a contacts list on your phone. You can **Create** a new contact, **Read** existing contacts, **Update** someone's phone number, or **Delete** a contact you don't need. Every app does these same four things. In the database world, we call them **CRUD** -- Create, Read, Update, Delete."
+    },
+    {
+      "type": "text",
+      "title": "The Four SQL Commands",
+      "body": "Each CRUD operation has its own SQL command:\n\n1. **Create** = `INSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com')`\n2. **Read** = `SELECT * FROM users WHERE id = 1`\n3. **Update** = `UPDATE users SET email = 'new@mail.com' WHERE id = 1`\n4. **Delete** = `DELETE FROM users WHERE id = 1`\n\nThe most dangerous operations are UPDATE and DELETE -- forgetting the WHERE clause affects EVERY row!"
+    },
+    {
+      "type": "code_example",
+      "title": "The Danger of Forgetting WHERE",
+      "language": "sql",
+      "code": "-- This updates ONE user's email (safe)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- This updates EVERY user's email (catastrophic!)\nUPDATE users SET email = 'new@mail.com';",
+      "annotation": "Without WHERE, the UPDATE applies to ALL rows. This is the #1 most common database disaster. Always double-check your WHERE clause before running UPDATE or DELETE."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "CRUD stands for Create (INSERT), Read (SELECT), Update (UPDATE), and Delete (DELETE). Always include a WHERE clause with UPDATE and DELETE, or you'll affect every row in the table."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "-- Update user #42's email address", "isBuggy": false },
+      { "line": 2, "text": "UPDATE users", "isBuggy": false },
+      { "line": 3, "text": "SET email = 'alice.new@example.com';", "isBuggy": true },
+      { "line": 4, "text": "", "isBuggy": false },
+      { "line": 5, "text": "-- Expected: only user 42 gets updated", "isBuggy": false },
+      { "line": 6, "text": "-- Actual: ALL 10,000 users now have the same email!", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "The developer wanted to update only user #42's email, but instead every user in the database now has 'alice.new@example.com' as their email address. 10,000 users affected! Find the line with the missing piece.",
+    "fixes": [
+      { "id": "a", "text": "SET email = 'alice.new@example.com' WHERE id = 42;", "isCorrect": true },
+      { "id": "b", "text": "SET email = 'alice.new@example.com' LIMIT 1;", "isCorrect": false },
+      { "id": "c", "text": "SET email = 'alice.new@example.com' FOR user 42;", "isCorrect": false },
+      { "id": "d", "text": "SET email = 'alice.new@example.com' ONLY id = 42;", "isCorrect": false }
+    ],
+    "explanation": "The UPDATE command without a WHERE clause updates EVERY row in the table. Adding 'WHERE id = 42' tells the database 'only change the row where the id column equals 42.' This is one of the most important safety rules in SQL: never run UPDATE or DELETE without a WHERE clause. Many developers first run a SELECT with the same WHERE clause to verify it matches the right rows before running the UPDATE.",
+    "glossaryTerms": ["crud", "update", "where-clause", "insert"]
+  }
+}

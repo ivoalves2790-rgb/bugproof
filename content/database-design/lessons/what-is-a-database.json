@@ -1,0 +1,91 @@
+{
+  "slug": "what-is-a-database",
+  "title": "What is a Database?",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "You've been hired to build a simple to-do list app. The founder asks 'Where should we store the tasks?' Let's explore the options and understand what a database actually is.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Different Storage Options",
+      "body": "Storing data is like storing physical items. You could use a **shoebox** (a text file -- simple but messy), a **spreadsheet binder** (a structured file like CSV -- organized but limited), or a **professional warehouse** (a database -- organized, searchable, secure, and built to scale)."
+    },
+    {
+      "type": "text",
+      "title": "What IS a Database, Exactly?",
+      "body": "A database is a **software program** that runs on a server and manages data for you. Popular ones include:\n\n1. **PostgreSQL** -- powerful, open-source, great for most apps\n2. **MySQL** -- very popular, used by WordPress and many web apps\n3. **SQLite** -- lightweight, stores data in a single file (great for small apps)\n4. **MongoDB** -- stores data as flexible documents instead of tables\n\nYour app code sends commands to the database, and it handles the storage, retrieval, and safety of the data."
+    },
+    {
+      "type": "text",
+      "title": "How Your App Uses a Database",
+      "body": "Your app doesn't open files directly. Instead:\n\n1. Your app **connects** to the database (like dialing a phone number)\n2. Your app **sends commands** in SQL (a special language for databases)\n3. The database **executes** the command and sends results back\n4. Your app **uses the results** (displays them, processes them, etc.)\n\nThe database is a separate process from your app -- they communicate over a connection."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A database is a specialized program that stores and manages data. Your app connects to it and sends commands in SQL. The database handles all the complex stuff: fast lookups, safe writes, and multiple users."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're building a to-do app. The founder says: 'Let's keep it simple -- just save the tasks in a JSON file on the server.' This works at first with 5 test users. But then you launch and get 500 users. Problems start appearing: some users' tasks disappear randomly. What's most likely happening?",
+        "choices": [
+          { "id": "a", "text": "Two users are writing to the file at the same time, overwriting each other's data", "nextNode": "correct-concurrency", "score": 10 },
+          { "id": "b", "text": "The JSON file is getting too big and slowing down", "nextNode": "partial-size", "score": 5 },
+          { "id": "c", "text": "The server is running out of memory", "nextNode": "wrong-memory", "score": 2 }
+        ]
+      },
+      "correct-concurrency": {
+        "narrative": "Exactly! When User A and User B both read the file at the same time, make changes, and write it back, the second write overwrites the first. User A's new task disappears. This is called a 'race condition.' The founder says: 'OK, what should we use instead?'",
+        "choices": [
+          { "id": "a", "text": "A database like PostgreSQL or SQLite -- they handle concurrent writes safely", "nextNode": "correct-database", "score": 10 },
+          { "id": "b", "text": "Just add file locking so only one user writes at a time", "nextNode": "partial-locking", "score": 5 }
+        ]
+      },
+      "partial-size": {
+        "narrative": "File size could be a factor eventually, but 500 users' worth of to-do items would only be a few megabytes -- that's not big enough to cause issues. The real problem is concurrency: multiple users writing to the same file at the same time, overwriting each other's changes.",
+        "choices": [
+          { "id": "a", "text": "So it's a race condition -- two writes happening at once", "nextNode": "correct-concurrency", "score": 5 }
+        ]
+      },
+      "wrong-memory": {
+        "narrative": "Memory usually isn't the issue for 500 users. A JSON file with task data would be tiny in memory. The problem is more fundamental: the file can't handle multiple users writing to it at the same time. When two writes overlap, data gets lost.",
+        "choices": [
+          { "id": "a", "text": "Got it -- concurrent writes are causing data loss", "nextNode": "correct-concurrency", "score": 5 }
+        ]
+      },
+      "correct-database": {
+        "narrative": "You migrate to SQLite (simple to set up) and the disappearing task problem vanishes. The database handles concurrent writes safely using transactions. Three months later, the app has 50,000 users and searches are starting to slow down. What's your next move?",
+        "choices": [
+          { "id": "a", "text": "Upgrade to PostgreSQL and add indexes for faster searches", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "SQLite should be fine, just get a faster server", "nextNode": "end-ok", "score": 4 }
+        ]
+      },
+      "partial-locking": {
+        "narrative": "File locking could work for a small number of users, but it means only one user can write at a time -- everyone else waits. With 500 users, that creates terrible performance. A database handles concurrent access much more efficiently, allowing many users to write simultaneously without conflicts.",
+        "choices": [
+          { "id": "a", "text": "A real database is the better solution", "nextNode": "correct-database", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "PostgreSQL handles 50,000 users easily. You add indexes on the user_id and due_date columns, and searches go from 500ms to 2ms. The app is fast, reliable, and ready to scale further.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "You made the right call at every step: identified the concurrency problem with flat files, chose a database for safe concurrent access, and upgraded to a more powerful database as the app grew. This progression -- file to SQLite to PostgreSQL -- is actually how many real startups evolve their data storage."
+      },
+      "end-ok": {
+        "narrative": "SQLite is great for small to medium apps, but it's designed for single-server use and can become a bottleneck with many concurrent writers. PostgreSQL is better suited for production web apps with many users.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "SQLite is wonderful for getting started, but production web apps with many concurrent users usually need a client-server database like PostgreSQL. It handles concurrent writes better and offers features like connection pooling that help with high traffic."
+      }
+    },
+    "glossaryTerms": ["database", "concurrency", "race-condition", "transaction"]
+  }
+}

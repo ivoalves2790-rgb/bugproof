@@ -1,0 +1,105 @@
+{
+  "slug": "reading-git-log",
+  "title": "Reading Git Log",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Your teammate says the latest deploy broke the login page. The site was working fine yesterday. You need to use Git's history to figure out what changed and who changed it.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Git Log = Your Project's Diary",
+      "body": "Imagine your project keeps a diary. Every time someone makes a commit, an entry is written: who did it, when, and a short note about what changed. `git log` lets you open that diary and read through every entry, from newest to oldest."
+    },
+    {
+      "type": "text",
+      "title": "What You'll See in the Log",
+      "body": "Each entry in `git log` shows:\n\n- **Commit hash** -- A unique ID like `a1b2c3d` (think of it as a serial number for that save point)\n- **Author** -- Who made the change\n- **Date** -- When it happened\n- **Message** -- What they said they changed\n\nThe most recent commit appears at the top."
+    },
+    {
+      "type": "code_example",
+      "title": "Useful Log Commands",
+      "language": "bash",
+      "code": "git log                # Full history with details\ngit log --oneline      # Compact view: hash + message\ngit show a1b2c3d       # See exactly what changed in one commit",
+      "annotation": "Use `git log --oneline` for a quick overview, then `git show <hash>` to dive into a specific commit."
+    },
+    {
+      "type": "text",
+      "title": "Why This Matters for Debugging",
+      "body": "When something breaks, `git log` is your detective tool. You can scan recent commits to find which change likely caused the problem, then use `git show` to see exactly what lines were added or removed. It's much faster than guessing."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "`git log` shows your project's complete history -- use it to find out what changed, when, and by whom when something goes wrong."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "The login page is showing a blank white screen after today's deploy. Your teammate is panicking. What's your first move?",
+        "choices": [
+          { "id": "a", "text": "Run 'git log' to see recent commits", "nextNode": "check-log", "score": 10 },
+          { "id": "b", "text": "Immediately revert to yesterday's version", "nextNode": "revert-blind", "score": 3 },
+          { "id": "c", "text": "Start rewriting the login page from scratch", "nextNode": "rewrite", "score": 0 }
+        ]
+      },
+      "check-log": {
+        "narrative": "Smart move! You run 'git log --oneline' and see:\n\na1b2c3d Fix navbar styling\nb4e5f6a Update login form validation\nc7d8e9f Add new marketing banner\nd0e1f2a Initial deploy setup\n\nOne of these commits likely caused the issue. Which one do you investigate first?",
+        "choices": [
+          { "id": "a", "text": "Check 'b4e5f6a Update login form validation' -- it directly touches login", "nextNode": "found-commit", "score": 10 },
+          { "id": "b", "text": "Check 'a1b2c3d Fix navbar styling' -- it's the most recent", "nextNode": "wrong-commit", "score": 5 },
+          { "id": "c", "text": "Check all commits one by one starting from the oldest", "nextNode": "slow-path", "score": 3 }
+        ]
+      },
+      "revert-blind": {
+        "narrative": "You revert without checking what changed. The login page works again, but now the new marketing banner that your boss asked for is also gone. They're not happy. It would have been better to check the log first to understand what specifically broke things.",
+        "choices": [
+          { "id": "a", "text": "Go back and check the log to understand what happened", "nextNode": "check-log", "score": 5 }
+        ]
+      },
+      "rewrite": {
+        "narrative": "Rewriting the entire login page would take hours and you'd lose all the recent improvements. Git's history has the answer -- you just need to look at what changed recently.",
+        "choices": [
+          { "id": "a", "text": "Okay, let me check git log instead", "nextNode": "check-log", "score": 3 }
+        ]
+      },
+      "found-commit": {
+        "narrative": "You run 'git show b4e5f6a' and see the commit changed the form's action URL to an invalid path. That's the bug! You now know exactly what line to fix. How do you proceed?",
+        "choices": [
+          { "id": "a", "text": "Fix just the broken URL and make a new commit", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Revert the entire commit", "nextNode": "end-okay", "score": 7 }
+        ]
+      },
+      "wrong-commit": {
+        "narrative": "The navbar styling commit only changed CSS colors -- nothing that would break login. You should look at commits that actually touch login-related code.",
+        "choices": [
+          { "id": "a", "text": "Check 'b4e5f6a Update login form validation' instead", "nextNode": "found-commit", "score": 5 }
+        ]
+      },
+      "slow-path": {
+        "narrative": "Checking from the oldest commit up will work eventually, but it's slow. A better strategy is to look at commit messages and check the ones most likely related to the broken feature first.",
+        "choices": [
+          { "id": "a", "text": "Focus on the login-related commit instead", "nextNode": "found-commit", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You fixed just the broken URL, committed the fix, and deployed. Login works perfectly and no other features were affected. Your teammate is impressed by how quickly you diagnosed the problem using Git's history.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent work! You used 'git log' to scan recent history, identified the most likely commit from its message, used 'git show' to see exactly what changed, and made a targeted fix. This is exactly how experienced developers debug production issues."
+      },
+      "end-okay": {
+        "narrative": "Reverting the whole commit fixed login but also removed the valid form validation improvements. You'll need to redo that work later. A more targeted fix would have been better.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "You found the right commit, which is great! But reverting the entire commit threw away good changes along with the bad. Next time, try fixing just the broken line so you keep the good parts."
+      }
+    },
+    "glossaryTerms": ["git-log", "git-show", "commit-hash"]
+  }
+}

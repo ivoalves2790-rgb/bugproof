@@ -1,0 +1,68 @@
+{
+  "slug": "naming-conventions",
+  "title": "Naming Conventions",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "naming-things",
+  "courseSlug": "code-organization",
+  "intro": "Naming conventions are agreements about how to format names in code. When everyone follows the same convention, code looks consistent and predictable. Swipe RIGHT if the naming follows JavaScript/React conventions, LEFT if it doesn't.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Conventions = Road Signs",
+      "body": "Road signs work because everyone agrees on what they look like. A red octagon means STOP everywhere. If each city invented its own sign shapes and colors, driving would be chaos. **Naming conventions** are the road signs of code -- they create predictability so developers know what to expect."
+    },
+    {
+      "type": "text",
+      "title": "JavaScript/React Naming Conventions",
+      "body": "In the JavaScript/React world, these are the standard conventions:\n\n- **camelCase** for variables and functions: `userName`, `fetchProducts()`\n- **PascalCase** for React components and classes: `UserProfile`, `ShoppingCart`\n- **UPPER_SNAKE_CASE** for constants: `MAX_RETRY_COUNT`, `API_BASE_URL`\n- **camelCase** for file names: `userService.js`, `formatDate.js`\n- **PascalCase** for component files: `UserCard.jsx`, `Header.jsx`\n- **kebab-case** for CSS classes: `user-profile`, `nav-item`"
+    },
+    {
+      "type": "code_example",
+      "title": "Consistent Conventions in Action",
+      "language": "javascript",
+      "code": "// Constants - UPPER_SNAKE_CASE\nconst MAX_LOGIN_ATTEMPTS = 5;\nconst API_BASE_URL = 'https://api.example.com';\n\n// Variables & functions - camelCase\nconst currentUser = getCurrentUser();\nconst isLoggedIn = checkAuthStatus();\n\n// React Component - PascalCase\nfunction UserDashboard({ userId }) {\n  const userOrders = fetchUserOrders(userId);\n  return <OrderList orders={userOrders} />;\n}",
+      "annotation": "At a glance you can tell: UPPER_SNAKE_CASE is a constant, camelCase is a variable or function, PascalCase is a component. The convention carries meaning."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use camelCase for variables/functions, PascalCase for components/classes, UPPER_SNAKE_CASE for constants, and kebab-case for CSS. Consistency matters more than which convention you pick -- just pick one and stick with it across your whole project."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "const user_name = 'Alice'; -- Using snake_case for a JavaScript variable",
+        "isGoodPractice": false,
+        "explanation": "JavaScript convention is camelCase for variables: userName, not user_name. Snake_case is the convention in Python and Ruby. Using the wrong convention won't cause errors, but it makes your code look inconsistent with every JavaScript library and tutorial, confusing other developers."
+      },
+      {
+        "id": "card-2",
+        "content": "function UserProfile() { return <div>...</div>; } -- PascalCase for a React component",
+        "isGoodPractice": true,
+        "explanation": "React requires components to start with an uppercase letter (PascalCase). This is how React distinguishes between HTML elements (<div>) and custom components (<UserProfile>). If you wrote <userProfile>, React would treat it as an unknown HTML tag, not your component."
+      },
+      {
+        "id": "card-3",
+        "content": "const MAX_RETRIES = 3; -- UPPER_SNAKE_CASE for a constant",
+        "isGoodPractice": true,
+        "explanation": "UPPER_SNAKE_CASE signals that this value is a constant -- it never changes during the program's execution. When you see MAX_RETRIES in code, you immediately know it's a fixed configuration value, not something computed or passed as a parameter."
+      },
+      {
+        "id": "card-4",
+        "content": "const FetchUserData = async () => { ... }; -- PascalCase for a regular function",
+        "isGoodPractice": false,
+        "explanation": "In React, PascalCase is reserved for components. If another developer sees FetchUserData, they'll assume it's a React component and try to render it like <FetchUserData />. Regular functions should use camelCase: fetchUserData. Save PascalCase for components and classes."
+      },
+      {
+        "id": "card-5",
+        "content": "Using camelCase for all file names in a JavaScript project: userService.js, formatDate.js, apiClient.js",
+        "isGoodPractice": true,
+        "explanation": "Using consistent camelCase for utility and service files is a common JavaScript convention. Component files typically use PascalCase (UserCard.jsx) to match the component name they export. The key is consistency within your project -- pick a convention and stick with it."
+      }
+    ],
+    "glossaryTerms": ["camel-case", "pascal-case", "snake-case", "naming-convention"]
+  }
+}

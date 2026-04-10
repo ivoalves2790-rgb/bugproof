@@ -1,0 +1,68 @@
+{
+  "slug": "what-is-unit-test",
+  "title": "What is a Unit Test?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Unit tests are the foundation of all testing. They test the smallest pieces of your code in isolation. Let's separate fact from fiction about what unit tests are and aren't. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Unit Test = Testing One LEGO Brick",
+      "body": "Before building a whole LEGO castle, you'd want to make sure each individual brick is solid -- no cracks, right shape, correct color. A **unit test** does the same for code. It tests ONE small piece (a function, a calculation) by itself. If all your individual bricks are solid, you can trust the castle you build with them."
+    },
+    {
+      "type": "text",
+      "title": "What Makes a Test a 'Unit' Test?",
+      "body": "A unit test has three properties:\n\n1. **Tests one thing** -- A single function or a single behavior\n2. **Runs in isolation** -- Doesn't depend on databases, APIs, or other services\n3. **Runs fast** -- Typically milliseconds, because there's no network or disk I/O\n\nIf your test needs a database running or makes API calls, it's probably an integration test, not a unit test."
+    },
+    {
+      "type": "code_example",
+      "title": "A Simple Unit Test",
+      "language": "javascript",
+      "code": "// The function (the 'unit' we're testing)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// The unit test\ntest('capitalizes the first letter', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
+      "annotation": "This test focuses on one function and one behavior. It doesn't need a database or server. It runs in milliseconds."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A unit test tests one small piece of code in isolation. It's fast, focused, and doesn't depend on external services like databases or APIs."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A unit test should test a single function or behavior in isolation.",
+        "isGoodPractice": true,
+        "explanation": "That's the definition of a unit test! 'Unit' means one small, isolated piece. Test one thing at a time so when a test fails, you know exactly what broke."
+      },
+      {
+        "id": "card-2",
+        "content": "A unit test that checks if a user can log in, browse products, and complete checkout is well-designed.",
+        "isGoodPractice": false,
+        "explanation": "That's testing an entire user journey -- it's an end-to-end test, not a unit test. A unit test would test just the login validation function, or just the price calculation, each in isolation."
+      },
+      {
+        "id": "card-3",
+        "content": "Unit tests should run in milliseconds, not seconds.",
+        "isGoodPractice": true,
+        "explanation": "Speed is a defining feature of unit tests. Because they test pure functions with no network calls or database queries, they should be extremely fast. If your unit test takes seconds, it's probably not a true unit test."
+      },
+      {
+        "id": "card-4",
+        "content": "A good unit test connects to the database to verify data was saved correctly.",
+        "isGoodPractice": false,
+        "explanation": "If a test connects to a database, it's an integration test, not a unit test. Unit tests run in isolation -- no databases, no APIs, no file system. You use 'mocking' to simulate these dependencies."
+      },
+      {
+        "id": "card-5",
+        "content": "Having lots of small unit tests is better than having a few large tests that check everything.",
+        "isGoodPractice": true,
+        "explanation": "Many small tests are better because when one fails, you immediately know which specific function broke. A large test that checks 20 things tells you 'something is wrong somewhere' -- not very helpful for debugging."
+      }
+    ],
+    "glossaryTerms": ["unit-test", "isolation", "test-runner"]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "slug": "first-deploy",
+  "title": "Your First Deploy",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Time to deploy for real! You'll set up a project, connect it to a hosting platform, and get it live on the internet. We'll use Vercel since it's the simplest for beginners.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Your First Launch",
+      "body": "Think of this like launching a paper airplane. You've spent time folding it carefully (writing code), and now you're going to throw it (deploy). The first throw might not be perfect, but it's exciting to see it fly. And unlike a paper airplane, you can always update and re-deploy."
+    },
+    {
+      "type": "text",
+      "title": "What You Need Before Deploying",
+      "body": "Before your first deploy, make sure you have:\n\n1. **Code on GitHub** -- Your project needs to be in a GitHub repository\n2. **A build command** -- Usually `npm run build` in your package.json\n3. **A hosting account** -- Sign up for Vercel, Netlify, or Railway (free)\n4. **Everything committed** -- No uncommitted changes lurking around"
+    },
+    {
+      "type": "code_example",
+      "title": "Using the Vercel CLI",
+      "language": "bash",
+      "code": "# Install the Vercel CLI globally\nnpm install -g vercel\n\n# Deploy from your project directory\nvercel\n\n# Deploy to production\nvercel --prod",
+      "annotation": "The Vercel CLI asks a few questions on first run, then deploys your project. It's that simple."
+    },
+    {
+      "type": "text",
+      "title": "What Happens After You Deploy",
+      "body": "After deploying, you'll get:\n\n- A **live URL** like `my-app.vercel.app` that anyone can visit\n- A **dashboard** showing build logs and deployment status\n- **Automatic deploys** -- every push to main triggers a new deploy\n- A **preview URL** for pull requests so you can test changes before they go live"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Your first deploy is just three steps: push code to GitHub, connect to a hosting platform, and watch it go live. You'll get a URL you can share with anyone."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-portfolio",
+    "initialFiles": ["src/App.js", "package.json", "public/index.html"],
+    "steps": [
+      {
+        "instruction": "First, test that your project builds successfully before deploying.",
+        "expectedCommand": "npm run build",
+        "acceptAlternatives": [],
+        "output": "Creating an optimized production build...\nCompiled successfully.\n\nFile sizes after gzip:\n  45.2 KB  build/static/js/main.js\n  1.7 KB   build/static/css/main.css\n\nThe build folder is ready to be deployed.",
+        "hint": "Run the build command that creates an optimized production version of your app."
+      },
+      {
+        "instruction": "The build succeeded. Now install the Vercel CLI so you can deploy from the terminal.",
+        "expectedCommand": "npm install -g vercel",
+        "acceptAlternatives": ["npm i -g vercel"],
+        "output": "added 1 package in 3s\n\n1 package is looking for funding\n  run `npm fund` for details",
+        "hint": "Install the 'vercel' package globally using npm."
+      },
+      {
+        "instruction": "Now deploy your project. Just type the deploy command and Vercel will handle the rest.",
+        "expectedCommand": "vercel",
+        "acceptAlternatives": ["vercel deploy", "npx vercel"],
+        "output": "Vercel CLI 33.0.0\n? Set up and deploy \"~/my-portfolio\"? [Y/n] y\n? Which scope do you want to deploy to? your-username\n? Link to existing project? [y/N] n\n? What's your project's name? my-portfolio\n? In which directory is your code located? ./\n\nLocal settings detected in vercel.json:\nAuto-detected Project Settings (Create React App):\n- Build Command: react-scripts build\n- Output Directory: build\n\n🔗 Linked to your-username/my-portfolio\n🔍 Inspect: https://vercel.com/your-username/my-portfolio\n✅ Preview: https://my-portfolio-abc123.vercel.app",
+        "hint": "Just type 'vercel' to start the deployment process."
+      },
+      {
+        "instruction": "That created a preview deploy. Now deploy to production so it gets your final URL.",
+        "expectedCommand": "vercel --prod",
+        "acceptAlternatives": ["vercel deploy --prod"],
+        "output": "Vercel CLI 33.0.0\n🔍 Inspect: https://vercel.com/your-username/my-portfolio\n✅ Production: https://my-portfolio.vercel.app\n\nCongratulations! Your app is now live! 🎉",
+        "hint": "Add the --prod flag to deploy to production."
+      }
+    ],
+    "completionMessage": "Your app is live on the internet! Anyone can visit your URL and see your project. From now on, every time you push to main, Vercel will automatically deploy the latest version.",
+    "glossaryTerms": ["vercel", "deploy", "production"]
+  }
+}

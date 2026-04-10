@@ -1,0 +1,68 @@
+{
+  "slug": "what-is-a-url",
+  "title": "What is a URL?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Every time you visit a website, you type (or click) a URL. But what do all those pieces actually mean? Swipe RIGHT if the statement is true, or LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "A URL Is Like a Mailing Address",
+      "body": "When you send a letter, you need a street address: 123 Main St, Apt 4, Springfield. A **URL** works the same way for the internet. It tells your browser exactly where to go -- which building (server), which apartment (path), and even which room (specific page)."
+    },
+    {
+      "type": "text",
+      "title": "The Parts of a URL",
+      "body": "A URL like `https://www.example.com/products/shoes?color=red` has several parts:\n\n1. **Protocol** (`https://`) -- how to communicate (like choosing phone vs email)\n2. **Domain** (`www.example.com`) -- which server to talk to (the building address)\n3. **Path** (`/products/shoes`) -- which page you want (the room number)\n4. **Query string** (`?color=red`) -- extra details (like a note on your letter)"
+    },
+    {
+      "type": "code_example",
+      "title": "A Real URL Broken Down",
+      "language": "text",
+      "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocol:  https://\nDomain:    api.weather.com\nPath:      /forecast/daily\nQuery:     ?city=london&units=metric",
+      "annotation": "The & symbol separates multiple query parameters. Here we're asking for London's forecast in metric units."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A URL is the address of something on the internet. It tells your browser what protocol to use, which server to contact, which page to fetch, and any extra details to include."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "The 'https' in a URL stands for the protocol -- it tells the browser HOW to communicate with the server.",
+        "isGoodPractice": true,
+        "explanation": "HTTPS stands for HyperText Transfer Protocol Secure. It's like choosing to send a sealed letter instead of a postcard. The 'S' means the communication is encrypted so nobody can read it in transit."
+      },
+      {
+        "id": "card-2",
+        "content": "The domain name 'google.com' is the actual address of Google's computer on the internet.",
+        "isGoodPractice": false,
+        "explanation": "Domain names are human-friendly labels, not actual addresses. The real address is an IP number like 142.250.80.46. Your browser uses DNS (like a phone book) to look up the real address from the domain name."
+      },
+      {
+        "id": "card-3",
+        "content": "The path '/products/shoes' in a URL works like a folder path on your computer.",
+        "isGoodPractice": true,
+        "explanation": "The path tells the server which resource you want, and it uses slashes just like folders on your computer. /products/shoes means 'inside the products section, show me shoes.' The server uses this path to figure out what content to send back."
+      },
+      {
+        "id": "card-4",
+        "content": "You always need to type the full URL including 'https://' to visit a website.",
+        "isGoodPractice": false,
+        "explanation": "Modern browsers are smart enough to add the protocol for you. When you type 'google.com', your browser automatically adds 'https://' before sending the request. It's there behind the scenes -- you just don't need to type it."
+      },
+      {
+        "id": "card-5",
+        "content": "The query string '?search=cats' in a URL sends extra information to the server.",
+        "isGoodPractice": true,
+        "explanation": "Query strings are like filling out a form and attaching it to your request. The server reads these key-value pairs and uses them to customize what it sends back. That's how search results, filters, and page numbers work in URLs."
+      }
+    ],
+    "glossaryTerms": ["url", "domain", "protocol", "query-string"]
+  }
+}

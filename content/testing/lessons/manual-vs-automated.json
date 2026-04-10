@@ -1,0 +1,66 @@
+{
+  "slug": "manual-vs-automated",
+  "title": "Manual vs Automated Testing",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "You've been testing your code by clicking around in the browser and checking if things look right. That's manual testing -- and it has some serious drawbacks. Let's compare manual and automated testing. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Manual = Hand-Washing, Automated = Dishwasher",
+      "body": "Manual testing is like hand-washing dishes. You do it yourself, one by one, and sometimes you miss a spot. Automated testing is like a dishwasher -- you load it up once, press a button, and it cleans everything consistently every time. The dishwasher doesn't get tired, forget a plate, or rush through the last few."
+    },
+    {
+      "type": "text",
+      "title": "Manual Testing",
+      "body": "**Manual testing** means YOU check if things work:\n\n- Click through the app in a browser\n- Type in forms and check the output\n- Try different scenarios by hand\n\nIt's slow, inconsistent, and doesn't scale. But it's good for exploring new features and checking visual design -- things that are hard to automate."
+    },
+    {
+      "type": "text",
+      "title": "Automated Testing",
+      "body": "**Automated testing** means CODE checks if things work:\n\n- Tests run in seconds\n- Same checks every time, no human error\n- Runs automatically on every push (via CI/CD)\n- Can test hundreds of scenarios in the time it takes to manually test one\n\nThe upfront cost is writing the tests, but they pay for themselves after just a few runs."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Manual testing is good for exploring and visual checks. Automated testing is faster, more reliable, and catches regressions. The best teams use both."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Manual testing is faster than automated testing when you only need to check one thing once.",
+        "isGoodPractice": true,
+        "explanation": "For a quick one-time check, clicking through the app is faster than writing a whole test. Automated tests pay off when you need to check the same thing repeatedly -- after every code change."
+      },
+      {
+        "id": "card-2",
+        "content": "Automated tests can catch bugs that were introduced by a code change you made in a completely different file.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the biggest benefits of automated tests. When you change file A, you might accidentally break something in file C. Automated tests check everything, so they catch these 'ripple effect' bugs that you'd never think to manually test."
+      },
+      {
+        "id": "card-3",
+        "content": "You should replace all manual testing with automated testing.",
+        "isGoodPractice": false,
+        "explanation": "Some things are better tested manually -- like visual design, user experience, and exploratory testing (trying random things to see what breaks). The best approach is automated tests for logic and manual testing for visual and UX checks."
+      },
+      {
+        "id": "card-4",
+        "content": "If your app has automated tests, you never need to test manually again.",
+        "isGoodPractice": false,
+        "explanation": "Automated tests check what you told them to check. They can't notice that a button looks weird, that the font is wrong, or that the layout is broken on mobile. Manual testing catches visual and UX issues that automated tests miss."
+      },
+      {
+        "id": "card-5",
+        "content": "Running automated tests before every deploy prevents regressions from reaching production.",
+        "isGoodPractice": true,
+        "explanation": "A regression is when something that used to work stops working. Running your full test suite before every deploy is the best way to catch regressions early. If a test fails, the deploy should be blocked until it's fixed."
+      }
+    ],
+    "glossaryTerms": ["manual-testing", "automated-testing", "regression"]
+  }
+}

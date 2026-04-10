@@ -1,0 +1,16 @@
+{
+  "slug": "reviewing-output",
+  "title": "Reviewing AI Output",
+  "description": "How to read, evaluate, and verify code that AI generates before you use it",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "ai-assisted-development",
+  "lessons": [
+    { "slug": "read-before-accept", "title": "Read Before You Accept", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "checking-api-calls", "title": "Checking API Calls and Imports", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "error-handling-gaps", "title": "Spotting Missing Error Handling", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "testing-ai-code", "title": "Testing AI-Generated Code", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "security-review", "title": "Security Red Flags in AI Code", "type": "swipe_to_judge", "order": 5, "difficulty": 3 },
+    { "slug": "ai-code-incident", "title": "When AI Code Hits Production", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

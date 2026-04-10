@@ -1,26 +1,170 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #e0e0e0;
+  --surface: #141414;
+  --surface-2: #1a1a1a;
+  --surface-3: #222222;
+  --border: #2a2a2a;
+  --border-bright: #333333;
+  --terminal-green: #00ff41;
+  --terminal-green-dim: #00cc33;
+  --terminal-green-bg: rgba(0, 255, 65, 0.08);
+  --terminal-amber: #ffb000;
+  --terminal-amber-dim: #cc8d00;
+  --terminal-red: #ff3333;
+  --terminal-red-dim: #cc2929;
+  --terminal-blue: #4da6ff;
+  --terminal-purple: #b388ff;
+  --terminal-cyan: #00e5ff;
+  --muted: #666666;
+  --muted-foreground: #999999;
+  --xp-gold: #ffd700;
+  --heart-red: #ff4757;
+  --streak-orange: #ff6b35;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-bright: var(--border-bright);
+  --color-terminal-green: var(--terminal-green);
+  --color-terminal-green-dim: var(--terminal-green-dim);
+  --color-terminal-green-bg: var(--terminal-green-bg);
+  --color-terminal-amber: var(--terminal-amber);
+  --color-terminal-amber-dim: var(--terminal-amber-dim);
+  --color-terminal-red: var(--terminal-red);
+  --color-terminal-red-dim: var(--terminal-red-dim);
+  --color-terminal-blue: var(--terminal-blue);
+  --color-terminal-purple: var(--terminal-purple);
+  --color-terminal-cyan: var(--terminal-cyan);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-xp-gold: var(--xp-gold);
+  --color-heart-red: var(--heart-red);
+  --color-streak-orange: var(--streak-orange);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, "SF Mono",
+    Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Terminal glow effects */
+.glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.glow-amber {
+  text-shadow: 0 0 10px rgba(255, 176, 0, 0.5), 0 0 20px rgba(255, 176, 0, 0.2);
+}
+
+.glow-red {
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.5), 0 0 20px rgba(255, 51, 51, 0.2);
+}
+
+/* Scanline effect for terminal feel */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+}
+
+/* Code block styles */
+.code-line {
+  transition: background-color 0.15s ease;
+}
+
+.code-line:hover {
+  background-color: rgba(0, 255, 65, 0.05);
+}
+
+.code-line.selected {
+  background-color: rgba(0, 255, 65, 0.12);
+  border-left: 2px solid var(--terminal-green);
+}
+
+.code-line.buggy {
+  background-color: rgba(255, 51, 51, 0.12);
+  border-left: 2px solid var(--terminal-red);
+}
+
+.code-line.correct {
+  background-color: rgba(0, 255, 65, 0.12);
+  border-left: 2px solid var(--terminal-green);
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* XP gain animation */
+@keyframes float-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+.xp-float {
+  animation: float-up 1.5s ease-out forwards;
+}
+
+/* Progress bar fill animation */
+@keyframes fill-progress {
+  from {
+    width: 0%;
+  }
+}
+
+.progress-fill {
+  animation: fill-progress 0.8s ease-out;
+}
+
+/* Swipe card styles */
+.swipe-card {
+  touch-action: pan-y;
+  user-select: none;
+}
+
+/* Mobile bottom safe area */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }

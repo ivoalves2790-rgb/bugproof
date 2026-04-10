@@ -1,0 +1,91 @@
+{
+  "slug": "why-tests-matter",
+  "title": "Why Tests Matter",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "You just joined a small startup. The codebase has zero tests. Your first task is to add a new payment feature. After you ship it, things start going wrong. Let's see why tests would have saved the day.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tests = Safety Net for a Tightrope Walker",
+      "body": "A tightrope walker CAN perform without a safety net. But one slip and it's a disaster. A safety net doesn't help you walk better -- it catches you when you fall. **Tests** are your safety net. They don't write your code for you, but they catch you when a change accidentally breaks something."
+    },
+    {
+      "type": "text",
+      "title": "The Real Reasons Tests Matter",
+      "body": "Tests save you time and stress in four big ways:\n\n1. **Catch bugs early** -- Find problems in 2 seconds instead of discovering them from angry users\n2. **Change code fearlessly** -- Refactor knowing tests will tell you if you broke something\n3. **Document behavior** -- Tests show exactly what your code is supposed to do\n4. **Sleep better** -- Deploy on Friday knowing your tests passed"
+    },
+    {
+      "type": "text",
+      "title": "The Cost of NOT Testing",
+      "body": "Without tests, every change is risky. You have to manually check everything. Did the login still work? Does checkout still process payments? Did the search still return results? This manual checking takes time, and you'll inevitably miss something. One missed bug in a payment system can cost real money."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tests catch bugs early, let you change code confidently, document expected behavior, and prevent regressions. The time you spend writing tests saves much more time debugging later."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You've added a discount code feature to the checkout. It works great in your local testing. You deploy to production on Thursday afternoon. Friday morning, you get a panicked message: 'Customers are getting 100% discounts on all orders!' What happened?",
+        "choices": [
+          { "id": "a", "text": "Check the discount calculation code for bugs", "nextNode": "check-code", "score": 10 },
+          { "id": "b", "text": "Immediately disable the discount feature", "nextNode": "disable-feature", "score": 7 },
+          { "id": "c", "text": "Check if someone entered a fraudulent discount code", "nextNode": "check-fraud", "score": 3 }
+        ]
+      },
+      "check-code": {
+        "narrative": "You look at the discount function and find the bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nWhen someone enters 20 for a 20% discount, the function calculates price - (price * 20), which makes the total massively negative. It should divide by 100 first. How would tests have helped?",
+        "choices": [
+          { "id": "a", "text": "A test checking applyDiscount(100, 20) === 80 would have caught this instantly", "nextNode": "test-would-help", "score": 10 },
+          { "id": "b", "text": "Tests wouldn't have helped -- this is a logic error you'd need to think through", "nextNode": "tests-do-help", "score": 3 }
+        ]
+      },
+      "disable-feature": {
+        "narrative": "Smart move to stop the bleeding. You disable the discount feature. But now you need to figure out what went wrong and fix it. Looking at the discount calculation...\n\napplyDiscount(100, 20) should return 80 but returns -1900.\n\nThe function is treating the percentage as a multiplier (20x) instead of dividing by 100 first (0.20x).",
+        "choices": [
+          { "id": "a", "text": "Fix the bug and add a test so this never happens again", "nextNode": "test-would-help", "score": 7 }
+        ]
+      },
+      "check-fraud": {
+        "narrative": "It's not fraud -- the discount codes are legitimate. The problem is that the calculation is wrong. Even a valid 20% discount code is resulting in orders with negative totals because the function multiplies by 20 instead of 0.20.",
+        "choices": [
+          { "id": "a", "text": "Look at the discount calculation code", "nextNode": "check-code", "score": 5 }
+        ]
+      },
+      "test-would-help": {
+        "narrative": "Exactly! A simple test like:\n\ntest('20% discount on $100 = $80', () => {\n  expect(applyDiscount(100, 20)).toBe(80);\n});\n\nThis would have failed immediately when you wrote the buggy code, before it ever reached production. What's your takeaway?",
+        "choices": [
+          { "id": "a", "text": "I should write tests for any code that involves calculations or money", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "I should test everything before every deploy", "nextNode": "end-okay", "score": 6 }
+        ]
+      },
+      "tests-do-help": {
+        "narrative": "Actually, tests are PERFECT for catching logic errors! That's their main job. A test that says 'a 20% discount on $100 should equal $80' would fail immediately with the buggy code, making the error obvious before you ever deployed.",
+        "choices": [
+          { "id": "a", "text": "Got it -- tests catch exactly these kinds of calculation errors", "nextNode": "end-good", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You fix the discount function (dividing by 100), write five tests covering different discount amounts including edge cases like 0% and 100%, and deploy the fix. The tests will prevent this bug from ever coming back, even if someone refactors the code later.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Great thinking! Code that handles money, calculations, or critical business logic should always have tests. A 30-second test would have prevented this bug from reaching production and saved real money."
+      },
+      "end-okay": {
+        "narrative": "Testing everything is admirable but impractical. The key is to test the most important parts -- especially anything involving money, user data, or core business logic. A few targeted tests are worth more than trying to test every single line.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Good instinct, but be strategic about testing. Focus on code that handles money, user data, authentication, and core business logic. You don't need 100% test coverage -- you need the right tests in the right places."
+      }
+    },
+    "glossaryTerms": ["regression", "safety-net", "test-coverage"]
+  }
+}

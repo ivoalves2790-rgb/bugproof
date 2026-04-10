@@ -1,0 +1,16 @@
+{
+  "slug": "when-ai-fails",
+  "title": "When AI Gets It Wrong",
+  "description": "Common failure modes, hallucinated APIs, outdated patterns, and how to recover",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "ai-assisted-development",
+  "lessons": [
+    { "slug": "hallucinated-apis", "title": "Hallucinated APIs and Libraries", "type": "bug_hunt", "order": 1, "difficulty": 2 },
+    { "slug": "outdated-patterns", "title": "Outdated Code Patterns", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "confident-but-wrong", "title": "Confidently Wrong", "type": "swipe_to_judge", "order": 3, "difficulty": 2 },
+    { "slug": "complex-logic-failure", "title": "Complex Logic Failures", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "ai-security-holes", "title": "Security Holes AI Creates", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "recovery-strategies", "title": "Recovery Strategies", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

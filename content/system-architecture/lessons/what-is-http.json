@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-http",
+  "title": "What is HTTP?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "HTTP is the language your browser speaks to servers. Every website you've ever visited used HTTP (or its secure cousin HTTPS) behind the scenes. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "HTTP Is Like Ordering at a Restaurant",
+      "body": "Imagine you're at a restaurant. You (the browser) look at the menu and tell the waiter (HTTP) what you want. The waiter carries your order to the kitchen (the server), then brings back your food (the response). **HTTP** is the waiter -- it's the agreed-upon language for making requests and getting responses."
+    },
+    {
+      "type": "text",
+      "title": "What Does HTTP Stand For?",
+      "body": "HTTP stands for **HyperText Transfer Protocol**. Let's break that down:\n\n1. **HyperText** -- text that can link to other text (that's what web pages are)\n2. **Transfer** -- moving it from one place to another\n3. **Protocol** -- a set of rules both sides agree on\n\nSo HTTP is just the rules for how browsers and servers exchange web pages."
+    },
+    {
+      "type": "text",
+      "title": "HTTP vs HTTPS",
+      "body": "**HTTPS** is HTTP with encryption. The 'S' stands for **Secure**. Think of HTTP as sending a postcard (anyone who handles it can read it) and HTTPS as sending a sealed letter (only the recipient can open it). Today, almost every website uses HTTPS because browsers warn users when a site uses plain HTTP."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "HTTP is the set of rules that browsers and servers use to communicate. HTTPS adds encryption to keep that communication private. Every website you visit uses one of these protocols."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "HTTP is a set of rules for how browsers and servers communicate.",
+        "isGoodPractice": true,
+        "explanation": "HTTP (HyperText Transfer Protocol) defines the format of requests and responses between your browser and a web server. It's like a common language both sides agree to speak."
+      },
+      {
+        "id": "card-2",
+        "content": "HTTP connections stay open permanently so data flows continuously.",
+        "isGoodPractice": false,
+        "explanation": "HTTP is a request-response protocol. Your browser sends a request, the server sends back a response, and the conversation is done. Each new page or resource requires a new request. It's more like exchanging letters than a phone call."
+      },
+      {
+        "id": "card-3",
+        "content": "HTTPS encrypts data so that nobody between you and the server can read it.",
+        "isGoodPractice": true,
+        "explanation": "HTTPS uses TLS encryption to create a secure tunnel. Even if someone intercepts the data (like on public Wi-Fi), they can't read it. This protects passwords, credit cards, and personal information."
+      },
+      {
+        "id": "card-4",
+        "content": "Only websites that handle passwords or payment info need HTTPS.",
+        "isGoodPractice": false,
+        "explanation": "Today, ALL websites should use HTTPS. Browsers like Chrome show 'Not Secure' warnings for HTTP sites. HTTPS protects against eavesdropping, tampering, and is required for many modern browser features. There's no good reason not to use it."
+      },
+      {
+        "id": "card-5",
+        "content": "When you click a link on a webpage, your browser sends an HTTP request to get the new page.",
+        "isGoodPractice": true,
+        "explanation": "Every time you click a link, submit a form, or load an image, your browser is sending HTTP requests behind the scenes. A single webpage might trigger dozens of requests -- one for the HTML, others for images, stylesheets, and scripts."
+      }
+    ],
+    "glossaryTerms": ["http", "https", "protocol", "encryption"]
+  }
+}

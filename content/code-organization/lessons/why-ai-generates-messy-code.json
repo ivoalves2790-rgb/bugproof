@@ -1,0 +1,66 @@
+{
+  "slug": "why-ai-generates-messy-code",
+  "title": "Why AI Generates Messy Code",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "AI coding tools are amazing at generating working code, but they have blind spots when it comes to organization. Understanding these blind spots helps you know what to fix after AI writes your code. Swipe RIGHT for true, LEFT for false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "AI = Great Chef, Bad Kitchen Manager",
+      "body": "Imagine a chef who can cook any dish perfectly but leaves the kitchen a disaster afterward. Every pan is dirty, ingredients are scattered, and nothing is put back in its place. **AI coding tools** are like this chef -- they produce working code but don't think about where it fits in your project, what else already exists, or how the codebase should be organized."
+    },
+    {
+      "type": "text",
+      "title": "Why AI Makes Organizational Mistakes",
+      "body": "AI tools generate code without full context:\n\n1. **No project awareness** -- AI doesn't know your file structure or existing patterns\n2. **One prompt at a time** -- Each response is independent; it doesn't remember choosing to put utilities in `lib/` earlier\n3. **Duplicates existing code** -- It writes a helper function you already have because it can't see your whole codebase\n4. **Inline everything** -- AI tends to put all logic in one file rather than splitting into proper modules"
+    },
+    {
+      "type": "text",
+      "title": "What You Need to Do After AI Generates Code",
+      "body": "After AI writes code for you, always do a quick cleanup pass:\n\n- **Check for duplicates** -- Does this function already exist somewhere?\n- **Move to the right file** -- Should this logic live in a utility file or shared module?\n- **Rename unclear variables** -- AI often uses generic names like `data` or `result`\n- **Split large files** -- If a file grew past 200 lines, it probably does too many things"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "AI generates working code but can't organize your project. It duplicates existing code, uses generic names, and inlines everything. Always do a cleanup pass: check for duplicates, move code to the right files, and rename unclear variables."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "AI tools understand your full project structure and put new code in the right file automatically.",
+        "isGoodPractice": false,
+        "explanation": "Most AI tools work with limited context -- usually just the current file or a few files you've shared. They don't see your full folder structure, existing utility files, or team conventions. That's why AI often creates new utility functions instead of reusing ones you already have."
+      },
+      {
+        "id": "card-2",
+        "content": "After getting code from AI, you should check if it duplicates logic that already exists in your project.",
+        "isGoodPractice": true,
+        "explanation": "AI doesn't know what's in your other files. If you already have a formatDate() function in utils.js, AI will happily write a new one instead of importing yours. Always check: does this functionality already exist somewhere in the project?"
+      },
+      {
+        "id": "card-3",
+        "content": "AI-generated code that works correctly doesn't need any refactoring.",
+        "isGoodPractice": false,
+        "explanation": "Working code is step one. But AI-generated code often has organizational problems: everything stuffed in one file, generic variable names, duplicated logic, and no consideration of your project's conventions. A 5-minute cleanup pass after each AI generation prevents technical debt from piling up."
+      },
+      {
+        "id": "card-4",
+        "content": "Asking AI to rename variables in your code is a good use of AI tools.",
+        "isGoodPractice": true,
+        "explanation": "AI is actually great at renaming and refactoring! You can paste code with bad names and ask AI to suggest better names based on context. AI understands what code does and can suggest descriptive names like userEmail instead of str1. Use AI's strengths to fix AI's weaknesses."
+      },
+      {
+        "id": "card-5",
+        "content": "Giving AI more context about your project structure leads to better organized code.",
+        "isGoodPractice": true,
+        "explanation": "When you tell AI about your project structure (where utilities go, your naming conventions, which libraries you use), it generates code that fits better. Context like 'We keep API calls in src/api/ and use camelCase for functions' helps AI match your patterns instead of inventing its own."
+      }
+    ],
+    "glossaryTerms": ["technical-debt", "refactoring", "code-duplication"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "unit-tests",
+  "title": "Unit Tests",
+  "description": "Writing your first unit tests with arrange-act-assert",
+  "order": 2,
+  "courseSlug": "testing",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-is-unit-test", "title": "What is a Unit Test?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "arrange-act-assert", "title": "Arrange, Act, Assert", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "testing-functions", "title": "Testing Functions", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "testing-edge-cases", "title": "Testing Edge Cases", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "mocking-basics", "title": "Mocking Basics", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "your-first-test", "title": "Your First Test", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

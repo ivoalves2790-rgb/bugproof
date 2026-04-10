@@ -1,0 +1,68 @@
+{
+  "slug": "what-are-env-variables",
+  "title": "What Are Environment Variables?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Your app needs different settings depending on where it runs -- your laptop, a testing server, or the real production site. Environment variables are how you handle this. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Env Vars = Name Badges at an Event",
+      "body": "Imagine you're organizing an event. Each venue has different contact numbers, wifi passwords, and room capacities. Instead of printing these details on every poster, you put them on a name badge that changes per venue. **Environment variables** work the same way -- they're settings that change depending on where your app is running, without changing your actual code."
+    },
+    {
+      "type": "text",
+      "title": "What Are They, Really?",
+      "body": "Environment variables (or \"env vars\") are **key-value pairs** that live outside your code. They tell your app things like:\n\n- What database to connect to\n- What your API keys are\n- Whether to show debug info\n- What port to run on\n\nThe beauty is that the same code can behave differently just by changing these variables."
+    },
+    {
+      "type": "code_example",
+      "title": "Using Env Vars in JavaScript",
+      "language": "javascript",
+      "code": "// Access an environment variable\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Running in production mode');\n} else {\n  console.log('Running in development mode');\n}",
+      "annotation": "process.env gives you access to all environment variables. The values come from outside your code."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Environment variables are settings that live outside your code and change based on where your app runs. They keep sensitive data like API keys out of your source code."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Environment variables let you use different database URLs for development and production without changing your code.",
+        "isGoodPractice": true,
+        "explanation": "This is exactly what env vars are for! Your local machine points to a test database, while production points to the real one. Same code, different config."
+      },
+      {
+        "id": "card-2",
+        "content": "It's fine to put your API keys directly in your JavaScript code since the code gets minified anyway.",
+        "isGoodPractice": false,
+        "explanation": "Minification just shortens variable names -- it doesn't hide your keys. Anyone can view your JavaScript in the browser and find those keys. Always use environment variables for sensitive data."
+      },
+      {
+        "id": "card-3",
+        "content": "Environment variables are named using ALL_CAPS_WITH_UNDERSCORES by convention.",
+        "isGoodPractice": true,
+        "explanation": "This is a widely-followed convention. Names like DATABASE_URL, API_KEY, and NODE_ENV make it immediately clear that a value is an environment variable."
+      },
+      {
+        "id": "card-4",
+        "content": "You should commit your environment variables to Git so your team can use them.",
+        "isGoodPractice": false,
+        "explanation": "Never commit env vars to Git! They often contain secrets like API keys and database passwords. Instead, share them through secure channels and each developer sets up their own .env file locally."
+      },
+      {
+        "id": "card-5",
+        "content": "Environment variables can only store strings, not numbers or objects.",
+        "isGoodPractice": true,
+        "explanation": "Env vars are always strings. If you need a number, you parse it: parseInt(process.env.PORT). If you need a boolean, you compare it: process.env.DEBUG === 'true'. This catches some beginners off guard."
+      }
+    ],
+    "glossaryTerms": ["environment-variable", "process-env", "api-key"]
+  }
+}

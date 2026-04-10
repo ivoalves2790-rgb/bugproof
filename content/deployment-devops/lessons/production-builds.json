@@ -1,0 +1,100 @@
+{
+  "slug": "production-builds",
+  "title": "What is a Production Build?",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Your team just deployed a new feature, but the build failed on the server even though everything works locally. You need to figure out what went wrong and get the site back online.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Building = Packing for a Trip",
+      "body": "A production build is like packing a suitcase for a trip. You don't bring your entire closet -- you pick only what you need, fold everything neatly, and compress it to fit. The **build process** takes your messy development code and creates a clean, compressed, optimized version that loads fast for users."
+    },
+    {
+      "type": "text",
+      "title": "What Happens During a Build",
+      "body": "When you run `npm run build`, several things happen:\n\n1. **Bundling** -- All your separate files get combined into fewer files\n2. **Minification** -- Variable names get shortened, whitespace removed\n3. **Tree-shaking** -- Unused code gets removed\n4. **Compilation** -- TypeScript, JSX, and modern syntax get converted to plain JavaScript\n5. **Optimization** -- Images compressed, CSS purged of unused styles"
+    },
+    {
+      "type": "code_example",
+      "title": "Before and After",
+      "language": "javascript",
+      "code": "// YOUR CODE (readable)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// AFTER BUILD (minified)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
+      "annotation": "The minified version does the exact same thing but is much smaller. This is why production builds load faster."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A production build bundles, minifies, and optimizes your code so it loads fast for users. Build errors are one of the most common deployment problems."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You push to main and the deploy starts. Two minutes later, you get an alert: 'Build failed'. The site is still showing the old version. Your PM is asking when the new feature will be live. What do you do first?",
+        "choices": [
+          { "id": "a", "text": "Check the build logs on the hosting platform", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Push the same code again -- maybe it was a temporary glitch", "nextNode": "retry-blind", "score": 2 },
+          { "id": "c", "text": "Tell the PM it will be ready tomorrow and go to lunch", "nextNode": "ignore", "score": 0 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "Good call! You open the build logs and see:\n\nError: Module not found: Can't resolve './components/Header'\n  at ./src/pages/index.js\n\nBuild failed with 1 error.\n\nThe file exists on your computer. What could be wrong?",
+        "choices": [
+          { "id": "a", "text": "Check if the filename casing matches -- Mac is case-insensitive but Linux servers aren't", "nextNode": "found-issue", "score": 10 },
+          { "id": "b", "text": "Delete the node_modules folder and reinstall", "nextNode": "wrong-fix", "score": 3 },
+          { "id": "c", "text": "The server must be broken -- contact hosting support", "nextNode": "blame-server", "score": 1 }
+        ]
+      },
+      "retry-blind": {
+        "narrative": "You push again and... same error. Build failures are almost never temporary glitches -- they're caused by real problems in your code or configuration. You need to actually read the error message.",
+        "choices": [
+          { "id": "a", "text": "Okay, let me check the build logs", "nextNode": "check-logs", "score": 3 }
+        ]
+      },
+      "ignore": {
+        "narrative": "Ignoring a build failure means the new feature isn't live and you're no closer to fixing it. The PM will ask again after lunch. Better to investigate now while the error is fresh.",
+        "choices": [
+          { "id": "a", "text": "Fine, let me check the build logs", "nextNode": "check-logs", "score": 1 }
+        ]
+      },
+      "found-issue": {
+        "narrative": "Bingo! Your file is named 'header.js' but your import says './components/Header'. On your Mac, this works because macOS doesn't care about case. But the Linux server does -- 'Header' and 'header' are different files. How do you fix it?",
+        "choices": [
+          { "id": "a", "text": "Rename the file to match the import: Header.js", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Change the import to lowercase: ./components/header", "nextNode": "end-okay", "score": 7 }
+        ]
+      },
+      "wrong-fix": {
+        "narrative": "Reinstalling dependencies didn't help because the problem isn't with your packages -- it's with your file path. Look at the error more carefully: it says the module can't be found. The file exists, so maybe it's a naming issue.",
+        "choices": [
+          { "id": "a", "text": "Check if the filename casing matches the import", "nextNode": "found-issue", "score": 5 }
+        ]
+      },
+      "blame-server": {
+        "narrative": "The server is fine -- it's running your build command exactly as instructed. The error is in your code. Read the error message again: it says a specific module can't be found.",
+        "choices": [
+          { "id": "a", "text": "Okay, let me look at the file path more carefully", "nextNode": "found-issue", "score": 3 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You rename 'header.js' to 'Header.js', commit, and push. The build succeeds and the site deploys in under 2 minutes. The PM is happy, and you've learned an important lesson about case sensitivity across operating systems.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Perfect debugging! You checked the build logs, identified the case-sensitivity issue, and made a clean fix. File casing is one of the most common 'works on my machine' bugs because Mac and Windows are case-insensitive but Linux servers are case-sensitive."
+      },
+      "end-okay": {
+        "narrative": "Changing the import to lowercase also works, but now your code style is inconsistent -- some imports use PascalCase and others don't. The convention for React components is PascalCase filenames, so renaming the file would be cleaner.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "You found the root cause -- great job! Either fix works, but renaming the file to PascalCase (Header.js) is the better convention for React components. Always be consistent with file casing to avoid these cross-platform bugs."
+      }
+    },
+    "glossaryTerms": ["production-build", "build-error", "case-sensitivity"]
+  }
+}

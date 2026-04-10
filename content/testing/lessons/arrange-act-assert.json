@@ -1,0 +1,53 @@
+{
+  "slug": "arrange-act-assert",
+  "title": "Arrange, Act, Assert",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Every good test follows a simple pattern: Arrange (set up), Act (do the thing), Assert (check the result). A developer wrote a test but got the pattern wrong. Find the bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "AAA = A Science Experiment",
+      "body": "Remember science class? Every experiment follows the same pattern: set up your equipment (**Arrange**), run the experiment (**Act**), check your results (**Assert**). Tests follow the exact same pattern. This makes them easy to read and consistent across your entire codebase."
+    },
+    {
+      "type": "text",
+      "title": "The Three A's",
+      "body": "**Arrange** -- Set up everything your test needs: create variables, prepare test data, configure the scenario.\n\n**Act** -- Call the function or perform the action you're testing. This is usually ONE line of code.\n\n**Assert** -- Check that the result matches what you expected. If it doesn't, the test fails."
+    },
+    {
+      "type": "code_example",
+      "title": "AAA in Action",
+      "language": "javascript",
+      "code": "test('calculates total with tax', () => {\n  // ARRANGE: set up the inputs\n  const price = 100;\n  const taxRate = 0.08;\n\n  // ACT: call the function\n  const result = calculateTotal(price, taxRate);\n\n  // ASSERT: check the result\n  expect(result).toBe(108);\n});",
+      "annotation": "Each section has a clear job. If this test fails, you know the calculateTotal function returned something other than 108."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every test should follow the AAA pattern: Arrange (set up), Act (do it), Assert (check it). This makes tests readable and consistent."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "test('formats currency correctly', () => {", "isBuggy": false },
+      { "line": 2, "text": "  const result = formatCurrency(1999);", "isBuggy": false },
+      { "line": 3, "text": "  expect(result).toBe('$19.99');", "isBuggy": false },
+      { "line": 4, "text": "  const price = 1999;", "isBuggy": true },
+      { "line": 5, "text": "});", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "This test follows the AAA pattern incorrectly. The Arrange step (setting up test data) is happening AFTER the Act and Assert steps. Find the line that's in the wrong place.",
+    "fixes": [
+      { "id": "a", "text": "Move 'const price = 1999;' to before line 2 and use it: formatCurrency(price)", "isCorrect": true },
+      { "id": "b", "text": "Remove line 4 since the test already works without it", "isCorrect": false },
+      { "id": "c", "text": "Change line 4 to 'const price = result;'", "isCorrect": false },
+      { "id": "d", "text": "Add another expect() after line 4", "isCorrect": false }
+    ],
+    "explanation": "The Arrange step (declaring the price variable) comes AFTER the Act and Assert steps. In the AAA pattern, you should always Arrange first, then Act, then Assert. The fix is to move 'const price = 1999;' to before the function call and use it: formatCurrency(price). This makes the test read naturally: set up the data, call the function with that data, check the result.",
+    "glossaryTerms": ["arrange-act-assert", "test-pattern", "assertion"]
+  }
+}

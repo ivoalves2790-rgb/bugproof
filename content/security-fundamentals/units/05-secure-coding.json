@@ -1,0 +1,16 @@
+{
+  "slug": "secure-coding",
+  "title": "Secure Coding Practices",
+  "description": "Dependency audits, least privilege, security headers, and defense in depth",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "dependency-audit", "title": "Auditing Dependencies", "type": "terminal_sim", "order": 1, "difficulty": 2 },
+    { "slug": "least-privilege", "title": "Principle of Least Privilege", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "security-headers", "title": "HTTP Security Headers", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "supply-chain-attack", "title": "Supply Chain Attack!", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "owasp-top-ten", "title": "OWASP Top 10 Overview", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "defense-in-depth", "title": "Defense in Depth", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

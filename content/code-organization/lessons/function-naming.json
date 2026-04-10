@@ -1,0 +1,68 @@
+{
+  "slug": "function-naming",
+  "title": "Function Naming",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "naming-things",
+  "courseSlug": "code-organization",
+  "intro": "Function names should tell you what the function does without reading its code. A good name is like a verb: it describes the action. Swipe RIGHT if the function name is good, LEFT if it's bad.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Function Names = Buttons on a Remote",
+      "body": "Imagine a TV remote where every button is labeled with a number instead of a word. Button 1 might change the channel, or adjust the volume, or open the menu -- you'd have to press it to find out. Good function names are like clearly labeled buttons: **you know what they do before you press them**."
+    },
+    {
+      "type": "text",
+      "title": "The Verb-Object Pattern",
+      "body": "Great function names follow the **verb + object** pattern:\n\n- `getUser()` -- verb: get, object: user\n- `calculateTotal()` -- verb: calculate, object: total\n- `sendEmail()` -- verb: send, object: email\n- `validatePassword()` -- verb: validate, object: password\n\nCommon verbs: get, set, create, update, delete, validate, calculate, send, fetch, parse, format, convert, check, handle"
+    },
+    {
+      "type": "code_example",
+      "title": "Good vs Bad Function Names",
+      "language": "javascript",
+      "code": "// BAD: What do these do?\nfunction do_it(x) { ... }\nfunction process(data) { ... }\nfunction handle(e) { ... }\nfunction stuff() { ... }\n\n// GOOD: Crystal clear\nfunction validateEmailAddress(email) { ... }\nfunction fetchUserProfile(userId) { ... }\nfunction handleLoginError(error) { ... }\nfunction calculateShippingCost() { ... }",
+      "annotation": "Each good name tells you: what action is performed (verb) and what it acts on (object). You could guess what these functions do without reading a single line of their code."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Name functions with a verb + object pattern: getUser, sendEmail, calculateTotal. The name should tell you what the function does without reading its body. Avoid vague names like process, handle, do, or manage."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "fetchUserOrders(userId) -- fetches a user's order history from the API",
+        "isGoodPractice": true,
+        "explanation": "This name nails the verb-object pattern: 'fetch' (the action) + 'UserOrders' (what's being fetched). The parameter 'userId' makes it clear you need to specify which user. You know exactly what this function does and what it returns."
+      },
+      {
+        "id": "card-2",
+        "content": "doStuff(data) -- processes and transforms data for display",
+        "isGoodPractice": false,
+        "explanation": "doStuff() tells you nothing. What stuff? What data? A better name would be 'formatProductsForDisplay(products)' or 'transformApiResponse(rawData)'. The name should describe the specific action, not just that 'stuff' happens."
+      },
+      {
+        "id": "card-3",
+        "content": "isEmailValid(email) -- returns true or false based on email format",
+        "isGoodPractice": true,
+        "explanation": "For functions that return a boolean (true/false), starting with 'is', 'has', 'can', or 'should' is the convention. 'isEmailValid' reads naturally in an if statement: if (isEmailValid(email)) { ... }. The name tells you both what it checks and that it returns true/false."
+      },
+      {
+        "id": "card-4",
+        "content": "handleClick(e) -- handles a button click event",
+        "isGoodPractice": false,
+        "explanation": "handleClick is too generic. Which button? What happens when it's clicked? Better names: handleSubmitButtonClick, handleAddToCartClick, or handleLogoutClick. In a component with 5 buttons, having 5 functions called handleClick1 through handleClick5 would be a nightmare."
+      },
+      {
+        "id": "card-5",
+        "content": "calculateMonthlyPayment(principal, rate, years) -- computes a monthly loan payment",
+        "isGoodPractice": true,
+        "explanation": "This name is excellent. The verb 'calculate' tells you it computes something. 'MonthlyPayment' tells you what. The parameters (principal, rate, years) are also well-named -- you know exactly what to pass in without reading the function body."
+      }
+    ],
+    "glossaryTerms": ["function-naming", "verb-object-pattern", "self-documenting-code"]
+  }
+}

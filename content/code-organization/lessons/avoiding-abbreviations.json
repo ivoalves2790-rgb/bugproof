@@ -1,0 +1,107 @@
+{
+  "slug": "avoiding-abbreviations",
+  "title": "Avoiding Abbreviations",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "naming-things",
+  "courseSlug": "code-organization",
+  "intro": "A teammate's code uses heavy abbreviations: 'usr', 'btn', 'msg', 'cfg', 'amt'. Now there's a bug and you need to understand their code to fix it. The abbreviations are making it nearly impossible.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Abbreviations = Inside Jokes",
+      "body": "Abbreviations in code are like inside jokes -- the person who wrote them knows exactly what they mean, but everyone else is lost. 'cfg' could be configuration, certified, or confirm. 'amt' could be amount, amendment, or automated. **Full words cost a few extra keystrokes but save everyone else minutes of confusion.**"
+    },
+    {
+      "type": "text",
+      "title": "When Abbreviations Are OK (and When They're Not)",
+      "body": "Some abbreviations are so universal that everyone knows them:\n\n- **OK to abbreviate:** `id`, `url`, `api`, `html`, `css`, `db`, `i` (in a for loop), `e` (in event handlers)\n- **Never abbreviate:** `usr` (user), `btn` (button), `msg` (message), `cfg` (config), `amt` (amount), `num` (number), `str` (string), `val` (value), `tmp` (temporary), `fn` (function)\n\nThe rule: if there's any chance someone won't know the abbreviation, spell it out."
+    },
+    {
+      "type": "code_example",
+      "title": "Abbreviations Make Bugs Harder to Find",
+      "language": "javascript",
+      "code": "// With abbreviations -- can you spot the bug?\nconst ttl = calcTtl(itms);\nconst tx = ttl * txRt;\nconst fnl = ttl + tx - dsc;\n\n// Without abbreviations -- bug is obvious\nconst total = calculateTotal(items);\nconst tax = total * taxRate;\nconst finalPrice = total + tax - discount;",
+      "annotation": "In the clear version, you can immediately see the logic: total + tax - discount. The abbreviated version is a puzzle. If there's a bug in the formula, you'd spot it instantly in the clear version."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Only abbreviate universally known terms (id, url, api). Spell out everything else. Full words take 2 extra seconds to type but save minutes of confusion for every person who reads the code, including future you."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Bug report: 'Discount codes aren't applied correctly. Some customers are being overcharged.'\n\nYou open the checkout function and find:\n\nfunction procOrd(usrId, itmLst, dscCd) {\n  const usr = getUsr(usrId);\n  const ttl = calcTtl(itmLst);\n  const dsc = getDsc(dscCd);\n  const amt = ttl - (ttl * dsc.pct) + shpCst(usr.addr);\n  return chrgUsr(usr.pmtMthd, amt);\n}\n\nWhat's your first reaction?",
+        "choices": [
+          { "id": "a", "text": "Decode each abbreviation: usrId=userId, itmLst=itemList, dscCd=discountCode, etc.", "nextNode": "decode", "score": 10 },
+          { "id": "b", "text": "Run the function with test data to see what happens", "nextNode": "test-first", "score": 5 },
+          { "id": "c", "text": "Rewrite the function with clear names before debugging", "nextNode": "rewrite-first", "score": 7 }
+        ]
+      },
+      "decode": {
+        "narrative": "You decode the abbreviations:\n\n- procOrd = processOrder\n- usrId = userId, itmLst = itemList, dscCd = discountCode\n- ttl = total, dsc = discount, amt = amount\n- shpCst = shippingCost, pmtMthd = paymentMethod\n\nNow the formula reads: amount = total - (total * discount.percent) + shippingCost(user.address)\n\nWith clear names, can you spot the bug?",
+        "choices": [
+          { "id": "a", "text": "The discount is applied to the total but shipping should be added BEFORE the discount calculation", "nextNode": "wrong-order", "score": 3 },
+          { "id": "b", "text": "The discount percentage might be stored as 20 instead of 0.20, making the math wrong", "nextNode": "found-bug", "score": 10 },
+          { "id": "c", "text": "The shipping cost function might be returning the wrong value", "nextNode": "check-shipping", "score": 4 }
+        ]
+      },
+      "test-first": {
+        "narrative": "You run the function with a $100 order and a 20% discount code. Expected result: $80 + shipping. Actual result: -$1,900 + shipping. The discount is way too large! But with these abbreviations, it's hard to trace where the math goes wrong.",
+        "choices": [
+          { "id": "a", "text": "Decode the abbreviations first so I can read the formula", "nextNode": "decode", "score": 8 }
+        ]
+      },
+      "rewrite-first": {
+        "narrative": "Smart instinct! You rename everything clearly. Now the formula is readable:\n\nconst amount = total - (total * discount.percent) + shippingCost;\n\nWith clear names, the logic is exposed. Can you see the discount bug?",
+        "choices": [
+          { "id": "a", "text": "discount.percent might be stored as 20 instead of 0.20", "nextNode": "found-bug", "score": 10 },
+          { "id": "b", "text": "The parentheses are in the wrong place", "nextNode": "wrong-parens", "score": 3 }
+        ]
+      },
+      "found-bug": {
+        "narrative": "You check the discount object and confirm: dsc.pct is 20 (not 0.20). So the formula calculates: 100 - (100 * 20) = 100 - 2000 = -1900. A 20% discount is subtracting 2000% instead! How do you fix it?",
+        "choices": [
+          { "id": "a", "text": "Divide the percentage by 100: total * (discount.percent / 100)", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Change the discount database to store 0.20 instead of 20", "nextNode": "end-db-change", "score": 6 }
+        ]
+      },
+      "wrong-order": {
+        "narrative": "Whether shipping is added before or after the discount depends on business rules, and in this case shipping SHOULD be calculated separately from the discount. The real bug is in how the discount percentage is used in the math.",
+        "choices": [
+          { "id": "a", "text": "Look more carefully at the discount calculation", "nextNode": "found-bug", "score": 5 }
+        ]
+      },
+      "check-shipping": {
+        "narrative": "The shipping function works correctly. The bug is in the discount calculation. Look at the formula: total - (total * discount.percent). If discount.percent is 20 (for 20%), what's 100 * 20?",
+        "choices": [
+          { "id": "a", "text": "2000! The percent needs to be divided by 100 first", "nextNode": "found-bug", "score": 8 }
+        ]
+      },
+      "wrong-parens": {
+        "narrative": "The parentheses are actually fine for the intended formula. The issue is simpler: the discount percentage value. If a 20% discount is stored as 20, then total * 20 gives 2000% of the total, not 20%.",
+        "choices": [
+          { "id": "a", "text": "The percent needs to be divided by 100", "nextNode": "found-bug", "score": 7 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Fixed! The formula now reads:\nconst amount = total - (total * discount.percent / 100) + shippingCost;\n\nA $100 order with 20% off: 100 - (100 * 20/100) + shipping = $80 + shipping. You also rename all the abbreviated variables so the next developer won't have to decode them.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "The bug was simple -- a missing /100 -- but the abbreviations made it much harder to find. If the code had said 'total * discount.percent' in full words from the start, the bug would have been obvious during code review. Abbreviations don't just make code hard to read; they hide bugs by making the logic opaque."
+      },
+      "end-db-change": {
+        "narrative": "Changing the database works but is risky -- other code might expect the percentage as a whole number (20 not 0.20). It's safer to handle the conversion in code. You also need to update every existing discount in the database.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "The fix works but database changes are riskier than code changes because other systems might depend on the current format. The safer fix is dividing by 100 in the calculation. The bigger lesson: if the code had used clear names instead of abbreviations, this bug would have been caught during the original code review."
+      }
+    },
+    "glossaryTerms": ["abbreviation", "readability", "code-review", "naming"]
+  }
+}

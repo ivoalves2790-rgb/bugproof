@@ -1,0 +1,16 @@
+{
+  "slug": "systematic-debugging",
+  "title": "Systematic Debugging",
+  "description": "Stop guessing and start debugging with a repeatable, logical process",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "reproduce-the-bug", "title": "Reproduce the Bug", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "binary-search-debugging", "title": "Binary Search Debugging", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "rubber-duck-debugging", "title": "Rubber Duck Debugging", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "isolating-the-problem", "title": "Isolating the Problem", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "reading-documentation", "title": "Reading Documentation", "type": "terminal_sim", "order": 5, "difficulty": 2 },
+    { "slug": "when-to-ask-for-help", "title": "When to Ask for Help", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

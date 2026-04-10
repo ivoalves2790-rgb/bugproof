@@ -1,0 +1,16 @@
+{
+  "slug": "common-attacks",
+  "title": "Common Web Attacks",
+  "description": "XSS, SQL injection, CSRF -- how they work and how to stop them",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "xss-basics", "title": "Cross-Site Scripting (XSS)", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "xss-incident", "title": "XSS Attack Reported!", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "sql-injection", "title": "SQL Injection", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "sql-injection-terminal", "title": "Testing for SQL Injection", "type": "terminal_sim", "order": 4, "difficulty": 3 },
+    { "slug": "csrf-explained", "title": "Cross-Site Request Forgery", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "input-validation", "title": "Input Validation Everywhere", "type": "bug_hunt", "order": 6, "difficulty": 2 }
+  ]
+}

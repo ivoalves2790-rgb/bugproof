@@ -1,0 +1,74 @@
+{
+  "slug": "requests-and-responses",
+  "title": "Requests and Responses",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Every interaction on the web is a conversation between your browser (the client) and a server. The browser sends a request, the server sends back a response. Let's see this in action using curl -- a tool that lets you make HTTP requests from the terminal.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Requests and Responses = Letters",
+      "body": "Think of HTTP like exchanging letters. Your browser writes a **request** letter: 'Dear server, please send me the homepage.' The server reads it and writes a **response** letter back: 'Here's the HTML for the homepage.' Every web interaction follows this simple back-and-forth pattern."
+    },
+    {
+      "type": "text",
+      "title": "What's Inside a Request?",
+      "body": "An HTTP request contains:\n\n1. **Method** -- what action you want (GET = 'give me data', POST = 'here's some data')\n2. **URL** -- where to send it\n3. **Headers** -- metadata like 'I accept JSON' or 'here's my login token'\n4. **Body** (optional) -- data you're sending, like a form submission"
+    },
+    {
+      "type": "text",
+      "title": "What's Inside a Response?",
+      "body": "An HTTP response contains:\n\n1. **Status code** -- a number saying what happened (200 = OK, 404 = not found)\n2. **Headers** -- metadata like 'this is HTML' or 'this response expires tomorrow'\n3. **Body** -- the actual content (HTML, JSON, an image, etc.)"
+    },
+    {
+      "type": "code_example",
+      "title": "A Simple Request with curl",
+      "language": "bash",
+      "code": "curl -v https://httpbin.org/get\n\n# Request sent:\n# GET /get HTTP/2\n# Host: httpbin.org\n# User-Agent: curl/8.1.0\n\n# Response received:\n# HTTP/2 200\n# Content-Type: application/json\n# { \"url\": \"https://httpbin.org/get\" }",
+      "annotation": "curl lets you make HTTP requests from the terminal. The -v flag shows the full conversation -- both the request your computer sent and the response that came back."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every web interaction is a request (from your browser) and a response (from the server). Requests specify what you want; responses deliver it along with a status code telling you if it worked."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": [],
+    "steps": [
+      {
+        "instruction": "Let's make our first HTTP request! Use curl to fetch data from https://httpbin.org/get -- this is a test server that echoes back your request.",
+        "expectedCommand": "curl https://httpbin.org/get",
+        "acceptAlternatives": ["curl 'https://httpbin.org/get'", "curl \"https://httpbin.org/get\""],
+        "output": "{\n  \"args\": {},\n  \"headers\": {\n    \"Accept\": \"*/*\",\n    \"Host\": \"httpbin.org\",\n    \"User-Agent\": \"curl/8.1.0\"\n  },\n  \"origin\": \"203.0.113.42\",\n  \"url\": \"https://httpbin.org/get\"\n}",
+        "hint": "Type 'curl' followed by the URL to make a GET request."
+      },
+      {
+        "instruction": "The server sent back JSON data showing what it received. Now let's see the full conversation -- the request headers AND response headers. Add the -v flag (verbose) to curl.",
+        "expectedCommand": "curl -v https://httpbin.org/get",
+        "acceptAlternatives": ["curl --verbose https://httpbin.org/get"],
+        "output": "> GET /get HTTP/2\n> Host: httpbin.org\n> User-Agent: curl/8.1.0\n> Accept: */*\n>\n< HTTP/2 200\n< Content-Type: application/json\n< Content-Length: 256\n<\n{\n  \"args\": {},\n  \"headers\": { \"Host\": \"httpbin.org\" },\n  \"url\": \"https://httpbin.org/get\"\n}",
+        "hint": "Add -v before the URL: curl -v <url>"
+      },
+      {
+        "instruction": "Lines with > are what you SENT (the request). Lines with < are what you GOT BACK (the response). Notice the '200' status code -- that means success! Now send a POST request with some data. Use: curl -X POST -d 'name=Alice' https://httpbin.org/post",
+        "expectedCommand": "curl -X POST -d 'name=Alice' https://httpbin.org/post",
+        "acceptAlternatives": ["curl -X POST -d \"name=Alice\" https://httpbin.org/post"],
+        "output": "{\n  \"args\": {},\n  \"data\": \"\",\n  \"form\": {\n    \"name\": \"Alice\"\n  },\n  \"headers\": {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Host\": \"httpbin.org\"\n  },\n  \"url\": \"https://httpbin.org/post\"\n}",
+        "hint": "Use -X POST to change the method and -d to send data."
+      },
+      {
+        "instruction": "The server received your POST data and echoed it back in the 'form' field. Let's try requesting something that doesn't exist to see an error. Fetch https://httpbin.org/status/404",
+        "expectedCommand": "curl https://httpbin.org/status/404",
+        "acceptAlternatives": ["curl -v https://httpbin.org/status/404"],
+        "output": "",
+        "hint": "Just use curl with the URL. This endpoint simulates a 404 error."
+      }
+    ],
+    "completionMessage": "You just had real conversations with a web server! You made a GET request (asking for data), saw the full request/response headers with -v, sent a POST request (submitting data), and triggered a 404 error. Every time you browse the web, your browser is doing exactly this -- hundreds of times per page.",
+    "glossaryTerms": ["http-request", "http-response", "curl", "headers"]
+  }
+}

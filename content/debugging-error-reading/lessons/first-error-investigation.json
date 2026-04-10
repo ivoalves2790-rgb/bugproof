@@ -1,0 +1,69 @@
+{
+  "slug": "first-error-investigation",
+  "title": "Your First Error Investigation",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "You just cloned a project and tried to run it, but it immediately crashes with an error. Let's walk through investigating the problem step by step using the terminal.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Debugging Is Like Being a Detective",
+      "body": "A detective doesn't guess who did it. They follow the evidence: the crime scene, the witnesses, the clues. Debugging is the same process. The error message is your first clue, the file and line number tell you where to look, and reading the code reveals what happened."
+    },
+    {
+      "type": "text",
+      "title": "The Investigation Steps",
+      "body": "Every error investigation follows the same pattern:\n\n1. **Run the code** and read the error message\n2. **Find the file and line** mentioned in the error\n3. **Look at that line** and the code around it\n4. **Understand the mismatch** between what the code expects and what it got\n\nThis process works for every programming language and every type of error."
+    },
+    {
+      "type": "code_example",
+      "title": "A Common First Error",
+      "language": "text",
+      "code": "$ node index.js\nError: Cannot find module './helpers'\n    at index.js:3",
+      "annotation": "This error says the file 'helpers' doesn't exist. Check what files actually exist (ls), then look at line 3 of index.js to see what it's trying to import."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Debug like a detective: read the error, go to the file and line it mentions, and look for the mismatch. Don't guess -- follow the evidence the error gives you."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["index.js", "package.json", "utils.js"],
+    "steps": [
+      {
+        "instruction": "First, try running the app so we can see the error message. Run the main file with Node.js.",
+        "expectedCommand": "node index.js",
+        "acceptAlternatives": ["node ./index.js"],
+        "output": "Error: Cannot find module './helpers'\nRequire stack:\n- /home/user/my-app/index.js\n    at Module._resolveFilename (node:internal/modules/cjs/loader:1075:15)\n    at Object.<anonymous> (/home/user/my-app/index.js:3:18)\n    at Module._compile (node:internal/modules/cjs/loader:1241:14)",
+        "hint": "Use 'node' followed by the filename to run a JavaScript file."
+      },
+      {
+        "instruction": "The error says it can't find a module called './helpers'. Let's check what files actually exist in this directory.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": ["ls -la", "ls -l", "dir"],
+        "output": "index.js  package.json  utils.js",
+        "hint": "Use 'ls' to list the files in the current directory."
+      },
+      {
+        "instruction": "There's no 'helpers.js' file -- but there IS a 'utils.js'. The import path is probably wrong. Let's look at line 3 of index.js where the error occurred to confirm.",
+        "expectedCommand": "cat index.js",
+        "acceptAlternatives": ["less index.js", "more index.js", "head index.js"],
+        "output": "const express = require('express');\nconst config = require('./config');\nconst helpers = require('./helpers');\n\nconst app = express();\napp.listen(3000);",
+        "hint": "Use 'cat' followed by the filename to display a file's contents."
+      },
+      {
+        "instruction": "Line 3 imports './helpers' but the file is called 'utils.js'. The quickest fix is to check if utils.js has the functions we need. Let's look at it.",
+        "expectedCommand": "cat utils.js",
+        "acceptAlternatives": ["less utils.js", "more utils.js"],
+        "output": "module.exports = {\n  formatDate: (date) => date.toISOString(),\n  capitalize: (str) => str.charAt(0).toUpperCase() + str.slice(1)\n};",
+        "hint": "Use 'cat' to read the contents of utils.js."
+      }
+    ],
+    "completionMessage": "You just completed your first error investigation! You followed the trail: ran the code, read the error message, checked what files exist, and found the mismatch. The fix would be to change require('./helpers') to require('./utils') on line 3. This pattern -- error message points to file and line, you read that line, and the fix becomes obvious -- is how you'll solve most import errors.",
+    "glossaryTerms": ["module-not-found", "require", "stack-trace"]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "security-fundamentals",
+  "title": "Security Fundamentals",
+  "description": "XSS, SQL injection, auth, API keys, OWASP basics",
+  "longDescription": "Every line of code you write is a potential door -- and attackers are constantly checking the handles. This course teaches you to think like an attacker so you can defend like a pro. You'll learn how cross-site scripting (XSS), SQL injection, and CSRF attacks actually work by seeing real vulnerable code patterns. You'll understand why API keys in frontend code are a ticking time bomb, how authentication systems get bypassed, and what the OWASP Top 10 really means for your daily work. More importantly, you'll learn the secure coding habits that prevent these vulnerabilities from ever reaching production. Security isn't someone else's job -- it's baked into every function you write, every input you accept, and every secret you store.",
+  "icon": "shield",
+  "color": "#4ECDC4",
+  "prerequisites": [],
+  "units": [
+    { "slug": "security-mindset", "title": "The Security Mindset", "order": 1 },
+    { "slug": "common-attacks", "title": "Common Web Attacks", "order": 2 },
+    { "slug": "authentication", "title": "Authentication & Authorization", "order": 3 },
+    { "slug": "data-protection", "title": "Protecting Data", "order": 4 },
+    { "slug": "secure-coding", "title": "Secure Coding Practices", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

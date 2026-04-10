@@ -1,0 +1,16 @@
+{
+  "slug": "debugging-in-practice",
+  "title": "Real-World Debugging",
+  "description": "Apply everything you've learned to realistic debugging scenarios you'll face on the job",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "api-response-errors", "title": "API Response Errors", "type": "incident_response", "order": 1, "difficulty": 2 },
+    { "slug": "debugging-css-layout", "title": "Debugging CSS Layout", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "environment-issues", "title": "Environment Issues", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "production-debugging", "title": "Production vs Development", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "debugging-someone-elses-code", "title": "Debugging Someone Else's Code", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "building-debugging-habits", "title": "Building Debugging Habits", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

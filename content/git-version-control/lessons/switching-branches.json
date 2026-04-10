@@ -1,0 +1,76 @@
+{
+  "slug": "switching-branches",
+  "title": "Switching Branches",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "You're juggling two features: dark mode and a search bar. You need to switch between branches to work on each one. But be careful -- Git won't let you switch if you have unsaved changes that could be lost.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Switching Branches = Changing Rooms",
+      "body": "Think of branches like different rooms in a house, each set up for a different project. When you switch branches, Git instantly rearranges your project folder to match that branch's version of the files. It's like walking into a different room where everything is set up exactly how you left it."
+    },
+    {
+      "type": "text",
+      "title": "Commit Before You Switch!",
+      "body": "This is the most important rule: **always commit (or stash) your changes before switching branches.** If you have uncommitted changes, Git might refuse to switch to protect your work. Uncommitted changes could get mixed up between branches or be lost entirely."
+    },
+    {
+      "type": "code_example",
+      "title": "The Switching Workflow",
+      "language": "bash",
+      "code": "git status                          # Check for uncommitted changes\ngit add .                           # Stage changes\ngit commit -m \"Save my progress\"    # Commit first!\ngit checkout main                   # Now safe to switch\ngit checkout -b feature/search-bar  # Create + switch in one step",
+      "annotation": "Always check `git status` before switching. If it shows changes, commit them first."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always commit your changes before switching branches -- use `git checkout <branch>` or `git switch <branch>` to move between them."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/blog-app",
+    "initialFiles": ["index.html", "style.css", "app.js"],
+    "steps": [
+      {
+        "instruction": "You're on the dark-mode branch and have just finished some changes. Check the status before switching.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch feature/dark-mode\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n\n\tmodified:   style.css\n\nno changes added to commit (use \"git add\" to track)",
+        "hint": "Type 'git status' to see if you have any uncommitted changes."
+      },
+      {
+        "instruction": "You have uncommitted changes to style.css. Save them with a commit before switching branches.",
+        "expectedCommand": "git add style.css",
+        "acceptAlternatives": ["git add ."],
+        "output": "",
+        "hint": "Stage the file first with 'git add style.css'."
+      },
+      {
+        "instruction": "Now commit the staged changes.",
+        "expectedCommand": "git commit -m \"Add dark mode styles\"",
+        "acceptAlternatives": ["git commit -m \"add dark mode styles\"", "git commit -m \"Dark mode styles\""],
+        "output": "[feature/dark-mode 5f6a7b8] Add dark mode styles\n 1 file changed, 42 insertions(+), 3 deletions(-)",
+        "hint": "Use 'git commit -m' followed by a descriptive message in quotes."
+      },
+      {
+        "instruction": "Now safely switch back to the main branch.",
+        "expectedCommand": "git checkout main",
+        "acceptAlternatives": ["git switch main"],
+        "output": "Switched to branch 'main'",
+        "hint": "Use 'git checkout main' or 'git switch main'."
+      },
+      {
+        "instruction": "Create and switch to a new search feature branch in a single command.",
+        "expectedCommand": "git checkout -b feature/search-bar",
+        "acceptAlternatives": ["git switch -c feature/search-bar"],
+        "output": "Switched to a new branch 'feature/search-bar'",
+        "hint": "The shortcut is 'git checkout -b <name>' which creates and switches in one step. Or use 'git switch -c <name>'."
+      }
+    ],
+    "completionMessage": "Nice! You committed your work before switching (important!), then created a new branch with the shortcut command. Remember: always commit or stash your changes before switching branches, or Git may refuse to switch to protect your work.",
+    "glossaryTerms": ["git-checkout", "git-switch", "uncommitted-changes", "branch"]
+  }
+}

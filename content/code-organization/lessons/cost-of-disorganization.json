@@ -1,0 +1,93 @@
+{
+  "slug": "cost-of-disorganization",
+  "title": "The Cost of Disorganization",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "Your team needs to add a simple feature: showing the user's name in the navigation bar. It should take 30 minutes. It's been three days and the feature still isn't shipped. Let's find out why disorganized code turns simple tasks into nightmares.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Messy Code = Messy Room",
+      "body": "You need your passport for a trip tomorrow. In an organized room, you walk to the desk drawer and grab it in 10 seconds. In a messy room, you spend 3 hours digging through piles, checking pockets, and looking under furniture. **Disorganized code** is the messy room -- finding and changing anything takes 10 times longer than it should."
+    },
+    {
+      "type": "text",
+      "title": "The Real Costs",
+      "body": "Disorganized code costs your team in four ways:\n\n1. **Search time** -- 'Where does the user data come from?' becomes a 30-minute archeological dig\n2. **Fear of change** -- 'If I change this, what else breaks?' leads to workarounds instead of fixes\n3. **Onboarding time** -- New developers take weeks instead of days to contribute\n4. **Duplicate bugs** -- The same logic in 5 places means fixing a bug in one place leaves 4 copies broken"
+    },
+    {
+      "type": "code_example",
+      "title": "When Finding Code Takes Longer Than Writing It",
+      "language": "text",
+      "code": "src/\n  app.js              (2,400 lines - everything)\n  helpers.js          (800 lines - random utility functions)\n  stuff.js            (350 lines - more random functions)\n  components.js       (1,200 lines - all React components)\n  api.js              (600 lines - all API calls mixed together)",
+      "annotation": "Where would you find the code that fetches the current user's name? You'd have to search all 5,350 lines across 5 vaguely-named files. In a well-organized project, you'd look in src/api/user.js or src/hooks/useCurrentUser.js."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Disorganized code turns 30-minute tasks into 3-day ordeals. The real cost is search time, fear of changes, slow onboarding, and duplicate bugs. Good organization is an investment that pays back on every future change."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Task: Display the logged-in user's name in the navigation bar. Expected time: 30 minutes.\n\nYou open the codebase and find a single file called app.js with 2,400 lines. There's also helpers.js (800 lines), stuff.js (350 lines), and components.js (1,200 lines). Where do you start looking for user data?",
+        "choices": [
+          { "id": "a", "text": "Search for 'user' across all files to find where user data is handled", "nextNode": "search-user", "score": 10 },
+          { "id": "b", "text": "Start reading app.js from the top since it's the main file", "nextNode": "read-app", "score": 3 },
+          { "id": "c", "text": "Check helpers.js since getting user data sounds like a helper function", "nextNode": "check-helpers", "score": 5 }
+        ]
+      },
+      "search-user": {
+        "narrative": "Searching for 'user' returns 147 results across all files. There's 'user', 'userData', 'currentUser', 'userInfo', 'usr', and 'loggedInUser' -- all meaning slightly different things in different places. Some are the same data fetched differently. Which do you use?",
+        "choices": [
+          { "id": "a", "text": "Find where the authentication/login logic is to trace the source of truth", "nextNode": "find-auth", "score": 10 },
+          { "id": "b", "text": "Just pick the first 'currentUser' variable you find and use it", "nextNode": "wrong-user", "score": 3 }
+        ]
+      },
+      "read-app": {
+        "narrative": "You start reading app.js line by line. 45 minutes later, you're at line 600 and have found database setup code, routing, middleware, authentication, and socket handlers all jumbled together. The user logic is somewhere in these 2,400 lines but there are no sections or comments to guide you.",
+        "choices": [
+          { "id": "a", "text": "Try searching for 'user' instead of reading line by line", "nextNode": "search-user", "score": 7 }
+        ]
+      },
+      "check-helpers": {
+        "narrative": "helpers.js has 47 functions with names like doThing(), process(), handle(), and format2(). None of them clearly relate to user data. There's a getCurrentUser() but it returns different data than getUserInfo() in stuff.js. Nobody documented which one is correct.",
+        "choices": [
+          { "id": "a", "text": "Search all files for 'user' to see the full picture", "nextNode": "search-user", "score": 7 }
+        ]
+      },
+      "find-auth": {
+        "narrative": "You trace the login flow and find the source of truth: a function called fetchUser() on line 1,847 of app.js that calls the API and stores the result in a global variable called 'usr'. The navigation component is on line 342 of components.js. But 'usr' is not accessible from there because it's scoped to a function in app.js. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Pass the user data through props or use React context to share it properly", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Make 'usr' a global window variable so it's accessible everywhere", "nextNode": "end-hacky", "score": 3 }
+        ]
+      },
+      "wrong-user": {
+        "narrative": "You grab 'currentUser' from helpers.js, but it turns out that variable holds cached data from the previous session. The nav bar shows the wrong name after login. You've now spent 2 hours and introduced a bug.",
+        "choices": [
+          { "id": "a", "text": "Step back and trace the authentication flow to find the real source of truth", "nextNode": "find-auth", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You create a UserContext that provides the current user to all components, and the nav bar accesses it cleanly. The feature works. Total time: 4 hours -- mostly spent understanding the codebase. A well-organized project would have had this done in 20 minutes.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "You navigated a messy codebase by tracing the source of truth instead of guessing. But notice how a 30-minute task took 4 hours because of poor organization: vague file names, 6 different user variables, 2,400-line files, and no clear data flow. This is the real cost of disorganization -- it's paid on every single change."
+      },
+      "end-hacky": {
+        "narrative": "Making 'usr' a global variable works today but creates a maintenance nightmare. Now any code anywhere can read or modify the user data with no tracking. When a bug appears with wrong user data, there's no way to trace where it was changed.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Global variables are a classic short-term fix that creates long-term pain. The codebase is already a mess because of shortcuts like this. A proper solution (React context, a state management library, or even just exporting from a module) gives you the same access but with clear ownership and traceability."
+      }
+    },
+    "glossaryTerms": ["spaghetti-code", "source-of-truth", "technical-debt", "global-variable"]
+  }
+}

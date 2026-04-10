@@ -1,0 +1,100 @@
+{
+  "slug": "primary-keys",
+  "title": "Primary Keys: Every Row's ID",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "Your team's app has a bug: when two users sign up with the same name, the app updates the wrong user's profile. The problem? The table is using the name column to identify users instead of a proper primary key.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Primary Keys = Social Security Numbers",
+      "body": "Imagine a school with two students named 'John Smith.' If you just use names, you can't tell them apart. That's why schools assign student IDs -- unique numbers that identify each student. A **primary key** is the same idea: a unique identifier for each row in a table, so you can always refer to exactly one specific record."
+    },
+    {
+      "type": "text",
+      "title": "What Makes a Good Primary Key?",
+      "body": "A primary key must be:\n\n1. **Unique** -- no two rows can have the same value\n2. **Not null** -- every row must have one\n3. **Unchanging** -- it should never need to be updated\n\nMost developers use an **auto-incrementing integer** (1, 2, 3, 4...) or a **UUID** (a random string like 'a1b2c3d4-e5f6-...'). Never use names, emails, or other real data as primary keys -- they can change or have duplicates."
+    },
+    {
+      "type": "code_example",
+      "title": "Creating a Table with a Primary Key",
+      "language": "sql",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-increments: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Now each user has a guaranteed unique ID\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- id is automatically set to 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- id is automatically set to 2 (different Alice, no confusion!)",
+      "annotation": "SERIAL means the database auto-generates the next number. PRIMARY KEY means this column uniquely identifies each row. Two users named 'Alice' get different IDs."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every table needs a primary key -- a unique identifier for each row. Use auto-incrementing integers (SERIAL) or UUIDs. Never use real-world data like names or emails as primary keys because they can change or duplicate."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Users report a weird bug: when they update their profile, sometimes another user's profile changes instead. You look at the users table and discover it has no primary key -- the app identifies users by their name column. Two users are both named 'Alex Johnson.' When the app runs UPDATE users SET bio = 'new bio' WHERE name = 'Alex Johnson', what happens?",
+        "choices": [
+          { "id": "a", "text": "Both Alex Johnsons get the same bio -- the WHERE clause matches two rows", "nextNode": "correct-both", "score": 10 },
+          { "id": "b", "text": "Only the first Alex Johnson gets updated", "nextNode": "wrong-first", "score": 3 },
+          { "id": "c", "text": "The database throws an error because of the duplicate name", "nextNode": "wrong-error", "score": 2 }
+        ]
+      },
+      "correct-both": {
+        "narrative": "Exactly! WHERE name = 'Alex Johnson' matches BOTH rows, so both users get the same bio. This is why you never identify rows by name. How should we fix this table?",
+        "choices": [
+          { "id": "a", "text": "Add an auto-incrementing id column as the primary key", "nextNode": "correct-fix", "score": 10 },
+          { "id": "b", "text": "Use the email column as the primary key since emails are unique", "nextNode": "partial-email", "score": 5 },
+          { "id": "c", "text": "Just make sure users can't have duplicate names", "nextNode": "wrong-unique-name", "score": 2 }
+        ]
+      },
+      "wrong-first": {
+        "narrative": "SQL doesn't have a concept of 'first' or 'second' row -- rows in a table have no inherent order. The WHERE clause matches ALL rows that meet the condition. Both Alex Johnsons match WHERE name = 'Alex Johnson', so both get updated.",
+        "choices": [
+          { "id": "a", "text": "So both rows get modified because the WHERE matches both", "nextNode": "correct-both", "score": 5 }
+        ]
+      },
+      "wrong-error": {
+        "narrative": "The database won't throw an error -- having duplicate names is perfectly valid. The name column has no UNIQUE constraint. SQL will happily update every row that matches the WHERE clause, even if that's 100 rows. That's exactly the problem!",
+        "choices": [
+          { "id": "a", "text": "So both Alex Johnsons get the same update", "nextNode": "correct-both", "score": 5 }
+        ]
+      },
+      "correct-fix": {
+        "narrative": "You add: ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY. Now every user has a unique numeric ID. The app uses UPDATE users SET bio = 'new bio' WHERE id = 42 instead of WHERE name = 'Alex Johnson'. Problem solved! What's the advantage of using an auto-incrementing integer?",
+        "choices": [
+          { "id": "a", "text": "It's always unique, never changes, and the database generates it automatically", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "It's easier to type than a UUID", "nextNode": "end-ok", "score": 5 }
+        ]
+      },
+      "partial-email": {
+        "narrative": "Emails are unique, but they're not ideal as primary keys. Users change their email addresses, which would require updating the primary key everywhere it's referenced. A good primary key should never change. An auto-incrementing integer (1, 2, 3...) is better because it never changes.",
+        "choices": [
+          { "id": "a", "text": "Use an auto-incrementing id instead since it never changes", "nextNode": "correct-fix", "score": 7 }
+        ]
+      },
+      "wrong-unique-name": {
+        "narrative": "Forcing unique names is a terrible user experience -- what if two people are genuinely named 'Alex Johnson'? You can't tell one of them they can't use their real name. The solution is to give each row its own unique identifier that's separate from any real-world data.",
+        "choices": [
+          { "id": "a", "text": "Add an auto-incrementing id column as the primary key", "nextNode": "correct-fix", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "The auto-incrementing id is automatically generated (you never set it manually), guaranteed unique (no duplicates possible), and it never needs to change. Even if a user changes their name, email, or every other field, their id stays the same. The bug is fixed.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "You correctly identified that identifying rows by non-unique data causes bugs, and that auto-incrementing primary keys solve this permanently. This is a foundational concept: every table should have a primary key, and it should be a meaningless unique identifier, not real-world data."
+      },
+      "end-ok": {
+        "narrative": "True, but the main reasons are more important: it's guaranteed unique, automatically generated, and never needs to change. Those properties make it a reliable way to identify any row forever.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "The key benefits of auto-incrementing IDs are: automatic generation (no manual work), guaranteed uniqueness (no duplicates), and immutability (they never change even when other data does). These properties make them the standard choice for primary keys."
+      }
+    },
+    "glossaryTerms": ["primary-key", "serial", "uuid", "unique-constraint"]
+  }
+}

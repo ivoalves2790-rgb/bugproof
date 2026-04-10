@@ -1,0 +1,16 @@
+{
+  "slug": "security-mindset",
+  "title": "The Security Mindset",
+  "description": "Think like an attacker to defend like a pro -- trust nothing, validate everything",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "trust-no-input", "title": "Trust No Input", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "anatomy-of-a-breach", "title": "Anatomy of a Data Breach", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "secrets-in-code", "title": "Secrets Hidden in Code", "type": "bug_hunt", "order": 3, "difficulty": 1 },
+    { "slug": "scanning-for-secrets", "title": "Scanning for Leaked Secrets", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "attack-surface", "title": "Understanding Attack Surface", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "env-variables", "title": "Environment Variables & .env Files", "type": "terminal_sim", "order": 6, "difficulty": 1 }
+  ]
+}

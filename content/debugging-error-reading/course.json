@@ -1,0 +1,22 @@
+{
+  "slug": "debugging-error-reading",
+  "title": "Debugging & Error Reading",
+  "description": "Stack traces, console, and systematic debugging",
+  "longDescription": "When your code breaks, the error message is trying to help you -- if you know how to read it. Most beginners stare at a wall of red text, panic, and start randomly changing things. This course teaches you to stay calm and methodical. You'll learn to read error messages like a detective reads clues: understanding what each part of a stack trace means, where to look first, and how to narrow down the problem. You'll master browser DevTools, console.log debugging, and systematic techniques that experienced developers use daily. By the end, you won't fear errors -- you'll welcome them as helpful guides pointing you straight to the problem.",
+  "icon": "bug",
+  "color": "#FF6B6B",
+  "prerequisites": [],
+  "units": [
+    { "slug": "reading-errors", "title": "Reading Error Messages", "order": 1 },
+    { "slug": "console-debugging", "title": "Console & DevTools", "order": 2 },
+    { "slug": "systematic-debugging", "title": "Systematic Debugging", "order": 3 },
+    { "slug": "common-errors", "title": "Common Error Patterns", "order": 4 },
+    { "slug": "debugging-in-practice", "title": "Real-World Debugging", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

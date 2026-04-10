@@ -1,0 +1,16 @@
+{
+  "slug": "how-the-web-works",
+  "title": "How the Web Works",
+  "description": "Understand what happens when you type a URL and press Enter -- from DNS to HTTP to the response that paints your screen",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "what-is-a-url", "title": "What is a URL?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "dns-the-internets-phonebook", "title": "DNS: The Internet's Phone Book", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "what-is-http", "title": "What is HTTP?", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "requests-and-responses", "title": "Requests and Responses", "type": "terminal_sim", "order": 4, "difficulty": 1 },
+    { "slug": "status-codes", "title": "HTTP Status Codes", "type": "bug_hunt", "order": 5, "difficulty": 1 },
+    { "slug": "putting-it-together", "title": "A Request's Full Journey", "type": "incident_response", "order": 6, "difficulty": 1 }
+  ]
+}

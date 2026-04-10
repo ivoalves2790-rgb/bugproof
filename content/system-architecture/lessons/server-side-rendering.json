@@ -1,0 +1,67 @@
+{
+  "slug": "server-side-rendering",
+  "title": "Server-Side vs Client-Side Rendering",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "There are two main ways to build web pages: have the server send finished HTML (server-side rendering) or have the browser build the page using JavaScript (client-side rendering). Let's explore the difference by examining what the browser actually receives.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SSR = Pre-Made Meal, CSR = Cook-at-Home Kit",
+      "body": "**Server-Side Rendering (SSR)** is like ordering a ready-made meal -- it arrives fully cooked, just eat it. **Client-Side Rendering (CSR)** is like a meal kit -- you get the ingredients (JavaScript) and your kitchen (browser) assembles it. SSR is faster to 'eat' but the kitchen (server) does more work."
+    },
+    {
+      "type": "text",
+      "title": "Server-Side Rendering (SSR)",
+      "body": "With SSR, the **server** builds the complete HTML page before sending it to the browser:\n\n1. Browser requests a page\n2. Server fetches data from the database\n3. Server generates complete HTML with the data filled in\n4. Browser receives ready-to-display HTML\n\nThe user sees content immediately. Search engines can also read it easily."
+    },
+    {
+      "type": "text",
+      "title": "Client-Side Rendering (CSR)",
+      "body": "With CSR, the server sends a nearly empty HTML page plus JavaScript. The browser does the heavy lifting:\n\n1. Browser requests a page\n2. Server sends a blank HTML shell + a JavaScript bundle\n3. Browser runs the JavaScript, which fetches data from an API\n4. JavaScript builds the page content in the browser\n\nThe initial load is slower, but navigation between pages can feel instant."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "SSR sends complete HTML from the server (faster first load, better for SEO). CSR sends JavaScript that builds the page in the browser (slower first load, but smoother page transitions). Many modern frameworks like Next.js combine both approaches."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/web-project",
+    "initialFiles": ["ssr-page.html", "csr-page.html", "app.js"],
+    "steps": [
+      {
+        "instruction": "Let's look at what a server-side rendered page looks like when it arrives in the browser. View the SSR page source.",
+        "expectedCommand": "cat ssr-page.html",
+        "acceptAlternatives": ["less ssr-page.html", "more ssr-page.html"],
+        "output": "<!DOCTYPE html>\n<html>\n<head><title>Products - MyStore</title></head>\n<body>\n  <h1>Our Products</h1>\n  <ul>\n    <li>Wireless Headphones - $49.99</li>\n    <li>Phone Case - $19.99</li>\n    <li>USB Cable - $9.99</li>\n  </ul>\n</body>\n</html>",
+        "hint": "Use 'cat' to read the file contents."
+      },
+      {
+        "instruction": "Notice the HTML already has all the product data filled in! The server built this complete page. Now look at the client-side rendered version.",
+        "expectedCommand": "cat csr-page.html",
+        "acceptAlternatives": ["less csr-page.html", "more csr-page.html"],
+        "output": "<!DOCTYPE html>\n<html>\n<head><title>MyStore</title></head>\n<body>\n  <div id=\"root\"></div>\n  <script src=\"app.js\"></script>\n</body>\n</html>",
+        "hint": "Use 'cat' to read the CSR page file."
+      },
+      {
+        "instruction": "See the difference? The CSR page is almost empty -- just a <div id='root'> and a script tag. The JavaScript has to do all the work. Let's see what app.js does.",
+        "expectedCommand": "cat app.js",
+        "acceptAlternatives": ["less app.js", "more app.js"],
+        "output": "// Client-side rendering: JS builds the page\nasync function loadProducts() {\n  const res = await fetch('/api/products');\n  const products = await res.json();\n  \n  const html = products.map(p => \n    `<li>${p.name} - $${p.price}</li>`\n  ).join('');\n  \n  document.getElementById('root').innerHTML = `\n    <h1>Our Products</h1>\n    <ul>${html}</ul>\n  `;\n}\n\nloadProducts();",
+        "hint": "Use 'cat' to see the JavaScript file."
+      },
+      {
+        "instruction": "With CSR, the browser has to: 1) download app.js, 2) run it, 3) fetch data from /api/products, 4) build the HTML. That's why CSR pages can show a blank screen initially. Let's check how big the JavaScript bundle is.",
+        "expectedCommand": "ls -la app.js",
+        "acceptAlternatives": ["ls -l app.js", "wc -c app.js"],
+        "output": "-rw-r--r--  1 user  staff  342 Apr 10 10:00 app.js",
+        "hint": "Use 'ls -la' to see file details including size."
+      }
+    ],
+    "completionMessage": "Now you can see the key difference: SSR pages arrive with content already filled in (fast first paint, great for search engines), while CSR pages arrive nearly empty and JavaScript builds everything in the browser (slower first paint, but can feel snappier for page transitions). Many modern frameworks like Next.js use a hybrid approach -- SSR for the first page, then CSR for navigating between pages.",
+    "glossaryTerms": ["server-side-rendering", "client-side-rendering", "spa", "seo"]
+  }
+}

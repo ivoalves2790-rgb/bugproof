@@ -1,0 +1,69 @@
+{
+  "slug": "the-deploy-process",
+  "title": "The Deploy Process",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Let's walk through the actual steps of deploying a project. You'll push code to GitHub and connect it to a hosting platform -- the standard modern workflow.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Deploy = Shipping a Package",
+      "body": "Deploying is like shipping a package. You **pack** your code (build it), **label** it (commit and push to GitHub), and **ship** it (the hosting platform picks it up and puts it live). Most modern platforms watch your GitHub repo and automatically deploy when you push new code."
+    },
+    {
+      "type": "text",
+      "title": "The Modern Deploy Workflow",
+      "body": "Here's how most developers deploy today:\n\n1. Write code locally\n2. Commit and push to GitHub\n3. The hosting platform detects the new code\n4. It builds your project automatically\n5. If the build succeeds, the new version goes live\n\nThis is called **Git-based deployment** and it's the standard for platforms like Vercel, Netlify, and Railway."
+    },
+    {
+      "type": "code_example",
+      "title": "The Commands You'll Use",
+      "language": "bash",
+      "code": "git add .\ngit commit -m \"Ready for production\"\ngit push origin main",
+      "annotation": "Once your repo is connected to a hosting platform, pushing to main is often all you need to trigger a deploy."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Modern deployment is Git-based: push your code to GitHub, and the hosting platform automatically builds and deploys it."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["src/App.js", "package.json", "README.md"],
+    "steps": [
+      {
+        "instruction": "First, check which files have changed since your last commit.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\nChanges not staged for commit:\n  modified:   src/App.js\n  modified:   package.json",
+        "hint": "Use the git command that shows the current state of your working directory."
+      },
+      {
+        "instruction": "Stage all your changes for commit.",
+        "expectedCommand": "git add .",
+        "acceptAlternatives": ["git add --all", "git add -A"],
+        "output": "",
+        "hint": "Use 'git add' with a dot to stage everything."
+      },
+      {
+        "instruction": "Commit your changes with a message describing what you did.",
+        "expectedCommand": "git commit -m \"Ready for production\"",
+        "acceptAlternatives": ["git commit -m \"ready for production\"", "git commit -m \"Deploy to production\"", "git commit -m \"Initial deploy\""],
+        "output": "[main 4f2a1b3] Ready for production\n 2 files changed, 15 insertions(+), 3 deletions(-)",
+        "hint": "Use 'git commit -m' followed by a message in quotes."
+      },
+      {
+        "instruction": "Push your code to GitHub. The hosting platform is watching this repo and will deploy automatically.",
+        "expectedCommand": "git push origin main",
+        "acceptAlternatives": ["git push"],
+        "output": "Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 412 bytes | 412.00 KiB/s, done.\nTo github.com:yourname/my-app.git\n   a1b2c3d..4f2a1b3  main -> main\n\n✓ Deploy triggered! Check your hosting dashboard for build status.",
+        "hint": "Push to the 'origin' remote on the 'main' branch."
+      }
+    ],
+    "completionMessage": "Your code is now on GitHub and the hosting platform has picked it up. In a minute or two, your app will be live on the internet with a real URL anyone can visit!",
+    "glossaryTerms": ["git-push", "deployment", "build"]
+  }
+}

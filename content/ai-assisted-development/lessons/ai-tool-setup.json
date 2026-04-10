@@ -1,0 +1,69 @@
+{
+  "slug": "ai-tool-setup",
+  "title": "Setting Up Your AI Workflow",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "ai-basics",
+  "courseSlug": "ai-assisted-development",
+  "intro": "Before you start vibe coding, you need a solid workflow. Let's set up a project with version control so you can safely experiment with AI-generated code -- accepting what works and reverting what doesn't.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Version Control Is Your Safety Net",
+      "body": "Imagine painting a picture but being able to press 'undo' at any point and go back to how it looked five minutes ago. Git gives you that for code. When you're experimenting with AI-generated code, Git lets you try things out and revert if they don't work."
+    },
+    {
+      "type": "text",
+      "title": "The Safe AI Coding Workflow",
+      "body": "Before using AI to write code, set up this workflow:\n\n1. **Initialize Git** so every change is tracked\n2. **Commit your starting point** as a clean baseline\n3. **Create a branch** for AI-generated code\n4. **Commit in small chunks** so you can revert individual changes\n\nThis way, you can always get back to working code if AI gives you something broken."
+    },
+    {
+      "type": "code_example",
+      "title": "Setting Up Your Safety Net",
+      "language": "bash",
+      "code": "git init\ngit add .\ngit commit -m \"Initial project setup\"\ngit checkout -b ai-feature",
+      "annotation": "These four commands create a Git repo, save your current code, and create a separate branch for AI experiments. If things go wrong, you can switch back to your clean main branch."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always use Git when working with AI-generated code. Commit before and after AI changes so you can review diffs and revert anything that doesn't work."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-ai-project",
+    "initialFiles": ["index.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "Initialize a Git repository so you can track changes and revert bad AI-generated code easily.",
+        "expectedCommand": "git init",
+        "acceptAlternatives": [],
+        "output": "Initialized empty Git repository in ~/my-ai-project/.git/",
+        "hint": "Use 'git init' to start tracking changes in this folder."
+      },
+      {
+        "instruction": "Make an initial commit with your existing files so you have a clean starting point before adding AI code.",
+        "expectedCommand": "git add .",
+        "acceptAlternatives": ["git add --all", "git add -A"],
+        "output": "",
+        "hint": "Use 'git add .' to stage all files, then you'll commit them."
+      },
+      {
+        "instruction": "Now commit these files with a clear message.",
+        "expectedCommand": "git commit -m \"Initial project setup\"",
+        "acceptAlternatives": ["git commit -m \"initial project setup\"", "git commit -m \"Initial commit\"", "git commit -m \"initial commit\""],
+        "output": "[main (root-commit) f1a2b3c] Initial project setup\n 2 files changed, 45 insertions(+)\n create mode 100644 index.js\n create mode 100644 package.json",
+        "hint": "Use 'git commit -m' followed by a message in quotes."
+      },
+      {
+        "instruction": "Create a new branch for AI-generated code. This way you can easily compare the AI's changes to your original code and revert if needed.",
+        "expectedCommand": "git checkout -b ai-feature",
+        "acceptAlternatives": ["git switch -c ai-feature", "git branch ai-feature && git checkout ai-feature"],
+        "output": "Switched to a new branch 'ai-feature'",
+        "hint": "Use 'git checkout -b' followed by the branch name 'ai-feature'."
+      }
+    ],
+    "completionMessage": "You now have a safe AI coding workflow. Work on a feature branch, commit AI-generated code in small chunks, review each change, and merge only what works. If AI generates something broken, you can always reset to your last good commit.",
+    "glossaryTerms": ["git-init", "branch", "version-control"]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "slug": "detached-head",
+  "title": "The Detached HEAD Mystery",
+  "type": "incident_response",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "You've been experimenting with your project and suddenly Git says you're in 'detached HEAD' state. Commits you make here could be lost forever! Navigate this tricky situation without losing your work.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Is HEAD?",
+      "body": "In Git, **HEAD** is just a label that says \"you are here.\" It normally points to the branch you're on (like `main`). When you make a commit, HEAD moves forward along with the branch. It's like a bookmark that follows you as you read through a book."
+    },
+    {
+      "type": "analogy",
+      "title": "Detached HEAD = Wandering Off the Trail",
+      "body": "Imagine you're hiking on a marked trail (your branch). You decide to step off the trail to explore an interesting rock formation (an old commit). You're free to look around, but if you build something out there and walk back to the trail, your creation gets left behind with no path back to it. That's **detached HEAD** -- you're off-branch, and new commits have no branch to anchor them."
+    },
+    {
+      "type": "text",
+      "title": "How Does This Happen?",
+      "body": "Detached HEAD usually happens when you:\n\n- Check out a specific commit hash: `git checkout a1b2c3d`\n- Check out a tag: `git checkout v1.0`\n\nGit shows a scary warning, but nothing is broken. You can look around safely. The danger is only if you **make new commits** here -- they could be lost when you switch back to a branch."
+    },
+    {
+      "type": "code_example",
+      "title": "The Rescue Move",
+      "language": "bash",
+      "code": "# If you're in detached HEAD and want to keep your work:\ngit checkout -b rescue-branch\n\n# This creates a new branch right where you are,\n# anchoring your commits so they won't be lost.",
+      "annotation": "The fix is simple: just create a branch. This gives your commits a home so Git won't garbage-collect them."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Detached HEAD means you're not on any branch -- if you make commits here, save them immediately by creating a new branch with `git checkout -b <name>`."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You wanted to check out an old version of your project to see how something used to work. You ran 'git checkout a1b2c3d' (a specific commit hash). Now Git shows this scary warning:\n\n'You are in detached HEAD state. You can look around, make experimental changes and commit them, and you can discard any commits you make in this state without impacting any branches.'\n\nWhat does this mean?",
+        "choices": [
+          { "id": "a", "text": "I'm looking at an old commit but I'm not on any branch -- any new commits could get lost", "nextNode": "understand-detached", "score": 10 },
+          { "id": "b", "text": "Something is broken and I need to fix my Git installation", "nextNode": "not-broken", "score": 2 },
+          { "id": "c", "text": "My HEAD pointer was literally detached and I've lost data", "nextNode": "no-data-loss", "score": 3 }
+        ]
+      },
+      "understand-detached": {
+        "narrative": "Correct! HEAD normally points to a branch (like main), which moves forward with each commit. In detached HEAD state, HEAD points directly to a commit instead. It's like standing in the middle of a timeline without being on a named branch.\n\nNow, while looking at this old code, you accidentally made some changes and committed them. You have work you want to keep! What do you do?",
+        "choices": [
+          { "id": "a", "text": "Create a new branch from where I am right now to save my work", "nextNode": "save-branch", "score": 10 },
+          { "id": "b", "text": "Run 'git checkout main' and hope the commits come with me", "nextNode": "lost-work", "score": 2 },
+          { "id": "c", "text": "Copy the changed files manually to my desktop as backup", "nextNode": "manual-copy", "score": 4 }
+        ]
+      },
+      "not-broken": {
+        "narrative": "Nothing is broken! Detached HEAD is a normal Git state. It just means you're looking at a specific commit rather than the tip of a branch. You can safely look around, or even make changes -- you just need to be careful about saving them properly.",
+        "choices": [
+          { "id": "a", "text": "Okay, so I can still work -- I just need to handle it carefully", "nextNode": "understand-detached", "score": 5 }
+        ]
+      },
+      "no-data-loss": {
+        "narrative": "No data has been lost! 'Detached HEAD' sounds dramatic, but it's just Git's way of saying your HEAD pointer is looking at a specific commit instead of following a branch. All your branches and their commits are perfectly safe.",
+        "choices": [
+          { "id": "a", "text": "Oh good, so what should I actually do here?", "nextNode": "understand-detached", "score": 5 }
+        ]
+      },
+      "save-branch": {
+        "narrative": "You run 'git checkout -b rescue-branch'. Git creates a new branch pointing to your current commit, and your work is now safely on a named branch. What do you do next?",
+        "choices": [
+          { "id": "a", "text": "Switch to main and merge rescue-branch if I want to keep the changes", "nextNode": "end-perfect", "score": 10 },
+          { "id": "b", "text": "Stay on rescue-branch and keep working", "nextNode": "end-good", "score": 7 }
+        ]
+      },
+      "lost-work": {
+        "narrative": "You switch to main and... your commits from detached HEAD state are now orphaned. They still exist temporarily, but Git will eventually garbage-collect them since no branch points to them. You can still recover them with 'git reflog', but that's an advanced move.",
+        "choices": [
+          { "id": "a", "text": "Quick, use 'git reflog' to find the lost commit hash and create a branch there", "nextNode": "reflog-rescue", "score": 7 }
+        ]
+      },
+      "manual-copy": {
+        "narrative": "Copying files works in an emergency, but Git has a much better way: just create a branch where you are. This preserves the full commit history, not just the current file state.",
+        "choices": [
+          { "id": "a", "text": "Let me create a branch instead", "nextNode": "save-branch", "score": 5 }
+        ]
+      },
+      "reflog-rescue": {
+        "narrative": "You run 'git reflog', find the commit hash of your lost work, and run 'git checkout -b rescue-branch <hash>'. Your work is saved! But this was a close call.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "You recovered your work using git reflog, which is an advanced recovery tool. But the easier path would have been to create a branch BEFORE switching away from detached HEAD. Remember: if you ever make commits in detached HEAD state, create a branch immediately to keep them safe."
+      },
+      "end-perfect": {
+        "narrative": "You created a rescue branch to save your detached HEAD commits, then merged them into main. Nothing was lost, and the workflow was clean. Well handled!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Perfect response! You understood that detached HEAD means you're not on a branch, created a new branch to save your commits, and then merged properly. The key lesson: if you ever find yourself in detached HEAD with work you want to keep, immediately run 'git checkout -b <new-branch-name>' to anchor your commits to a branch."
+      },
+      "end-good": {
+        "narrative": "Your commits are saved on rescue-branch. You can merge them into main whenever you're ready. Good thinking!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 17,
+        "feedback": "Good job saving your work by creating a branch! The key insight is that detached HEAD commits need a branch to survive. You can merge rescue-branch into main whenever you're ready. Next time, consider creating a branch before making commits in detached HEAD state."
+      }
+    },
+    "glossaryTerms": ["detached-head", "head", "branch", "git-reflog"]
+  }
+}

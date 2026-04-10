@@ -1,0 +1,16 @@
+{
+  "slug": "scaling-patterns",
+  "title": "Scaling & Patterns",
+  "description": "Learn what happens when your app goes from 10 users to 10 million -- and the architectural patterns that make it possible",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "vertical-vs-horizontal", "title": "Vertical vs Horizontal Scaling", "type": "swipe_to_judge", "order": 1, "difficulty": 2 },
+    { "slug": "load-balancers", "title": "Load Balancers", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "microservices-vs-monolith", "title": "Microservices vs Monolith", "type": "swipe_to_judge", "order": 3, "difficulty": 3 },
+    { "slug": "message-queues", "title": "Message Queues", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "cdn-edge-computing", "title": "CDNs & Edge Computing", "type": "terminal_sim", "order": 5, "difficulty": 3 },
+    { "slug": "architecture-decisions", "title": "Making Architecture Decisions", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

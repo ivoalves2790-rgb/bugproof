@@ -1,0 +1,80 @@
+{
+  "slug": "code-splitting",
+  "title": "Code Splitting",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "Your single-page app loads a 2MB JavaScript bundle before showing anything. Users on slow connections wait 10+ seconds. The app has a dashboard, a settings page, an admin panel, and a chart library -- but most users only visit the dashboard. Time to split things up.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Code Splitting = Chapters in a Book",
+      "body": "Imagine if you had to download an entire encyclopedia before you could read one article. That's what a single JavaScript bundle does -- it forces users to download code for every page, even pages they'll never visit. **Code splitting** is like splitting the encyclopedia into chapters that load on demand."
+    },
+    {
+      "type": "text",
+      "title": "How Code Splitting Works",
+      "body": "Instead of one giant JavaScript file, code splitting creates multiple smaller files:\n\n1. **Route-based splitting** -- Each page becomes its own chunk (dashboard.js, settings.js, admin.js)\n2. **Component-based splitting** -- Heavy components load only when rendered (chart library, rich text editor)\n3. **Library splitting** -- Vendor code (React, lodash) goes in a separate chunk that caches well\n\nThe user only downloads the code needed for the page they're viewing."
+    },
+    {
+      "type": "code_example",
+      "title": "React.lazy for Route Splitting",
+      "language": "jsx",
+      "code": "import React, { lazy, Suspense } from 'react';\n\n// These are loaded on-demand, not upfront\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
+      "annotation": "Each page component is wrapped in lazy(), so its JavaScript file only downloads when the user navigates to that route. Suspense shows a loading fallback while the chunk downloads."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Code splitting breaks your JavaScript into smaller chunks that load on demand. Split by route (each page is a chunk), by component (heavy libraries load when needed), and by vendor (third-party code caches separately)."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your app's single bundle is 2MB. You analyze it and find:\n\n- Dashboard code: 200KB\n- Settings page: 150KB\n- Admin panel: 300KB\n- Chart library (used only in admin): 600KB\n- PDF generator (used only in settings): 400KB\n- Shared React + utilities: 350KB\n\n80% of users only visit the dashboard. What's your first code splitting strategy?",
+        "choices": [
+          { "id": "a", "text": "Split by route -- each page becomes its own chunk", "nextNode": "route-split", "score": 10 },
+          { "id": "b", "text": "Split the chart library into its own chunk since it's the biggest", "nextNode": "chart-split", "score": 6 },
+          { "id": "c", "text": "Minify everything harder to make the single bundle smaller", "nextNode": "minify-only", "score": 2 }
+        ]
+      },
+      "route-split": {
+        "narrative": "You split the app into route-based chunks:\n\n- Main chunk (shared code): 350KB\n- Dashboard chunk: 200KB\n- Settings + PDF generator: 550KB\n- Admin + charts: 900KB\n\nNow dashboard users only download 550KB instead of 2MB. But the admin chunk is still 900KB. What do you do about it?",
+        "choices": [
+          { "id": "a", "text": "Also lazy load the chart library so it only loads when the charts component renders", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "900KB is fine since only admins see it", "nextNode": "end-okay", "score": 6 }
+        ]
+      },
+      "chart-split": {
+        "narrative": "Splitting the chart library helps, but you're still sending 1.4MB to dashboard users who don't need the settings page, admin panel, or PDF generator. Route-based splitting would be more impactful as a first step.",
+        "choices": [
+          { "id": "a", "text": "Start with route-based splitting instead", "nextNode": "route-split", "score": 7 }
+        ]
+      },
+      "minify-only": {
+        "narrative": "Your code is already minified. You might squeeze out another 5-10%, but the fundamental problem remains: you're sending 2MB of code to users who only need 200KB. The solution isn't smaller files -- it's fewer files loaded upfront.",
+        "choices": [
+          { "id": "a", "text": "Try code splitting instead of just compression", "nextNode": "route-split", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Now your loading breakdown is:\n\n- Dashboard users: 350KB (shared) + 200KB (dashboard) = 550KB\n- Settings users: + 550KB when they navigate there\n- Admin users: + 300KB for admin, then + 600KB for charts only when they open the charts tab\n\nDashboard load time dropped from 10 seconds to under 3 seconds on slow connections.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Perfect strategy! Route-based splitting gave the biggest win by keeping dashboard users from downloading admin and settings code. Then component-level splitting of the chart library ensured even admin users don't load 600KB of charts until they actually view charts. This layered approach is exactly how production apps handle code splitting."
+      },
+      "end-okay": {
+        "narrative": "The route splitting alone is a huge win for most users. Admin page performance could be better, but this is a reasonable trade-off if admin users are on fast connections.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Route-based splitting was the right first move and gave the biggest performance win. For the admin page, lazily loading the 600KB chart library would help, especially for admin users on slower connections. But overall, you've cut the initial load for 80% of users from 2MB to 550KB."
+      }
+    },
+    "glossaryTerms": ["code-splitting", "lazy-loading", "bundle", "chunk"]
+  }
+}

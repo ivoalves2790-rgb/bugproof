@@ -1,0 +1,66 @@
+{
+  "slug": "hosting-platforms",
+  "title": "Hosting Platforms",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "There are dozens of places you can deploy your app. Some are great for beginners, some are designed for large companies. Let's learn which platforms match which needs. Swipe right if it's a GOOD match, or left if it's a BAD match.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Hosting = Renting an Apartment",
+      "body": "Your app needs somewhere to live on the internet. **Hosting** is like renting an apartment for your code. Some platforms give you a tiny studio that's free (great for small projects). Others give you a whole building with a doorman and maintenance team (for big apps with lots of users)."
+    },
+    {
+      "type": "text",
+      "title": "The Big Three for Beginners",
+      "body": "If you're just getting started, these three platforms are the most popular:\n\n1. **Vercel** -- Best for frontend apps and Next.js projects. Deploys from GitHub automatically.\n2. **Netlify** -- Great for static sites and frontend apps. Simple drag-and-drop deploys.\n3. **Railway** -- Best when you need a backend server and database. Like Vercel but for full-stack apps."
+    },
+    {
+      "type": "text",
+      "title": "Free Tiers and Limits",
+      "body": "Most hosting platforms have a **free tier** -- you can deploy small projects without paying anything. But free tiers have limits:\n\n- Limited bandwidth (how much data your app can send)\n- Limited compute time (your app might sleep after inactivity)\n- Limited storage (small databases only)\n\nFor learning and small projects, free tiers are more than enough."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Vercel, Netlify, and Railway are the most beginner-friendly hosting platforms. All offer free tiers perfect for learning and small projects."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Using Vercel for a Next.js frontend project.",
+        "isGoodPractice": true,
+        "explanation": "Vercel was literally built by the creators of Next.js. It's the perfect match -- it understands Next.js features like server-side rendering and API routes out of the box."
+      },
+      {
+        "id": "card-2",
+        "content": "Using Netlify to host a Python backend API with a database.",
+        "isGoodPractice": false,
+        "explanation": "Netlify is designed primarily for static sites and frontend apps. For a Python backend with a database, you'd want something like Railway, Render, or Fly.io that supports backend servers and databases."
+      },
+      {
+        "id": "card-3",
+        "content": "Starting with AWS or Google Cloud when you're deploying your first ever project.",
+        "isGoodPractice": false,
+        "explanation": "AWS and Google Cloud are powerful but very complex. They're designed for teams with DevOps experience. For your first project, stick with Vercel, Netlify, or Railway -- they handle most of the complexity for you."
+      },
+      {
+        "id": "card-4",
+        "content": "Using Railway when your app needs both a backend server and a database.",
+        "isGoodPractice": true,
+        "explanation": "Railway is great for full-stack apps. It can run your backend server and provision a database (like PostgreSQL) with just a few clicks. It's one of the simplest ways to deploy a complete app."
+      },
+      {
+        "id": "card-5",
+        "content": "Deploying a static portfolio website on Netlify's free tier.",
+        "isGoodPractice": true,
+        "explanation": "This is exactly what Netlify excels at. A static portfolio site uses minimal bandwidth and compute, so the free tier is perfect. You can even drag-and-drop your project folder to deploy."
+      }
+    ],
+    "glossaryTerms": ["hosting", "static-site", "free-tier"]
+  }
+}

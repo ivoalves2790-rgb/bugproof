@@ -1,0 +1,17 @@
+{
+  "slug": "testing",
+  "title": "Testing",
+  "description": "Why test, what to test, unit/integration/e2e basics",
+  "longDescription": "Testing is your safety net. Every time you change code, tests automatically verify nothing broke. This course teaches you why testing matters (even for small projects), what kinds of tests exist, what to test and what to skip, and how to write tests that actually catch bugs instead of just checking boxes.",
+  "icon": "check-circle",
+  "color": "#A29BFE",
+  "prerequisites": [],
+  "units": [
+    { "slug": "why-test", "title": "Why Test?", "order": 1 },
+    { "slug": "unit-tests", "title": "Unit Tests", "order": 2 },
+    { "slug": "integration-tests", "title": "Integration Tests", "order": 3 },
+    { "slug": "what-to-test", "title": "What to Test", "order": 4 },
+    { "slug": "testing-in-practice", "title": "Testing in Practice", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "common-errors",
+  "title": "Common Error Patterns",
+  "description": "Recognize the most frequent bugs you'll encounter and learn their fixes on sight",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "undefined-and-null", "title": "Undefined & Null Errors", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "off-by-one-errors", "title": "Off-by-One Errors", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "async-await-errors", "title": "Async/Await Mistakes", "type": "incident_response", "order": 3, "difficulty": 3 },
+    { "slug": "type-coercion-bugs", "title": "Type Coercion Bugs", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "import-export-errors", "title": "Import & Export Errors", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "scope-and-closure-bugs", "title": "Scope & Closure Bugs", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "slug": "what-is-git",
+  "title": "What is Git?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Git is the most popular version control system in the world. But there are a lot of myths and misunderstandings about what it actually does. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Version Control = Revision History",
+      "body": "You know how Google Docs lets you click \"Version history\" and see every change anyone ever made? You can even go back to an older version if something went wrong. **Version control** is that same idea, but for your entire project folder -- every file, every change, tracked over time."
+    },
+    {
+      "type": "text",
+      "title": "So What Is Git?",
+      "body": "Git is the most popular version control tool in the world. It runs on your computer and keeps a complete timeline of every change you make to your project. Think of it as an **unlimited undo system** that remembers everything -- who changed what, when, and why."
+    },
+    {
+      "type": "text",
+      "title": "Why Should You Care?",
+      "body": "Even if you're building apps with AI tools, things break. Git lets you:\n\n1. Go back to a working version when something breaks\n2. Try risky experiments without fear\n3. Collaborate with others without overwriting each other's work\n4. Keep a clear history of what changed and why"
+    },
+    {
+      "type": "text",
+      "title": "Git vs GitHub -- They're Different!",
+      "body": "**Git** is the tool that runs on your computer and tracks changes. **GitHub** is a website where you can store your Git projects online and collaborate with others. You can use Git without GitHub, but most teams use both together."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Git is a version control tool that tracks every change to your project -- like an unlimited undo history for your entire codebase."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Git saves a complete copy of every file each time you commit.",
+        "isGoodPractice": false,
+        "explanation": "Git is smarter than that. It stores snapshots and uses delta compression, meaning it only saves the differences between versions. This is why Git repositories stay surprisingly small even with thousands of commits."
+      },
+      {
+        "id": "card-2",
+        "content": "Git works entirely on your local machine -- you don't need an internet connection to use it.",
+        "isGoodPractice": true,
+        "explanation": "This is one of Git's superpowers. Unlike older systems, Git stores the full repository history on your computer. You only need the internet when pushing to or pulling from a remote like GitHub."
+      },
+      {
+        "id": "card-3",
+        "content": "Git and GitHub are the same thing.",
+        "isGoodPractice": false,
+        "explanation": "Git is the version control tool that runs on your machine. GitHub is a website that hosts Git repositories online and adds collaboration features like pull requests. You can use Git without GitHub."
+      },
+      {
+        "id": "card-4",
+        "content": "Git tracks changes to your files over time, like a detailed save history.",
+        "isGoodPractice": true,
+        "explanation": "Think of Git like an unlimited undo history for your entire project. Every commit is a save point you can return to at any time. This is why developers call it version control."
+      },
+      {
+        "id": "card-5",
+        "content": "You need to know how to code to use Git.",
+        "isGoodPractice": false,
+        "explanation": "Git can track any type of file -- code, text, configuration files, even images. Designers, writers, and data scientists all use Git. You interact with it through terminal commands, not by writing code."
+      }
+    ],
+    "glossaryTerms": ["version-control", "commit", "repository"]
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "slug": "core-web-vitals",
+  "title": "Core Web Vitals Explained",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Google uses three metrics called Core Web Vitals to measure how fast your site feels. They affect search rankings and user experience. Let's see if you can tell the facts from the fiction. Swipe RIGHT for true, LEFT for false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Web Vitals = Health Checkup",
+      "body": "When you go to the doctor, they check your blood pressure, heart rate, and temperature -- three key numbers that tell a lot about your overall health. **Core Web Vitals** are the same idea for websites: three specific measurements that tell you how healthy your site's performance is. Google picked these three because they capture what users actually care about."
+    },
+    {
+      "type": "text",
+      "title": "The Three Vitals",
+      "body": "1. **LCP (Largest Contentful Paint)** -- How long until the biggest visible element loads. Think: hero image or main heading. Target: under 2.5 seconds.\n\n2. **INP (Interaction to Next Paint)** -- How long until the page responds after a user clicks or types. Target: under 200 milliseconds.\n\n3. **CLS (Cumulative Layout Shift)** -- How much the page content jumps around while loading. Target: under 0.1."
+    },
+    {
+      "type": "code_example",
+      "title": "A CLS Problem in Action",
+      "language": "html",
+      "code": "<!-- BAD: Image has no dimensions, causes layout shift -->\n<img src=\"/hero.jpg\">\n\n<!-- GOOD: Browser reserves space before image loads -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
+      "annotation": "Without width and height, the browser doesn't know how much space the image needs. When it finally loads, everything below it jumps down -- that's a layout shift."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Core Web Vitals measure three things: how fast the main content appears (LCP), how quickly the page responds to interaction (INP), and how much the layout jumps around (CLS). They affect both user experience and Google search rankings."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "LCP measures how long until the very first pixel appears on screen.",
+        "isGoodPractice": false,
+        "explanation": "LCP measures the Largest Contentful Paint -- how long until the biggest visible element (like a hero image or main heading) finishes loading. The first pixel is measured by a different metric called FCP (First Contentful Paint). LCP is about the main content, not the first paint."
+      },
+      {
+        "id": "card-2",
+        "content": "Adding width and height attributes to images can improve your CLS score.",
+        "isGoodPractice": true,
+        "explanation": "When you set width and height on an image tag, the browser can reserve the right amount of space before the image downloads. Without them, the page content shifts when the image suddenly appears and pushes everything down. This jumping is exactly what CLS measures."
+      },
+      {
+        "id": "card-3",
+        "content": "Core Web Vitals only matter for SEO -- regular users don't notice the difference.",
+        "isGoodPractice": false,
+        "explanation": "Core Web Vitals were chosen specifically because they measure things users DO notice. Users notice when a page takes 5 seconds to show content (LCP), when buttons don't respond to clicks (INP), and when text jumps around while they're trying to read (CLS). Google measures them because users care about them."
+      },
+      {
+        "id": "card-4",
+        "content": "A slow API response can hurt your LCP score if the main content depends on that data.",
+        "isGoodPractice": true,
+        "explanation": "If your hero section shows data from an API call, LCP won't be measured until that data arrives and renders. A slow API means slow LCP. This is why server-side rendering and static generation are popular -- they can show content without waiting for client-side API calls."
+      },
+      {
+        "id": "card-5",
+        "content": "You need to score perfectly on all three Core Web Vitals to rank well on Google.",
+        "isGoodPractice": false,
+        "explanation": "You don't need perfection. Google uses Web Vitals as one of many ranking signals, and they use thresholds (good, needs improvement, poor) rather than exact scores. Meeting the 'good' threshold for all three helps, but content relevance is still the biggest ranking factor."
+      }
+    ],
+    "glossaryTerms": ["lcp", "inp", "cls", "core-web-vitals"]
+  }
+}

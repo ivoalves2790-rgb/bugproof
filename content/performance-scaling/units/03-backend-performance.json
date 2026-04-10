@@ -1,0 +1,9 @@
+{
+  "slug": "backend-performance",
+  "title": "Backend Performance",
+  "description": "N+1 queries, database indexing, and API response times",
+  "order": 3,
+  "courseSlug": "performance-scaling",
+  "tier": "intermediate",
+  "lessons": []
+}

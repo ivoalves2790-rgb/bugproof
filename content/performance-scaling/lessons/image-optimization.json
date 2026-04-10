@@ -1,0 +1,60 @@
+{
+  "slug": "image-optimization",
+  "title": "Image Optimization",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "A product listing page loads 24 product images, but it takes 12 seconds to fully load on mobile. The images are the problem. Find the line in this React component that's causing the biggest performance hit.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Images = Moving Trucks",
+      "body": "Imagine you need to deliver a letter across town. You could use a massive 18-wheeler truck, or you could use a bicycle messenger. Both deliver the letter, but one uses way more resources. **Unoptimized images** are like using a moving truck to deliver a letter -- they carry way more data than needed for what's actually displayed on screen."
+    },
+    {
+      "type": "text",
+      "title": "The Image Optimization Checklist",
+      "body": "Every image on your page should pass this checklist:\n\n1. **Right format** -- Use WebP or AVIF instead of PNG/JPEG (30-50% smaller)\n2. **Right size** -- Don't load a 4000px image for a 400px thumbnail\n3. **Right compression** -- Quality 80 looks identical to 100 but is much smaller\n4. **Right loading** -- Images below the fold should use lazy loading\n5. **Right dimensions** -- Always set width/height to prevent layout shifts"
+    },
+    {
+      "type": "code_example",
+      "title": "Before and After",
+      "language": "jsx",
+      "code": "// BAD: Full-size unoptimized image\n<img src=\"/photos/product-4000x3000.png\" />\n\n// GOOD: Optimized with all the right attributes\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Blue running shoes\"\n/>",
+      "annotation": "The optimized version uses WebP format, is sized to match its display size, reserves space with width/height, lazy loads, and includes alt text for accessibility."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Images are usually the heaviest assets on a page. Use modern formats (WebP/AVIF), resize to display dimensions, compress to quality 80, lazy load below-the-fold images, and always set width and height."
+    }
+  ],
+  "exercise": {
+    "language": "jsx",
+    "code": [
+      { "line": 1, "text": "function ProductCard({ product }) {", "isBuggy": false },
+      { "line": 2, "text": "  return (", "isBuggy": false },
+      { "line": 3, "text": "    <div className=\"product-card\">", "isBuggy": false },
+      { "line": 4, "text": "      <img", "isBuggy": false },
+      { "line": 5, "text": "        src={product.originalPhoto}", "isBuggy": true },
+      { "line": 6, "text": "        alt={product.name}", "isBuggy": false },
+      { "line": 7, "text": "      />", "isBuggy": false },
+      { "line": 8, "text": "      <h3>{product.name}</h3>", "isBuggy": false },
+      { "line": 9, "text": "      <p>${product.price}</p>", "isBuggy": false },
+      { "line": 10, "text": "    </div>", "isBuggy": false },
+      { "line": 11, "text": "  );", "isBuggy": false },
+      { "line": 12, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "Each product has both originalPhoto (4000x3000 PNG, ~3MB) and thumbnail (400x300 WebP, ~30KB). The card displays images at 400x300 pixels. Which line loads the wrong image source?",
+    "fixes": [
+      { "id": "a", "text": "src={product.thumbnail}", "isCorrect": true },
+      { "id": "b", "text": "src={product.originalPhoto} width={400}", "isCorrect": false },
+      { "id": "c", "text": "src={product.originalPhoto} loading=\"lazy\"", "isCorrect": false },
+      { "id": "d", "text": "src={product.originalPhoto.replace('.png', '.webp')}", "isCorrect": false }
+    ],
+    "explanation": "The component uses product.originalPhoto -- a 3MB full-resolution PNG -- when it only needs a 30KB thumbnail. With 24 products on the page, that's 72MB of images instead of 720KB. Simply switching to product.thumbnail uses images already sized and optimized for the card's 400x300 display. Options B and C still download the 3MB file. Option D changes the format but not the resolution.",
+    "glossaryTerms": ["image-optimization", "thumbnail", "webp"]
+  }
+}

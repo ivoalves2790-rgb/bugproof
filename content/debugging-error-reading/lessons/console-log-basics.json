@@ -1,0 +1,56 @@
+{
+  "slug": "console-log-basics",
+  "title": "Console.log Basics",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "console-debugging",
+  "courseSlug": "debugging-error-reading",
+  "intro": "A developer is trying to debug why their shopping cart total is always wrong. They added console.log statements, but they put them in the wrong places so the logs aren't helpful. Find the poorly placed log.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Console.log Is Like a Security Camera",
+      "body": "Security cameras show you what's happening at a specific spot. `console.log` does the same thing for your code -- it shows you the value of a variable at the exact moment that line runs. Place it in the right spot and you see the clue. Place it in the wrong spot and you see nothing useful."
+    },
+    {
+      "type": "text",
+      "title": "Where to Place Your Logs",
+      "body": "The key rule: **log AFTER the code that changes the value**, not before it. If you want to see what a variable looks like after a calculation, put the log after the calculation. Common strategy:\n\n1. Log inputs at the **start** of a function\n2. Log results **after** the important logic\n3. Log inside loops to see each step"
+    },
+    {
+      "type": "code_example",
+      "title": "Good vs Bad Log Placement",
+      "language": "javascript",
+      "code": "function double(x) {\n  // Bad: logs before the calculation\n  console.log('result:', result); // ReferenceError!\n  const result = x * 2;\n\n  // Good: logs after the calculation\n  console.log('result:', result); // Shows the actual value\n  return result;\n}",
+      "annotation": "Always place console.log after the line that creates or changes the value you want to inspect."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Console.log is your simplest debugging tool. Place it after the code you're investigating, label your output clearly, and remember that code runs top to bottom -- log placement matters."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "function calculateTotal(items) {", "isBuggy": false },
+      { "line": 2, "text": "  let total = 0;", "isBuggy": false },
+      { "line": 3, "text": "  console.log('Total:', total);", "isBuggy": true },
+      { "line": 4, "text": "  for (const item of items) {", "isBuggy": false },
+      { "line": 5, "text": "    total += item.price * item.quantity;", "isBuggy": false },
+      { "line": 6, "text": "  }", "isBuggy": false },
+      { "line": 7, "text": "  return total;", "isBuggy": false },
+      { "line": 8, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "The developer wants to see the calculated total but it always logs 0. The console.log is in the wrong place. Tap the line that should be moved.",
+    "fixes": [
+      { "id": "a", "text": "Move the console.log to after line 6 (after the loop ends)", "isCorrect": true },
+      { "id": "b", "text": "Change it to console.log('Total:', items)", "isCorrect": false },
+      { "id": "c", "text": "Move the console.log to before line 1", "isCorrect": false },
+      { "id": "d", "text": "Change it to console.error('Total:', total)", "isCorrect": false }
+    ],
+    "explanation": "The console.log on line 3 runs BEFORE the loop on lines 4-6, so total is still 0 at that point. To see the final calculated value, you need to log AFTER the loop finishes adding up all the prices. The key principle: put console.log AFTER the code that changes the value you're inspecting, not before it.",
+    "glossaryTerms": ["console-log", "debugging", "execution-order"]
+  }
+}

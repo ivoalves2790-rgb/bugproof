@@ -1,0 +1,394 @@
+[
+  {
+    "id": "commit",
+    "term": "Commit",
+    "definition": "A snapshot of your code at a specific point in time. Think of it like a save point in a video game — you can always go back to it.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["staging-area", "branch", "repository"],
+    "example": "After finishing a feature, run `git commit -m \"Add login page\"` to save that version."
+  },
+  {
+    "id": "staging-area",
+    "term": "Staging Area",
+    "definition": "A holding zone where you pick which changes to include in your next commit. Like putting items in a shopping cart before checkout.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "working-directory"],
+    "example": "`git add login.js` puts just that one file in the staging area."
+  },
+  {
+    "id": "branch",
+    "term": "Branch",
+    "definition": "A separate line of development. Like creating a copy of your project to try something new without affecting the original.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "commit", "main-branch"],
+    "example": "`git checkout -b feature/login` creates a new branch called 'feature/login'."
+  },
+  {
+    "id": "merge",
+    "term": "Merge",
+    "definition": "Combining changes from one branch into another. Like taking your experimental work and adding it back to the main project.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["branch", "merge-conflict", "pull-request"],
+    "example": "`git merge feature/login` brings the login branch changes into your current branch."
+  },
+  {
+    "id": "merge-conflict",
+    "term": "Merge Conflict",
+    "definition": "When two people changed the same lines of code differently. Git can't decide which version to keep, so it asks you to choose.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "branch"],
+    "example": "Git shows <<<<<<< and >>>>>>> markers around conflicting code. You delete the markers and keep the right version."
+  },
+  {
+    "id": "repository",
+    "term": "Repository (Repo)",
+    "definition": "A folder that Git is tracking. Contains your code and its entire version history.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "branch", "remote"],
+    "example": "Your project folder becomes a repo when you run `git init` inside it."
+  },
+  {
+    "id": "remote",
+    "term": "Remote",
+    "definition": "A version of your repository stored on the internet (like GitHub). Lets you share code and back it up.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["push", "pull", "repository"],
+    "example": "`git push origin main` sends your code to the remote repository on GitHub."
+  },
+  {
+    "id": "pull-request",
+    "term": "Pull Request (PR)",
+    "definition": "A request to merge your changes into the main codebase. Other developers can review your code before it's merged.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "branch", "code-review"],
+    "example": "On GitHub, you create a PR to ask your team to review and merge your feature branch."
+  },
+  {
+    "id": "stack-trace",
+    "term": "Stack Trace",
+    "definition": "A list of function calls that led to an error, shown bottom-to-top. It tells you WHERE the error happened and HOW the code got there.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "exception", "call-stack"],
+    "example": "TypeError: Cannot read property 'name' of undefined\n    at getUser (user.js:15)\n    at handleLogin (auth.js:42)"
+  },
+  {
+    "id": "error-message",
+    "term": "Error Message",
+    "definition": "Text that tells you what went wrong in your code. Always read this FIRST before trying to fix anything.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["stack-trace", "exception"],
+    "example": "'TypeError: x is not a function' means you're trying to call something as a function that isn't one."
+  },
+  {
+    "id": "console",
+    "term": "Console",
+    "definition": "A tool in your browser (or terminal) that shows messages, errors, and lets you run code for testing. Your #1 debugging tool.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "console-log"],
+    "example": "Press F12 in your browser, click 'Console' tab, and you'll see any errors your code produced."
+  },
+  {
+    "id": "console-log",
+    "term": "console.log()",
+    "definition": "A command that prints a value to the console. The simplest debugging technique — just print stuff to see what's happening.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["console", "debugging"],
+    "example": "`console.log('user:', user)` will show you what the user variable contains."
+  },
+  {
+    "id": "xss",
+    "term": "XSS (Cross-Site Scripting)",
+    "definition": "An attack where someone injects malicious code into a website that other users then run. Like someone slipping a note into a book that tricks the next reader.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["sql-injection", "sanitization"],
+    "example": "If a comment box doesn't sanitize input, an attacker could type `<script>steal(cookies)</script>` and it would run in other users' browsers."
+  },
+  {
+    "id": "sql-injection",
+    "term": "SQL Injection",
+    "definition": "An attack where someone puts database commands into an input field to manipulate your database. Like telling a robot butler 'give me the key AND open the safe'.",
+    "relatedCourses": ["security-fundamentals", "database-design"],
+    "relatedTerms": ["xss", "parameterized-query"],
+    "example": "Typing `' OR 1=1 --` into a login form could bypass authentication if the app doesn't use parameterized queries."
+  },
+  {
+    "id": "api-key",
+    "term": "API Key",
+    "definition": "A secret password that identifies your app when talking to an external service. NEVER put this in your frontend code or share it publicly.",
+    "relatedCourses": ["security-fundamentals", "deployment-devops"],
+    "relatedTerms": ["environment-variable", "authentication"],
+    "example": "Your Stripe API key should go in a `.env` file, never in JavaScript that runs in the browser."
+  },
+  {
+    "id": "api",
+    "term": "API (Application Programming Interface)",
+    "definition": "A way for two pieces of software to talk to each other. Like a waiter taking your order (request) to the kitchen (server) and bringing back food (response).",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["endpoint", "rest-api", "http-request"],
+    "example": "When you load weather data in your app, you're calling a weather API that returns JSON data."
+  },
+  {
+    "id": "endpoint",
+    "term": "Endpoint",
+    "definition": "A specific URL that an API listens on for requests. Each endpoint does one thing.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "rest-api", "http-request"],
+    "example": "`GET /api/users` is an endpoint that returns a list of users. `POST /api/users` creates a new user."
+  },
+  {
+    "id": "frontend",
+    "term": "Frontend",
+    "definition": "The part of an app that users see and interact with. Runs in the browser. Built with HTML, CSS, and JavaScript.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["backend", "client-side"],
+    "example": "The login form you see, the buttons you click, the animations — that's all frontend."
+  },
+  {
+    "id": "backend",
+    "term": "Backend",
+    "definition": "The part of an app that runs on the server. Handles data, business logic, and talks to the database. Users never see this directly.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["frontend", "server-side", "database"],
+    "example": "When you click 'Log in', the backend checks your password against the database and decides if you get access."
+  },
+  {
+    "id": "database",
+    "term": "Database",
+    "definition": "An organized collection of data that your app reads from and writes to. Like a giant spreadsheet that your code can query.",
+    "relatedCourses": ["database-design", "system-architecture"],
+    "relatedTerms": ["schema", "query", "table"],
+    "example": "PostgreSQL, MongoDB, and SQLite are all databases. Your user accounts, posts, and settings are stored in one."
+  },
+  {
+    "id": "schema",
+    "term": "Schema",
+    "definition": "The structure of your database — what tables exist, what columns each has, and how they relate. Like a blueprint for your data.",
+    "relatedCourses": ["database-design"],
+    "relatedTerms": ["database", "migration", "table"],
+    "example": "A users table might have columns: id, email, password_hash, created_at."
+  },
+  {
+    "id": "migration",
+    "term": "Migration",
+    "definition": "A script that changes your database structure (add a table, rename a column). Like version control for your database.",
+    "relatedCourses": ["database-design", "deployment-devops"],
+    "relatedTerms": ["schema", "database"],
+    "example": "A migration file might say: 'CREATE TABLE posts (id, title, body, user_id, created_at)'."
+  },
+  {
+    "id": "environment-variable",
+    "term": "Environment Variable (env var)",
+    "definition": "A setting stored outside your code that changes based on where it runs (dev, staging, production). Keeps secrets out of your codebase.",
+    "relatedCourses": ["deployment-devops", "security-fundamentals"],
+    "relatedTerms": ["api-key", "dotenv"],
+    "example": "DATABASE_URL=postgres://user:pass@host:5432/mydb — stored in a .env file, never committed to git."
+  },
+  {
+    "id": "ci-cd",
+    "term": "CI/CD",
+    "definition": "Continuous Integration / Continuous Deployment. Automated processes that test your code and deploy it when you push changes.",
+    "relatedCourses": ["deployment-devops", "testing"],
+    "relatedTerms": ["deployment", "pipeline"],
+    "example": "When you push to GitHub, CI runs your tests automatically. If they pass, CD deploys your app to production."
+  },
+  {
+    "id": "deployment",
+    "term": "Deployment",
+    "definition": "The process of putting your app on the internet so real users can access it. Going from 'works on my machine' to 'works for everyone'.",
+    "relatedCourses": ["deployment-devops"],
+    "relatedTerms": ["ci-cd", "hosting", "production"],
+    "example": "Running `vercel deploy` takes your Next.js app and puts it on a server with a public URL."
+  },
+  {
+    "id": "unit-test",
+    "term": "Unit Test",
+    "definition": "A test that checks if one small piece of code (a function, a component) works correctly in isolation.",
+    "relatedCourses": ["testing"],
+    "relatedTerms": ["integration-test", "e2e-test"],
+    "example": "Testing that your `calculateTotal(items)` function returns the right number for a given list of items."
+  },
+  {
+    "id": "integration-test",
+    "term": "Integration Test",
+    "definition": "A test that checks if multiple pieces of your app work together correctly (API + database, frontend + backend).",
+    "relatedCourses": ["testing"],
+    "relatedTerms": ["unit-test", "e2e-test"],
+    "example": "Testing that creating a user via the API actually saves them to the database and returns the right response."
+  },
+  {
+    "id": "n-plus-one",
+    "term": "N+1 Query Problem",
+    "definition": "A performance bug where your code makes 1 query to get a list, then N more queries to get details for each item. Should be 1-2 queries total.",
+    "relatedCourses": ["performance-scaling", "database-design"],
+    "relatedTerms": ["query", "database", "caching"],
+    "example": "Loading 100 blog posts, then running a separate query for each post's author = 101 queries instead of 2."
+  },
+  {
+    "id": "caching",
+    "term": "Caching",
+    "definition": "Storing a copy of data so you don't have to fetch/compute it again. Like writing down a phone number instead of looking it up every time.",
+    "relatedCourses": ["performance-scaling"],
+    "relatedTerms": ["n-plus-one", "cdn"],
+    "example": "Storing API responses in memory for 5 minutes so repeat requests are instant instead of hitting the database."
+  },
+  {
+    "id": "separation-of-concerns",
+    "term": "Separation of Concerns",
+    "definition": "Organizing code so each file/module handles one thing. The UI code shouldn't contain database logic, and vice versa.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["refactoring", "architecture"],
+    "example": "Keep your API route handlers separate from your database queries, and both separate from your UI components."
+  },
+  {
+    "id": "refactoring",
+    "term": "Refactoring",
+    "definition": "Restructuring existing code without changing what it does. Making it cleaner, faster, or easier to understand.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["separation-of-concerns", "technical-debt"],
+    "example": "Extracting a 200-line function into 5 smaller functions that each do one thing clearly."
+  },
+  {
+    "id": "prompt-engineering",
+    "term": "Prompt Engineering",
+    "definition": "The skill of writing clear, specific instructions to get better output from AI coding tools. Garbage in, garbage out.",
+    "relatedCourses": ["ai-assisted-development"],
+    "relatedTerms": ["context-window", "hallucination"],
+    "example": "Instead of 'make a login', write 'Create a Next.js login page with email/password form, Supabase auth, error handling, and redirect to /dashboard on success.'"
+  },
+  {
+    "id": "hallucination",
+    "term": "Hallucination",
+    "definition": "When AI generates code that looks correct but uses APIs, functions, or patterns that don't actually exist. Always verify AI output.",
+    "relatedCourses": ["ai-assisted-development"],
+    "relatedTerms": ["prompt-engineering"],
+    "example": "AI might suggest `import { useAuth } from 'next-auth/hooks'` when that import path doesn't exist in the library."
+  },
+  {
+    "id": "working-directory",
+    "term": "Working Directory",
+    "definition": "The folder you're currently in on the command line. Commands you run affect files in this directory.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["staging-area", "repository"],
+    "example": "`cd my-project` changes your working directory to the my-project folder."
+  },
+  {
+    "id": "http-request",
+    "term": "HTTP Request",
+    "definition": "A message sent from a client (browser) to a server asking for something. Has a method (GET, POST, etc.), URL, headers, and optional body.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "endpoint", "rest-api"],
+    "example": "When you load a webpage, your browser sends a GET request. When you submit a form, it sends a POST request."
+  },
+  {
+    "id": "json",
+    "term": "JSON",
+    "definition": "JavaScript Object Notation. A text format for sending structured data between systems. The universal language of APIs.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "http-request"],
+    "example": "`{\"name\": \"Alice\", \"age\": 30}` is JSON. APIs send and receive data in this format."
+  },
+  {
+    "id": "authentication",
+    "term": "Authentication (Auth)",
+    "definition": "Verifying WHO someone is. 'Prove you are who you say you are.' Usually done with passwords, tokens, or social login.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["authorization", "jwt", "session"],
+    "example": "Logging in with your email and password is authentication. The system checks if your credentials match."
+  },
+  {
+    "id": "authorization",
+    "term": "Authorization",
+    "definition": "Determining WHAT someone is allowed to do. 'You're logged in, but can you access this resource?'",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["authentication", "role-based-access"],
+    "example": "A regular user can edit their own profile, but only admins can delete other users' accounts."
+  },
+  {
+    "id": "git-init",
+    "term": "git init",
+    "definition": "The command that turns a regular folder into a Git repository. Creates a hidden .git folder that tracks all changes.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["repository", "commit"],
+    "example": "Run `git init` inside your project folder to start tracking changes with Git."
+  },
+  {
+    "id": "git-log",
+    "term": "git log",
+    "definition": "A command that shows the history of commits in your repository. Like a changelog of every save point.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "git-diff"],
+    "example": "`git log --oneline` shows a compact list of recent commits with their messages."
+  },
+  {
+    "id": "git-diff",
+    "term": "git diff",
+    "definition": "A command that shows what changed between two states. Lines added are shown in green, removed in red.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["git-log", "commit"],
+    "example": "`git diff` shows unstaged changes. `git diff --staged` shows what you're about to commit."
+  },
+  {
+    "id": "git-revert",
+    "term": "git revert",
+    "definition": "A command that undoes a specific commit by creating a NEW commit that reverses those changes. Safe way to undo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "git-reset"],
+    "example": "`git revert abc1234` undoes the changes from commit abc1234 without erasing history."
+  },
+  {
+    "id": "push",
+    "term": "Push",
+    "definition": "Sending your local commits to a remote repository (like GitHub). Sharing your work with the team.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["pull", "remote", "commit"],
+    "example": "`git push origin main` sends your commits on the main branch to the remote."
+  },
+  {
+    "id": "pull",
+    "term": "Pull",
+    "definition": "Downloading and merging changes from a remote repository into your local copy. Getting the latest work from your team.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["push", "remote", "merge"],
+    "example": "`git pull origin main` fetches the latest changes and merges them into your local main branch."
+  },
+  {
+    "id": "sanitization",
+    "term": "Sanitization",
+    "definition": "Cleaning user input to remove potentially dangerous content before using it. Essential to prevent XSS and injection attacks.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["xss", "sql-injection"],
+    "example": "Converting `<script>` tags in user comments to plain text so they can't execute as code."
+  },
+  {
+    "id": "main-branch",
+    "term": "Main Branch",
+    "definition": "The primary branch of your repository, usually called 'main' or 'master'. Represents the current stable version of your code.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["branch", "merge"],
+    "example": "Feature branches are created from main and merged back into main when ready."
+  },
+  {
+    "id": "exception",
+    "term": "Exception",
+    "definition": "An error that interrupts the normal flow of your program. If not caught, it crashes your app.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "stack-trace", "try-catch"],
+    "example": "Trying to access a property on `null` throws a TypeError exception."
+  },
+  {
+    "id": "debugging",
+    "term": "Debugging",
+    "definition": "The process of finding and fixing problems in code. Named after literally removing a moth from a computer in the 1940s.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["console-log", "stack-trace", "breakpoint"],
+    "example": "Reading the error message, adding console.log statements, checking variable values — that's debugging."
+  },
+  {
+    "id": "technical-debt",
+    "term": "Technical Debt",
+    "definition": "Shortcuts taken in code that save time now but cost more time later. Like credit card debt — small payments add up.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["refactoring"],
+    "example": "Copy-pasting the same logic in 5 places instead of making a reusable function. Works now, nightmare to maintain later."
+  }
+]

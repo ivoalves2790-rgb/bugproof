@@ -1,0 +1,76 @@
+{
+  "slug": "creating-branches",
+  "title": "Creating Branches",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "You're working on a blog app and want to add a dark mode feature. Instead of changing the main code directly, you'll create a separate branch to work on safely.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "How Branch Creation Works",
+      "body": "When you create a branch, Git doesn't copy your files. It just creates a tiny bookmark (called a **pointer**) that says \"this branch starts here.\" It happens instantly and takes almost no space. That's why developers create branches constantly -- they're cheap and fast."
+    },
+    {
+      "type": "code_example",
+      "title": "The Commands for Branching",
+      "language": "bash",
+      "code": "git branch                       # List all branches\ngit branch feature/dark-mode     # Create a new branch\ngit checkout feature/dark-mode   # Switch to it\n\n# Or do both at once:\ngit checkout -b feature/dark-mode",
+      "annotation": "The shortcut `git checkout -b <name>` creates AND switches in one command. You'll use this a lot."
+    },
+    {
+      "type": "text",
+      "title": "Creating vs Switching",
+      "body": "**Important:** `git branch <name>` only creates the branch -- it does not switch you to it. You're still on your old branch until you run `git checkout <name>`. The asterisk (*) next to a branch name in `git branch` output tells you which branch you're currently on."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Create a branch with `git branch <name>`, switch to it with `git checkout <name>`, or do both at once with `git checkout -b <name>`."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/blog-app",
+    "initialFiles": ["index.html", "style.css", "app.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "First, check what branch you're currently on.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "* main",
+        "hint": "Type 'git branch' to see all branches. The asterisk (*) shows which one you're on."
+      },
+      {
+        "instruction": "Create a new branch called 'feature/dark-mode' for your dark mode work.",
+        "expectedCommand": "git branch feature/dark-mode",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Use 'git branch' followed by the name of the new branch: git branch feature/dark-mode"
+      },
+      {
+        "instruction": "List branches again to confirm your new branch was created.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "  feature/dark-mode\n* main",
+        "hint": "Type 'git branch' to see all branches. Notice you're still on main (the asterisk)."
+      },
+      {
+        "instruction": "Switch to your new branch so your changes will be saved there instead of on main.",
+        "expectedCommand": "git checkout feature/dark-mode",
+        "acceptAlternatives": ["git switch feature/dark-mode"],
+        "output": "Switched to branch 'feature/dark-mode'",
+        "hint": "Use 'git checkout' or 'git switch' followed by the branch name to move to it."
+      },
+      {
+        "instruction": "Verify you're now on the feature branch.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "* feature/dark-mode\n  main",
+        "hint": "Type 'git branch' -- the asterisk should now be next to feature/dark-mode."
+      }
+    ],
+    "completionMessage": "You've created and switched to a feature branch! Any commits you make now will only exist on 'feature/dark-mode'. The main branch stays untouched until you're ready to merge. Pro tip: 'git checkout -b feature/dark-mode' creates AND switches in one command.",
+    "glossaryTerms": ["branch", "git-checkout", "git-switch", "feature-branch"]
+  }
+}

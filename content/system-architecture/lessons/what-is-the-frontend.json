@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-the-frontend",
+  "title": "What is the Frontend?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "The frontend is everything the user sees and interacts with. But there are common misconceptions about what counts as 'frontend' and what it's responsible for. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Frontend Is Like a Restaurant Dining Room",
+      "body": "A restaurant has two halves: the **dining room** (where customers sit) and the **kitchen** (where food is made). The frontend is the dining room. It's everything the customer sees -- the menu, the decor, the plates. The customer never goes into the kitchen, but they interact with everything in the dining room."
+    },
+    {
+      "type": "text",
+      "title": "What the Frontend Includes",
+      "body": "The frontend is the code that runs **in the user's browser**. It's built with three core technologies:\n\n1. **HTML** -- the structure (headings, paragraphs, buttons)\n2. **CSS** -- the styling (colors, fonts, layouts)\n3. **JavaScript** -- the interactivity (clicks, animations, form validation)\n\nFrameworks like React, Vue, and Angular add structure on top of these three."
+    },
+    {
+      "type": "text",
+      "title": "The Frontend's Job",
+      "body": "The frontend is responsible for:\n\n1. **Displaying data** to the user (text, images, lists)\n2. **Handling interactions** (button clicks, form typing, scrolling)\n3. **Making requests** to the backend for data\n4. **Updating the screen** when new data arrives\n\nIt does NOT store data permanently, manage user accounts, or process payments -- that's the backend's job."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The frontend is the code that runs in the user's browser. It handles everything the user sees and interacts with, using HTML for structure, CSS for styling, and JavaScript for interactivity."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "The frontend code runs on the user's computer, inside their web browser.",
+        "isGoodPractice": true,
+        "explanation": "When you visit a website, the server sends HTML, CSS, and JavaScript files to your browser. Your browser then runs that code locally on your device. That's why you can right-click any webpage and 'View Source' -- the code is right there on your machine."
+      },
+      {
+        "id": "card-2",
+        "content": "The frontend is a safe place to store passwords and API keys since users can't see the code.",
+        "isGoodPractice": false,
+        "explanation": "Users CAN see all frontend code! Anyone can open browser DevTools and inspect every line of JavaScript, every network request, and every variable. Never put sensitive data in frontend code -- it's completely visible to anyone who visits your site."
+      },
+      {
+        "id": "card-3",
+        "content": "A button changing color when you hover over it is handled by the frontend.",
+        "isGoodPractice": true,
+        "explanation": "Hover effects, animations, color changes, and other visual interactions are all frontend work. This specific example is handled by CSS (the :hover pseudo-class). No server communication is needed -- it all happens instantly in the browser."
+      },
+      {
+        "id": "card-4",
+        "content": "The frontend directly connects to the database to get user data.",
+        "isGoodPractice": false,
+        "explanation": "The frontend NEVER talks directly to the database. That would be a massive security problem -- anyone could modify the frontend code to steal or delete all your data. Instead, the frontend talks to the backend through APIs, and the backend talks to the database."
+      },
+      {
+        "id": "card-5",
+        "content": "HTML, CSS, and JavaScript are the three core technologies of frontend development.",
+        "isGoodPractice": true,
+        "explanation": "HTML provides structure, CSS provides styling, and JavaScript provides interactivity. Every frontend framework (React, Vue, Angular) is built on top of these three. Understanding them is essential even if you use a framework."
+      }
+    ],
+    "glossaryTerms": ["frontend", "html", "css", "javascript", "browser"]
+  }
+}

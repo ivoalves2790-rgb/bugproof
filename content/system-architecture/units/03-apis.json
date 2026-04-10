@@ -1,0 +1,16 @@
+{
+  "slug": "apis",
+  "title": "APIs & Data Flow",
+  "description": "Discover how different parts of an application communicate through APIs -- the contracts that hold modern software together",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "what-is-an-api", "title": "What is an API?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "rest-basics", "title": "REST: The Language of Web APIs", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "json-data-format", "title": "JSON: How Data Travels", "type": "bug_hunt", "order": 3, "difficulty": 1 },
+    { "slug": "endpoints-and-routes", "title": "Endpoints & Routes", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "http-methods", "title": "GET, POST, PUT, DELETE", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "api-design-basics", "title": "API Design Basics", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

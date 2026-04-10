@@ -1,0 +1,58 @@
+{
+  "slug": "frontend-backend-communication",
+  "title": "How Frontend Talks to Backend",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "A developer is trying to send data from their React frontend to their Express backend, but the request fails. The backend never receives the data. The bug is in how they set up the fetch request.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Frontend-Backend Communication = Passing Notes",
+      "body": "The frontend and backend are like two people in different rooms passing notes. They need to agree on: **the language** (JSON), **the format** (where to put the message), and **the delivery method** (HTTP method like GET or POST). If any of these are wrong, the message doesn't get through."
+    },
+    {
+      "type": "text",
+      "title": "How fetch() Works",
+      "body": "The frontend uses `fetch()` to talk to the backend:\n\n1. **URL** -- where to send the request (`/api/users`)\n2. **Method** -- what kind of request (GET, POST, PUT, DELETE)\n3. **Headers** -- metadata like `Content-Type: application/json`\n4. **Body** -- the data you're sending (must be a JSON string)\n\nIf you forget to set the Content-Type header or forget to stringify the body, the backend won't understand your message."
+    },
+    {
+      "type": "code_example",
+      "title": "A Correct fetch() POST Request",
+      "language": "javascript",
+      "code": "const response = await fetch('/api/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ name: 'Alice', email: 'alice@example.com' })\n});",
+      "annotation": "Three things are essential: the method must be POST, the Content-Type header tells the server to expect JSON, and the body must be a string (JSON.stringify converts an object to a JSON string)."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The frontend communicates with the backend using fetch() or similar HTTP clients. When sending data, always set the Content-Type header to 'application/json' and convert your data to a string with JSON.stringify()."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "async function createUser(name, email) {", "isBuggy": false },
+      { "line": 2, "text": "  const response = await fetch('/api/users', {", "isBuggy": false },
+      { "line": 3, "text": "    method: 'POST',", "isBuggy": false },
+      { "line": 4, "text": "    headers: {", "isBuggy": false },
+      { "line": 5, "text": "      'Content-Type': 'application/json'", "isBuggy": false },
+      { "line": 6, "text": "    },", "isBuggy": false },
+      { "line": 7, "text": "    body: { name: name, email: email }", "isBuggy": true },
+      { "line": 8, "text": "  });", "isBuggy": false },
+      { "line": 9, "text": "  return response.json();", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 7,
+    "prompt": "The backend receives an empty body with no data. The developer set the Content-Type header correctly and used the POST method, but the data isn't arriving. The problem is on the line that sets the request body. Find the bug.",
+    "fixes": [
+      { "id": "a", "text": "body: JSON.stringify({ name: name, email: email })", "isCorrect": true },
+      { "id": "b", "text": "body: `name=${name}&email=${email}`", "isCorrect": false },
+      { "id": "c", "text": "data: { name: name, email: email }", "isCorrect": false },
+      { "id": "d", "text": "body: new FormData({ name, email })", "isCorrect": false }
+    ],
+    "explanation": "The fetch() API requires the body to be a string, not a JavaScript object. When you pass a plain object, it gets converted to '[object Object]' -- which is useless. You must use JSON.stringify() to convert the object into a proper JSON string like '{\"name\":\"Alice\",\"email\":\"alice@example.com\"}'. This is one of the most common mistakes when first working with fetch().",
+    "glossaryTerms": ["fetch", "json-stringify", "content-type", "http-post"]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "slug": "columns-and-data-types",
+  "title": "Columns & Data Types",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "A developer is creating a table to store product information, but they chose the wrong data type for the price column. This causes prices to lose their decimal places -- $49.99 becomes $49!",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Data Types = Container Shapes",
+      "body": "Think of data types like different container shapes. A **round hole** (INTEGER) only fits round pegs (whole numbers). A **square hole** (TEXT) fits square pegs (words and sentences). A **special hole** (DECIMAL) fits money values with cents. If you try to stuff a square peg in a round hole, things break. Choosing the right container for each type of data is a key part of database design."
+    },
+    {
+      "type": "text",
+      "title": "Common Data Types",
+      "body": "Every column has a data type that controls what values it can hold:\n\n1. **INTEGER** -- whole numbers (1, 42, -7). Use for IDs, quantities, ages\n2. **TEXT** / **VARCHAR** -- text strings ('Alice', 'hello world'). Use for names, emails, descriptions\n3. **DECIMAL** / **NUMERIC** -- precise numbers with decimals (49.99, 3.14). Use for money!\n4. **BOOLEAN** -- true or false. Use for flags like is_active, is_admin\n5. **TIMESTAMP** -- date and time (2024-03-15 14:30:00). Use for created_at, updated_at"
+    },
+    {
+      "type": "code_example",
+      "title": "Choosing the Right Type Matters",
+      "language": "sql",
+      "code": "-- BAD: price as INTEGER loses decimal places\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price INTEGER  -- $49.99 becomes $49!\n);\n\n-- GOOD: price as DECIMAL keeps cents\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price DECIMAL(10, 2)  -- 10 digits total, 2 after the decimal\n);",
+      "annotation": "DECIMAL(10, 2) means up to 10 digits total with 2 after the decimal point. This correctly stores values like 49.99, 1299.00, and 0.50. Never use INTEGER or FLOAT for money!"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every column needs the right data type: INTEGER for whole numbers, TEXT for strings, DECIMAL for money, BOOLEAN for true/false, and TIMESTAMP for dates. Wrong data types cause data loss or bugs."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "CREATE TABLE products (", "isBuggy": false },
+      { "line": 2, "text": "  id INTEGER PRIMARY KEY,", "isBuggy": false },
+      { "line": 3, "text": "  name TEXT NOT NULL,", "isBuggy": false },
+      { "line": 4, "text": "  price INTEGER NOT NULL,", "isBuggy": true },
+      { "line": 5, "text": "  description TEXT,", "isBuggy": false },
+      { "line": 6, "text": "  in_stock BOOLEAN DEFAULT true", "isBuggy": false },
+      { "line": 7, "text": ");", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "Products are being inserted with prices like 49.99, but when you query them, they show up as 49. The decimal part is being lost! Find the column with the wrong data type.",
+    "fixes": [
+      { "id": "a", "text": "price DECIMAL(10, 2) NOT NULL,", "isCorrect": true },
+      { "id": "b", "text": "price FLOAT NOT NULL,", "isCorrect": false },
+      { "id": "c", "text": "price TEXT NOT NULL,", "isCorrect": false },
+      { "id": "d", "text": "price BIGINT NOT NULL,", "isCorrect": false }
+    ],
+    "explanation": "INTEGER only stores whole numbers, so 49.99 gets truncated to 49. For money, always use DECIMAL(10, 2) which stores exactly 2 decimal places. Why not FLOAT? Because floating-point numbers have tiny rounding errors (49.99 might become 49.989999999...), which is unacceptable for financial calculations. DECIMAL stores exact values.",
+    "glossaryTerms": ["data-type", "integer", "decimal", "varchar"]
+  }
+}

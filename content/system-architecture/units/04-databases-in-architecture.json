@@ -1,0 +1,16 @@
+{
+  "slug": "databases-in-architecture",
+  "title": "Databases in Architecture",
+  "description": "Understand where databases fit in the system, how the backend talks to them, and why data persistence matters",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "where-data-lives", "title": "Where Does Data Live?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "sql-vs-nosql-architecture", "title": "SQL vs NoSQL in Architecture", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "orm-basics", "title": "ORMs: Code Talks to Databases", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "data-flow-full-stack", "title": "Data Flow: Button to Database", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "caching-layer", "title": "The Caching Layer", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "database-connections", "title": "Connection Pools & Limits", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

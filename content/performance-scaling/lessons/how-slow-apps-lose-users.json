@@ -1,0 +1,98 @@
+{
+  "slug": "how-slow-apps-lose-users",
+  "title": "How Slow Apps Lose Users",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Your e-commerce app's conversion rate just dropped 30% overnight. Sales are plummeting but nothing in the code changed. Your CEO is asking what happened. Time to investigate.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Speed = Trust",
+      "body": "Imagine walking into two stores. One has automatic doors that open instantly. The other has a sticky door that takes 5 seconds to open. Which store feels more professional? Which one do you trust with your credit card? **Speed is trust**. Users subconsciously judge your app's quality by how fast it responds."
+    },
+    {
+      "type": "text",
+      "title": "The Numbers Are Brutal",
+      "body": "Research consistently shows:\n\n- **53%** of mobile users abandon a site that takes over 3 seconds to load\n- Each extra second of load time can reduce conversions by **7%**\n- A 100ms delay in response time can reduce conversion rates by **7%**\n- Users who experience slow loads are **less likely to return**, even after the problem is fixed"
+    },
+    {
+      "type": "text",
+      "title": "The Bounce Rate Death Spiral",
+      "body": "Slow pages create a vicious cycle:\n\n1. Page loads slowly -> users bounce\n2. High bounce rate -> Google ranks you lower\n3. Lower ranking -> less traffic\n4. Less traffic -> less revenue to fix the problem\n\nPerformance isn't a nice-to-have -- it directly affects your business survival."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Speed equals trust and money. Over half of users abandon slow sites, and every extra second of load time costs you conversions. Performance problems compound: slow pages lose users, rankings, and revenue."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your e-commerce site's conversion rate dropped 30% overnight. Revenue is down significantly. The development team says no code was deployed. Where do you start investigating?",
+        "choices": [
+          { "id": "a", "text": "Check if the site is loading slower than usual using monitoring tools", "nextNode": "check-speed", "score": 10 },
+          { "id": "b", "text": "Look at the server error logs for crashes", "nextNode": "check-errors", "score": 5 },
+          { "id": "c", "text": "Check if a competitor launched a sale", "nextNode": "check-competitor", "score": 2 }
+        ]
+      },
+      "check-speed": {
+        "narrative": "You open your monitoring dashboard and see it: average page load time jumped from 1.8 seconds to 7.2 seconds yesterday. The site isn't broken -- it's just painfully slow. Users are arriving but leaving before the page finishes loading. What's the likely cause?",
+        "choices": [
+          { "id": "a", "text": "Check if a third-party script or CDN is having issues", "nextNode": "found-cdn", "score": 10 },
+          { "id": "b", "text": "Check if the database is slow", "nextNode": "check-db", "score": 6 },
+          { "id": "c", "text": "Check if there's a DDoS attack", "nextNode": "check-ddos", "score": 4 }
+        ]
+      },
+      "check-errors": {
+        "narrative": "No server errors or crashes. The site is technically working fine -- all pages return 200 OK responses. But something is making users leave without buying. Maybe the issue isn't errors but speed?",
+        "choices": [
+          { "id": "a", "text": "Check the site's loading speed in monitoring tools", "nextNode": "check-speed", "score": 7 }
+        ]
+      },
+      "check-competitor": {
+        "narrative": "No major competitor activity. Your traffic numbers are actually the same as usual -- people are visiting. They're just not buying. The problem is on your end.",
+        "choices": [
+          { "id": "a", "text": "Check if the site is performing differently than usual", "nextNode": "check-speed", "score": 5 }
+        ]
+      },
+      "found-cdn": {
+        "narrative": "You found it! Your image CDN provider had a partial outage yesterday. All product images are loading from a backup server that's 10x slower. The images are there, but they take 5+ seconds to appear. Users see a page full of blank image placeholders and leave. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Switch to a backup CDN and add lazy loading for images below the fold", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Wait for the CDN provider to fix their outage", "nextNode": "end-wait", "score": 3 }
+        ]
+      },
+      "check-db": {
+        "narrative": "Database response times are normal -- queries are fast. The API responses are also quick. The slowness is happening on the frontend, after the data arrives. Something about rendering the page is taking much longer than usual.",
+        "choices": [
+          { "id": "a", "text": "Check if static assets (images, CSS, JS) are loading slowly", "nextNode": "found-cdn", "score": 8 }
+        ]
+      },
+      "check-ddos": {
+        "narrative": "Traffic patterns look normal -- no unusual spike in requests. This isn't an attack. The server is handling requests fine, but something downstream is slow.",
+        "choices": [
+          { "id": "a", "text": "Check third-party services and CDNs", "nextNode": "found-cdn", "score": 6 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You switch to a backup CDN, add lazy loading so images below the fold don't block the initial page load, and add monitoring alerts for CDN response times. Within an hour, load times are back to 2 seconds and conversions start recovering.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent investigation! You correctly identified that a third-party dependency (the CDN) caused the slowdown. The key lesson: your app is only as fast as its slowest dependency. Always have fallback options for critical third-party services, and set up alerts for performance regressions so you catch them before your CEO does."
+      },
+      "end-wait": {
+        "narrative": "While you wait, the slow loading continues. Every hour costs you more lost sales. CDN outages can last hours or even days. Meanwhile, your conversion rate keeps dropping and frustrated users are posting complaints on social media.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Waiting for a third-party to fix their problem puts your business at their mercy. Always have a backup plan for critical dependencies. Techniques like fallback CDNs, service workers with cached assets, and lazy loading can keep your site usable even when a dependency has issues."
+      }
+    },
+    "glossaryTerms": ["bounce-rate", "cdn", "conversion-rate", "lazy-loading"]
+  }
+}

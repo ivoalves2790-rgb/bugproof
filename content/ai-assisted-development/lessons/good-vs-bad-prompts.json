@@ -1,0 +1,74 @@
+{
+  "slug": "good-vs-bad-prompts",
+  "title": "Good vs Bad Prompts",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "prompting",
+  "courseSlug": "ai-assisted-development",
+  "intro": "The quality of your prompt determines the quality of the code you get back. Some prompts set AI up for success, others guarantee garbage. Swipe right if this is a GOOD prompt, left if it's BAD.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Prompts Are Like Ordering at a Restaurant",
+      "body": "Saying 'give me food' at a restaurant would get you something random. Saying 'I'd like a grilled chicken sandwich on sourdough, no mayo, with a side salad' gets exactly what you want. AI prompts work the same way -- the more specific you are, the better the result."
+    },
+    {
+      "type": "text",
+      "title": "What Makes a Good Prompt",
+      "body": "A good prompt includes:\n\n1. **Language** -- what programming language to use\n2. **Purpose** -- what the code should do\n3. **Inputs and outputs** -- what goes in and what comes out\n4. **Constraints** -- any rules or libraries to use\n\nBad prompts are vague ('fix my code,' 'make it better'). Good prompts are specific and include all the decisions already made."
+    },
+    {
+      "type": "code_example",
+      "title": "Bad Prompt vs Good Prompt",
+      "language": "text",
+      "code": "Bad:  \"Write me a function\"\n\nGood: \"Write a JavaScript function called formatPrice\n       that takes a number (cents) and returns a string\n       formatted as USD (e.g., 1999 becomes '$19.99').\n       Handle zero and negative values.\"",
+      "annotation": "The good prompt specifies language, function name, input type, output format, and edge cases. AI can produce exactly what you need on the first try."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Specific prompts get specific results. Always include the language, what the code should do, the inputs and outputs, and any constraints. The more decisions you make in the prompt, the less the AI has to guess."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Prompt: \"Write me a function\"",
+        "isGoodPractice": false,
+        "explanation": "This prompt gives AI almost nothing to work with. What language? What should the function do? What inputs and outputs? AI will guess, and it will probably guess wrong. Always specify the language, purpose, inputs, and expected output."
+      },
+      {
+        "id": "card-2",
+        "content": "Prompt: \"Write a Python function called calculate_shipping_cost that takes a weight in kilograms and a destination country code (string), and returns the shipping cost as a float. Use flat rate $5 for domestic (US) and $15 for international.\"",
+        "isGoodPractice": true,
+        "explanation": "This prompt is specific and complete. It states the language (Python), function name, parameters with types, return type, and business logic. AI has everything it needs to produce exactly what you want on the first try."
+      },
+      {
+        "id": "card-3",
+        "content": "Prompt: \"Fix my code\" (with no code pasted)",
+        "isGoodPractice": false,
+        "explanation": "AI can't read your screen or your mind. If you don't include the actual code and the error you're seeing, AI has nothing to work with. Always paste the relevant code, the error message, and describe what you expected to happen."
+      },
+      {
+        "id": "card-4",
+        "content": "Prompt: \"I have an Express.js API with a /users route. Add input validation using the Joi library to check that the request body has a 'name' (string, required) and 'email' (valid email, required). Return 400 with error details if validation fails.\"",
+        "isGoodPractice": true,
+        "explanation": "This prompt specifies the framework (Express.js), the library to use (Joi), the exact fields and validation rules, and the error behavior. AI can produce production-ready code from this because every decision is already made."
+      },
+      {
+        "id": "card-5",
+        "content": "Prompt: \"Make it better\"",
+        "isGoodPractice": false,
+        "explanation": "Better how? Faster? More readable? More secure? Shorter? AI will pick something random to improve, and it probably won't be what you care about. Be specific: 'Refactor this function to reduce the nesting depth' or 'Add error handling for the network call' tells AI exactly what 'better' means to you."
+      },
+      {
+        "id": "card-6",
+        "content": "Prompt: \"Convert this JavaScript callback-based function to use async/await. Keep the same error handling behavior -- if the file read fails, it should throw with the original error message.\"",
+        "isGoodPractice": true,
+        "explanation": "This prompt specifies the transformation (callbacks to async/await), the constraint (preserve error handling behavior), and the specific detail to watch for (original error message). Constraints and requirements help AI produce code that actually fits your needs."
+      }
+    ],
+    "glossaryTerms": ["prompt", "context", "specificity"]
+  }
+}

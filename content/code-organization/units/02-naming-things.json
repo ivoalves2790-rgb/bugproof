@@ -1,0 +1,16 @@
+{
+  "slug": "naming-things",
+  "title": "Naming Things",
+  "description": "Variable naming, function naming, file naming, and conventions",
+  "order": 2,
+  "courseSlug": "code-organization",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "variable-naming", "title": "Variable Naming", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "function-naming", "title": "Function Naming", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "file-naming", "title": "File Naming", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "naming-conventions", "title": "Naming Conventions", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "boolean-naming", "title": "Boolean Naming", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "avoiding-abbreviations", "title": "Avoiding Abbreviations", "type": "incident_response", "order": 6, "difficulty": 2 }
+  ]
+}

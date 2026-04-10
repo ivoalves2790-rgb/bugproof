@@ -1,0 +1,9 @@
+{
+  "slug": "caching",
+  "title": "Caching Strategies",
+  "description": "Browser caching, CDNs, memoization, and cache invalidation",
+  "order": 4,
+  "courseSlug": "performance-scaling",
+  "tier": "intermediate",
+  "lessons": []
+}

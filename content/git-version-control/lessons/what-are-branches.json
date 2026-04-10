@@ -1,0 +1,66 @@
+{
+  "slug": "what-are-branches",
+  "title": "What Are Branches?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Branches are one of Git's most powerful features. They let you create parallel versions of your project so you can work on new features without breaking what already works. Swipe right for TRUE statements and left for FALSE ones.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Branches = Parallel Universes",
+      "body": "Imagine you could split into two alternate timelines. In one timeline you try adding a wild new feature. In the other, everything stays stable and working. If the feature works out, you merge the timelines back together. If it doesn't, you just discard that timeline. That's exactly what **branches** do in Git."
+    },
+    {
+      "type": "text",
+      "title": "The Main Branch",
+      "body": "Every Git project starts with one branch, usually called **main**. This is the \"official\" version of your project -- the stable, working code. You should avoid making risky changes directly on main. Instead, you create a new branch for each feature or fix."
+    },
+    {
+      "type": "text",
+      "title": "Why Branches Matter",
+      "body": "Branches let you:\n\n- **Experiment safely** -- Try new ideas without breaking working code\n- **Work in parallel** -- Multiple people can work on different features at the same time\n- **Stay organized** -- Each branch has one clear purpose\n- **Merge when ready** -- Bring your changes back to main only when they're tested and working"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A branch is a parallel version of your project -- work on features in their own branch, then merge back to main when they're ready."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A branch is like a parallel universe for your code -- changes in one branch don't affect other branches.",
+        "isGoodPractice": true,
+        "explanation": "Exactly right. Think of branches as alternate timelines. You can experiment freely on a feature branch knowing that your main branch stays safe and working. When the feature is ready, you merge the timelines back together."
+      },
+      {
+        "id": "card-2",
+        "content": "Creating a branch copies all your project files into a new folder.",
+        "isGoodPractice": false,
+        "explanation": "Git is much more efficient than that. A branch is just a lightweight pointer to a commit. It takes almost no disk space and is created instantly. Git doesn't duplicate files -- it just remembers which commit each branch points to."
+      },
+      {
+        "id": "card-3",
+        "content": "You should do all your work directly on the main branch.",
+        "isGoodPractice": false,
+        "explanation": "Working directly on main is risky. If your changes introduce a bug, the main branch is broken for everyone. The best practice is to create a new branch for each feature or fix, test it, and then merge it back into main when it's ready."
+      },
+      {
+        "id": "card-4",
+        "content": "Every Git repository starts with a default branch, usually called 'main'.",
+        "isGoodPractice": true,
+        "explanation": "When you run 'git init', Git creates your first branch automatically. It used to be called 'master' by default, but most projects now use 'main'. This branch typically represents the stable, production-ready version of your code."
+      },
+      {
+        "id": "card-5",
+        "content": "You can have as many branches as you want in a repository.",
+        "isGoodPractice": true,
+        "explanation": "There's no practical limit. Large projects often have dozens or even hundreds of branches at once -- one for each feature being developed, each bug being fixed, or each experiment being tried. Branches are cheap and fast to create."
+      }
+    ],
+    "glossaryTerms": ["branch", "main-branch", "feature-branch"]
+  }
+}

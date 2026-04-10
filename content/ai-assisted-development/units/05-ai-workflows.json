@@ -1,0 +1,16 @@
+{
+  "slug": "ai-workflows",
+  "title": "AI-Powered Workflows",
+  "description": "Practical patterns for integrating AI into your daily development process",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "ai-assisted-development",
+  "lessons": [
+    { "slug": "ai-for-boilerplate", "title": "AI for Boilerplate and Scaffolding", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "ai-for-debugging", "title": "Using AI to Debug", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "ai-for-learning", "title": "AI as a Learning Tool", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "ai-code-review", "title": "AI-Assisted Code Review", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "version-control-ai", "title": "Version Control for AI Code", "type": "terminal_sim", "order": 5, "difficulty": 2 },
+    { "slug": "building-with-ai", "title": "Building a Full Feature with AI", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

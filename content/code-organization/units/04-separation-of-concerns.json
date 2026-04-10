@@ -1,0 +1,9 @@
+{
+  "slug": "separation-of-concerns",
+  "title": "Separation of Concerns",
+  "description": "Keeping logic, data, and presentation separate",
+  "order": 4,
+  "courseSlug": "code-organization",
+  "tier": "intermediate",
+  "lessons": []
+}

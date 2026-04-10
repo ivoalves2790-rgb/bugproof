@@ -1,0 +1,88 @@
+{
+  "slug": "the-loading-waterfall",
+  "title": "The Loading Waterfall",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "A user reports that your website takes 8 seconds to load. You open the browser DevTools and see a waterfall chart showing exactly what's happening during those 8 seconds. Let's investigate.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Loading = Assembly Line",
+      "body": "When a browser loads a page, it's like an assembly line. First it downloads the HTML, then it discovers CSS and JavaScript files it needs, then it downloads those, then it finds images referenced in the CSS, and so on. Each step can't start until the previous one finishes. This chain of dependent downloads is called a **waterfall**."
+    },
+    {
+      "type": "text",
+      "title": "What a Waterfall Shows",
+      "body": "A waterfall chart in DevTools shows every file your page requests, lined up on a timeline. You can see:\n\n1. **What** was downloaded (HTML, CSS, JS, images, fonts)\n2. **When** each download started and finished\n3. **How long** each request took\n4. **What blocked what** -- which files had to wait for others\n\nLong bars and late-starting requests are your clues to what's slow."
+    },
+    {
+      "type": "code_example",
+      "title": "A Typical Waterfall Problem",
+      "language": "html",
+      "code": "<head>\n  <link rel=\"stylesheet\" href=\"/styles.css\">\n  <script src=\"/analytics.js\"></script>\n  <script src=\"/chat-widget.js\"></script>\n  <script src=\"/app.js\"></script>\n</head>",
+      "annotation": "Each script blocks the next one from loading. The browser downloads them one by one instead of in parallel. Moving scripts to the bottom of the body or adding 'async'/'defer' fixes this."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The loading waterfall shows every file your page downloads and what's blocking what. Most slow pages have a long chain of dependent requests that could be loaded in parallel instead."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "A user reports your landing page takes 8 seconds to load. You open Chrome DevTools Network tab and see the waterfall:\n\n1. index.html (200ms)\n2. styles.css (300ms) -- starts after HTML\n3. analytics.js (500ms) -- starts after HTML\n4. app.js (800ms) -- waits for analytics.js to finish\n5. hero-image.png (2.1s) -- waits for CSS to finish\n6. Font files (1.2s) -- waits for CSS to finish\n7. API call for content (1.8s) -- waits for app.js to finish\n\nWhat's the biggest problem here?",
+        "choices": [
+          { "id": "a", "text": "app.js is waiting for analytics.js to finish before it can start loading", "nextNode": "found-blocking", "score": 10 },
+          { "id": "b", "text": "The hero image is too large at 2.1 seconds", "nextNode": "image-issue", "score": 5 },
+          { "id": "c", "text": "There are too many files being loaded", "nextNode": "too-many-files", "score": 3 }
+        ]
+      },
+      "found-blocking": {
+        "narrative": "Exactly! analytics.js is render-blocking and forces app.js to wait. The app.js script then blocks the API call for content. This creates a chain: analytics (500ms) -> app.js (800ms) -> API call (1.8s) = 3.1 seconds of chained waiting. How do you fix it?",
+        "choices": [
+          { "id": "a", "text": "Add 'async' to analytics.js so it loads without blocking other scripts", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Remove analytics.js entirely", "nextNode": "end-remove", "score": 5 },
+          { "id": "c", "text": "Combine all JavaScript into one file", "nextNode": "end-combine", "score": 4 }
+        ]
+      },
+      "image-issue": {
+        "narrative": "The hero image is large, but it loads in parallel with font files so it's not blocking other resources. The real chain is in the JavaScript: analytics.js blocks app.js, which blocks the API call. That chain adds up to over 3 seconds of sequential waiting that could happen in parallel.",
+        "choices": [
+          { "id": "a", "text": "Focus on the JavaScript blocking chain instead", "nextNode": "found-blocking", "score": 7 }
+        ]
+      },
+      "too-many-files": {
+        "narrative": "7 files isn't unusual for a web page. The problem isn't the number of files -- it's that they're loading sequentially instead of in parallel. Modern browsers can download 6+ files at once, but only if nothing is blocking them.",
+        "choices": [
+          { "id": "a", "text": "Look at what's blocking parallel downloads", "nextNode": "found-blocking", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You add 'async' to the analytics script:\n\n<script async src=\"/analytics.js\"></script>\n\nNow analytics loads in the background without blocking app.js. The app.js starts loading immediately after the HTML, and the API call fires sooner. Total load time drops from 8 seconds to about 4.5 seconds.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Great work! The 'async' attribute tells the browser to download and run the script without blocking anything else. The key insight is that the waterfall showed a chain of dependencies that didn't need to exist. Analytics doesn't need to finish before your app code starts loading."
+      },
+      "end-remove": {
+        "narrative": "Removing analytics works but your team needs that data. A better approach is to load analytics with the 'async' attribute so it doesn't block other scripts. This gives you the data without the performance cost.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Removing blocking resources is effective but drastic. The 'async' and 'defer' attributes let you keep scripts without blocking page load. Use 'async' for independent scripts like analytics, and 'defer' for scripts that need the DOM to be ready."
+      },
+      "end-combine": {
+        "narrative": "Combining scripts into one file reduces HTTP requests, but it doesn't fix the blocking issue -- one giant script still blocks rendering. And it means users download all code upfront, even code they might not need yet.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Bundling can help with HTTP overhead, but the real fix is eliminating the blocking chain. Use 'async' or 'defer' attributes to let scripts load without blocking each other, and use code splitting to only load what's needed."
+      }
+    },
+    "glossaryTerms": ["waterfall", "render-blocking", "async-script", "defer"]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "slug": "monitoring",
+  "title": "Monitoring & Rollbacks",
+  "description": "Watching your app in production and recovering when things go wrong",
+  "order": 5,
+  "courseSlug": "deployment-devops",
+  "tier": "advanced"
+}

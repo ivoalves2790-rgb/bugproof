@@ -1,0 +1,53 @@
+{
+  "slug": "config-patterns",
+  "title": "Configuration Patterns",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Good configuration patterns keep your app flexible and secure. A developer hardcoded values that should be configurable. Find the bug that will cause problems in production.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Config = A Car's Dashboard",
+      "body": "A car's dashboard lets you adjust things without rebuilding the engine -- temperature, radio station, mirror positions. **Configuration** in software works the same way. You should be able to change settings (database URL, API endpoints, feature flags) without rewriting code."
+    },
+    {
+      "type": "text",
+      "title": "The #1 Config Rule: Never Hardcode Secrets",
+      "body": "The most important rule: **never put values that change between environments directly in your code**. Instead, read them from environment variables:\n\n- Database URLs\n- API keys and secrets\n- Service endpoints\n- Feature flags\n- Port numbers"
+    },
+    {
+      "type": "code_example",
+      "title": "Bad vs Good Configuration",
+      "language": "javascript",
+      "code": "// BAD: Hardcoded values\nconst db = connect('postgresql://admin:password123@localhost:5432/myapp');\n\n// GOOD: Read from environment\nconst db = connect(process.env.DATABASE_URL);\n\n// GOOD: With a fallback for development\nconst port = process.env.PORT || 3000;",
+      "annotation": "The fallback pattern (|| 3000) lets you skip setting PORT in development while requiring it in production."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Never hardcode values that differ between environments. Use process.env for everything configurable, with sensible defaults for development."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "// Server configuration", "isBuggy": false },
+      { "line": 2, "text": "const port = process.env.PORT || 3000;", "isBuggy": false },
+      { "line": 3, "text": "const apiUrl = 'http://localhost:4000/api';", "isBuggy": true },
+      { "line": 4, "text": "const dbUrl = process.env.DATABASE_URL;", "isBuggy": false },
+      { "line": 5, "text": "const debug = process.env.NODE_ENV !== 'production';", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "This app works fine locally but in production the API calls all fail. The developer used env vars for most config but missed one. Find the hardcoded value.",
+    "fixes": [
+      { "id": "a", "text": "const apiUrl = process.env.API_URL || 'http://localhost:4000/api';", "isCorrect": true },
+      { "id": "b", "text": "const apiUrl = 'https://api.production.com/api';", "isCorrect": false },
+      { "id": "c", "text": "const apiUrl = process.env.API_URL;", "isCorrect": false },
+      { "id": "d", "text": "const apiUrl = `http://${process.env.HOST}:4000/api`;", "isCorrect": false }
+    ],
+    "explanation": "The API URL is hardcoded to 'http://localhost:4000/api'. This works on the developer's machine but fails in production because there is no localhost -- the API lives at a different URL on the server. The fix reads from an environment variable (API_URL) and falls back to localhost for development. This pattern -- env var with a default -- is the standard approach.",
+    "glossaryTerms": ["hardcoding", "configuration", "environment-variable"]
+  }
+}

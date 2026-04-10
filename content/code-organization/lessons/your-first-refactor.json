@@ -1,0 +1,76 @@
+{
+  "slug": "your-first-refactor",
+  "title": "Your First Refactor",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "Your project has a single 400-line file called app.js that contains everything: components, utilities, API calls, and configuration. Let's split it into organized files and folders using the terminal.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Refactoring = Organizing a Junk Drawer",
+      "body": "You know that one drawer in your house where everything ends up? Batteries, tape, scissors, old menus, keys to who-knows-what. **Refactoring** is like finally organizing that drawer: you don't throw anything away, you just put things where they belong. Batteries in one spot, tools in another, trash in the bin."
+    },
+    {
+      "type": "text",
+      "title": "What Refactoring Is (and Isn't)",
+      "body": "Refactoring means **changing how code is organized without changing what it does**.\n\n- Moving a function to a different file = refactoring\n- Renaming a variable for clarity = refactoring\n- Splitting a big function into smaller ones = refactoring\n- Adding a new feature = NOT refactoring\n- Fixing a bug = NOT refactoring\n\nThe key: after refactoring, the app works exactly the same as before."
+    },
+    {
+      "type": "code_example",
+      "title": "Before and After",
+      "language": "text",
+      "code": "BEFORE:\nsrc/\n  app.js            (400 lines - everything)\n\nAFTER:\nsrc/\n  components/\n    Header.jsx\n    ProductList.jsx\n  api/\n    products.js\n  utils/\n    formatPrice.js\n  app.js            (30 lines - just imports and routing)",
+      "annotation": "The code is exactly the same, just organized into files by purpose. app.js went from 400 lines to 30 because each piece now lives in its own file."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Refactoring reorganizes code without changing behavior. Start by creating folders for different concerns (components, api, utils), then move functions into the right files. The app works the same, but now you can find and change things easily."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project/src",
+    "initialFiles": ["app.js"],
+    "steps": [
+      {
+        "instruction": "First, create the folder structure for an organized project. We need folders for components, API calls, and utility functions.",
+        "expectedCommand": "mkdir components api utils",
+        "acceptAlternatives": ["mkdir -p components api utils", "mkdir components && mkdir api && mkdir utils"],
+        "output": "",
+        "hint": "Use 'mkdir' to create multiple folders at once: mkdir folder1 folder2 folder3"
+      },
+      {
+        "instruction": "Now let's move the first piece out of app.js. The Header component should live in its own file in the components folder. Create the file.",
+        "expectedCommand": "touch components/Header.jsx",
+        "acceptAlternatives": ["touch components/Header.js"],
+        "output": "",
+        "hint": "Use 'touch' to create a new empty file. React components go in the components/ folder with .jsx extension."
+      },
+      {
+        "instruction": "Create a file for the API functions that fetch product data.",
+        "expectedCommand": "touch api/products.js",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "API functions live in the api/ folder. The file name should match what it fetches: products.js"
+      },
+      {
+        "instruction": "Create a utility file for the price formatting function that's currently buried in app.js.",
+        "expectedCommand": "touch utils/formatPrice.js",
+        "acceptAlternatives": ["touch utils/format-price.js"],
+        "output": "",
+        "hint": "Utility functions go in the utils/ folder. Name the file after what the function does: formatPrice.js"
+      },
+      {
+        "instruction": "Let's verify our new structure looks right. List all files and folders recursively.",
+        "expectedCommand": "ls -R",
+        "acceptAlternatives": ["find . -type f", "tree"],
+        "output": ".:\napi  app.js  components  utils\n\n./api:\nproducts.js\n\n./components:\nHeader.jsx\n\n./utils:\nformatPrice.js",
+        "hint": "Use 'ls -R' to list all files and folders recursively, showing the tree structure."
+      }
+    ],
+    "completionMessage": "You've created a clean folder structure! The next step would be to move the relevant code from app.js into each new file and add import/export statements. After refactoring, app.js will be a slim 30-line file that just imports everything and sets up routing. The app works exactly the same, but now every piece has a logical home.",
+    "glossaryTerms": ["refactoring", "file-structure", "separation-of-concerns", "module"]
+  }
+}

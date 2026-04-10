@@ -1,0 +1,55 @@
+{
+  "slug": "not-null-and-defaults",
+  "title": "NOT NULL & Default Values",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "A developer's app crashes when it tries to display a user's name because the name is NULL (empty). The table allows empty names, which should have been prevented from the start. Let's fix the table definition.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "NOT NULL = Required Fields on a Form",
+      "body": "When you fill out a form, some fields have a red asterisk (*) meaning 'required.' You can't submit the form without filling them in. **NOT NULL** is the database version of that asterisk -- it means 'this column must have a value, you can't leave it blank.' Without NOT NULL, you get invisible empty values that cause crashes later."
+    },
+    {
+      "type": "text",
+      "title": "What is NULL?",
+      "body": "**NULL** in a database means 'no value' or 'unknown.' It's not zero, not an empty string -- it's the absence of any value at all. NULL causes problems because:\n\n1. `NULL + 5` = NULL (not 5)\n2. `NULL = NULL` is false (NULL isn't equal to anything, even itself!)\n3. Your code might crash trying to call `.length` on NULL\n\nThe fix? Use **NOT NULL** on columns that should always have a value."
+    },
+    {
+      "type": "code_example",
+      "title": "NOT NULL and DEFAULT",
+      "language": "sql",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name is required\n  email TEXT NOT NULL UNIQUE,      -- email is required and unique\n  bio TEXT DEFAULT '',             -- optional, defaults to empty string\n  is_active BOOLEAN DEFAULT true,  -- defaults to true for new users\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-set to current time\n);",
+      "annotation": "NOT NULL means the column is required. DEFAULT provides a value when one isn't specified. Use NOT NULL for essential data like name and email. Use DEFAULT for fields that have a sensible automatic value."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "NOT NULL prevents empty values in columns that should always have data. DEFAULT provides automatic values when none is specified. Together, they keep your data clean and prevent NULL-related crashes in your app."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "CREATE TABLE users (", "isBuggy": false },
+      { "line": 2, "text": "  id SERIAL PRIMARY KEY,", "isBuggy": false },
+      { "line": 3, "text": "  name TEXT,", "isBuggy": true },
+      { "line": 4, "text": "  email TEXT NOT NULL UNIQUE,", "isBuggy": false },
+      { "line": 5, "text": "  role TEXT DEFAULT 'member',", "isBuggy": false },
+      { "line": 6, "text": "  created_at TIMESTAMP DEFAULT NOW()", "isBuggy": false },
+      { "line": 7, "text": ");", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "The app crashes with 'Cannot read property toUpperCase of null' when trying to display a user's name. Some users were inserted without a name, and the column allowed it. Find the column that should require a value but doesn't.",
+    "fixes": [
+      { "id": "a", "text": "name TEXT NOT NULL,", "isCorrect": true },
+      { "id": "b", "text": "name TEXT DEFAULT 'Unknown',", "isCorrect": false },
+      { "id": "c", "text": "name VARCHAR(255),", "isCorrect": false },
+      { "id": "d", "text": "name TEXT UNIQUE,", "isCorrect": false }
+    ],
+    "explanation": "The name column is defined as just 'TEXT' with no constraint, so NULL values are allowed. When the app tries to call .toUpperCase() on a NULL name, it crashes. Adding NOT NULL ensures every user MUST have a name when they're inserted. The database will reject any INSERT that tries to leave the name empty. Option B (DEFAULT 'Unknown') would prevent NULLs but would fill your database with 'Unknown' users instead of forcing the app to collect a real name.",
+    "glossaryTerms": ["null", "not-null", "default", "constraint"]
+  }
+}

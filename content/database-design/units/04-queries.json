@@ -1,0 +1,16 @@
+{
+  "slug": "queries",
+  "title": "Writing Queries",
+  "description": "Master the SQL commands you'll use every day -- SELECT, WHERE, ORDER BY, GROUP BY, and more",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "select-basics", "title": "SELECT: Getting Data Out", "type": "terminal_sim", "order": 1, "difficulty": 1 },
+    { "slug": "where-clauses", "title": "WHERE: Filtering Results", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "order-and-limit", "title": "ORDER BY & LIMIT", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "aggregate-functions", "title": "COUNT, SUM, AVG", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "group-by", "title": "GROUP BY: Summarizing Data", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "subqueries", "title": "Subqueries", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}
