@@ -8,14 +8,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VibeCode — Learn Software Engineering",
+  title: "Bugproof — Learn Software Engineering",
   description:
-    "Interactive software engineering lessons for vibe coders. Learn git, debugging, security, architecture, and more.",
+    "Interactive software engineering lessons. Learn git, debugging, security, architecture, and more.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "VibeCode",
+    title: "Bugproof",
   },
 };
 
@@ -36,6 +36,17 @@ export default function RootLayout({
     <html lang="en" className={`${geistMono.variable} h-full`}>
       <body className="min-h-full bg-background text-foreground font-mono antialiased">
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );

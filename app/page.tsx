@@ -8,12 +8,12 @@ export default function LandingPage() {
         <div className="mb-8">
           <h1 className="text-5xl font-bold tracking-tight">
             <span className="text-terminal-green glow-green">{">"}</span>
-            <span className="text-foreground">vibe</span>
-            <span className="text-terminal-green">code</span>
+            <span className="text-foreground">bug</span>
+            <span className="text-terminal-green">proof</span>
           </h1>
           <div className="mt-2 font-mono text-sm text-muted-foreground">
             <span className="text-terminal-green">$</span> learn software
-            engineering the fun way
+            engineering the right way
             <span className="cursor-blink text-terminal-green">_</span>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function LandingPage() {
             <div className="h-2.5 w-2.5 rounded-full bg-terminal-green/60" />
           </div>
           <div className="text-muted-foreground">
-            <span className="text-terminal-green">$</span> vibecode --status
+            <span className="text-terminal-green">$</span> bugproof --status
             <br />
             <span className="text-terminal-amber">courses:</span> 10 loaded
             <br />

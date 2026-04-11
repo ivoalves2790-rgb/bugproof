@@ -11,7 +11,7 @@ export default function CoursesPage() {
           <span className="text-terminal-green">{">"}</span> All Courses
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {courses.length} courses covering everything a vibe coder needs to know.
+          {courses.length} courses covering everything an engineer needs to know.
         </p>
       </div>
 

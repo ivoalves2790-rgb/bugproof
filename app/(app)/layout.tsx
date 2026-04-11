@@ -11,7 +11,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-x-hidden">
         <Sidebar />
         <TopBar hearts={hearts} streak={streak} xp={xp} />
         <main className="pb-20 pt-14 md:pb-0 md:pl-56">

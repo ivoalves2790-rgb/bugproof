@@ -54,7 +54,7 @@ export default function SettingsPage() {
         <Card>
           <h3 className="font-semibold">Install App</h3>
           <p className="mt-1 text-sm text-muted-foreground">
-            VibeCode is a Progressive Web App. You can install it on your device
+            Bugproof is a Progressive Web App. You can install it on your device
             for the best experience.
           </p>
           <div className="mt-3 rounded-lg bg-surface-2 p-3 text-xs text-muted-foreground">

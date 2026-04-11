@@ -27,10 +27,10 @@ export default function ProfilePage() {
       <Card className="mb-6">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-terminal-green/10 text-2xl font-bold text-terminal-green">
-            VC
+            BP
           </div>
           <div>
-            <h2 className="text-lg font-bold">Vibe Coder</h2>
+            <h2 className="text-lg font-bold">Engineer</h2>
             <div className="flex items-center gap-2">
               <Badge variant="green">Level {levelProgress.level}</Badge>
               <span className="text-xs text-muted-foreground">

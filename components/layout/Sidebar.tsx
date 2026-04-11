@@ -22,8 +22,8 @@ export function Sidebar() {
       <div className="flex h-14 items-center px-4 border-b border-border">
         <Link href="/dashboard" className="flex items-center gap-1">
           <span className="text-xl font-bold text-terminal-green glow-green">{">"}</span>
-          <span className="text-lg font-bold">vibe</span>
-          <span className="text-lg font-bold text-terminal-green">code</span>
+          <span className="text-lg font-bold">bug</span>
+          <span className="text-lg font-bold text-terminal-green">proof</span>
         </Link>
       </div>
 

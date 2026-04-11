@@ -51,7 +51,7 @@ export default function LoginPage() {
           <span className="text-terminal-green">{">"}</span> Log in
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Welcome back, vibe coder
+          Welcome back, engineer
         </p>
       </div>
 

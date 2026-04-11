@@ -14,8 +14,8 @@ export function TopBar({ hearts, streak, xp }: TopBarProps) {
       {/* Mobile logo - only shown on mobile */}
       <div className="flex items-center gap-1 md:hidden">
         <span className="text-lg font-bold text-terminal-green glow-green">{">"}</span>
-        <span className="font-bold">vibe</span>
-        <span className="font-bold text-terminal-green">code</span>
+        <span className="font-bold">bug</span>
+        <span className="font-bold text-terminal-green">proof</span>
       </div>
 
       {/* Spacer for desktop */}
