@@ -55,6 +55,20 @@ export default function LoginPage() {
         </p>
       </div>
 
+      <Button
+        variant="secondary"
+        className="w-full"
+        onClick={handleGoogleLogin}
+      >
+        Continue with Google
+      </Button>
+
+      <div className="my-6 flex items-center gap-3">
+        <div className="h-px flex-1 bg-border" />
+        <span className="text-xs text-muted-foreground">or</span>
+        <div className="h-px flex-1 bg-border" />
+      </div>
+
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
