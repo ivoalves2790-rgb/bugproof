@@ -11,11 +11,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-background overflow-x-hidden">
+      <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-background">
         <Sidebar />
         <TopBar hearts={hearts} streak={streak} xp={xp} />
-        <main className="pb-20 pt-14 md:pb-0 md:pl-56">
-          <div className="mx-auto max-w-4xl p-4 md:p-6">{children}</div>
+        <main className="w-full pb-20 pt-14 md:pb-0 md:pl-56">
+          <div className="mx-auto w-full max-w-4xl px-4 py-4 md:px-6 md:py-6">{children}</div>
         </main>
         <BottomNav />
       </div>

@@ -10,7 +10,7 @@ interface TopBarProps {
 
 export function TopBar({ hearts, streak, xp }: TopBarProps) {
   return (
-    <div className="flex h-14 items-center justify-between border-b border-border bg-surface px-4 md:pl-60">
+    <div className="fixed top-0 left-0 right-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 md:pl-60">
       {/* Mobile logo - only shown on mobile */}
       <div className="flex items-center gap-1 md:hidden">
         <span className="text-lg font-bold text-terminal-green glow-green">{">"}</span>

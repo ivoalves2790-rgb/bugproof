@@ -47,7 +47,7 @@ export function CourseCard({ course, progress = 0, level }: CourseCardProps) {
                 </Badge>
               )}
             </div>
-            <p className="mt-0.5 text-xs text-muted-foreground truncate">
+            <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2 sm:truncate">
               {course.description}
             </p>
             <div className="mt-2">

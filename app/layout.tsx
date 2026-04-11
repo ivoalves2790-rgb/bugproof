@@ -33,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistMono.variable} h-full`}>
-      <body className="min-h-full bg-background text-foreground font-mono antialiased">
+    <html lang="en" className={`${geistMono.variable} h-full overflow-x-hidden`}>
+      <body className="min-h-full w-full max-w-[100vw] overflow-x-hidden bg-background text-foreground font-mono antialiased">
         {children}
         <script
           dangerouslySetInnerHTML={{
