@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { IconFlame, IconStar, IconHeart, IconCheckCircle } from "@/components/ui/Icons";
+import { IconFlame, IconStar, IconHeart, IconCheckCircle, IconSettings } from "@/components/ui/Icons";
 import { getCourses } from "@/lib/content/loader";
 import { getUserLevelProgress } from "@/lib/engine/level-calculator";
 import { useProgressStats } from "@/lib/progress/use-progress";
 import { useLanguage } from "@/lib/i18n/use-language";
+import Link from "next/link";
 
 function getCourseCompletedCount(courseSlug: string): number {
   let completed = 0;
@@ -146,6 +147,19 @@ export default function ProfilePage() {
           );
         })}
       </div>
+
+      {/* Settings link */}
+      <Link href="/settings" className="mt-6 block">
+        <Card>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <IconSettings size={18} className="text-muted-foreground" />
+              <span className="text-sm font-semibold">{t("nav.settings")}</span>
+            </div>
+            <span className="text-muted-foreground">&rarr;</span>
+          </div>
+        </Card>
+      </Link>
     </div>
   );
 }
