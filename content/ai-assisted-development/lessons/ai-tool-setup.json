@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "Before you start vibe coding, you need a solid workflow. Let's set up a project with version control so you can safely experiment with AI-generated code -- accepting what works and reverting what doesn't.",
+  "intro": "Before you start vibe coding, you need a solid workflow. Just like save slots in a video game let you reload when a boss fight goes wrong, Git lets you undo bad AI-generated code. Let's set up a project with version control so you can safely experiment -- accepting what works and reverting what doesn't.",
   "teach": [
     {
       "type": "analogy",

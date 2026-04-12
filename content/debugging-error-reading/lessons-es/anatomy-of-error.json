@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Un desarrollador está intentando mostrar el nombre de un usuario en una página de perfil, pero la aplicación se cae. El error dice: TypeError: Cannot read properties of undefined (reading 'name'). El error está en cómo acceden a los datos del usuario.",
+  "intro": "Un desarrollador está intentando mostrar el nombre de un usuario en una página de perfil, pero la aplicación se cae. Piensa en ello como meter la mano en un buzón vacío esperando encontrar una carta -- los datos simplemente no están ahí. El error dice: TypeError: Cannot read properties of undefined (reading 'name'), y el error está en cómo acceden a los datos del usuario.",
   "teach": [
     {
       "type": "analogy",

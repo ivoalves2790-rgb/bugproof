@@ -1,7 +1,7 @@
 {
   "slug": "tables-and-schemas",
   "title": "Tables & Schemas",
-  "description": "Learn how to structure your data into tables with columns, data types, and constraints that keep your data clean and consistent",
+  "description": "Just like designing a form with specific fields, learn how to structure your data into tables with columns, data types, and constraints that keep your data clean and consistent",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "database-design",

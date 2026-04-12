@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "A developer is trying to send data from their React frontend to their Express backend, but the request fails. The backend never receives the data. The bug is in how they set up the fetch request.",
+  "intro": "A developer is trying to send data from their React frontend to their Express backend, but the request fails. Imagine ordering food but speaking the wrong language -- the kitchen never gets your order. The backend never receives the data, and the bug is in how they set up the fetch request.",
   "teach": [
     {
       "type": "analogy",

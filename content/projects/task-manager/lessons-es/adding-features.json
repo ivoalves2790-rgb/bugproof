@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta en produccion y los usuarios quieren nuevas funcionalidades. Pero lanzar codigo nuevo a todos los usuarios a la vez es riesgoso. Aprendamos sobre feature flags, despliegues graduales y practicas de despliegue seguro.",
+  "intro": "Tu gestor de tareas esta en produccion y los usuarios quieren nuevas funcionalidades. Pero lanzar codigo nuevo a todos los usuarios a la vez es riesgoso — es como abrir las compuertas de golpe en vez de girar un grifo. Aprendamos sobre feature flags, despliegues graduales y practicas de despliegue seguro.",
   "teach": [
     {
       "type": "text",

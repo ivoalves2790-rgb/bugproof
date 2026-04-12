@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "A user reports that your website takes 8 seconds to load. You open the browser DevTools and see a waterfall chart showing exactly what's happening during those 8 seconds. Let's investigate.",
+  "intro": "A user reports that your website takes 8 seconds to load. Think of it like a group trip where everyone is waiting on someone else before they can leave -- each file waits for another to finish. You open the browser DevTools and see a waterfall chart showing exactly what's happening during those 8 seconds. Let's investigate.",
   "teach": [
     {
       "type": "analogy",

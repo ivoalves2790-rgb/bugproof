@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Your task manager's database is set up and the tables are ready. Now you need to write the SQL queries that power every feature. One wrong query and users could see each other's tasks — or lose data entirely.",
+  "intro": "Your task manager's database is set up and the tables are ready. Now you need to write the SQL queries that power every feature. Think of queries like asking a librarian for exactly the right book — be precise and you get what you need, be vague and you get the wrong shelf. One wrong query and users could see each other's tasks — or lose data entirely.",
   "teach": [
     {
       "type": "text",

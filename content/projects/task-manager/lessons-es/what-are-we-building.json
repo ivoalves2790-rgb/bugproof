@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Antes de escribir codigo, asegurate de entender lo que un gestor de tareas realmente necesita. Desliza a la derecha para funcionalidades que pertenecen a nuestro MVP, a la izquierda para las que no.",
+  "intro": "Antes de escribir codigo, asegurate de entender lo que un gestor de tareas realmente necesita. Piensa en un MVP como un puesto de tacos antes de un restaurante completo — no necesitas servicio de valet el primer dia, solo buenos tacos. Desliza a la derecha para funcionalidades que pertenecen a nuestro MVP, a la izquierda para las que no.",
   "teach": [
     {
       "type": "text",

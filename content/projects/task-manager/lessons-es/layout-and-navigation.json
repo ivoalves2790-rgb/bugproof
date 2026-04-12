@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas necesita una estructura de layout y un sistema de navegacion. Las elecciones que hagas ahora determinan como se siente usar la app tanto en movil como en escritorio. Veamos como manejas las decisiones clave.",
+  "intro": "Tu gestor de tareas necesita una estructura de layout y un sistema de navegacion. Similar al plano de un arquitecto, el layout define donde vive cada cosa y como los usuarios se mueven entre secciones. Las elecciones que hagas ahora determinan como se siente usar la app tanto en movil como en escritorio. Veamos como manejas las decisiones clave.",
   "teach": [
     {
       "type": "text",

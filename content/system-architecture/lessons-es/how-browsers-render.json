@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "El sitio web de tu equipo carga pero muestra una pantalla blanca durante 3 segundos antes de que aparezca el contenido. Los usuarios se están quejando. Necesitas entender cómo los navegadores renderizan páginas para encontrar el cuello de botella.",
+  "intro": "El sitio web de tu equipo carga pero muestra una pantalla blanca durante 3 segundos antes de que aparezca el contenido. Igual que una casa no puede pintarse hasta que las paredes estén levantadas, un navegador sigue pasos estrictos para construir una página. Los usuarios se están quejando, y necesitas entender cómo los navegadores renderizan páginas para encontrar el cuello de botella.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "Hay dos formas principales de construir páginas web: hacer que el servidor envíe HTML terminado (renderizado en servidor) o hacer que el navegador construya la página usando JavaScript (renderizado en cliente). Exploremos la diferencia examinando lo que el navegador realmente recibe.",
+  "intro": "Hay dos formas principales de construir páginas web: hacer que el servidor envíe HTML terminado (renderizado en servidor) o hacer que el navegador construya la página usando JavaScript (renderizado en cliente). Es como la diferencia entre una comida lista para comer y un kit para cocinar en casa. Exploremos examinando lo que el navegador realmente recibe.",
   "teach": [
     {
       "type": "analogy",

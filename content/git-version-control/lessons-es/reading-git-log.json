@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Tu compañero de equipo dice que el último despliegue rompió la página de inicio de sesión. El sitio funcionaba bien ayer. Necesitas usar el historial de Git para descubrir qué cambió y quién lo cambió.",
+  "intro": "Tu compañero de equipo dice que el último despliegue rompió la página de inicio de sesión. El sitio funcionaba bien ayer. Igual que un detective revisando las cámaras de seguridad para encontrar cuándo algo salió mal, necesitas usar el historial de Git para descubrir qué cambió y quién lo cambió.",
   "teach": [
     {
       "type": "analogy",

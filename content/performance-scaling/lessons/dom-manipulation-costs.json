@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "The DOM (Document Object Model) is how JavaScript talks to the page. But touching the DOM is expensive -- it's the slowest thing your JavaScript can do. Understanding why helps you avoid common pitfalls. Swipe RIGHT for true, LEFT for false.",
+  "intro": "The DOM (Document Object Model) is how JavaScript talks to the page. But touching the DOM is expensive -- imagine handing a construction crew 100 tiny blueprint changes one at a time instead of one revised plan. Understanding why it's the slowest thing your JavaScript can do helps you avoid common pitfalls. Swipe RIGHT for true, LEFT for false.",
   "teach": [
     {
       "type": "analogy",

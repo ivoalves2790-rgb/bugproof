@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "It's deployment day. You connect your repo to Vercel, hit deploy, and... the build fails. Welcome to the real world of deployment debugging.",
+  "intro": "It's deployment day. It's like moving into a new apartment — everything worked at your old place, but the new environment has its own quirks. You connect your repo to Vercel, hit deploy, and... the build fails. Welcome to the real world of deployment debugging.",
   "teach": [
     {
       "type": "text",

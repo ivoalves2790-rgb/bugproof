@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "The context window is the amount of text an AI can 'see' at once -- your prompt, the conversation history, and its response all have to fit inside it. Understanding this limit is key to getting good results. Swipe right for TRUE, left for FALSE.",
+  "intro": "The context window is the amount of text an AI can 'see' at once -- imagine a desk that can only hold so many papers before the oldest ones fall off the edge. Your prompt, the conversation history, and its response all have to fit inside it. Understanding this limit is key to getting good results. Swipe right for TRUE, left for FALSE.",
   "teach": [
     {
       "type": "analogy",

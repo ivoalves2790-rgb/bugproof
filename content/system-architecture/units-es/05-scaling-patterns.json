@@ -1,7 +1,7 @@
 {
   "slug": "scaling-patterns",
   "title": "Escalamiento y Patrones",
-  "description": "Aprende qué sucede cuando tu aplicación pasa de 10 usuarios a 10 millones -- y los patrones arquitectónicos que lo hacen posible",
+  "description": "Similar a cómo un puesto de comida crece hasta ser una cadena de restaurantes, aprende qué sucede cuando tu app pasa de 10 usuarios a 10 millones y los patrones que lo hacen posible",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "system-architecture",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "A developer's app crashes when it tries to display a user's name because the name is NULL (empty). The table allows empty names, which should have been prevented from the start. Let's fix the table definition.",
+  "intro": "A developer's app crashes when it tries to display a user's name because the name is NULL (empty). Think of NOT NULL like the required fields on a form marked with a red asterisk -- without them, people skip critical info and things break. The table allows empty names, which should have been prevented from the start. Let's fix the table definition.",
   "teach": [
     {
       "type": "analogy",

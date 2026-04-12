@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "A good dev environment saves you hours of frustration. Swipe right on solid setup practices, left on habits that will slow you down.",
+  "intro": "A good dev environment saves you hours of frustration. Just like a chef preps their station before cooking, setting up your tools before writing code makes everything smoother. Swipe right on solid setup practices, left on habits that will slow you down.",
   "teach": [
     {
       "type": "text",

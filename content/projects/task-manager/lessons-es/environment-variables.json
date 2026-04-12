@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Las variables de entorno almacenan secretos y configuracion que cambian entre desarrollo y produccion. Si las configuras mal, tu app filtra claves de API o se conecta a la base de datos equivocada.",
+  "intro": "Las variables de entorno almacenan secretos y configuracion que cambian entre desarrollo y produccion. Piensa en ellas como la lista de contactos de tu telefono — tu codigo marca 'la base de datos' y el entorno completa el numero real. Si las configuras mal, tu app filtra claves de API o se conecta a la base de datos equivocada.",
   "teach": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "slug": "unit-tests",
   "title": "Unit Tests",
-  "description": "Writing your first unit tests with arrange-act-assert",
+  "description": "Just like testing each ingredient before baking a cake, learn to write your first unit tests with arrange-act-assert",
   "order": 2,
   "courseSlug": "testing",
   "tier": "beginner",

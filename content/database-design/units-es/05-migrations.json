@@ -1,7 +1,7 @@
 {
   "slug": "migrations",
   "title": "Migraciones y Evolución",
-  "description": "Aprende cómo cambiar de forma segura la estructura de tu base de datos con el tiempo sin perder datos ni romper tu aplicación",
+  "description": "Es como remodelar una tienda sin cerrarla -- aprende a cambiar de forma segura la estructura de tu base de datos con el tiempo sin perder datos ni romper tu app",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "database-design",

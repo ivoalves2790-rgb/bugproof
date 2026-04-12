@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "You're ready to create the Next.js project for your task manager. The choices you make during setup will shape how easy the project is to work with. Let's see how you handle it.",
+  "intro": "You're ready to create the Next.js project for your task manager. It's like picking your safety gear before a climb — the choices you make during setup will shape how easy the project is to work with. Let's see how you handle it.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "Un desarrollador está intentando enviar datos desde su frontend en React a su backend en Express, pero la petición falla. El backend nunca recibe los datos. El error está en cómo configuró la petición fetch.",
+  "intro": "Un desarrollador está intentando enviar datos desde su frontend en React a su backend en Express, pero la petición falla. Imagina pedir comida pero hablar en el idioma equivocado -- la cocina nunca recibe tu pedido. El backend nunca recibe los datos, y el error está en cómo configuró la petición fetch.",
   "teach": [
     {
       "type": "analogy",

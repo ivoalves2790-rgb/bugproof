@@ -1,7 +1,7 @@
 {
   "slug": "debugging-in-practice",
   "title": "Real-World Debugging",
-  "description": "Apply everything you've learned to realistic debugging scenarios you'll face on the job",
+  "description": "Imagine a flight simulator for debugging -- apply everything you've learned to realistic scenarios you'll face on the job",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "debugging-error-reading",

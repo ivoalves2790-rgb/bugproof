@@ -1,7 +1,7 @@
 {
   "slug": "what-to-test",
   "title": "What to Test",
-  "description": "Deciding what deserves a test and what to skip",
+  "description": "Imagine choosing which rooms in a house need smoke detectors -- learn to decide what deserves a test and what to skip",
   "order": 4,
   "courseSlug": "testing",
   "tier": "intermediate"

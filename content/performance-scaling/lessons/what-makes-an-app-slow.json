@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Every app you've ever rage-quit was probably slow. But what actually makes an app feel slow? It's not always what you'd guess. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "Every app you've ever rage-quit was probably slow. But what actually makes an app feel slow? Similar to a restaurant where slowness could come from the kitchen, the waiter, or too many customers, app performance problems have different sources. It's not always what you'd guess. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "You're working on a blog app and want to add a dark mode feature. Instead of changing the main code directly, you'll create a separate branch to work on safely.",
+  "intro": "You're working on a blog app and want to add a dark mode feature. Imagine making a copy of a painting so you can experiment with new colors without risking the original. Instead of changing the main code directly, you'll create a separate branch to work on safely.",
   "teach": [
     {
       "type": "analogy",

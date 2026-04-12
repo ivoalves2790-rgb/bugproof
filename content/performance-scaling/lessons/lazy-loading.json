@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Why load something the user can't see yet? Lazy loading means only loading resources when they're actually needed. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "Why load something the user can't see yet? Just like Netflix streams a movie as you watch instead of downloading the whole thing first, lazy loading means only loading resources when they're actually needed. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Los tests unitarios son la base de todo el testing. Testean las piezas más pequeñas de tu código de forma aislada. Separemos los hechos de la ficción sobre qué son y qué no son los tests unitarios. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "intro": "Los tests unitarios son la base de todo el testing. Testean las piezas más pequeñas de tu código de forma aislada -- similar a revisar cada pieza individual de LEGO antes de construir el castillo completo. Separemos los hechos de la ficción sobre qué son y qué no son los tests unitarios. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
   "teach": [
     {
       "type": "analogy",

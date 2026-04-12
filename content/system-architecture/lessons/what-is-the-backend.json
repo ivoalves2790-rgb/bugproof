@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "The backend is the hidden part of an application -- the server, the database, and all the logic the user never sees directly. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "The backend is the hidden part of an application -- think of it like the kitchen in a restaurant, where the real work happens out of sight. It includes the server, the database, and all the logic the user never sees directly. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

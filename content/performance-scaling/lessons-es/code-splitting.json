@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Tu app de una sola página carga un bundle de JavaScript de 2MB antes de mostrar algo. Los usuarios en conexiones lentas esperan más de 10 segundos. La app tiene un dashboard, una página de configuración, un panel de administración y una biblioteca de gráficos -- pero la mayoría de los usuarios solo visitan el dashboard. Es hora de dividir las cosas.",
+  "intro": "Tu app de una sola página carga un bundle de JavaScript de 2MB antes de mostrar algo. Es como obligar a alguien a descargar una enciclopedia entera solo para leer un artículo. Los usuarios en conexiones lentas esperan más de 10 segundos. La app tiene un dashboard, una página de configuración, un panel de administración y una biblioteca de gráficos -- pero la mayoría de los usuarios solo visitan el dashboard. Es hora de dividir las cosas.",
   "teach": [
     {
       "type": "analogy",

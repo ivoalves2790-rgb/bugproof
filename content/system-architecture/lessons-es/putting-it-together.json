@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Escribes 'www.coolshop.com' en tu navegador y presionas Enter. MUCHO sucede detrás de escena. Vamos a rastrear el viaje completo desde la pulsación de tecla hasta la página renderizada.",
+  "intro": "Escribes 'www.coolshop.com' en tu navegador y presionas Enter. Similar a pedir comida a domicilio -- desde buscar el número del restaurante hasta comerte el plato -- MUCHO sucede detrás de escena. Vamos a rastrear el viaje completo desde la pulsación de tecla hasta la página renderizada.",
   "teach": [
     {
       "type": "analogy",

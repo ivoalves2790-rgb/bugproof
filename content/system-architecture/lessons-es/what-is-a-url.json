@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Cada vez que visitas un sitio web, escribes (o haces clic en) una URL. Pero, ¿qué significan realmente todas esas partes? Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
+  "intro": "Cada vez que visitas un sitio web, escribes (o haces clic en) una URL. Piensa en ella como una dirección postal para internet -- cada parte le dice a tu navegador exactamente a dónde ir. Pero, ¿qué significan realmente todas esas partes? Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

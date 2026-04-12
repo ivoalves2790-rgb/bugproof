@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Cada interacción en la web es una conversación entre tu navegador (el cliente) y un servidor. El navegador envía una petición, el servidor envía una respuesta. Veamos esto en acción usando curl -- una herramienta que te permite hacer peticiones HTTP desde la terminal.",
+  "intro": "Cada interacción en la web es una conversación entre tu navegador (el cliente) y un servidor -- piensa en ello como intercambiar cartas de ida y vuelta. El navegador envía una petición, el servidor envía una respuesta. Veamos esto en acción usando curl -- una herramienta que te permite hacer peticiones HTTP desde la terminal.",
   "teach": [
     {
       "type": "analogy",

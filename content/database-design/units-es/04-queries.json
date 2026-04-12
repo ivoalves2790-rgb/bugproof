@@ -1,7 +1,7 @@
 {
   "slug": "queries",
   "title": "Escribiendo Consultas",
-  "description": "Domina los comandos SQL que usarás todos los días -- SELECT, WHERE, ORDER BY, GROUP BY, y más",
+  "description": "Imagina pedirle a un bibliotecario que encuentre exactamente lo que necesitas -- domina los comandos SQL que usarás todos los días como SELECT, WHERE, ORDER BY, GROUP BY y más",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "database-design",

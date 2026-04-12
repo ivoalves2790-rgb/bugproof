@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "You're about to use AI to help plan your task manager. The decisions you make here will shape the entire project. Choose wisely.",
+  "intro": "You're about to use AI to help plan your task manager. It's like hiring a brilliant but literal-minded assistant — give clear instructions and you get great results, but be vague and you get chaos. The decisions you make here will shape the entire project. Choose wisely.",
   "teach": [
     {
       "type": "text",

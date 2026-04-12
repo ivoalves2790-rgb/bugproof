@@ -2,7 +2,7 @@
   "slug": "database-design",
   "title": "Diseno de Bases de Datos",
   "description": "Esquemas, relaciones, migraciones y consultas",
-  "longDescription": "Cada aplicacion necesita almacenar datos en algun lugar -- cuentas de usuario, publicaciones, pedidos, configuraciones. Una base de datos es ese lugar, y como la organices determina si tu aplicacion es rapida y confiable o lenta y llena de errores. Este curso te ensena a pensar en los datos: como estructurar tablas, crear relaciones entre ellas, escribir consultas para recuperar datos y evolucionar tu base de datos a medida que tu aplicacion crece con migraciones.",
+  "longDescription": "Cada aplicacion necesita almacenar datos en algun lugar -- cuentas de usuario, publicaciones, pedidos, configuraciones. Una base de datos es ese lugar, y como la organices determina si tu aplicacion es rapida y confiable o lenta y llena de errores. Imaginalo como un archivador -- si tiras papeles al azar nunca encontraras nada, pero con carpetas etiquetadas y un sistema claro, la busqueda es instantanea. Este curso te ensena a pensar en los datos: como estructurar tablas, crear relaciones entre ellas, escribir consultas para recuperar datos y evolucionar tu base de datos a medida que tu aplicacion crece con migraciones.",
   "icon": "database",
   "color": "#96CEB4",
   "prerequisites": [],

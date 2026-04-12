@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Tu app esta en produccion. Pero como sabes si realmente esta funcionando? El monitoreo te ayuda a ver problemas antes que tus usuarios. Desliza a la derecha en buenas practicas de monitoreo.",
+  "intro": "Tu app esta en produccion. Pero como sabes si realmente esta funcionando? Imagina conducir un auto sin tablero — sin velocimetro, sin indicador de combustible, sin luces de advertencia. El monitoreo le da a tu app ese tablero para que puedas ver problemas antes que tus usuarios. Desliza a la derecha en buenas practicas de monitoreo.",
   "teach": [
     {
       "type": "text",

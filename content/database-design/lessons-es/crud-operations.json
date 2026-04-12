@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Un desarrollador está escribiendo SQL para actualizar la dirección de correo electrónico de un usuario, pero su consulta cambia el correo de TODOS los usuarios en vez de solo uno. Este es un error clásico (y aterrador) con el comando UPDATE.",
+  "intro": "Un desarrollador está escribiendo SQL para actualizar la dirección de correo electrónico de un usuario, pero su consulta cambia el correo de TODOS los usuarios en vez de solo uno. Es como usar un borrador en un cuaderno sin verificar en qué línea estás -- podrías borrar las notas de alguien más. Este es un error clásico (y aterrador) con el comando UPDATE.",
   "teach": [
     {
       "type": "analogy",

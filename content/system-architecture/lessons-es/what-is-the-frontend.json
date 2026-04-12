@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "El frontend es todo lo que el usuario ve e interactúa. Pero hay conceptos erróneos comunes sobre qué cuenta como 'frontend' y de qué es responsable. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "El frontend es todo lo que el usuario ve e interactúa -- similar al comedor de un restaurante donde los clientes disfrutan del menú, la decoración y el servicio. Pero hay conceptos erróneos comunes sobre qué cuenta como 'frontend' y de qué es responsable. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

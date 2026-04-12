@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "¿Por qué cargar algo que el usuario aún no puede ver? La carga diferida significa solo cargar recursos cuando realmente se necesitan. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "¿Por qué cargar algo que el usuario aún no puede ver? Igual que Netflix transmite una película mientras la ves en lugar de descargarla toda primero, la carga diferida significa solo cargar recursos cuando realmente se necesitan. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

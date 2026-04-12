@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Los formularios son como los usuarios crean y editan tareas. Un buen diseno de formularios reduce la friccion; un mal diseno hace que los usuarios abandonen con frustracion. Juzga si cada practica de formularios ayuda o perjudica la experiencia.",
+  "intro": "Los formularios son como los usuarios crean y editan tareas. Piensa en un formulario como una ventanilla de autoservicio — los mejores son rapidos, claros y nunca te hacen repetir tu pedido. Un buen diseno de formularios reduce la friccion; un mal diseno hace que los usuarios abandonen con frustracion. Juzga si cada practica de formularios ayuda o perjudica la experiencia.",
   "teach": [
     {
       "type": "text",

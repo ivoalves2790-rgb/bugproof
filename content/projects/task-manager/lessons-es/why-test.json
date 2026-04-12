@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Hacer tests se siente como trabajo extra — hasta que un bug llega a produccion y pasas tres horas depurando lo que un test habria detectado en tres segundos. Exploremos por que hacer tests importa.",
+  "intro": "Hacer tests se siente como trabajo extra — hasta que un bug llega a produccion y pasas tres horas depurando lo que un test habria detectado en tres segundos. Piensa en los tests como el corrector ortografico de tu codigo: podrias revisar todo manualmente, pero para que lo harias? Exploremos por que hacer tests importa.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Git is the most popular version control system in the world. But there are a lot of myths and misunderstandings about what it actually does. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "Git is the most popular version control system in the world. Think of it like an unlimited undo button for your entire project -- it remembers every version of every file. But there are a lot of myths and misunderstandings about what it actually does. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Un usuario reporta que tu sitio web tarda 8 segundos en cargar. Abres las DevTools del navegador y ves un gráfico de cascada mostrando exactamente qué está pasando durante esos 8 segundos. Investiguemos.",
+  "intro": "Un usuario reporta que tu sitio web tarda 8 segundos en cargar. Piensa en ello como un viaje en grupo donde todos están esperando a que alguien más esté listo antes de poder salir -- cada archivo espera a que otro termine. Abres las DevTools del navegador y ves un gráfico de cascada mostrando exactamente qué está pasando durante esos 8 segundos. Investiguemos.",
   "teach": [
     {
       "type": "analogy",

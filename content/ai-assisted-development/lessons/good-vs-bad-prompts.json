@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "prompting",
   "courseSlug": "ai-assisted-development",
-  "intro": "The quality of your prompt determines the quality of the code you get back. Some prompts set AI up for success, others guarantee garbage. Swipe right if this is a GOOD prompt, left if it's BAD.",
+  "intro": "The quality of your prompt determines the quality of the code you get back. It's like ordering at a restaurant -- saying 'give me food' gets you something random, but a specific order gets exactly what you want. Some prompts set AI up for success, others guarantee garbage. Swipe right if this is a GOOD prompt, left if it's BAD.",
   "teach": [
     {
       "type": "analogy",

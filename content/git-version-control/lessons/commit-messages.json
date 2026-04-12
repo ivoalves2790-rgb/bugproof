@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Commit messages are notes to your future self (and your teammates). A good message explains WHAT changed and WHY. Swipe right for GOOD commit messages and left for BAD ones.",
+  "intro": "Commit messages are notes to your future self (and your teammates). Think of them like labels on moving boxes -- 'kitchen stuff' is way more helpful than 'misc'. A good message explains WHAT changed and WHY. Swipe right for GOOD commit messages and left for BAD ones.",
   "teach": [
     {
       "type": "analogy",

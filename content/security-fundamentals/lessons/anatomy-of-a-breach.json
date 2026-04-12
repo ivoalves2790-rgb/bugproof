@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "security-mindset",
   "courseSlug": "security-fundamentals",
-  "intro": "It's 2 AM and your phone is blowing up. A user just tweeted a screenshot showing they can see other users' private data on your app. This is a real security incident. Every decision you make in the next few minutes matters.",
+  "intro": "It's 2 AM and your phone is blowing up. A user just tweeted a screenshot showing they can see other users' private data on your app. Just like a burst pipe, your first job is to stop the leak before doing anything else. This is a real security incident, and every decision you make in the next few minutes matters.",
   "teach": [
     {
       "type": "analogy",

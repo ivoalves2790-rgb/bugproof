@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Git keeps your code safe and lets you undo mistakes. Swipe right on good git habits, left on practices that will cause you pain.",
+  "intro": "Git keeps your code safe and lets you undo mistakes. Think of commits like save points in a video game — if the boss fight goes wrong, you can reload instead of starting over. Swipe right on good git habits, left on practices that will cause you pain.",
   "teach": [
     {
       "type": "text",

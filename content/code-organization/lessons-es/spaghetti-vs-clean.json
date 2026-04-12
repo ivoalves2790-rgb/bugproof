@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "Trabajar con cierto código es un placer. Otro código te hace querer renunciar y convertirte en agricultor. La diferencia usualmente no se trata de algoritmos inteligentes -- se trata de organización. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "Trabajar con cierto código es un placer. Otro código te hace querer renunciar y convertirte en agricultor. Imagina una cocina bien organizada donde todo tiene su lugar versus una donde ollas, especias y utensilios están todos en el mismo montón. La diferencia usualmente no se trata de algoritmos inteligentes -- se trata de organización. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas funciona genial localmente, pero una vez que esta en linea, cualquiera podria leer o eliminar las tareas de cualquier otro. Exploremos por que la autenticacion importa y que protege realmente.",
+  "intro": "Tu gestor de tareas funciona genial localmente, pero una vez que esta en linea, cualquiera podria leer o eliminar las tareas de cualquier otro. Imagina un hotel sin llaves de habitacion — cualquiera podria entrar a cualquier cuarto. Exploremos por que la autenticacion importa y que protege realmente.",
   "teach": [
     {
       "type": "text",

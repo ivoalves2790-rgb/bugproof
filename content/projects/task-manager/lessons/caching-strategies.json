@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Caching means storing data so you don't have to fetch it again. Done right, it makes your app feel instant. Done wrong, it shows users stale data. Let's sort out the good from the bad.",
+  "intro": "Caching means storing data so you don't have to fetch it again — similar to keeping a cheat sheet instead of re-reading the whole textbook every time. Done right, it makes your app feel instant. Done wrong, it shows users stale data. Let's sort out the good from the bad.",
   "teach": [
     {
       "type": "text",

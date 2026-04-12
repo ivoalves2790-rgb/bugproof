@@ -1,7 +1,7 @@
 {
   "slug": "authentication",
   "title": "Authentication & Authorization",
-  "description": "Passwords, tokens, sessions, and who gets access to what",
+  "description": "Just like a bouncer checking IDs at the door, learn about passwords, tokens, sessions, and who gets access to what",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "security-fundamentals",

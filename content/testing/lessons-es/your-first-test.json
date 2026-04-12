@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Es hora de escribir un test desde cero. Tienes una función que valida direcciones de email, y necesitas escribir tests para asegurarte de que funciona correctamente. Configuremos Jest y escribamos tu primer test real.",
+  "intro": "Es hora de escribir un test desde cero. Piensa en ello como seguir una receta por primera vez -- los ingredientes son simples y los pasos siempre son los mismos. Tienes una función que valida direcciones de email, y necesitas escribir tests para asegurarte de que funciona correctamente. Configuremos Jest y escribamos tu primer test real.",
   "teach": [
     {
       "type": "analogy",

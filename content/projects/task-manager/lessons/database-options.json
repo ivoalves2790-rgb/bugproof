@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Your task manager needs a database to store tasks. There are many options, and the wrong choice can cost you days of rework. Make the right call.",
+  "intro": "Your task manager needs a database to store tasks. Think of it like choosing between a filing cabinet and a junk drawer — the right structure makes all the difference. There are many options, and the wrong choice can cost you days of rework. Make the right call.",
   "teach": [
     {
       "type": "text",

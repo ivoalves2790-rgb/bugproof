@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Edge cases are the weird, unusual inputs that break your code -- empty strings, zero, null, negative numbers, very large numbers. A developer's function passes all the normal tests but crashes on edge cases. Find the missing protection.",
+  "intro": "Edge cases are the weird, unusual inputs that break your code -- empty strings, zero, null, negative numbers, very large numbers. Just like car manufacturers test vehicles in extreme heat and freezing cold, you need to test your code with extreme inputs. A developer's function passes all the normal tests but crashes on edge cases. Find the missing protection.",
   "teach": [
     {
       "type": "analogy",

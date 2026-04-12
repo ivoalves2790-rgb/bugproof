@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "naming-things",
   "courseSlug": "code-organization",
-  "intro": "A project has files named things like 'stuff.js', 'utils2.js', and 'final_FINAL_v3.js'. Let's rename them properly so anyone can find what they're looking for.",
+  "intro": "A project has files named things like 'stuff.js', 'utils2.js', and 'final_FINAL_v3.js'. Think of file names like labels on drawers in a filing cabinet -- clear labels mean you find what you need instantly. Let's rename them properly so anyone can find what they're looking for.",
   "teach": [
     {
       "type": "analogy",

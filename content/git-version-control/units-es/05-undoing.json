@@ -1,7 +1,7 @@
 {
   "slug": "undoing",
   "title": "Deshaciendo cambios",
-  "description": "Revierte commits, quita archivos del staging y recupérate de errores",
+  "description": "Es como tener un botón de deshacer con máquina del tiempo -- aprende a revertir commits, quitar archivos del staging y recuperarte de errores",
   "order": 5,
   "courseSlug": "git-version-control",
   "tier": "advanced",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta creciendo. Los usuarios reportan que cargar su lista de tareas toma mas de 5 segundos. La base de datos es el cuello de botella. Como lo arreglas sin reescribir todo?",
+  "intro": "Tu gestor de tareas esta creciendo. Los usuarios reportan que cargar su lista de tareas toma mas de 5 segundos. Piensa en ello como una biblioteca sin catalogo — el bibliotecario tiene que revisar cada estante para encontrar tu libro. La base de datos es el cuello de botella. Como lo arreglas sin reescribir todo?",
   "teach": [
     {
       "type": "text",

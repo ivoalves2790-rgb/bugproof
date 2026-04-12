@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "A developer is trying to create a feature branch, do some work, and merge it back. But they made a common mistake that beginners often run into. Can you spot it?",
+  "intro": "A developer is trying to create a feature branch, do some work, and merge it back. It's like following a recipe -- skip one step and the whole dish can go wrong. But they made a common mistake that beginners often run into. Can you spot it?",
   "teach": [
     {
       "type": "analogy",

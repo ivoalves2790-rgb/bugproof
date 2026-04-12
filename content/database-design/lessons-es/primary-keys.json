@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "La app de tu equipo tiene un error: cuando dos usuarios se registran con el mismo nombre, la app actualiza el perfil del usuario equivocado. ¿El problema? La tabla usa la columna de nombre para identificar usuarios en lugar de una clave primaria adecuada.",
+  "intro": "La app de tu equipo tiene un error: cuando dos usuarios se registran con el mismo nombre, la app actualiza el perfil del usuario equivocado. Imagina una escuela con dos estudiantes llamados 'Juan García' y sin números de estudiante -- nunca sabrías de cuál estás hablando. ¿El problema? La tabla usa la columna de nombre para identificar usuarios en lugar de una clave primaria adecuada.",
   "teach": [
     {
       "type": "analogy",

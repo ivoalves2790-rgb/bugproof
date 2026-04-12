@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Un script de Python está procesando una lista de calificaciones de estudiantes, pero se cae con: IndexError: list index out of range. El error apunta a esta función. ¿Puedes encontrar qué línea se sale de los límites?",
+  "intro": "Un script de Python está procesando una lista de calificaciones de estudiantes, pero se cae con: IndexError: list index out of range. Es como intentar tomar el tercer libro de un estante que solo tiene dos -- estás buscando más allá de lo que existe. El error apunta a esta función. ¿Puedes encontrar qué línea se sale de los límites?",
   "teach": [
     {
       "type": "analogy",

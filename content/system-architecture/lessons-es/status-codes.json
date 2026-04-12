@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Un desarrollador está construyendo el manejo de errores para su aplicación, pero mezcló algunos códigos de estado HTTP. El código usa el código de estado incorrecto para un error de 'no encontrado', lo que confundirá a cualquier frontend que lea la respuesta.",
+  "intro": "Un desarrollador está construyendo el manejo de errores para su aplicación, pero mezcló algunos códigos de estado HTTP. Igual que los semáforos les dicen a los conductores qué hacer, los códigos de estado le dicen a tu navegador qué pasó -- y usar el incorrecto causa confusión. El código usa el código de estado incorrecto para un error de 'no encontrado', lo que confundirá a cualquier frontend que lea la respuesta.",
   "teach": [
     {
       "type": "analogy",

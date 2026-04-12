@@ -2,7 +2,7 @@
   "slug": "testing",
   "title": "Testing",
   "description": "Why test, what to test, unit/integration/e2e basics",
-  "longDescription": "Testing is your safety net. Every time you change code, tests automatically verify nothing broke. This course teaches you why testing matters (even for small projects), what kinds of tests exist, what to test and what to skip, and how to write tests that actually catch bugs instead of just checking boxes.",
+  "longDescription": "Testing is your safety net. Just like a spell checker catches typos before you send an important email, tests catch bugs before your code reaches users. Every time you change code, tests automatically verify nothing broke. This course teaches you why testing matters (even for small projects), what kinds of tests exist, what to test and what to skip, and how to write tests that actually catch bugs instead of just checking boxes.",
   "icon": "check-circle",
   "color": "#A29BFE",
   "prerequisites": [],

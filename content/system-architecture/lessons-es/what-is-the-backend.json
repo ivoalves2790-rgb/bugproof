@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "El backend es la parte oculta de una aplicación -- el servidor, la base de datos y toda la lógica que el usuario nunca ve directamente. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "El backend es la parte oculta de una aplicación -- piensa en él como la cocina de un restaurante, donde el trabajo real sucede fuera de la vista. Incluye el servidor, la base de datos y toda la lógica que el usuario nunca ve directamente. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

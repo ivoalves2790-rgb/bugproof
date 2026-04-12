@@ -1,7 +1,7 @@
 {
   "slug": "apis",
   "title": "APIs y Flujo de Datos",
-  "description": "Descubre cómo las diferentes partes de una aplicación se comunican a través de APIs -- los contratos que mantienen unido al software moderno",
+  "description": "Igual que un mesero tomando pedidos entre tú y la cocina, descubre cómo las diferentes partes de una aplicación se comunican a través de APIs -- los contratos que mantienen unido al software moderno",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "system-architecture",

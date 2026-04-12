@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "El desvio de alcance mata proyectos. Juzga si cada escenario es buena disciplina de planificacion o una trampa de desvio de alcance.",
+  "intro": "El desvio de alcance mata proyectos. Es como hacer la maleta para un fin de semana pero llevar ropa para dos semanas — de repente no puedes ni despegar. Juzga si cada escenario es buena disciplina de planificacion o una trampa de desvio de alcance.",
   "teach": [
     {
       "type": "text",

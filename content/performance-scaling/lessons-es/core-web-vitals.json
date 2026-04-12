@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Google usa tres métricas llamadas Core Web Vitals para medir qué tan rápido se siente tu sitio. Afectan el posicionamiento en buscadores y la experiencia del usuario. Veamos si puedes distinguir los hechos de la ficción. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "intro": "Google usa tres métricas llamadas Core Web Vitals para medir qué tan rápido se siente tu sitio. Imagina un chequeo médico pero para tu sitio web -- tres números clave que revelan su salud general. Afectan el posicionamiento en buscadores y la experiencia del usuario. Veamos si puedes distinguir los hechos de la ficción. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Tailwind CSS lets you style components with utility classes directly in your markup. Judge whether each Tailwind practice is good or bad.",
+  "intro": "Tailwind CSS lets you style components with utility classes directly in your markup. It's like having a spice rack instead of pre-mixed seasoning packets — you pick exactly what you need for each dish. Judge whether each Tailwind practice is good or bad.",
   "teach": [
     {
       "type": "text",

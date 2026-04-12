@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "A product listing page loads 24 product images, but it takes 12 seconds to fully load on mobile. The images are the problem. Find the line in this React component that's causing the biggest performance hit.",
+  "intro": "A product listing page loads 24 product images, but it takes 12 seconds to fully load on mobile. Imagine ordering a highway billboard just to display a small photo in your living room -- that's what unoptimized images do to your page. Find the line in this React component that's causing the biggest performance hit.",
   "teach": [
     {
       "type": "analogy",

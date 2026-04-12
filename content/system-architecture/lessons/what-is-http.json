@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "HTTP is the language your browser speaks to servers. Every website you've ever visited used HTTP (or its secure cousin HTTPS) behind the scenes. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "HTTP is the language your browser speaks to servers -- imagine it as the common language a waiter uses between you and the kitchen. Every website you've ever visited used HTTP (or its secure cousin HTTPS) behind the scenes. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

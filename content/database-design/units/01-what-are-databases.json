@@ -1,7 +1,7 @@
 {
   "slug": "what-are-databases",
   "title": "What Are Databases?",
-  "description": "Understand why apps need databases and the difference between storing data in files vs a dedicated database system",
+  "description": "Think of a database like a super-powered spreadsheet -- understand why apps need them and the difference between storing data in files vs a dedicated database system",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "database-design",

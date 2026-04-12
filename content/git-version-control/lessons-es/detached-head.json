@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Has estado experimentando con tu proyecto y de repente Git dice que estás en estado 'detached HEAD'. ¡Los commits que hagas aquí podrían perderse para siempre! Navega esta situación complicada sin perder tu trabajo.",
+  "intro": "Has estado experimentando con tu proyecto y de repente Git dice que estás en estado 'detached HEAD'. Es como salirte del sendero marcado en un bosque -- puedes explorar, pero si no marcas tu camino, no encontrarás el regreso. ¡Los commits que hagas aquí podrían perderse para siempre! Navega esta situación complicada sin perder tu trabajo.",
   "teach": [
     {
       "type": "text",

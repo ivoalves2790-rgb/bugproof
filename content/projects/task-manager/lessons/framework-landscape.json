@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "There are dozens of JavaScript frameworks out there. Swipe right on smart framework-picking strategies, left on common mistakes beginners make when choosing one.",
+  "intro": "There are dozens of JavaScript frameworks out there. Picking one is like choosing a vehicle — you want something the right size for the job, not a semi-truck for a grocery run. Swipe right on smart framework-picking strategies, left on common mistakes beginners make when choosing one.",
   "teach": [
     {
       "type": "text",

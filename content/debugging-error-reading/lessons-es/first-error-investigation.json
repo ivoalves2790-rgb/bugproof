@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Acabas de clonar un proyecto e intentaste ejecutarlo, pero se cae inmediatamente con un error. Vamos a recorrer la investigación del problema paso a paso usando la terminal.",
+  "intro": "Acabas de clonar un proyecto e intentaste ejecutarlo, pero se cae inmediatamente con un error. Piensa en ello como ser un detective en la escena de un crimen -- el mensaje de error es tu primera pista. Vamos a recorrer la investigación del problema paso a paso usando la terminal.",
   "teach": [
     {
       "type": "analogy",

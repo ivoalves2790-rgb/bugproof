@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Una estructura de carpetas limpia hace tu proyecto navegable y mantenible. Desliza a la derecha en practicas solidas de organizacion, a la izquierda en habitos desordenados que te perseguiran despues.",
+  "intro": "Una estructura de carpetas limpia hace tu proyecto navegable y mantenible. Imagina un closet donde todo esta ordenado versus una pila gigante — solo uno te permite encontrar lo que necesitas en segundos. Desliza a la derecha en practicas solidas de organizacion, a la izquierda en habitos desordenados que te perseguiran despues.",
   "teach": [
     {
       "type": "text",

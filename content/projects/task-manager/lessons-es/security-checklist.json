@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Antes de lanzar tu gestor de tareas, repasa esta lista de verificacion de seguridad. Desliza a la derecha en practicas que deberias seguir, a la izquierda en las peligrosas.",
+  "intro": "Antes de lanzar tu gestor de tareas, repasa esta lista de verificacion de seguridad. Tal como un piloto revisa su lista de verificacion antes de cada despegue, tu deberias revisar estas protecciones antes de cada lanzamiento. Desliza a la derecha en practicas que deberias seguir, a la izquierda en las peligrosas.",
   "teach": [
     {
       "type": "text",

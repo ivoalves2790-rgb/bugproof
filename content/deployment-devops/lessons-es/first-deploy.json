@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "¡Es hora de desplegar de verdad! Configurarás un proyecto, lo conectarás a una plataforma de hosting, y lo pondrás en vivo en internet. Usaremos Vercel ya que es el más simple para principiantes.",
+  "intro": "¡Es hora de desplegar de verdad! Es como lanzar un avión de papel -- has pasado tiempo doblándolo con cuidado, y ahora lo lanzas al aire. Configurarás un proyecto, lo conectarás a una plataforma de hosting, y lo pondrás en vivo en internet. Usaremos Vercel ya que es el más simple para principiantes.",
   "teach": [
     {
       "type": "analogy",

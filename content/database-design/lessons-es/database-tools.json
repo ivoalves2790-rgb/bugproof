@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Acabas de unirte a un equipo y necesitas revisar la base de datos de producción para depurar un problema. Pero nunca te has conectado a una base de datos remota antes. Recorramos el proceso y aprendamos sobre las herramientas que usan los desarrolladores.",
+  "intro": "Acabas de unirte a un equipo y necesitas revisar la base de datos de producción para depurar un problema. Similar a cómo puedes leer un libro en la biblioteca, en un e-reader o por audiolibro, hay diferentes herramientas para acceder a los mismos datos. Pero nunca te has conectado a una base de datos remota antes. Recorramos el proceso y aprendamos sobre las herramientas que usan los desarrolladores.",
   "teach": [
     {
       "type": "analogy",

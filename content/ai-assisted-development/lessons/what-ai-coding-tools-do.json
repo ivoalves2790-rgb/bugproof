@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "AI coding tools like ChatGPT, Claude, and Copilot are everywhere -- but there are a lot of misconceptions about what they actually do. Swipe right if the statement is TRUE, left if it's FALSE.",
+  "intro": "AI coding tools like ChatGPT, Claude, and Copilot are everywhere -- but there are a lot of misconceptions about what they actually do. Think of them like a very fast autocomplete for code, predicting what comes next based on patterns rather than truly understanding your problem. Swipe right if the statement is TRUE, left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

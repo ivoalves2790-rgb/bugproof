@@ -1,7 +1,7 @@
 {
   "slug": "console-debugging",
   "title": "Consola y DevTools",
-  "description": "Domina console.log, las DevTools del navegador y otras herramientas para ver qué está haciendo realmente tu código",
+  "description": "Es como tener visión de rayos X para tu código -- domina console.log, las DevTools del navegador y otras herramientas para ver qué está haciendo realmente",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "debugging-error-reading",

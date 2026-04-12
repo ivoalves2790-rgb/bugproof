@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "Your team's app has a bug: when two users sign up with the same name, the app updates the wrong user's profile. The problem? The table is using the name column to identify users instead of a proper primary key.",
+  "intro": "Your team's app has a bug: when two users sign up with the same name, the app updates the wrong user's profile. Imagine a school with two students named 'John Smith' and no student IDs -- you'd never know which one you're talking about. The problem? The table is using the name column to identify users instead of a proper primary key.",
   "teach": [
     {
       "type": "analogy",

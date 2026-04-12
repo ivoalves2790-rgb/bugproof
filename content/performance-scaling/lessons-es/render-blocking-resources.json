@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Una página muestra una pantalla blanca durante 3 segundos antes de que aparezca algo. El HTML está bien y el servidor responde rápido -- el problema está en la etiqueta <head>. Los recursos que bloquean el renderizado están impidiendo que el navegador muestre algo. Encuentra la línea que causa el mayor retraso.",
+  "intro": "Una página muestra una pantalla blanca durante 3 segundos antes de que aparezca algo. Es como insistir en leer un libro de cocina entero de principio a fin antes de poner agua a hervir. El HTML está bien y el servidor responde rápido -- el problema está en la etiqueta <head>. Los recursos que bloquean el renderizado están impidiendo que el navegador muestre algo. Encuentra la línea que causa el mayor retraso.",
   "teach": [
     {
       "type": "analogy",

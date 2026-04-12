@@ -1,7 +1,7 @@
 {
   "slug": "measuring",
   "title": "Medición y perfilado",
-  "description": "DevTools, Lighthouse, presupuestos de rendimiento y métricas de usuarios reales",
+  "description": "Es como un rastreador de fitness para tu app -- aprende a usar DevTools, Lighthouse, presupuestos de rendimiento y métricas de usuarios reales",
   "order": 5,
   "courseSlug": "performance-scaling",
   "tier": "advanced",

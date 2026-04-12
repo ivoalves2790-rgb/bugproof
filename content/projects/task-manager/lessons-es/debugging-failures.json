@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Tus tests estan fallando y necesitas descubrir por que. Es un bug real o un test malo? Desliza a la derecha en buenas practicas de depuracion, a la izquierda en las malas.",
+  "intro": "Tus tests estan fallando y necesitas descubrir por que. Imagina que eres un detective examinando la escena del crimen — el mensaje de error es tu primera pista. Es un bug real o un test malo? Desliza a la derecha en buenas practicas de depuracion, a la izquierda en las malas.",
   "teach": [
     {
       "type": "text",

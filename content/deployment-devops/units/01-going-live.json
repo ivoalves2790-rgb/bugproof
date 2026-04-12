@@ -1,7 +1,7 @@
 {
   "slug": "going-live",
   "title": "Going Live",
-  "description": "What deployment means, hosting platforms, and your first deploy",
+  "description": "Think of deployment like launching a ship -- learn what it means, explore hosting platforms, and complete your first deploy",
   "order": 1,
   "courseSlug": "deployment-devops",
   "tier": "beginner",

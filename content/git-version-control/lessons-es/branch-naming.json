@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Los nombres de las ramas pueden parecer triviales, pero en un equipo con docenas de ramas, un buen nombre marca la diferencia entre el orden y el caos. Desliza a la derecha para nombres de rama BUENOS y a la izquierda para MALOS.",
+  "intro": "Los nombres de las ramas pueden parecer triviales, pero en un equipo con docenas de ramas, un buen nombre marca la diferencia entre el orden y el caos. Piensa en ello como etiquetar carpetas en un archivero -- etiquetas claras ayudan a todos a encontrar lo que necesitan al instante. Desliza a la derecha para nombres de rama BUENOS y a la izquierda para MALOS.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Your app just crashed and the console is showing a scary wall of text called a 'stack trace.' Don't panic -- every line in that trace is a breadcrumb leading you to the bug. Let's learn to read it.",
+  "intro": "Your app just crashed and the console is showing a scary wall of text called a 'stack trace.' Imagine it like a trail of breadcrumbs through a maze -- each line shows you one step closer to where things went wrong. Don't panic. Let's learn to read it.",
   "teach": [
     {
       "type": "analogy",

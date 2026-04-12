@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "console-debugging",
   "courseSlug": "debugging-error-reading",
-  "intro": "A developer is trying to debug why their shopping cart total is always wrong. They added console.log statements, but they put them in the wrong places so the logs aren't helpful. Find the poorly placed log.",
+  "intro": "A developer is trying to debug why their shopping cart total is always wrong. Imagine placing a security camera at the entrance instead of at the cash register -- you'd never catch the real problem. They added console.log statements, but they put them in the wrong places so the logs aren't helpful. Find the poorly placed log.",
   "teach": [
     {
       "type": "analogy",

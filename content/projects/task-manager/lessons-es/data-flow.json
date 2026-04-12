@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Los datos fluyen a traves de tu gestor de tareas como agua por tuberias — desde la base de datos, a traves de la API, hacia la interfaz, y de vuelta. Desliza a la derecha en patrones correctos de flujo de datos, a la izquierda en incorrectos.",
+  "intro": "Los datos fluyen a traves de tu gestor de tareas como agua por tuberias — desde la base de datos, a traves de la API, hacia la interfaz, y de vuelta. Igual que rastrear un paquete en su ruta de entrega, entender este camino te ayuda a encontrar donde fallan las cosas. Desliza a la derecha en patrones correctos de flujo de datos, a la izquierda en incorrectos.",
   "teach": [
     {
       "type": "text",

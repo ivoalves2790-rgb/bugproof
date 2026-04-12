@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "La tasa de conversión de tu app de e-commerce acaba de caer un 30% de la noche a la mañana. Las ventas se desploman pero nada en el código cambió. Tu CEO está preguntando qué pasó. Es hora de investigar.",
+  "intro": "La tasa de conversión de tu app de e-commerce acaba de caer un 30% de la noche a la mañana. Es como una tienda cuya puerta de entrada de repente tarda 5 segundos en abrirse -- los clientes se van antes de entrar. Las ventas se desploman pero nada en el código cambió. Tu CEO está preguntando qué pasó. Es hora de investigar.",
   "teach": [
     {
       "type": "analogy",

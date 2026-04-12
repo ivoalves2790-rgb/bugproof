@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Las historias de usuario describen funcionalidades desde la perspectiva del usuario. Juzga si cada una esta bien escrita o necesita mejoras.",
+  "intro": "Las historias de usuario describen funcionalidades desde la perspectiva del usuario. Imagina pedir en un restaurante — mientras mas especifico sea tu pedido, mas probable es que recibas exactamente lo que quieres. Juzga si cada una esta bien escrita o necesita mejoras.",
   "teach": [
     {
       "type": "text",

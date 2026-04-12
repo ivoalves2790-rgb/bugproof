@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Data flows through your task manager like water through pipes — from the database, through the API, into the UI, and back again. Swipe right on correct data flow patterns, left on incorrect ones.",
+  "intro": "Data flows through your task manager like water through pipes — from the database, through the API, into the UI, and back again. Just like tracing a package through its delivery route, understanding this path helps you find where things go wrong. Swipe right on correct data flow patterns, left on incorrect ones.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "¡Es hora de escribir tests reales! Testearás una función utilitaria simple usando Jest, el framework de testing más popular de JavaScript. Sigue los pasos y ejecuta tus tests para verlos pasar y fallar.",
+  "intro": "¡Es hora de escribir tests reales! Piensa en ello como calificar tarea con una hoja de respuestas -- ya sabes las respuestas correctas y verificas si las de tu función coinciden. Testearás una función utilitaria simple usando Jest, el framework de testing más popular de JavaScript. Sigue los pasos y ejecuta tus tests para verlos pasar y fallar.",
   "teach": [
     {
       "type": "analogy",

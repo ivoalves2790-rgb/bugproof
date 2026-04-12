@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "A Python script is processing a list of student grades, but it crashes with: IndexError: list index out of range. The error points to this function. Can you find which line goes out of bounds?",
+  "intro": "A Python script is processing a list of student grades, but it crashes with: IndexError: list index out of range. It's like trying to grab the third book from a shelf that only has two -- you're reaching past what exists. The error points to this function. Can you find which line goes out of bounds?",
   "teach": [
     {
       "type": "analogy",

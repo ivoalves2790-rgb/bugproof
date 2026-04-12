@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "A developer just finished building a login feature but also has some unrelated debug files lying around. They want to commit ONLY the login files, but their command stages everything. Find the bug.",
+  "intro": "A developer just finished building a login feature but also has some unrelated debug files lying around. Think of staging like packing a suitcase -- you pick exactly what goes in, not just dump your whole closet. They want to commit ONLY the login files, but their command stages everything. Find the bug.",
   "teach": [
     {
       "type": "analogy",

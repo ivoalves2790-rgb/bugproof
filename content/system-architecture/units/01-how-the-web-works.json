@@ -1,7 +1,7 @@
 {
   "slug": "how-the-web-works",
   "title": "How the Web Works",
-  "description": "Understand what happens when you type a URL and press Enter -- from DNS to HTTP to the response that paints your screen",
+  "description": "Think of the web like a postal system -- understand what happens when you type a URL and press Enter, from DNS to HTTP to the response that paints your screen",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "system-architecture",

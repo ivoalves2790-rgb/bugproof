@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Time to write real tests! You'll test a simple utility function using Jest, the most popular JavaScript testing framework. Follow along and run your tests to see them pass and fail.",
+  "intro": "Time to write real tests! Think of it like grading homework with an answer key -- you already know the right answers, and you check if your function's answers match. You'll test a simple utility function using Jest, the most popular JavaScript testing framework. Follow along and run your tests to see them pass and fail.",
   "teach": [
     {
       "type": "analogy",

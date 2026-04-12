@@ -1,7 +1,7 @@
 {
   "slug": "why-test",
   "title": "¿Por qué testear?",
-  "description": "Qué son los tests, por qué importan y cómo pensar sobre el testing",
+  "description": "Piensa en los tests como una red de seguridad para equilibristas -- aprende qué son, por qué importan y cómo pensar sobre el testing",
   "order": 1,
   "courseSlug": "testing",
   "tier": "beginner",

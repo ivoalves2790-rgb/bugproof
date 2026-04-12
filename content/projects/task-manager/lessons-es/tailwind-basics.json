@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Tailwind CSS te permite dar estilo a componentes con clases utilitarias directamente en tu markup. Juzga si cada practica de Tailwind es buena o mala.",
+  "intro": "Tailwind CSS te permite dar estilo a componentes con clases utilitarias directamente en tu markup. Es como tener un especiero completo en vez de sobres de condimento premezclado — eliges exactamente lo que necesitas para cada plato. Juzga si cada practica de Tailwind es buena o mala.",
   "teach": [
     {
       "type": "text",

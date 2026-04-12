@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Has heredado un proyecto React lento y necesitas encontrar victorias rápidas de rendimiento. Usemos algunas herramientas de línea de comandos para medir el estado actual y aplicar correcciones que hagan una diferencia inmediata.",
+  "intro": "Has heredado un proyecto React lento y necesitas encontrar victorias rápidas de rendimiento. Piensa en ello como limpiar tu departamento antes de que lleguen visitas sorpresa -- unos pocos arreglos pequeños pueden hacer que todo se sienta dramáticamente mejor. Usemos algunas herramientas de línea de comandos para medir el estado actual y aplicar correcciones que hagan una diferencia inmediata.",
   "teach": [
     {
       "type": "analogy",

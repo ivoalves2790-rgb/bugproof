@@ -1,7 +1,7 @@
 {
   "slug": "tables-and-schemas",
   "title": "Tablas y Esquemas",
-  "description": "Aprende cómo estructurar tus datos en tablas con columnas, tipos de datos y restricciones que mantienen tus datos limpios y consistentes",
+  "description": "Igual que diseñar un formulario con campos específicos, aprende a estructurar tus datos en tablas con columnas, tipos de datos y restricciones que mantienen todo limpio y consistente",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "database-design",

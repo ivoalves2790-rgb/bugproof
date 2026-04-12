@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Your team just deployed a new feature, but the build failed on the server even though everything works locally. You need to figure out what went wrong and get the site back online.",
+  "intro": "Your team just deployed a new feature, but the build failed on the server even though everything works locally. Think of it like packing a suitcase -- if something doesn't fit right, the whole trip is delayed. You need to figure out what went wrong and get the site back online.",
   "teach": [
     {
       "type": "analogy",

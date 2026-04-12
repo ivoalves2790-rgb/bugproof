@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "Time to create your own database table from scratch! You're building a bookstore app and need a table to store books. We'll use SQLite to create the table, insert some data, and query it.",
+  "intro": "Time to create your own database table from scratch! Just like drawing a blueprint before building a house, you need to define your table structure before filling it with data. You're building a bookstore app and need a table to store books. We'll use SQLite to create the table, insert some data, and query it.",
   "teach": [
     {
       "type": "analogy",

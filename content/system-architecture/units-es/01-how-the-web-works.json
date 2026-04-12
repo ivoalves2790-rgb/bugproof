@@ -1,7 +1,7 @@
 {
   "slug": "how-the-web-works",
   "title": "Cómo Funciona la Web",
-  "description": "Comprende qué sucede cuando escribes una URL y presionas Enter -- desde DNS hasta HTTP y la respuesta que pinta tu pantalla",
+  "description": "Piensa en la web como un sistema postal -- comprende qué sucede cuando escribes una URL y presionas Enter, desde DNS hasta HTTP y la respuesta que pinta tu pantalla",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "system-architecture",

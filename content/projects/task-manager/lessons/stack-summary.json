@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "You've chosen your stack: Next.js, Supabase, and TypeScript. Now a senior engineer asks you to justify your choices. Can you explain why each piece fits?",
+  "intro": "You've chosen your stack: Next.js, Supabase, and TypeScript. Think of your stack like a band — each instrument plays a different role, and together they make music. Now a senior engineer asks you to justify your choices. Can you explain why each piece fits?",
   "teach": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "slug": "reading-errors",
   "title": "Reading Error Messages",
-  "description": "Learn to decode error messages instead of panicking when you see red text in your console",
+  "description": "Think of error messages like a doctor's diagnosis -- learn to decode them instead of panicking when you see red text in your console",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "debugging-error-reading",

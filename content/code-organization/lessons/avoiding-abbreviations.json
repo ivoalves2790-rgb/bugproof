@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "naming-things",
   "courseSlug": "code-organization",
-  "intro": "A teammate's code uses heavy abbreviations: 'usr', 'btn', 'msg', 'cfg', 'amt'. Now there's a bug and you need to understand their code to fix it. The abbreviations are making it nearly impossible.",
+  "intro": "A teammate's code uses heavy abbreviations: 'usr', 'btn', 'msg', 'cfg', 'amt'. It's like reading a text message full of slang from a language you don't speak. Now there's a bug and you need to understand their code to fix it. The abbreviations are making it nearly impossible.",
   "teach": [
     {
       "type": "analogy",

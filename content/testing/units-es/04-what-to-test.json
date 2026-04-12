@@ -1,7 +1,7 @@
 {
   "slug": "what-to-test",
   "title": "Qué testear",
-  "description": "Decidiendo qué merece un test y qué puedes omitir",
+  "description": "Imagina elegir qué habitaciones de una casa necesitan detector de humo -- aprende a decidir qué merece un test y qué puedes omitir",
   "order": 4,
   "courseSlug": "testing",
   "tier": "intermediate"

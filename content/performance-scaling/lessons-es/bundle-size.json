@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "El bundle de JavaScript de tu app sigue creciendo. Cada nueva funcionalidad agrega otra biblioteca, y nadie está verificando el costo. Usemos herramientas de línea de comandos para medir tu bundle, encontrar las dependencias pesadas y recortar la grasa.",
+  "intro": "El bundle de JavaScript de tu app sigue creciendo. Piensa en ello como una maleta que se hace más pesada con cada viaje -- eventualmente te cuesta extra y lo ralentiza todo. Cada nueva funcionalidad agrega otra biblioteca, y nadie está verificando el costo. Usemos herramientas de línea de comandos para medir tu bundle, encontrar las dependencias pesadas y recortar la grasa.",
   "teach": [
     {
       "type": "analogy",

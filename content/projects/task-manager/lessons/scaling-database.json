@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Your task manager is growing. Users are reporting that loading their task list takes 5+ seconds. The database is the bottleneck. How do you fix it without rewriting everything?",
+  "intro": "Your task manager is growing. Users are reporting that loading their task list takes 5+ seconds. Think of it like a library with no catalog — the librarian has to check every shelf to find your book. The database is the bottleneck. How do you fix it without rewriting everything?",
   "teach": [
     {
       "type": "text",

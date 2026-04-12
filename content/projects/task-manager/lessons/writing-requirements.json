@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "You need to describe your task manager to an AI assistant. The quality of your description determines the quality of what gets built. Make good choices.",
+  "intro": "You need to describe your task manager to an AI assistant. It's like giving directions to a taxi driver — say 'somewhere nice' and you might end up in a parking lot, but give exact GPS coordinates and you arrive exactly where you want. The quality of your description determines the quality of what gets built. Make good choices.",
   "teach": [
     {
       "type": "text",

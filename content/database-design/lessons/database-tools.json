@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "You've just joined a team and need to look at the production database to debug an issue. But you've never connected to a remote database before. Let's walk through the process and learn about the tools developers use.",
+  "intro": "You've just joined a team and need to look at the production database to debug an issue. Similar to how you can read a book at the library, on an e-reader, or by audiobook, there are different tools to access the same data. But you've never connected to a remote database before. Let's walk through the process and learn about the tools developers use.",
   "teach": [
     {
       "type": "analogy",

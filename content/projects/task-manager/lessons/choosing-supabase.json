@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "We're using Supabase as our backend for the task manager. Swipe right on true Supabase advantages, left on misconceptions or things that aren't quite right.",
+  "intro": "We're using Supabase as our backend for the task manager. It's like moving into a furnished apartment instead of building a house from scratch — the essentials are already set up. Swipe right on true Supabase advantages, left on misconceptions or things that aren't quite right.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Tu equipo acaba de desplegar una nueva funcionalidad, pero la compilación falló en el servidor aunque todo funciona localmente. Necesitas averiguar qué salió mal y poner el sitio de nuevo en línea.",
+  "intro": "Tu equipo acaba de desplegar una nueva funcionalidad, pero la compilación falló en el servidor aunque todo funciona localmente. Piensa en ello como empacar una maleta -- si algo no cabe bien, todo el viaje se retrasa. Necesitas averiguar qué salió mal y poner el sitio de nuevo en línea.",
   "teach": [
     {
       "type": "analogy",

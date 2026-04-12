@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Los tests unitarios verifican funciones individuales, pero los usuarios reales no llaman funciones — hacen clic en botones, llenan formularios y navegan paginas. Probemos los recorridos reales de los usuarios a traves de tu gestor de tareas.",
+  "intro": "Los tests unitarios verifican funciones individuales, pero los usuarios reales no llaman funciones — hacen clic en botones, llenan formularios y navegan paginas. Tal como un teatro necesita un ensayo general completo y no solo repasar los dialogos, tu app necesita tests de flujo de extremo a extremo. Probemos los recorridos reales de los usuarios a traves de tu gestor de tareas.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "Un desarrollador junior puso lógica sensible en el lugar equivocado -- está verificando si un usuario tiene acceso de administrador en el lado del cliente (en el navegador), lo que significa que cualquier usuario podría evadirlo con las DevTools.",
+  "intro": "Un desarrollador junior puso lógica sensible en el lugar equivocado -- imagina poner al guardia de seguridad en el vestíbulo en vez de en la puerta de la bóveda. Está verificando si un usuario tiene acceso de administrador en el lado del cliente (en el navegador), lo que significa que cualquier usuario podría evadirlo con las DevTools.",
   "teach": [
     {
       "type": "analogy",

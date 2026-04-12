@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "A .env file is where you store environment variables locally. A developer's app can't connect to the database after cloning the repo. Their .env file is set up wrong. Find the bug.",
+  "intro": "A .env file is where you store environment variables locally -- think of it like your phone's personal settings page that you wouldn't copy to someone else's device. A developer's app can't connect to the database after cloning the repo. Their .env file is set up wrong. Find the bug.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "If you've ever used a spreadsheet, you already understand the basics of database tables. Rows, columns, cells -- the concepts are the same. But databases add important rules that spreadsheets don't have. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "If you've ever used a spreadsheet, you already understand the basics of database tables. Imagine a spreadsheet with strict rules -- you can't put text in a number column or leave required fields blank. Rows, columns, cells -- the concepts are the same. But databases add important rules that spreadsheets don't have. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

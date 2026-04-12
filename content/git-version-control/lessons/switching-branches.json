@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "You're juggling two features: dark mode and a search bar. You need to switch between branches to work on each one. But be careful -- Git won't let you switch if you have unsaved changes that could be lost.",
+  "intro": "You're juggling two features: dark mode and a search bar. Imagine having separate desks for each project -- you can walk over to a different desk and pick up right where you left off. You need to switch between branches to work on each one. But be careful -- Git won't let you switch if you have unsaved changes that could be lost.",
   "teach": [
     {
       "type": "analogy",

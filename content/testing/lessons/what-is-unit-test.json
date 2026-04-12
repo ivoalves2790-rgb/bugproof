@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Unit tests are the foundation of all testing. They test the smallest pieces of your code in isolation. Let's separate fact from fiction about what unit tests are and aren't. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "Unit tests are the foundation of all testing. They test the smallest pieces of your code in isolation -- similar to checking each individual LEGO brick for cracks before building the whole castle. Let's separate fact from fiction about what unit tests are and aren't. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Professional teams don't just have 'my laptop' and 'the live site'. They have multiple environments for testing at different stages. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "Professional teams don't just have 'my laptop' and 'the live site'. Imagine a Broadway show -- you wouldn't skip from reading the script straight to performing for an audience. They have multiple environments for testing at different stages. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "El cache significa almacenar datos para no tener que obtenerlos de nuevo. Bien hecho, hace que tu app se sienta instantanea. Mal hecho, muestra datos obsoletos a los usuarios. Separemos lo bueno de lo malo.",
+  "intro": "El cache significa almacenar datos para no tener que obtenerlos de nuevo — similar a tener una hoja de apuntes en vez de releer todo el libro cada vez. Bien hecho, hace que tu app se sienta instantanea. Mal hecho, muestra datos obsoletos a los usuarios. Separemos lo bueno de lo malo.",
   "teach": [
     {
       "type": "text",

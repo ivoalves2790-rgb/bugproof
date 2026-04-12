@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Git mantiene tu codigo seguro y te permite deshacer errores. Desliza a la derecha en buenos habitos de git, a la izquierda en practicas que te causaran dolor.",
+  "intro": "Git mantiene tu codigo seguro y te permite deshacer errores. Piensa en los commits como puntos de guardado en un videojuego — si la pelea con el jefe sale mal, puedes recargar en vez de empezar de cero. Desliza a la derecha en buenos habitos de git, a la izquierda en practicas que te causaran dolor.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "A developer is building error handling for their app, but they mixed up some HTTP status codes. The code uses the wrong status code for a 'not found' error, which will confuse any frontend that reads the response.",
+  "intro": "A developer is building error handling for their app, but they mixed up some HTTP status codes. Just like traffic lights tell drivers what to do, status codes tell your browser what happened -- and using the wrong one causes confusion. The code uses the wrong status code for a 'not found' error, which will confuse any frontend that reads the response.",
   "teach": [
     {
       "type": "analogy",

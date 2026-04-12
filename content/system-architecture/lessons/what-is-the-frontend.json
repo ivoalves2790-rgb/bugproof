@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "The frontend is everything the user sees and interacts with. But there are common misconceptions about what counts as 'frontend' and what it's responsible for. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "The frontend is everything the user sees and interacts with -- similar to a restaurant's dining room where customers experience the menu, decor, and service. But there are common misconceptions about what counts as 'frontend' and what it's responsible for. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

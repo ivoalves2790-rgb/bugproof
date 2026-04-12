@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "You're building the most important UI component in your task manager: the task card. Every design decision you make here affects how users interact with their tasks. Let's see how you approach it.",
+  "intro": "You're building the most important UI component in your task manager: the task card. Imagine it like a sticky note on a whiteboard — it needs to show just enough info at a glance without overwhelming. Every design decision you make here affects how users interact with their tasks. Let's see how you approach it.",
   "teach": [
     {
       "type": "text",

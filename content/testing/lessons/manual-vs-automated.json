@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "You've been testing your code by clicking around in the browser and checking if things look right. That's manual testing -- and it has some serious drawbacks. Let's compare manual and automated testing. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "You've been testing your code by clicking around in the browser and checking if things look right. That's manual testing -- and it has some serious drawbacks. It's like hand-washing every dish versus using a dishwasher. Let's compare manual and automated testing. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

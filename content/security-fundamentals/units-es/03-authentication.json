@@ -1,7 +1,7 @@
 {
   "slug": "authentication",
   "title": "Autenticación y autorización",
-  "description": "Contraseñas, tokens, sesiones y quién tiene acceso a qué",
+  "description": "Igual que un portero verificando identificaciones en la entrada, aprende sobre contraseñas, tokens, sesiones y quién tiene acceso a qué",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "security-fundamentals",

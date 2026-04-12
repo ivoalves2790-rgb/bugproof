@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "Your project has a single 400-line file called app.js that contains everything: components, utilities, API calls, and configuration. Let's split it into organized files and folders using the terminal.",
+  "intro": "Your project has a single 400-line file called app.js that contains everything: components, utilities, API calls, and configuration. Imagine finally organizing that junk drawer where everything ends up -- you're not throwing anything away, just putting things where they belong. Let's split it into organized files and folders using the terminal.",
   "teach": [
     {
       "type": "analogy",

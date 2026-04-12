@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "Las herramientas de codificación con IA son increíbles para generar código funcional, pero tienen puntos ciegos cuando se trata de organización. Entender estos puntos ciegos te ayuda a saber qué arreglar después de que la IA escribe tu código. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "intro": "Las herramientas de codificación con IA son increíbles para generar código funcional, pero tienen puntos ciegos cuando se trata de organización. Piensa en la IA como un chef brillante que hace comida deliciosa pero deja la cocina hecha un desastre. Entender estos puntos ciegos te ayuda a saber qué arreglar después de que la IA escribe tu código. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
   "teach": [
     {
       "type": "analogy",

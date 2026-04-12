@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Estas construyendo el componente de interfaz mas importante de tu gestor de tareas: la tarjeta de tarea. Cada decision de diseno que tomes aqui afecta como los usuarios interactuan con sus tareas. Veamos como lo abordas.",
+  "intro": "Estas construyendo el componente de interfaz mas importante de tu gestor de tareas: la tarjeta de tarea. Imaginala como una nota adhesiva en un tablero — necesita mostrar justo la informacion suficiente de un vistazo sin abrumar. Cada decision de diseno que tomes aqui afecta como los usuarios interactuan con sus tareas. Veamos como lo abordas.",
   "teach": [
     {
       "type": "text",

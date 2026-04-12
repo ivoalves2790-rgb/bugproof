@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "Un desarrollador está creando una tabla para almacenar información de productos, pero eligió el tipo de datos incorrecto para la columna de precio. Esto causa que los precios pierdan sus decimales -- ¡$49.99 se convierte en $49!",
+  "intro": "Un desarrollador está creando una tabla para almacenar información de productos, pero eligió el tipo de datos incorrecto para la columna de precio. Piensa en los tipos de datos como contenedores de diferentes formas -- un agujero redondo solo acepta piezas redondas, y meter dinero en una columna de enteros pierde los centavos. Esto causa que los precios pierdan sus decimales -- ¡$49.99 se convierte en $49!",
   "teach": [
     {
       "type": "analogy",

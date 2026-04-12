@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Your task manager works great locally, but once it goes online, anyone could read or delete anyone else's tasks. Let's explore why authentication matters and what it actually protects.",
+  "intro": "Your task manager works great locally, but once it goes online, anyone could read or delete anyone else's tasks. Imagine a hotel with no room keys — anyone could walk into any room. Let's explore why authentication matters and what it actually protects.",
   "teach": [
     {
       "type": "text",

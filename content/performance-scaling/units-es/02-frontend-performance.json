@@ -1,7 +1,7 @@
 {
   "slug": "frontend-performance",
   "title": "Rendimiento del frontend",
-  "description": "Optimización de imágenes, carga diferida, división de código y rendimiento de renderizado",
+  "description": "Igual que empacar una maleta eficientemente, aprende sobre optimización de imágenes, carga diferida, división de código y rendimiento de renderizado",
   "order": 2,
   "courseSlug": "performance-scaling",
   "tier": "beginner",

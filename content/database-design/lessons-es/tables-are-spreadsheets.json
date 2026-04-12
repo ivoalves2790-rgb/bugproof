@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "Si alguna vez has usado una hoja de cálculo, ya entiendes los conceptos básicos de las tablas de base de datos. Filas, columnas, celdas -- los conceptos son los mismos. Pero las bases de datos agregan reglas importantes que las hojas de cálculo no tienen. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "Si alguna vez has usado una hoja de cálculo, ya entiendes los conceptos básicos de las tablas de base de datos. Imagina una hoja de cálculo con reglas estrictas -- no puedes poner texto en una columna de números ni dejar campos obligatorios vacíos. Filas, columnas, celdas -- los conceptos son los mismos. Pero las bases de datos agregan reglas importantes que las hojas de cálculo no tienen. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "naming-things",
   "courseSlug": "code-organization",
-  "intro": "This code works perfectly but is impossible to understand because of terrible variable names. Every variable is named with single letters or meaningless words. Find the worst offender -- the variable whose name gives you zero clue about what it contains.",
+  "intro": "This code works perfectly but is impossible to understand because of terrible variable names. It's like moving into a house where every box is labeled 'stuff' -- you have to open each one to find anything. Every variable is named with single letters or meaningless words. Find the worst offender -- the variable whose name gives you zero clue about what it contains.",
   "teach": [
     {
       "type": "analogy",

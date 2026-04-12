@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Google uses three metrics called Core Web Vitals to measure how fast your site feels. They affect search rankings and user experience. Let's see if you can tell the facts from the fiction. Swipe RIGHT for true, LEFT for false.",
+  "intro": "Google uses three metrics called Core Web Vitals to measure how fast your site feels. Imagine a doctor's checkup but for your website -- three key numbers that reveal its overall health. They affect search rankings and user experience. Let's see if you can tell the facts from the fiction. Swipe RIGHT for true, LEFT for false.",
   "teach": [
     {
       "type": "analogy",

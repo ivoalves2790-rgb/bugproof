@@ -1,7 +1,7 @@
 {
   "slug": "queries",
   "title": "Writing Queries",
-  "description": "Master the SQL commands you'll use every day -- SELECT, WHERE, ORDER BY, GROUP BY, and more",
+  "description": "Imagine asking a librarian to find exactly what you need -- master the SQL commands you'll use every day like SELECT, WHERE, ORDER BY, GROUP BY, and more",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "database-design",

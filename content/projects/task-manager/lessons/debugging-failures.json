@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Your tests are failing and you need to figure out why. Is it a real bug or a bad test? Swipe right on good debugging practices, left on bad ones.",
+  "intro": "Your tests are failing and you need to figure out why. Imagine you're a detective examining a crime scene — the error message is your first clue. Is it a real bug or a bad test? Swipe right on good debugging practices, left on bad ones.",
   "teach": [
     {
       "type": "text",

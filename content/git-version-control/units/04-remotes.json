@@ -1,7 +1,7 @@
 {
   "slug": "remotes",
   "title": "Remotes & GitHub",
-  "description": "Push, pull, clone, and collaborate with remote repositories",
+  "description": "Imagine a shared cloud drive for your code history -- learn to push, pull, clone, and collaborate with remote repositories",
   "order": 4,
   "courseSlug": "git-version-control",
   "tier": "intermediate",

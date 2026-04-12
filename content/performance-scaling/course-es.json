@@ -2,7 +2,7 @@
   "slug": "performance-scaling",
   "title": "Rendimiento y Escalabilidad",
   "description": "Consultas N+1, cache, carga diferida y perfilado",
-  "longDescription": "Una aplicacion lenta pierde usuarios. El rendimiento no se trata de optimizacion prematura -- se trata de conocer las trampas comunes que hacen que las aplicaciones se arrastren y las soluciones directas para cada una. Este curso cubre los mayores asesinos del rendimiento: consultas N+1, caches faltantes, paquetes inflados, imagenes sin optimizar y cuellos de botella en el renderizado. Aprenderas a detectarlos, corregirlos y medir la diferencia.",
+  "longDescription": "Una aplicacion lenta pierde usuarios. El rendimiento no se trata de optimizacion prematura -- se trata de conocer las trampas comunes que hacen que las aplicaciones se arrastren y las soluciones directas para cada una. Similar a una autopista, tu aplicacion puede manejar mucho trafico hasta que un cuello de botella provoca que todo se detenga. Este curso cubre los mayores asesinos del rendimiento: consultas N+1, caches faltantes, paquetes inflados, imagenes sin optimizar y cuellos de botella en el renderizado. Aprenderas a detectarlos, corregirlos y medir la diferencia.",
   "icon": "zap",
   "color": "#FD79A8",
   "prerequisites": [],

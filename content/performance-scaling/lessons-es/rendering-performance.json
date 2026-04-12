@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Un componente React se re-renderiza más de 200 veces cuando el usuario escribe en un campo de búsqueda, haciendo toda la página laggy. El componente renderiza una lista grande de elementos y los filtra en cada tecleo. Encuentra la línea que causa re-renderizados innecesarios.",
+  "intro": "Un componente React se re-renderiza más de 200 veces cuando el usuario escribe en un campo de búsqueda, haciendo toda la página laggy. Imagina repintar toda tu casa cada vez que cuelgas un cuadro nuevo -- eso es lo que hacen los re-renderizados innecesarios. El componente renderiza una lista grande de elementos y los filtra en cada tecleo. Encuentra la línea que causa re-renderizados innecesarios.",
   "teach": [
     {
       "type": "analogy",

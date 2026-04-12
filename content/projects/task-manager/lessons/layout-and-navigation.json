@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Your task manager needs a layout structure and navigation system. The choices you make now determine how the app feels to use on both mobile and desktop. Let's see how you handle the key decisions.",
+  "intro": "Your task manager needs a layout structure and navigation system. Similar to an architect's floor plan, the layout defines where everything lives and how users move between sections. The choices you make now determine how the app feels to use on both mobile and desktop. Let's see how you handle the key decisions.",
   "teach": [
     {
       "type": "text",

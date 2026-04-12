@@ -1,7 +1,7 @@
 {
   "slug": "why-organization-matters",
   "title": "Por qué importa la organización",
-  "description": "Código espagueti vs código limpio, el costo de la desorganización y tu primera refactorización",
+  "description": "Piensa en el código desordenado como un escritorio lleno de cosas -- explora código espagueti vs código limpio, el costo de la desorganización y tu primera refactorización",
   "order": 1,
   "courseSlug": "code-organization",
   "tier": "beginner",

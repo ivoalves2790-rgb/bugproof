@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "React apps are built from components. Judge whether each approach to component design is a good practice or a bad one.",
+  "intro": "React apps are built from components — just like LEGO sets are built from small, reusable bricks. Judge whether each approach to component design is a good practice or a bad one.",
   "teach": [
     {
       "type": "analogy",

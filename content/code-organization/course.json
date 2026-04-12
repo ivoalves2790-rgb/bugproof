@@ -2,7 +2,7 @@
   "slug": "code-organization",
   "title": "Code Organization",
   "description": "File structure, naming, separation of concerns",
-  "longDescription": "AI can write code, but it can't organize a codebase. As your project grows, good structure is the difference between 'I can find and change anything in 5 minutes' and 'I'm afraid to touch anything'. This course teaches practical code organization: how to name things, when to split files, how to separate concerns, and how to refactor without breaking everything.",
+  "longDescription": "AI can write code, but it can't organize a codebase. As your project grows, good structure is the difference between 'I can find and change anything in 5 minutes' and 'I'm afraid to touch anything'. It's like organizing a kitchen -- when every tool has a clear place, you cook faster and never waste time searching. This course teaches practical code organization: how to name things, when to split files, how to separate concerns, and how to refactor without breaking everything.",
   "icon": "folder-code",
   "color": "#00B894",
   "prerequisites": [],

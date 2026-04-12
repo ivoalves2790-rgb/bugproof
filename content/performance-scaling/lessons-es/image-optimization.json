@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Una página de listado de productos carga 24 imágenes de productos, pero tarda 12 segundos en cargar completamente en móvil. Las imágenes son el problema. Encuentra la línea en este componente React que está causando el mayor impacto en el rendimiento.",
+  "intro": "Una página de listado de productos carga 24 imágenes de productos, pero tarda 12 segundos en cargar completamente en móvil. Imagina pedir un espectacular de carretera solo para mostrar una foto pequeña en tu sala -- eso es lo que hacen las imágenes sin optimizar. Encuentra la línea en este componente React que está causando el mayor impacto en el rendimiento.",
   "teach": [
     {
       "type": "analogy",

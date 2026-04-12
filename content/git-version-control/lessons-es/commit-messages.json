@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Los mensajes de commit son notas para tu yo del futuro (y tus compañeros de equipo). Un buen mensaje explica QUÉ cambió y POR QUÉ. Desliza a la derecha para mensajes de commit BUENOS y a la izquierda para MALOS.",
+  "intro": "Los mensajes de commit son notas para tu yo del futuro (y tus compañeros de equipo). Piensa en ellos como etiquetas en cajas de mudanza -- 'cosas de cocina' es mucho más útil que 'varios'. Un buen mensaje explica QUÉ cambió y POR QUÉ. Desliza a la derecha para mensajes de commit BUENOS y a la izquierda para MALOS.",
   "teach": [
     {
       "type": "analogy",

@@ -1,7 +1,7 @@
 {
   "slug": "naming-things",
   "title": "Naming Things",
-  "description": "Variable naming, function naming, file naming, and conventions",
+  "description": "Just like labeling boxes when you move, good names make everything findable -- learn variable naming, function naming, file naming, and conventions",
   "order": 2,
   "courseSlug": "code-organization",
   "tier": "beginner",

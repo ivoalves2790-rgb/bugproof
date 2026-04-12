@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "A clean folder structure makes your project navigable and maintainable. Swipe right on solid organization practices, left on messy habits that will haunt you later.",
+  "intro": "A clean folder structure makes your project navigable and maintainable. Imagine a closet where everything is sorted versus one big pile — only one lets you find what you need in seconds. Swipe right on solid organization practices, left on messy habits that will haunt you later.",
   "teach": [
     {
       "type": "text",

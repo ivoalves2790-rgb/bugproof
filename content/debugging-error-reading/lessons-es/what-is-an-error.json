@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Los errores no son un castigo -- son mensajes de tu computadora tratando de ayudarte a resolver un problema. Pero muchos principiantes tienen una idea equivocada sobre lo que significan los errores. Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
+  "intro": "Los errores no son un castigo -- son mensajes de tu computadora tratando de ayudarte a resolver un problema, igual que la luz de revisión del motor te avisa que algo necesita atención sin significar que tu auto está destruido. Pero muchos principiantes tienen una idea equivocada sobre lo que significan los errores. Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

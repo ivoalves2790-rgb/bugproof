@@ -1,7 +1,7 @@
 {
   "slug": "domains-dns",
   "title": "Dominios y DNS",
-  "description": "Cómo los nombres de dominio, los registros DNS y HTTPS funcionan juntos",
+  "description": "Similar a cómo una dirección ayuda a encontrar tu casa, aprende cómo los nombres de dominio, los registros DNS y HTTPS funcionan juntos",
   "order": 4,
   "courseSlug": "deployment-devops",
   "tier": "intermediate"

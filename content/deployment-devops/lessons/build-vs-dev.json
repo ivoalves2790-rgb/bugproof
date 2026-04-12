@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "When you run your app locally, you're in 'development mode'. But production uses a completely different 'build mode'. A developer's deploy is failing because they mixed up the two. Find the bug.",
+  "intro": "When you run your app locally, you're in 'development mode'. But production uses a completely different 'build mode' -- think of it like the difference between a dress rehearsal and opening night. A developer's deploy is failing because they mixed up the two. Find the bug.",
   "teach": [
     {
       "type": "analogy",

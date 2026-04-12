@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Estás trabajando en una aplicación de blog y quieres agregar un modo oscuro. En lugar de cambiar el código principal directamente, crearás una rama separada para trabajar de forma segura.",
+  "intro": "Estás trabajando en una aplicación de blog y quieres agregar un modo oscuro. Imagina hacer una copia de una pintura para experimentar con nuevos colores sin arriesgar el original. En lugar de cambiar el código principal directamente, crearás una rama separada para trabajar de forma segura.",
   "teach": [
     {
       "type": "analogy",

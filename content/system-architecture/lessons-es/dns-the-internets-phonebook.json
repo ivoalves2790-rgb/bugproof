@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Tu amigo dice: '¡Mi sitio web está caído! ¡Nadie puede acceder!' Investigarás y descubrirás cómo funciona realmente el DNS -- el sistema que traduce nombres de dominio en direcciones IP.",
+  "intro": "Tu amigo dice: '¡Mi sitio web está caído! ¡Nadie puede acceder!' Es como saber el nombre de un restaurante pero no su dirección -- sin DNS, tu navegador no puede encontrar nada. Investigarás y descubrirás cómo funciona realmente el DNS -- el sistema que traduce nombres de dominio en direcciones IP.",
   "teach": [
     {
       "type": "analogy",

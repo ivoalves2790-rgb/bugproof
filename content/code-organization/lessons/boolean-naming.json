@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "naming-things",
   "courseSlug": "code-organization",
-  "intro": "Boolean variables hold true or false. Their names should read like yes/no questions. This component has booleans with confusing names that make the logic nearly impossible to follow. Find the boolean name that causes the most confusion.",
+  "intro": "Boolean variables hold true or false. Their names should read like yes/no questions -- similar to light switches with clear labels so you know exactly what each one controls. This component has booleans with confusing names that make the logic nearly impossible to follow. Find the boolean name that causes the most confusion.",
   "teach": [
     {
       "type": "analogy",

@@ -1,7 +1,7 @@
 {
   "slug": "integration-tests",
   "title": "Tests de integración",
-  "description": "Testeando cómo múltiples partes de tu app trabajan juntas",
+  "description": "Similar a verificar que los engranajes encajen en una máquina, aprende a testear cómo múltiples partes de tu app trabajan juntas",
   "order": 3,
   "courseSlug": "testing",
   "tier": "intermediate"

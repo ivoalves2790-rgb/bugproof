@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "There are two big families of databases: SQL (structured tables) and NoSQL (flexible documents). There's a lot of debate about which is 'better,' but both have their place. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "There are two big families of databases: SQL (structured tables) and NoSQL (flexible documents). Think of SQL like a spreadsheet with strict columns, and NoSQL like a notebook where each page can look different. There's a lot of debate about which is 'better,' but both have their place. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

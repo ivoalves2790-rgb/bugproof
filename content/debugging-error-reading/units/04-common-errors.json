@@ -1,7 +1,7 @@
 {
   "slug": "common-errors",
   "title": "Common Error Patterns",
-  "description": "Recognize the most frequent bugs you'll encounter and learn their fixes on sight",
+  "description": "Similar to a mechanic who recognizes engine sounds, learn to spot the most frequent bugs on sight and know their fixes",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "debugging-error-reading",

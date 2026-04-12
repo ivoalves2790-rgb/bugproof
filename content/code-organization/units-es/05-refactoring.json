@@ -1,7 +1,7 @@
 {
   "slug": "refactoring",
   "title": "Refactorización",
-  "description": "Reestructurando código de forma segura sin romper nada",
+  "description": "Es como renovar una casa mientras la gente sigue viviendo en ella -- aprende a reestructurar código de forma segura sin romper nada",
   "order": 5,
   "courseSlug": "code-organization",
   "tier": "advanced",

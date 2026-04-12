@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "SQL es el lenguaje que usas para hablar con una base de datos. Se lee casi como inglés: 'SELECT name FROM users WHERE age > 18.' Ejecutemos algunos comandos SQL reales y veamos los resultados.",
+  "intro": "SQL es el lenguaje que usas para hablar con una base de datos. Es como decirle a un bibliotecario exactamente qué libro quieres -- lo describes y él lo encuentra por ti. Se lee casi como inglés: 'SELECT name FROM users WHERE age > 18.' Ejecutemos algunos comandos SQL reales y veamos los resultados.",
   "teach": [
     {
       "type": "analogy",

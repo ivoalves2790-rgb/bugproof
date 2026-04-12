@@ -1,7 +1,7 @@
 {
   "slug": "relationships",
   "title": "Relationships",
-  "description": "Connect your tables together with foreign keys and understand one-to-many, many-to-many, and one-to-one relationships",
+  "description": "Similar to how a family tree connects relatives, connect your tables together with foreign keys and understand one-to-many, many-to-many, and one-to-one relationships",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "database-design",

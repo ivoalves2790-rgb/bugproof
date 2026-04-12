@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Your app is live. But how do you know if it's actually working? Monitoring helps you see problems before your users do. Swipe right on good monitoring practices.",
+  "intro": "Your app is live. But how do you know if it's actually working? Imagine driving a car with no dashboard — no speedometer, no fuel gauge, no warning lights. Monitoring gives your app that dashboard so you can see problems before your users do. Swipe right on good monitoring practices.",
   "teach": [
     {
       "type": "text",

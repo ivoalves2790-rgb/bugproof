@@ -1,7 +1,7 @@
 {
   "slug": "environment-config",
   "title": "Environment & Config",
-  "description": "Environment variables, secrets, and configuration across environments",
+  "description": "Just like a recipe that changes based on who's cooking, learn about environment variables, secrets, and configuration across environments",
   "order": 2,
   "courseSlug": "deployment-devops",
   "tier": "beginner",

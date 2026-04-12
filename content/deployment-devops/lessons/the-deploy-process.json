@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Let's walk through the actual steps of deploying a project. You'll push code to GitHub and connect it to a hosting platform -- the standard modern workflow.",
+  "intro": "Let's walk through the actual steps of deploying a project, similar to shipping a package -- you pack it, label it, and send it off. You'll push code to GitHub and connect it to a hosting platform -- the standard modern workflow.",
   "teach": [
     {
       "type": "analogy",

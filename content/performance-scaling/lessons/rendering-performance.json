@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "A React component re-renders 200+ times when the user types in a search box, making the whole page laggy. The component renders a large list of items and filters them on each keystroke. Find the line causing unnecessary re-renders.",
+  "intro": "A React component re-renders 200+ times when the user types in a search box, making the whole page laggy. Imagine repainting your entire house every time you hang a new picture -- that's what unnecessary re-renders do. The component renders a large list of items and filters them on each keystroke. Find the line causing unnecessary re-renders.",
   "teach": [
     {
       "type": "analogy",

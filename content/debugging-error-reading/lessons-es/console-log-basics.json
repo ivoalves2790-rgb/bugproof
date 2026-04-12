@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "console-debugging",
   "courseSlug": "debugging-error-reading",
-  "intro": "Un desarrollador está intentando depurar por qué el total de su carrito de compras siempre está mal. Agregó sentencias console.log, pero las puso en los lugares equivocados así que los registros no son útiles. Encuentra el log mal ubicado.",
+  "intro": "Un desarrollador está intentando depurar por qué el total de su carrito de compras siempre está mal. Imagina poner una cámara de seguridad en la entrada en vez de en la caja registradora -- nunca captarías el problema real. Agregó sentencias console.log, pero las puso en los lugares equivocados así que los registros no son útiles. Encuentra el log mal ubicado.",
   "teach": [
     {
       "type": "analogy",

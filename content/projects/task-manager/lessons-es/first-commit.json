@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Has configurado tu proyecto de Next.js y estas listo para hacer tu primer commit. Los habitos que construyas ahora te acompanaran durante todo el proyecto. Veamos si empiezas limpio.",
+  "intro": "Has configurado tu proyecto de Next.js y estas listo para hacer tu primer commit. Piensa en ello como sellar una capsula del tiempo — lo que pongas ahi queda preservado para siempre en la historia de tu proyecto. Los habitos que construyas ahora te acompanaran durante todo el proyecto. Veamos si empiezas limpio.",
   "teach": [
     {
       "type": "text",

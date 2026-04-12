@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Launch day is here. You're about to share your task manager with the world. But first, let's make sure you haven't forgotten anything critical.",
+  "intro": "Launch day is here. Just like a theater company checks the lights and sound before opening night, you need to verify everything works before the audience arrives. You're about to share your task manager with the world. But first, let's make sure you haven't forgotten anything critical.",
   "teach": [
     {
       "type": "text",

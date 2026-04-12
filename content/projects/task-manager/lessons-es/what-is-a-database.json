@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Antes de almacenar una sola tarea, necesitas entender que es y que no es realmente una base de datos. Desliza a la derecha en afirmaciones verdaderas, a la izquierda en falsas.",
+  "intro": "Antes de almacenar una sola tarea, necesitas entender que es y que no es realmente una base de datos. Imagina un archivador con carpetas etiquetadas versus una pila de notas adhesivas — esa es la diferencia entre tener una base de datos y no tenerla. Desliza a la derecha en afirmaciones verdaderas, a la izquierda en falsas.",
   "teach": [
     {
       "type": "text",

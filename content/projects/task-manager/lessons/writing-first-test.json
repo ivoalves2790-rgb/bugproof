@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "You've decided to add tests to your task manager. You open the testing framework docs and stare at the blank test file. Let's walk through writing your first real test.",
+  "intro": "You've decided to add tests to your task manager. You open the testing framework docs and stare at the blank test file. It's like writing a lab report in science class — set up the experiment, run it, and check the results. Let's walk through writing your first real test.",
   "teach": [
     {
       "type": "text",

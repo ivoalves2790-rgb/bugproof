@@ -1,7 +1,7 @@
 {
   "slug": "frontend-performance",
   "title": "Frontend Performance",
-  "description": "Image optimization, lazy loading, code splitting, and rendering performance",
+  "description": "Just like packing a suitcase efficiently, learn image optimization, lazy loading, code splitting, and rendering performance",
   "order": 2,
   "courseSlug": "performance-scaling",
   "tier": "beginner",

@@ -1,7 +1,7 @@
 {
   "slug": "apis",
   "title": "APIs & Data Flow",
-  "description": "Discover how different parts of an application communicate through APIs -- the contracts that hold modern software together",
+  "description": "Just like a waiter taking orders between you and the kitchen, discover how different parts of an application communicate through APIs -- the contracts that hold modern software together",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "system-architecture",

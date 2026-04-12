@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "AI coding tools are amazing at generating working code, but they have blind spots when it comes to organization. Understanding these blind spots helps you know what to fix after AI writes your code. Swipe RIGHT for true, LEFT for false.",
+  "intro": "AI coding tools are amazing at generating working code, but they have blind spots when it comes to organization. Think of AI like a brilliant chef who makes delicious food but leaves the kitchen a total mess. Understanding these blind spots helps you know what to fix after AI writes your code. Swipe RIGHT for true, LEFT for false.",
   "teach": [
     {
       "type": "analogy",

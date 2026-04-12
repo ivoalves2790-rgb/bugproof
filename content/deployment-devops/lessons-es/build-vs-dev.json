@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Cuando ejecutas tu app localmente, estás en 'modo de desarrollo'. Pero producción usa un 'modo de compilación' completamente diferente. El despliegue de un desarrollador está fallando porque mezcló los dos. Encuentra el error.",
+  "intro": "Cuando ejecutas tu app localmente, estás en 'modo de desarrollo'. Pero producción usa un 'modo de compilación' completamente diferente -- piensa en ello como la diferencia entre un ensayo general y la noche de estreno. El despliegue de un desarrollador está fallando porque mezcló los dos. Encuentra el error.",
   "teach": [
     {
       "type": "analogy",

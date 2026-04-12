@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "HTTP es el lenguaje que tu navegador habla con los servidores. Cada sitio web que has visitado usa HTTP (o su primo seguro HTTPS) detrás de escena. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "HTTP es el lenguaje que tu navegador habla con los servidores -- imagina que es el idioma común que un mesero usa entre tú y la cocina. Cada sitio web que has visitado usa HTTP (o su primo seguro HTTPS) detrás de escena. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

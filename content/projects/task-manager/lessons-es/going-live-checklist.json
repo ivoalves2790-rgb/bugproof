@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "El dia del lanzamiento ha llegado. Estas a punto de compartir tu gestor de tareas con el mundo. Pero primero, aseguremonos de que no hayas olvidado nada critico.",
+  "intro": "El dia del lanzamiento ha llegado. Igual que una compania de teatro revisa las luces y el sonido antes de la noche de estreno, necesitas verificar que todo funcione antes de que llegue el publico. Estas a punto de compartir tu gestor de tareas con el mundo. Pero primero, aseguremonos de que no hayas olvidado nada critico.",
   "teach": [
     {
       "type": "text",

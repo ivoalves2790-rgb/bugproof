@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas necesita una base de datos para almacenar tareas. Hay muchas opciones, y la eleccion equivocada puede costarte dias de retrabajo. Toma la decision correcta.",
+  "intro": "Tu gestor de tareas necesita una base de datos para almacenar tareas. Piensa en ello como elegir entre un archivador ordenado y un cajon desordenado — la estructura correcta marca toda la diferencia. Hay muchas opciones, y la eleccion equivocada puede costarte dias de retrabajo. Toma la decision correcta.",
   "teach": [
     {
       "type": "text",

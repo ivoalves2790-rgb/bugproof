@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "La base de datos de tu gestor de tareas esta configurada y las tablas estan listas. Ahora necesitas escribir las consultas SQL que potencian cada funcionalidad. Una consulta incorrecta y los usuarios podrian ver las tareas de otros — o perder datos completamente.",
+  "intro": "La base de datos de tu gestor de tareas esta configurada y las tablas estan listas. Ahora necesitas escribir las consultas SQL que potencian cada funcionalidad. Piensa en las consultas como pedirle al bibliotecario exactamente el libro correcto — se preciso y obtendras lo que necesitas, se vago y te dara el estante equivocado. Una consulta incorrecta y los usuarios podrian ver las tareas de otros — o perder datos completamente.",
   "teach": [
     {
       "type": "text",

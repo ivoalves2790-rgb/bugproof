@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "No todos los tests son iguales. Algunos son rápidos y baratos, otros son lentos y caros. La pirámide de testing te ayuda a decidir cuántos de cada tipo escribir. Un equipo tiene su pirámide invertida -- encuentra el problema.",
+  "intro": "No todos los tests son iguales. Algunos son rápidos y baratos, otros son lentos y caros. Igual que un edificio necesita una base ancha y sólida y solo un pequeño penthouse arriba, la pirámide de testing te ayuda a decidir cuántos de cada tipo escribir. Un equipo tiene su pirámide invertida -- encuentra el problema.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Unit tests check individual functions, but real users don't call functions — they click buttons, fill forms, and navigate pages. Let's test actual user journeys through your task manager.",
+  "intro": "Unit tests check individual functions, but real users don't call functions — they click buttons, fill forms, and navigate pages. Just like a theater needs a full dress rehearsal and not just line checks, your app needs end-to-end flow tests. Let's test actual user journeys through your task manager.",
   "teach": [
     {
       "type": "text",

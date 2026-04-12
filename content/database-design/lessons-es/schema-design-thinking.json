@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "El diseño de esquemas se trata de decidir cómo organizar tus datos ANTES de escribir cualquier código. Las buenas decisiones ahora te ahorran reescrituras dolorosas después. Desliza a la DERECHA si la práctica de diseño es BUENA, a la IZQUIERDA si es MALA.",
+  "intro": "El diseño de esquemas se trata de decidir cómo organizar tus datos ANTES de escribir cualquier código. Es como organizar un clóset antes de llenarlo -- camisas aquí, pantalones allá, zapatos abajo. Las buenas decisiones ahora te ahorran reescrituras dolorosas después. Desliza a la DERECHA si la práctica de diseño es BUENA, a la IZQUIERDA si es MALA.",
   "teach": [
     {
       "type": "analogy",

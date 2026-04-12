@@ -1,7 +1,7 @@
 {
   "slug": "naming-things",
   "title": "Nombrando cosas",
-  "description": "Nombres de variables, nombres de funciones, nombres de archivos y convenciones",
+  "description": "Igual que etiquetar cajas en una mudanza, los buenos nombres hacen todo más fácil de encontrar -- aprende nombres de variables, funciones, archivos y convenciones",
   "order": 2,
   "courseSlug": "code-organization",
   "tier": "beginner",

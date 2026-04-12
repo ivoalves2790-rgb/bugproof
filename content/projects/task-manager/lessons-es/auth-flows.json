@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Hay varias formas de manejar la autenticacion — JWTs, sesiones, OAuth. Cada una tiene sus ventajas y desventajas. Desliza a la derecha en las afirmaciones correctas, a la izquierda en los conceptos erroneos.",
+  "intro": "Hay varias formas de manejar la autenticacion — JWTs, sesiones, OAuth. Piensa en ellas como diferentes maneras de demostrar tu identidad en un club: una pulsera, una verificacion de ID o un amigo que responde por ti. Cada una tiene sus ventajas y desventajas. Desliza a la derecha en las afirmaciones correctas, a la izquierda en los conceptos erroneos.",
   "teach": [
     {
       "type": "text",

@@ -2,7 +2,7 @@
   "slug": "ai-assisted-development",
   "title": "AI-Assisted Development",
   "description": "Prompting for better code, reviewing AI output",
-  "longDescription": "AI coding tools are transforming how software gets built. Whether you're using ChatGPT, Claude, GitHub Copilot, or Cursor, knowing how to work WITH AI makes you dramatically more productive -- and knowing when NOT to trust it keeps you out of trouble. This course teaches you the real skills behind vibe coding: crafting prompts that produce working code, understanding what AI can and can't do, spotting subtle bugs in AI-generated output, and building workflows that combine your creativity with AI's speed. You'll learn why context matters, how to break problems into AI-friendly pieces, and what to always verify before shipping AI-written code to production.",
+  "longDescription": "AI coding tools are transforming how software gets built. Think of AI as a brilliant junior developer who works at lightning speed but still needs your guidance to get things right. Whether you're using ChatGPT, Claude, GitHub Copilot, or Cursor, knowing how to work WITH AI makes you dramatically more productive -- and knowing when NOT to trust it keeps you out of trouble. This course teaches you the real skills behind vibe coding: crafting prompts that produce working code, understanding what AI can and can't do, spotting subtle bugs in AI-generated output, and building workflows that combine your creativity with AI's speed. You'll learn why context matters, how to break problems into AI-friendly pieces, and what to always verify before shipping AI-written code to production.",
   "icon": "bot",
   "color": "#E17055",
   "prerequisites": [],

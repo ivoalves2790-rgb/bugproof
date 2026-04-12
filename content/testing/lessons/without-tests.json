@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "You're working on a growing e-commerce app with zero tests. The team keeps shipping features fast, but lately things keep breaking. A simple CSS change just broke the entire checkout flow. Experience firsthand what happens when you skip testing.",
+  "intro": "You're working on a growing e-commerce app with zero tests. It's like driving without mirrors -- you can't see what your changes might hit. The team keeps shipping features fast, but lately things keep breaking. A simple CSS change just broke the entire checkout flow. Experience firsthand what happens when you skip testing.",
   "teach": [
     {
       "type": "analogy",

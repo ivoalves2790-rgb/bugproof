@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Has decidido agregar tests a tu gestor de tareas. Abres la documentacion del framework de testing y te quedas mirando el archivo de test en blanco. Recorramos juntos la escritura de tu primer test real.",
+  "intro": "Has decidido agregar tests a tu gestor de tareas. Abres la documentacion del framework de testing y te quedas mirando el archivo de test en blanco. Es como escribir un informe de laboratorio en clase de ciencias — preparas el experimento, lo ejecutas y verificas los resultados. Recorramos juntos la escritura de tu primer test real.",
   "teach": [
     {
       "type": "text",

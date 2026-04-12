@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Every good test follows a simple pattern: Arrange (set up), Act (do the thing), Assert (check the result). A developer wrote a test but got the pattern wrong. Find the bug.",
+  "intro": "Every good test follows a simple pattern: Arrange (set up), Act (do the thing), Assert (check the result). Think of it like a science experiment -- you set up your equipment, run the experiment, then check your results. A developer wrote a test but got the pattern wrong. Find the bug.",
   "teach": [
     {
       "type": "analogy",

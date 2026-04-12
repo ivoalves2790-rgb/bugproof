@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Time to deploy for real! You'll set up a project, connect it to a hosting platform, and get it live on the internet. We'll use Vercel since it's the simplest for beginners.",
+  "intro": "Time to deploy for real! It's like launching a paper airplane -- you've spent time folding it carefully, and now you throw it into the air. You'll set up a project, connect it to a hosting platform, and get it live on the internet. We'll use Vercel since it's the simplest for beginners.",
   "teach": [
     {
       "type": "analogy",

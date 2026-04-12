@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Your friend says 'My website is down! Nobody can reach it!' You'll investigate and discover how DNS -- the system that translates domain names into IP addresses -- actually works.",
+  "intro": "Your friend says 'My website is down! Nobody can reach it!' It's like knowing a restaurant's name but not its address -- without DNS, your browser can't find anything. You'll investigate and discover how DNS -- the system that translates domain names into IP addresses -- actually works.",
   "teach": [
     {
       "type": "analogy",

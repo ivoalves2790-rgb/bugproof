@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Tests unitarios, tests de integracion, tests de extremo a extremo — cada uno sirve un proposito diferente y detecta diferentes tipos de bugs. Separemos cual es cual.",
+  "intro": "Tests unitarios, tests de integracion, tests de extremo a extremo — cada uno sirve un proposito diferente y detecta diferentes tipos de bugs. Piensa en ello como construir un auto: pruebas las piezas individuales, luego como se conectan, y finalmente lo sacas a dar una vuelta. Separemos cual es cual.",
   "teach": [
     {
       "type": "text",

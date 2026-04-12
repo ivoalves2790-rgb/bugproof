@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Your task manager is live and users want new features. But shipping new code to all users at once is risky. Let's learn about feature flags, gradual rollouts, and safe deployment practices.",
+  "intro": "Your task manager is live and users want new features. But shipping new code to all users at once is risky — think of it like opening the floodgates instead of turning a faucet. Let's learn about feature flags, gradual rollouts, and safe deployment practices.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Las ramas son una de las funciones más poderosas de Git. Te permiten crear versiones paralelas de tu proyecto para que puedas trabajar en nuevas funcionalidades sin romper lo que ya funciona. Desliza a la derecha para afirmaciones VERDADERAS y a la izquierda para FALSAS.",
+  "intro": "Las ramas son una de las funciones más poderosas de Git. Imagina un libro de elige-tu-propia-aventura donde cada camino existe de forma independiente -- eso es lo que las ramas hacen con tu código. Te permiten crear versiones paralelas de tu proyecto para que puedas trabajar en nuevas funcionalidades sin romper lo que ya funciona. Desliza a la derecha para afirmaciones VERDADERAS y a la izquierda para FALSAS.",
   "teach": [
     {
       "type": "analogy",

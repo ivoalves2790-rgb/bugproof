@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Un buen entorno de desarrollo te ahorra horas de frustracion. Desliza a la derecha en practicas solidas de configuracion, a la izquierda en habitos que te van a ralentizar.",
+  "intro": "Un buen entorno de desarrollo te ahorra horas de frustracion. Igual que un chef prepara su estacion antes de cocinar, configurar tus herramientas antes de escribir codigo hace todo mas fluido. Desliza a la derecha en practicas solidas de configuracion, a la izquierda en habitos que te van a ralentizar.",
   "teach": [
     {
       "type": "text",

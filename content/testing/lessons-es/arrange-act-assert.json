@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Todo buen test sigue un patrón simple: Arrange (preparar), Act (actuar), Assert (verificar). Un desarrollador escribió un test pero se equivocó con el patrón. Encuentra el bug.",
+  "intro": "Todo buen test sigue un patrón simple: Arrange (preparar), Act (actuar), Assert (verificar). Piensa en ello como un experimento de ciencias -- preparas el equipo, ejecutas el experimento y luego revisas los resultados. Un desarrollador escribió un test pero se equivocó con el patrón. Encuentra el bug.",
   "teach": [
     {
       "type": "analogy",

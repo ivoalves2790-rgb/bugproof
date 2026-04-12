@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "JavaScript has several built-in error types and each one tells you something different about what went wrong. Knowing the type helps you fix bugs faster. For each statement, swipe RIGHT if it's correct or LEFT if it's wrong.",
+  "intro": "JavaScript has several built-in error types and each one tells you something different about what went wrong. Just like warning lights on a car dashboard each point to a different system, each error type points to a different kind of fix. For each statement, swipe RIGHT if it's correct or LEFT if it's wrong.",
   "teach": [
     {
       "type": "analogy",

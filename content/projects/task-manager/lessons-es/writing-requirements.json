@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Necesitas describir tu gestor de tareas a un asistente de IA. La calidad de tu descripcion determina la calidad de lo que se construye. Toma buenas decisiones.",
+  "intro": "Necesitas describir tu gestor de tareas a un asistente de IA. Es como darle indicaciones a un taxista — di 'a un lugar bonito' y podrias terminar en un estacionamiento, pero dale coordenadas GPS exactas y llegaras exactamente donde quieres. La calidad de tu descripcion determina la calidad de lo que se construye. Toma buenas decisiones.",
   "teach": [
     {
       "type": "text",

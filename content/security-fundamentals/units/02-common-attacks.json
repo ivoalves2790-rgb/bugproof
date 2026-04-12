@@ -1,7 +1,7 @@
 {
   "slug": "common-attacks",
   "title": "Common Web Attacks",
-  "description": "XSS, SQL injection, CSRF -- how they work and how to stop them",
+  "description": "Think of these attacks like burglars testing every door and window -- learn how XSS, SQL injection, and CSRF work and how to stop them",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "security-fundamentals",

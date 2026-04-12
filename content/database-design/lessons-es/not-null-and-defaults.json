@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "La app de un desarrollador se cae cuando intenta mostrar el nombre de un usuario porque el nombre es NULL (vacío). La tabla permite nombres vacíos, lo cual debería haberse prevenido desde el principio. Arreglemos la definición de la tabla.",
+  "intro": "La app de un desarrollador se cae cuando intenta mostrar el nombre de un usuario porque el nombre es NULL (vacío). Piensa en NOT NULL como los campos obligatorios de un formulario marcados con un asterisco rojo -- sin ellos, la gente omite información crítica y las cosas se rompen. La tabla permite nombres vacíos, lo cual debería haberse prevenido desde el principio. Arreglemos la definición de la tabla.",
   "teach": [
     {
       "type": "analogy",

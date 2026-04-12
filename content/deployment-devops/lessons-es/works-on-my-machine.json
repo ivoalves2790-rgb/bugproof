@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Es viernes por la tarde. Despliegas una funcionalidad que pasó todas las pruebas locales. Cinco minutos después, la app se cae en producción. Tu consola muestra un error que nunca has visto. Es hora de depurar la frase más famosa del software: '¡Pero funciona en mi máquina!'",
+  "intro": "Es viernes por la tarde. Despliegas una funcionalidad que pasó todas las pruebas locales. Cinco minutos después, la app se cae en producción -- igual que una receta que funciona en tu cocina pero falla en un restaurante con un horno diferente. Tu consola muestra un error que nunca has visto. Es hora de depurar la frase más famosa del software: '¡Pero funciona en mi máquina!'",
   "teach": [
     {
       "type": "analogy",

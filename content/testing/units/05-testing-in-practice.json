@@ -1,7 +1,7 @@
 {
   "slug": "testing-in-practice",
   "title": "Testing in Practice",
-  "description": "Real-world testing workflows, CI integration, and testing culture",
+  "description": "It's like moving from practice drills to a real game -- explore real-world testing workflows, CI integration, and testing culture",
   "order": 5,
   "courseSlug": "testing",
   "tier": "advanced"

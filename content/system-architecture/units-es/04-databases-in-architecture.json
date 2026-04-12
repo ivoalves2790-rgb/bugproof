@@ -1,7 +1,7 @@
 {
   "slug": "databases-in-architecture",
   "title": "Bases de Datos en la Arquitectura",
-  "description": "Comprende dónde encajan las bases de datos en el sistema, cómo el backend se comunica con ellas, y por qué la persistencia de datos importa",
+  "description": "Imagina la base de datos como el almacén detrás de una tienda -- comprende dónde encaja en el sistema, cómo el backend se comunica con ella y por qué la persistencia de datos importa",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "system-architecture",

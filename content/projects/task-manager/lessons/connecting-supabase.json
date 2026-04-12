@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Your database schema is ready and your queries are written. Now it's time to connect your Next.js task manager to Supabase so your app can actually talk to the database. One wrong configuration and nothing works.",
+  "intro": "Your database schema is ready and your queries are written. Now it's time to connect your Next.js task manager to Supabase so your app can actually talk to the database. Think of it like plugging a cable between two devices — one wrong setting and there's no connection.",
   "teach": [
     {
       "type": "text",

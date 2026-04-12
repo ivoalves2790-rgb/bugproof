@@ -2,7 +2,7 @@
   "slug": "deployment-devops",
   "title": "Despliegue y DevOps",
   "description": "Hosting, variables de entorno, CI/CD, dominios y DNS",
-  "longDescription": "Construir una aplicacion es solo la mitad de la batalla -- ponerla en vivo en internet es la otra mitad. El despliegue es donde 'funciona en mi maquina' se convierte en 'funciona para todos'. Este curso cubre todo, desde variables de entorno y plataformas de hosting hasta pipelines de CI/CD, dominios, DNS y que hacer cuando tu despliegue falla a las 2 de la manana.",
+  "longDescription": "Construir una aplicacion es solo la mitad de la batalla -- ponerla en vivo en internet es la otra mitad. El despliegue es donde 'funciona en mi maquina' se convierte en 'funciona para todos'. Igual que lanzar un cohete, necesitas listas de verificacion, entornos de prueba y un plan para cuando las cosas salen mal. Este curso cubre todo, desde variables de entorno y plataformas de hosting hasta pipelines de CI/CD, dominios, DNS y que hacer cuando tu despliegue falla a las 2 de la manana.",
   "icon": "cloud",
   "color": "#FECA57",
   "prerequisites": [],

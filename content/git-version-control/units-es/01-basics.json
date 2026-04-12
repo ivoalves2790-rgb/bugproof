@@ -1,7 +1,7 @@
 {
   "slug": "basics",
   "title": "Fundamentos de Git",
-  "description": "Qué es Git, por qué es importante y tus primeros commits",
+  "description": "Piensa en Git como un sistema de guardado para tu código -- aprende qué es, por qué es importante y haz tus primeros commits",
   "order": 1,
   "courseSlug": "git-version-control",
   "tier": "beginner",

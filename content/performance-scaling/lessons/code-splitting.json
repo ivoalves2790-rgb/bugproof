@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Your single-page app loads a 2MB JavaScript bundle before showing anything. Users on slow connections wait 10+ seconds. The app has a dashboard, a settings page, an admin panel, and a chart library -- but most users only visit the dashboard. Time to split things up.",
+  "intro": "Your single-page app loads a 2MB JavaScript bundle before showing anything. It's like forcing someone to download an entire encyclopedia just to read one article. Users on slow connections wait 10+ seconds. The app has a dashboard, a settings page, an admin panel, and a chart library -- but most users only visit the dashboard. Time to split things up.",
   "teach": [
     {
       "type": "analogy",

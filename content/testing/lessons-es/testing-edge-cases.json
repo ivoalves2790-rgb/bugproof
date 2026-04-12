@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Los casos límite son los inputs extraños e inusuales que rompen tu código -- cadenas vacías, cero, null, números negativos, números muy grandes. La función de un desarrollador pasa todos los tests normales pero crashea con casos límite. Encuentra la protección que falta.",
+  "intro": "Los casos límite son los inputs extraños e inusuales que rompen tu código -- cadenas vacías, cero, null, números negativos, números muy grandes. Igual que los fabricantes de autos prueban vehículos en calor extremo y frío polar, necesitas testear tu código con inputs extremos. La función de un desarrollador pasa todos los tests normales pero crashea con casos límite. Encuentra la protección que falta.",
   "teach": [
     {
       "type": "analogy",

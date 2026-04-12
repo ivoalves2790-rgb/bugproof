@@ -1,7 +1,7 @@
 {
   "slug": "common-errors",
   "title": "Patrones de errores comunes",
-  "description": "Reconoce los errores más frecuentes que encontrarás y aprende sus soluciones a primera vista",
+  "description": "Similar a un mecánico que reconoce sonidos del motor, aprende a detectar los errores más frecuentes a primera vista y conocer sus soluciones",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "debugging-error-reading",

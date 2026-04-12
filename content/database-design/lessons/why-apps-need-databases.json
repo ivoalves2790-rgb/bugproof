@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Every app stores data somewhere. But why can't we just save everything in a regular file? Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "Every app stores data somewhere. But why can't we just save everything in a regular file? Imagine running a hospital with only a first aid kit -- it works for small problems but falls apart when 50 patients arrive at once. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

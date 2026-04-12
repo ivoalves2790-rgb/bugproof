@@ -2,7 +2,7 @@
   "slug": "database-design",
   "title": "Database Design",
   "description": "Schemas, relationships, migrations, and queries",
-  "longDescription": "Every app needs to store data somewhere — user accounts, posts, orders, settings. A database is that somewhere, and how you organize it determines whether your app is fast and reliable or slow and buggy. This course teaches you to think about data: how to structure tables, create relationships between them, write queries to get data back, and evolve your database as your app grows with migrations.",
+  "longDescription": "Every app needs to store data somewhere — user accounts, posts, orders, settings. A database is that somewhere, and how you organize it determines whether your app is fast and reliable or slow and buggy. Think of it like a filing cabinet -- if you toss papers in randomly you'll never find anything, but with labeled folders and a clear system, retrieval is instant. This course teaches you to think about data: how to structure tables, create relationships between them, write queries to get data back, and evolve your database as your app grows with migrations.",
   "icon": "database",
   "color": "#96CEB4",
   "prerequisites": [],

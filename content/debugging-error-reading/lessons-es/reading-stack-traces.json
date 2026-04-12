@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Tu aplicación acaba de fallar y la consola muestra un muro de texto aterrador llamado 'traza de pila.' No entres en pánico -- cada línea en esa traza es una migaja de pan que te lleva al error. Aprendamos a leerla.",
+  "intro": "Tu aplicación acaba de fallar y la consola muestra un muro de texto aterrador llamado 'traza de pila.' Imagina que es un rastro de migajas de pan en un laberinto -- cada línea te muestra un paso más cerca de donde las cosas salieron mal. No entres en pánico. Aprendamos a leerla.",
   "teach": [
     {
       "type": "analogy",

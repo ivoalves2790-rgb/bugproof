@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Every time you visit a website, you type (or click) a URL. But what do all those pieces actually mean? Swipe RIGHT if the statement is true, or LEFT if it's false.",
+  "intro": "Every time you visit a website, you type (or click) a URL. Think of it like a mailing address for the internet -- each part tells your browser exactly where to go. But what do all those pieces actually mean? Swipe RIGHT if the statement is true, or LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

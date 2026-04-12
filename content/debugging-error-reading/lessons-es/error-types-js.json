@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "JavaScript tiene varios tipos de errores integrados y cada uno te dice algo diferente sobre lo que salió mal. Conocer el tipo te ayuda a corregir errores más rápido. Para cada afirmación, desliza a la DERECHA si es correcta o a la IZQUIERDA si es incorrecta.",
+  "intro": "JavaScript tiene varios tipos de errores integrados y cada uno te dice algo diferente sobre lo que salió mal. Igual que las luces de advertencia en el tablero de un auto apuntan cada una a un sistema diferente, cada tipo de error apunta a un tipo diferente de solución. Para cada afirmación, desliza a la DERECHA si es correcta o a la IZQUIERDA si es incorrecta.",
   "teach": [
     {
       "type": "analogy",

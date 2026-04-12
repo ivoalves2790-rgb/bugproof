@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "Schema design is about deciding how to organize your data BEFORE you write any code. Good decisions now save you from painful rewrites later. Swipe RIGHT if the design practice is GOOD, LEFT if it's BAD.",
+  "intro": "Schema design is about deciding how to organize your data BEFORE you write any code. It's like organizing a closet before filling it -- shirts here, pants there, shoes on the bottom. Good decisions now save you from painful rewrites later. Swipe RIGHT if the design practice is GOOD, LEFT if it's BAD.",
   "teach": [
     {
       "type": "analogy",

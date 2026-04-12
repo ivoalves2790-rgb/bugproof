@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "You've built your app and it runs great on your laptop. But how does it get from your machine to the actual internet where anyone can use it? That process is called deployment. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "You've built your app and it runs great on your laptop. But how does it get from your machine to the actual internet where anyone can use it? It's like going from cooking in your home kitchen to opening a restaurant for the public. That process is called deployment. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

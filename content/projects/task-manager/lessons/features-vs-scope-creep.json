@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Scope creep kills projects. Judge whether each scenario is good planning discipline or a scope creep trap.",
+  "intro": "Scope creep kills projects. It's like packing for a weekend trip but bringing clothes for two weeks — suddenly you can't even get off the ground. Judge whether each scenario is good planning discipline or a scope creep trap.",
   "teach": [
     {
       "type": "text",

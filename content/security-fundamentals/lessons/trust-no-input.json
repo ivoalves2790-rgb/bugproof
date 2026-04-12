@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "security-mindset",
   "courseSlug": "security-fundamentals",
-  "intro": "The #1 rule of security: never trust user input. But it's not just form fields -- data can arrive from URLs, cookies, headers, APIs, and even your own database if it was populated by users. Swipe right if the practice is SECURE, or left if it's INSECURE.",
+  "intro": "The #1 rule of security: never trust user input. Imagine every piece of incoming data as a package from a stranger -- it needs to be inspected before you open it. It's not just form fields; data can arrive from URLs, cookies, headers, APIs, and even your own database if it was populated by users. Swipe right if the practice is SECURE, or left if it's INSECURE.",
   "teach": [
     {
       "type": "analogy",

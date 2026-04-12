@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Los equipos profesionales no solo tienen 'mi laptop' y 'el sitio en vivo'. Tienen múltiples entornos para probar en diferentes etapas. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "intro": "Los equipos profesionales no solo tienen 'mi laptop' y 'el sitio en vivo'. Imagina un show de Broadway -- no pasarías de leer el guion directo a actuar frente a la audiencia. Tienen múltiples entornos para probar en diferentes etapas. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
   "teach": [
     {
       "type": "analogy",

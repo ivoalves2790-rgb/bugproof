@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "You just joined a new team and need to fix a bug in code you've never seen before. The original developer left the company. No documentation. Let's practice the skill of reading unfamiliar code.",
+  "intro": "You just joined a new team and need to fix a bug in code you've never seen before. The original developer left the company. No documentation. Think of it like being a detective at a crime scene -- you follow clues and trace evidence instead of reading every document in the building. Let's practice the skill of reading unfamiliar code.",
   "teach": [
     {
       "type": "analogy",

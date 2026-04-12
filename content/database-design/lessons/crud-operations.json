@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "A developer is writing SQL to update a user's email address, but their query changes EVERY user's email instead of just one. This is a classic (and terrifying) mistake with the UPDATE command.",
+  "intro": "A developer is writing SQL to update a user's email address, but their query changes EVERY user's email instead of just one. It's like using an eraser in a notebook without checking which line you're on -- you might erase someone else's notes. This is a classic (and terrifying) mistake with the UPDATE command.",
   "teach": [
     {
       "type": "analogy",

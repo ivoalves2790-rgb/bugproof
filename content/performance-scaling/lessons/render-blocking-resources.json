@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "A page shows a blank white screen for 3 seconds before anything appears. The HTML is fine and the server responds quickly -- the problem is in the <head> tag. Render-blocking resources are preventing the browser from showing anything. Find the line causing the worst delay.",
+  "intro": "A page shows a blank white screen for 3 seconds before anything appears. It's like insisting on reading an entire cookbook cover to cover before you start boiling water. The HTML is fine and the server responds quickly -- the problem is in the <head> tag. Render-blocking resources are preventing the browser from showing anything. Find the line causing the worst delay.",
   "teach": [
     {
       "type": "analogy",

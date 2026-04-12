@@ -1,7 +1,7 @@
 {
   "slug": "data-protection",
   "title": "Protección de datos",
-  "description": "Cifrado, HTTPS, almacenamiento seguro y mantener seguros los datos de los usuarios",
+  "description": "Imagina sellar una carta en un sobre que solo el destinatario puede abrir -- aprende sobre cifrado, HTTPS, almacenamiento seguro y cómo mantener seguros los datos de los usuarios",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "security-fundamentals",

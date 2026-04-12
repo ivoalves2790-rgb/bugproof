@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Testing feels like extra work — until a bug makes it to production and you spend three hours debugging what a test would have caught in three seconds. Let's explore why testing matters.",
+  "intro": "Testing feels like extra work — until a bug makes it to production and you spend three hours debugging what a test would have caught in three seconds. Think of tests like spell check for your code: you could proofread everything manually, but why would you? Let's explore why testing matters.",
   "teach": [
     {
       "type": "text",

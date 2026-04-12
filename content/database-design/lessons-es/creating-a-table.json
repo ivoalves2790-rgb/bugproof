@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "¡Es hora de crear tu propia tabla de base de datos desde cero! Estás construyendo una app de librería y necesitas una tabla para almacenar libros. Usaremos SQLite para crear la tabla, insertar algunos datos y consultarla.",
+  "intro": "¡Es hora de crear tu propia tabla de base de datos desde cero! Igual que dibujar un plano antes de construir una casa, necesitas definir la estructura de tu tabla antes de llenarla con datos. Estás construyendo una app de librería y necesitas una tabla para almacenar libros. Usaremos SQLite para crear la tabla, insertar algunos datos y consultarla.",
   "teach": [
     {
       "type": "analogy",

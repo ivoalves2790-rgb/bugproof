@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Your task manager has login working, but a curious user discovers they can access other people's tasks just by changing the URL. Time to lock down your routes.",
+  "intro": "Your task manager has login working, but a curious user discovers they can access other people's tasks just by changing the URL. Imagine a building where the doors have name tags but no locks — anyone can walk into any room. Time to lock down your routes.",
   "teach": [
     {
       "type": "text",

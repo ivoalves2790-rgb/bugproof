@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Tu función llama a una API externa. No puedes (y no deberías) llamar a la API real en tus tests -- es lenta, cuesta dinero y podría estar caída. El mocking te permite simular dependencias externas. Un suite de tests está llamando a una API real y causando problemas. Descubre la solución.",
+  "intro": "Tu función llama a una API externa. No puedes (y no deberías) llamar a la API real en tus tests -- es lenta, cuesta dinero y podría estar caída. Imagina usar un doble de riesgo en una película en lugar del actor real para las escenas peligrosas -- eso es lo que hace el mocking con tu código. Un suite de tests está llamando a una API real y causando problemas. Descubre la solución.",
   "teach": [
     {
       "type": "analogy",

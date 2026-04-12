@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "It's time to write a test from scratch. You have a function that validates email addresses, and you need to write tests to make sure it works correctly. Let's set up Jest and write your first real test.",
+  "intro": "It's time to write a test from scratch. Think of it like following a recipe for the first time -- the ingredients are simple and the steps are always the same. You have a function that validates email addresses, and you need to write tests to make sure it works correctly. Let's set up Jest and write your first real test.",
   "teach": [
     {
       "type": "analogy",

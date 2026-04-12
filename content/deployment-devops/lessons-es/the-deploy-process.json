@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Recorramos los pasos reales de desplegar un proyecto. Enviarás código a GitHub y lo conectarás a una plataforma de hosting -- el flujo de trabajo moderno estándar.",
+  "intro": "Recorramos los pasos reales de desplegar un proyecto, similar a enviar un paquete -- lo empacas, lo etiquetas y lo envías. Enviarás código a GitHub y lo conectarás a una plataforma de hosting -- el flujo de trabajo moderno estándar.",
   "teach": [
     {
       "type": "analogy",

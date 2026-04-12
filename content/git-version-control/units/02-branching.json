@@ -1,7 +1,7 @@
 {
   "slug": "branching",
   "title": "Branching",
-  "description": "Create parallel timelines to work on features without breaking things",
+  "description": "Just like parallel universes in a sci-fi movie, create branches to work on features without breaking things",
   "order": 2,
   "courseSlug": "git-version-control",
   "tier": "beginner",

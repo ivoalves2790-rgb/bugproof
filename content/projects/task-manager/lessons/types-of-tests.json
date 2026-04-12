@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Unit tests, integration tests, end-to-end tests — each serves a different purpose and catches different kinds of bugs. Let's sort out which is which.",
+  "intro": "Unit tests, integration tests, end-to-end tests — each serves a different purpose and catches different kinds of bugs. Think of it like building a car: you test individual parts, then how they connect, then take the whole thing for a drive. Let's sort out which is which.",
   "teach": [
     {
       "type": "text",

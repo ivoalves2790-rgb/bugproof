@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "You type 'www.coolshop.com' into your browser and press Enter. A LOT happens behind the scenes. Let's trace the full journey from keystroke to rendered page.",
+  "intro": "You type 'www.coolshop.com' into your browser and press Enter. Similar to ordering delivery food -- from looking up the restaurant's number to eating the meal -- a LOT happens behind the scenes. Let's trace the full journey from keystroke to rendered page.",
   "teach": [
     {
       "type": "analogy",

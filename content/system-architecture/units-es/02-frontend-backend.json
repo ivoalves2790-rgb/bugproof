@@ -1,7 +1,7 @@
 {
   "slug": "frontend-backend",
   "title": "Frontend vs Backend",
-  "description": "Aprende la diferencia entre el código que se ejecuta en tu navegador y el código que se ejecuta en un servidor -- y por qué ambos existen",
+  "description": "Es como un restaurante donde el comedor es el frontend y la cocina es el backend -- aprende la diferencia entre el código del navegador y el del servidor, y por qué ambos existen",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "system-architecture",

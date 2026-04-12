@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "tables-and-schemas",
   "courseSlug": "database-design",
-  "intro": "A developer is creating a table to store product information, but they chose the wrong data type for the price column. This causes prices to lose their decimal places -- $49.99 becomes $49!",
+  "intro": "A developer is creating a table to store product information, but they chose the wrong data type for the price column. Think of data types like different shaped containers -- a round hole only fits round pegs, and stuffing money into an integer column loses the cents. This causes prices to lose their decimal places -- $49.99 becomes $49!",
   "teach": [
     {
       "type": "analogy",

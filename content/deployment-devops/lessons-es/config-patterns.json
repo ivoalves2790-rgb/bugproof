@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Los buenos patrones de configuración mantienen tu app flexible y segura. Un desarrollador escribió valores directamente en el código que deberían ser configurables. Encuentra el error que causará problemas en producción.",
+  "intro": "Los buenos patrones de configuración mantienen tu app flexible y segura, igual que el tablero de un auto te permite ajustar cosas sin reconstruir el motor. Un desarrollador escribió valores directamente en el código que deberían ser configurables. Encuentra el error que causará problemas en producción.",
   "teach": [
     {
       "type": "analogy",

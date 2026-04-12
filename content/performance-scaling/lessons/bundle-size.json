@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "Your app's JavaScript bundle keeps growing. Every new feature adds another library, and nobody's checking the cost. Let's use command-line tools to measure your bundle, find the heavy dependencies, and trim the fat.",
+  "intro": "Your app's JavaScript bundle keeps growing. Think of it like a suitcase that gets heavier with every trip -- eventually, it costs you extra and slows everything down. Every new feature adds another library, and nobody's checking the cost. Let's use command-line tools to measure your bundle, find the heavy dependencies, and trim the fat.",
   "teach": [
     {
       "type": "analogy",

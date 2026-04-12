@@ -1,7 +1,7 @@
 {
   "slug": "unit-tests",
   "title": "Tests unitarios",
-  "description": "Escribiendo tus primeros tests unitarios con arrange-act-assert",
+  "description": "Igual que probar cada ingrediente antes de hornear un pastel, aprende a escribir tus primeros tests unitarios con arrange-act-assert",
   "order": 2,
   "courseSlug": "testing",
   "tier": "beginner",

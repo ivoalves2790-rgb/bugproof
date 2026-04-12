@@ -1,7 +1,7 @@
 {
   "slug": "branching",
   "title": "Ramificaciones",
-  "description": "Crea líneas de tiempo paralelas para trabajar en funcionalidades sin romper nada",
+  "description": "Igual que universos paralelos en una película de ciencia ficción, crea ramas para trabajar en funcionalidades sin romper nada",
   "order": 2,
   "courseSlug": "git-version-control",
   "tier": "beginner",

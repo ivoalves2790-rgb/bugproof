@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Tu esquema de base de datos esta listo y tus consultas estan escritas. Ahora es hora de conectar tu gestor de tareas de Next.js a Supabase para que tu app pueda realmente hablar con la base de datos. Una configuracion incorrecta y nada funciona.",
+  "intro": "Tu esquema de base de datos esta listo y tus consultas estan escritas. Ahora es hora de conectar tu gestor de tareas de Next.js a Supabase para que tu app pueda realmente hablar con la base de datos. Piensa en ello como conectar un cable entre dos dispositivos — un ajuste incorrecto y no hay conexion.",
   "teach": [
     {
       "type": "text",

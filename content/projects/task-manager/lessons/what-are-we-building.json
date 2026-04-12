@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Before coding anything, let's make sure you understand what a task manager actually needs. Swipe right for features that belong in our MVP, left for ones that don't.",
+  "intro": "Before coding anything, let's make sure you understand what a task manager actually needs. Think of an MVP like a taco stand before a full restaurant — you don't need valet parking on day one, just great tacos. Swipe right for features that belong in our MVP, left for ones that don't.",
   "teach": [
     {
       "type": "text",

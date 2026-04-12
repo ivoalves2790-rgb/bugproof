@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Branches are one of Git's most powerful features. They let you create parallel versions of your project so you can work on new features without breaking what already works. Swipe right for TRUE statements and left for FALSE ones.",
+  "intro": "Branches are one of Git's most powerful features. Imagine a choose-your-own-adventure book where each path exists independently -- that's what branches do for your code. They let you create parallel versions of your project so you can work on new features without breaking what already works. Swipe right for TRUE statements and left for FALSE ones.",
   "teach": [
     {
       "type": "analogy",

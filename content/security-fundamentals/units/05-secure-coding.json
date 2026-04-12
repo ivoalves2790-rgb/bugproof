@@ -1,7 +1,7 @@
 {
   "slug": "secure-coding",
   "title": "Secure Coding Practices",
-  "description": "Dependency audits, least privilege, security headers, and defense in depth",
+  "description": "Similar to a castle with moats, walls, and guards in layers, learn about dependency audits, least privilege, security headers, and defense in depth",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "security-fundamentals",

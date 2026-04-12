@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Not every file belongs in Git. Secret API keys, giant dependency folders, and system files should be ignored. The .gitignore file tells Git which files to pretend don't exist.",
+  "intro": "Not every file belongs in Git. Secret API keys, giant dependency folders, and system files should be ignored. Think of it like a bouncer at a club -- .gitignore decides which files get in and which ones stay outside. The .gitignore file tells Git which files to pretend don't exist.",
   "teach": [
     {
       "type": "analogy",

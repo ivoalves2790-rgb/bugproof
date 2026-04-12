@@ -1,7 +1,7 @@
 {
   "slug": "monitoring",
   "title": "Monitoreo y Reversiones",
-  "description": "Vigilando tu app en producción y recuperándote cuando las cosas salen mal",
+  "description": "Es como tener cámaras de seguridad para tu app -- aprende a vigilarla en producción y recuperarte cuando las cosas salen mal",
   "order": 5,
   "courseSlug": "deployment-devops",
   "tier": "advanced"

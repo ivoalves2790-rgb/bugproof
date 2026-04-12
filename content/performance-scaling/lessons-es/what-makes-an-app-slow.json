@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Cada app que hayas abandonado con frustración probablemente era lenta. Pero ¿qué hace realmente que una app se sienta lenta? No siempre es lo que imaginarías. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "Cada app que hayas abandonado con frustración probablemente era lenta. Pero ¿qué hace realmente que una app se sienta lenta? Similar a un restaurante donde la lentitud puede venir de la cocina, el mesero o demasiados clientes, los problemas de rendimiento tienen diferentes orígenes. No siempre es lo que imaginarías. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

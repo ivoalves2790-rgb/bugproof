@@ -1,7 +1,7 @@
 {
   "slug": "data-protection",
   "title": "Protecting Data",
-  "description": "Encryption, HTTPS, secure storage, and keeping user data safe",
+  "description": "Imagine sealing a letter in an envelope that only the recipient can open -- learn about encryption, HTTPS, secure storage, and keeping user data safe",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "security-fundamentals",

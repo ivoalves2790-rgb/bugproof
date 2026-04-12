@@ -1,7 +1,7 @@
 {
   "slug": "systematic-debugging",
   "title": "Systematic Debugging",
-  "description": "Stop guessing and start debugging with a repeatable, logical process",
+  "description": "Just like a detective following clues, stop guessing and start debugging with a repeatable, logical process",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "debugging-error-reading",

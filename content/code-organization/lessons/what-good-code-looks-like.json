@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "This function works perfectly -- it processes an order, sends an email, and updates the database. But it violates a core principle of clean code. Find the line where the problem starts.",
+  "intro": "This function works perfectly -- it processes an order, sends an email, and updates the database. Think of it like a well-organized toolbox where each tool has its own spot versus one where everything is thrown in together. But it violates a core principle of clean code. Find the line where the problem starts.",
   "teach": [
     {
       "type": "analogy",

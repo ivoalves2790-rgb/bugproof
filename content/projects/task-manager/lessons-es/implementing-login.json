@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Estas agregando login a tu gestor de tareas. Un usuario reporta que no puede iniciar sesion y descubres que la implementacion de auth tiene algunos problemas fundamentales. Como lo arreglas?",
+  "intro": "Estas agregando login a tu gestor de tareas. Piensa en ello como construir la puerta principal — necesita mantener a los intrusos afuera mientras deja entrar a los residentes sin problema. Un usuario reporta que no puede iniciar sesion y descubres que la implementacion de auth tiene algunos problemas fundamentales. Como lo arreglas?",
   "teach": [
     {
       "type": "text",

@@ -2,7 +2,7 @@
   "slug": "system-architecture",
   "title": "Arquitectura de Sistemas",
   "description": "Frontend, backend, bases de datos, APIs y como fluyen las solicitudes",
-  "longDescription": "Cada aplicacion que usas tiene tuberias invisibles detras de escena. Cuando tocas un boton, ocurre una cadena de eventos: tu navegador envia una solicitud, un servidor la procesa, una base de datos almacena o recupera datos y llega una respuesta. Este curso revela esa maquinaria oculta. Entenderas como trabajan juntos el frontend y el backend, que son realmente las APIs, como fluyen los datos a traves de un sistema y como disenar aplicaciones que no se desmoronen a medida que crecen.",
+  "longDescription": "Cada aplicacion que usas tiene tuberias invisibles detras de escena. Cuando tocas un boton, ocurre una cadena de eventos: tu navegador envia una solicitud, un servidor la procesa, una base de datos almacena o recupera datos y llega una respuesta. Imagina un restaurante -- el frontend es el comedor donde interactuan los clientes, el backend es la cocina que hace el trabajo real y la API es el mesero que lleva los pedidos entre ambos. Este curso revela esa maquinaria oculta. Entenderas como trabajan juntos el frontend y el backend, que son realmente las APIs, como fluyen los datos a traves de un sistema y como disenar aplicaciones que no se desmoronen a medida que crecen.",
   "icon": "server",
   "color": "#45B7D1",
   "prerequisites": [],

@@ -1,7 +1,7 @@
 {
   "slug": "basics",
   "title": "Git Basics",
-  "description": "What Git is, why it matters, and your first commits",
+  "description": "Think of Git like a save system for your code -- learn what it is, why it matters, and make your first commits",
   "order": 1,
   "courseSlug": "git-version-control",
   "tier": "beginner",

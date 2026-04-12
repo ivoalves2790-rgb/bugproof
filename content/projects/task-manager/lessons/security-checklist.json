@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Before shipping your task manager, run through this security checklist. Swipe right on practices you should follow, left on dangerous ones.",
+  "intro": "Before shipping your task manager, run through this security checklist. Just like a pilot runs pre-flight checks before every takeoff, you should review these safeguards before every launch. Swipe right on practices you should follow, left on dangerous ones.",
   "teach": [
     {
       "type": "text",

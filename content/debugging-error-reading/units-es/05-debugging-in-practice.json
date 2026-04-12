@@ -1,7 +1,7 @@
 {
   "slug": "debugging-in-practice",
   "title": "Depuración en el mundo real",
-  "description": "Aplica todo lo que has aprendido a escenarios realistas de depuración que enfrentarás en el trabajo",
+  "description": "Imagina un simulador de vuelo para depuración -- aplica todo lo que has aprendido a escenarios realistas que enfrentarás en el trabajo",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "debugging-error-reading",

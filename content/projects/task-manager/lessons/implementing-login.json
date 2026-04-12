@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "You're adding login to your task manager. A user reports they can't sign in, and you discover the auth implementation has some fundamental issues. How do you fix it?",
+  "intro": "You're adding login to your task manager. Think of it like building a front door — it needs to keep intruders out while letting residents in smoothly. A user reports they can't sign in, and you discover the auth implementation has some fundamental issues. How do you fix it?",
   "teach": [
     {
       "type": "text",

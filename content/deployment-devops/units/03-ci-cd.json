@@ -1,7 +1,7 @@
 {
   "slug": "ci-cd",
   "title": "CI/CD Pipelines",
-  "description": "Automated testing and deployment with continuous integration and delivery",
+  "description": "Imagine an assembly line that tests and ships your code automatically -- learn about CI/CD with continuous integration and delivery",
   "order": 3,
   "courseSlug": "deployment-devops",
   "tier": "intermediate"

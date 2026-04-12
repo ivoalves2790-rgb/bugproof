@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "Before you write a single test, let's clear up what tests actually are and what they aren't. There are a lot of misconceptions out there. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "Before you write a single test, let's clear up what tests actually are and what they aren't. Think of tests as a spell checker for your code -- they automatically catch mistakes so you don't have to re-check everything by hand. There are a lot of misconceptions out there. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

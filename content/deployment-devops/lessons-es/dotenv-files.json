@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Un archivo .env es donde almacenas las variables de entorno localmente. La app de un desarrollador no puede conectarse a la base de datos después de clonar el repositorio. Su archivo .env está mal configurado. Encuentra el error.",
+  "intro": "Un archivo .env es donde almacenas las variables de entorno localmente -- piensa en ello como la página de configuración personal de tu teléfono que no copiarías al dispositivo de otra persona. La app de un desarrollador no puede conectarse a la base de datos después de clonar el repositorio. Su archivo .env está mal configurado. Encuentra el error.",
   "teach": [
     {
       "type": "analogy",

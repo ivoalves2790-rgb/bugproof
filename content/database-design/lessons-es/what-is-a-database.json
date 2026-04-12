@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Te han contratado para construir una aplicación simple de lista de tareas. El fundador pregunta '¿Dónde deberíamos almacenar las tareas?' Exploremos las opciones y entendamos qué es realmente una base de datos.",
+  "intro": "Te han contratado para construir una aplicación simple de lista de tareas. El fundador pregunta '¿Dónde deberíamos almacenar las tareas?' Piensa en ello como elegir entre una caja de zapatos, un archivero o un almacén profesional para tus datos -- cada uno tiene capacidades muy diferentes. Exploremos las opciones y entendamos qué es realmente una base de datos.",
   "teach": [
     {
       "type": "analogy",

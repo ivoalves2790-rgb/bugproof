@@ -1,7 +1,7 @@
 {
   "slug": "why-test",
   "title": "Why Test?",
-  "description": "What tests are, why they matter, and how to think about testing",
+  "description": "Think of tests like a safety net for tightrope walkers -- learn what they are, why they matter, and how to think about testing",
   "order": 1,
   "courseSlug": "testing",
   "tier": "beginner",

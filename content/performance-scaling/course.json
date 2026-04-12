@@ -2,7 +2,7 @@
   "slug": "performance-scaling",
   "title": "Performance & Scaling",
   "description": "N+1 queries, caching, lazy loading, profiling",
-  "longDescription": "A slow app loses users. Performance isn't about premature optimization — it's about knowing the common traps that make apps crawl and the straightforward fixes for each. This course covers the biggest performance killers: N+1 queries, missing caches, bloated bundles, unoptimized images, and rendering bottlenecks. You'll learn to spot them, fix them, and measure the difference.",
+  "longDescription": "A slow app loses users. Performance isn't about premature optimization — it's about knowing the common traps that make apps crawl and the straightforward fixes for each. Similar to a highway, your app can handle plenty of traffic until one bottleneck causes everything to gridlock. This course covers the biggest performance killers: N+1 queries, missing caches, bloated bundles, unoptimized images, and rendering bottlenecks. You'll learn to spot them, fix them, and measure the difference.",
   "icon": "zap",
   "color": "#FD79A8",
   "prerequisites": [],

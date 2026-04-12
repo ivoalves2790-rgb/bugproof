@@ -1,7 +1,7 @@
 {
   "slug": "going-live",
   "title": "Salir en Vivo",
-  "description": "Qué significa el despliegue, plataformas de hosting, y tu primer despliegue",
+  "description": "Piensa en el despliegue como lanzar un barco al mar -- aprende qué significa, explora plataformas de hosting y completa tu primer despliegue",
   "order": 1,
   "courseSlug": "deployment-devops",
   "tier": "beginner",

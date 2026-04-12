@@ -2,7 +2,7 @@
   "slug": "code-organization",
   "title": "Organizacion del Codigo",
   "description": "Estructura de archivos, nombres y separacion de responsabilidades",
-  "longDescription": "La IA puede escribir codigo, pero no puede organizar un proyecto. A medida que tu proyecto crece, una buena estructura es la diferencia entre 'puedo encontrar y cambiar cualquier cosa en 5 minutos' y 'tengo miedo de tocar cualquier cosa'. Este curso ensena organizacion practica del codigo: como nombrar las cosas, cuando dividir archivos, como separar responsabilidades y como refactorizar sin romper todo.",
+  "longDescription": "La IA puede escribir codigo, pero no puede organizar un proyecto. A medida que tu proyecto crece, una buena estructura es la diferencia entre 'puedo encontrar y cambiar cualquier cosa en 5 minutos' y 'tengo miedo de tocar cualquier cosa'. Es como organizar una cocina -- cuando cada utensilio tiene su lugar, cocinas mas rapido y nunca pierdes tiempo buscando. Este curso ensena organizacion practica del codigo: como nombrar las cosas, cuando dividir archivos, como separar responsabilidades y como refactorizar sin romper todo.",
   "icon": "folder-code",
   "color": "#00B894",
   "prerequisites": [],

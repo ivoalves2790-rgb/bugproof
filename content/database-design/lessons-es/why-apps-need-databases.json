@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Toda aplicación almacena datos en algún lugar. Pero, ¿por qué no podemos simplemente guardar todo en un archivo normal? Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "Toda aplicación almacena datos en algún lugar. Pero, ¿por qué no podemos simplemente guardar todo en un archivo normal? Imagina administrar un hospital con solo un botiquín de primeros auxilios -- funciona para problemas pequeños pero se desmorona cuando llegan 50 pacientes a la vez. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

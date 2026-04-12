@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "You just joined a small startup. The codebase has zero tests. Your first task is to add a new payment feature. After you ship it, things start going wrong. Let's see why tests would have saved the day.",
+  "intro": "You just joined a small startup. The codebase has zero tests. Imagine walking a tightrope without a safety net -- one slip and it's a disaster. Your first task is to add a new payment feature. After you ship it, things start going wrong. Let's see why tests would have saved the day.",
   "teach": [
     {
       "type": "analogy",

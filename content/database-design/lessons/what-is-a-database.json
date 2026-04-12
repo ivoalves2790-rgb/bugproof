@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "You've been hired to build a simple to-do list app. The founder asks 'Where should we store the tasks?' Let's explore the options and understand what a database actually is.",
+  "intro": "You've been hired to build a simple to-do list app. The founder asks 'Where should we store the tasks?' Think of it like choosing between a shoebox, a filing cabinet, or a professional warehouse for your data -- each has very different capabilities. Let's explore the options and understand what a database actually is.",
   "teach": [
     {
       "type": "analogy",

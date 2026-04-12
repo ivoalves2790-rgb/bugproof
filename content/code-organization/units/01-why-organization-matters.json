@@ -1,7 +1,7 @@
 {
   "slug": "why-organization-matters",
   "title": "Why Organization Matters",
-  "description": "Spaghetti code vs clean code, the cost of disorganization, and your first refactor",
+  "description": "Think of messy code like a cluttered desk -- explore spaghetti code vs clean code, the cost of disorganization, and your first refactor",
   "order": 1,
   "courseSlug": "code-organization",
   "tier": "beginner",

@@ -1,7 +1,7 @@
 {
   "slug": "integration-tests",
   "title": "Integration Tests",
-  "description": "Testing how multiple parts of your app work together",
+  "description": "Similar to testing that gears mesh properly in a machine, learn to test how multiple parts of your app work together",
   "order": 3,
   "courseSlug": "testing",
   "tier": "intermediate"

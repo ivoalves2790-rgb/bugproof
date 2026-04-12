@@ -1,7 +1,7 @@
 {
   "slug": "scaling-patterns",
   "title": "Scaling & Patterns",
-  "description": "Learn what happens when your app goes from 10 users to 10 million -- and the architectural patterns that make it possible",
+  "description": "Similar to how a food truck grows into a restaurant chain, learn what happens when your app goes from 10 users to 10 million and the patterns that make it possible",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "system-architecture",

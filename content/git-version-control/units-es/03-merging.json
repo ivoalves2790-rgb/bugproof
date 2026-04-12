@@ -1,7 +1,7 @@
 {
   "slug": "merging",
   "title": "Fusión",
-  "description": "Combina el trabajo de diferentes ramas y resuelve conflictos",
+  "description": "Similar a fusionar carriles en una autopista, aprende a combinar el trabajo de diferentes ramas y resolver conflictos",
   "order": 3,
   "courseSlug": "git-version-control",
   "tier": "intermediate",

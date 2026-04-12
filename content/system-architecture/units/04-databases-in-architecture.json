@@ -1,7 +1,7 @@
 {
   "slug": "databases-in-architecture",
   "title": "Databases in Architecture",
-  "description": "Understand where databases fit in the system, how the backend talks to them, and why data persistence matters",
+  "description": "Imagine the database as the warehouse behind a store -- understand where it fits in the system, how the backend talks to it, and why data persistence matters",
   "order": 4,
   "tier": "intermediate",
   "courseSlug": "system-architecture",

@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "It's Friday afternoon. You deploy a feature that passed all local testing. Five minutes later, the app crashes in production. Your console shows an error you've never seen before. Time to debug the most famous phrase in software: 'But it works on my machine!'",
+  "intro": "It's Friday afternoon. You deploy a feature that passed all local testing. Five minutes later, the app crashes in production -- just like a recipe that works in your kitchen but fails in a restaurant with a different oven. Your console shows an error you've never seen before. Time to debug the most famous phrase in software: 'But it works on my machine!'",
   "teach": [
     {
       "type": "analogy",

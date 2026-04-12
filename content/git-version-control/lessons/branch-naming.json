@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Branch names might seem trivial, but on a team with dozens of branches, good naming makes the difference between order and chaos. Swipe right for GOOD branch names and left for BAD ones.",
+  "intro": "Branch names might seem trivial, but on a team with dozens of branches, good naming makes the difference between order and chaos. Think of it like labeling folders in a filing cabinet -- clear labels help everyone find what they need instantly. Swipe right for GOOD branch names and left for BAD ones.",
   "teach": [
     {
       "type": "analogy",

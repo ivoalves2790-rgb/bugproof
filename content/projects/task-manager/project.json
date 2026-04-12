@@ -2,7 +2,7 @@
   "slug": "task-manager",
   "title": "Task Manager",
   "description": "Build a full-stack task management app from scratch.",
-  "longDescription": "You'll go from a blank screen to a deployed, working task manager. Along the way you'll learn to plan features, pick a tech stack, write prompts for AI, build a UI, design a database, add authentication, test your code, and ship it to the world.",
+  "longDescription": "You'll go from a blank screen to a deployed, working task manager -- think of it like building a house from the foundation up, except the house is an app and the tools are AI-powered. Along the way you'll learn to plan features, pick a tech stack, write prompts for AI, build a UI, design a database, add authentication, test your code, and ship it to the world.",
   "icon": "clipboard-list",
   "color": "#4ECDC4",
   "difficulty": "beginner",

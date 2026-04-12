@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "You asked AI to write a function that fetches user data from an API and formats it. The code looks clean and professional, but the AI hallucinated -- it used a method that doesn't exist. Find the bug.",
+  "intro": "You asked AI to write a function that fetches user data from an API and formats it. The code looks clean and professional, but the AI hallucinated -- imagine asking for directions and being confidently told to turn left on a street that doesn't exist. It used a method that doesn't exist. Find the bug.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "Not all tests are created equal. Some are fast and cheap, others are slow and expensive. The testing pyramid helps you decide how many of each type to write. A team has their pyramid upside-down -- find the problem.",
+  "intro": "Not all tests are created equal. Some are fast and cheap, others are slow and expensive. Just like a building needs a wide, solid foundation and only a small penthouse on top, the testing pyramid helps you decide how many of each type to write. A team has their pyramid upside-down -- find the problem.",
   "teach": [
     {
       "type": "analogy",

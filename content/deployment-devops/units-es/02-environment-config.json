@@ -1,7 +1,7 @@
 {
   "slug": "environment-config",
   "title": "Entorno y Configuración",
-  "description": "Variables de entorno, secretos y configuración entre entornos",
+  "description": "Igual que una receta que cambia según quién cocina, aprende sobre variables de entorno, secretos y configuración entre entornos",
   "order": 2,
   "courseSlug": "deployment-devops",
   "tier": "beginner",

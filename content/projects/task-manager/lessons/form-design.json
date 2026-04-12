@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Forms are how users create and edit tasks. Good form design reduces friction; bad form design makes users rage-quit. Judge whether each form practice helps or hurts the experience.",
+  "intro": "Forms are how users create and edit tasks. Think of a form like a drive-through window — the best ones are quick, clear, and never make you repeat your order. Good form design reduces friction; bad form design makes users rage-quit. Judge whether each form practice helps or hurts the experience.",
   "teach": [
     {
       "type": "text",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "Your e-commerce app's conversion rate just dropped 30% overnight. Sales are plummeting but nothing in the code changed. Your CEO is asking what happened. Time to investigate.",
+  "intro": "Your e-commerce app's conversion rate just dropped 30% overnight. It's like a store whose front door suddenly takes 5 seconds to open -- customers walk away before they even get inside. Sales are plummeting but nothing in the code changed. Your CEO is asking what happened. Time to investigate.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "security-mindset",
   "courseSlug": "security-fundamentals",
-  "intro": "Son las 2 AM y tu teléfono no para de sonar. Un usuario acaba de publicar en Twitter una captura de pantalla mostrando que puede ver los datos privados de otros usuarios en tu aplicación. Este es un incidente de seguridad real. Cada decisión que tomes en los próximos minutos importa.",
+  "intro": "Son las 2 AM y tu teléfono no para de sonar. Un usuario acaba de publicar en Twitter una captura de pantalla mostrando que puede ver los datos privados de otros usuarios en tu aplicación. Igual que con una tubería rota, tu primer trabajo es detener la fuga antes de hacer cualquier otra cosa. Este es un incidente de seguridad real, y cada decisión que tomes en los próximos minutos importa.",
   "teach": [
     {
       "type": "analogy",

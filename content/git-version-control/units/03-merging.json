@@ -1,7 +1,7 @@
 {
   "slug": "merging",
   "title": "Merging",
-  "description": "Combine work from different branches and resolve conflicts",
+  "description": "Similar to merging lanes on a highway, learn to combine work from different branches and resolve conflicts",
   "order": 3,
   "courseSlug": "git-version-control",
   "tier": "intermediate",

@@ -1,7 +1,7 @@
 {
   "slug": "caching",
   "title": "Estrategias de caché",
-  "description": "Caché del navegador, CDNs, memoización e invalidación de caché",
+  "description": "Similar a tener una hoja de apuntes con respuestas que ya buscaste, aprende sobre caché del navegador, CDNs, memoización e invalidación de caché",
   "order": 4,
   "courseSlug": "performance-scaling",
   "tier": "intermediate",

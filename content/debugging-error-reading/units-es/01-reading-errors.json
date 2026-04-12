@@ -1,7 +1,7 @@
 {
   "slug": "reading-errors",
   "title": "Leyendo mensajes de error",
-  "description": "Aprende a descifrar los mensajes de error en lugar de entrar en pánico cuando veas texto rojo en tu consola",
+  "description": "Piensa en los mensajes de error como el diagnóstico de un doctor -- aprende a descifrarlos en lugar de entrar en pánico cuando veas texto rojo en tu consola",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "debugging-error-reading",

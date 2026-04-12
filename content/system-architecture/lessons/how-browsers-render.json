@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "Your team's website loads but shows a blank white screen for 3 seconds before the content appears. Users are complaining. You need to understand how browsers render pages to find the bottleneck.",
+  "intro": "Your team's website loads but shows a blank white screen for 3 seconds before the content appears. Just like a house can't be painted until the walls are up, a browser follows strict steps to build a page. Users are complaining, and you need to understand how browsers render pages to find the bottleneck.",
   "teach": [
     {
       "type": "analogy",

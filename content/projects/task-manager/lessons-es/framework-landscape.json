@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Hay docenas de frameworks de JavaScript por ahi. Desliza a la derecha en estrategias inteligentes para elegir frameworks, a la izquierda en errores comunes que cometen los principiantes al elegir uno.",
+  "intro": "Hay docenas de frameworks de JavaScript por ahi. Elegir uno es como elegir un vehiculo — quieres algo del tamano adecuado para el trabajo, no un camion para ir al supermercado. Desliza a la derecha en estrategias inteligentes para elegir frameworks, a la izquierda en errores comunes que cometen los principiantes al elegir uno.",
   "teach": [
     {
       "type": "text",

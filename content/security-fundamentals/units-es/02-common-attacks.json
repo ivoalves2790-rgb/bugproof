@@ -1,7 +1,7 @@
 {
   "slug": "common-attacks",
   "title": "Ataques web comunes",
-  "description": "XSS, inyección SQL, CSRF -- cómo funcionan y cómo detenerlos",
+  "description": "Piensa en estos ataques como ladrones probando cada puerta y ventana -- aprende cómo funcionan XSS, inyección SQL y CSRF, y cómo detenerlos",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "security-fundamentals",

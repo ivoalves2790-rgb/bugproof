@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "frontend-performance",
   "courseSlug": "performance-scaling",
-  "intro": "El DOM (Document Object Model) es cómo JavaScript se comunica con la página. Pero tocar el DOM es costoso -- es lo más lento que tu JavaScript puede hacer. Entender por qué te ayuda a evitar trampas comunes. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "intro": "El DOM (Document Object Model) es cómo JavaScript se comunica con la página. Pero tocar el DOM es costoso -- imagina entregarle a un equipo de construcción 100 pequeños cambios de plano uno a la vez en lugar de un solo plan revisado. Entender por qué es lo más lento que tu JavaScript puede hacer te ayuda a evitar trampas comunes. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
   "teach": [
     {
       "type": "analogy",

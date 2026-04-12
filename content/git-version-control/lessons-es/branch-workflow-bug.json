@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Un desarrollador está intentando crear una rama de función, hacer algo de trabajo y fusionarla de vuelta. Pero cometió un error común en el que los principiantes suelen caer. ¿Puedes detectarlo?",
+  "intro": "Un desarrollador está intentando crear una rama de función, hacer algo de trabajo y fusionarla de vuelta. Es como seguir una receta -- te saltas un paso y todo el plato puede salir mal. Pero cometió un error común en el que los principiantes suelen caer. ¿Puedes detectarlo?",
   "teach": [
     {
       "type": "analogy",

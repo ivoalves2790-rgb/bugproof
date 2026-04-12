@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "naming-things",
   "courseSlug": "code-organization",
-  "intro": "Naming conventions are agreements about how to format names in code. When everyone follows the same convention, code looks consistent and predictable. Swipe RIGHT if the naming follows JavaScript/React conventions, LEFT if it doesn't.",
+  "intro": "Naming conventions are agreements about how to format names in code. Just like traffic signs work because everyone agrees on what shapes and colors mean, conventions create predictability in your codebase. When everyone follows the same convention, code looks consistent and predictable. Swipe RIGHT if the naming follows JavaScript/React conventions, LEFT if it doesn't.",
   "teach": [
     {
       "type": "analogy",

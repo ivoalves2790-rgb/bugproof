@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "Your team needs to add a simple feature: showing the user's name in the navigation bar. It should take 30 minutes. It's been three days and the feature still isn't shipped. Let's find out why disorganized code turns simple tasks into nightmares.",
+  "intro": "Your team needs to add a simple feature: showing the user's name in the navigation bar. It should take 30 minutes. Imagine needing your passport tomorrow but your room is a disaster -- a 10-second task becomes a 3-hour search. It's been three days and the feature still isn't shipped. Let's find out why disorganized code turns simple tasks into nightmares.",
   "teach": [
     {
       "type": "analogy",

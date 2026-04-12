@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "Estás trabajando en una app de e-commerce en crecimiento con cero tests. El equipo sigue lanzando funcionalidades rápido, pero últimamente las cosas se siguen rompiendo. Un simple cambio de CSS acaba de romper todo el flujo de checkout. Experimenta de primera mano lo que pasa cuando omites el testing.",
+  "intro": "Estás trabajando en una app de e-commerce en crecimiento con cero tests. Es como conducir sin espejos -- no puedes ver lo que tus cambios podrían golpear. El equipo sigue lanzando funcionalidades rápido, pero últimamente las cosas se siguen rompiendo. Un simple cambio de CSS acaba de romper todo el flujo de checkout. Experimenta de primera mano lo que pasa cuando omites el testing.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Good configuration patterns keep your app flexible and secure. A developer hardcoded values that should be configurable. Find the bug that will cause problems in production.",
+  "intro": "Good configuration patterns keep your app flexible and secure, just like a car dashboard lets you adjust settings without rebuilding the engine. A developer hardcoded values that should be configurable. Find the bug that will cause problems in production.",
   "teach": [
     {
       "type": "analogy",

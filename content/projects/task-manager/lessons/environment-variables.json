@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Environment variables store secrets and configuration that change between development and production. Get them wrong and your app leaks API keys or connects to the wrong database.",
+  "intro": "Environment variables store secrets and configuration that change between development and production. Think of them like a phone's contact list — your code dials 'the database' and the environment fills in the actual number. Get them wrong and your app leaks API keys or connects to the wrong database.",
   "teach": [
     {
       "type": "text",

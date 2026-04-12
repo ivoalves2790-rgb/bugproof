@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Before you store a single task, you need to understand what a database actually is and isn't. Swipe right on true statements, left on false ones.",
+  "intro": "Before you store a single task, you need to understand what a database actually is and isn't. Imagine a filing cabinet with labeled folders versus a pile of sticky notes — that's the difference between having a database and not having one. Swipe right on true statements, left on false ones.",
   "teach": [
     {
       "type": "text",

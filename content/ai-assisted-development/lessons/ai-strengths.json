@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "AI coding tools are incredible at some tasks and terrible at others. Knowing the difference saves you hours of frustration. Swipe right if this is a GOOD use of AI, left if it's a BAD use.",
+  "intro": "AI coding tools are incredible at some tasks and terrible at others. Think of AI like a junior developer who has read every tutorial ever written but has never shipped a real project. Knowing the difference saves you hours of frustration. Swipe right if this is a GOOD use of AI, left if it's a BAD use.",
   "teach": [
     {
       "type": "analogy",

@@ -1,7 +1,7 @@
 {
   "slug": "secure-coding",
   "title": "Prácticas de codificación segura",
-  "description": "Auditorías de dependencias, privilegio mínimo, cabeceras de seguridad y defensa en profundidad",
+  "description": "Similar a un castillo con fosos, muros y guardias en capas, aprende sobre auditorías de dependencias, privilegio mínimo, cabeceras de seguridad y defensa en profundidad",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "security-fundamentals",

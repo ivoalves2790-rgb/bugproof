@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "ai-basics",
   "courseSlug": "ai-assisted-development",
-  "intro": "You're building a small e-commerce app and you've been using AI for everything. Things have been going great -- until they aren't. A customer reports they were charged twice for the same order.",
+  "intro": "You're building a small e-commerce app and you've been using AI for everything. Things have been going great -- until they aren't. Imagine a beautiful bridge with a hidden crack in a support beam -- AI code can look perfect on the surface but hide dangerous flaws. A customer reports they were charged twice for the same order.",
   "teach": [
     {
       "type": "analogy",

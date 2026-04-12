@@ -1,7 +1,7 @@
 {
   "slug": "relationships",
   "title": "Relaciones",
-  "description": "Conecta tus tablas entre sí con claves foráneas y comprende las relaciones uno-a-muchos, muchos-a-muchos y uno-a-uno",
+  "description": "Similar a cómo un árbol genealógico conecta parientes, conecta tus tablas con claves foráneas y comprende las relaciones uno-a-muchos, muchos-a-muchos y uno-a-uno",
   "order": 3,
   "tier": "intermediate",
   "courseSlug": "database-design",

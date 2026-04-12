@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "There are dozens of places you can deploy your app. Some are great for beginners, some are designed for large companies. Let's learn which platforms match which needs. Swipe right if it's a GOOD match, or left if it's a BAD match.",
+  "intro": "There are dozens of places you can deploy your app -- similar to choosing an apartment, some are cozy free studios while others are full buildings with a doorman. Let's learn which platforms match which needs. Swipe right if it's a GOOD match, or left if it's a BAD match.",
   "teach": [
     {
       "type": "analogy",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Tu app necesita diferentes configuraciones dependiendo de dónde se ejecute -- tu laptop, un servidor de pruebas, o el sitio de producción real. Las variables de entorno son cómo manejas esto. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "intro": "Tu app necesita diferentes configuraciones dependiendo de dónde se ejecute -- tu laptop, un servidor de pruebas, o el sitio de producción real. Piensa en ello como el marcado rápido de un teléfono: los botones siempre hacen lo mismo, pero los números cambian según de quién sea el teléfono. Las variables de entorno son cómo manejas esto. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
   "teach": [
     {
       "type": "analogy",

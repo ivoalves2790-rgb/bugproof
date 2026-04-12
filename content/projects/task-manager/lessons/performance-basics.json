@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Your task manager is live and people are using it. But some pages load slowly and users are bouncing. Let's learn what makes web apps fast — and what slows them down.",
+  "intro": "Your task manager is live and people are using it. But some pages load slowly and users are bouncing. Think of a slow app like a restaurant where every dish takes an hour — customers leave before the food arrives. Let's learn what makes web apps fast — and what slows them down.",
   "teach": [
     {
       "type": "text",

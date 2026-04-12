@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "why-performance-matters",
   "courseSlug": "performance-scaling",
-  "intro": "You've inherited a slow React project and need to find quick performance wins. Let's use some command-line tools to measure the current state and apply fixes that make an immediate difference.",
+  "intro": "You've inherited a slow React project and need to find quick performance wins. Think of it like cleaning your apartment before surprise guests arrive -- a few small fixes can make everything feel dramatically better. Let's use some command-line tools to measure the current state and apply fixes that make an immediate difference.",
   "teach": [
     {
       "type": "analogy",

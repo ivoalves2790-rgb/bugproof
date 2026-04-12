@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "A junior developer put sensitive logic in the wrong place -- they're checking if a user has admin access on the client side (in the browser), which means any user could bypass it with DevTools.",
+  "intro": "A junior developer put sensitive logic in the wrong place -- think of it like putting the security guard in the lobby instead of at the vault door. They're checking if a user has admin access on the client side (in the browser), which means any user could bypass it with DevTools.",
   "teach": [
     {
       "type": "analogy",

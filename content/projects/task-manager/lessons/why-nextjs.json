@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "We're using Next.js for our task manager. Swipe right on real advantages of Next.js, left on myths or misconceptions people spread about it.",
+  "intro": "We're using Next.js for our task manager. If React is the engine, Next.js is the whole car — ready to drive out of the lot. Swipe right on real advantages of Next.js, left on myths or misconceptions people spread about it.",
   "teach": [
     {
       "type": "text",

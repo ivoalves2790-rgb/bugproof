@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "how-the-web-works",
   "courseSlug": "system-architecture",
-  "intro": "Every interaction on the web is a conversation between your browser (the client) and a server. The browser sends a request, the server sends back a response. Let's see this in action using curl -- a tool that lets you make HTTP requests from the terminal.",
+  "intro": "Every interaction on the web is a conversation between your browser (the client) and a server -- think of it like exchanging letters back and forth. The browser sends a request, the server sends back a response. Let's see this in action using curl -- a tool that lets you make HTTP requests from the terminal.",
   "teach": [
     {
       "type": "analogy",

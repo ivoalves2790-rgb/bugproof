@@ -1,7 +1,7 @@
 {
   "slug": "ci-cd",
   "title": "Pipelines de CI/CD",
-  "description": "Pruebas y despliegue automatizados con integración y entrega continua",
+  "description": "Imagina una línea de ensamblaje que prueba y envía tu código automáticamente -- aprende sobre CI/CD con integración y entrega continua",
   "order": 3,
   "courseSlug": "deployment-devops",
   "tier": "intermediate"

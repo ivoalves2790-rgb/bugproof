@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Es dia de despliegue. Conectas tu repositorio a Vercel, presionas deploy y... la compilacion falla. Bienvenido al mundo real de la depuracion de despliegues.",
+  "intro": "Es dia de despliegue. Es como mudarte a un departamento nuevo — todo funcionaba en el anterior, pero el nuevo entorno tiene sus propias particularidades. Conectas tu repositorio a Vercel, presionas deploy y... la compilacion falla. Bienvenido al mundo real de la depuracion de despliegues.",
   "teach": [
     {
       "type": "text",

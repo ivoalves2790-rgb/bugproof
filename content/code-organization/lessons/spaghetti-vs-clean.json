@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-organization-matters",
   "courseSlug": "code-organization",
-  "intro": "Some code is a joy to work with. Other code makes you want to quit and become a farmer. The difference usually isn't about clever algorithms -- it's about organization. Swipe RIGHT if the statement is true, LEFT if it's false.",
+  "intro": "Some code is a joy to work with. Other code makes you want to quit and become a farmer. Imagine a well-organized kitchen where everything has its place versus one where pots, spices, and utensils are all in the same pile. The difference usually isn't about clever algorithms -- it's about organization. Swipe RIGHT if the statement is true, LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",

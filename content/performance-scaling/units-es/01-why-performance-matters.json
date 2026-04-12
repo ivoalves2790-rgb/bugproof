@@ -1,7 +1,7 @@
 {
   "slug": "why-performance-matters",
   "title": "Por qué importa el rendimiento",
-  "description": "Qué hace lentas a las apps, cascadas de carga y Core Web Vitals",
+  "description": "Piensa en una app lenta como un embotellamiento de tráfico -- aprende qué hace lentas a las apps, entiende las cascadas de carga y descubre los Core Web Vitals",
   "order": 1,
   "courseSlug": "performance-scaling",
   "tier": "beginner",

@@ -1,7 +1,7 @@
 {
   "slug": "what-are-databases",
   "title": "¿Qué Son las Bases de Datos?",
-  "description": "Comprende por qué las aplicaciones necesitan bases de datos y la diferencia entre almacenar datos en archivos vs un sistema de base de datos dedicado",
+  "description": "Piensa en una base de datos como una hoja de cálculo con superpoderes -- comprende por qué las apps las necesitan y la diferencia entre almacenar datos en archivos vs un sistema dedicado",
   "order": 1,
   "tier": "beginner",
   "courseSlug": "database-design",

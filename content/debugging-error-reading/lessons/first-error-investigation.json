@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "You just cloned a project and tried to run it, but it immediately crashes with an error. Let's walk through investigating the problem step by step using the terminal.",
+  "intro": "You just cloned a project and tried to run it, but it immediately crashes with an error. Think of it like being a detective at a crime scene -- the error message is your first clue. Let's walk through investigating the problem step by step using the terminal.",
   "teach": [
     {
       "type": "analogy",

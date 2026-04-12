@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "security-mindset",
   "courseSlug": "security-fundamentals",
-  "intro": "La regla #1 de seguridad: nunca confíes en la entrada del usuario. Pero no son solo los campos de formulario -- los datos pueden llegar desde URLs, cookies, cabeceras, APIs e incluso tu propia base de datos si fue llenada por usuarios. Desliza a la derecha si la práctica es SEGURA, o a la izquierda si es INSEGURA.",
+  "intro": "La regla #1 de seguridad: nunca confíes en la entrada del usuario. Imagina que cada dato que llega es un paquete de un desconocido -- necesita ser inspeccionado antes de abrirlo. No son solo los campos de formulario; los datos pueden llegar desde URLs, cookies, cabeceras, APIs e incluso tu propia base de datos si fue llenada por usuarios. Desliza a la derecha si la práctica es SEGURA, o a la izquierda si es INSEGURA.",
   "teach": [
     {
       "type": "analogy",

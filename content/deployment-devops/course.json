@@ -2,7 +2,7 @@
   "slug": "deployment-devops",
   "title": "Deployment & DevOps",
   "description": "Hosting, env vars, CI/CD, domains, and DNS",
-  "longDescription": "Building an app is only half the battle — getting it live on the internet is the other half. Deployment is where 'works on my machine' becomes 'works for everyone'. This course covers everything from environment variables and hosting platforms to CI/CD pipelines, domains, DNS, and what to do when your deploy breaks at 2am.",
+  "longDescription": "Building an app is only half the battle — getting it live on the internet is the other half. Deployment is where 'works on my machine' becomes 'works for everyone'. Just like launching a rocket, you need checklists, staging environments, and a plan for when things go sideways. This course covers everything from environment variables and hosting platforms to CI/CD pipelines, domains, DNS, and what to do when your deploy breaks at 2am.",
   "icon": "cloud",
   "color": "#FECA57",
   "prerequisites": [],

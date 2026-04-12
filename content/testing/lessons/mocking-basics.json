@@ -6,7 +6,7 @@
   "xpReward": 20,
   "unitSlug": "unit-tests",
   "courseSlug": "testing",
-  "intro": "Your function calls an external API. You can't (and shouldn't) call the real API in your tests -- it's slow, costs money, and might be down. Mocking lets you fake external dependencies. A test suite is hitting a real API and causing problems. Figure out the solution.",
+  "intro": "Your function calls an external API. You can't (and shouldn't) call the real API in your tests -- it's slow, costs money, and might be down. Imagine using a stunt double in a movie instead of the real actor for dangerous scenes -- that's what mocking does for your code. A test suite is hitting a real API and causing problems. Figure out the solution.",
   "teach": [
     {
       "type": "analogy",

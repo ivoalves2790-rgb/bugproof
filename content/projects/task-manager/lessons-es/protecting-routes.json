@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas tiene login funcionando, pero un usuario curioso descubre que puede acceder a las tareas de otras personas simplemente cambiando la URL. Es hora de asegurar tus rutas.",
+  "intro": "Tu gestor de tareas tiene login funcionando, pero un usuario curioso descubre que puede acceder a las tareas de otras personas simplemente cambiando la URL. Imagina un edificio donde las puertas tienen nombres pero no cerraduras — cualquiera puede entrar a cualquier habitacion. Es hora de asegurar tus rutas.",
   "teach": [
     {
       "type": "text",

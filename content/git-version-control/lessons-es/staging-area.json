@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Un desarrollador acaba de terminar de construir una función de inicio de sesión, pero también tiene algunos archivos de depuración no relacionados por ahí. Quiere hacer commit SOLO de los archivos de inicio de sesión, pero su comando prepara todo. Encuentra el error.",
+  "intro": "Un desarrollador acaba de terminar de construir una función de inicio de sesión, pero también tiene algunos archivos de depuración no relacionados por ahí. Piensa en el staging como empacar una maleta -- eliges exactamente qué va dentro, no metes todo el clóset. Quiere hacer commit SOLO de los archivos de inicio de sesión, pero su comando prepara todo. Encuentra el error.",
   "teach": [
     {
       "type": "analogy",

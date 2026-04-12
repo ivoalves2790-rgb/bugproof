@@ -1,7 +1,7 @@
 {
   "slug": "undoing",
   "title": "Undoing Changes",
-  "description": "Revert commits, unstage files, and recover from mistakes",
+  "description": "It's like having an undo button with a time machine -- learn to revert commits, unstage files, and recover from mistakes",
   "order": 5,
   "courseSlug": "git-version-control",
   "tier": "advanced",

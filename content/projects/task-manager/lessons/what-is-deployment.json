@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Your task manager works on your laptop — now it's time to put it on the internet so anyone can use it. Let's explore what deployment actually means.",
+  "intro": "Your task manager works on your laptop — now it's time to put it on the internet so anyone can use it. It's like going from cooking at home to opening a restaurant: the recipe is the same, but the logistics are completely different. Let's explore what deployment actually means.",
   "teach": [
     {
       "type": "text",

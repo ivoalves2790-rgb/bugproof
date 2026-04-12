@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas funciona en tu laptop — ahora es momento de ponerlo en internet para que cualquiera pueda usarlo. Exploremos que significa realmente el despliegue.",
+  "intro": "Tu gestor de tareas funciona en tu laptop — ahora es momento de ponerlo en internet para que cualquiera pueda usarlo. Es como pasar de cocinar en casa a abrir un restaurante: la receta es la misma, pero la logistica es completamente diferente. Exploremos que significa realmente el despliegue.",
   "teach": [
     {
       "type": "text",

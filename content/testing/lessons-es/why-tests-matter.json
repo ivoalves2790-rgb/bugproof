@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "why-test",
   "courseSlug": "testing",
-  "intro": "Acabas de unirte a una pequeña startup. El código base tiene cero tests. Tu primera tarea es agregar una nueva funcionalidad de pagos. Después de lanzarla, las cosas empiezan a salir mal. Veamos por qué los tests habrían salvado el día.",
+  "intro": "Acabas de unirte a una pequeña startup. El código base tiene cero tests. Imagina caminar por la cuerda floja sin red de seguridad -- un resbalón y es un desastre. Tu primera tarea es agregar una nueva funcionalidad de pagos. Después de lanzarla, las cosas empiezan a salir mal. Veamos por qué los tests habrían salvado el día.",
   "teach": [
     {
       "type": "analogy",

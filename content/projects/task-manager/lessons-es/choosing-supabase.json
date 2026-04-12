@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Estamos usando Supabase como nuestro backend para el gestor de tareas. Desliza a la derecha en verdaderas ventajas de Supabase, a la izquierda en conceptos erroneos o cosas que no son del todo correctas.",
+  "intro": "Estamos usando Supabase como nuestro backend para el gestor de tareas. Es como mudarte a un departamento amueblado en vez de construir una casa desde cero — lo esencial ya esta listo. Desliza a la derecha en verdaderas ventajas de Supabase, a la izquierda en conceptos erroneos o cosas que no son del todo correctas.",
   "teach": [
     {
       "type": "text",

@@ -1,7 +1,7 @@
 {
   "slug": "remotes",
   "title": "Remotos y GitHub",
-  "description": "Push, pull, clone y colaboración con repositorios remotos",
+  "description": "Imagina una nube compartida para el historial de tu código -- aprende a hacer push, pull, clone y colaborar con repositorios remotos",
   "order": 4,
   "courseSlug": "git-version-control",
   "tier": "intermediate",

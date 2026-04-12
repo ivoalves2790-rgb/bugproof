@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "Your teammate says the latest deploy broke the login page. The site was working fine yesterday. You need to use Git's history to figure out what changed and who changed it.",
+  "intro": "Your teammate says the latest deploy broke the login page. The site was working fine yesterday. Just like a detective reviewing security camera footage to find when something went wrong, you need to use Git's history to figure out what changed and who changed it.",
   "teach": [
     {
       "type": "analogy",

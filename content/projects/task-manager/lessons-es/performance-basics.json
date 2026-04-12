@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta en produccion y la gente lo esta usando. Pero algunas paginas cargan lento y los usuarios se van. Aprendamos que hace rapidas a las apps web — y que las hace lentas.",
+  "intro": "Tu gestor de tareas esta en produccion y la gente lo esta usando. Pero algunas paginas cargan lento y los usuarios se van. Imagina una app lenta como un restaurante donde cada plato tarda una hora — los clientes se van antes de que llegue la comida. Aprendamos que hace rapidas a las apps web — y que las hace lentas.",
   "teach": [
     {
       "type": "text",

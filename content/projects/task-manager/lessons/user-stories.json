@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "User stories describe features from the user's perspective. Judge whether each one is well-written or needs improvement.",
+  "intro": "User stories describe features from the user's perspective. Imagine ordering at a restaurant — the more specific your order, the more likely you get exactly what you want. Judge whether each one is well-written or needs improvement.",
   "teach": [
     {
       "type": "text",

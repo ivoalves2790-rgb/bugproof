@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Estamos usando Next.js para nuestro gestor de tareas. Desliza a la derecha en ventajas reales de Next.js, a la izquierda en mitos o conceptos erroneos que la gente difunde sobre el.",
+  "intro": "Estamos usando Next.js para nuestro gestor de tareas. Si React es el motor, Next.js es el auto completo — listo para salir del concesionario. Desliza a la derecha en ventajas reales de Next.js, a la izquierda en mitos o conceptos erroneos que la gente difunde sobre el.",
   "teach": [
     {
       "type": "text",

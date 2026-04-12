@@ -1,7 +1,7 @@
 {
   "slug": "migrations",
   "title": "Migrations & Evolution",
-  "description": "Learn how to safely change your database structure over time without losing data or breaking your app",
+  "description": "It's like remodeling a store without closing it -- learn how to safely change your database structure over time without losing data or breaking your app",
   "order": 5,
   "tier": "advanced",
   "courseSlug": "database-design",

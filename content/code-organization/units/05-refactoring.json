@@ -1,7 +1,7 @@
 {
   "slug": "refactoring",
   "title": "Refactoring",
-  "description": "Safely restructuring code without breaking things",
+  "description": "It's like renovating a house while people still live in it -- learn to safely restructure code without breaking things",
   "order": 5,
   "courseSlug": "code-organization",
   "tier": "advanced",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "what-are-databases",
   "courseSlug": "database-design",
-  "intro": "Hay dos grandes familias de bases de datos: SQL (tablas estructuradas) y NoSQL (documentos flexibles). Hay mucho debate sobre cuál es 'mejor,' pero ambas tienen su lugar. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "intro": "Hay dos grandes familias de bases de datos: SQL (tablas estructuradas) y NoSQL (documentos flexibles). Piensa en SQL como una hoja de cálculo con columnas estrictas, y NoSQL como un cuaderno donde cada página puede verse diferente. Hay mucho debate sobre cuál es 'mejor,' pero ambas tienen su lugar. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
   "teach": [
     {
       "type": "analogy",

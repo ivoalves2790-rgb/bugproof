@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Las apps de React se construyen con componentes. Juzga si cada enfoque de diseno de componentes es una buena practica o una mala.",
+  "intro": "Las apps de React se construyen con componentes — igual que los sets de LEGO se construyen con pequenos ladrillos reutilizables. Juzga si cada enfoque de diseno de componentes es una buena practica o una mala.",
   "teach": [
     {
       "type": "analogy",

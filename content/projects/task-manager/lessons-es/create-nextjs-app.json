@@ -6,7 +6,7 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Estas listo para crear el proyecto de Next.js para tu gestor de tareas. Las elecciones que hagas durante la configuracion determinaran lo facil que sera trabajar con el proyecto. Veamos como lo manejas.",
+  "intro": "Estas listo para crear el proyecto de Next.js para tu gestor de tareas. Es como elegir tu equipo de seguridad antes de escalar — las elecciones que hagas durante la configuracion determinaran lo facil que sera trabajar con el proyecto. Veamos como lo manejas.",
   "teach": [
     {
       "type": "text",

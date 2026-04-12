@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "branching",
   "courseSlug": "git-version-control",
-  "intro": "Estás manejando dos funcionalidades: modo oscuro y una barra de búsqueda. Necesitas cambiar entre ramas para trabajar en cada una. Pero ten cuidado -- Git no te dejará cambiar si tienes cambios sin guardar que podrían perderse.",
+  "intro": "Estás manejando dos funcionalidades: modo oscuro y una barra de búsqueda. Imagina tener escritorios separados para cada proyecto -- puedes ir a otro escritorio y retomar justo donde lo dejaste. Necesitas cambiar entre ramas para trabajar en cada una. Pero ten cuidado -- Git no te dejará cambiar si tienes cambios sin guardar que podrían perderse.",
   "teach": [
     {
       "type": "analogy",

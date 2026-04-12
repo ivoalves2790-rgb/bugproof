@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "going-live",
   "courseSlug": "deployment-devops",
-  "intro": "Hay docenas de lugares donde puedes desplegar tu app. Algunos son geniales para principiantes, algunos están diseñados para grandes empresas. Aprendamos qué plataformas coinciden con qué necesidades. Desliza a la derecha si es una BUENA coincidencia, o a la izquierda si es MALA.",
+  "intro": "Hay docenas de lugares donde puedes desplegar tu app -- similar a elegir un apartamento, algunos son pequeños estudios gratuitos mientras otros son edificios completos con portero. Aprendamos qué plataformas coinciden con qué necesidades. Desliza a la derecha si es una BUENA coincidencia, o a la izquierda si es MALA.",
   "teach": [
     {
       "type": "analogy",

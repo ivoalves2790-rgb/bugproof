@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "frontend-backend",
   "courseSlug": "system-architecture",
-  "intro": "There are two main ways to build web pages: have the server send finished HTML (server-side rendering) or have the browser build the page using JavaScript (client-side rendering). Let's explore the difference by examining what the browser actually receives.",
+  "intro": "There are two main ways to build web pages: have the server send finished HTML (server-side rendering) or have the browser build the page using JavaScript (client-side rendering). It's like the difference between a ready-made meal and a cook-at-home kit. Let's explore by examining what the browser actually receives.",
   "teach": [
     {
       "type": "analogy",

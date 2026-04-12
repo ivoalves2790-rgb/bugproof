@@ -6,7 +6,7 @@
   "xpReward": 15,
   "unitSlug": "basics",
   "courseSlug": "git-version-control",
-  "intro": "No todos los archivos pertenecen a Git. Las claves secretas de API, las carpetas gigantes de dependencias y los archivos del sistema deben ignorarse. El archivo .gitignore le dice a Git qué archivos pretender que no existen.",
+  "intro": "No todos los archivos pertenecen a Git. Las claves secretas de API, las carpetas gigantes de dependencias y los archivos del sistema deben ignorarse. Piensa en ello como un portero de club -- .gitignore decide qué archivos entran y cuáles se quedan afuera. El archivo .gitignore le dice a Git qué archivos pretender que no existen.",
   "teach": [
     {
       "type": "analogy",

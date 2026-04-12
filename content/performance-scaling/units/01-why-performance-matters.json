@@ -1,7 +1,7 @@
 {
   "slug": "why-performance-matters",
   "title": "Why Performance Matters",
-  "description": "What makes apps slow, loading waterfalls, and Core Web Vitals",
+  "description": "Think of a slow app like a traffic jam -- learn what makes apps slow, understand loading waterfalls, and discover Core Web Vitals",
   "order": 1,
   "courseSlug": "performance-scaling",
   "tier": "beginner",

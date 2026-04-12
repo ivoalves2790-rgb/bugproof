@@ -1,7 +1,7 @@
 {
   "slug": "prompting",
   "title": "Prompting for Better Code",
-  "description": "How to write prompts that produce useful, working code instead of vague or broken output",
+  "description": "It's like giving directions -- learn how to write prompts that produce useful, working code instead of vague or broken output",
   "order": 2,
   "tier": "beginner",
   "courseSlug": "ai-assisted-development",

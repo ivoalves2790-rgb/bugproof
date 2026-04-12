@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "environment-config",
   "courseSlug": "deployment-devops",
-  "intro": "Your app needs different settings depending on where it runs -- your laptop, a testing server, or the real production site. Environment variables are how you handle this. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "intro": "Your app needs different settings depending on where it runs -- your laptop, a testing server, or the real production site. Think of it like speed dial on a phone: the buttons always do the same thing, but the actual numbers change depending on whose phone it is. Environment variables are how you handle this. Swipe right if the statement is TRUE, or left if it's FALSE.",
   "teach": [
     {
       "type": "analogy",

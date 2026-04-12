@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "reading-errors",
   "courseSlug": "debugging-error-reading",
-  "intro": "Errors aren't punishment -- they're messages from your computer trying to help you fix a problem. But a lot of beginners have the wrong idea about what errors mean. Swipe RIGHT if the statement is true, or LEFT if it's false.",
+  "intro": "Errors aren't punishment -- they're messages from your computer trying to help you fix a problem, just like a check engine light tells you something needs attention without meaning your car is destroyed. But a lot of beginners have the wrong idea about what errors mean. Swipe RIGHT if the statement is true, or LEFT if it's false.",
   "teach": [
     {
       "type": "analogy",
