@@ -25,8 +25,8 @@ export default function ProjectsPage() {
         </p>
       </div>
 
-      <div className="mb-4 rounded-lg border border-xp-gold/20 bg-xp-gold/5 px-4 py-3">
-        <p className="text-xs text-xp-gold/90 leading-relaxed">
+      <div className="mb-4 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-4 py-3">
+        <p className="text-xs font-semibold text-terminal-red leading-relaxed">
           {motivation}
         </p>
       </div>

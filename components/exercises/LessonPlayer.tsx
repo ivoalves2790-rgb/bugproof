@@ -160,8 +160,8 @@ export function LessonPlayer({
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <h2 className="mb-2 text-lg font-bold">{lesson.title}</h2>
-          <div className="mb-4 rounded-lg border border-xp-gold/20 bg-xp-gold/5 px-3 py-2">
-            <p className="text-[11px] text-xp-gold/90 leading-relaxed">{teachMotivation}</p>
+          <div className="mb-4 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-3 py-2">
+            <p className="text-[11px] font-semibold text-terminal-red leading-relaxed">{teachMotivation}</p>
           </div>
         </motion.div>
 
@@ -196,8 +196,8 @@ export function LessonPlayer({
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <h2 className="text-lg font-bold">{lesson.title}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{lesson.intro}</p>
-        <div className="mt-3 rounded-lg border border-xp-gold/20 bg-xp-gold/5 px-3 py-2">
-          <p className="text-[11px] text-xp-gold/90 leading-relaxed">{exerciseMotivation}</p>
+        <div className="mt-3 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-3 py-2">
+          <p className="text-[11px] font-semibold text-terminal-red leading-relaxed">{exerciseMotivation}</p>
         </div>
       </motion.div>
 

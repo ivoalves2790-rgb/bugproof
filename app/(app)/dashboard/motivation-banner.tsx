@@ -18,8 +18,8 @@ export function MotivationBanner() {
   });
 
   return (
-    <div className="mb-4 rounded-lg border border-terminal-green/20 bg-terminal-green/5 px-4 py-3">
-      <p className="text-xs text-terminal-green/90 leading-relaxed">
+    <div className="mb-4 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-4 py-3">
+      <p className="text-xs font-semibold text-terminal-red leading-relaxed">
         {message}
       </p>
     </div>

@@ -170,11 +170,11 @@ function TeachBlockRenderer({ block }: { block: TeachBlock }) {
 
     case "motivation":
       return (
-        <div className="rounded-xl border border-xp-gold/30 bg-xp-gold/5 p-5">
-          <div className="mb-1 text-xs font-medium uppercase tracking-wider text-xp-gold">
+        <div className="rounded-xl border border-terminal-red/30 bg-terminal-red/10 p-5">
+          <div className="mb-1 text-xs font-bold uppercase tracking-wider text-terminal-red">
             💰 Why This Pays Off
           </div>
-          <p className="text-sm leading-relaxed text-xp-gold/90">
+          <p className="text-sm font-semibold leading-relaxed text-terminal-red">
             <RichText text={block.body} />
           </p>
         </div>

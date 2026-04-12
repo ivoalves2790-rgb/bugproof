@@ -4,6 +4,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import { ToastProvider } from "@/components/ui/Toast";
 import { PremiumProvider } from "@/lib/hooks/use-premium";
 import { LanguageProvider } from "@/lib/i18n/use-language";
+import { GlobalMotivationBanner } from "@/components/motivation/GlobalMotivationBanner";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const hearts = 3;
@@ -18,7 +19,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Sidebar />
           <TopBar hearts={hearts} streak={streak} xp={xp} />
           <main className="w-full pb-20 pt-14 md:pb-0 md:pl-56">
-            <div className="mx-auto w-full max-w-4xl px-4 py-4 md:px-6 md:py-6">{children}</div>
+            <div className="mx-auto w-full max-w-4xl px-4 py-4 md:px-6 md:py-6">
+              <GlobalMotivationBanner />
+              {children}
+            </div>
           </main>
           <BottomNav />
         </div>
