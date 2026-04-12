@@ -65,7 +65,7 @@ export function GlossaryModal({ entry, onClose, onOpenRelated }: GlossaryModalPr
           {entry.example && (
             <div className="mt-4 rounded-lg bg-surface-2 p-3">
               <span className="text-[10px] uppercase tracking-wider text-terminal-amber">
-                {t("glossary.title") === "Glosario" ? "Ejemplo" : "Example"}
+                {t("glossary.example")}
               </span>
               <p className="mt-1 text-xs text-muted-foreground font-mono leading-relaxed">
                 {entry.example}

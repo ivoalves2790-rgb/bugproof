@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useMemo, useCallback } from "react";
-import glossaryData from "@/content/glossary.json";
+import glossaryEn from "@/content/glossary.json";
+import glossaryEs from "@/content/glossary-es.json";
+import { useLanguage } from "@/lib/i18n/use-language";
 import { GlossaryModal } from "./GlossaryModal";
 
 interface GlossaryEntry {
@@ -12,32 +14,37 @@ interface GlossaryEntry {
   relatedTerms?: string[];
 }
 
-const glossary = glossaryData as GlossaryEntry[];
+function buildGlossaryIndex(data: GlossaryEntry[]) {
+  const termMap = new Map<string, GlossaryEntry>();
+  for (const entry of data) {
+    termMap.set(entry.term.toLowerCase(), entry);
+    // Also add without parenthetical: "Pull Request (PR)" → "pull request"
+    const withoutParens = entry.term.replace(/\s*\(.*?\)\s*/g, "").trim();
+    if (withoutParens !== entry.term) {
+      termMap.set(withoutParens.toLowerCase(), entry);
+    }
+    // Add abbreviations: "XSS (Cross-Site Scripting)" → "xss"
+    const abbrev = entry.term.match(/^(\w+)\s*\(/);
+    if (abbrev) {
+      termMap.set(abbrev[1].toLowerCase(), entry);
+    }
+  }
 
-// Build a lookup map: lowercase term → entry
-const termMap = new Map<string, GlossaryEntry>();
-for (const entry of glossary) {
-  termMap.set(entry.term.toLowerCase(), entry);
-  // Also add without parenthetical: "Pull Request (PR)" → "pull request"
-  const withoutParens = entry.term.replace(/\s*\(.*?\)\s*/g, "").trim();
-  if (withoutParens !== entry.term) {
-    termMap.set(withoutParens.toLowerCase(), entry);
-  }
-  // Add abbreviations: "XSS (Cross-Site Scripting)" → "xss"
-  const abbrev = entry.term.match(/^(\w+)\s*\(/);
-  if (abbrev) {
-    termMap.set(abbrev[1].toLowerCase(), entry);
-  }
+  // Sort terms by length (longest first) to match "merge conflict" before "merge"
+  const sortedTerms = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
+
+  // Build regex that matches any glossary term (word-boundary aware)
+  const termRegex = new RegExp(
+    `\\b(${sortedTerms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`,
+    "gi"
+  );
+
+  return { termMap, termRegex, glossary: data };
 }
 
-// Sort terms by length (longest first) to match "merge conflict" before "merge"
-const sortedTerms = Array.from(termMap.keys()).sort((a, b) => b.length - a.length);
-
-// Build regex that matches any glossary term (word-boundary aware)
-const termRegex = new RegExp(
-  `\\b(${sortedTerms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`,
-  "gi"
-);
+// Pre-build indexes for both locales
+const indexEn = buildGlossaryIndex(glossaryEn as GlossaryEntry[]);
+const indexEs = buildGlossaryIndex(glossaryEs as GlossaryEntry[]);
 
 interface GlossaryHighlighterProps {
   text: string;
@@ -45,12 +52,15 @@ interface GlossaryHighlighterProps {
 }
 
 export function GlossaryHighlighter({ text, className }: GlossaryHighlighterProps) {
+  const { locale } = useLanguage();
   const [activeEntry, setActiveEntry] = useState<GlossaryEntry | null>(null);
+
+  const { termMap, termRegex, glossary } = locale === "es" ? indexEs : indexEn;
 
   const handleOpenRelated = useCallback((termId: string) => {
     const entry = glossary.find((e) => e.id === termId);
     if (entry) setActiveEntry(entry);
-  }, []);
+  }, [glossary]);
 
   // Split text into segments: plain text and highlighted terms
   const segments = useMemo(() => {
@@ -91,7 +101,7 @@ export function GlossaryHighlighter({ text, className }: GlossaryHighlighterProp
     }
 
     return result;
-  }, [text]);
+  }, [text, termMap, termRegex]);
 
   return (
     <>
