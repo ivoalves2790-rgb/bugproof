@@ -14,6 +14,11 @@
       "body": "When you send a letter, you need a street address: 123 Main St, Apt 4, Springfield. A **URL** works the same way for the internet. It tells your browser exactly where to go -- which building (server), which apartment (path), and even which room (specific page)."
     },
     {
+      "type": "analogy",
+      "title": "A URL Is Like a Recipe Card",
+      "body": "A recipe card tells you exactly what you need: the cookbook (domain), the chapter (path), and special notes like 'make it gluten-free' (query parameters). A **URL** is the same -- it's a precise set of instructions so your browser knows exactly what to ask for. Change one ingredient and you get a completely different dish."
+    },
+    {
       "type": "text",
       "title": "The Parts of a URL",
       "body": "A URL like `https://www.example.com/products/shoes?color=red` has several parts:\n\n1. **Protocol** (`https://`) -- how to communicate (like choosing phone vs email)\n2. **Domain** (`www.example.com`) -- which server to talk to (the building address)\n3. **Path** (`/products/shoes`) -- which page you want (the room number)\n4. **Query string** (`?color=red`) -- extra details (like a note on your letter)"
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocol:  https://\nDomain:    api.weather.com\nPath:      /forecast/daily\nQuery:     ?city=london&units=metric",
       "annotation": "The & symbol separates multiple query parameters. Here we're asking for London's forecast in metric units."
+    },
+    {
+      "type": "motivation",
+      "body": "Clean, well-structured URLs are what make your app discoverable on Google and shareable on social media. When you vibecode with good URL design, you build apps that attract organic traffic -- and traffic is money."
     },
     {
       "type": "key_takeaway",

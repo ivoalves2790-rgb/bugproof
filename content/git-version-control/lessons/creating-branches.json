@@ -9,9 +9,19 @@
   "intro": "You're working on a blog app and want to add a dark mode feature. Instead of changing the main code directly, you'll create a separate branch to work on safely.",
   "teach": [
     {
+      "type": "analogy",
+      "title": "Creating a Branch = Opening a New Tab",
+      "body": "Think of creating a branch like opening a new browser tab. Your original tab stays exactly where it is -- nothing changes. The new tab starts from the same page, but now you can navigate somewhere completely different without losing your place. Creating a Git branch is just as instant and lightweight."
+    },
+    {
       "type": "text",
       "title": "How Branch Creation Works",
       "body": "When you create a branch, Git doesn't copy your files. It just creates a tiny bookmark (called a **pointer**) that says \"this branch starts here.\" It happens instantly and takes almost no space. That's why developers create branches constantly -- they're cheap and fast."
+    },
+    {
+      "type": "analogy",
+      "title": "Branches = Sticky Notes on a Timeline",
+      "body": "Imagine a long timeline of your project's history pinned to a wall. A branch is just a sticky note you place at one point on that timeline saying \"start building from here.\" You can stick as many notes as you want -- they weigh nothing and take up no space. That's literally what Git does: a branch is a tiny pointer, not a copy of your files."
     },
     {
       "type": "code_example",
@@ -24,6 +34,10 @@
       "type": "text",
       "title": "Creating vs Switching",
       "body": "**Important:** `git branch <name>` only creates the branch -- it does not switch you to it. You're still on your old branch until you run `git checkout <name>`. The asterisk (*) next to a branch name in `git branch` output tells you which branch you're currently on."
+    },
+    {
+      "type": "motivation",
+      "body": "Creating branches is the foundation of professional Git workflow. Every open-source contribution, every team project, every AI-built app you want to ship -- it all starts with creating a branch. This one skill unlocks pull requests, code reviews, and real team collaboration."
     },
     {
       "type": "key_takeaway",

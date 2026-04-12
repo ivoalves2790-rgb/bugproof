@@ -19,6 +19,15 @@
       "body": "Think of data flow like ordering at a restaurant. The user (customer) fills out a form (places an order). The frontend (waiter) sends it to the API (kitchen). The database (pantry) stores the ingredients. When you fetch data, the kitchen prepares the dish from the pantry and the waiter brings it to the table. If the food is wrong, you trace the problem: did the waiter write down the wrong order, did the kitchen misread it, or was the pantry stocked wrong?"
     },
     {
+      "type": "analogy",
+      "title": "Data Flow Is Like a Package Delivery",
+      "body": "When you order something online, the package goes: your order -> warehouse -> delivery truck -> your door. If it never arrives, you can track each step: did the warehouse ship it? Is the truck stuck? Was the address wrong? Data in your app follows the same traceable path. When something doesn't show up in the UI, you check each stop along the route."
+    },
+    {
+      "type": "motivation",
+      "body": "Understanding data flow is the superpower that lets you debug anything. When you can trace a bug from button click to database and back, you build reliable apps — the kind people trust with their daily workflow and gladly pay for."
+    },
+    {
       "type": "key_takeaway",
       "body": "Data flows in a predictable path: UI -> API -> Database and back. When something breaks, trace the flow step by step. Check the browser's network tab for API errors, Supabase logs for database errors, and the UI for rendering issues."
     }

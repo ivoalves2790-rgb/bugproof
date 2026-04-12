@@ -14,9 +14,18 @@
       "body": "The command `npx create-next-app@latest` scaffolds a full Next.js project with sensible defaults. It asks you a series of questions about TypeScript, ESLint, Tailwind CSS, and the App Router. For our task manager, we want TypeScript (catches bugs early), ESLint (catches mistakes), Tailwind (styles fast), and the App Router (the modern way to build Next.js apps)."
     },
     {
+      "type": "analogy",
+      "title": "The IKEA Flatpack vs. Raw Lumber",
+      "body": "Using create-next-app is like buying an IKEA flatpack — all the pieces are cut, the screws are included, and the instructions are right there. Manual setup is like going to a lumberyard and cutting every piece yourself. You CAN do it, but why would you when the flatpack gets you a functional desk in 30 minutes?"
+    },
+    {
       "type": "text",
       "title": "Why These Defaults Matter",
       "body": "TypeScript adds types to JavaScript, which means your editor can warn you about bugs before you even run the code. Tailwind CSS lets you style components without switching between files. The App Router uses the `app/` directory and gives you layouts, loading states, and server components out of the box."
+    },
+    {
+      "type": "motivation",
+      "body": "You just learned how to spin up a professional-grade project in under a minute. Freelancers charge clients hundreds of dollars just for project setup — you can now do this in your sleep and start building the product that earns."
     },
     {
       "type": "key_takeaway",

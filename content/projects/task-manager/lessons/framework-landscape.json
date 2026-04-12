@@ -19,6 +19,15 @@
       "body": "Building a task manager with Angular is like driving a semi-truck to the grocery store. It works, but it's overkill. You want something the right size for the job — powerful enough to handle your needs, simple enough that you won't get lost."
     },
     {
+      "type": "analogy",
+      "title": "The Power Tool Aisle",
+      "body": "Walking into a hardware store and buying the most expensive drill doesn't make you a better builder. What matters is: does the drill fit the screws you're using? Does it come with the bits you need? Can you find replacement parts easily? Frameworks are the same — the 'best' one is the one that fits YOUR project and has the support YOU need."
+    },
+    {
+      "type": "motivation",
+      "body": "Choosing the right framework from day one means you can build and iterate faster. Faster iteration means faster product-market fit, and that's how solo builders turn side projects into income streams."
+    },
+    {
       "type": "key_takeaway",
       "body": "Choose a framework based on: project complexity, community size, available learning resources, and how well it matches what you're building. Ignore hype cycles."
     }

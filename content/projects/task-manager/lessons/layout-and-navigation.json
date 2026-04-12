@@ -19,6 +19,15 @@
       "body": "Most people check their tasks on their phone. If you design for desktop first and then try to cram it onto mobile, the experience will feel broken. Start with the mobile layout — a single column, touch-friendly buttons, bottom navigation — and then **enhance** for desktop with a sidebar or wider grid."
     },
     {
+      "type": "analogy",
+      "title": "Layout Is Like a Building's Floor Plan",
+      "body": "Before a single wall goes up, an architect draws a floor plan showing where the hallways, rooms, and exits go. Your app's layout is the same — it defines where the navigation lives, where content goes, and how users move between sections. A confusing floor plan means people get lost; a confusing layout means users can't find features."
+    },
+    {
+      "type": "motivation",
+      "body": "Great navigation is invisible — users just find what they need. Clunky navigation makes people uninstall. Getting layout right means your app feels professional, and professional-feeling apps are the ones people pay for."
+    },
+    {
       "type": "key_takeaway",
       "body": "Use Next.js layout files to define shared structure, design mobile-first using Tailwind's responsive prefixes, and keep navigation simple. A task manager needs at most 3-4 top-level navigation items. If you need more, your scope is too big."
     }

@@ -19,6 +19,15 @@
       "body": "Una tarjeta de tarea no es solo una pantalla — los usuarios van a hacer clic, completarla, tal vez arrastrarla. Construye tu componente con **estados de interaccion** en mente desde el inicio: efectos hover, estados activos, estilos de completado. Una tarjeta sin retroalimentacion visual cuando pasas el cursor se siente rota, aunque tecnicamente funcione."
     },
     {
+      "type": "analogy",
+      "title": "La Tarjeta de Tarea Es Como una Tarjeta de Presentacion",
+      "body": "Una buena tarjeta de presentacion muestra tu nombre, cargo y una forma de contactarte — no tu curriculum completo. La tarjeta de tarea funciona igual: da justo la informacion suficiente para que alguien decida que hacer despues. Sobrecargala con detalles y los ojos de la gente se pierden, igual que con una tarjeta de presentacion que tiene 15 lineas de texto."
+    },
+    {
+      "type": "motivation",
+      "body": "La tarjeta de tarea es el corazon de tu producto — es lo que los usuarios tocan docenas de veces al dia. Clava este componente y habras construido algo a lo que la gente quiere volver. Eso es lo que convierte un proyecto personal en una app que genera dinero."
+    },
+    {
       "type": "key_takeaway",
       "body": "Empieza con la tarjeta minima viable — titulo y un boton de completar. Agrega informacion (fecha limite, prioridad, etiquetas) solo cuando tus historias de usuario lo requieran. Cada dato en la tarjeta compite por atencion, asi que se intencional con lo que muestras."
     }

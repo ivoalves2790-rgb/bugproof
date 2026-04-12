@@ -21,6 +21,15 @@
       "annotation": "Each approach has different trade-offs around scalability, security, and complexity."
     },
     {
+      "type": "analogy",
+      "title": "Three Ways to Prove Your Age",
+      "body": "Sessions are like showing your ID every time — the bouncer checks a list to confirm you're valid. JWTs are like a stamped wristband — anyone can read the stamp without checking the list, but you can't un-stamp it once it's on. OAuth is like having a friend the bouncer trusts vouch for you — you never have to show your ID at all."
+    },
+    {
+      "type": "motivation",
+      "body": "Understanding auth flows means you can offer Google and GitHub login — the signup experience users expect from professional products. Fewer friction points at signup means more users, and more users means more revenue."
+    },
+    {
       "type": "key_takeaway",
       "body": "For most apps, using an auth provider with OAuth support is the easiest and most secure path. You get Google/GitHub login and don't need to manage passwords yourself."
     }

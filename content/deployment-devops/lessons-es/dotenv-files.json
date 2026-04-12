@@ -14,6 +14,11 @@
       "body": "Piensa en un archivo .env como la página de configuración de tu teléfono. Es personal de tu dispositivo -- tu contraseña wifi, tu cuenta de correo, tus preferencias. No copiarías la configuración de tu teléfono al teléfono de otra persona. De manera similar, cada desarrollador y cada servidor tiene su propio archivo .env con configuraciones específicas de ese entorno."
     },
     {
+      "type": "analogy",
+      "title": ".env = Una Tarjeta de Receta Secreta",
+      "body": "Imagina que tienes una tarjeta de receta secreta pegada dentro de tu gabinete de cocina. Tiene todas las medidas de ingredientes especiales que hacen tus platillos unicos. Nunca la pondrias en el refrigerador para que los invitados la vean, y cada chef de la familia tiene su propia version. Un archivo .env es la tarjeta de receta secreta de tu app -- personal, oculta, y nunca compartida publicamente."
+    },
+    {
       "type": "text",
       "title": "El Formato del Archivo .env",
       "body": "Un archivo .env es súper simple -- solo pares clave=valor, uno por línea:\n\n- Sin espacios alrededor del signo `=`\n- No se necesitan comillas (generalmente)\n- Las líneas que empiezan con `#` son comentarios\n- El archivo vive en el directorio raíz de tu proyecto\n- El nombre del archivo es literalmente `.env` (empezando con un punto)"
@@ -29,6 +34,10 @@
       "type": "text",
       "title": "La Regla de Oro: Nunca Committees .env",
       "body": "Tu archivo .env contiene secretos. **Siempre** agrégalo a `.gitignore` para que nunca se envíe a GitHub. En su lugar, crea un archivo `.env.example` que muestre qué variables se necesitan (sin los valores reales) para que otros desarrolladores sepan qué configurar."
+    },
+    {
+      "type": "motivation",
+      "body": "El archivo .env es el eslabon perdido entre tu app creada con IA y servicios reales como Stripe y bases de datos. Domina esto, y tu app puede aceptar pagos y guardar datos de usuarios desde el primer dia."
     },
     {
       "type": "key_takeaway",

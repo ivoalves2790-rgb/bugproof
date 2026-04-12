@@ -19,6 +19,15 @@
       "body": "You don't call the grocery store every time you want to know if you have milk. You check the fridge (cache). But if someone drank the milk and didn't update the note, you'll think you have milk when you don't. That's a stale cache — and it's the hardest problem in caching."
     },
     {
+      "type": "analogy",
+      "title": "Caching Is Like Keeping Favorites on Speed Dial",
+      "body": "You could look up your best friend's number in the phone book every time you call, but it's faster to save it as a contact. Caching saves the result of expensive lookups so you don't repeat the work. Just make sure you update the contact if they change their number."
+    },
+    {
+      "type": "motivation",
+      "body": "Caching makes your app feel instant, and instant-feeling apps win users over slow competitors. The speed advantage you gain from smart caching directly translates to better retention and more revenue."
+    },
+    {
       "type": "key_takeaway",
       "body": "Cache data that changes infrequently (user settings, category lists) aggressively. Cache data that changes often (task lists, notifications) carefully with short expiry times or real-time invalidation."
     }

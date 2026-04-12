@@ -14,6 +14,11 @@
       "body": "Imagine repainting your entire house every time you hang a new picture frame. That's what unnecessary re-renders do -- the browser redraws components that haven't actually changed. A **smart** painter would only repaint the wall where the new frame hangs. React can be smart too, if you tell it what hasn't changed."
     },
     {
+      "type": "analogy",
+      "title": "Re-renders = Reprinting the Entire Newspaper",
+      "body": "Imagine a newspaper that reprints every single page every time one headline changes. The printing press runs nonstop, the delivery trucks are overwhelmed, and readers get their paper late. A smart newspaper only reprints the page that changed. **React memoization** does the same -- it tells your app to only re-render the components that actually have new content, not the entire page."
+    },
+    {
       "type": "text",
       "title": "Why Re-renders Are Expensive",
       "body": "Every time a React component re-renders, the browser must:\n\n1. Run your component function again (executing all the code inside)\n2. Compare the new output with the previous output (diffing)\n3. Update the actual DOM where things changed (painting)\n\nFor a small component, this is fast. For a list of 500 items, doing this on every keystroke creates visible lag."
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "// BAD: Creates a new function on every render\n<ExpensiveList\n  items={items}\n  onSelect={(id) => setSelected(id)}\n/>\n\n// GOOD: Stable function reference\nconst handleSelect = useCallback(\n  (id) => setSelected(id),\n  []\n);\n<ExpensiveList items={items} onSelect={handleSelect} />",
       "annotation": "When you pass an inline arrow function, React sees a 'new' function every render and re-renders ExpensiveList. useCallback keeps the same function reference, so React knows the prop hasn't changed."
+    },
+    {
+      "type": "motivation",
+      "body": "A search box that lags on every keystroke will make users give up on your app. Mastering rendering performance means your vibecoded apps feel polished and professional -- the kind users trust enough to pull out their credit card."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "A restaurant has two halves: the **dining room** (where customers sit) and the **kitchen** (where food is made). The frontend is the dining room. It's everything the customer sees -- the menu, the decor, the plates. The customer never goes into the kitchen, but they interact with everything in the dining room."
     },
     {
+      "type": "analogy",
+      "title": "The Frontend Is Like a TV Remote",
+      "body": "A TV remote has buttons you press and a screen that shows you channels. But the remote doesn't store all those shows -- it just sends signals to your cable box. The **frontend** is like that remote: it gives users buttons to click and screens to look at, but the real data lives somewhere else (the backend). The remote is your window into the system."
+    },
+    {
       "type": "text",
       "title": "What the Frontend Includes",
       "body": "The frontend is the code that runs **in the user's browser**. It's built with three core technologies:\n\n1. **HTML** -- the structure (headings, paragraphs, buttons)\n2. **CSS** -- the styling (colors, fonts, layouts)\n3. **JavaScript** -- the interactivity (clicks, animations, form validation)\n\nFrameworks like React, Vue, and Angular add structure on top of these three."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The Frontend's Job",
       "body": "The frontend is responsible for:\n\n1. **Displaying data** to the user (text, images, lists)\n2. **Handling interactions** (button clicks, form typing, scrolling)\n3. **Making requests** to the backend for data\n4. **Updating the screen** when new data arrives\n\nIt does NOT store data permanently, manage user accounts, or process payments -- that's the backend's job."
+    },
+    {
+      "type": "motivation",
+      "body": "Every app that makes money starts with what users see and touch. Master the frontend, and you can vibecode polished interfaces that people actually want to pay for."
     },
     {
       "type": "key_takeaway",

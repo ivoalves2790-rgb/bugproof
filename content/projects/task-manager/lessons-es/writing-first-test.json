@@ -14,11 +14,20 @@
       "body": "Cada test tiene tres fases: Preparar (configurar los datos), Actuar (ejecutar la funcion) y Afirmar (verificar el resultado). Un test para agregar una tarea crearia datos de entrada, llamaria a la funcion addTask y verificaria que la tarea devuelta tiene las propiedades correctas."
     },
     {
+      "type": "analogy",
+      "title": "Escribir un Test Es Como Hacer un Informe de Laboratorio",
+      "body": "En la clase de ciencias, preparas un experimento (preparar), lo ejecutas (actuar) y verificas el resultado contra tu hipotesis (afirmar). Escribir un test sigue exactamente los mismos pasos — tu eres el cientifico y tu codigo es el experimento."
+    },
+    {
       "type": "code_example",
       "title": "Un Test Unitario Simple",
       "language": "text",
       "code": "test('addTask creates a task with correct title and pending status', () => {\n  // Arrange\n  const input = { title: 'Buy groceries' };\n  \n  // Act\n  const task = addTask(input);\n  \n  // Assert\n  expect(task.title).toBe('Buy groceries');\n  expect(task.status).toBe('pending');\n  expect(task.id).toBeDefined();\n});",
       "annotation": "El patron Preparar-Actuar-Afirmar mantiene los tests legibles y enfocados en un solo comportamiento."
+    },
+    {
+      "type": "motivation",
+      "body": "Escribir tu primer test es un hito — demuestra que puedes construir software de manera profesional. Las apps con tests atraen usuarios que pagan porque funcionan de forma confiable, y esa confiabilidad es lo que convierte un proyecto personal en ingresos."
     },
     {
       "type": "key_takeaway",

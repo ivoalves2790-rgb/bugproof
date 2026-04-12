@@ -14,6 +14,11 @@
       "body": "Writing your first test is like following a recipe for the first time. The ingredients are simple (a function to test, some inputs, and expected outputs), and the steps are always the same (arrange, act, assert). Once you've done it once, you can do it for any function."
     },
     {
+      "type": "analogy",
+      "title": "Your First Test = Training Wheels on a Bike",
+      "body": "Remember learning to ride a bike? Training wheels made the scary part manageable -- you could focus on pedaling without worrying about balance. Writing your **first test** is the same. The framework (Jest) handles the hard parts. You just need to say: 'call this function, expect this result.' Once you're comfortable, you'll wonder how you ever coded without tests."
+    },
+    {
       "type": "text",
       "title": "Setting Up Jest",
       "body": "To start testing with Jest, you need:\n\n1. Install Jest: `npm install --save-dev jest`\n2. Add a test script to package.json: `\"test\": \"jest\"`\n3. Create a test file with `.test.js` extension\n4. Run tests with: `npm test`\n\nJest automatically finds and runs all files ending in `.test.js`."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// tests/email.test.js\nconst { isValidEmail } = require('../src/email');\n\ndescribe('isValidEmail', () => {\n  test('returns true for valid emails', () => {\n    expect(isValidEmail('user@example.com')).toBe(true);\n  });\n\n  test('returns false for emails without @', () => {\n    expect(isValidEmail('userexample.com')).toBe(false);\n  });\n});",
       "annotation": "'describe' groups related tests together. Each 'test' checks one specific behavior. This structure makes test output easy to read."
+    },
+    {
+      "type": "motivation",
+      "body": "Writing your first test is the single most valuable step you'll take as a vibecoder. From this moment on, every app you build with AI has a guardian watching over it -- and that's what separates hobby projects from products people actually pay for."
     },
     {
       "type": "key_takeaway",

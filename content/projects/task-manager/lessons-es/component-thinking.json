@@ -19,6 +19,15 @@
       "body": "Un componente deberia hacer **una cosa bien**. Si te encuentras describiendo un componente con la palabra 'y' — como 'obtiene datos Y renderiza una lista Y maneja el filtrado' — ese componente esta haciendo demasiado. Dividelo en piezas mas pequenas: un envoltorio de obtencion de datos, un renderizador de lista y un control de filtro."
     },
     {
+      "type": "analogy",
+      "title": "Componentes Son Como Estaciones de Cocina",
+      "body": "En una cocina profesional, hay una estacion para la parrilla, una para ensaladas y una para postres. Cada estacion hace una cosa y la hace bien. Si un chef intentara hacerlo todo a la vez, los pedidos se acumularian y la comida se quemaria. Los componentes de React funcionan igual — cada uno tiene un trabajo especifico, y juntos sirven la experiencia completa."
+    },
+    {
+      "type": "motivation",
+      "body": "Pensar en componentes es como los desarrolladores profesionales construyen apps que escalan. Cuando estructuras bien tu interfaz, agregar nuevas funcionalidades (y nuevas fuentes de ingreso) a tu producto toma horas en vez de semanas."
+    },
+    {
       "type": "key_takeaway",
       "body": "Los buenos componentes son pequenos, enfocados y reutilizables. Si un componente es dificil de nombrar, probablemente hace demasiado. Si copias y pegas JSX, probablemente necesitas un componente compartido. Empieza con menos componentes mas grandes y dividelos a medida que la complejidad crece."
     }

@@ -21,6 +21,15 @@
       "annotation": "Each column has a name, a type, and optional constraints. NOT NULL means the field is required. DEFAULT sets a fallback value. REFERENCES creates a relationship to another table."
     },
     {
+      "type": "analogy",
+      "title": "A Schema Is Like a Spreadsheet Template",
+      "body": "Imagine creating a spreadsheet template for tracking expenses: column A is always the date, column B is the amount, column C is the category. You wouldn't let someone put a name where the amount goes. A database schema works the same way — it locks in the column types and rules so no garbage data sneaks in. The template keeps everyone honest."
+    },
+    {
+      "type": "motivation",
+      "body": "A well-designed schema is the foundation of every successful app. Get your data structure right, and every feature you build on top of it becomes easier — meaning you ship faster and start earning sooner."
+    },
+    {
       "type": "key_takeaway",
       "body": "A good schema enforces data quality at the database level. Use NOT NULL for required fields, sensible defaults, proper data types, and foreign keys to connect related tables. The database should reject bad data before your app ever sees it."
     }

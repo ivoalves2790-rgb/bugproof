@@ -14,6 +14,11 @@
       "body": "Antes de construir un castillo de LEGO completo, querrías asegurarte de que cada bloque individual es sólido -- sin grietas, forma correcta, color correcto. Un **test unitario** hace lo mismo con el código. Testea UNA pequeña pieza (una función, un cálculo) por sí sola. Si todos tus bloques individuales son sólidos, puedes confiar en el castillo que construyes con ellos."
     },
     {
+      "type": "analogy",
+      "title": "Test unitario = Revisar cada ingrediente antes de hornear",
+      "body": "Antes de hornear un pastel, revisas cada ingrediente por separado: ¿La harina está fresca? ¿Los huevos están buenos? ¿El azúcar es realmente azúcar y no sal? No esperas a que el pastel esté horneado para descubrirlo. Un **test unitario** revisa cada 'ingrediente' de tu código individualmente, para que cuando los combines todos, sepas que cada pieza es sólida."
+    },
+    {
       "type": "text",
       "title": "¿Qué hace que un test sea un test 'unitario'?",
       "body": "Un test unitario tiene tres propiedades:\n\n1. **Testea una sola cosa** -- Una sola función o un solo comportamiento\n2. **Se ejecuta de forma aislada** -- No depende de bases de datos, APIs u otros servicios\n3. **Se ejecuta rápido** -- Típicamente milisegundos, porque no hay I/O de red ni disco\n\nSi tu test necesita una base de datos ejecutándose o hace llamadas a APIs, probablemente es un test de integración, no un test unitario."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// The function (the 'unit' we're testing)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// The unit test\ntest('capitalizes the first letter', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
       "annotation": "Este test se enfoca en una función y un comportamiento. No necesita una base de datos ni servidor. Se ejecuta en milisegundos."
+    },
+    {
+      "type": "motivation",
+      "body": "La IA puede generar docenas de funciones en segundos, pero cualquiera de ellas podría tener un bug sutil. Los tests unitarios te permiten verificar cada pieza individualmente, para que puedas cobrar con confianza por una app construida con código en el que confías."
     },
     {
       "type": "key_takeaway",

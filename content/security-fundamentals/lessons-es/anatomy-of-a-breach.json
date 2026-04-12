@@ -14,6 +14,11 @@
       "body": "Cuando una tubería se rompe en tu casa, lo primero que haces es cerrar el agua -- no trapear el piso, no llamar al plomero, no publicar en redes sociales. En una filtración de datos, tu primer movimiento es el mismo: detener la fuga antes de hacer cualquier otra cosa."
     },
     {
+      "type": "analogy",
+      "title": "La respuesta a incidentes es como el triaje en urgencias",
+      "body": "Cuando alguien llega a urgencias, los doctores no empiezan con el papeleo -- primero estabilizan al paciente, luego diagnostican y después tratan. Una filtración de datos funciona igual: contener la hemorragia (detener la fuga), evaluar el daño (revisar los logs), notificar a la familia (avisar a los usuarios afectados) y luego operar (corregir la causa raíz). Saltarse directo a la corrección mientras los datos siguen filtrándose es como programar una cirugía mientras el paciente sigue en la ambulancia."
+    },
+    {
       "type": "text",
       "title": "Los cuatro pasos de la respuesta a incidentes",
       "body": "Cuando ocurre una brecha de seguridad, sigue estos pasos en orden:\n\n1. **Contener** -- detener la fuga inmediatamente (deshabilitar el endpoint, revocar la clave)\n2. **Evaluar** -- revisar los logs para ver cuántos datos fueron accedidos\n3. **Notificar** -- informar a los usuarios afectados y a tu equipo\n4. **Corregir** -- parchar la vulnerabilidad y agregar protecciones para evitar que vuelva a pasar"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// VULNERABLE: anyone can access any user's data\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// FIXED: check that the requester owns this data\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Forbidden' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
       "annotation": "La versión vulnerable permite que cualquiera obtenga los datos de cualquier usuario solo cambiando el ID en la URL. La corrección agrega autenticación y verifica que solo puedas acceder a tus propios datos."
+    },
+    {
+      "type": "motivation",
+      "body": "Si estás construyendo apps con IA y vendiéndolas a clientes, una sola filtración de datos puede destruir la confianza que tanto te costó ganar -- y matar tus ingresos de la noche a la mañana. Saber responder a incidentes no es solo una habilidad, es un seguro para tu negocio."
     },
     {
       "type": "key_takeaway",

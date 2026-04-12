@@ -14,6 +14,11 @@
       "body": "Manual testing is like hand-washing dishes. You do it yourself, one by one, and sometimes you miss a spot. Automated testing is like a dishwasher -- you load it up once, press a button, and it cleans everything consistently every time. The dishwasher doesn't get tired, forget a plate, or rush through the last few."
     },
     {
+      "type": "analogy",
+      "title": "Manual = Security Guard, Automated = Security Cameras",
+      "body": "A security guard can only watch one entrance at a time, gets tired, and takes breaks. Security cameras watch every entrance simultaneously, 24/7, and never blink. **Manual testing** is the guard -- great for judgment calls and noticing something 'feels off.' **Automated testing** is the camera system -- it watches everything at once and never misses a thing it's been told to look for."
+    },
+    {
       "type": "text",
       "title": "Manual Testing",
       "body": "**Manual testing** means YOU check if things work:\n\n- Click through the app in a browser\n- Type in forms and check the output\n- Try different scenarios by hand\n\nIt's slow, inconsistent, and doesn't scale. But it's good for exploring new features and checking visual design -- things that are hard to automate."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Automated Testing",
       "body": "**Automated testing** means CODE checks if things work:\n\n- Tests run in seconds\n- Same checks every time, no human error\n- Runs automatically on every push (via CI/CD)\n- Can test hundreds of scenarios in the time it takes to manually test one\n\nThe upfront cost is writing the tests, but they pay for themselves after just a few runs."
+    },
+    {
+      "type": "motivation",
+      "body": "You can vibecode a new feature in minutes, but manually testing every page after every change takes hours. Automated tests let you ship updates at the speed AI writes code -- without the fear of silently breaking what already makes you money."
     },
     {
       "type": "key_takeaway",

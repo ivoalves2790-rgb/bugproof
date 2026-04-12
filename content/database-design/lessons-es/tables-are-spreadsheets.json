@@ -14,6 +14,11 @@
       "body": "Una tabla de base de datos es como una hoja de cálculo con reglas estrictas. En Google Sheets, puedes poner cualquier cosa en cualquier lugar -- números en una columna de nombre, texto en una columna de edad. Una tabla de base de datos dice: 'La columna nombre SOLO acepta texto. La columna edad SOLO acepta números. Y cada fila DEBE tener un ID.' Estas reglas previenen datos desordenados e inconsistentes."
     },
     {
+      "type": "analogy",
+      "title": "El Estacionamiento",
+      "body": "Una tabla de base de datos es como un estacionamiento bien disenado. Cada **piso** es un tipo de columna (autos compactos, camionetas, motos), cada **lugar** es una celda, y cada **auto estacionado** es una fila de datos. No puedes estacionar un trailer en un lugar para compactos -- el estacionamiento impone reglas sobre que cabe donde. Y cada lugar tiene un numero unico para que siempre puedas encontrar tu auto. Asi es exactamente como las tablas mantienen los datos organizados y localizables."
+    },
+    {
       "type": "text",
       "title": "Tablas, Filas y Columnas",
       "body": "Una tabla de base de datos tiene tres partes:\n\n1. **Columnas** (también llamadas campos) -- definen qué TIPO de datos se almacena (nombre, email, edad)\n2. **Filas** (también llamadas registros) -- cada fila es un elemento (un usuario, un producto, un pedido)\n3. **Celdas** -- la intersección de una fila y una columna (el email del usuario #5)\n\nUna tabla 'users' podría tener columnas para id, name, email y created_at, con una fila por usuario."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "users table:\n+----+----------+---------------------+------------+\n| id | name     | email               | created_at |\n+----+----------+---------------------+------------+\n|  1 | Alice    | alice@example.com   | 2024-01-15 |\n|  2 | Bob      | bob@example.com     | 2024-02-20 |\n|  3 | Charlie  | charlie@example.com | 2024-03-10 |\n+----+----------+---------------------+------------+",
       "annotation": "Cada columna tiene un nombre y un tipo de datos. Cada fila es un usuario. La columna 'id' identifica de manera única cada fila. Esto se ve igual que una hoja de cálculo, pero con reglas aplicadas sobre qué datos pueden ir en cada columna."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber como funcionan las tablas es como saber organizar el inventario de una tienda. Cuando vibecodeas una app con IA, necesitas decirle que tablas crear. Si lo haces bien, tu app puede manejar miles de clientes que pagan con datos limpios y confiables."
     },
     {
       "type": "key_takeaway",

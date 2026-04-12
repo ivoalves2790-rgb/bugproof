@@ -14,6 +14,11 @@
       "body": "El frontend y el backend son como dos personas en habitaciones diferentes pasándose notas. Necesitan ponerse de acuerdo en: **el idioma** (JSON), **el formato** (dónde poner el mensaje), y **el método de entrega** (método HTTP como GET o POST). Si cualquiera de estos está mal, el mensaje no llega."
     },
     {
+      "type": "analogy",
+      "title": "Comunicacion Frontend-Backend = Pedir con un Walkie-Talkie",
+      "body": "Imagina una obra de construccion donde el operador de la grua (frontend) necesita suministros del almacen (backend). Se comunican por **walkie-talkie** (fetch/HTTP). El operador debe decir las palabras clave correctas: 'Solicito 50 ladrillos, seccion B' (el metodo, URL y cuerpo correctos). Si dice 'ladrillos por favor' sin especificar seccion, el almacen no sabra donde entregarlos. La comunicacion precisa lo es todo."
+    },
+    {
       "type": "text",
       "title": "Cómo Funciona fetch()",
       "body": "El frontend usa `fetch()` para hablar con el backend:\n\n1. **URL** -- a dónde enviar la petición (`/api/users`)\n2. **Método** -- qué tipo de petición (GET, POST, PUT, DELETE)\n3. **Encabezados** -- metadatos como `Content-Type: application/json`\n4. **Cuerpo** -- los datos que estás enviando (debe ser una cadena JSON)\n\nSi olvidas establecer el encabezado Content-Type u olvidas convertir el cuerpo a cadena, el backend no entenderá tu mensaje."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "const response = await fetch('/api/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ name: 'Alice', email: 'alice@example.com' })\n});",
       "annotation": "Tres cosas son esenciales: el método debe ser POST, el encabezado Content-Type le dice al servidor que espere JSON, y el cuerpo debe ser una cadena (JSON.stringify convierte un objeto en una cadena JSON)."
+    },
+    {
+      "type": "motivation",
+      "body": "La conexion entre frontend y backend es la fontaneria de todo SaaS, marketplace y tienda online. Si haces esto bien al vibecodear, puedes conectar cualquier funcion -- pagos, dashboards, notificaciones -- que convierte tu app en un negocio."
     },
     {
       "type": "key_takeaway",

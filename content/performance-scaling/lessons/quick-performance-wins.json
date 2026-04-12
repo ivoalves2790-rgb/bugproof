@@ -14,6 +14,11 @@
       "body": "Before you renovate the whole kitchen, check if the fridge door is just left open. Most slow apps have a few obvious problems that account for 80% of the slowness. Fix those first and you'll see dramatic improvement with minimal effort. These are your **quick wins**."
     },
     {
+      "type": "analogy",
+      "title": "Quick Wins = Cleaning Before Guests Arrive",
+      "body": "When surprise guests are 10 minutes away, you don't renovate the bathroom. You toss clutter in a closet, wipe the counter, and light a candle. It takes 5 minutes but makes the whole place feel 10x better. **Quick performance wins** work the same way -- a few small changes (compress images, defer scripts, add caching) can transform how fast your app feels without rewriting anything."
+    },
+    {
       "type": "text",
       "title": "The Top Quick Wins",
       "body": "The fastest ways to speed up most web apps:\n\n1. **Compress images** -- often cuts page weight by 50-80%\n2. **Enable gzip/brotli compression** -- shrinks text files (HTML, CSS, JS) by 60-80%\n3. **Add caching headers** -- returning visitors don't re-download unchanged files\n4. **Remove unused CSS/JS** -- many projects ship code nobody uses\n5. **Defer non-critical scripts** -- let the page render before loading analytics and widgets"
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# See what's in your JavaScript bundle\nnpx webpack-bundle-analyzer dist/stats.json\n\n# Or for a quick size check\ndu -sh dist/\nls -lh dist/static/js/",
       "annotation": "Understanding what's in your bundle is the first step. Often you'll find huge libraries being imported when only a small part is needed."
+    },
+    {
+      "type": "motivation",
+      "body": "You don't need weeks of refactoring to see results. A single afternoon of quick performance wins can slash load times and immediately boost user retention -- which translates directly to more revenue from your app."
     },
     {
       "type": "key_takeaway",

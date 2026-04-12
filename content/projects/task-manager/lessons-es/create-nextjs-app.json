@@ -14,9 +14,18 @@
       "body": "El comando `npx create-next-app@latest` genera un proyecto completo de Next.js con valores predeterminados sensatos. Te hace una serie de preguntas sobre TypeScript, ESLint, Tailwind CSS y el App Router. Para nuestro gestor de tareas, queremos TypeScript (detecta bugs temprano), ESLint (detecta errores), Tailwind (estilos rapidos) y el App Router (la forma moderna de construir apps con Next.js)."
     },
     {
+      "type": "analogy",
+      "title": "El Mueble de IKEA vs. Madera en Bruto",
+      "body": "Usar create-next-app es como comprar un mueble de IKEA — todas las piezas estan cortadas, los tornillos incluidos, y las instrucciones ahi mismo. La configuracion manual es como ir a una madereria y cortar cada pieza tu mismo. PUEDES hacerlo, pero por que lo harias cuando el kit te da un escritorio funcional en 30 minutos?"
+    },
+    {
       "type": "text",
       "title": "Por Que Estos Valores Predeterminados Importan",
       "body": "TypeScript agrega tipos a JavaScript, lo que significa que tu editor puede advertirte sobre bugs antes de que ejecutes el codigo. Tailwind CSS te permite dar estilo a componentes sin cambiar entre archivos. El App Router usa el directorio `app/` y te da layouts, estados de carga y componentes del servidor incluidos."
+    },
+    {
+      "type": "motivation",
+      "body": "Acabas de aprender a crear un proyecto de nivel profesional en menos de un minuto. Los freelancers cobran a sus clientes cientos de dolares solo por la configuracion del proyecto — tu ahora puedes hacer esto dormido y empezar a construir el producto que genera ingresos."
     },
     {
       "type": "key_takeaway",

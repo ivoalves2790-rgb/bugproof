@@ -14,9 +14,18 @@
       "body": "Your first commit should contain only the scaffolded project files with a clean .gitignore in place. No extra features, no experimental code, no leftover template content. This gives you a known-good baseline you can always return to if things go wrong."
     },
     {
+      "type": "analogy",
+      "title": "Sealing a Time Capsule",
+      "body": "Your first commit is like sealing a time capsule. Whatever you put in there is preserved forever in your project's history. You wouldn't toss your house keys into a time capsule — so don't commit your API keys either. Pack it carefully: only clean, intentional contents."
+    },
+    {
       "type": "text",
       "title": "Check Before You Commit",
       "body": "Always run `git status` before committing to see exactly what you're about to save. Check for files that shouldn't be there — .env files with real secrets, node_modules, build output, or OS files like .DS_Store. A clean first commit means a clean project history."
+    },
+    {
+      "type": "motivation",
+      "body": "This first commit is the foundation of a real product. Every successful app you see in the store started with exactly this moment — someone hitting 'commit' on a fresh project. You're now one of those people."
     },
     {
       "type": "key_takeaway",

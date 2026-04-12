@@ -19,6 +19,15 @@
       "body": "Unit tests check individual car parts (does the engine start?). Integration tests check that parts work together (does the engine connect to the transmission?). E2E tests are the full test drive (can you drive from A to B?). You need all three, but it's cheaper to test parts individually first."
     },
     {
+      "type": "analogy",
+      "title": "Testing Layers Are Like Checking a Recipe",
+      "body": "Unit tests are tasting each ingredient separately — is the salt fresh? Integration tests are checking that ingredients combine well — does the sauce taste right? E2E tests are serving the whole meal to a guest. You wouldn't skip tasting the sauce just because the individual ingredients were fine."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing which type of test to use means you catch bugs faster and ship features with confidence — that speed is what separates hobby projects from money-making products."
+    },
+    {
       "type": "key_takeaway",
       "body": "Follow the testing pyramid: many fast unit tests at the base, some integration tests in the middle, and a few critical E2E tests at the top."
     }

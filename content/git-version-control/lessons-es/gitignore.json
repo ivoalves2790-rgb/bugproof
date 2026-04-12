@@ -26,11 +26,20 @@
       "annotation": "Cada línea es un patrón. Puedes usar `*` como comodín y `/` para carpetas. Las líneas que comienzan con `#` son comentarios."
     },
     {
+      "type": "analogy",
+      "title": ".gitignore = El filtro de spam de tu repositorio",
+      "body": "Piensa en `.gitignore` como el filtro de spam de tu correo electrónico. Sin él, tu bandeja de entrada se llena de basura -- newsletters, estafas, publicidad. Con él, solo lo importante pasa. Tu `.gitignore` filtra los archivos basura (archivos del sistema, secretos, dependencias) para que tu repositorio solo contenga lo que realmente importa."
+    },
+    {
       "type": "code_example",
       "title": "Comandos que usarás",
       "language": "bash",
       "code": "echo \".env\" > .gitignore          # Create .gitignore with one rule\necho \"node_modules/\" >> .gitignore # Append another rule\ngit status                         # Verify ignored files are hidden",
       "annotation": "Usa `>` para crear/sobrescribir y `>>` para agregar al final. Siempre ejecuta `git status` después para confirmar que funcionó."
+    },
+    {
+      "type": "motivation",
+      "body": "Subir claves de API a GitHub accidentalmente le ha costado millones de dólares a empresas. Conocer `.gitignore` protege tus proyectos y tu reputación -- es una de las primeras cosas que los desarrolladores senior revisan al evaluar tu código."
     },
     {
       "type": "key_takeaway",

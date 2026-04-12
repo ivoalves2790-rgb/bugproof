@@ -21,6 +21,15 @@
       "annotation": "Cada columna tiene un nombre, un tipo y restricciones opcionales. NOT NULL significa que el campo es requerido. DEFAULT establece un valor por defecto. REFERENCES crea una relacion con otra tabla."
     },
     {
+      "type": "analogy",
+      "title": "Un Esquema Es Como una Plantilla de Hoja de Calculo",
+      "body": "Imagina crear una plantilla de hoja de calculo para rastrear gastos: la columna A siempre es la fecha, la columna B es el monto, la columna C es la categoria. No dejarias que alguien ponga un nombre donde va el monto. Un esquema de base de datos funciona igual — fija los tipos de columna y las reglas para que no se cuelen datos basura. La plantilla mantiene a todos honestos."
+    },
+    {
+      "type": "motivation",
+      "body": "Un esquema bien disenado es la base de toda app exitosa. Haz bien tu estructura de datos, y cada funcionalidad que construyas encima sera mas facil — lo que significa que lanzas mas rapido y empiezas a ganar antes."
+    },
+    {
       "type": "key_takeaway",
       "body": "Un buen esquema impone calidad de datos a nivel de base de datos. Usa NOT NULL para campos requeridos, valores predeterminados sensatos, tipos de datos apropiados y claves foraneas para conectar tablas relacionadas. La base de datos deberia rechazar datos malos antes de que tu app los vea."
     }

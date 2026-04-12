@@ -14,6 +14,11 @@
       "body": "Cuando un navegador carga una página, es como una línea de ensamblaje. Primero descarga el HTML, luego descubre archivos CSS y JavaScript que necesita, luego los descarga, luego encuentra imágenes referenciadas en el CSS, y así sucesivamente. Cada paso no puede empezar hasta que el anterior termine. Esta cadena de descargas dependientes se llama una **cascada**."
     },
     {
+      "type": "analogy",
+      "title": "Cascada = Esperar a que tus amigos se alisten",
+      "body": "Planeaste un viaje en grupo. Pero Sara no puede salir hasta que Tomás la recoja, Tomás no puede salir hasta que reciba la dirección de tu parte, y tú no puedes enviar la dirección hasta confirmar el restaurante. Todos están esperando a alguien más. Una **cascada de carga** es lo mismo -- cada archivo espera a que otro termine antes de poder empezar. Romper estas cadenas innecesarias deja que todos se alisten al mismo tiempo."
+    },
+    {
       "type": "text",
       "title": "Qué muestra una cascada",
       "body": "Un gráfico de cascada en DevTools muestra cada archivo que tu página solicita, alineado en una línea de tiempo. Puedes ver:\n\n1. **Qué** se descargó (HTML, CSS, JS, imágenes, fuentes)\n2. **Cuándo** comenzó y terminó cada descarga\n3. **Cuánto tiempo** tomó cada solicitud\n4. **Qué bloqueó qué** -- qué archivos tuvieron que esperar por otros\n\nBarras largas y solicitudes que empiezan tarde son tus pistas de qué es lento."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<head>\n  <link rel=\"stylesheet\" href=\"/styles.css\">\n  <script src=\"/analytics.js\"></script>\n  <script src=\"/chat-widget.js\"></script>\n  <script src=\"/app.js\"></script>\n</head>",
       "annotation": "Cada script bloquea al siguiente de cargar. El navegador los descarga uno por uno en lugar de en paralelo. Mover los scripts al final del body o agregar 'async'/'defer' arregla esto."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber leer un gráfico de cascada te permite encontrar el cuello de botella exacto que hace huir a los usuarios. Arregla una sola dependencia encadenada y podrías reducir el tiempo de carga a la mitad -- manteniendo a los usuarios enganchados y pagando."
     },
     {
       "type": "key_takeaway",

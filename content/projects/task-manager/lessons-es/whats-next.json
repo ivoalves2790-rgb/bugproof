@@ -14,9 +14,18 @@
       "body": "Felicitaciones — pasaste de una pantalla en blanco a una app desplegada y funcionando. Planificaste funcionalidades, elegiste un stack, construiste una interfaz, disenaste una base de datos, agregaste auth, escribiste tests y lanzaste a produccion. Ese es el ciclo completo de desarrollo de software."
     },
     {
+      "type": "analogy",
+      "title": "La V1 Es Como Plantar una Semilla",
+      "body": "Tu primera version es una semilla en la tierra, no el arbol terminado. Hiciste el trabajo duro de plantarla — ahora necesita sol (usuarios), agua (actualizaciones) y poda (eliminar lo que no funciona). El mayor error es desenterrarla cada semana para probar con una semilla diferente."
+    },
+    {
       "type": "text",
       "title": "Que Viene Despues de la V1?",
       "body": "Ahora que tu MVP esta en produccion, obtendras retroalimentacion real de los usuarios. Algunas funcionalidades que pensaste eran esenciales no se usaran. Algunas cosas en las que no pensaste seran solicitadas constantemente. Escucha a tus usuarios, pero filtra a traves de tu vision de producto."
+    },
+    {
+      "type": "motivation",
+      "body": "Ahora tienes todas las habilidades necesarias para construir y lanzar un producto real con IA. El siguiente paso es iterar basandote en la retroalimentacion de usuarios y agregar un flujo de pago — estas a una integracion de Stripe de tu primer dolar."
     },
     {
       "type": "key_takeaway",

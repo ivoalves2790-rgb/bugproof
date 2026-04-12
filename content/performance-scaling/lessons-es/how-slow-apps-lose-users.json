@@ -14,6 +14,11 @@
       "body": "Imagina entrar a dos tiendas. Una tiene puertas automáticas que se abren al instante. La otra tiene una puerta pegajosa que tarda 5 segundos en abrirse. ¿Qué tienda se siente más profesional? ¿En cuál confías con tu tarjeta de crédito? **La velocidad es confianza**. Los usuarios juzgan subconscientement la calidad de tu app por qué tan rápido responde."
     },
     {
+      "type": "analogy",
+      "title": "Velocidad = La fila de la caja",
+      "body": "Imagina dos supermercados. Uno tiene 10 cajas abiertas y sales en 2 minutos. El otro tiene 1 sola caja con una fila enorme. Probablemente abandones tu carrito lleno y te vayas. Eso es exactamente lo que pasa en línea -- los usuarios tienen una paciencia limitada, y si tarda demasiado, dejan su carrito y se van con la competencia que es más rápida."
+    },
+    {
       "type": "text",
       "title": "Los números son brutales",
       "body": "La investigación muestra consistentemente:\n\n- **53%** de los usuarios móviles abandonan un sitio que tarda más de 3 segundos en cargar\n- Cada segundo extra de tiempo de carga puede reducir las conversiones un **7%**\n- Un retraso de 100ms en el tiempo de respuesta puede reducir las tasas de conversión un **7%**\n- Los usuarios que experimentan cargas lentas tienen **menos probabilidad de regresar**, incluso después de que el problema se arregla"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "La espiral mortal de la tasa de rebote",
       "body": "Las páginas lentas crean un ciclo vicioso:\n\n1. La página carga lento -> los usuarios se van\n2. Alta tasa de rebote -> Google te posiciona más abajo\n3. Posición más baja -> menos tráfico\n4. Menos tráfico -> menos ingresos para arreglar el problema\n\nEl rendimiento no es un lujo -- afecta directamente la supervivencia de tu negocio."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada segundo que tu app tarda en cargar es dinero que se va por la puerta. Cuando vibecondeas una app rápida, no solo escribes mejor código -- estás protegiendo directamente tu fuente de ingresos."
     },
     {
       "type": "key_takeaway",

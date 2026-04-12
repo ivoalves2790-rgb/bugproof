@@ -14,6 +14,11 @@
       "body": "When your car's check engine light turns on, it doesn't mean the car is destroyed. It means the car detected a problem and is telling you about it. Error messages work the same way -- they're your code's way of saying 'something went wrong, here's what I know about it.'"
     },
     {
+      "type": "analogy",
+      "title": "Errors Are Like a GPS Saying 'Recalculating'",
+      "body": "When you make a wrong turn, your GPS doesn't explode or shut down. It calmly says 'recalculating' and tells you exactly where you went off track. Error messages do the same thing -- they tell you where your code took a wrong turn and give you the info to get back on the right path."
+    },
+    {
       "type": "text",
       "title": "What Actually Happens When Code Errors",
       "body": "When your program hits a line it can't execute, it **stops running** at that point and creates an error message. The message includes:\n\n1. The **type** of error (what category of problem)\n2. A **description** (what specifically went wrong)\n3. The **location** (which file and line number)\n\nYour job is to read these three pieces and use them to find the fix."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "TypeError: Cannot read properties of undefined (reading 'name')\n    at getUser (app.js:15)\n    at main (app.js:42)",
       "annotation": "This error tells you three things: the type is TypeError, the problem is that something is undefined, and it happened at line 15 of app.js."
+    },
+    {
+      "type": "motivation",
+      "body": "Understanding that errors are helpers, not roadblocks, is the mindset shift that separates people who give up on their app ideas from people who ship them and make money with vibecoding."
     },
     {
       "type": "key_takeaway",

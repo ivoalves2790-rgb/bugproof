@@ -19,9 +19,18 @@
       "body": "Every Git project starts with one branch, usually called **main**. This is the \"official\" version of your project -- the stable, working code. You should avoid making risky changes directly on main. Instead, you create a new branch for each feature or fix."
     },
     {
+      "type": "analogy",
+      "title": "Branches = Draft Copies of an Essay",
+      "body": "Imagine you're writing an important essay. Instead of editing the original directly, you make a copy and experiment -- rearrange paragraphs, try a new introduction, add bold claims. If the draft turns out great, you replace the original. If it's terrible, you throw away the copy and the original is untouched. Branches give your code that same safety net."
+    },
+    {
       "type": "text",
       "title": "Why Branches Matter",
       "body": "Branches let you:\n\n- **Experiment safely** -- Try new ideas without breaking working code\n- **Work in parallel** -- Multiple people can work on different features at the same time\n- **Stay organized** -- Each branch has one clear purpose\n- **Merge when ready** -- Bring your changes back to main only when they're tested and working"
+    },
+    {
+      "type": "motivation",
+      "body": "Branches are how real dev teams ship features at startups and tech companies. Understanding branching means you can contribute to any professional project -- and that opens the door to remote dev jobs paying $80K-$200K."
     },
     {
       "type": "key_takeaway",

@@ -19,6 +19,15 @@
       "body": "Cocinar en casa es localhost — funciona, pero solo tu comes. El despliegue es abrir un restaurante: necesitas un local (servidor), un letrero (nombre de dominio), inspecciones sanitarias (seguridad) y la capacidad de servir a muchas personas a la vez (escalabilidad). La receta es la misma, pero la logistica es completamente diferente."
     },
     {
+      "type": "analogy",
+      "title": "El Despliegue Es Como Publicar un Libro",
+      "body": "Escribir una novela en tu laptop es como correr tu app en localhost — solo tu puedes leerla. El despliegue es lograr que se publique y se coloque en estantes de todo el mundo. La historia no cambia, pero ahora necesita portada, ISBN, distribuidor y libreria para realmente llegar a los lectores."
+    },
+    {
+      "type": "motivation",
+      "body": "El despliegue es el momento en que tu proyecto se convierte en un producto real. Hasta que tu app este en internet, no puede atraer usuarios ni generar dinero — desplegar es literalmente el paso que desbloquea los ingresos."
+    },
+    {
       "type": "key_takeaway",
       "body": "Las plataformas modernas como Vercel y Netlify manejan la mayor parte de la complejidad del despliegue por ti. Subes codigo, ellos lo compilan y lo sirven. Enfocate en lo que hace especial a tu app, no en la configuracion del servidor."
     }

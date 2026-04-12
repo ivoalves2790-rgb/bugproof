@@ -14,6 +14,11 @@
       "body": "En una fábrica, el control de calidad verifica cada producto contra las especificaciones: ¿tiene el tamaño correcto? ¿El peso correcto? ¿Funciona? **Testear funciones** es la misma idea. Verificas: ¿esta función devuelve el output correcto para un input dado? ¿Maneja inputs extraños con elegancia?"
     },
     {
+      "type": "analogy",
+      "title": "Testear funciones = Calificar tarea con una clave de respuestas",
+      "body": "Cuando un profesor califica tareas, tiene una clave de respuestas: la pregunta 1 debería ser 42, la pregunta 2 debería ser 'París'. Compara la respuesta de cada estudiante contra la clave. **Testear funciones** funciona de forma idéntica -- ya conoces las respuestas correctas (outputs esperados), y verificas si las respuestas de tu función (outputs reales) coinciden. ¿Respuesta incorrecta? Esa función necesita arreglarse."
+    },
+    {
       "type": "text",
       "title": "Jest: El framework de testing",
       "body": "**Jest** es el framework de testing más popular para JavaScript. Proporciona:\n\n- `test()` -- Definir un caso de test\n- `expect()` -- Iniciar una aserción\n- `.toBe()` -- Verificar igualdad exacta\n- `.toEqual()` -- Verificar igualdad profunda (para objetos/arrays)\n- `.toBeTruthy()` / `.toBeFalsy()` -- Verificar veracidad"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "const { isEven, double, clamp } = require('./math');\n\ntest('isEven returns true for even numbers', () => {\n  expect(isEven(4)).toBe(true);\n  expect(isEven(0)).toBe(true);\n});\n\ntest('isEven returns false for odd numbers', () => {\n  expect(isEven(3)).toBe(false);\n  expect(isEven(7)).toBe(false);\n});\n\ntest('double multiplies by 2', () => {\n  expect(double(5)).toBe(10);\n  expect(double(0)).toBe(0);\n});",
       "annotation": "Cada test tiene un nombre descriptivo que se lee como una oración. Cuando un test falla, el nombre te dice exactamente qué se rompió."
+    },
+    {
+      "type": "motivation",
+      "body": "Las funciones de tu app vibecodeada manejan cosas reales -- precios, datos de usuarios, permisos. Testear cada función significa que sabes que funciona antes de que un cliente que paga la active. Así es como proteges tus ingresos una función a la vez."
     },
     {
       "type": "key_takeaway",

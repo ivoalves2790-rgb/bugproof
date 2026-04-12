@@ -14,6 +14,11 @@
       "body": "Imagine you can only fit a certain number of papers on your desk at once. If you pile on too many, older ones fall off the edge. The context window works the same way -- it can hold a limited amount of text. Once it's full, the AI starts 'forgetting' what you said earlier."
     },
     {
+      "type": "analogy",
+      "title": "The Context Window Is Like a Whiteboard in a Meeting",
+      "body": "Picture a team meeting with one whiteboard. As the discussion goes on, you keep writing new points. Eventually the board is full and you have to erase the oldest notes to make room. The AI's context window works the same way -- newer information pushes out older information, so what you wrote at the start of the conversation may no longer be visible."
+    },
+    {
       "type": "text",
       "title": "What Counts Toward the Context Window",
       "body": "Everything in the conversation takes up space:\n\n1. **Your messages** -- every prompt you send\n2. **AI's responses** -- its answers use space too\n3. **Pasted code** -- large code blocks eat up context fast\n4. **System instructions** -- hidden setup text the tool uses\n\nThe context window includes ALL of this, not just your last message."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "How to Work Within the Limit",
       "body": "To get the best results:\n\n1. Include **only relevant code**, not your entire codebase\n2. **Start fresh conversations** when the AI seems confused\n3. **Repeat key instructions** in long conversations\n4. Paste **error messages and stack traces** -- they're high-value context"
+    },
+    {
+      "type": "motivation",
+      "body": "Developers who understand the context window get better AI output with fewer attempts. That means you build features faster, iterate quicker, and launch products while others are still debugging their first prompt."
     },
     {
       "type": "key_takeaway",

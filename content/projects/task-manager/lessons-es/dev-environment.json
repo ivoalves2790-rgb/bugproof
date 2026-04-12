@@ -14,9 +14,18 @@
       "body": "Antes de escribir una sola linea de codigo, tu entorno de desarrollo necesita estar listo. Esto significa tener Node.js instalado, un buen editor de codigo (VS Code es el estandar), y una terminal con la que te sientas comodo. Saltarte este paso es como intentar cocinar en una cocina sin cuchillos."
     },
     {
+      "type": "analogy",
+      "title": "El Mise en Place del Chef",
+      "body": "En las cocinas profesionales, los chefs practican el 'mise en place' — todo en su lugar antes de cocinar. Los ingredientes estan preparados, las herramientas acomodadas, las estaciones limpias. Configurar tu entorno de desarrollo es tu mise en place. Picas la cebolla (instalas Node), afilas los cuchillos (configuras VS Code) y precalientas el horno (configuras Git) ANTES de empezar a cocinar codigo."
+    },
+    {
       "type": "text",
       "title": "La Consistencia Es Clave",
       "body": "Los equipos profesionales usan herramientas como archivos `.nvmrc` para fijar la version de Node.js, `.editorconfig` para formato consistente, y scripts en `package.json` para que cada desarrollador ejecute los mismos comandos. Estos pequenos archivos previenen el clasico problema de 'funciona en mi maquina'."
+    },
+    {
+      "type": "motivation",
+      "body": "Un entorno de desarrollo limpio significa que puedes ir de idea a prototipo funcional en horas, no dias. Cuando detectas una oportunidad para construir algo que la gente quiere, la velocidad lo es todo — y tu configuracion es la plataforma de lanzamiento."
     },
     {
       "type": "key_takeaway",

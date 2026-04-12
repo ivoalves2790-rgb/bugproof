@@ -19,11 +19,20 @@
       "body": "AI is like a GPS: it can find the route, but YOU need to know the destination. If you type in the wrong address, the GPS will confidently drive you to the wrong place. Same with AI — it will confidently build the wrong thing if your prompt is wrong."
     },
     {
+      "type": "analogy",
+      "title": "Directing a Movie",
+      "body": "You're the director, AI is the crew. A great crew can build sets, film scenes, and edit footage — but without a director's vision, they'll produce a random mess. Your job isn't to hold the camera. It's to say 'here's the story we're telling, here's the mood, here's the ending.' Give AI the vision, and it'll execute beautifully."
+    },
+    {
       "type": "code_example",
       "title": "Structuring an AI Planning Session",
       "language": "text",
       "code": "Step 1: Define the goal\n  \"I'm building a task manager for personal use\"\n\nStep 2: List the features (from your user stories)\n  \"Core features: create, complete, delete, due dates\"\n\nStep 3: Set constraints\n  \"Tech: Next.js + Supabase. Mobile-first. Ship in 2 weeks.\"\n\nStep 4: Ask for a plan, not code\n  \"Give me a project plan with milestones, not code yet\"",
       "annotation": "Notice: you're asking for a PLAN first, not jumping straight to code. This is what separates thoughtful builders from chaotic ones."
+    },
+    {
+      "type": "motivation",
+      "body": "Professional developers charge $150+/hour for project planning. You're learning to do this with AI as your co-pilot — a skill that lets you plan and build entire products solo, keeping all the profit for yourself."
     },
     {
       "type": "key_takeaway",

@@ -14,11 +14,20 @@
       "body": "Las variables de entorno son pares clave-valor que configuran tu app sin escribir valores directamente en el codigo. DATABASE_URL podria apuntar a localhost en desarrollo y a tu base de datos de produccion en produccion. API_KEY se mantiene secreta porque nunca esta en tu codigo — se configura en la plataforma de despliegue."
     },
     {
+      "type": "analogy",
+      "title": "Las Variables de Entorno Son Como la Agenda de Tu Telefono",
+      "body": "No te tatuas numeros de telefono en el brazo — los guardas en tu telefono y cambian cuando la gente obtiene nuevos numeros. Las variables de entorno funcionan igual: tu codigo dice 'llama a la base de datos' y el entorno completa la direccion real, que puede ser diferente en cada dispositivo."
+    },
+    {
       "type": "code_example",
       "title": "Variables de Entorno en la Practica",
       "language": "text",
       "code": "# .env.local (development - never committed)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Production (set in Vercel dashboard)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (committed - shows what vars are needed)\nDATABASE_URL=\nAPI_KEY=",
       "annotation": "Mantiene un archivo .env.example para que los nuevos desarrolladores sepan que variables configurar, sin exponer los valores reales."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber manejar variables de entorno te permite conectar de forma segura APIs de pago, analiticas y servicios externos — los componentes basicos de apps que generan ingresos reales."
     },
     {
       "type": "key_takeaway",

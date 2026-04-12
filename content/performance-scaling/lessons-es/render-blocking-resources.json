@@ -14,6 +14,11 @@
       "body": "Imagina un lugar de conciertos donde todos tienen que pasar por una sola puerta. Aunque miles de personas están listas, solo una fila se mueve a la vez. Los **recursos que bloquean el renderizado** funcionan igual -- el navegador encuentra un archivo CSS o JavaScript en el <head> y detiene todo para descargarlo y procesarlo antes de mostrar cualquier contenido al usuario."
     },
     {
+      "type": "analogy",
+      "title": "Bloqueo de renderizado = Leer todo el manual antes de cocinar",
+      "body": "Imagina que quieres hacer pasta. En lugar de simplemente poner agua a hervir, insistes en leer todo el libro de cocina de 200 páginas de principio a fin primero. No pasa nada en la cocina hasta que termines de leer. Eso es lo que los **recursos que bloquean el renderizado** le hacen a tu página -- el navegador insiste en cargar completamente ciertos archivos antes de mostrar nada al usuario, aunque la mayoría de ese contenido no se necesite de inmediato."
+    },
+    {
       "type": "text",
       "title": "¿Qué bloquea el renderizado?",
       "body": "Dos tipos de recursos bloquean el renderizado por defecto:\n\n1. **Archivos CSS** -- El navegador no mostrará nada hasta que todo el CSS en el <head> esté cargado, porque no quiere que el contenido aparezca sin estilo\n2. **Archivos JavaScript** -- Los scripts en el <head> sin 'async' o 'defer' bloquean el análisis del HTML completamente\n\nCuantos más recursos de bloqueo tengas, más tiempo los usuarios se quedan mirando una pantalla en blanco."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- BLOCKING: Browser stops everything to load this -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- NON-BLOCKING: Browser continues while loading -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
       "annotation": "El atributo 'defer' descarga el script en paralelo y lo ejecuta después del análisis del HTML. El atributo 'async' descarga en paralelo y ejecuta tan pronto como esté listo."
+    },
+    {
+      "type": "motivation",
+      "body": "Una pantalla blanca durante 3 segundos es todo lo que se necesita para que un usuario presione el botón de regreso y busque la app de alguien más. Eliminar recursos que bloquean el renderizado es una de las formas más rápidas de retener usuarios -- y sus billeteras -- en tu página."
     },
     {
       "type": "key_takeaway",

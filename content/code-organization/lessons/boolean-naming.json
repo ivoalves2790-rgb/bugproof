@@ -14,6 +14,11 @@
       "body": "A boolean is a yes/no answer. If the variable name doesn't sound like a yes/no question, it's badly named. 'Is the door locked?' -> `isDoorLocked` (true/false). 'Door status?' -> `doorStatus` is confusing because the answer could be 'locked', 'unlocked', 'open', 'closed' -- it doesn't clearly map to true/false."
     },
     {
+      "type": "analogy",
+      "title": "Booleans = Light Switches With Labels",
+      "body": "Every light switch in your home controls something, but if none of them are labeled, you flip switches randomly hoping to find the right one. A labeled switch -- 'Kitchen Lights', 'Porch Light' -- tells you exactly what it controls. **Boolean variables are like light switches**: `isKitchenLightOn` is a clearly labeled switch, while `light` or `status` could mean anything."
+    },
+    {
       "type": "text",
       "title": "Boolean Naming Prefixes",
       "body": "Good boolean names start with a prefix that implies a yes/no answer:\n\n- **is** -- `isLoading`, `isVisible`, `isAdmin`\n- **has** -- `hasPermission`, `hasErrors`, `hasSubscription`\n- **can** -- `canEdit`, `canDelete`, `canSubmit`\n- **should** -- `shouldRefresh`, `shouldShowModal`, `shouldAutoSave`\n\nWhen you see `if (isLoading)` or `if (hasErrors)`, the intent is immediately clear."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: What do these mean when true?\nconst open = true;        // Is it open? Or should we open it?\nconst login = false;      // Is this the login page? Or are we logged in?\nconst data = true;        // We have data? Data is valid? Data is loading?\n\n// GOOD: Reads naturally in if-statements\nconst isOpen = true;      // The thing is open\nconst isLoggedIn = false; // The user is not logged in\nconst hasData = true;     // We have data available",
       "annotation": "Good boolean names make if-statements read like English: if (isOpen), if (isLoggedIn), if (hasData). Bad names leave you guessing."
+    },
+    {
+      "type": "motivation",
+      "body": "Apps with clear boolean logic are apps that don't break when clients request new features. Every `isSubscribed` and `hasPaymentMethod` you name correctly is a feature toggle that's easy to extend -- and extending features is what keeps clients paying."
     },
     {
       "type": "key_takeaway",

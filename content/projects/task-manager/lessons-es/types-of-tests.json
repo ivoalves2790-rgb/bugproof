@@ -19,6 +19,15 @@
       "body": "Los tests unitarios verifican partes individuales del auto (arranca el motor?). Los tests de integracion verifican que las partes funcionen juntas (el motor se conecta a la transmision?). Los tests E2E son la prueba de manejo completa (puedes conducir de A a B?). Necesitas los tres, pero es mas barato probar las partes individualmente primero."
     },
     {
+      "type": "analogy",
+      "title": "Las Capas de Testing Son Como Verificar una Receta",
+      "body": "Los tests unitarios son probar cada ingrediente por separado — esta fresca la sal? Los tests de integracion verifican que los ingredientes combinen bien — la salsa sabe bien? Los tests E2E son servir toda la comida a un invitado. No dejarias de probar la salsa solo porque los ingredientes individuales estaban bien."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber que tipo de test usar significa detectar bugs mas rapido y lanzar funcionalidades con confianza — esa velocidad es lo que separa los proyectos de hobby de los productos que generan dinero."
+    },
+    {
       "type": "key_takeaway",
       "body": "Sigue la piramide de testing: muchos tests unitarios rapidos en la base, algunos tests de integracion en el medio y unos pocos tests E2E criticos en la cima."
     }

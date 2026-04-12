@@ -19,6 +19,15 @@
       "body": "Imagine a hotel with no room keys. Anyone could walk into any room, take your stuff, or sleep in your bed. Authentication is the key card — it proves which room is yours. Authorization (a related concept) is what the key card unlocks: your room, the pool, but not the staff office."
     },
     {
+      "type": "analogy",
+      "title": "Auth Is Like a Concert Wristband",
+      "body": "At a music festival, your wristband proves you bought a ticket (authentication). The color of your wristband determines whether you get into the VIP area or just the general section (authorization). Without a wristband, security won't even let you through the gate. Your app works the same way — no login, no access."
+    },
+    {
+      "type": "motivation",
+      "body": "Authentication is what makes your app personal — and personal apps are what people pay for. Without auth, you can't have user accounts, and without user accounts, you can't charge for premium features."
+    },
+    {
       "type": "key_takeaway",
       "body": "Authentication verifies identity ('who are you?'), authorization controls access ('what can you do?'). Any app that stores user-specific data needs both."
     }

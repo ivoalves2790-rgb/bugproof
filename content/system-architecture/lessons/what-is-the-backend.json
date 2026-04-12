@@ -14,6 +14,11 @@
       "body": "Remember the restaurant? The **kitchen** is the backend. Customers (users) never see it, but it's where the real work happens -- taking orders, preparing food, managing inventory, and making sure everything is safe to eat. The waiter (API) carries requests from the dining room (frontend) to the kitchen (backend) and back."
     },
     {
+      "type": "analogy",
+      "title": "The Backend Is Like a Bank Vault",
+      "body": "A bank has a fancy lobby (the frontend) where customers walk in, but the real valuables are locked in the **vault** underground. You can't just walk in and grab cash -- you have to go through a teller who checks your ID first. The backend is that vault: it stores the important stuff (data, passwords, business logic) and only gives access through secure, controlled channels."
+    },
+    {
       "type": "text",
       "title": "What the Backend Does",
       "body": "The backend is code that runs on a **server** -- a computer you control. It handles:\n\n1. **Business logic** -- rules like 'users can't buy more than 5 items'\n2. **Data storage** -- saving to and reading from databases\n3. **Authentication** -- checking passwords and managing login sessions\n4. **Security** -- keeping secrets safe and validating all input\n5. **Heavy processing** -- sending emails, resizing images, running reports"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Common Backend Languages",
       "body": "The backend can be written in many languages:\n\n1. **JavaScript** (Node.js) -- same language as the frontend\n2. **Python** (Django, Flask) -- popular for its readability\n3. **Ruby** (Rails) -- famous for rapid development\n4. **Java** (Spring) -- common in large enterprises\n5. **Go** -- fast, used for high-performance services\n\nUnlike the frontend (which must use JavaScript in browsers), you can pick any language for the backend."
+    },
+    {
+      "type": "motivation",
+      "body": "The backend is where the real business happens -- payments, user data, subscriptions. When you vibecode a backend that handles these reliably, you have the engine that actually collects revenue."
     },
     {
       "type": "key_takeaway",

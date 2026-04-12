@@ -14,6 +14,11 @@
       "body": "Un restaurante tiene dos mitades: el **comedor** (donde se sientan los clientes) y la **cocina** (donde se prepara la comida). El frontend es el comedor. Es todo lo que el cliente ve -- el menú, la decoración, los platos. El cliente nunca va a la cocina, pero interactúa con todo en el comedor."
     },
     {
+      "type": "analogy",
+      "title": "El Frontend Es Como un Control Remoto",
+      "body": "Un control remoto tiene botones que presionas y una pantalla que te muestra canales. Pero el control no almacena todos esos programas -- solo envía señales a tu decodificador. El **frontend** es como ese control: le da a los usuarios botones para hacer clic y pantallas para ver, pero los datos reales viven en otro lugar (el backend). El control es tu ventana al sistema."
+    },
+    {
       "type": "text",
       "title": "Qué Incluye el Frontend",
       "body": "El frontend es el código que se ejecuta **en el navegador del usuario**. Está construido con tres tecnologías principales:\n\n1. **HTML** -- la estructura (encabezados, párrafos, botones)\n2. **CSS** -- el estilo (colores, fuentes, diseños)\n3. **JavaScript** -- la interactividad (clics, animaciones, validación de formularios)\n\nFrameworks como React, Vue y Angular agregan estructura sobre estas tres."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "El Trabajo del Frontend",
       "body": "El frontend es responsable de:\n\n1. **Mostrar datos** al usuario (texto, imágenes, listas)\n2. **Manejar interacciones** (clics en botones, escritura en formularios, desplazamiento)\n3. **Hacer peticiones** al backend para obtener datos\n4. **Actualizar la pantalla** cuando llegan nuevos datos\n\nNO almacena datos permanentemente, no gestiona cuentas de usuario ni procesa pagos -- ese es el trabajo del backend."
+    },
+    {
+      "type": "motivation",
+      "body": "Toda app que genera dinero empieza por lo que los usuarios ven y tocan. Domina el frontend, y podras vibecodear interfaces pulidas por las que la gente realmente quiera pagar."
     },
     {
       "type": "key_takeaway",

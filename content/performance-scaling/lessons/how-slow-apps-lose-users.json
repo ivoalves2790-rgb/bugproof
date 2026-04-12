@@ -14,6 +14,11 @@
       "body": "Imagine walking into two stores. One has automatic doors that open instantly. The other has a sticky door that takes 5 seconds to open. Which store feels more professional? Which one do you trust with your credit card? **Speed is trust**. Users subconsciously judge your app's quality by how fast it responds."
     },
     {
+      "type": "analogy",
+      "title": "Speed = The Checkout Line",
+      "body": "Picture two grocery stores. One has 10 checkout lanes open and you're out in 2 minutes. The other has 1 lane open with a huge line. You might abandon your full cart and walk out. That's exactly what happens online -- users have a mental checkout line, and if it takes too long, they leave their cart behind and go to a competitor who's faster."
+    },
+    {
       "type": "text",
       "title": "The Numbers Are Brutal",
       "body": "Research consistently shows:\n\n- **53%** of mobile users abandon a site that takes over 3 seconds to load\n- Each extra second of load time can reduce conversions by **7%**\n- A 100ms delay in response time can reduce conversion rates by **7%**\n- Users who experience slow loads are **less likely to return**, even after the problem is fixed"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The Bounce Rate Death Spiral",
       "body": "Slow pages create a vicious cycle:\n\n1. Page loads slowly -> users bounce\n2. High bounce rate -> Google ranks you lower\n3. Lower ranking -> less traffic\n4. Less traffic -> less revenue to fix the problem\n\nPerformance isn't a nice-to-have -- it directly affects your business survival."
+    },
+    {
+      "type": "motivation",
+      "body": "Every second your app takes to load is money walking out the door. When you vibecode a fast app, you're not just writing better code -- you're directly protecting your revenue stream."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "A building needs a wide, solid foundation (cheap, fast), regular floors in the middle, and a small penthouse on top (expensive, fancy). If you build a building that's mostly penthouse with a tiny foundation, it topples over. The **testing pyramid** works the same way -- you need many fast, cheap tests at the bottom and fewer slow, expensive tests at the top."
     },
     {
+      "type": "analogy",
+      "title": "The Pyramid = A Healthcare System",
+      "body": "A good healthcare system has many quick checkups (blood pressure, temperature) that catch most problems early, some specialized tests (blood work, X-rays) for deeper issues, and few expensive procedures (MRIs, surgery) for serious cases. The **testing pyramid** follows the same logic -- lots of quick unit tests catch most bugs, integration tests catch connection issues, and a few expensive E2E tests verify critical flows."
+    },
+    {
       "type": "text",
       "title": "The Three Layers",
       "body": "The testing pyramid has three layers:\n\n1. **Unit tests** (bottom, MANY) -- Test individual functions. Super fast, run in milliseconds. Write lots of these.\n2. **Integration tests** (middle, SOME) -- Test how pieces work together. Slower, but catch connection bugs.\n3. **End-to-end (E2E) tests** (top, FEW) -- Test the whole app like a real user. Slowest, but test the full flow.\n\nThe ratio should be roughly: 70% unit, 20% integration, 10% E2E."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Unit tests: test a single function\n# Speed: ~50 tests per second\nnpm run test:unit     # Done in 2 seconds\n\n# Integration tests: test API endpoints\n# Speed: ~5 tests per second\nnpm run test:int      # Done in 30 seconds\n\n# E2E tests: test full user flows in a browser\n# Speed: ~1 test per 10 seconds\nnpm run test:e2e      # Done in 5 minutes",
       "annotation": "Unit tests run 100x faster than E2E tests. That's why you want more of them."
+    },
+    {
+      "type": "motivation",
+      "body": "A slow test suite means slow deploys, and slow deploys mean you can't react to users fast enough. The pyramid keeps your tests blazing fast so you can ship AI-built features daily -- the speed that turns a side project into a business."
     },
     {
       "type": "key_takeaway",

@@ -21,6 +21,15 @@
       "annotation": "La proteccion del frontend es para la experiencia del usuario (redireccion). La proteccion del backend es para la seguridad (bloqueo). Nunca confies solo en el frontend."
     },
     {
+      "type": "analogy",
+      "title": "La Proteccion de Rutas Es Como la Seguridad del Aeropuerto",
+      "body": "El letrero en el aeropuerto que dice 'Solo Personal Autorizado' es como la proteccion de rutas del frontend — detiene a la gente honesta de entrar por error. Pero la puerta cerrada con lector de credenciales detras es la proteccion del backend — fisicamente impide el acceso. Si solo tienes el letrero pero no el candado, cualquiera que ignore el letrero pasa directamente."
+    },
+    {
+      "type": "motivation",
+      "body": "Las rutas protegidas son la diferencia entre una app que te daria verguenza lanzar y una por la que cobrarias con orgullo. Asegura tus rutas y tendras un producto listo para clientes reales que pagan."
+    },
+    {
       "type": "key_takeaway",
       "body": "Siempre aplica la autorizacion en el servidor. Las protecciones de rutas del frontend son una conveniencia para los usuarios, no una medida de seguridad. Cada endpoint de API debe verificar quien esta haciendo la solicitud."
     }

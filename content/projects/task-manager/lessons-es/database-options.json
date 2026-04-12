@@ -14,11 +14,20 @@
       "body": "Las bases de datos SQL (como PostgreSQL) almacenan datos en tablas estructuradas con filas y columnas. Las bases de datos NoSQL (como MongoDB) almacenan datos como documentos flexibles. Para un gestor de tareas con relaciones de datos claras — los usuarios tienen tareas, las tareas tienen categorias — SQL suele ser la mejor opcion."
     },
     {
+      "type": "analogy",
+      "title": "Archivero vs. Cajon de los Triques",
+      "body": "Una base de datos SQL es como un archivero — todo tiene una carpeta etiquetada y puedes encontrar exactamente lo que necesitas en segundos. Una base de datos NoSQL es mas como el cajon de los triques — puedes meter cualquier cosa, pero buena suerte encontrando ese recibo cuando llegue la temporada de impuestos. Para datos organizados como tareas, quieres el archivero."
+    },
+    {
       "type": "code_example",
       "title": "Datos de Tareas: SQL vs NoSQL",
       "language": "text",
       "code": "SQL (PostgreSQL):\n  tasks table: id | title | status | due_date | user_id\n  Clean, structured, easy to query and filter.\n\nNoSQL (MongoDB):\n  { title: '...', status: '...', due_date: '...', user: {...} }\n  Flexible, but relationships get messy fast.",
       "annotation": "Cuando tus datos tienen estructura clara y relaciones (las tareas pertenecen a usuarios), SQL mantiene las cosas limpias. NoSQL brilla cuando las formas de datos son impredecibles."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber elegir la base de datos correcta es lo que separa proyectos de juguete de productos reales. El gestor de tareas que estas construyendo usa la misma tecnologia de base de datos que apps generando miles de dolares en ingresos mensuales."
     },
     {
       "type": "key_takeaway",

@@ -14,11 +14,20 @@
       "body": "Anyone can list technologies. What separates good engineers is being able to explain why they chose each one. For every tool in your stack, you should be able to say: what problem it solves, what alternatives you considered, and why this option won the tradeoff."
     },
     {
+      "type": "analogy",
+      "title": "A Band, Not a Solo Act",
+      "body": "Your tech stack is like a band. Next.js is the lead vocalist — it handles the parts the audience sees. Supabase is the drummer — keeping the rhythm of your data steady in the background. TypeScript is the sound engineer — making sure nothing goes off-key. Vercel is the stage crew — setting everything up so the show goes live without a hitch. Each member has a role, and together they make music."
+    },
+    {
       "type": "code_example",
       "title": "Our Stack at a Glance",
       "language": "text",
       "code": "Frontend:  Next.js (React framework)\nBackend:   Supabase (PostgreSQL + Auth + APIs)\nLanguage:  TypeScript (type-safe JavaScript)\nDeploy:    Vercel (optimized for Next.js)",
       "annotation": "Each piece was chosen because it solves a specific need for our task manager and works well with the others. That's what a good stack looks like — tools that complement each other."
+    },
+    {
+      "type": "motivation",
+      "body": "You now have the same tech stack that startups use to build apps generating real revenue. The difference between you and them? They started. You're about to."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "When you go to the doctor, they check your blood pressure, heart rate, and temperature -- three key numbers that tell a lot about your overall health. **Core Web Vitals** are the same idea for websites: three specific measurements that tell you how healthy your site's performance is. Google picked these three because they capture what users actually care about."
     },
     {
+      "type": "analogy",
+      "title": "Web Vitals = Restaurant Reviews",
+      "body": "When you search for a restaurant, you check ratings for food quality, service speed, and ambiance. You won't visit a place with 2 stars on service even if the food is great. **Core Web Vitals** are your website's public review scores -- Google uses them to decide whether to recommend your site to searchers, just like you use star ratings to pick where to eat."
+    },
+    {
       "type": "text",
       "title": "The Three Vitals",
       "body": "1. **LCP (Largest Contentful Paint)** -- How long until the biggest visible element loads. Think: hero image or main heading. Target: under 2.5 seconds.\n\n2. **INP (Interaction to Next Paint)** -- How long until the page responds after a user clicks or types. Target: under 200 milliseconds.\n\n3. **CLS (Cumulative Layout Shift)** -- How much the page content jumps around while loading. Target: under 0.1."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- BAD: Image has no dimensions, causes layout shift -->\n<img src=\"/hero.jpg\">\n\n<!-- GOOD: Browser reserves space before image loads -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
       "annotation": "Without width and height, the browser doesn't know how much space the image needs. When it finally loads, everything below it jumps down -- that's a layout shift."
+    },
+    {
+      "type": "motivation",
+      "body": "Good Core Web Vitals scores mean Google sends you free organic traffic. Bad scores mean your app gets buried. When you're building apps to make money, CWV optimization is free marketing that pays for itself."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "**Renderizado en Servidor (SSR)** es como pedir una comida preparada -- llega completamente cocinada, solo cómela. **Renderizado en Cliente (CSR)** es como un kit de comida -- recibes los ingredientes (JavaScript) y tu cocina (navegador) lo ensambla. SSR es más rápido para 'comer' pero la cocina (servidor) hace más trabajo."
     },
     {
+      "type": "analogy",
+      "title": "SSR vs CSR = Ver una Pelicula en Streaming vs Descargarla",
+      "body": "**SSR** es como ver una pelicula en streaming -- presionas play y empieza de inmediato porque el servidor hace el trabajo. **CSR** es como descargar la pelicula entera primero y luego verla -- hay una larga espera al inicio, pero una vez que esta en tu dispositivo, saltar entre escenas es instantaneo. Cada enfoque tiene compromisos entre que tan rapido ves el primer cuadro y que tan fluida es la experiencia despues."
+    },
+    {
       "type": "text",
       "title": "Renderizado en Servidor (SSR)",
       "body": "Con SSR, el **servidor** construye la página HTML completa antes de enviarla al navegador:\n\n1. El navegador solicita una página\n2. El servidor obtiene datos de la base de datos\n3. El servidor genera HTML completo con los datos incluidos\n4. El navegador recibe HTML listo para mostrar\n\nEl usuario ve el contenido inmediatamente. Los motores de búsqueda también pueden leerlo fácilmente."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Renderizado en Cliente (CSR)",
       "body": "Con CSR, el servidor envía una página HTML casi vacía más JavaScript. El navegador hace el trabajo pesado:\n\n1. El navegador solicita una página\n2. El servidor envía una estructura HTML vacía + un paquete JavaScript\n3. El navegador ejecuta el JavaScript, que obtiene datos de una API\n4. JavaScript construye el contenido de la página en el navegador\n\nLa carga inicial es más lenta, pero la navegación entre páginas puede sentirse instantánea."
+    },
+    {
+      "type": "motivation",
+      "body": "Elegir la estrategia de renderizado correcta es como las apps rankean en Google y convierten visitantes en clientes. Cuando vibecodeas con SSR donde importa, tus paginas aparecen en los resultados de busqueda -- y ese trafico organico gratuito es el mas rentable."
     },
     {
       "type": "key_takeaway",

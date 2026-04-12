@@ -29,6 +29,15 @@
       "body": "**Git** is the tool that runs on your computer and tracks changes. **GitHub** is a website where you can store your Git projects online and collaborate with others. You can use Git without GitHub, but most teams use both together."
     },
     {
+      "type": "analogy",
+      "title": "Git = Your Project's Time Machine",
+      "body": "Think of Git like a time machine for your project. Every commit is a snapshot frozen in time. You can jump back to any moment -- last Tuesday, three months ago, the day before everything broke. Unlike Ctrl+Z which only goes back step by step, Git lets you teleport to any point in history instantly."
+    },
+    {
+      "type": "motivation",
+      "body": "Git is listed as a required skill in 95% of developer job postings paying $100K+. Even if you build apps entirely with AI tools, employers and clients expect you to use Git -- it's the universal language of professional development."
+    },
+    {
       "type": "key_takeaway",
       "body": "Git is a version control tool that tracks every change to your project -- like an unlimited undo history for your entire codebase."
     }

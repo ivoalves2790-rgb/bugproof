@@ -14,6 +14,11 @@
       "body": "Piensa en una producción teatral. El **modo dev** es el ensayo -- las luces están encendidas, puedes parar y reiniciar, alguien te lee notas, y está bien si las cosas no son perfectas. El **modo build** es la noche de estreno -- todo está pulido, optimizado y funcionando a toda velocidad para la audiencia. No ensayarías frente a una multitud, y no harías la función de estreno con las luces de la sala encendidas."
     },
     {
+      "type": "analogy",
+      "title": "Modo Dev = Borrador de Email, Modo Build = Email Enviado",
+      "body": "Escribir un borrador de email es como el modo dev -- puedes ajustarlo, corregir errores y reorganizar parrafos sin consecuencias. Pero una vez que das click en 'Enviar,' es modo build -- el email esta pulido, final, y ahi afuera para que personas reales lo lean. No enviarias un borrador a medio escribir a tu jefe, y no desplegarias modo dev a tus usuarios."
+    },
+    {
       "type": "text",
       "title": "Qué Cambia Entre Modos",
       "body": "**Modo de desarrollo** (`npm run dev`):\n- Recarga rápida cuando cambias código\n- Mensajes de error detallados con números de línea\n- Sin optimización -- carga lento pero inicia rápido\n- Muestra advertencias útiles en la consola\n\n**Build de producción** (`npm run build`):\n- El código se minifica (comprime para ser diminuto)\n- Las imágenes se optimizan\n- El código no usado se elimina (tree-shaking)\n- Los mensajes de error son genéricos (por seguridad)"
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Development: start a local server with hot reloading\nnpm run dev\n\n# Production: create an optimized build\nnpm run build\nnpm start        # serve the built version",
       "annotation": "Siempre prueba `npm run build` localmente antes de desplegar. Si falla en tu máquina, fallará en el servidor también."
+    },
+    {
+      "type": "motivation",
+      "body": "Los usuarios abandonan una app lenta en segundos. Entender build vs dev significa que tu app creada con IA carga rapido y se siente profesional -- que es la diferencia entre un proyecto de juguete y un producto por el que la gente paga."
     },
     {
       "type": "key_takeaway",

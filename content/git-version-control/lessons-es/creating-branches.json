@@ -9,9 +9,19 @@
   "intro": "Estás trabajando en una aplicación de blog y quieres agregar un modo oscuro. En lugar de cambiar el código principal directamente, crearás una rama separada para trabajar de forma segura.",
   "teach": [
     {
+      "type": "analogy",
+      "title": "Crear una rama = Abrir una nueva pestaña",
+      "body": "Piensa en crear una rama como abrir una nueva pestaña del navegador. Tu pestaña original se queda exactamente donde está -- nada cambia. La nueva pestaña empieza desde la misma página, pero ahora puedes navegar a un lugar completamente diferente sin perder tu lugar. Crear una rama en Git es igual de instantáneo y ligero."
+    },
+    {
       "type": "text",
       "title": "Cómo funciona la creación de ramas",
       "body": "Cuando creas una rama, Git no copia tus archivos. Solo crea un pequeño marcador (llamado **puntero**) que dice \"esta rama comienza aquí.\" Sucede instantáneamente y no ocupa casi espacio. Por eso los desarrolladores crean ramas constantemente -- son baratas y rápidas."
+    },
+    {
+      "type": "analogy",
+      "title": "Ramas = Notas adhesivas en una línea de tiempo",
+      "body": "Imagina una larga línea de tiempo del historial de tu proyecto clavada en una pared. Una rama es solo una nota adhesiva que colocas en un punto de esa línea de tiempo diciendo \"empieza a construir desde aquí.\" Puedes pegar tantas notas como quieras -- no pesan nada y no ocupan espacio. Eso es literalmente lo que hace Git: una rama es un pequeño puntero, no una copia de tus archivos."
     },
     {
       "type": "code_example",
@@ -24,6 +34,10 @@
       "type": "text",
       "title": "Crear vs cambiar",
       "body": "**Importante:** `git branch <nombre>` solo crea la rama -- no te cambia a ella. Sigues en tu rama anterior hasta que ejecutes `git checkout <nombre>`. El asterisco (*) junto al nombre de una rama en la salida de `git branch` te indica en cuál estás actualmente."
+    },
+    {
+      "type": "motivation",
+      "body": "Crear ramas es la base del flujo de trabajo profesional con Git. Cada contribución open source, cada proyecto en equipo, cada app construida con IA que quieras lanzar -- todo empieza creando una rama. Esta habilidad desbloquea pull requests, revisiones de código y colaboración real en equipo."
     },
     {
       "type": "key_takeaway",

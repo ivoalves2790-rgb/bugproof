@@ -14,11 +14,20 @@
       "body": "Un test de flujo de usuario simula lo que hace un usuario real: abrir la app, iniciar sesion, crear una tarea, marcarla como completada. Estos son tests de integracion o E2E que verifican que multiples componentes funcionen juntos. Detectan bugs que los tests unitarios no encuentran, como un formulario que se envia pero que en realidad no guarda en la base de datos."
     },
     {
+      "type": "analogy",
+      "title": "Los Tests de Flujo Son Como un Ensayo General",
+      "body": "Un teatro no verifica solo que cada actor sepa sus lineas (tests unitarios). Hacen un ensayo general completo con vestuario, iluminacion y cambios de escena (tests de flujo). Solo al ejecutar todo el espectaculo junto puedes detectar problemas como una entrada perdida o una utileria fuera de lugar."
+    },
+    {
       "type": "code_example",
       "title": "Un Test de Flujo de Usuario",
       "language": "text",
       "code": "test('user can create and complete a task', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('New Task');\n  await fillInput('Task title', 'Buy milk');\n  await clickButton('Save');\n  \n  expect(await getText('.task-list')).toContain('Buy milk');\n  \n  await clickCheckbox('Buy milk');\n  expect(await getText('.completed-tasks')).toContain('Buy milk');\n});",
       "annotation": "Este test cubre el recorrido completo del usuario — login, crear y completar — detectando problemas de integracion que los tests unitarios no encontrarian."
+    },
+    {
+      "type": "motivation",
+      "body": "Los flujos de usuario que pruebas son los mismos que generan ingresos — registrarse, usar el producto, volver. Asegurarte de que esos caminos funcionen perfectamente es como construyes un producto por el que la gente esta dispuesta a pagar."
     },
     {
       "type": "key_takeaway",

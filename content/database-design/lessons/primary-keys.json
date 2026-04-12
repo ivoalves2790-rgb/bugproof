@@ -14,6 +14,11 @@
       "body": "Imagine a school with two students named 'John Smith.' If you just use names, you can't tell them apart. That's why schools assign student IDs -- unique numbers that identify each student. A **primary key** is the same idea: a unique identifier for each row in a table, so you can always refer to exactly one specific record."
     },
     {
+      "type": "analogy",
+      "title": "The License Plate",
+      "body": "Two people can own identical-looking red Toyota Camrys, but every car has a unique **license plate**. That plate never changes even if the car gets repainted or changes owners. Police, insurance companies, and parking garages all use the plate to identify exactly which car they mean. A primary key is your data's license plate -- a permanent, unique tag that removes all ambiguity."
+    },
+    {
       "type": "text",
       "title": "What Makes a Good Primary Key?",
       "body": "A primary key must be:\n\n1. **Unique** -- no two rows can have the same value\n2. **Not null** -- every row must have one\n3. **Unchanging** -- it should never need to be updated\n\nMost developers use an **auto-incrementing integer** (1, 2, 3, 4...) or a **UUID** (a random string like 'a1b2c3d4-e5f6-...'). Never use names, emails, or other real data as primary keys -- they can change or have duplicates."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-increments: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Now each user has a guaranteed unique ID\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- id is automatically set to 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- id is automatically set to 2 (different Alice, no confusion!)",
       "annotation": "SERIAL means the database auto-generates the next number. PRIMARY KEY means this column uniquely identifies each row. Two users named 'Alice' get different IDs."
+    },
+    {
+      "type": "motivation",
+      "body": "Primary keys are how your app knows which customer paid, which order shipped, and which subscription to renew. Without them, your vibecoded app would mix up users and payments -- and that is how you lose customers and money fast."
     },
     {
       "type": "key_takeaway",

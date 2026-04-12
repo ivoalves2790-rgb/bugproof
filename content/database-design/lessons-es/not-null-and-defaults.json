@@ -14,6 +14,11 @@
       "body": "Cuando llenas un formulario, algunos campos tienen un asterisco rojo (*) que significa 'obligatorio.' No puedes enviar el formulario sin llenarlos. **NOT NULL** es la versión de base de datos de ese asterisco -- significa 'esta columna debe tener un valor, no puedes dejarla vacía.' Sin NOT NULL, obtienes valores vacíos invisibles que causan fallos después."
     },
     {
+      "type": "analogy",
+      "title": "La Red de Seguridad del Circo",
+      "body": "NOT NULL y DEFAULT son como redes de seguridad en un circo. La **red NOT NULL** atrapa a cualquier artista (dato) que intente saltar sin arnes (valor faltante) -- detiene el espectaculo inmediatamente en vez de dejar que alguien caiga. La **red DEFAULT** es mas suave -- si un artista olvida su disfraz, el circo le da uno estandar para que el show continue. Juntas, se aseguran de que nadie toque el suelo."
+    },
+    {
       "type": "text",
       "title": "¿Qué es NULL?",
       "body": "**NULL** en una base de datos significa 'sin valor' o 'desconocido.' No es cero, no es una cadena vacía -- es la ausencia de cualquier valor. NULL causa problemas porque:\n\n1. `NULL + 5` = NULL (no 5)\n2. `NULL = NULL` es falso (NULL no es igual a nada, ¡ni siquiera a sí mismo!)\n3. Tu código podría fallar al intentar llamar `.length` en NULL\n\n¿La solución? Usa **NOT NULL** en columnas que siempre deberían tener un valor."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name is required\n  email TEXT NOT NULL UNIQUE,      -- email is required and unique\n  bio TEXT DEFAULT '',             -- optional, defaults to empty string\n  is_active BOOLEAN DEFAULT true,  -- defaults to true for new users\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-set to current time\n);",
       "annotation": "NOT NULL significa que la columna es obligatoria. DEFAULT proporciona un valor cuando no se especifica uno. Usa NOT NULL para datos esenciales como nombre y email. Usa DEFAULT para campos que tienen un valor automático sensato."
+    },
+    {
+      "type": "motivation",
+      "body": "Los errores por NULL son la razon numero uno por la que las apps vibecodeadas fallan en produccion. Configurar NOT NULL y DEFAULT correctamente significa que tu app no se caera cuando un usuario se salte un campo del formulario -- y las apps que no se caen son las que mantienen a sus clientes de pago."
     },
     {
       "type": "key_takeaway",

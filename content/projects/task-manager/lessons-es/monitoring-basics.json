@@ -19,6 +19,15 @@
       "body": "No conduces con los ojos vendados. El tablero de tu auto muestra velocidad, nivel de combustible y alertas del motor. El monitoreo le da a tu app un tablero — tasas de error, tiempos de respuesta y cantidad de usuarios. Sin el, conduces a ciegas y no sabras que algo esta mal hasta que el motor este en llamas."
     },
     {
+      "type": "analogy",
+      "title": "El Monitoreo Es Como un Monitor de Bebe",
+      "body": "Los padres no se paran sobre la cuna 24/7 — usan un monitor de bebe que les avisa cuando algo necesita atencion. El monitoreo de apps funciona igual: observa silenciosamente en segundo plano y solo te despierta cuando hay un problema real, como un pico de errores o el sitio cayendose."
+    },
+    {
+      "type": "motivation",
+      "body": "El monitoreo es como proteges tus ingresos. Si tu app se cae y no te enteras por horas, son horas de usuarios e ingresos perdidos. Los negocios reales monitorean sus productos — y eso es exactamente lo que estas construyendo."
+    },
+    {
       "type": "key_takeaway",
       "body": "Empieza con tres cosas: rastreo de errores (Sentry o similar), monitoreo de uptime (esta el sitio activo?) y analiticas basicas (la gente lo esta usando?). Puedes agregar monitoreo mas sofisticado despues."
     }

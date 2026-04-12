@@ -167,6 +167,18 @@ function TeachBlockRenderer({ block }: { block: TeachBlock }) {
           </p>
         </div>
       );
+
+    case "motivation":
+      return (
+        <div className="rounded-xl border border-xp-gold/30 bg-xp-gold/5 p-5">
+          <div className="mb-1 text-xs font-medium uppercase tracking-wider text-xp-gold">
+            💰 Why This Pays Off
+          </div>
+          <p className="text-sm leading-relaxed text-xp-gold/90">
+            <RichText text={block.body} />
+          </p>
+        </div>
+      );
   }
 }
 

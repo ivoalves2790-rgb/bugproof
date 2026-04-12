@@ -14,6 +14,11 @@
       "body": "In a factory, quality control checks each product against specifications: is it the right size? The right weight? Does it work? **Testing functions** is the same idea. You check: does this function return the right output for a given input? Does it handle weird inputs gracefully?"
     },
     {
+      "type": "analogy",
+      "title": "Testing Functions = Grading Homework With an Answer Key",
+      "body": "When a teacher grades homework, they have an answer key: question 1 should be 42, question 2 should be 'Paris'. They compare each student's answer against the key. **Testing functions** works identically -- you already know the right answers (expected outputs), and you check if your function's answers (actual outputs) match. Wrong answer? That function needs fixing."
+    },
+    {
       "type": "text",
       "title": "Jest: The Testing Framework",
       "body": "**Jest** is the most popular testing framework for JavaScript. It provides:\n\n- `test()` -- Define a test case\n- `expect()` -- Start an assertion\n- `.toBe()` -- Check exact equality\n- `.toEqual()` -- Check deep equality (for objects/arrays)\n- `.toBeTruthy()` / `.toBeFalsy()` -- Check truthiness"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "const { isEven, double, clamp } = require('./math');\n\ntest('isEven returns true for even numbers', () => {\n  expect(isEven(4)).toBe(true);\n  expect(isEven(0)).toBe(true);\n});\n\ntest('isEven returns false for odd numbers', () => {\n  expect(isEven(3)).toBe(false);\n  expect(isEven(7)).toBe(false);\n});\n\ntest('double multiplies by 2', () => {\n  expect(double(5)).toBe(10);\n  expect(double(0)).toBe(0);\n});",
       "annotation": "Each test has a descriptive name that reads like a sentence. When a test fails, the name tells you exactly what broke."
+    },
+    {
+      "type": "motivation",
+      "body": "The functions in your vibecoded app handle real things -- prices, user data, permissions. Testing each function means you know it works before a paying customer ever triggers it. That's how you protect your revenue one function at a time."
     },
     {
       "type": "key_takeaway",

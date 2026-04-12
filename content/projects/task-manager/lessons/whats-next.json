@@ -14,9 +14,18 @@
       "body": "Congratulations — you went from a blank screen to a deployed, working app. You planned features, chose a stack, built a UI, designed a database, added auth, wrote tests, and shipped to production. That's the full software development lifecycle."
     },
     {
+      "type": "analogy",
+      "title": "V1 Is Like Planting a Seed",
+      "body": "Your first version is a seed in the ground, not the finished tree. You've done the hard work of planting it — now it needs sunlight (users), water (updates), and pruning (removing what doesn't work). The biggest mistake is digging it up every week to try a different seed."
+    },
+    {
       "type": "text",
       "title": "What Comes After V1?",
       "body": "Now that your MVP is live, you'll get real user feedback. Some features you thought were essential will go unused. Some things you didn't think of will be requested constantly. Listen to your users, but filter through your product vision."
+    },
+    {
+      "type": "motivation",
+      "body": "You now have every skill needed to build and ship a real product with AI. The next step is iterating based on user feedback and adding a payment flow — you're one Stripe integration away from your first dollar."
     },
     {
       "type": "key_takeaway",

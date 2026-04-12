@@ -14,6 +14,11 @@
       "body": "Tu app necesita un lugar donde vivir en internet. El **hosting** es como alquilar un apartamento para tu código. Algunas plataformas te dan un pequeño estudio gratuito (genial para proyectos pequeños). Otras te dan un edificio entero con portero y equipo de mantenimiento (para apps grandes con muchos usuarios)."
     },
     {
+      "type": "analogy",
+      "title": "Hosting = Elegir una Membresia de Gimnasio",
+      "body": "Elegir una plataforma de hosting es como elegir un gimnasio. Algunos son enormes con todas las maquinas imaginables pero cuestan una fortuna y abruman a los principiantes (AWS). Otros son estudios pequenos y amigables con lo esencial y prueba gratuita (Vercel, Netlify). No necesitas el mega-gimnasio para ponerte en forma -- empieza pequeno y mejora cuando lo superes."
+    },
+    {
       "type": "text",
       "title": "Las Tres Grandes para Principiantes",
       "body": "Si estás empezando, estas tres plataformas son las más populares:\n\n1. **Vercel** -- La mejor para apps frontend y proyectos Next.js. Despliega desde GitHub automáticamente.\n2. **Netlify** -- Genial para sitios estáticos y apps frontend. Despliegues simples de arrastrar y soltar.\n3. **Railway** -- La mejor cuando necesitas un servidor backend y base de datos. Como Vercel pero para apps full-stack."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Niveles Gratuitos y Límites",
       "body": "La mayoría de las plataformas de hosting tienen un **nivel gratuito** -- puedes desplegar proyectos pequeños sin pagar nada. Pero los niveles gratuitos tienen límites:\n\n- Ancho de banda limitado (cuántos datos puede enviar tu app)\n- Tiempo de cómputo limitado (tu app podría dormirse después de inactividad)\n- Almacenamiento limitado (solo bases de datos pequeñas)\n\nPara aprender y proyectos pequeños, los niveles gratuitos son más que suficientes."
+    },
+    {
+      "type": "motivation",
+      "body": "Los niveles gratuitos de hosting significan que puedes lanzar tu app creada con IA y empezar a conseguir usuarios sin gastar un centavo. La plataforma crece contigo a medida que tu app empieza a generar dinero."
     },
     {
       "type": "key_takeaway",

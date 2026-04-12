@@ -14,11 +14,20 @@
       "body": "Environment variables are key-value pairs that configure your app without hardcoding values. DATABASE_URL might point to localhost in development and your production database in production. API_KEY stays secret because it's never in your code — it's set in the deployment platform."
     },
     {
+      "type": "analogy",
+      "title": "Env Vars Are Like a Phone's Contact List",
+      "body": "You don't tattoo phone numbers on your arm — you save them in your phone and they change when people get new numbers. Environment variables work the same way: your code says 'call the database' and the environment fills in the actual address, which can be different on every device."
+    },
+    {
       "type": "code_example",
       "title": "Env Vars in Practice",
       "language": "text",
       "code": "# .env.local (development - never committed)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Production (set in Vercel dashboard)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (committed - shows what vars are needed)\nDATABASE_URL=\nAPI_KEY=",
       "annotation": "Keep a .env.example file so new developers know which variables to set up, without exposing the actual values."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to manage environment variables means you can safely connect payment APIs, analytics, and third-party services — the building blocks of apps that generate real revenue."
     },
     {
       "type": "key_takeaway",

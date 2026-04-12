@@ -21,6 +21,15 @@
       "annotation": "Siempre hashea las contrasenas y nunca incluyas datos sensibles en las respuestas de la API."
     },
     {
+      "type": "analogy",
+      "title": "El Hashing de Contrasenas Es Como una Trituradora",
+      "body": "Imagina que en vez de guardar una llave maestra de tu casa, guardas una version triturada. Si alguien entra a tu almacen de llaves, lo unico que encuentra es confeti — inutil. Pero cuando traes tu llave real, el sistema la tritura de la misma forma y compara los patrones de confeti. Eso es el hashing: la contrasena original nunca se almacena, solo su huella irreversible."
+    },
+    {
+      "type": "motivation",
+      "body": "Un flujo de login seguro es innegociable para cualquier app que maneje usuarios reales. Haz esto bien y habras superado la barrera de confianza mas grande — la gente ingresara su email, creara cuentas y eventualmente abrira sus billeteras."
+    },
+    {
       "type": "key_takeaway",
       "body": "Usa una libreria o proveedor de auth en lugar de construir el login desde cero. Si debes construirlo, siempre hashea las contrasenas, valida en el servidor y nunca expongas datos sensibles en las respuestas."
     }

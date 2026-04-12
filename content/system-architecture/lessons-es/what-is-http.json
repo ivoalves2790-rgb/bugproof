@@ -14,6 +14,11 @@
       "body": "Imagina que estás en un restaurante. Tú (el navegador) miras el menú y le dices al mesero (HTTP) lo que quieres. El mesero lleva tu pedido a la cocina (el servidor), luego te trae tu comida (la respuesta). **HTTP** es el mesero -- es el lenguaje acordado para hacer peticiones y obtener respuestas."
     },
     {
+      "type": "analogy",
+      "title": "HTTP Es Como Hablar el Mismo Idioma",
+      "body": "Imagina a dos personas que hablan idiomas diferentes intentando hacer negocios. ¡No lograrian nada! HTTP es el **idioma comun** que todo navegador y todo servidor acuerdan hablar. No importa si el servidor esta escrito en Python y el navegador ejecuta JavaScript -- HTTP es el idioma compartido en el medio que les permite entenderse."
+    },
+    {
       "type": "text",
       "title": "¿Qué Significa HTTP?",
       "body": "HTTP significa **Protocolo de Transferencia de Hipertexto**. Vamos a desglosarlo:\n\n1. **Hipertexto** -- texto que puede enlazar a otro texto (eso es lo que son las páginas web)\n2. **Transferencia** -- moverlo de un lugar a otro\n3. **Protocolo** -- un conjunto de reglas con las que ambos lados están de acuerdo\n\nEntonces HTTP son simplemente las reglas de cómo los navegadores y servidores intercambian páginas web."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "HTTP vs HTTPS",
       "body": "**HTTPS** es HTTP con encriptación. La 'S' significa **Seguro**. Piensa en HTTP como enviar una postal (cualquiera que la maneje puede leerla) y HTTPS como enviar una carta sellada (solo el destinatario puede abrirla). Hoy en día, casi todos los sitios web usan HTTPS porque los navegadores advierten a los usuarios cuando un sitio usa HTTP sin encriptar."
+    },
+    {
+      "type": "motivation",
+      "body": "HTTP es la columna vertebral de toda app web que genera dinero. Entender como hablan los navegadores y servidores significa que puedes vibecodear apps que cargan rapido, manejan errores con elegancia y hacen que los usuarios vuelvan."
     },
     {
       "type": "key_takeaway",

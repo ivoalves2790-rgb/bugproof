@@ -14,6 +14,11 @@
       "body": "Imagine moving to a new house. You pack everything in boxes. Box labeled 'Kitchen - Plates' is easy to unpack. Box labeled 'stuff' or 'x' means you have to open it and dig through to find what you need. **Variable names are labels on boxes** -- good names tell you what's inside without opening the box."
     },
     {
+      "type": "analogy",
+      "title": "Variable Names = Contacts in Your Phone",
+      "body": "Imagine if your phone contacts were saved as 'Person 1', 'Person 2', 'Guy from Tuesday'. You'd have to call each one to figure out who they are. But names like 'Mom', 'Dr. Garcia', 'Landlord' tell you exactly who you're contacting. **Variable names are your code's contact list** -- `userEmail` is like saving a name properly, while `x` is like saving 'Person 47'."
+    },
+    {
       "type": "text",
       "title": "Rules for Good Variable Names",
       "body": "A good variable name answers the question 'what does this contain?' without reading any other code:\n\n1. **Describe the content** -- `userEmail` not `str` or `e`\n2. **Be specific** -- `selectedProductId` not `id` or `data`\n3. **Use full words** -- `firstName` not `fn` or `fName`\n4. **Match the type** -- plurals for arrays (`users`), singular for single items (`user`)\n5. **Avoid meaningless names** -- never use `temp`, `data`, `info`, `stuff`, `thing`"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: What do these even mean?\nconst d = getData();\nconst f = d.filter(x => x.a > 5);\nconst r = f.map(x => x.n);\n\n// GOOD: You can read this like English\nconst products = fetchProducts();\nconst expensiveProducts = products.filter(p => p.price > 5);\nconst productNames = expensiveProducts.map(p => p.name);",
       "annotation": "The good version tells a story: get products, filter expensive ones, extract their names. The bad version is a puzzle you have to solve."
+    },
+    {
+      "type": "motivation",
+      "body": "Clear variable names are the fastest way to make your AI-built apps maintainable. Maintainable apps mean clients keep paying you to add features month after month instead of hiring someone else to rewrite everything from scratch."
     },
     {
       "type": "key_takeaway",

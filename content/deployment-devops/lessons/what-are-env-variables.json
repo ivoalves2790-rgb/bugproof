@@ -14,6 +14,11 @@
       "body": "Imagine you're organizing an event. Each venue has different contact numbers, wifi passwords, and room capacities. Instead of printing these details on every poster, you put them on a name badge that changes per venue. **Environment variables** work the same way -- they're settings that change depending on where your app is running, without changing your actual code."
     },
     {
+      "type": "analogy",
+      "title": "Env Vars = Speed Dial on Your Phone",
+      "body": "Your phone's speed dial buttons always do the same thing -- call someone -- but the actual number behind each button is different depending on whose phone it is. Environment variables are like speed dial for your app: the code always calls process.env.DATABASE_URL, but the actual value behind it changes depending on whether you're on your laptop, a test server, or production."
+    },
+    {
       "type": "text",
       "title": "What Are They, Really?",
       "body": "Environment variables (or \"env vars\") are **key-value pairs** that live outside your code. They tell your app things like:\n\n- What database to connect to\n- What your API keys are\n- Whether to show debug info\n- What port to run on\n\nThe beauty is that the same code can behave differently just by changing these variables."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// Access an environment variable\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Running in production mode');\n} else {\n  console.log('Running in development mode');\n}",
       "annotation": "process.env gives you access to all environment variables. The values come from outside your code."
+    },
+    {
+      "type": "motivation",
+      "body": "Environment variables are how your vibecoded app connects to payment processors, databases, and APIs. Without them, your app can't process payments or store data -- with them, you have a real business."
     },
     {
       "type": "key_takeaway",

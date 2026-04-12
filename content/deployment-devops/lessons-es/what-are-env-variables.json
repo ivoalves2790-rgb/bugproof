@@ -14,6 +14,11 @@
       "body": "Imagina que estás organizando un evento. Cada sede tiene diferentes números de contacto, contraseñas de wifi y capacidades de sala. En lugar de imprimir estos detalles en cada póster, los pones en un gafete que cambia por sede. Las **variables de entorno** funcionan de la misma manera -- son configuraciones que cambian dependiendo de dónde se ejecute tu app, sin cambiar tu código real."
     },
     {
+      "type": "analogy",
+      "title": "Variables de Entorno = Marcado Rapido en Tu Telefono",
+      "body": "Los botones de marcado rapido de tu telefono siempre hacen lo mismo -- llamar a alguien -- pero el numero real detras de cada boton es diferente dependiendo de de quien sea el telefono. Las variables de entorno son como el marcado rapido para tu app: el codigo siempre llama a process.env.DATABASE_URL, pero el valor real detras cambia dependiendo de si estas en tu laptop, un servidor de pruebas o produccion."
+    },
+    {
       "type": "text",
       "title": "¿Qué Son Realmente?",
       "body": "Las variables de entorno (o \"env vars\") son **pares clave-valor** que viven fuera de tu código. Le dicen a tu app cosas como:\n\n- A qué base de datos conectarse\n- Cuáles son tus claves API\n- Si mostrar información de depuración\n- En qué puerto ejecutarse\n\nLo hermoso es que el mismo código puede comportarse diferente solo cambiando estas variables."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// Access an environment variable\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Running in production mode');\n} else {\n  console.log('Running in development mode');\n}",
       "annotation": "process.env te da acceso a todas las variables de entorno. Los valores vienen de fuera de tu código."
+    },
+    {
+      "type": "motivation",
+      "body": "Las variables de entorno son la forma en que tu app creada con IA se conecta a procesadores de pago, bases de datos y APIs. Sin ellas, tu app no puede procesar pagos ni guardar datos -- con ellas, tienes un negocio real."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Cuando vas al doctor, te revisan la presión arterial, el ritmo cardíaco y la temperatura -- tres números clave que dicen mucho sobre tu salud general. Los **Core Web Vitals** son la misma idea para sitios web: tres mediciones específicas que te dicen qué tan saludable es el rendimiento de tu sitio. Google eligió estas tres porque capturan lo que realmente les importa a los usuarios."
     },
     {
+      "type": "analogy",
+      "title": "Web Vitals = Reseñas de restaurantes",
+      "body": "Cuando buscas un restaurante, revisas calificaciones de calidad de comida, velocidad de servicio y ambiente. No visitarías un lugar con 2 estrellas en servicio aunque la comida sea increíble. Los **Core Web Vitals** son las reseñas públicas de tu sitio web -- Google los usa para decidir si recomienda tu sitio a los que buscan, igual que tú usas las estrellas para elegir dónde comer."
+    },
+    {
       "type": "text",
       "title": "Las tres métricas vitales",
       "body": "1. **LCP (Largest Contentful Paint)** -- Cuánto tiempo hasta que el elemento visible más grande se carga. Piensa en: imagen principal o encabezado. Objetivo: menos de 2.5 segundos.\n\n2. **INP (Interaction to Next Paint)** -- Cuánto tiempo hasta que la página responde después de que un usuario hace clic o escribe. Objetivo: menos de 200 milisegundos.\n\n3. **CLS (Cumulative Layout Shift)** -- Cuánto se mueve el contenido de la página mientras carga. Objetivo: menos de 0.1."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- BAD: Image has no dimensions, causes layout shift -->\n<img src=\"/hero.jpg\">\n\n<!-- GOOD: Browser reserves space before image loads -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
       "annotation": "Sin width y height, el navegador no sabe cuánto espacio necesita la imagen. Cuando finalmente carga, todo lo de abajo salta hacia abajo -- eso es un cambio de layout."
+    },
+    {
+      "type": "motivation",
+      "body": "Buenas puntuaciones de Core Web Vitals significan que Google te envía tráfico orgánico gratis. Malas puntuaciones significan que tu app queda enterrada. Cuando construyes apps para ganar dinero, la optimización de CWV es marketing gratuito que se paga solo."
     },
     {
       "type": "key_takeaway",

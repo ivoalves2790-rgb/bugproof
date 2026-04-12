@@ -19,6 +19,15 @@
       "body": "A task card isn't just a display — users will click it, complete it, maybe drag it. Build your component with **interaction states** in mind from the start: hover effects, active states, completed styling. A card with no visual feedback when you hover feels broken, even if it technically works."
     },
     {
+      "type": "analogy",
+      "title": "The Task Card Is Like a Business Card",
+      "body": "A great business card shows your name, title, and one way to reach you — not your entire resume. A task card works the same way: it gives just enough info for someone to decide what to do next. Overload it with details and people's eyes glaze over, just like they would with a business card that has 15 lines of text."
+    },
+    {
+      "type": "motivation",
+      "body": "The task card is the heart of your product — it's what users touch dozens of times a day. Nail this component, and you've built something people want to keep coming back to. That's what turns a side project into a money-making app."
+    },
+    {
       "type": "key_takeaway",
       "body": "Start with the minimum viable card — title and a complete button. Add information (due date, priority, tags) only when your user stories call for it. Every piece of data on the card competes for attention, so be intentional about what you show."
     }

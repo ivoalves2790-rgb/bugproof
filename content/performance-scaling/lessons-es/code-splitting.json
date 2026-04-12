@@ -14,6 +14,11 @@
       "body": "Imagina si tuvieras que descargar una enciclopedia entera antes de poder leer un artículo. Eso es lo que hace un solo bundle de JavaScript -- obliga a los usuarios a descargar código para cada página, incluso páginas que nunca visitarán. La **división de código** es como dividir la enciclopedia en capítulos que se cargan bajo demanda."
     },
     {
+      "type": "analogy",
+      "title": "División de código = Entrega de supermercado por bolsas",
+      "body": "Imagina que tu servicio de entrega a domicilio te mandara cada producto del supermercado, aunque solo pediste huevos y leche. Esperarías una eternidad a que llegue el camión. La **división de código** es como hacer que el servicio te envíe solo lo que pediste ahora, y entregue el resto después si agregas algo a tu orden. Los usuarios reciben lo que necesitan rápido, sin descargar toda la tienda."
+    },
+    {
       "type": "text",
       "title": "Cómo funciona la división de código",
       "body": "En lugar de un archivo JavaScript gigante, la división de código crea múltiples archivos más pequeños:\n\n1. **División basada en rutas** -- Cada página se convierte en su propio fragmento (dashboard.js, settings.js, admin.js)\n2. **División basada en componentes** -- Los componentes pesados se cargan solo cuando se renderizan (biblioteca de gráficos, editor de texto enriquecido)\n3. **División de bibliotecas** -- El código de terceros (React, lodash) va en un fragmento separado que se cachea bien\n\nEl usuario solo descarga el código necesario para la página que está viendo."
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "import React, { lazy, Suspense } from 'react';\n\n// These are loaded on-demand, not upfront\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
       "annotation": "Cada componente de página está envuelto en lazy(), así que su archivo JavaScript solo se descarga cuando el usuario navega a esa ruta. Suspense muestra un fallback de carga mientras el fragmento se descarga."
+    },
+    {
+      "type": "motivation",
+      "body": "La división de código es lo que convierte apps hechas con IA de proyectos de hobby a productos profesionales. Cuando tu dashboard carga en 2 segundos en vez de 10, los usuarios se quedan lo suficiente para darle al botón de suscribirse."
     },
     {
       "type": "key_takeaway",

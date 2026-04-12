@@ -14,6 +14,11 @@
       "body": "A production build is like packing a suitcase for a trip. You don't bring your entire closet -- you pick only what you need, fold everything neatly, and compress it to fit. The **build process** takes your messy development code and creates a clean, compressed, optimized version that loads fast for users."
     },
     {
+      "type": "analogy",
+      "title": "Build = Compressing a Photo Before Texting",
+      "body": "When you take a photo, the raw file is massive -- great for editing but terrible for sending. Before texting it, your phone automatically compresses it so it sends fast without losing visible quality. A production build does the same to your code: it squeezes out all the extra stuff (comments, whitespace, unused code) so your app loads lightning-fast for users."
+    },
+    {
       "type": "text",
       "title": "What Happens During a Build",
       "body": "When you run `npm run build`, several things happen:\n\n1. **Bundling** -- All your separate files get combined into fewer files\n2. **Minification** -- Variable names get shortened, whitespace removed\n3. **Tree-shaking** -- Unused code gets removed\n4. **Compilation** -- TypeScript, JSX, and modern syntax get converted to plain JavaScript\n5. **Optimization** -- Images compressed, CSS purged of unused styles"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// YOUR CODE (readable)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// AFTER BUILD (minified)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
       "annotation": "The minified version does the exact same thing but is much smaller. This is why production builds load faster."
+    },
+    {
+      "type": "motivation",
+      "body": "A fast-loading app keeps users around long enough to become paying customers. Mastering production builds means your vibecoded app feels snappy and professional from the first visit."
     },
     {
       "type": "key_takeaway",

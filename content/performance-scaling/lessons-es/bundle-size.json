@@ -14,6 +14,11 @@
       "body": "Las aerolíneas tienen un límite de peso para el equipaje. Si tu maleta sobrepasa el límite, pagas extra y todo toma más tiempo. Tu bundle de JavaScript es como esa maleta -- cuanto más pesado, más esperan los usuarios. Y al igual que empacar, la solución es eliminar cosas que realmente no necesitas, no comprar una maleta más grande."
     },
     {
+      "type": "analogy",
+      "title": "Tamaño del bundle = Llenar tu mochila para una caminata corta",
+      "body": "Vas a hacer una caminata de un día, pero empacas equipo de campamento, ropa de invierno, equipo de buceo y una caja de herramientas -- por si acaso. Ahora tu mochila pesa 25 kilos y apenas puedes caminar. Eso es lo que un bundle inflado le hace a tu app -- obliga a los usuarios a cargar el peso de bibliotecas y funcionalidades que nunca usarán en esta página. **Empaca ligero, camina rápido.**"
+    },
+    {
       "type": "text",
       "title": "Por qué importa el tamaño del bundle",
       "body": "Cada kilobyte de JavaScript tiene un doble costo:\n\n1. **Tiempo de descarga** -- Los usuarios deben descargar el archivo antes de que pase algo\n2. **Tiempo de análisis** -- El navegador debe leer y compilar el JavaScript antes de poder ejecutarlo\n\nEn una conexión 3G lenta, 1MB de JavaScript tarda unos 10 segundos en descargarse Y otros cuantos segundos en analizarse. Por eso el tamaño del bundle se traduce directamente en tiempo de carga."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Imports the entire lodash library (70KB+)\nimport _ from 'lodash';\nconst sorted = _.sortBy(users, 'name');\n\n// GOOD: Imports just the function you need (2KB)\nimport sortBy from 'lodash/sortBy';\nconst sorted = sortBy(users, 'name');",
       "annotation": "La primera importación trae más de 500 funciones de lodash. La segunda importación solo incluye sortBy y sus dependencias. Esto se llama tree-shaking, y puede reducir el tamaño de las bibliotecas en un 90%."
+    },
+    {
+      "type": "motivation",
+      "body": "La IA facilita agregar bibliotecas -- a veces demasiado fácil. Mantener tu bundle liviano es lo que asegura que las apps que vibecondeas realmente carguen rápido en teléfonos reales con planes de datos reales, que es donde viven los usuarios que pagan."
     },
     {
       "type": "key_takeaway",

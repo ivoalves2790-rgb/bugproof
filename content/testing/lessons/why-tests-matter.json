@@ -14,6 +14,11 @@
       "body": "A tightrope walker CAN perform without a safety net. But one slip and it's a disaster. A safety net doesn't help you walk better -- it catches you when you fall. **Tests** are your safety net. They don't write your code for you, but they catch you when a change accidentally breaks something."
     },
     {
+      "type": "analogy",
+      "title": "Tests = Smoke Detectors in Your House",
+      "body": "You don't install smoke detectors because you expect a fire every day. You install them because the ONE time something goes wrong, they save everything. **Tests** are the smoke detectors of your codebase. They sit quietly in the background, and the moment something catches fire -- a broken feature, a bad calculation -- they scream loudly before the damage spreads."
+    },
+    {
       "type": "text",
       "title": "The Real Reasons Tests Matter",
       "body": "Tests save you time and stress in four big ways:\n\n1. **Catch bugs early** -- Find problems in 2 seconds instead of discovering them from angry users\n2. **Change code fearlessly** -- Refactor knowing tests will tell you if you broke something\n3. **Document behavior** -- Tests show exactly what your code is supposed to do\n4. **Sleep better** -- Deploy on Friday knowing your tests passed"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The Cost of NOT Testing",
       "body": "Without tests, every change is risky. You have to manually check everything. Did the login still work? Does checkout still process payments? Did the search still return results? This manual checking takes time, and you'll inevitably miss something. One missed bug in a payment system can cost real money."
+    },
+    {
+      "type": "motivation",
+      "body": "Every bug that reaches your users is a refund request, a bad review, or a lost customer. When you ship AI-generated apps, tests are the difference between a side project that makes money and one that destroys your reputation overnight."
     },
     {
       "type": "key_takeaway",

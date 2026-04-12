@@ -14,6 +14,11 @@
       "body": "Las **bases de datos SQL** son como una hoja de cálculo -- cada fila tiene las mismas columnas, todo es estructurado y predecible. Las **bases de datos NoSQL** son como un cuaderno -- cada página puede tener contenido diferente, y eres libre de organizar las cosas como quieras. Las hojas de cálculo son geniales cuando conoces tu estructura; los cuadernos son geniales cuando cada entrada es diferente."
     },
     {
+      "type": "analogy",
+      "title": "El Set de LEGO vs. el Bloque de Arcilla",
+      "body": "Una **base de datos SQL** es como un set de LEGO -- tienes piezas especificas que encajan de formas definidas, y puedes construir estructuras complejas siguiendo las reglas. Una **base de datos NoSQL** es como un bloque de arcilla -- puedes moldearlo en cualquier forma sin reglas. Los LEGOs son mas faciles de mantener y reorganizar; la arcilla es mas flexible pero puede volverse un desastre si no tienes cuidado."
+    },
+    {
       "type": "text",
       "title": "Bases de Datos SQL (Relacionales)",
       "body": "Las bases de datos SQL almacenan datos en **tablas** con columnas fijas:\n\n1. **PostgreSQL** -- la más popular para proyectos nuevos\n2. **MySQL** -- usada por WordPress, Facebook, Twitter\n3. **SQLite** -- ligera, genial para apps pequeñas y móviles\n\nLes hablas usando **SQL** (Lenguaje de Consulta Estructurado). Son geniales cuando tus datos tienen estructura y relaciones claras."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Bases de Datos NoSQL",
       "body": "Las bases de datos NoSQL almacenan datos de manera más flexible:\n\n1. **MongoDB** -- almacena documentos tipo JSON (la NoSQL más popular)\n2. **Redis** -- almacena pares clave-valor en memoria (súper rápido)\n3. **Firebase** -- base de datos de documentos en tiempo real de Google\n\nSon geniales cuando cada registro puede tener campos diferentes, o cuando necesitas velocidad extrema o flexibilidad."
+    },
+    {
+      "type": "motivation",
+      "body": "Conocer la diferencia entre SQL y NoSQL te permite elegir la herramienta correcta cuando vibecodeas tu proxima app. La mayoria de las apps que generan dinero -- e-commerce, SaaS, plataformas de reservas -- usan bases de datos SQL porque mantienen los datos financieros solidos como roca. Elige bien y tu app manejara pagos reales desde el primer dia."
     },
     {
       "type": "key_takeaway",

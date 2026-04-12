@@ -14,6 +14,11 @@
       "body": "Driving without side mirrors seems fine... until you need to change lanes. You have no idea what's behind you or beside you. Without tests, you can't see what your code changes might hit. Every change is a lane change with no mirrors -- you might be fine, or you might crash into something you didn't even know was there."
     },
     {
+      "type": "analogy",
+      "title": "No Tests = Removing Guardrails from a Mountain Road",
+      "body": "Mountain roads have guardrails for a reason. On a clear day, you might think they're unnecessary -- you can see the road just fine. But at night, in fog, or when you're tired, those guardrails are the only thing between you and a cliff. **Skipping tests** is like removing the guardrails. Things seem fine when conditions are perfect, but the moment complexity creeps in, there's nothing to stop you from going over the edge."
+    },
+    {
       "type": "text",
       "title": "The Slow Decay of an Untested Codebase",
       "body": "At first, no tests seems fine -- the app is small and you know every line. But as it grows:\n\n1. **Week 1**: Small app, you remember everything. No bugs.\n2. **Month 3**: App is bigger. Bugs slip in occasionally.\n3. **Month 6**: Nobody remembers how old code works. Changes break things.\n4. **Year 1**: Everyone is afraid to touch anything. New features take 3x longer because of unexpected breakage."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The Fear Factor",
       "body": "The worst consequence of no tests is **fear**. Developers become afraid to change code because they don't know what will break. Instead of cleaning up messy code, they add workarounds on top. Instead of refactoring, they copy-paste. The codebase gets worse and worse because nobody dares to improve it."
+    },
+    {
+      "type": "motivation",
+      "body": "An app without tests is an app you're afraid to update. And an app you can't update is an app that dies. If you want your vibecoded project to keep earning money, tests are what let you ship new features without breaking the ones your users already pay for."
     },
     {
       "type": "key_takeaway",

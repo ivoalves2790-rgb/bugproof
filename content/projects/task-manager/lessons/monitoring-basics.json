@@ -19,6 +19,15 @@
       "body": "You don't drive blindfolded. Your car's dashboard shows speed, fuel level, and engine warnings. Monitoring gives your app a dashboard — error rates, response times, and user counts. Without it, you're driving blind and won't know something is wrong until the engine is on fire."
     },
     {
+      "type": "analogy",
+      "title": "Monitoring Is Like a Baby Monitor",
+      "body": "Parents don't stand over the crib 24/7 — they use a baby monitor that alerts them when something needs attention. App monitoring works the same way: it watches silently in the background and only wakes you up when there's a real problem, like a spike in errors or the site going down."
+    },
+    {
+      "type": "motivation",
+      "body": "Monitoring is how you protect your revenue. If your app goes down and you don't know for hours, that's hours of lost users and lost income. Real businesses monitor their products — and that's exactly what you're building."
+    },
+    {
       "type": "key_takeaway",
       "body": "Start with three things: error tracking (Sentry or similar), uptime monitoring (is the site up?), and basic analytics (are people using it?). You can add more sophisticated monitoring later."
     }

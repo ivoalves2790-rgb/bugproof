@@ -14,9 +14,18 @@
       "body": "Git tracks every change you make to your code. If you break something, you can go back to a working version. If you want to try a risky feature, you can create a branch so your main code stays safe. Without git, one bad change can destroy hours of work with no way to recover."
     },
     {
+      "type": "analogy",
+      "title": "Save Points in a Video Game",
+      "body": "Git commits are like save points in a video game. Before you fight the boss (deploy a feature), you save your progress. If the boss kills you (the feature breaks), you reload from the last save instead of starting the entire game over. Players who never save lose everything when things go wrong. Don't be that player."
+    },
+    {
       "type": "text",
       "title": "The .gitignore Is Non-Negotiable",
       "body": "A `.gitignore` file tells git which files NOT to track. You never want to commit `node_modules/` (thousands of dependency files), `.env` files (secret API keys), or `.next/` (build output). create-next-app generates a `.gitignore` for you, but always double-check it before your first commit."
+    },
+    {
+      "type": "motivation",
+      "body": "Version control isn't just a developer skill — it's a business skill. When you're shipping updates to paying users, git lets you roll back safely if something breaks. Your users stay happy, your revenue stays intact."
     },
     {
       "type": "key_takeaway",

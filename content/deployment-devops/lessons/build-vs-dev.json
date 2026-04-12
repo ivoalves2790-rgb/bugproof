@@ -14,6 +14,11 @@
       "body": "Think of a theater production. **Dev mode** is rehearsal -- the lights are on, you can stop and restart, someone is reading you notes, and it's okay if things aren't perfect. **Build mode** is opening night -- everything is polished, optimized, and running at full speed for the audience. You wouldn't rehearse in front of a crowd, and you wouldn't perform opening night with the house lights on."
     },
     {
+      "type": "analogy",
+      "title": "Dev Mode = Draft Email, Build Mode = Sent Email",
+      "body": "Writing a draft email is like dev mode -- you can tweak it, fix typos, and rearrange paragraphs with zero consequences. But once you hit 'Send,' it's build mode -- the email is polished, final, and out there for real people to read. You wouldn't send a half-written draft to your boss, and you wouldn't deploy dev mode to your users."
+    },
+    {
       "type": "text",
       "title": "What Changes Between Modes",
       "body": "**Development mode** (`npm run dev`):\n- Fast reloading when you change code\n- Detailed error messages with line numbers\n- No optimization -- loads slowly but starts fast\n- Shows helpful warnings in the console\n\n**Production build** (`npm run build`):\n- Code is minified (compressed to be tiny)\n- Images are optimized\n- Unused code is removed (tree-shaking)\n- Error messages are generic (for security)"
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Development: start a local server with hot reloading\nnpm run dev\n\n# Production: create an optimized build\nnpm run build\nnpm start        # serve the built version",
       "annotation": "Always test `npm run build` locally before deploying. If it fails on your machine, it will fail on the server too."
+    },
+    {
+      "type": "motivation",
+      "body": "Users will leave a slow app in seconds. Understanding build vs dev means your vibecoded app loads fast and feels professional -- which is the difference between a toy project and a product people pay for."
     },
     {
       "type": "key_takeaway",

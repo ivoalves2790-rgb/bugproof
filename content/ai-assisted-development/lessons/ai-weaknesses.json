@@ -14,6 +14,11 @@
       "body": "AI-generated code often looks clean and professional on the surface. But underneath, it might have subtle problems -- like a bridge that looks great but has a crack in a support beam. The code compiles, the tests pass, but there's a logic error waiting to cause real damage."
     },
     {
+      "type": "analogy",
+      "title": "AI Is Like a Spell Checker That Can't Read",
+      "body": "A spell checker catches typos perfectly but has no idea if your sentence actually makes sense. It can fix 'teh' to 'the' but won't notice if you said 'the car flew to the grocery store.' AI-generated code is similar -- it looks syntactically correct and follows conventions, but may contain logic that makes no real-world sense."
+    },
+    {
       "type": "text",
       "title": "Common AI Failure Modes",
       "body": "AI-generated code commonly fails in these ways:\n\n1. **Duplicate logic** -- AI loses track during editing and repeats operations\n2. **Missing edge cases** -- it handles the happy path but not errors or empty inputs\n3. **Outdated patterns** -- it uses APIs or syntax from old library versions\n4. **Confident but wrong** -- the code looks correct but has subtle logic bugs"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The Critical Code Rule",
       "body": "Any code that handles **money, security, or user data** needs extra scrutiny. AI is great for scaffolding and UI, but payment processing, authentication, and data handling should always be reviewed line by line by a human. Add tests as safety nets for critical paths."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing AI's weak spots doesn't slow you down -- it speeds you up. You'll catch bugs before your users do, which means fewer refunds, better reviews, and more trust in the products you ship."
     },
     {
       "type": "key_takeaway",

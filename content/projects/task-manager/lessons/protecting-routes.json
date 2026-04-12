@@ -21,6 +21,15 @@
       "annotation": "Frontend protection is for UX (redirecting). Backend protection is for security (blocking). Never rely on frontend alone."
     },
     {
+      "type": "analogy",
+      "title": "Route Protection Is Like Airport Security",
+      "body": "The sign at the airport saying 'Authorized Personnel Only' is like frontend route protection — it stops honest people from wandering in. But the locked door with a badge scanner behind it is backend protection — it physically prevents access. If you only have the sign but no lock, anyone who ignores the sign walks right through."
+    },
+    {
+      "type": "motivation",
+      "body": "Protected routes are the difference between an app you'd be embarrassed to launch and one you'd proudly charge money for. Lock down your routes, and you have a product that's ready for real paying customers."
+    },
+    {
       "type": "key_takeaway",
       "body": "Always enforce authorization on the server. Frontend route guards are a convenience for users, not a security measure. Every API endpoint must verify who is making the request."
     }

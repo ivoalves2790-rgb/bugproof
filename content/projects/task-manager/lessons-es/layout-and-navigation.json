@@ -19,6 +19,15 @@
       "body": "La mayoria de las personas revisan sus tareas en su telefono. Si disenas para escritorio primero y luego intentas comprimirlo para movil, la experiencia se sentira rota. Empieza con el layout movil — una sola columna, botones amigables al tacto, navegacion inferior — y luego **mejora** para escritorio con una barra lateral o cuadricula mas amplia."
     },
     {
+      "type": "analogy",
+      "title": "El Layout Es Como el Plano de un Edificio",
+      "body": "Antes de que suba una sola pared, un arquitecto dibuja un plano mostrando donde van los pasillos, las habitaciones y las salidas. El layout de tu app es lo mismo — define donde vive la navegacion, donde va el contenido y como los usuarios se mueven entre secciones. Un plano confuso significa que la gente se pierde; un layout confuso significa que los usuarios no encuentran funcionalidades."
+    },
+    {
+      "type": "motivation",
+      "body": "Una buena navegacion es invisible — los usuarios simplemente encuentran lo que necesitan. Una navegacion torpe hace que la gente desinstale. Hacer bien el layout significa que tu app se siente profesional, y las apps que se sienten profesionales son las que la gente paga."
+    },
+    {
       "type": "key_takeaway",
       "body": "Usa archivos de layout de Next.js para definir la estructura compartida, disena movil primero usando los prefijos responsivos de Tailwind, y manten la navegacion simple. Un gestor de tareas necesita como maximo 3-4 elementos de navegacion principal. Si necesitas mas, tu alcance es demasiado grande."
     }

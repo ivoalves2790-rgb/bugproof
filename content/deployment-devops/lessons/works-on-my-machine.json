@@ -14,6 +14,11 @@
       "body": "Imagine a recipe that works perfectly in your kitchen but fails at a restaurant. Why? Different oven temperature, different altitude, different brand of flour. Your kitchen (development) and the restaurant (production) look similar but have subtle differences. The same happens with code -- your laptop and the server are different **environments** with different settings."
     },
     {
+      "type": "analogy",
+      "title": "The Moving Day Surprise",
+      "body": "You packed your lamp and it worked great at your old apartment. But at the new place, the outlet voltage is different and the lamp blows out. Your laptop and the production server are like two different apartments -- same lamp (code), different electrical systems (operating system, installed software, configuration). What worked in one place can literally break in the other."
+    },
+    {
       "type": "text",
       "title": "The Top 5 'Works on My Machine' Bugs",
       "body": "These are the most common reasons code works locally but fails in production:\n\n1. **Missing environment variables** -- You set them locally but forgot to add them on the server\n2. **Case-sensitive file paths** -- Mac/Windows ignore case, Linux doesn't\n3. **Different Node.js versions** -- Your laptop has v20, the server has v18\n4. **Missing dependencies** -- A package is installed globally on your machine but not in package.json\n5. **Hardcoded localhost URLs** -- localhost doesn't exist on the server"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// This works on Mac but fails on Linux\nimport Header from './components/header';\n// File is actually named: Header.js\n\n// This works locally but fails in production\nconst API = 'http://localhost:3001/api';\n// Production API is at https://api.myapp.com\n\n// This works when you have sharp installed globally\nconst sharp = require('sharp'); // Not in package.json!",
       "annotation": "Each of these looks correct on your machine but will crash on the server for different reasons."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to squash 'works on my machine' bugs means your vibecoded apps actually work for real users -- and real users are the ones who pay you."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Imagina que manejas un negocio. PODRÍAS tirar todos tus papeles en una caja grande. Pero encontrar cualquier cosa sería una pesadilla. Un **archivador** organiza los papeles en cajones y carpetas etiquetadas para que puedas encontrar exactamente lo que necesitas al instante. Una base de datos hace lo mismo con los datos de tu aplicación."
     },
     {
+      "type": "analogy",
+      "title": "El Hospital vs. el Botiquin",
+      "body": "Almacenar datos sin una base de datos es como manejar un hospital solo con un botiquin de primeros auxilios. Un botiquin (archivo plano) funciona para una cortadita, pero cuando llegan 50 pacientes a la vez, necesitas un hospital real con habitaciones separadas, historiales medicos, personal capacitado y equipos que sigan funcionando durante un apagon. Una base de datos es el hospital de tus datos -- hecho para manejar emergencias, escalar y nunca perder el historial de un paciente."
+    },
+    {
       "type": "text",
       "title": "¿Qué Pasa Sin una Base de Datos?",
       "body": "Podrías almacenar datos en un archivo de texto o JSON. Pero esto falla rápidamente:\n\n1. **Velocidad** -- leer un archivo gigante para encontrar un registro es lento\n2. **Concurrencia** -- ¿qué pasa si dos usuarios intentan escribir al mismo tiempo?\n3. **Seguridad** -- ¿qué pasa si la app se cae a mitad de escritura y corrompe el archivo?\n4. **Consultas** -- ¿cómo encuentras todos los pedidos mayores a $50 del martes pasado?\n\nLas bases de datos resuelven todos estos problemas."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Lo Que Te Da una Base de Datos",
       "body": "Una base de datos es software especializado diseñado para almacenar y recuperar datos eficientemente. Te da:\n\n1. **Búsquedas rápidas** -- encuentra registros en milisegundos, incluso con millones de filas\n2. **Escrituras seguras** -- los datos nunca quedan a medio escribir ni se corrompen\n3. **Consultas** -- haz preguntas complejas sobre tus datos\n4. **Concurrencia** -- maneja miles de usuarios leyendo y escribiendo simultáneamente"
+    },
+    {
+      "type": "motivation",
+      "body": "Toda app que cobra dinero necesita una base de datos detras. Cuando entiendes por que importan las bases de datos, puedes vibecodear apps que realmente mantengan seguros los datos de usuarios y soporten picos de trafico el dia del lanzamiento -- la diferencia entre un proyecto de hobby y un negocio real."
     },
     {
       "type": "key_takeaway",

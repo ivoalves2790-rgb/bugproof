@@ -14,6 +14,11 @@
       "body": "Una dirección postal tiene partes: nombre, calle, ciudad, código postal. Un mensaje de error tiene partes también: el tipo de error, la descripción, el nombre del archivo y el número de línea. Así como lees una dirección de arriba a abajo para encontrar una casa, lees un mensaje de error pieza por pieza para encontrar el error."
     },
     {
+      "type": "analogy",
+      "title": "Un mensaje de error es como el informe de un doctor",
+      "body": "Cuando un doctor te da resultados, no solo dice 'algo está mal.' Te dice la condición (diagnóstico), qué está afectado (síntomas) y dónde está el problema (qué parte del cuerpo). Un mensaje de error hace lo mismo: el tipo de error es el diagnóstico, la descripción es el síntoma y el archivo/línea es la ubicación."
+    },
+    {
       "type": "text",
       "title": "Las tres partes de cada error",
       "body": "Cada mensaje de error tiene tres piezas clave:\n\n1. **Tipo de error** -- la categoría (como `TypeError` o `ReferenceError`)\n2. **Descripción del error** -- qué salió mal específicamente (como \"Cannot read properties of undefined\")\n3. **Ubicación** -- el archivo y número de línea donde ocurrió el fallo\n\nLa descripción es la parte más importante. Te dice exactamente qué intentó hacer tu código que no funcionó."
@@ -29,6 +34,10 @@
       "type": "text",
       "title": "Encadenamiento opcional al rescate",
       "body": "JavaScript tiene un atajo llamado **encadenamiento opcional** (`?.`). En lugar de `data.user.name`, escribes `data.user?.name`. El `?.` dice: \"si lo que está antes de mí es undefined o null, simplemente devuelve undefined en lugar de fallar.\" Es una forma segura de acceder a propiedades anidadas."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber descomponer un mensaje de error en sus partes es justo la habilidad que te permite corregir código generado por IA rápidamente. Mientras más rápido corrijas bugs, más rápido lanzas funciones y empiezas a ganar dinero con tus apps."
     },
     {
       "type": "key_takeaway",

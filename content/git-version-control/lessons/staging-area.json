@@ -19,11 +19,20 @@
       "body": "Sometimes you've changed 5 files, but only 3 of them are related to the feature you're working on. The other 2 are debug code, notes, or experiments. The staging area lets you **commit only what makes sense together** and leave the rest for later."
     },
     {
+      "type": "analogy",
+      "title": "Staging = Packing a Suitcase",
+      "body": "Imagine you're packing for a trip. You don't throw your entire closet into the suitcase -- you carefully pick the clothes you need for this specific trip. The staging area is your open suitcase. You place items in it one by one, check that everything fits, and only then zip it up (commit). Packing carelessly means you'll arrive with stuff you don't need."
+    },
+    {
       "type": "code_example",
       "title": "Different Ways to Stage Files",
       "language": "bash",
       "code": "git add .                  # Stage ALL changed files\ngit add style.css          # Stage one specific file\ngit add src/login/*        # Stage all files in a folder\ngit add *.js               # Stage all JavaScript files",
       "annotation": "`git add .` is convenient but dangerous when you have files you don't want to commit. Be specific when it matters."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to stage changes properly means you can ship clean, professional commits that impress clients and pass code reviews. Sloppy commits with debug files are the fastest way to lose a freelance contract."
     },
     {
       "type": "key_takeaway",

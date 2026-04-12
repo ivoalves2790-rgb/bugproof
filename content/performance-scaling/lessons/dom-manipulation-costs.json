@@ -14,6 +14,11 @@
       "body": "Imagine the DOM as a building's blueprint. Every time you change the blueprint (add a room, move a wall), the construction crew has to stop, read the changes, figure out what's affected, and rebuild. If you hand them 100 tiny changes one at a time, they rebuild 100 times. If you batch all 100 changes into one revised blueprint, they rebuild once. That's why **batching DOM changes** is so important."
     },
     {
+      "type": "analogy",
+      "title": "DOM = Rearranging Furniture With Movers",
+      "body": "Imagine hiring movers to rearrange your apartment. Every time you want to move one piece of furniture, they measure the entire room, move the piece, then measure again. If you ask them to move 50 items one at a time, they measure the room 100 times. But if you give them a complete floor plan upfront, they measure once, move everything, and measure once more. That's the difference between **individual DOM updates** and **batched updates**."
+    },
+    {
       "type": "text",
       "title": "Why DOM Access is Slow",
       "body": "The DOM lives in a different part of the browser than JavaScript. Every time JS accesses or modifies the DOM, it's crossing a bridge between two systems. This bridge has a toll:\n\n1. **Reading** (e.g., element.offsetHeight) forces the browser to calculate the current layout\n2. **Writing** (e.g., element.style.color = 'red') marks the layout as dirty, requiring recalculation\n3. **Reading then writing in a loop** is the worst -- each read forces layout calculation, then each write invalidates it again"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Forces layout recalculation on every iteration\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ reads layout each time!\n}\n\n// GOOD: Read once, then write in a batch\nconst width = container.offsetWidth; // one read\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // only writes\n}",
       "annotation": "The bad version reads offsetWidth inside the loop, which forces the browser to recalculate layout on every iteration because the previous write (style.width) invalidated it. This is called 'layout thrashing.'"
+    },
+    {
+      "type": "motivation",
+      "body": "Layout thrashing is the hidden reason apps feel janky and unresponsive. Understanding DOM costs lets you build buttery-smooth interfaces that keep users happy, engaged, and willing to pay for your product."
     },
     {
       "type": "key_takeaway",

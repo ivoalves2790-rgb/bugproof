@@ -14,11 +14,20 @@
       "body": "A medida que tus datos crecen, las consultas que eran rapidas con 100 filas se vuelven lentas con 100,000 filas. Los culpables habituales: indices faltantes en columnas por las que filtras u ordenas, consultas que obtienen mas datos de los necesarios (SELECT *) y problemas de consultas N+1 donde tu codigo ejecuta una consulta separada para cada elemento en una lista."
     },
     {
+      "type": "analogy",
+      "title": "Los Indices de Base de Datos Son Como el Indice de un Libro",
+      "body": "Imagina buscar una palabra en un libro de 500 paginas leyendo cada pagina desde el principio. Eso es lo que hace una base de datos sin indice. Ahora imagina ir al indice al final del libro — te dice exactamente que paginas revisar. Un indice de base de datos funciona igual, saltando directamente a las filas que coinciden."
+    },
+    {
       "type": "code_example",
       "title": "Correcciones Comunes de Rendimiento de Base de Datos",
       "language": "text",
       "code": "SLOW: SELECT * FROM tasks WHERE user_id = 123\n  → No index on user_id, scans every row\n\nFAST: CREATE INDEX idx_tasks_user_id ON tasks(user_id);\n  → Database jumps directly to matching rows\n\nSLOW: Fetching 10,000 tasks then filtering in JavaScript\nFAST: SELECT * FROM tasks WHERE user_id = 123 LIMIT 20 OFFSET 0;\n  → Let the database do the filtering and pagination",
       "annotation": "Los indices y la paginacion son las dos optimizaciones de base de datos con mayor impacto. Resuelven el 80% de los problemas de rendimiento."
+    },
+    {
+      "type": "motivation",
+      "body": "Una base de datos lenta significa tiempos de carga lentos, y eso significa que los usuarios se van. Saber escalar tu base de datos es la habilidad que permite que tu app maneje miles de usuarios que pagan sin despeinarse."
     },
     {
       "type": "key_takeaway",

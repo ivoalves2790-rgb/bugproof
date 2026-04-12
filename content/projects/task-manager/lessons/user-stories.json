@@ -14,11 +14,20 @@
       "body": "A user story describes a feature from the perspective of the person using it. The format is simple: **As a [user], I want to [action], so that [benefit]**. This forces you to think about WHY a feature exists, not just what it does."
     },
     {
+      "type": "analogy",
+      "title": "Ordering at a Restaurant",
+      "body": "Imagine telling a waiter 'bring me food' vs. 'I'd like the grilled salmon, medium, with a side salad, no onions.' The more specific your order, the more likely you get exactly what you want. User stories are your way of placing a precise order for your app's features — who's hungry, what they want, and why it matters to them."
+    },
+    {
       "type": "code_example",
       "title": "User Story Examples",
       "language": "text",
       "code": "GOOD: \"As a user, I want to set a due date\n       on my tasks, so that I can prioritize\n       what needs to be done first.\"\n\nBAD:  \"Add a date picker component\"\n\nGOOD: \"As a user, I want to filter tasks by\n       status, so that I can focus on what's\n       in progress.\"\n\nBAD:  \"Implement filtering\"",
       "annotation": "The good examples explain WHO wants it, WHAT they want, and WHY. The bad ones are just technical tasks with no context."
+    },
+    {
+      "type": "motivation",
+      "body": "Apps that solve real user problems get real paying customers. Writing user stories trains you to think like a product owner — the skill that separates hobbyists from people who ship profitable apps with AI."
     },
     {
       "type": "key_takeaway",

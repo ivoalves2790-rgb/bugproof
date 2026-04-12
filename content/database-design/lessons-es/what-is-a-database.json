@@ -14,6 +14,11 @@
       "body": "Almacenar datos es como almacenar objetos físicos. Podrías usar una **caja de zapatos** (un archivo de texto -- simple pero desordenado), una **carpeta con hojas de cálculo** (un archivo estructurado como CSV -- organizado pero limitado), o un **almacén profesional** (una base de datos -- organizado, buscable, seguro y hecho para escalar)."
     },
     {
+      "type": "analogy",
+      "title": "La Cocina del Restaurante",
+      "body": "Piensa en una base de datos como la cocina de un restaurante concurrido. Tu (la app) eres el mesero tomando pedidos. No cocinas la comida tu mismo -- le pasas la orden a la **cocina** (la base de datos), que tiene todo el equipo, ingredientes y personal entrenado para manejarla. La cocina puede procesar docenas de pedidos a la vez sin mezclarlos, y si la luz parpadea, no pierde el rastro de lo que se pidio. Eso es lo que una base de datos hace con tus datos."
+    },
+    {
       "type": "text",
       "title": "¿Qué ES Exactamente una Base de Datos?",
       "body": "Una base de datos es un **programa de software** que se ejecuta en un servidor y gestiona datos por ti. Los más populares incluyen:\n\n1. **PostgreSQL** -- poderoso, de código abierto, excelente para la mayoría de las apps\n2. **MySQL** -- muy popular, usado por WordPress y muchas aplicaciones web\n3. **SQLite** -- ligero, almacena datos en un solo archivo (genial para apps pequeñas)\n4. **MongoDB** -- almacena datos como documentos flexibles en lugar de tablas\n\nEl código de tu app envía comandos a la base de datos, y ella se encarga del almacenamiento, recuperación y seguridad de los datos."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Cómo Tu App Usa una Base de Datos",
       "body": "Tu app no abre archivos directamente. En su lugar:\n\n1. Tu app se **conecta** a la base de datos (como marcar un número de teléfono)\n2. Tu app **envía comandos** en SQL (un lenguaje especial para bases de datos)\n3. La base de datos **ejecuta** el comando y envía resultados de vuelta\n4. Tu app **usa los resultados** (los muestra, los procesa, etc.)\n\nLa base de datos es un proceso separado de tu app -- se comunican a través de una conexión."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender que es una base de datos te pone por delante de la mayoria de principiantes en vibecoding. Toda app que genera dinero -- desde herramientas SaaS hasta marketplaces -- almacena datos de usuarios, pagos y suscripciones en una base de datos. Este es el cimiento para construir apps que manejen usuarios reales e ingresos reales."
     },
     {
       "type": "key_takeaway",

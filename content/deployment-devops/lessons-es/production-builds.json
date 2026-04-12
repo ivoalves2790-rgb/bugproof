@@ -14,6 +14,11 @@
       "body": "Un build de producción es como empacar una maleta para un viaje. No llevas todo tu armario -- eliges solo lo que necesitas, doblas todo con cuidado y lo comprimes para que quepa. El **proceso de compilación** toma tu código de desarrollo desordenado y crea una versión limpia, comprimida y optimizada que carga rápido para los usuarios."
     },
     {
+      "type": "analogy",
+      "title": "Build = Comprimir una Foto Antes de Enviarla",
+      "body": "Cuando tomas una foto, el archivo en bruto es enorme -- genial para editar pero terrible para enviar. Antes de enviarla por mensaje, tu telefono automaticamente la comprime para que se envie rapido sin perder calidad visible. Un build de produccion hace lo mismo con tu codigo: exprime todo lo extra (comentarios, espacios en blanco, codigo no usado) para que tu app cargue ultra rapido para los usuarios."
+    },
+    {
       "type": "text",
       "title": "Qué Pasa Durante una Compilación",
       "body": "Cuando ejecutas `npm run build`, suceden varias cosas:\n\n1. **Empaquetado** -- Todos tus archivos separados se combinan en menos archivos\n2. **Minificación** -- Los nombres de variables se acortan, los espacios en blanco se eliminan\n3. **Tree-shaking** -- El código no usado se elimina\n4. **Compilación** -- TypeScript, JSX y sintaxis moderna se convierten a JavaScript plano\n5. **Optimización** -- Imágenes comprimidas, CSS purgado de estilos no usados"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// YOUR CODE (readable)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// AFTER BUILD (minified)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
       "annotation": "La versión minificada hace exactamente lo mismo pero es mucho más pequeña. Por esto los builds de producción cargan más rápido."
+    },
+    {
+      "type": "motivation",
+      "body": "Una app que carga rapido mantiene a los usuarios el tiempo suficiente para convertirse en clientes que pagan. Dominar los builds de produccion significa que tu app creada con IA se siente rapida y profesional desde la primera visita."
     },
     {
       "type": "key_takeaway",

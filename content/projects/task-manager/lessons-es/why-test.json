@@ -19,6 +19,15 @@
       "body": "Podrias revisar cada documento manualmente, pero el corrector ortografico detecta la mayoria de los errores al instante y automaticamente. Los tests hacen lo mismo con el codigo. Aun necesitas pensar en lo que escribes, pero los tests detectan los errores obvios antes de que alguien mas los vea."
     },
     {
+      "type": "analogy",
+      "title": "Los Tests Son Como la Lista de Verificacion de un Piloto",
+      "body": "Los pilotos no se saltan la lista de verificacion porque 'el avion volo bien ayer'. En cada vuelo revisan motores, instrumentos y controles. Los tests son tu lista de verificacion pre-vuelo — se ejecutan cada vez que cambias codigo, asegurandose de que nada critico se haya roto por accidente."
+    },
+    {
+      "type": "motivation",
+      "body": "Las apps que fallan pierden usuarios y dinero. Los tests te permiten lanzar actualizaciones con confianza, lo que significa usuarios mas contentos y un producto que crece — el tipo de producto que realmente genera dinero."
+    },
+    {
       "type": "key_takeaway",
       "body": "Los tests ahorran tiempo a largo plazo. Escribir un test toma minutos; depurar un bug en produccion toma horas. La confianza para cambiar codigo sin miedo vale la inversion inicial."
     }

@@ -19,11 +19,20 @@
       "body": "A veces has cambiado 5 archivos, pero solo 3 de ellos están relacionados con la funcionalidad en la que estás trabajando. Los otros 2 son código de depuración, notas o experimentos. El área de preparación te permite **hacer commit solo de lo que tiene sentido junto** y dejar el resto para después."
     },
     {
+      "type": "analogy",
+      "title": "Staging = Hacer la maleta",
+      "body": "Imagina que estás empacando para un viaje. No metes todo tu armario en la maleta -- eliges cuidadosamente la ropa que necesitas para este viaje en particular. El area de preparación es tu maleta abierta. Colocas los artículos uno por uno, verificas que todo esté bien, y solo entonces la cierras (commit). Empacar descuidadamente significa llegar con cosas que no necesitas."
+    },
+    {
       "type": "code_example",
       "title": "Diferentes formas de preparar archivos",
       "language": "bash",
       "code": "git add .                  # Stage ALL changed files\ngit add style.css          # Stage one specific file\ngit add src/login/*        # Stage all files in a folder\ngit add *.js               # Stage all JavaScript files",
       "annotation": "`git add .` es conveniente pero peligroso cuando tienes archivos que no quieres incluir en el commit. Sé específico cuando sea importante."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber preparar cambios correctamente significa que puedes entregar commits limpios y profesionales que impresionan a clientes y pasan revisiones de código. Commits desordenados con archivos de depuración son la forma más rápida de perder un contrato freelance."
     },
     {
       "type": "key_takeaway",

@@ -14,9 +14,18 @@
       "body": "Git rastrea cada cambio que haces en tu codigo. Si rompes algo, puedes volver a una version funcional. Si quieres probar una funcionalidad riesgosa, puedes crear una rama para que tu codigo principal se mantenga seguro. Sin git, un mal cambio puede destruir horas de trabajo sin forma de recuperarlo."
     },
     {
+      "type": "analogy",
+      "title": "Puntos de Guardado en un Videojuego",
+      "body": "Los commits de git son como puntos de guardado en un videojuego. Antes de pelear con el jefe final (desplegar una funcionalidad), guardas tu progreso. Si el jefe te mata (la funcionalidad se rompe), recargas desde el ultimo guardado en lugar de empezar todo el juego de nuevo. Los jugadores que nunca guardan pierden todo cuando las cosas salen mal. No seas ese jugador."
+    },
+    {
       "type": "text",
       "title": "El .gitignore No Es Negociable",
       "body": "Un archivo `.gitignore` le dice a git que archivos NO rastrear. Nunca quieres hacer commit de `node_modules/` (miles de archivos de dependencias), archivos `.env` (claves API secretas), o `.next/` (salida de compilacion). create-next-app genera un `.gitignore` por ti, pero siempre verificalo antes de tu primer commit."
+    },
+    {
+      "type": "motivation",
+      "body": "El control de versiones no es solo una habilidad de desarrollador — es una habilidad de negocio. Cuando envias actualizaciones a usuarios que pagan, git te permite revertir de forma segura si algo se rompe. Tus usuarios se quedan contentos, tus ingresos se mantienen intactos."
     },
     {
       "type": "key_takeaway",

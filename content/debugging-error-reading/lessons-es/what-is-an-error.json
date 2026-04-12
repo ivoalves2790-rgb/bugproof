@@ -14,6 +14,11 @@
       "body": "Cuando la luz de revisión del motor de tu auto se enciende, no significa que el auto esté destruido. Significa que el auto detectó un problema y te está informando. Los mensajes de error funcionan de la misma manera -- son la forma en que tu código dice 'algo salió mal, esto es lo que sé al respecto.'"
     },
     {
+      "type": "analogy",
+      "title": "Los errores son como un GPS diciendo 'recalculando'",
+      "body": "Cuando tomas un giro equivocado, tu GPS no explota ni se apaga. Tranquilamente dice 'recalculando' y te indica exactamente dónde te desviaste. Los mensajes de error hacen lo mismo -- te dicen dónde tu código tomó un camino equivocado y te dan la información para volver a la ruta correcta."
+    },
+    {
       "type": "text",
       "title": "Qué pasa realmente cuando el código falla",
       "body": "Cuando tu programa llega a una línea que no puede ejecutar, **deja de ejecutarse** en ese punto y crea un mensaje de error. El mensaje incluye:\n\n1. El **tipo** de error (qué categoría de problema)\n2. Una **descripción** (qué salió mal específicamente)\n3. La **ubicación** (qué archivo y número de línea)\n\nTu trabajo es leer estas tres piezas y usarlas para encontrar la solución."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "TypeError: Cannot read properties of undefined (reading 'name')\n    at getUser (app.js:15)\n    at main (app.js:42)",
       "annotation": "Este error te dice tres cosas: el tipo es TypeError, el problema es que algo es undefined, y ocurrió en la línea 15 de app.js."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender que los errores son aliados, no obstáculos, es el cambio de mentalidad que separa a quienes abandonan sus ideas de app de quienes las lanzan y ganan dinero con vibecoding."
     },
     {
       "type": "key_takeaway",

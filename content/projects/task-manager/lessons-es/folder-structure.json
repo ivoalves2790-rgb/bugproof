@@ -14,9 +14,18 @@
       "body": "Next.js usa el directorio `app/` para definir tus rutas. Cada carpeta dentro de `app/` se convierte en una ruta URL. Un archivo `page.tsx` dentro de una carpeta la convierte en una ruta. Un archivo `layout.tsx` envuelve las paginas en interfaz compartida. Esta convencion significa que tu estructura de carpetas ES tu enrutamiento — sin configuracion necesaria."
     },
     {
+      "type": "analogy",
+      "title": "Un Closet Bien Organizado",
+      "body": "Imagina abrir un closet donde camisas, pantalones, calcetines y zapatos estan todos mezclados en un monton. Ahora imagina uno donde las camisas estan en ganchos, los pantalones en un estante, los calcetines en un cajon. Ambos closets tienen la misma ropa, pero solo uno te deja vestirte en 2 minutos. La estructura de carpetas de tu proyecto es ese closet — organizalo bien y encontraras cualquier archivo al instante."
+    },
+    {
       "type": "text",
       "title": "Donde Va Todo lo Demas?",
       "body": "Mas alla de `app/`, querras una carpeta `components/` para interfaz reutilizable, una carpeta `lib/` para utilidades y helpers de base de datos, y una carpeta `types/` para definiciones de tipos de TypeScript. Algunos equipos ponen los componentes junto a las paginas que los usan, otros centralizan todo. Ambos enfoques funcionan — lo clave es elegir una convencion y mantenerla."
+    },
+    {
+      "type": "motivation",
+      "body": "Una estructura de proyecto limpia significa que puedes agregar nuevas funcionalidades en minutos en lugar de horas. Cuando tu app empiece a tener usuarios que pagan y pidan cambios, te moveras rapido porque sabes exactamente donde vive todo."
     },
     {
       "type": "key_takeaway",

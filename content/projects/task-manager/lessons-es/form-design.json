@@ -19,6 +19,15 @@
       "body": "La validacion deberia guiar a los usuarios, no regañarlos. Muestra errores **en linea** junto al campo que tiene el problema, no en una alerta generica en la parte superior de la pagina. Valida al salir del campo (cuando el usuario deja un campo) para verificaciones de formato, y al enviar para campos requeridos. Nunca limpies el formulario completo cuando la validacion falla."
     },
     {
+      "type": "analogy",
+      "title": "Los Formularios Son Como una Ventanilla de Autoservicio",
+      "body": "Los mejores autoservicios tienen un menu corto, un altavoz claro y te repiten el pedido para confirmar. Los peores tienen 200 opciones, un altavoz roto y te hacen empezar de nuevo si cambias algo. Tus formularios deberian ser el carril rapido: pide solo lo necesario, confirma sobre la marcha y nunca castigues al usuario por un pequeno error."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada dolar que tu app gana empieza con un usuario llenando un formulario. Una experiencia de formulario fluida significa mas tareas creadas, mas engagement y mas razones para que los usuarios se actualicen a tu plan premium."
+    },
+    {
       "type": "key_takeaway",
       "body": "El mejor formulario es el formulario mas corto. Para la creacion de tareas, puede que solo necesites un campo de titulo — haz todo lo demas opcional o establece valores predeterminados inteligentes. Los usuarios siempre pueden editar una tarea despues de crearla. Baja friccion al momento de crear significa mas tareas capturadas."
     }

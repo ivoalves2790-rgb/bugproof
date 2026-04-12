@@ -14,6 +14,11 @@
       "body": "Imagina una receta que funciona perfectamente en tu cocina pero falla en un restaurante. ¿Por qué? Diferente temperatura del horno, diferente altitud, diferente marca de harina. Tu cocina (desarrollo) y el restaurante (producción) se ven similares pero tienen diferencias sutiles. Lo mismo pasa con el código -- tu laptop y el servidor son **entornos** diferentes con diferentes configuraciones."
     },
     {
+      "type": "analogy",
+      "title": "La Sorpresa del Dia de Mudanza",
+      "body": "Empacaste tu lampara y funcionaba perfecto en tu viejo departamento. Pero en el nuevo, el voltaje del enchufe es diferente y la lampara se quema. Tu laptop y el servidor de produccion son como dos departamentos diferentes -- misma lampara (codigo), diferentes sistemas electricos (sistema operativo, software instalado, configuracion). Lo que funcionaba en un lugar puede literalmente romperse en el otro."
+    },
+    {
       "type": "text",
       "title": "Los 5 Errores Principales de 'Funciona en Mi Máquina'",
       "body": "Estas son las razones más comunes por las que el código funciona localmente pero falla en producción:\n\n1. **Variables de entorno faltantes** -- Las configuraste localmente pero olvidaste agregarlas en el servidor\n2. **Rutas de archivo sensibles a mayúsculas** -- Mac/Windows ignoran mayúsculas, Linux no\n3. **Diferentes versiones de Node.js** -- Tu laptop tiene v20, el servidor tiene v18\n4. **Dependencias faltantes** -- Un paquete está instalado globalmente en tu máquina pero no en package.json\n5. **URLs de localhost escritas directamente** -- localhost no existe en el servidor"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// This works on Mac but fails on Linux\nimport Header from './components/header';\n// File is actually named: Header.js\n\n// This works locally but fails in production\nconst API = 'http://localhost:3001/api';\n// Production API is at https://api.myapp.com\n\n// This works when you have sharp installed globally\nconst sharp = require('sharp'); // Not in package.json!",
       "annotation": "Cada uno de estos se ve correcto en tu máquina pero fallará en el servidor por diferentes razones."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber resolver los errores de 'funciona en mi maquina' significa que tus apps creadas con IA realmente funcionan para usuarios reales -- y los usuarios reales son los que te pagan."
     },
     {
       "type": "key_takeaway",

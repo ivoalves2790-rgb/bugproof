@@ -14,6 +14,11 @@
       "body": "Imagine ordering food at a restaurant. A slow experience could be caused by many things: a slow kitchen, too many customers, a waiter who takes forever to bring the menu, or a cook who makes every dish from scratch instead of prepping ingredients ahead of time. **App performance** works the same way -- slowness can come from the network, the server, the browser, or your code."
     },
     {
+      "type": "analogy",
+      "title": "Performance = Highway Traffic",
+      "body": "Think of your app like a highway during rush hour. There are only so many lanes (bandwidth), and every car (request) adds to congestion. A single overturned truck (a massive uncompressed image or a blocking script) can bring the entire highway to a standstill, even if most cars are small and fast. **Optimizing performance** is like being a traffic engineer -- you widen lanes, clear accidents quickly, and reroute traffic to keep everything flowing."
+    },
+    {
       "type": "text",
       "title": "The Three Bottlenecks",
       "body": "Most performance problems fall into three buckets:\n\n1. **Network** -- Too much data being sent, too many requests, slow server responses\n2. **Rendering** -- The browser struggling to paint pixels on screen\n3. **Computation** -- Your code doing too much work (heavy loops, unnecessary calculations)\n\nThe fix depends on which bucket the problem lives in."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Perceived vs Actual Speed",
       "body": "Here's a secret: **how fast your app feels** matters more than how fast it actually is. A page that shows a loading skeleton in 200ms and fills in data at 2 seconds *feels* faster than a blank page that loads everything at 1.5 seconds. Users hate staring at nothing."
+    },
+    {
+      "type": "motivation",
+      "body": "If your app feels sluggish, users will close the tab before they ever see your features -- or pay for them. Understanding what makes apps slow is the first step to building products people actually stick around to use."
     },
     {
       "type": "key_takeaway",

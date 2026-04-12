@@ -14,6 +14,11 @@
       "body": "Antes de llenar un armario, decides: camisas aquí, pantalones allá, zapatos abajo. Si simplemente tiras todo al azar, encontrar cualquier cosa después es una pesadilla. El **diseño de esquemas** es organizar el armario de tu base de datos -- decidir qué tablas necesitas, qué columnas tiene cada una, y cómo se relacionan entre sí, ANTES de empezar a llenarlas con datos."
     },
     {
+      "type": "analogy",
+      "title": "El Urbanista",
+      "body": "El diseno de esquemas es como la planificacion urbana. Antes de construir una sola casa, un urbanista decide por donde van las calles, que zonas son residenciales vs. comerciales, y por donde pasan las tuberias y cables electricos. Si construyes casas primero y planeas calles despues, terminas con una ciudad caotica donde nada conecta. Disenar tu esquema primero significa que tus datos tienen barrios claros (tablas), calles bien pavimentadas (relaciones), y ninguna calle sin salida."
+    },
+    {
       "type": "text",
       "title": "Preguntas para Hacer al Diseñar un Esquema",
       "body": "Antes de crear tablas, pregunta:\n\n1. **¿Con qué cosas trabaja mi app?** (usuarios, productos, pedidos = tablas separadas)\n2. **¿Qué necesito saber sobre cada cosa?** (usuario: nombre, email, contraseña = columnas)\n3. **¿Cómo se relacionan estas cosas?** (un usuario TIENE muchos pedidos = relación)\n4. **¿Qué debe siempre tener un valor?** (nombre = NOT NULL, bio = opcional)\n5. **¿Qué debe ser único?** (email = UNIQUE, nombre = puede duplicarse)"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Una Tabla Por 'Cosa'",
       "body": "La regla más importante: **cada tipo de cosa obtiene su propia tabla**.\n\n- Usuarios van en una tabla `users`\n- Productos van en una tabla `products`\n- Pedidos van en una tabla `orders`\n\nNo mezcles todo en una tabla gigante. Si te encuentras repitiendo los mismos datos en múltiples filas (como el nombre del usuario apareciendo en cada pedido), esa es una señal de que necesitas una tabla separada."
+    },
+    {
+      "type": "motivation",
+      "body": "El diseno de esquemas es la habilidad con mayor impacto en vibecoding. Un esquema bien disenado te permite construir funcionalidades rapido -- cuentas de usuario, pagos, suscripciones, analiticas -- todo sobre la misma base solida. Disena el esquema bien una vez, y cada funcionalidad que agregues genera dinero sin reescrituras dolorosas."
     },
     {
       "type": "key_takeaway",

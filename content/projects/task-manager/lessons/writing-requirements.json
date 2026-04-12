@@ -14,11 +14,20 @@
       "body": "Requirements are a clear list of what your app should do. Without them, you'll wander, forget features, and build the wrong thing. When using AI to help you code, requirements become even more critical — the AI builds exactly what you describe, nothing more."
     },
     {
+      "type": "analogy",
+      "title": "GPS Coordinates vs. 'Go That Way'",
+      "body": "Giving vague requirements to AI is like telling a taxi driver 'take me somewhere nice.' You might end up at a fine restaurant or a random parking lot. Clear requirements are like giving exact GPS coordinates — the driver knows precisely where to go, and you arrive exactly where you want to be."
+    },
+    {
       "type": "code_example",
       "title": "Bad vs Good Requirements",
       "language": "text",
       "code": "BAD:  \"Make a task app\"\nGOOD: \"Users can create tasks with a title (required)\n      and description (optional). Tasks have three\n      states: todo, in-progress, done. Users can\n      filter tasks by state.\"",
       "annotation": "The bad requirement gives the AI nothing to work with. The good one specifies exactly what 'task' means and how it behaves."
+    },
+    {
+      "type": "motivation",
+      "body": "Clear requirements are your superpower as a vibecoder. While others waste hours going back and forth with AI, you'll nail it in one prompt and ship your product faster — time saved is money earned."
     },
     {
       "type": "key_takeaway",

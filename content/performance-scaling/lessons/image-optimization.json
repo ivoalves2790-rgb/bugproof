@@ -14,6 +14,11 @@
       "body": "Imagine you need to deliver a letter across town. You could use a massive 18-wheeler truck, or you could use a bicycle messenger. Both deliver the letter, but one uses way more resources. **Unoptimized images** are like using a moving truck to deliver a letter -- they carry way more data than needed for what's actually displayed on screen."
     },
     {
+      "type": "analogy",
+      "title": "Images = Ordering a Billboard for Your Living Room",
+      "body": "Imagine ordering a 30-foot highway billboard to hang a small family photo in your living room. Sure, the photo is on it, but it's absurdly oversized for the space. That's what loading a 4000-pixel image for a 400-pixel card does -- you're downloading 100x more data than needed. **Image optimization** is choosing the right frame size for the wall you're hanging it on."
+    },
+    {
       "type": "text",
       "title": "The Image Optimization Checklist",
       "body": "Every image on your page should pass this checklist:\n\n1. **Right format** -- Use WebP or AVIF instead of PNG/JPEG (30-50% smaller)\n2. **Right size** -- Don't load a 4000px image for a 400px thumbnail\n3. **Right compression** -- Quality 80 looks identical to 100 but is much smaller\n4. **Right loading** -- Images below the fold should use lazy loading\n5. **Right dimensions** -- Always set width/height to prevent layout shifts"
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "// BAD: Full-size unoptimized image\n<img src=\"/photos/product-4000x3000.png\" />\n\n// GOOD: Optimized with all the right attributes\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Blue running shoes\"\n/>",
       "annotation": "The optimized version uses WebP format, is sized to match its display size, reserves space with width/height, lazy loads, and includes alt text for accessibility."
+    },
+    {
+      "type": "motivation",
+      "body": "Images are often the single biggest reason pages load slowly. Optimizing them is the easiest performance win you'll ever get -- and faster product pages mean more sales and happier customers who come back."
     },
     {
       "type": "key_takeaway",

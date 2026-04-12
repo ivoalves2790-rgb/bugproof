@@ -19,11 +19,20 @@
       "body": "Este es el flujo de trabajo típico:\n\n1. **Crear una rama** desde main para tu función\n2. **Hacer commits** en tu rama de función mientras trabajas\n3. **Volver a main** cuando la función esté terminada\n4. **Fusionar** tu rama de función en main\n\nLa regla clave: debes estar **parado en la rama que recibe los cambios** cuando fusionas."
     },
     {
+      "type": "analogy",
+      "title": "Fusionar = Recibir un paquete",
+      "body": "Piensa en fusionar como recibir una entrega en tu puerta. El repartidor (rama de función) trae el paquete a tu casa (rama main). Tienes que estar en casa (parado en main) para aceptar la entrega. Si vas al almacén en vez de quedarte en casa, lo estás haciendo al revés -- el paquete no termina en tu casa. Por eso te cambias a main antes de fusionar."
+    },
+    {
       "type": "code_example",
       "title": "El flujo correcto de fusión",
       "language": "bash",
       "code": "git checkout -b feature/payments   # Create & switch to feature branch\n# ... do your work, make commits ...\ngit checkout main                  # Switch BACK to main\ngit merge feature/payments         # Merge feature INTO main",
       "annotation": "¡La dirección de la fusión importa! Te paras en main y traes la función -- no al revés."
+    },
+    {
+      "type": "motivation",
+      "body": "Dominar el flujo de merge es lo que separa el conocimiento de tutorial de las habilidades listas para producción. Las empresas usan este mismo flujo cientos de veces al día -- domínalo y podrás unirte con confianza a cualquier equipo de desarrollo, ya sea construyendo con IA o de forma tradicional."
     },
     {
       "type": "key_takeaway",

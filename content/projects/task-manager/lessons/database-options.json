@@ -14,11 +14,20 @@
       "body": "SQL databases (like PostgreSQL) store data in structured tables with rows and columns. NoSQL databases (like MongoDB) store data as flexible documents. For a task manager with clear data relationships — users have tasks, tasks have categories — SQL is usually the better fit."
     },
     {
+      "type": "analogy",
+      "title": "Filing Cabinet vs. Junk Drawer",
+      "body": "A SQL database is like a filing cabinet — everything has a labeled folder, and you can find exactly what you need in seconds. A NoSQL database is more like a junk drawer — you can toss anything in, but good luck finding that one receipt when tax season comes. For organized data like tasks, you want the filing cabinet."
+    },
+    {
       "type": "code_example",
       "title": "Task Data: SQL vs NoSQL",
       "language": "text",
       "code": "SQL (PostgreSQL):\n  tasks table: id | title | status | due_date | user_id\n  Clean, structured, easy to query and filter.\n\nNoSQL (MongoDB):\n  { title: '...', status: '...', due_date: '...', user: {...} }\n  Flexible, but relationships get messy fast.",
       "annotation": "When your data has clear structure and relationships (tasks belong to users), SQL keeps things clean. NoSQL shines when data shapes are unpredictable."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to pick the right database is what separates toy projects from real products. The task manager you're building uses the same database tech as apps generating thousands in monthly revenue."
     },
     {
       "type": "key_takeaway",

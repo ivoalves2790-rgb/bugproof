@@ -14,6 +14,11 @@
       "body": "Imagine you've been cooking amazing meals in your home kitchen. Deployment is like opening a restaurant -- you're taking what works at home and setting it up so the public can enjoy it too. You need a location (server), a way for people to find you (domain name), and everything has to work even when 100 customers show up at once."
     },
     {
+      "type": "analogy",
+      "title": "Deployment = Putting Up a Billboard",
+      "body": "You've been drawing an amazing poster in your bedroom. It looks great, but only you can see it. Deployment is like renting a billboard on the highway and putting your poster up there. Suddenly, thousands of people driving by can see your work. You need the right size (server capacity), a good location (reliable hosting), and weatherproofing (error handling) so it stays up 24/7."
+    },
+    {
       "type": "text",
       "title": "What Deployment Actually Means",
       "body": "Deployment is the process of taking your code from your computer and putting it on a server connected to the internet. Once deployed, anyone with the URL can visit your app.\n\nThe basic idea is simple:\n\n1. You write code on your computer\n2. You push that code to a server\n3. The server runs your code 24/7\n4. People visit your URL and see your app"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Why It's Not Just Copy-Paste",
       "body": "You can't just copy your project folder to a server and call it done. Your code needs to be **built** (optimized for speed), **configured** (connected to databases and services), and **served** (set up to handle web traffic). Modern tools automate most of this, but understanding what's happening helps when things go wrong."
+    },
+    {
+      "type": "motivation",
+      "body": "Every app that makes money started with someone hitting deploy for the first time. Mastering deployment means your AI-built apps can go from your laptop to paying customers in minutes."
     },
     {
       "type": "key_takeaway",

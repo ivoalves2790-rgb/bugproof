@@ -14,6 +14,11 @@
       "body": "Netflix doesn't download an entire movie before you press play. It loads just enough to start, then keeps loading more as you watch. **Lazy loading** is the same idea applied to web pages -- don't load images, components, or data until the user actually needs them."
     },
     {
+      "type": "analogy",
+      "title": "Lazy Loading = A Buffet With a Kitchen",
+      "body": "At a smart buffet, the chef doesn't cook every dish at opening time. The popular dishes are ready upfront, but the less common ones are cooked to order when someone actually asks for them. **Lazy loading** works the same way -- you serve the content users see first immediately, and only prepare the rest when they scroll down or navigate to it."
+    },
+    {
       "type": "text",
       "title": "What Can Be Lazy Loaded?",
       "body": "Almost anything on a page can be lazy loaded:\n\n1. **Images** -- Only load images when they scroll into view (use `loading=\"lazy\"`)\n2. **Components** -- Only load heavy components when the user navigates to them (React.lazy, dynamic imports)\n3. **Data** -- Only fetch data when the user opens a section or tab\n4. **Third-party scripts** -- Load analytics, chat widgets, etc. after the main content"
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- Loads immediately (good for hero/above-fold images) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Lazy loads when user scrolls near it -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
       "annotation": "The browser's built-in loading='lazy' attribute delays loading until the image is close to the viewport. No JavaScript needed!"
+    },
+    {
+      "type": "motivation",
+      "body": "Lazy loading can cut your initial load time by 80% with just a few attribute changes. That means users see your app almost instantly -- and an app that loads fast is an app that gets paying customers, not bounce statistics."
     },
     {
       "type": "key_takeaway",

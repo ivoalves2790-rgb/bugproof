@@ -19,6 +19,15 @@
       "body": "React es un gran motor, pero aun necesitas construir el auto a su alrededor — enrutamiento, logica del servidor, herramientas de compilacion. Next.js te da el auto completo, listo para conducir. Aun puedes abrir el capo y personalizar, pero empiezas con algo que funciona."
     },
     {
+      "type": "analogy",
+      "title": "Mudarse a un Departamento Amueblado",
+      "body": "Usar React puro es como rentar un departamento vacio — tienes las paredes, pero necesitas comprar muebles, electrodomesticos y descifrar donde poner todo. Next.js es como un departamento amueblado. El sofa, la cocina y el Wi-Fi ya estan listos. Solo traes tus cosas personales y empiezas a vivir."
+    },
+    {
+      "type": "motivation",
+      "body": "Next.js es el framework detras de algunos de los productos web mas exitosos de hoy. Aprenderlo significa que puedes construir apps de nivel produccion que se ven y funcionan como si las hubiera hecho un equipo completo — pero solo eres tu y la IA, y los ingresos son todos tuyos."
+    },
+    {
       "type": "key_takeaway",
       "body": "Next.js nos da enrutamiento basado en archivos, rutas de API integradas, renderizado del lado del servidor y despliegue facil. Eso es exactamente lo que nuestro gestor de tareas necesita para ir de cero a produccion rapidamente."
     }

@@ -14,6 +14,11 @@
       "body": "Think of a contacts list on your phone. You can **Create** a new contact, **Read** existing contacts, **Update** someone's phone number, or **Delete** a contact you don't need. Every app does these same four things. In the database world, we call them **CRUD** -- Create, Read, Update, Delete."
     },
     {
+      "type": "analogy",
+      "title": "The Notebook With an Eraser",
+      "body": "CRUD is like using a notebook with a pencil and eraser. You **write** new entries (Create), **read** what you wrote earlier (Read), **erase and rewrite** a line to fix a typo (Update), or **tear out a page** you no longer need (Delete). But imagine erasing without looking at which line you are on -- you might erase someone else's notes. That is exactly what happens when you forget the WHERE clause in SQL."
+    },
+    {
       "type": "text",
       "title": "The Four SQL Commands",
       "body": "Each CRUD operation has its own SQL command:\n\n1. **Create** = `INSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com')`\n2. **Read** = `SELECT * FROM users WHERE id = 1`\n3. **Update** = `UPDATE users SET email = 'new@mail.com' WHERE id = 1`\n4. **Delete** = `DELETE FROM users WHERE id = 1`\n\nThe most dangerous operations are UPDATE and DELETE -- forgetting the WHERE clause affects EVERY row!"
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "-- This updates ONE user's email (safe)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- This updates EVERY user's email (catastrophic!)\nUPDATE users SET email = 'new@mail.com';",
       "annotation": "Without WHERE, the UPDATE applies to ALL rows. This is the #1 most common database disaster. Always double-check your WHERE clause before running UPDATE or DELETE."
+    },
+    {
+      "type": "motivation",
+      "body": "CRUD is the heartbeat of every money-making app. Signing up a user is Create, showing a product page is Read, changing a subscription plan is Update, and canceling an account is Delete. Master CRUD and you can vibecode any app that handles real customers and real transactions."
     },
     {
       "type": "key_takeaway",

@@ -19,11 +19,20 @@
       "body": "La IA es como un GPS: puede encontrar la ruta, pero TU necesitas saber el destino. Si escribes la direccion equivocada, el GPS te llevara con confianza al lugar equivocado. Lo mismo con la IA — construira con confianza algo equivocado si tu prompt esta mal."
     },
     {
+      "type": "analogy",
+      "title": "Dirigiendo una Pelicula",
+      "body": "Tu eres el director, la IA es el equipo de produccion. Un gran equipo puede construir escenarios, filmar escenas y editar — pero sin la vision del director, produciran un desorden. Tu trabajo no es sostener la camara. Es decir 'esta es la historia, este es el tono, este es el final.' Dale la vision a la IA, y ejecutara de maravilla."
+    },
+    {
       "type": "code_example",
       "title": "Estructurando una Sesion de Planificacion con IA",
       "language": "text",
       "code": "Step 1: Define the goal\n  \"I'm building a task manager for personal use\"\n\nStep 2: List the features (from your user stories)\n  \"Core features: create, complete, delete, due dates\"\n\nStep 3: Set constraints\n  \"Tech: Next.js + Supabase. Mobile-first. Ship in 2 weeks.\"\n\nStep 4: Ask for a plan, not code\n  \"Give me a project plan with milestones, not code yet\"",
       "annotation": "Observa: estas pidiendo un PLAN primero, no saltando directamente al codigo. Esto es lo que separa a los constructores reflexivos de los caoticos."
+    },
+    {
+      "type": "motivation",
+      "body": "Los desarrolladores profesionales cobran $150+/hora por planificacion de proyectos. Tu estas aprendiendo a hacerlo con IA como copiloto — una habilidad que te permite planificar y construir productos completos solo, quedandote con todas las ganancias."
     },
     {
       "type": "key_takeaway",

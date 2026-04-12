@@ -14,6 +14,11 @@
       "body": "Desplegar es como enviar un paquete. **Empacas** tu código (lo compilas), lo **etiquetas** (commit y push a GitHub), y lo **envías** (la plataforma de hosting lo recoge y lo pone en vivo). La mayoría de las plataformas modernas vigilan tu repositorio de GitHub y despliegan automáticamente cuando envías código nuevo."
     },
     {
+      "type": "analogy",
+      "title": "Desplegar = Publicar un Libro",
+      "body": "Escribir codigo es como escribir el manuscrito de un libro. Pero nadie puede leerlo hasta que lo envias a la editorial (GitHub), ellos lo imprimen (build), y aparece en las librerias (sale en vivo). El proceso de despliegue es tu canal de publicacion -- del borrador final a los estantes. Y al igual que una editorial, las plataformas modernas manejan la impresion y distribucion automaticamente una vez que les entregas el manuscrito."
+    },
+    {
       "type": "text",
       "title": "El Flujo de Trabajo Moderno de Despliegue",
       "body": "Así es como la mayoría de los desarrolladores despliegan hoy:\n\n1. Escriben código localmente\n2. Hacen commit y push a GitHub\n3. La plataforma de hosting detecta el nuevo código\n4. Compila tu proyecto automáticamente\n5. Si la compilación tiene éxito, la nueva versión sale en vivo\n\nEsto se llama **despliegue basado en Git** y es el estándar para plataformas como Vercel, Netlify y Railway."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "git add .\ngit commit -m \"Ready for production\"\ngit push origin main",
       "annotation": "Una vez que tu repositorio está conectado a una plataforma de hosting, hacer push a main a menudo es todo lo que necesitas para activar un despliegue."
+    },
+    {
+      "type": "motivation",
+      "body": "El proceso de despliegue es el puente entre crear algo genial y realmente ganar dinero con ello. Una vez que domines este flujo, cada app que crees con IA esta a solo un git push de salir en vivo."
     },
     {
       "type": "key_takeaway",

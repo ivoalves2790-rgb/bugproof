@@ -19,11 +19,20 @@
       "body": "A restaurant with 200 items on the menu can't be great at all of them. A focused menu with 10 items done well beats a bloated one every time. Your app is the same — 5 polished features beat 50 half-built ones."
     },
     {
+      "type": "analogy",
+      "title": "Packing for a Weekend Trip",
+      "body": "Scope creep is like packing a suitcase for a weekend trip but bringing clothes for two weeks 'just in case.' Suddenly your carry-on is overweight and you can't even get on the plane. Pack light, travel fast. You can always buy a toothbrush when you land — same way you can always add features after you ship."
+    },
+    {
       "type": "code_example",
       "title": "A Scope Creep Conversation",
       "language": "text",
       "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
       "annotation": "Each feature alone seems small, but they compound. Every feature means more code, more bugs, more edge cases."
+    },
+    {
+      "type": "motivation",
+      "body": "The apps making money on the app store aren't the ones with the most features — they're the ones that actually shipped. Every feature you cut gets you closer to launch day, and launch day is when you start earning."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Conducir sin espejos laterales parece estar bien... hasta que necesitas cambiar de carril. No tienes idea de qué hay detrás o al lado tuyo. Sin tests, no puedes ver qué podrían afectar tus cambios de código. Cada cambio es un cambio de carril sin espejos -- podrías estar bien, o podrías chocar con algo que ni sabías que estaba ahí."
     },
     {
+      "type": "analogy",
+      "title": "Sin tests = Quitar las barandas de una carretera de montaña",
+      "body": "Las carreteras de montaña tienen barandas por una razón. En un día despejado, podrías pensar que son innecesarias -- puedes ver el camino bien. Pero de noche, con niebla, o cuando estás cansado, esas barandas son lo único entre tú y el precipicio. **Omitir los tests** es como quitar las barandas. Todo parece bien cuando las condiciones son perfectas, pero en el momento en que la complejidad aparece, no hay nada que te detenga de caer al vacío."
+    },
+    {
       "type": "text",
       "title": "La decadencia lenta de un código sin tests",
       "body": "Al principio, no tener tests parece estar bien -- la app es pequeña y conoces cada línea. Pero a medida que crece:\n\n1. **Semana 1**: App pequeña, recuerdas todo. Sin bugs.\n2. **Mes 3**: La app es más grande. Los bugs se cuelan ocasionalmente.\n3. **Mes 6**: Nadie recuerda cómo funciona el código viejo. Los cambios rompen cosas.\n4. **Año 1**: Todos tienen miedo de tocar cualquier cosa. Las nuevas funcionalidades toman 3 veces más porque hay roturas inesperadas."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "El factor miedo",
       "body": "La peor consecuencia de no tener tests es el **miedo**. Los desarrolladores tienen miedo de cambiar código porque no saben qué se va a romper. En lugar de limpiar código desordenado, agregan parches encima. En lugar de refactorizar, copian y pegan. El código base empeora cada vez más porque nadie se atreve a mejorarlo."
+    },
+    {
+      "type": "motivation",
+      "body": "Una app sin tests es una app que te da miedo actualizar. Y una app que no puedes actualizar es una app que muere. Si quieres que tu proyecto vibecodeado siga generando dinero, los tests son lo que te permite lanzar nuevas funcionalidades sin romper las que tus usuarios ya pagan."
     },
     {
       "type": "key_takeaway",

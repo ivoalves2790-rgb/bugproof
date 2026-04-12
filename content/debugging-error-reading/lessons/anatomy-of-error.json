@@ -14,6 +14,11 @@
       "body": "A mailing address has parts: name, street, city, zip. An error message has parts too: the error type, the description, the file name, and the line number. Just like you read an address from top to bottom to find a house, you read an error message piece by piece to find the bug."
     },
     {
+      "type": "analogy",
+      "title": "An Error Message Is Like a Doctor's Report",
+      "body": "When a doctor gives you test results, they don't just say 'something is wrong.' They tell you the condition (diagnosis), what's affected (symptoms), and where the problem is (which body part). An error message does the same: the error type is the diagnosis, the description is the symptom, and the file/line is the location."
+    },
+    {
       "type": "text",
       "title": "The Three Parts of Every Error",
       "body": "Every error message has three key pieces:\n\n1. **Error type** -- the category (like `TypeError` or `ReferenceError`)\n2. **Error description** -- what specifically went wrong (like \"Cannot read properties of undefined\")\n3. **Location** -- the file and line number where the crash happened\n\nThe description is the most important part. It tells you exactly what your code tried to do that didn't work."
@@ -29,6 +34,10 @@
       "type": "text",
       "title": "Optional Chaining to the Rescue",
       "body": "JavaScript has a shortcut called **optional chaining** (`?.`). Instead of `data.user.name`, you write `data.user?.name`. The `?.` says: \"if the thing before me is undefined or null, just return undefined instead of crashing.\" It's a safe way to access nested properties."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to break down an error message into its parts is exactly the skill that lets you fix AI-generated code fast. The faster you fix bugs, the faster you ship features and start earning money from your apps."
     },
     {
       "type": "key_takeaway",

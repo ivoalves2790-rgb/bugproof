@@ -14,6 +14,11 @@
       "body": "Remember science class? Every experiment follows the same pattern: set up your equipment (**Arrange**), run the experiment (**Act**), check your results (**Assert**). Tests follow the exact same pattern. This makes them easy to read and consistent across your entire codebase."
     },
     {
+      "type": "analogy",
+      "title": "AAA = Ordering at a Restaurant",
+      "body": "Think of eating out: you **Arrange** by choosing your table and reading the menu, you **Act** by placing your order, and you **Assert** by checking that the food matches what you ordered. If you get pasta when you ordered pizza, something went wrong. Tests work the same way -- set up, do the thing, check the result."
+    },
+    {
       "type": "text",
       "title": "The Three A's",
       "body": "**Arrange** -- Set up everything your test needs: create variables, prepare test data, configure the scenario.\n\n**Act** -- Call the function or perform the action you're testing. This is usually ONE line of code.\n\n**Assert** -- Check that the result matches what you expected. If it doesn't, the test fails."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "test('calculates total with tax', () => {\n  // ARRANGE: set up the inputs\n  const price = 100;\n  const taxRate = 0.08;\n\n  // ACT: call the function\n  const result = calculateTotal(price, taxRate);\n\n  // ASSERT: check the result\n  expect(result).toBe(108);\n});",
       "annotation": "Each section has a clear job. If this test fails, you know the calculateTotal function returned something other than 108."
+    },
+    {
+      "type": "motivation",
+      "body": "The AAA pattern makes your tests clean and predictable, which means when AI generates code that breaks something, you find out in seconds -- not after a customer files a complaint. Clean tests protect clean revenue."
     },
     {
       "type": "key_takeaway",

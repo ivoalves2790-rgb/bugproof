@@ -14,6 +14,11 @@
       "body": "Antes de renovar toda la cocina, verifica si la puerta del refrigerador simplemente quedó abierta. La mayoría de las apps lentas tienen algunos problemas obvios que representan el 80% de la lentitud. Arregla esos primero y verás una mejora dramática con esfuerzo mínimo. Estas son tus **victorias rápidas**."
     },
     {
+      "type": "analogy",
+      "title": "Victorias rápidas = Limpiar antes de que lleguen las visitas",
+      "body": "Cuando te avisan que llegan visitas en 10 minutos, no renuevas el baño. Metes el desorden en un clóset, limpias la mesa y prendes una vela. Toma 5 minutos pero todo se siente 10 veces mejor. Las **victorias rápidas de rendimiento** funcionan igual -- unos pocos cambios pequeños (comprimir imágenes, diferir scripts, agregar caché) pueden transformar qué tan rápida se siente tu app sin reescribir nada."
+    },
+    {
       "type": "text",
       "title": "Las principales victorias rápidas",
       "body": "Las formas más rápidas de acelerar la mayoría de las apps web:\n\n1. **Comprimir imágenes** -- a menudo reduce el peso de la página en 50-80%\n2. **Habilitar compresión gzip/brotli** -- reduce archivos de texto (HTML, CSS, JS) en 60-80%\n3. **Agregar headers de caché** -- los visitantes que regresan no re-descargan archivos sin cambios\n4. **Eliminar CSS/JS no utilizado** -- muchos proyectos envían código que nadie usa\n5. **Diferir scripts no críticos** -- deja que la página se renderice antes de cargar analytics y widgets"
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# See what's in your JavaScript bundle\nnpx webpack-bundle-analyzer dist/stats.json\n\n# Or for a quick size check\ndu -sh dist/\nls -lh dist/static/js/",
       "annotation": "Entender qué hay en tu bundle es el primer paso. A menudo encontrarás bibliotecas enormes siendo importadas cuando solo se necesita una parte pequeña."
+    },
+    {
+      "type": "motivation",
+      "body": "No necesitas semanas de refactorización para ver resultados. Una sola tarde de victorias rápidas de rendimiento puede recortar los tiempos de carga e inmediatamente mejorar la retención de usuarios -- lo que se traduce directamente en más ingresos de tu app."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Just as a traffic light tells you green/yellow/red, HTTP status codes tell your browser what happened. **2xx** (green) = success. **3xx** (yellow) = redirect, go somewhere else. **4xx** (red for you) = you made a mistake. **5xx** (red for them) = the server broke. The first digit tells you the category instantly."
     },
     {
+      "type": "analogy",
+      "title": "Status Codes Are Like Report Card Grades",
+      "body": "Think of status codes as grades on a report card. **200** is an A+ (perfect, here's your data). **404** is like getting your paper back marked 'topic doesn't exist.' **500** is the teacher saying 'sorry, I lost your exam' -- it's not your fault, the system messed up. Just like grades tell you what went right or wrong, status codes tell your app exactly what happened."
+    },
+    {
       "type": "text",
       "title": "The Most Common Status Codes",
       "body": "You'll see these all the time:\n\n1. **200 OK** -- everything worked\n2. **201 Created** -- a new resource was created (like after signing up)\n3. **301 Moved Permanently** -- this page moved, go here instead\n4. **400 Bad Request** -- you sent something the server doesn't understand\n5. **401 Unauthorized** -- you need to log in first\n6. **403 Forbidden** -- you're logged in but don't have permission\n7. **404 Not Found** -- this page doesn't exist\n8. **500 Internal Server Error** -- something broke on the server"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'User not found' });\n  }\n  res.status(200).json(user);\n});",
       "annotation": "The server explicitly sets the status code. 404 tells the browser 'this user doesn't exist' while 200 means 'here's the user you asked for.' The frontend can check these codes to decide what to show."
+    },
+    {
+      "type": "motivation",
+      "body": "Apps that handle errors well keep users happy and paying. When you vibecode proper status codes, your app can show friendly error messages instead of crashing -- and that's the difference between users who leave and users who stay."
     },
     {
       "type": "key_takeaway",

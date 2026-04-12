@@ -14,6 +14,11 @@
       "body": "Security cameras show you what's happening at a specific spot. `console.log` does the same thing for your code -- it shows you the value of a variable at the exact moment that line runs. Place it in the right spot and you see the clue. Place it in the wrong spot and you see nothing useful."
     },
     {
+      "type": "analogy",
+      "title": "Console.log Is Like Tasting Food While Cooking",
+      "body": "A good chef tastes the dish at each stage -- after adding salt, after simmering, before serving. They don't wait until the dish is on the table to find out something went wrong. Console.log is the same: you 'taste' your variables at key moments to make sure the values are what you expect before the code finishes running."
+    },
+    {
       "type": "text",
       "title": "Where to Place Your Logs",
       "body": "The key rule: **log AFTER the code that changes the value**, not before it. If you want to see what a variable looks like after a calculation, put the log after the calculation. Common strategy:\n\n1. Log inputs at the **start** of a function\n2. Log results **after** the important logic\n3. Log inside loops to see each step"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "function double(x) {\n  // Bad: logs before the calculation\n  console.log('result:', result); // ReferenceError!\n  const result = x * 2;\n\n  // Good: logs after the calculation\n  console.log('result:', result); // Shows the actual value\n  return result;\n}",
       "annotation": "Always place console.log after the line that creates or changes the value you want to inspect."
+    },
+    {
+      "type": "motivation",
+      "body": "Console.log is the number one tool vibecoding pros use to verify that AI-generated code is actually doing what they want. Master this and you can debug any app you build, which means more apps shipped and more money in your pocket."
     },
     {
       "type": "key_takeaway",

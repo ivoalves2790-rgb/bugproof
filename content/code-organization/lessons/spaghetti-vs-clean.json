@@ -14,6 +14,11 @@
       "body": "Imagine two kitchens. In the first, every utensil has a place, ingredients are labeled, and recipes are in a binder. In the second, everything is piled on the counter, spices are in random drawers, and there's no recipe in sight. Both kitchens can make dinner, but which one do you want to cook in every day? **Code organization** is the difference between these two kitchens."
     },
     {
+      "type": "analogy",
+      "title": "Spaghetti Code = A Playlist on Shuffle With No Song Names",
+      "body": "Imagine your music app had no song titles, no albums, and everything played on shuffle. You'd hear a random mix of jazz, heavy metal, and podcasts with no way to find the song you want. **Spaghetti code feels the same way** -- logic jumps randomly between unrelated tasks, and you have no way to navigate to the part you need without listening through the chaos."
+    },
+    {
       "type": "text",
       "title": "What is Spaghetti Code?",
       "body": "**Spaghetti code** is code where everything is tangled together:\n\n- Functions are 500 lines long and do 12 different things\n- Variables are named `x`, `temp`, `data2`\n- The same logic is copied and pasted in 6 places\n- You change one thing and three unrelated features break\n\nIt's called spaghetti because if you try to pull on one strand, the whole plate comes with it."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "What Makes Code Clean?",
       "body": "Clean code isn't about perfection. It follows a few practical rules:\n\n1. **Each function does one thing** -- and its name says what that thing is\n2. **Variables describe their contents** -- `userEmail` not `str1`\n3. **Files are small and focused** -- one component per file, not everything in one mega-file\n4. **No copy-paste** -- shared logic lives in one place\n5. **You can find things** -- the file structure makes sense"
+    },
+    {
+      "type": "motivation",
+      "body": "Clean code is how you turn one-time gigs into long-term contracts. When clients can easily add features to your codebase (or hire someone else who can), they trust you with bigger projects -- and bigger budgets."
     },
     {
       "type": "key_takeaway",

@@ -19,11 +19,20 @@
       "body": "Hacer un commit es un proceso de tres pasos:\n\n1. **Preparar (stage)** -- Elige qué archivos quieres incluir en este punto de guardado (`git add`)\n2. **Confirmar (commit)** -- Toma la instantánea con un mensaje corto describiendo qué cambió (`git commit`)\n3. **Subir (push)** -- Sube tu punto de guardado a GitHub para que esté respaldado en línea (`git push`)\n\nPor ahora, nos enfocaremos en los pasos 1 y 2."
     },
     {
+      "type": "analogy",
+      "title": "Commits = Fotografías en un álbum",
+      "body": "Piensa en cada commit como tomar una fotografía de todo tu proyecto y colocarla en un álbum de fotos. Cada foto tiene una fecha y un pie de foto (tu mensaje de commit). Años después, puedes hojear el álbum y ver exactamente cómo se veía tu proyecto en cualquier momento. Incluso puedes \"reimprimir\" una foto antigua -- eso es revertir a un commit anterior."
+    },
+    {
       "type": "code_example",
       "title": "Los comandos que usarás",
       "language": "bash",
       "code": "git init                          # Start tracking this folder\ngit add .                         # Stage all files\ngit status                        # See what's staged\ngit commit -m \"Initial commit\"    # Save the snapshot",
       "annotation": "No te preocupes por memorizar estos -- practicarás cada uno en el ejercicio."
+    },
+    {
+      "type": "motivation",
+      "body": "Tu primer commit es el primer paso para construir un portafolio real. Cada app que lances con herramientas de IA necesita control de versiones -- los freelancers que usan Git cobran 2-3x más que los que simplemente envían archivos zip por correo."
     },
     {
       "type": "key_takeaway",

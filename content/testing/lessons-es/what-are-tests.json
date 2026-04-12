@@ -14,6 +14,11 @@
       "body": "¿Sabes cómo un corrector ortográfico subraya automáticamente las palabras mal escritas mientras escribes? No tienes que releer manualmente cada oración -- el corrector lo hace por ti. Los **tests** son como un corrector ortográfico para tu código. Verifican automáticamente que tu código hace lo que se supone que debe hacer, para que no tengas que verificar todo manualmente cada vez que haces un cambio."
     },
     {
+      "type": "analogy",
+      "title": "Tests = Probar el plato antes de servirlo",
+      "body": "Todo buen chef prueba la comida antes de enviarla a los clientes. No simplemente espera que la sazón esté bien -- lo verifica. Los **tests** funcionan igual con tu código. Antes de que los usuarios lo vean, los tests te permiten 'probar' cada funcionalidad para asegurar que está bien. Si algo falla, lo detectas en la cocina, no en la mesa."
+    },
+    {
       "type": "text",
       "title": "Qué son realmente los tests",
       "body": "Un test es un pequeño fragmento de código que:\n\n1. **Prepara** un escenario (dado este input...)\n2. **Ejecuta** algo de código (llama a esta función...)\n3. **Verifica** el resultado (espera este output...)\n\nSi el resultado coincide con lo que esperabas, el test **pasa**. Si no, el test **falla** y te dice exactamente qué salió mal."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// The function we want to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// The test\ntest('adds 2 + 3 to equal 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
       "annotation": "Este test llama a add(2, 3) y verifica si el resultado es 5. Si alguien accidentalmente rompe la función add, este test lo detectará."
+    },
+    {
+      "type": "motivation",
+      "body": "Cuando vibecodeando creas una app con IA, el código aparece rápido -- pero los bugs se esconden en la velocidad. Los tests son la forma de asegurar que tu app generada por IA realmente funciona antes de que haya usuarios reales (y dinero real) en juego."
     },
     {
       "type": "key_takeaway",

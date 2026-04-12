@@ -14,6 +14,11 @@
       "body": "¿Recuerdas el restaurante? La **cocina** es el backend. Los clientes (usuarios) nunca la ven, pero es donde sucede el trabajo real -- tomar pedidos, preparar comida, gestionar inventario y asegurar que todo sea seguro para comer. El mesero (API) lleva las peticiones del comedor (frontend) a la cocina (backend) y de vuelta."
     },
     {
+      "type": "analogy",
+      "title": "El Backend Es Como la Boveda de un Banco",
+      "body": "Un banco tiene un vestibulo elegante (el frontend) donde los clientes entran, pero las cosas valiosas estan bajo llave en la **boveda** subterranea. No puedes simplemente entrar y tomar dinero -- tienes que pasar por un cajero que revisa tu identificacion primero. El backend es esa boveda: guarda lo importante (datos, contrasenas, logica de negocio) y solo da acceso a traves de canales seguros y controlados."
+    },
+    {
       "type": "text",
       "title": "Qué Hace el Backend",
       "body": "El backend es código que se ejecuta en un **servidor** -- una computadora que tú controlas. Se encarga de:\n\n1. **Lógica de negocio** -- reglas como 'los usuarios no pueden comprar más de 5 artículos'\n2. **Almacenamiento de datos** -- guardar y leer de bases de datos\n3. **Autenticación** -- verificar contraseñas y gestionar sesiones de inicio de sesión\n4. **Seguridad** -- mantener los secretos a salvo y validar todas las entradas\n5. **Procesamiento pesado** -- enviar correos electrónicos, redimensionar imágenes, generar reportes"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Lenguajes Comunes de Backend",
       "body": "El backend puede escribirse en muchos lenguajes:\n\n1. **JavaScript** (Node.js) -- el mismo lenguaje que el frontend\n2. **Python** (Django, Flask) -- popular por su legibilidad\n3. **Ruby** (Rails) -- famoso por el desarrollo rápido\n4. **Java** (Spring) -- común en grandes empresas\n5. **Go** -- rápido, usado para servicios de alto rendimiento\n\nA diferencia del frontend (que debe usar JavaScript en los navegadores), puedes elegir cualquier lenguaje para el backend."
+    },
+    {
+      "type": "motivation",
+      "body": "El backend es donde ocurre el negocio real -- pagos, datos de usuarios, suscripciones. Cuando vibecodeas un backend que maneja esto de forma confiable, tienes el motor que realmente recauda ingresos."
     },
     {
       "type": "key_takeaway",

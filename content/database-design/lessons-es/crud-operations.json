@@ -14,6 +14,11 @@
       "body": "Piensa en una lista de contactos en tu teléfono. Puedes **Crear** un nuevo contacto, **Leer** contactos existentes, **Actualizar** el número de teléfono de alguien, o **Eliminar** un contacto que no necesitas. Toda app hace estas mismas cuatro cosas. En el mundo de las bases de datos, las llamamos **CRUD** -- Create, Read, Update, Delete (Crear, Leer, Actualizar, Eliminar)."
     },
     {
+      "type": "analogy",
+      "title": "El Cuaderno Con Borrador",
+      "body": "CRUD es como usar un cuaderno con lapiz y borrador. **Escribes** nuevas entradas (Create), **lees** lo que escribiste antes (Read), **borras y reescribes** una linea para corregir un error (Update), o **arrancas una pagina** que ya no necesitas (Delete). Pero imagina borrar sin fijarte en que linea estas -- podrias borrar las notas de otra persona. Eso es exactamente lo que pasa cuando olvidas la clausula WHERE en SQL."
+    },
+    {
       "type": "text",
       "title": "Los Cuatro Comandos SQL",
       "body": "Cada operación CRUD tiene su propio comando SQL:\n\n1. **Create** = `INSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com')`\n2. **Read** = `SELECT * FROM users WHERE id = 1`\n3. **Update** = `UPDATE users SET email = 'new@mail.com' WHERE id = 1`\n4. **Delete** = `DELETE FROM users WHERE id = 1`\n\n¡Las operaciones más peligrosas son UPDATE y DELETE -- olvidar la cláusula WHERE afecta a TODAS las filas!"
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "-- This updates ONE user's email (safe)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- This updates EVERY user's email (catastrophic!)\nUPDATE users SET email = 'new@mail.com';",
       "annotation": "Sin WHERE, el UPDATE se aplica a TODAS las filas. Este es el desastre de bases de datos más común. Siempre verifica tu cláusula WHERE antes de ejecutar UPDATE o DELETE."
+    },
+    {
+      "type": "motivation",
+      "body": "CRUD es el corazon de toda app que genera dinero. Registrar un usuario es Create, mostrar una pagina de producto es Read, cambiar un plan de suscripcion es Update, y cancelar una cuenta es Delete. Domina CRUD y podras vibecodear cualquier app que maneje clientes reales y transacciones reales."
     },
     {
       "type": "key_takeaway",

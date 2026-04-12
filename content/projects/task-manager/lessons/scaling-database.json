@@ -14,11 +14,20 @@
       "body": "As your data grows, queries that were fast with 100 rows become slow with 100,000 rows. The usual culprits: missing indexes on columns you filter or sort by, queries that fetch more data than needed (SELECT *), and N+1 query problems where your code runs a separate query for each item in a list."
     },
     {
+      "type": "analogy",
+      "title": "Database Indexes Are Like a Book's Index",
+      "body": "Imagine searching for a word in a 500-page book by reading every page from the start. That's what a database does without an index. Now imagine flipping to the index at the back — it tells you exactly which pages to check. A database index works the same way, skipping straight to the matching rows."
+    },
+    {
       "type": "code_example",
       "title": "Common Database Performance Fixes",
       "language": "text",
       "code": "SLOW: SELECT * FROM tasks WHERE user_id = 123\n  → No index on user_id, scans every row\n\nFAST: CREATE INDEX idx_tasks_user_id ON tasks(user_id);\n  → Database jumps directly to matching rows\n\nSLOW: Fetching 10,000 tasks then filtering in JavaScript\nFAST: SELECT * FROM tasks WHERE user_id = 123 LIMIT 20 OFFSET 0;\n  → Let the database do the filtering and pagination",
       "annotation": "Indexes and pagination are the two most impactful database optimizations. They solve 80% of performance problems."
+    },
+    {
+      "type": "motivation",
+      "body": "A slow database means slow load times, which means users leave. Knowing how to scale your database is the skill that lets your app handle thousands of paying users without breaking a sweat."
     },
     {
       "type": "key_takeaway",

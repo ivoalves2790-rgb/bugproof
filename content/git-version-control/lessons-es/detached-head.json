@@ -24,11 +24,20 @@
       "body": "El HEAD desconectado generalmente ocurre cuando:\n\n- Haces checkout de un hash de commit específico: `git checkout a1b2c3d`\n- Haces checkout de una etiqueta: `git checkout v1.0`\n\nGit muestra una advertencia intimidante, pero nada está roto. Puedes mirar alrededor de forma segura. El peligro es solo si **haces nuevos commits** aquí -- podrían perderse cuando vuelvas a una rama."
     },
     {
+      "type": "analogy",
+      "title": "HEAD desconectado = Escribir en una servilleta",
+      "body": "Imagina que estás en un restaurante y tienes una idea brillante. La garabateas en una servilleta. Si te guardas esa servilleta en el bolsillo (creas una rama), la tendrás para siempre. Pero si la dejas en la mesa y te vas (cambias de rama sin guardar), la servilleta se tira cuando limpian la mesa. Los commits en detached HEAD son notas en servilletas -- brillantes pero frágiles a menos que las guardes."
+    },
+    {
       "type": "code_example",
       "title": "El movimiento de rescate",
       "language": "bash",
       "code": "# If you're in detached HEAD and want to keep your work:\ngit checkout -b rescue-branch\n\n# This creates a new branch right where you are,\n# anchoring your commits so they won't be lost.",
       "annotation": "La solución es simple: solo crea una rama. Esto le da a tus commits un hogar para que Git no los elimine."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber salir de detached HEAD sin perder trabajo es una habilidad avanzada que impresiona en entrevistas técnicas. Demuestra que realmente entiendes Git -- y los desarrolladores que dominan sus herramientas a fondo consiguen mejores salarios y tarifas freelance."
     },
     {
       "type": "key_takeaway",

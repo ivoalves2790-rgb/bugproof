@@ -14,6 +14,11 @@
       "body": "En una película, las escenas peligrosas usan dobles de acción en lugar del actor real. El doble se ve igual, actúa el mismo rol, pero tú controlas exactamente lo que pasa. El **mocking** es usar un doble de acción para las dependencias de tu código. En lugar de llamar a una API real, creas una versión falsa que devuelve exactamente lo que quieres."
     },
     {
+      "type": "analogy",
+      "title": "Mocking = Un simulador de vuelo",
+      "body": "Los pilotos no aprenden a volar subiéndose a un avión real durante una tormenta. Usan simuladores de vuelo que crean escenarios realistas sin peligro real. El **mocking** es un simulador de vuelo para tu código. Simulas la base de datos, la API, el sistema de pagos -- testeando cada escenario (incluyendo crashes y fallos) sin tocar nada real."
+    },
+    {
       "type": "text",
       "title": "¿Por qué hacer mock?",
       "body": "Haces mock de dependencias porque:\n\n1. **Velocidad** -- Las llamadas reales a APIs toman 100ms+. Los mocks toman 0ms.\n2. **Confiabilidad** -- Las APIs reales pueden estar caídas o con límite de uso. Los mocks siempre funcionan.\n3. **Control** -- Puedes simular errores, respuestas vacías y casos límite.\n4. **Costo** -- Algunas APIs cobran por solicitud. No desperdicies dinero en tests.\n5. **Aislamiento** -- Estás testeando TU código, no la API."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// WITHOUT mocking: calls real API (slow, unreliable)\ntest('displays weather', async () => {\n  const weather = await fetchWeather('NYC'); // Real API call!\n  expect(weather.temp).toBeDefined();\n});\n\n// WITH mocking: fake the API response (fast, reliable)\ntest('displays weather', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'sunny'\n  });\n  const weather = await fetchWeather('NYC'); // Returns fake data!\n  expect(weather.temp).toBe(72);\n});",
       "annotation": "El mock devuelve datos falsos al instante. Tu test se ejecuta en milisegundos y funciona incluso cuando la API está caída."
+    },
+    {
+      "type": "motivation",
+      "body": "Tu app vibecodeada probablemente habla con APIs, bases de datos o proveedores de pagos. Sin mocking, no puedes testear estas integraciones de forma segura. Con mocking, puedes verificar cada escenario -- incluyendo fallos de pago -- antes de que el dinero de un cliente real esté en juego."
     },
     {
       "type": "key_takeaway",

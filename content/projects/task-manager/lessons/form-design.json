@@ -19,6 +19,15 @@
       "body": "Validation should guide users, not scold them. Show errors **inline** next to the field that has the problem, not in a generic alert at the top of the page. Validate on blur (when the user leaves a field) for format checks, and on submit for required fields. Never clear the entire form when validation fails."
     },
     {
+      "type": "analogy",
+      "title": "Forms Are Like a Drive-Through Window",
+      "body": "The best drive-throughs have a short menu, a clear speaker, and they repeat your order back to confirm. The worst ones have 200 items, a broken speaker, and they make you start over if you change one thing. Your forms should be the fast lane: ask only what's needed, confirm as you go, and never punish the user for making a small mistake."
+    },
+    {
+      "type": "motivation",
+      "body": "Every dollar your app earns starts with a user filling out a form. A smooth form experience means more tasks created, more engagement, and more reasons for users to upgrade to your premium plan."
+    },
+    {
       "type": "key_takeaway",
       "body": "The best form is the shortest form. For task creation, you might only need a title field — make everything else optional or set smart defaults. Users can always edit a task after creating it. Low friction at creation time means more tasks captured."
     }

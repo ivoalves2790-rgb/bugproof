@@ -19,6 +19,15 @@
       "body": "Building a backend from scratch is like moving into an empty house — you need to buy every piece of furniture. Supabase is a furnished apartment. The database, auth, and storage are already set up. You can rearrange things, but you're not starting from zero."
     },
     {
+      "type": "analogy",
+      "title": "The All-You-Can-Eat Buffet",
+      "body": "Supabase is like an all-you-can-eat buffet for backend services. Database? Help yourself. Authentication? Already on the table. Real-time updates? Grab a plate. You only pay more when you're eating a LOT — and by then, your app is successful enough to afford it."
+    },
+    {
+      "type": "motivation",
+      "body": "Supabase's free tier lets you launch a real product with zero upfront cost. That means your first paying customers are pure profit — you're building a business with no overhead while you learn."
+    },
+    {
       "type": "key_takeaway",
       "body": "Supabase provides PostgreSQL, auth, storage, and real-time features with a generous free tier. For a task manager, it covers every backend need without requiring you to build or manage a server."
     }

@@ -14,6 +14,11 @@
       "body": "Abbreviations in code are like inside jokes -- the person who wrote them knows exactly what they mean, but everyone else is lost. 'cfg' could be configuration, certified, or confirm. 'amt' could be amount, amendment, or automated. **Full words cost a few extra keystrokes but save everyone else minutes of confusion.**"
     },
     {
+      "type": "analogy",
+      "title": "Abbreviations = Handwritten Prescriptions",
+      "body": "Doctors used to write prescriptions by hand with heavy abbreviations. Pharmacists misread them so often that patients got the wrong medication -- sometimes with deadly results. That's why prescriptions moved to printed, full-word formats. **Code abbreviations carry the same risk**: 'dsc' might mean 'discount' to you, but the next developer reads it as 'description' and introduces a bug that costs real money."
+    },
+    {
       "type": "text",
       "title": "When Abbreviations Are OK (and When They're Not)",
       "body": "Some abbreviations are so universal that everyone knows them:\n\n- **OK to abbreviate:** `id`, `url`, `api`, `html`, `css`, `db`, `i` (in a for loop), `e` (in event handlers)\n- **Never abbreviate:** `usr` (user), `btn` (button), `msg` (message), `cfg` (config), `amt` (amount), `num` (number), `str` (string), `val` (value), `tmp` (temporary), `fn` (function)\n\nThe rule: if there's any chance someone won't know the abbreviation, spell it out."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// With abbreviations -- can you spot the bug?\nconst ttl = calcTtl(itms);\nconst tx = ttl * txRt;\nconst fnl = ttl + tx - dsc;\n\n// Without abbreviations -- bug is obvious\nconst total = calculateTotal(items);\nconst tax = total * taxRate;\nconst finalPrice = total + tax - discount;",
       "annotation": "In the clear version, you can immediately see the logic: total + tax - discount. The abbreviated version is a puzzle. If there's a bug in the formula, you'd spot it instantly in the clear version."
+    },
+    {
+      "type": "motivation",
+      "body": "Code full of abbreviations scares away collaborators and makes clients nervous about hiring you for ongoing work. Spelling things out shows you build for the long term -- and long-term projects are where the real money is in vibecoding."
     },
     {
       "type": "key_takeaway",

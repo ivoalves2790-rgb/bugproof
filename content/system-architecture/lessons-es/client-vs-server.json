@@ -14,6 +14,11 @@
       "body": "**Lado del cliente** significa código que se ejecuta en el dispositivo del usuario (su navegador). **Lado del servidor** significa código que se ejecuta en un servidor que tú controlas. ¿La diferencia clave? El usuario puede ver y modificar cualquier cosa del lado del cliente. Es como la diferencia entre una cerradura en TU puerta (servidor -- tú la controlas) vs darle a alguien un candado que pueden forzar (cliente -- ellos lo controlan)."
     },
     {
+      "type": "analogy",
+      "title": "Cliente vs Servidor = Examen a Libro Abierto vs Cerrado",
+      "body": "Una verificacion del **lado del cliente** es como un examen a libro abierto -- el estudiante tiene todas las respuestas frente a el y puede cambiar lo que quiera. Una verificacion del **lado del servidor** es como un examen a libro cerrado supervisado por un profesor -- el estudiante no puede hacer trampa porque no tiene acceso a las respuestas. Por eso nunca confias en el cliente para hacer cumplir las reglas por si solo."
+    },
+    {
       "type": "text",
       "title": "¿Qué Debería Ejecutarse Dónde?",
       "body": "**Lado del cliente** (navegador) es bueno para:\n- Efectos visuales y animaciones\n- Validación de entradas de formulario (para retroalimentación rápida al usuario)\n- Navegar entre vistas\n\n**Lado del servidor** (servidor) es requerido para:\n- Verificaciones de autenticación y autorización\n- Operaciones de base de datos\n- Procesamiento de pagos\n- Cualquier lógica sensible a la seguridad"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Client-side admin check\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Anyone can open DevTools and type:\n// user.role = 'admin'\n\n// GOOD: Server-side admin check\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Forbidden' });\n  }\n  res.json(adminData);\n});",
       "annotation": "Las verificaciones del lado del cliente son para la experiencia de usuario (ocultar botones), pero la seguridad real debe ocurrir en el servidor donde el usuario no puede manipularla."
+    },
+    {
+      "type": "motivation",
+      "body": "Saber donde poner tu logica es la diferencia entre una app que hackean el primer dia y una que genera confianza (y dinero) por anos. Vibecodear es rapido, pero poner la seguridad en el lugar correcto es lo que protege tus ingresos."
     },
     {
       "type": "key_takeaway",

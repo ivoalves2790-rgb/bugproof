@@ -14,9 +14,18 @@
       "body": "Before you write a single line of code, your dev environment needs to be ready. This means having Node.js installed, a good code editor (VS Code is the go-to), and a terminal you're comfortable with. Skipping this step is like trying to cook in a kitchen with no knives."
     },
     {
+      "type": "analogy",
+      "title": "A Chef's Mise en Place",
+      "body": "In professional kitchens, chefs practice 'mise en place' — everything in its place before you cook. Ingredients are prepped, tools are laid out, stations are clean. Setting up your dev environment is your mise en place. You chop the onions (install Node), sharpen the knives (configure VS Code), and preheat the oven (set up Git) BEFORE you start cooking code."
+    },
+    {
       "type": "text",
       "title": "Consistency Is Key",
       "body": "Professional teams use tools like `.nvmrc` files to lock the Node.js version, `.editorconfig` for consistent formatting, and `package.json` scripts so every developer runs the same commands. These small files prevent the classic 'works on my machine' problem."
+    },
+    {
+      "type": "motivation",
+      "body": "A clean dev environment means you can go from idea to working prototype in hours, not days. When you spot an opportunity to build something people want, speed is everything — and your setup is the launchpad."
     },
     {
       "type": "key_takeaway",

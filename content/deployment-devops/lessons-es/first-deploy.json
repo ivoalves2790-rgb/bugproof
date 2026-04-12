@@ -14,6 +14,11 @@
       "body": "Piensa en esto como lanzar un avión de papel. Has pasado tiempo doblándolo cuidadosamente (escribiendo código), y ahora lo vas a lanzar (desplegar). El primer lanzamiento puede no ser perfecto, pero es emocionante verlo volar. Y a diferencia de un avión de papel, siempre puedes actualizar y re-desplegar."
     },
     {
+      "type": "analogy",
+      "title": "Primer Despliegue = Abrir Tu Puesto de Limonada",
+      "body": "Recuerdas montar un puesto de limonada de nino? Hiciste la limonada (escribiste el codigo), montaste la mesa en la banqueta (elegiste una plataforma de hosting) y pusiste un letrero (obtuviste tu URL). Tu primer despliegue es exactamente asi -- no tiene que ser perfecto, pero en el momento en que abres al publico, aprendes cosas que nunca habrias aprendido solo haciendo limonada en la cocina."
+    },
+    {
       "type": "text",
       "title": "Lo Que Necesitas Antes de Desplegar",
       "body": "Antes de tu primer despliegue, asegúrate de tener:\n\n1. **Código en GitHub** -- Tu proyecto necesita estar en un repositorio de GitHub\n2. **Un comando de compilación** -- Generalmente `npm run build` en tu package.json\n3. **Una cuenta de hosting** -- Regístrate en Vercel, Netlify o Railway (gratis)\n4. **Todo committeado** -- Sin cambios sin committear rondando"
@@ -29,6 +34,10 @@
       "type": "text",
       "title": "Qué Pasa Después de Desplegar",
       "body": "Después de desplegar, obtendrás:\n\n- Una **URL en vivo** como `my-app.vercel.app` que cualquiera puede visitar\n- Un **dashboard** mostrando logs de compilación y estado del despliegue\n- **Despliegues automáticos** -- cada push a main activa un nuevo despliegue\n- Una **URL de vista previa** para pull requests para que puedas probar cambios antes de que salgan en vivo"
+    },
+    {
+      "type": "motivation",
+      "body": "Tu primer despliegue es el momento en que tu proyecto creado con IA pasa de 'hobby interesante' a 'producto real.' Una vez que tiene una URL, puedes compartirlo, recibir feedback y empezar a cobrar por el."
     },
     {
       "type": "key_takeaway",

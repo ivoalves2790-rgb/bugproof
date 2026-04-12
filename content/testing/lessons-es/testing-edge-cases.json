@@ -14,6 +14,11 @@
       "body": "Los fabricantes de autos no solo prueban autos con clima soleado. Los prueban con calor extremo, frío bajo cero, lluvia fuerte y sal. Los **casos límite** son las condiciones extremas para tu código. Son los inputs extraños que los usuarios definitivamente van a enviar -- formularios vacíos, texto súper largo, números negativos, o ningún input en absoluto."
     },
     {
+      "type": "analogy",
+      "title": "Casos límite = Hacer tu casa a prueba de niños",
+      "body": "Cuando preparas una casa para niños, no solo proteges contra el uso normal. Piensas: ¿y si jalan esto? ¿Y si meten un dedo ahí? ¿Y si intentan comérselo? **Testear casos límite** es hacer tu código a prueba de niños. Los usuarios harán cosas que nunca imaginaste -- enviar formularios vacíos, pegar 10,000 caracteres, ingresar edades negativas. Si no lo testeaste, ellos LO van a encontrar."
+    },
+    {
       "type": "text",
       "title": "Los casos límite más comunes",
       "body": "Siempre testea estos escenarios:\n\n- **Vacío/null**: ¿Qué pasa si el input es `null`, `undefined`, o `''`?\n- **Cero**: ¿Tu matemática funciona con 0? ¿División entre cero?\n- **Números negativos**: ¿La cantidad puede ser -5?\n- **Límites**: Si el máximo es 100, ¿qué pasa con 99, 100 y 101?\n- **Valores muy grandes**: ¿Qué pasa con 999999999?\n- **Caracteres especiales**: ¿Qué pasa con input que tiene emoji, comillas o HTML?"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "test('handles zero quantity', () => {\n  expect(calculatePrice(10, 0)).toBe(0);\n});\n\ntest('handles null input', () => {\n  expect(formatName(null)).toBe('');\n});\n\ntest('handles empty string', () => {\n  expect(validateEmail('')).toBe(false);\n});\n\ntest('handles very long input', () => {\n  const longString = 'a'.repeat(10000);\n  expect(truncate(longString, 100)).toHaveLength(100);\n});",
       "annotation": "Cada test apunta a un caso límite específico. Estos son los inputs que los usuarios EVENTUALMENTE van a enviar, así que tu código necesita manejarlos."
+    },
+    {
+      "type": "motivation",
+      "body": "El código generado por IA ama el camino feliz pero muchas veces ignora lo raro. Los tests de casos límite son tu póliza de seguro -- atrapan los bugs que hacen que los usuarios dejen una reseña de 1 estrella y pidan un reembolso."
     },
     {
       "type": "key_takeaway",

@@ -21,6 +21,15 @@
       "annotation": "Las claves vienen de variables de entorno, no de cadenas escritas en el codigo. El prefijo NEXT_PUBLIC_ las hace disponibles en el navegador. La clave anonima es segura para exponer porque las politicas RLS protegen tus datos."
     },
     {
+      "type": "analogy",
+      "title": "Conectar Supabase Es Como Enchufar un Cable USB",
+      "body": "Tu app y tu base de datos son dos dispositivos que necesitan comunicarse. La libreria cliente de Supabase es el cable, la URL del proyecto es el puerto donde lo enchufas, y la clave anonima es el handshake que dice 'si, este dispositivo tiene permiso para conectarse.' Un ajuste mal y no hay conexion — pero hazlo bien y los datos fluyen al instante."
+    },
+    {
+      "type": "motivation",
+      "body": "Conectar tu app a una base de datos real es el momento en que tu proyecto deja de ser un prototipo y empieza a ser un producto. Este es el paso que hace que tu gestor de tareas sea capaz de servir a usuarios reales — y los usuarios reales son los que generan ingresos reales."
+    },
+    {
       "type": "key_takeaway",
       "body": "Almacena las credenciales de Supabase en variables de entorno, nunca en tu codigo. La clave anonima esta disenada para ser publica — es la Seguridad a Nivel de Fila (no la clave en si) la que protege tus datos. Siempre habilita RLS en cada tabla."
     }

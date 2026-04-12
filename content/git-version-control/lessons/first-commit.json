@@ -19,11 +19,20 @@
       "body": "Making a commit is a three-step process:\n\n1. **Stage** -- Pick which files you want to include in this save point (`git add`)\n2. **Commit** -- Take the snapshot with a short message describing what changed (`git commit`)\n3. **Push** -- Upload your save point to GitHub so it's backed up online (`git push`)\n\nFor now, we'll focus on steps 1 and 2."
     },
     {
+      "type": "analogy",
+      "title": "Commits = Photographs in an Album",
+      "body": "Think of each commit as taking a photograph of your entire project and placing it in a photo album. Each photo has a date and a caption (your commit message). Years later, you can flip through the album and see exactly what your project looked like at any moment. You can even \"reprint\" an old photo -- that's reverting to a previous commit."
+    },
+    {
       "type": "code_example",
       "title": "The Commands You'll Use",
       "language": "bash",
       "code": "git init                          # Start tracking this folder\ngit add .                         # Stage all files\ngit status                        # See what's staged\ngit commit -m \"Initial commit\"    # Save the snapshot",
       "annotation": "Don't worry about memorizing these -- you'll practice each one in the exercise."
+    },
+    {
+      "type": "motivation",
+      "body": "Your first commit is the first step toward building a real portfolio. Every app you ship with AI tools needs version control -- freelancers who use Git charge 2-3x more than those who just email zip files."
     },
     {
       "type": "key_takeaway",

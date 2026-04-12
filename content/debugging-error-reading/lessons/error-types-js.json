@@ -14,6 +14,11 @@
       "body": "When you go to a doctor, they don't just say 'you're sick.' They identify the type: a cold, a sprain, an allergy. JavaScript errors work the same way. Each error type tells you a different category of problem, which points you toward a different kind of fix."
     },
     {
+      "type": "analogy",
+      "title": "Error Types Are Like Warning Lights on a Dashboard",
+      "body": "Your car dashboard has different warning lights for different problems -- one for low oil, one for engine temperature, one for tire pressure. Each light tells you a different system needs attention and a different kind of fix. JavaScript error types work the same way: SyntaxError means your grammar needs fixing, TypeError means you mixed up your data types, and each one points to a different repair."
+    },
+    {
       "type": "text",
       "title": "The Four Main Error Types",
       "body": "JavaScript has four error types you'll see most often:\n\n1. **SyntaxError** -- your code has a grammar mistake and can't even run\n2. **ReferenceError** -- you used a variable name that doesn't exist\n3. **TypeError** -- you tried an operation on the wrong kind of value\n4. **RangeError** -- a number is outside the allowed range"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// SyntaxError: missing closing bracket\nfunction greet( { console.log('hi'); }\n\n// ReferenceError: variable doesn't exist\nconsole.log(userName);\n\n// TypeError: wrong operation for this type\nconst num = 42;\nnum.toUpperCase();",
       "annotation": "Each error type points to a different kind of mistake. SyntaxError means broken grammar, ReferenceError means a missing name, TypeError means a mismatched operation."
+    },
+    {
+      "type": "motivation",
+      "body": "When AI generates code with a TypeError or ReferenceError, knowing the difference means you can tell the AI exactly what to fix instead of starting over. That speed is what turns vibecoding from a hobby into income."
     },
     {
       "type": "key_takeaway",

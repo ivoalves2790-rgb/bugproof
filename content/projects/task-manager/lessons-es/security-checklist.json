@@ -19,6 +19,15 @@
       "body": "No esperas hasta que alguien entre a robar para instalar cerraduras. Cierras con llave cada noche como habito. De manera similar, sanitizar entradas, usar HTTPS y validar en el servidor deberian ser habitos — no cosas que agregas despues cuando algo sale mal."
     },
     {
+      "type": "analogy",
+      "title": "La Seguridad Es Como Tu Sistema Inmunologico",
+      "body": "Tu cuerpo no espera a enfermarse para combatir germenes — los globulos blancos siempre estan patrullando. Una app segura funciona igual: la validacion de entradas, la limitacion de solicitudes y el cifrado corren constantemente en segundo plano, bloqueando amenazas silenciosamente antes de que causen dano."
+    },
+    {
+      "type": "motivation",
+      "body": "Los usuarios confian en apps que protegen sus datos. Una app segura es una por la que la gente paga y recomienda — cada habito de seguridad que construyes ahora es una inversion en un producto que vale dinero real."
+    },
+    {
       "type": "key_takeaway",
       "body": "Los tres habitos de seguridad principales: valida toda la entrada en el servidor, usa consultas parametrizadas (nunca concatenes SQL) y siempre usa HTTPS en produccion."
     }

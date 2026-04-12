@@ -14,11 +14,20 @@
       "body": "Vercel fue creado por los creadores de Next.js, lo que lo convierte en la opcion de despliegue mas fluida. Conectas tu repositorio de GitHub, Vercel detecta que es una app Next.js y la compila automaticamente. Pero 'automatico' no significa 'sin problemas' — variables de entorno faltantes, errores de compilacion y errores de tipos son problemas comunes en el primer despliegue."
     },
     {
+      "type": "analogy",
+      "title": "Desplegar Es Como Mudarte a un Departamento Nuevo",
+      "body": "Todo funcionaba en tu lugar anterior, pero en el departamento nuevo los enchufes estan en lugares diferentes y la presion del agua es distinta. Desplegar en Vercel es similar — tu codigo es el mismo, pero el entorno es nuevo, y pequenas diferencias (variables de entorno faltantes, sistemas de archivos sensibles a mayusculas) pueden causarte problemas."
+    },
+    {
       "type": "code_example",
       "title": "Errores Comunes del Primer Despliegue",
       "language": "text",
       "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ You forgot to add env vars in Vercel dashboard\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript is stricter in production builds\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Case sensitivity: taskList.tsx vs TaskList.tsx (Linux is case-sensitive)",
       "annotation": "La mayoria de los fallos del primer despliegue son problemas de entorno o configuracion de compilacion, no bugs de codigo."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada despliegue exitoso pone tu producto frente a usuarios reales. Dominar los despliegues en Vercel significa que puedes pasar de idea a app en produccion en horas, no semanas — y la velocidad al mercado es como los creadores independientes generan dinero."
     },
     {
       "type": "key_takeaway",

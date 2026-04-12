@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { UnitLessonList } from "./unit-lesson-list";
 import { useLanguage } from "@/lib/i18n/use-language";
+import { getRandomMessage, UNIT_PAGE_MESSAGES } from "@/lib/motivation/messages";
 
 const typeColors: Record<string, string> = {
   bug_hunt: "text-terminal-red",
@@ -40,6 +41,7 @@ export default function UnitPage() {
   const course = getCourse(courseSlug, locale);
   const [unitData, setUnitData] = useState<UnitData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [motivation] = useState(() => getRandomMessage(UNIT_PAGE_MESSAGES, locale));
 
   useEffect(() => {
     async function loadUnit() {
@@ -123,6 +125,12 @@ export default function UnitPage() {
             {unitData.description}
           </p>
         )}
+      </div>
+
+      <div className="mb-4 rounded-lg border border-xp-gold/20 bg-xp-gold/5 px-4 py-3">
+        <p className="text-xs text-xp-gold/90 leading-relaxed">
+          {motivation}
+        </p>
       </div>
 
       {/* Lesson path */}

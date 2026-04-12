@@ -14,6 +14,11 @@
       "body": "Crear una tabla es como diseñar un formulario en papel antes de imprimir cientos de copias. Decides qué campos incluir (nombre, autor, precio), qué formato usa cada campo (texto, número, fecha), y qué campos son obligatorios. Una vez que el formulario está diseñado, todos llenan la misma estructura."
     },
     {
+      "type": "analogy",
+      "title": "El Plano Antes de Construir",
+      "body": "Crear una tabla es como dibujar el plano de una casa antes de echar el concreto. Decides cuantas habitaciones (columnas), para que sirve cada una (tipos de datos), y cuales son obligatorias (NOT NULL). Si te saltas el plano y empiezas a construir al azar, terminas con puertas que dan a paredes. Un buen CREATE TABLE es tu plano -- disenalo una vez, y cada registro que entre encajara perfectamente."
+    },
+    {
       "type": "text",
       "title": "El Comando CREATE TABLE",
       "body": "El patrón básico es:\n\n```\nCREATE TABLE table_name (\n  column_name DATA_TYPE CONSTRAINTS,\n  column_name DATA_TYPE CONSTRAINTS\n);\n```\n\nDefines cada columna con un nombre, un tipo de datos, y restricciones opcionales como NOT NULL, PRIMARY KEY, UNIQUE, o DEFAULT."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE books (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  title TEXT NOT NULL,\n  author TEXT NOT NULL,\n  price DECIMAL(8, 2) NOT NULL,\n  pages INTEGER,\n  published_year INTEGER,\n  in_stock BOOLEAN DEFAULT true\n);",
       "annotation": "AUTOINCREMENT hace que el id cuente automáticamente (1, 2, 3...). title, author y price son obligatorios (NOT NULL). pages y published_year son opcionales. in_stock tiene valor por defecto true."
+    },
+    {
+      "type": "motivation",
+      "body": "Crear tablas es el primer paso real para construir una app en produccion. Cuando vibecodeas un producto SaaS, la IA necesita que describas tus tablas. Domina esta habilidad y podras crear apps con almacenamiento de datos correcto, listas para usuarios que pagan desde el primer dia."
     },
     {
       "type": "key_takeaway",

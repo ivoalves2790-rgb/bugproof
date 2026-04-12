@@ -14,6 +14,11 @@
       "body": "Puedes leer un libro yendo a la biblioteca (línea de comandos), usando un lector electrónico (GUI de base de datos), o haciendo que alguien te lo lea (ORM en tu código). Las tres te dan el mismo contenido, solo de diferentes maneras. Las herramientas de base de datos son iguales -- diferentes interfaces para los mismos datos."
     },
     {
+      "type": "analogy",
+      "title": "El Tablero del Auto",
+      "body": "Las herramientas de base de datos son como el tablero de tu auto. Podrias abrir el capo y revisar el motor directamente (linea de comandos), usar los indicadores y luces de advertencia del tablero (herramienta GUI), o dejar que la computadora del auto maneje todo automaticamente (ORM en codigo). La mayoria de los conductores miran el tablero a diario pero solo abren el capo cuando algo necesita inspeccion mas profunda. Los desarrolladores hacen lo mismo -- GUI para revisiones rapidas, linea de comandos para trabajo de precision."
+    },
+    {
       "type": "text",
       "title": "Tres Formas de Acceder a una Base de Datos",
       "body": "Los desarrolladores típicamente usan una de estas:\n\n1. **Línea de comandos** (`psql` para PostgreSQL, `sqlite3` para SQLite) -- rápida, poderosa, pero solo texto\n2. **Herramientas GUI** (TablePlus, DBeaver, pgAdmin) -- visual, genial para explorar datos\n3. **Desde tu código** (usando un ORM o constructor de consultas) -- cómo tu app accede a la base de datos\n\nLa mayoría de los desarrolladores usan una GUI para explorar y la línea de comandos o código para hacer cambios."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Cadenas de Conexión",
       "body": "Para conectarte a una base de datos, necesitas una **cadena de conexión** -- una dirección que le dice a tu herramienta dónde está la base de datos:\n\n`postgresql://username:password@hostname:5432/database_name`\n\nEsto incluye: el tipo de base de datos, tus credenciales de inicio de sesión, la dirección del servidor, el número de puerto, y qué base de datos abrir. Esta cadena generalmente se almacena en una variable de entorno por seguridad."
+    },
+    {
+      "type": "motivation",
+      "body": "Conocer tus herramientas de base de datos te transforma de alguien que construye apps a alguien que puede depurarlas y arreglarlas cuando usuarios reales reportan problemas. Esa capacidad de mantener una app en vivo funcionando bien es lo que separa proyectos vibecodeados de negocios vibecodeados que generan ingresos."
     },
     {
       "type": "key_takeaway",

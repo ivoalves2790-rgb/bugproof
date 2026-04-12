@@ -14,6 +14,11 @@
       "body": "Think of a Broadway show. You don't go straight from reading the script to performing for an audience. There are stages: **table reads** (development), **dress rehearsals** (staging), and **opening night** (production). Each stage catches different problems, and you'd rather catch them before the audience sees them."
     },
     {
+      "type": "analogy",
+      "title": "Environments = Testing a New Menu Item",
+      "body": "A restaurant doesn't put a brand new dish on the menu without testing it. First, the chef experiments in the kitchen (development). Then the staff does a taste test (staging). Only after everyone agrees it's ready does it go on the menu for paying customers (production). Skipping straight from kitchen experiments to the customer's plate is how you end up with bad reviews."
+    },
+    {
       "type": "text",
       "title": "The Three Environments",
       "body": "Most teams use three environments:\n\n1. **Development** -- Your local machine. You can break things freely, experiment, and debug with detailed errors.\n2. **Staging** -- A copy of production used for final testing. Same server setup, same database structure, but with test data. Only your team can see it.\n3. **Production** -- The real deal. Actual users, real data, real money. Bugs here affect real people."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Development (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Production (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
       "annotation": "Notice how development uses localhost and test keys, while production uses real servers and live API keys."
+    },
+    {
+      "type": "motivation",
+      "body": "Understanding environments means you can test risky changes without breaking your live app. Your vibecoded product keeps earning money while you safely build the next feature."
     },
     {
       "type": "key_takeaway",

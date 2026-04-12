@@ -19,6 +19,15 @@
       "body": "React is a great engine, but you still need to build the car around it — routing, server logic, build tools. Next.js gives you the whole car, ready to drive. You can still pop the hood and customize, but you start with something that works."
     },
     {
+      "type": "analogy",
+      "title": "Moving Into a Furnished Apartment",
+      "body": "Using plain React is like renting an empty apartment — you have the walls, but you need to buy furniture, appliances, and figure out where to put everything. Next.js is like a furnished apartment. The couch, kitchen, and Wi-Fi are already set up. You just bring your personal stuff and start living."
+    },
+    {
+      "type": "motivation",
+      "body": "Next.js is the framework behind some of the most successful web products today. Learning it means you can build production-grade apps that look and perform like they were made by a full team — except it's just you and AI, and the revenue is all yours."
+    },
+    {
       "type": "key_takeaway",
       "body": "Next.js gives us file-based routing, built-in API routes, server-side rendering, and easy deployment. That's exactly what our task manager needs to go from zero to production fast."
     }

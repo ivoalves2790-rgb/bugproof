@@ -14,6 +14,11 @@
       "body": "You need your passport for a trip tomorrow. In an organized room, you walk to the desk drawer and grab it in 10 seconds. In a messy room, you spend 3 hours digging through piles, checking pockets, and looking under furniture. **Disorganized code** is the messy room -- finding and changing anything takes 10 times longer than it should."
     },
     {
+      "type": "analogy",
+      "title": "Disorganized Code = Tangled Christmas Lights",
+      "body": "Every December you pull out the Christmas lights and find them in a tangled ball. You spend an hour untangling them before you can even start decorating. Now imagine if you'd stored them neatly on a reel last year -- you'd be decorating in minutes. **Disorganized code is the tangled ball of lights**: every time you need to make a change, you spend most of your time untangling before you can do any real work."
+    },
+    {
       "type": "text",
       "title": "The Real Costs",
       "body": "Disorganized code costs your team in four ways:\n\n1. **Search time** -- 'Where does the user data come from?' becomes a 30-minute archeological dig\n2. **Fear of change** -- 'If I change this, what else breaks?' leads to workarounds instead of fixes\n3. **Onboarding time** -- New developers take weeks instead of days to contribute\n4. **Duplicate bugs** -- The same logic in 5 places means fixing a bug in one place leaves 4 copies broken"
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "src/\n  app.js              (2,400 lines - everything)\n  helpers.js          (800 lines - random utility functions)\n  stuff.js            (350 lines - more random functions)\n  components.js       (1,200 lines - all React components)\n  api.js              (600 lines - all API calls mixed together)",
       "annotation": "Where would you find the code that fetches the current user's name? You'd have to search all 5,350 lines across 5 vaguely-named files. In a well-organized project, you'd look in src/api/user.js or src/hooks/useCurrentUser.js."
+    },
+    {
+      "type": "motivation",
+      "body": "When you build apps with AI, disorganized code means every new feature request from a client takes 5x longer. Organized code lets you say 'yes' to more client work and ship faster -- that directly translates to more revenue per hour."
     },
     {
       "type": "key_takeaway",

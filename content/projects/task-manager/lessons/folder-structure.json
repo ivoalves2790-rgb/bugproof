@@ -14,9 +14,18 @@
       "body": "Next.js uses the `app/` directory to define your routes. Each folder inside `app/` becomes a URL path. A `page.tsx` file inside a folder makes it a route. A `layout.tsx` file wraps pages in shared UI. This convention means your folder structure IS your routing — no config needed."
     },
     {
+      "type": "analogy",
+      "title": "A Well-Organized Closet",
+      "body": "Imagine opening a closet where shirts, pants, socks, and shoes are all mixed in one pile. Now imagine one where shirts are on hangers, pants on a shelf, socks in a drawer. Both closets hold the same clothes, but only one lets you get dressed in 2 minutes. Your project folder structure is that closet — organize it well and you'll find any file instantly."
+    },
+    {
       "type": "text",
       "title": "Where Does Everything Else Go?",
       "body": "Beyond `app/`, you'll want a `components/` folder for reusable UI, a `lib/` folder for utilities and database helpers, and a `types/` folder for TypeScript type definitions. Some teams put components next to the pages that use them, others centralize everything. Either works — the key is picking a convention and sticking with it."
+    },
+    {
+      "type": "motivation",
+      "body": "A clean project structure means you can add new features in minutes instead of hours. When your app starts getting paying users and they request changes, you'll move fast because you know exactly where everything lives."
     },
     {
       "type": "key_takeaway",

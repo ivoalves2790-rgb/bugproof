@@ -14,6 +14,11 @@
       "body": "Imagine a filing cabinet where the drawers are labeled 'misc', 'stuff', 'things', and 'other'. You'd have to open every drawer to find anything. Now imagine labels like 'Tax Documents 2024', 'Client Contracts', 'Employee Records'. **Good file names** are like clear drawer labels -- they tell you what's inside without opening the file."
     },
     {
+      "type": "analogy",
+      "title": "File Names = Street Addresses",
+      "body": "Imagine if streets had no names and houses had no numbers. To visit a friend, you'd wander around the neighborhood checking every house. That's what a project with files named 'stuff.js' and 'misc.js' feels like. **Good file names are street addresses** -- `UserProfile.jsx` is like '123 Maple Street': you know exactly where to go without wandering."
+    },
+    {
       "type": "text",
       "title": "File Naming Rules",
       "body": "Follow these rules and you'll never lose a file:\n\n1. **Name files after what they contain** -- `UserProfile.jsx` not `Component3.jsx`\n2. **One concept per file** -- A file called `utils.js` with 50 functions needs to be split\n3. **Match the export** -- If the file exports a `ProductCard` component, name it `ProductCard.jsx`\n4. **Use consistent casing** -- PascalCase for components (`UserCard.jsx`), camelCase or kebab-case for utilities (`formatDate.js` or `format-date.js`)\n5. **Never use version numbers** -- `app_v2_final.js` is a sign things have gone wrong"
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "BAD:                         GOOD:\nstuff.js                     authHelpers.js\nutils2.js                    dateFormatters.js\nComponent3.jsx               ShoppingCart.jsx\nfinal_FINAL_v3.js            checkoutFlow.js\nnew_stuff_backup.js          paymentValidation.js\ntest.js                      userAuth.test.js",
       "annotation": "Every good file name tells you what the file contains. No guessing, no opening files to check, no mystery."
+    },
+    {
+      "type": "motivation",
+      "body": "A well-named file structure is your portfolio piece. When potential clients look at your GitHub repos, clean file names signal you're a professional who delivers maintainable work -- the kind of developer who earns repeat business."
     },
     {
       "type": "key_takeaway",

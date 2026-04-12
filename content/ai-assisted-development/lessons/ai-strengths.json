@@ -14,6 +14,11 @@
       "body": "Imagine hiring someone who has read every coding tutorial ever written but has never worked on a real project. They're amazing at standard patterns and common tasks, but they struggle with anything that requires deep understanding of your specific business. That's AI in a nutshell."
     },
     {
+      "type": "analogy",
+      "title": "AI Is Like a Master Chef's Recipe Book",
+      "body": "Imagine having a recipe book with every dish ever created. You can whip up any standard meal in minutes. But if someone asks for a dish that combines flavors in a way no recipe covers, you're on your own. AI is your recipe book -- unbeatable for known dishes, but you're the chef who handles the creative improvisation."
+    },
+    {
       "type": "text",
       "title": "Where AI Excels",
       "body": "AI is strongest at tasks it has seen thousands of examples of:\n\n1. **Boilerplate code** -- component skeletons, API routes, config files\n2. **Code explanation** -- breaking down unfamiliar code line by line\n3. **Language translation** -- converting Python to JavaScript or vice versa\n4. **Common patterns** -- sorting algorithms, form validation, CRUD operations"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Where AI Falls Short",
       "body": "AI struggles with tasks that require deep understanding:\n\n1. **Complex business logic** -- rules specific to your app\n2. **Security-critical code** -- authentication, encryption, access control\n3. **System architecture** -- designing how large systems fit together\n4. **Novel algorithms** -- problems with no common pattern to match"
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing where AI shines means you can delegate the boring stuff and focus on what makes your app unique. The faster you crank out boilerplate and standard features, the sooner your product is live and generating revenue."
     },
     {
       "type": "key_takeaway",

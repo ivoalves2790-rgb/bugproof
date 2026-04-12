@@ -1,24 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import { getProjects } from "@/lib/content/loader";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { useLanguage } from "@/lib/i18n/use-language";
+import { getRandomMessage, COURSE_PAGE_MESSAGES } from "@/lib/motivation/messages";
 
 
 export default function ProjectsPage() {
   const { locale, t } = useLanguage();
   const projects = getProjects(locale);
+  const [motivation] = useState(() => getRandomMessage(COURSE_PAGE_MESSAGES, locale));
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold">
           <span className="text-terminal-green">{">"}</span> {t("projects.title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {t("projects.subtitle")}
+        </p>
+      </div>
+
+      <div className="mb-4 rounded-lg border border-xp-gold/20 bg-xp-gold/5 px-4 py-3">
+        <p className="text-xs text-xp-gold/90 leading-relaxed">
+          {motivation}
         </p>
       </div>
 

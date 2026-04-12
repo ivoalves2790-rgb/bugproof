@@ -14,6 +14,11 @@
       "body": "In a movie, dangerous scenes use stunt doubles instead of the real actor. The stunt double looks the same, acts the same role, but you control exactly what happens. **Mocking** is using a stunt double for your code's dependencies. Instead of calling a real API, you create a fake version that returns exactly what you want."
     },
     {
+      "type": "analogy",
+      "title": "Mocking = A Flight Simulator",
+      "body": "Pilots don't learn to fly by jumping into a real plane during a thunderstorm. They use flight simulators that create realistic scenarios without real danger. **Mocking** is a flight simulator for your code. You simulate the database, the API, the payment system -- testing every scenario (including crashes and failures) without touching anything real."
+    },
+    {
       "type": "text",
       "title": "Why Mock?",
       "body": "You mock dependencies because:\n\n1. **Speed** -- Real API calls take 100ms+. Mocks take 0ms.\n2. **Reliability** -- Real APIs can be down or rate-limited. Mocks always work.\n3. **Control** -- You can simulate errors, empty responses, and edge cases.\n4. **Cost** -- Some APIs charge per request. Don't waste money on tests.\n5. **Isolation** -- You're testing YOUR code, not the API."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// WITHOUT mocking: calls real API (slow, unreliable)\ntest('displays weather', async () => {\n  const weather = await fetchWeather('NYC'); // Real API call!\n  expect(weather.temp).toBeDefined();\n});\n\n// WITH mocking: fake the API response (fast, reliable)\ntest('displays weather', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'sunny'\n  });\n  const weather = await fetchWeather('NYC'); // Returns fake data!\n  expect(weather.temp).toBe(72);\n});",
       "annotation": "The mock returns fake data instantly. Your test runs in milliseconds and works even when the API is down."
+    },
+    {
+      "type": "motivation",
+      "body": "Your vibecoded app probably talks to APIs, databases, or payment providers. Without mocking, you can't test these integrations safely. With mocking, you can verify every scenario -- including payment failures -- before a real customer's money is on the line."
     },
     {
       "type": "key_takeaway",

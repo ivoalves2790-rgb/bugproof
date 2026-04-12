@@ -14,6 +14,11 @@
       "body": "Cuando alguien dice 'mira la página 47, párrafo 3,' puedes ir directamente allí. Los mensajes de error funcionan de la misma manera. Te dan un nombre de archivo y número de línea para que puedas saltar directamente al problema en lugar de leer todo tu código fuente."
     },
     {
+      "type": "analogy",
+      "title": "Los números de línea son como números de apartamento",
+      "body": "Si un amigo dice 'vivo en el edificio de la calle Principal, apartamento 4B,' no tocas cada puerta para encontrarlo. Vas directo al 4B. Los números de línea de errores funcionan igual -- el nombre del archivo es el edificio y el número de línea es el apartamento. Ve directamente ahí en vez de buscar por todo el código."
+    },
+    {
       "type": "text",
       "title": "Cómo leer el número de línea",
       "body": "Los mensajes de error muestran la ubicación así: `File \"app.py\", line 12`. Eso significa que el fallo ocurrió en la **línea 12** del archivo llamado **app.py**. Tu editor de código muestra los números de línea en el lado izquierdo. Salta a esa línea -- el error está allí o muy cerca."
@@ -24,6 +29,10 @@
       "language": "python",
       "code": "colors = [\"red\", \"blue\"]\nprint(colors[2])  # IndexError: list index out of range",
       "annotation": "La lista tiene 2 elementos en el índice 0 y 1. Pedir el índice 2 falla porque no existe. Python cuenta desde 0, así que una lista con 2 elementos tiene índices 0 y 1."
+    },
+    {
+      "type": "motivation",
+      "body": "Ir directo al número de línea correcto en vez de adivinar te ahorra horas cada semana. Cuando construyes apps con IA para ganar dinero, ese tiempo ahorrado significa más funciones lanzadas y más ingresos generados."
     },
     {
       "type": "key_takeaway",

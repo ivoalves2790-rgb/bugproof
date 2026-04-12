@@ -14,6 +14,11 @@
       "body": "Think of this like launching a paper airplane. You've spent time folding it carefully (writing code), and now you're going to throw it (deploy). The first throw might not be perfect, but it's exciting to see it fly. And unlike a paper airplane, you can always update and re-deploy."
     },
     {
+      "type": "analogy",
+      "title": "First Deploy = Opening Your Lemonade Stand",
+      "body": "Remember setting up a lemonade stand as a kid? You made the lemonade (wrote the code), set up the table on the sidewalk (chose a hosting platform), and put up a sign (got your URL). Your first deploy is exactly like that -- it doesn't have to be perfect, but the moment you open for business, you learn things you never would have by just making lemonade in the kitchen."
+    },
+    {
       "type": "text",
       "title": "What You Need Before Deploying",
       "body": "Before your first deploy, make sure you have:\n\n1. **Code on GitHub** -- Your project needs to be in a GitHub repository\n2. **A build command** -- Usually `npm run build` in your package.json\n3. **A hosting account** -- Sign up for Vercel, Netlify, or Railway (free)\n4. **Everything committed** -- No uncommitted changes lurking around"
@@ -29,6 +34,10 @@
       "type": "text",
       "title": "What Happens After You Deploy",
       "body": "After deploying, you'll get:\n\n- A **live URL** like `my-app.vercel.app` that anyone can visit\n- A **dashboard** showing build logs and deployment status\n- **Automatic deploys** -- every push to main triggers a new deploy\n- A **preview URL** for pull requests so you can test changes before they go live"
+    },
+    {
+      "type": "motivation",
+      "body": "Your first deploy is the moment your vibecoded project goes from 'cool hobby' to 'real product.' Once it has a URL, you can share it, get feedback, and start charging for it."
     },
     {
       "type": "key_takeaway",

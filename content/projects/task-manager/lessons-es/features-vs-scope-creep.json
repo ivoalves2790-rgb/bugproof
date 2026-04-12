@@ -19,11 +19,20 @@
       "body": "Un restaurante con 200 platillos en el menu no puede ser excelente en todos. Un menu enfocado con 10 platillos bien hechos gana siempre contra uno inflado. Tu app es igual — 5 funcionalidades pulidas superan a 50 a medio construir."
     },
     {
+      "type": "analogy",
+      "title": "Empacando para un Fin de Semana",
+      "body": "El desvio de alcance es como empacar una maleta para un viaje de fin de semana pero llevar ropa para dos semanas 'por si acaso.' De repente tu maleta pesa demasiado y ni puedes subir al avion. Empaca ligero, viaja rapido. Siempre puedes comprar un cepillo de dientes al llegar — igual que siempre puedes agregar funcionalidades despues de lanzar."
+    },
+    {
       "type": "code_example",
       "title": "Una Conversacion de Desvio de Alcance",
       "language": "text",
       "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
       "annotation": "Cada funcionalidad por si sola parece pequena, pero se acumulan. Cada funcionalidad significa mas codigo, mas bugs, mas casos especiales."
+    },
+    {
+      "type": "motivation",
+      "body": "Las apps que generan dinero en la tienda no son las que tienen mas funcionalidades — son las que realmente se lanzaron. Cada funcionalidad que recortas te acerca al dia de lanzamiento, y el dia de lanzamiento es cuando empiezas a facturar."
     },
     {
       "type": "key_takeaway",

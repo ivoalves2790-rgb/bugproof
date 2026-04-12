@@ -29,6 +29,15 @@
       "body": "**Git** es la herramienta que se ejecuta en tu computadora y rastrea los cambios. **GitHub** es un sitio web donde puedes almacenar tus proyectos Git en línea y colaborar con otros. Puedes usar Git sin GitHub, pero la mayoría de los equipos usan ambos juntos."
     },
     {
+      "type": "analogy",
+      "title": "Git = La máquina del tiempo de tu proyecto",
+      "body": "Piensa en Git como una máquina del tiempo para tu proyecto. Cada commit es una foto congelada en el tiempo. Puedes saltar a cualquier momento -- el martes pasado, hace tres meses, el día antes de que todo se rompiera. A diferencia de Ctrl+Z que solo retrocede paso a paso, Git te permite teletransportarte a cualquier punto del historial al instante."
+    },
+    {
+      "type": "motivation",
+      "body": "Git aparece como requisito en el 95% de las ofertas de trabajo para desarrolladores que pagan $100K+. Aunque construyas apps completamente con herramientas de IA, empleadores y clientes esperan que uses Git -- es el lenguaje universal del desarrollo profesional."
+    },
+    {
       "type": "key_takeaway",
       "body": "Git es una herramienta de control de versiones que rastrea cada cambio en tu proyecto -- como un historial de deshacer ilimitado para todo tu código fuente."
     }

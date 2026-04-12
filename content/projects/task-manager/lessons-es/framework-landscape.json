@@ -19,6 +19,15 @@
       "body": "Construir un gestor de tareas con Angular es como conducir un camion al supermercado. Funciona, pero es excesivo. Quieres algo del tamano adecuado para el trabajo — lo suficientemente potente para manejar tus necesidades, lo suficientemente simple para que no te pierdas."
     },
     {
+      "type": "analogy",
+      "title": "El Pasillo de Herramientas Electricas",
+      "body": "Entrar a una ferreteria y comprar el taladro mas caro no te hace mejor constructor. Lo que importa es: el taladro se ajusta a los tornillos que usas? Viene con las brocas que necesitas? Puedes encontrar repuestos facilmente? Los frameworks son iguales — el 'mejor' es el que se ajusta a TU proyecto y tiene el soporte que TU necesitas."
+    },
+    {
+      "type": "motivation",
+      "body": "Elegir el framework correcto desde el primer dia significa que puedes construir e iterar mas rapido. Iteracion mas rapida significa encontrar tu mercado antes, y asi es como los constructores independientes convierten proyectos secundarios en fuentes de ingreso."
+    },
+    {
       "type": "key_takeaway",
       "body": "Elige un framework basandote en: complejidad del proyecto, tamano de la comunidad, recursos de aprendizaje disponibles y que tan bien se adapta a lo que estas construyendo. Ignora los ciclos de hype."
     }

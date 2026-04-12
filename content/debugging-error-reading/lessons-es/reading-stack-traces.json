@@ -14,6 +14,11 @@
       "body": "Imagina que caminas por cinco habitaciones y tropiezas en la última. Una traza de pila es como una lista de cada habitación por la que pasaste, en orden, con la habitación donde tropezaste listada primero. Muestra la cadena de llamadas a funciones que llevaron al fallo."
     },
     {
+      "type": "analogy",
+      "title": "Una traza de pila es como el historial de llamadas de tu teléfono",
+      "body": "Cuando pierdes una llamada y quieres saber quién llamó, revisas tu historial de llamadas -- muestra la llamada más reciente arriba. Una traza de pila es el historial de llamadas de tu código. La llamada de función más reciente (donde ocurrió el fallo) está arriba, y cada línea abajo muestra quién llamó a quién, llevándote hasta donde todo empezó."
+    },
+    {
       "type": "text",
       "title": "Cómo leer una traza de pila",
       "body": "Una traza de pila se lee **de arriba a abajo**:\n\n1. La **línea superior** es donde el error realmente ocurrió -- comienza aquí\n2. Cada línea debajo muestra qué función llamó a la de arriba\n3. **Salta las líneas del framework** (como react-dom o internos de node) -- enfócate en TUS archivos\n\nLa línea superior de tu propio código es casi siempre donde está el error."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- YOUR code, start here\n    at renderWithHooks (react-dom.js:14985)  <-- framework, skip\n    at App (src/App.jsx:22)               <-- YOUR code, called UserCard",
       "annotation": "Comienza en la línea superior que menciona TUS archivos (UserCard.jsx:8). Ahí es donde ocurrió el fallo. App.jsx:22 es desde donde se llamó a UserCard."
+    },
+    {
+      "type": "motivation",
+      "body": "Las trazas de pila se ven intimidantes, pero leerlas es un superpoder. Los pros del vibecoding que saben descifrar una traza de pila arreglan fallos en minutos en vez de horas -- y esa eficiencia es lo que hace rentable construir y vender apps."
     },
     {
       "type": "key_takeaway",

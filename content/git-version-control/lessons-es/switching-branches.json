@@ -14,6 +14,11 @@
       "body": "Piensa en las ramas como diferentes habitaciones en una casa, cada una preparada para un proyecto diferente. Cuando cambias de rama, Git reorganiza instantáneamente la carpeta de tu proyecto para que coincida con la versión de archivos de esa rama. Es como entrar a una habitación diferente donde todo está exactamente como lo dejaste."
     },
     {
+      "type": "analogy",
+      "title": "Cambiar de rama = Cambiar de canal de TV",
+      "body": "Piensa en cambiar de rama como cambiar de canal en una TV con DVR integrado. Cada canal (rama) tiene su propio contenido grabado. Cuando cambias de canal, la imagen cambia al instante. Pero si estabas grabando algo en el canal actual, necesitas darle a \"guardar\" primero -- de lo contrario tu grabación se corrompe. Por eso haces commit antes de cambiar."
+    },
+    {
       "type": "text",
       "title": "¡Haz commit antes de cambiar!",
       "body": "Esta es la regla más importante: **siempre haz commit (o stash) de tus cambios antes de cambiar de rama.** Si tienes cambios sin confirmar, Git podría negarse a cambiar para proteger tu trabajo. Los cambios sin confirmar podrían mezclarse entre ramas o perderse completamente."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "git status                          # Check for uncommitted changes\ngit add .                           # Stage changes\ngit commit -m \"Save my progress\"    # Commit first!\ngit checkout main                   # Now safe to switch\ngit checkout -b feature/search-bar  # Create + switch in one step",
       "annotation": "Siempre verifica `git status` antes de cambiar. Si muestra cambios, confírmalos primero."
+    },
+    {
+      "type": "motivation",
+      "body": "Poder manejar varias funcionalidades a la vez es lo que te hace valioso en un equipo. ¿Construyendo una app con IA? Constantemente cambiarás entre ramas para diferentes features -- esta habilidad mantiene tu trabajo organizado y a tus clientes contentos."
     },
     {
       "type": "key_takeaway",

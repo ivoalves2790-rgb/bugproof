@@ -14,6 +14,11 @@
       "body": "When you cross a street, you automatically check for cars. You don't just walk out blindly. **Test-driven thinking** is the same instinct applied to code. Before writing a function, you think: what inputs could break this? What should happen with weird data? What if the user does something unexpected?"
     },
     {
+      "type": "analogy",
+      "title": "Test-Driven Thinking = Writing the Exam Before the Textbook",
+      "body": "Imagine a teacher who writes the final exam FIRST, then designs the course to make sure students can pass it. That's **test-driven thinking**. You define what success looks like (the test) before you build the thing (the code). This way, you never lose sight of what 'done' means, and you know the moment you've achieved it."
+    },
+    {
       "type": "text",
       "title": "The Test-Driven Mindset",
       "body": "Before writing any code, ask yourself:\n\n1. **What should this function do?** -- Define the expected behavior\n2. **What are the normal inputs?** -- The typical use case\n3. **What are the edge cases?** -- Empty strings, zero, null, negative numbers\n4. **What should happen when things go wrong?** -- Error messages, defaults, fallbacks\n\nIf you can answer these questions, you can write tests."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// Task: write a function that calculates a tip\n// Test-driven thinking:\n// - calculateTip(100, 15) should return 15\n// - calculateTip(100, 0) should return 0\n// - calculateTip(0, 15) should return 0\n// - calculateTip(-50, 15) should... throw an error?\n// - calculateTip(100, 150) should... is a 150% tip valid?",
       "annotation": "Notice how thinking about tests BEFORE writing code helps you design a better function. You discover edge cases early."
+    },
+    {
+      "type": "motivation",
+      "body": "When you tell AI what to build, you're already thinking about requirements. Turn those requirements into tests and you've just built a safety net that protects your app -- and your income -- every time the AI writes new code."
     },
     {
       "type": "key_takeaway",

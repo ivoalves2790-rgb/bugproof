@@ -14,6 +14,11 @@
       "body": "Saying 'give me food' at a restaurant would get you something random. Saying 'I'd like a grilled chicken sandwich on sourdough, no mayo, with a side salad' gets exactly what you want. AI prompts work the same way -- the more specific you are, the better the result."
     },
     {
+      "type": "analogy",
+      "title": "Prompts Are Like Blueprints for a Contractor",
+      "body": "Telling a contractor 'build me a house' will get you something -- but probably not what you wanted. Handing them detailed blueprints with room sizes, materials, and electrical layouts gets you your dream home. Your prompt is the blueprint: the more detail you put in, the less rework you'll need later."
+    },
+    {
       "type": "text",
       "title": "What Makes a Good Prompt",
       "body": "A good prompt includes:\n\n1. **Language** -- what programming language to use\n2. **Purpose** -- what the code should do\n3. **Inputs and outputs** -- what goes in and what comes out\n4. **Constraints** -- any rules or libraries to use\n\nBad prompts are vague ('fix my code,' 'make it better'). Good prompts are specific and include all the decisions already made."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "Bad:  \"Write me a function\"\n\nGood: \"Write a JavaScript function called formatPrice\n       that takes a number (cents) and returns a string\n       formatted as USD (e.g., 1999 becomes '$19.99').\n       Handle zero and negative values.\"",
       "annotation": "The good prompt specifies language, function name, input type, output format, and edge cases. AI can produce exactly what you need on the first try."
+    },
+    {
+      "type": "motivation",
+      "body": "Great prompts mean less back-and-forth and more working code on the first try. Every minute you save on prompt revisions is a minute spent building features that earn money."
     },
     {
       "type": "key_takeaway",

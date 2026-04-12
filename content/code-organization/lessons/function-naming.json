@@ -14,6 +14,11 @@
       "body": "Imagine a TV remote where every button is labeled with a number instead of a word. Button 1 might change the channel, or adjust the volume, or open the menu -- you'd have to press it to find out. Good function names are like clearly labeled buttons: **you know what they do before you press them**."
     },
     {
+      "type": "analogy",
+      "title": "Function Names = Chapter Titles in a Book",
+      "body": "When you pick up a book, you scan the table of contents to find the chapter you need. Imagine if every chapter was called 'Chapter' or 'Part' with no description. You'd have to read the whole book to find what you want. **Function names are your code's table of contents** -- `sendPasswordResetEmail()` tells you exactly what that chapter is about, while `doStuff()` tells you nothing."
+    },
+    {
       "type": "text",
       "title": "The Verb-Object Pattern",
       "body": "Great function names follow the **verb + object** pattern:\n\n- `getUser()` -- verb: get, object: user\n- `calculateTotal()` -- verb: calculate, object: total\n- `sendEmail()` -- verb: send, object: email\n- `validatePassword()` -- verb: validate, object: password\n\nCommon verbs: get, set, create, update, delete, validate, calculate, send, fetch, parse, format, convert, check, handle"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: What do these do?\nfunction do_it(x) { ... }\nfunction process(data) { ... }\nfunction handle(e) { ... }\nfunction stuff() { ... }\n\n// GOOD: Crystal clear\nfunction validateEmailAddress(email) { ... }\nfunction fetchUserProfile(userId) { ... }\nfunction handleLoginError(error) { ... }\nfunction calculateShippingCost() { ... }",
       "annotation": "Each good name tells you: what action is performed (verb) and what it acts on (object). You could guess what these functions do without reading a single line of their code."
+    },
+    {
+      "type": "motivation",
+      "body": "Well-named functions let you onboard collaborators or hand off projects without lengthy explanations. In the vibecoding world, that means you can scale from solo projects to team contracts -- multiplying your earning potential."
     },
     {
       "type": "key_takeaway",

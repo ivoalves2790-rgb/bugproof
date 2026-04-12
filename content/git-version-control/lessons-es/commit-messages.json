@@ -19,11 +19,20 @@
       "body": "Un buen mensaje de commit responde: **¿qué cambió y por qué?** Mantenlo corto (menos de 50 caracteres en la primera línea), comienza con un verbo y sé específico. La convención es usar el **modo imperativo** -- escríbelo como un comando.\n\n- **Bueno:** \"Fix login button not responding on mobile\"\n- **Malo:** \"fixed stuff\" o \"WIP\" o \"asdfjkl\""
     },
     {
+      "type": "analogy",
+      "title": "Mensajes de commit = Mensajes de texto para tu yo del futuro",
+      "body": "Imagina que le envías un mensaje de texto a ti mismo dentro de seis meses. Si escribes \"cosas,\" tu yo del futuro no tendrá idea de qué quisiste decir. Pero si escribes \"Arreglé el bug del checkout que cobraba dos veces a los clientes,\" tu yo del futuro entenderá el contexto al instante. Cada mensaje de commit es un texto para tu yo del futuro -- haz que valga la pena."
+    },
+    {
       "type": "code_example",
       "title": "Ejemplos buenos vs malos",
       "language": "bash",
       "code": "# Good messages:\ngit commit -m \"Add email validation to signup form\"\ngit commit -m \"Fix crash when user uploads empty file\"\ngit commit -m \"Remove deprecated payment API calls\"\n\n# Bad messages:\ngit commit -m \"fix stuff\"\ngit commit -m \"WIP\"\ngit commit -m \"changes\"",
       "annotation": "Observa que los buenos mensajes comienzan con un verbo (Add, Fix, Remove) y describen un cambio específico."
+    },
+    {
+      "type": "motivation",
+      "body": "Los mensajes de commit limpios son lo que separa a los programadores aficionados de los profesionales que cobran bien. Cuando clientes o compañeros revisan tu historial de Git, buenos mensajes generan confianza y consiguen contratos recurrentes."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Cuando envías una carta, necesitas una dirección: Calle Principal 123, Apt 4, Springfield. Una **URL** funciona de la misma manera para internet. Le dice a tu navegador exactamente a dónde ir -- qué edificio (servidor), qué apartamento (ruta), e incluso qué habitación (página específica)."
     },
     {
+      "type": "analogy",
+      "title": "Una URL Es Como una Tarjeta de Receta",
+      "body": "Una tarjeta de receta te dice exactamente lo que necesitas: el libro de cocina (dominio), el capitulo (ruta), y notas especiales como 'hazlo sin gluten' (parametros de consulta). Una **URL** es lo mismo -- es un conjunto preciso de instrucciones para que tu navegador sepa exactamente que pedir. Cambia un ingrediente y obtienes un plato completamente diferente."
+    },
+    {
       "type": "text",
       "title": "Las Partes de una URL",
       "body": "Una URL como `https://www.example.com/products/shoes?color=red` tiene varias partes:\n\n1. **Protocolo** (`https://`) -- cómo comunicarse (como elegir entre teléfono o correo electrónico)\n2. **Dominio** (`www.example.com`) -- con qué servidor hablar (la dirección del edificio)\n3. **Ruta** (`/products/shoes`) -- qué página quieres (el número de habitación)\n4. **Cadena de consulta** (`?color=red`) -- detalles adicionales (como una nota en tu carta)"
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocol:  https://\nDomain:    api.weather.com\nPath:      /forecast/daily\nQuery:     ?city=london&units=metric",
       "annotation": "El símbolo & separa múltiples parámetros de consulta. Aquí estamos pidiendo el pronóstico de Londres en unidades métricas."
+    },
+    {
+      "type": "motivation",
+      "body": "Las URLs limpias y bien estructuradas son lo que hace que tu app sea descubrible en Google y compartible en redes sociales. Cuando vibecodeas con buen diseno de URLs, construyes apps que atraen trafico organico -- y el trafico es dinero."
     },
     {
       "type": "key_takeaway",

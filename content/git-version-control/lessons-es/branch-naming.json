@@ -19,9 +19,18 @@
       "body": "La mayoría de los equipos usan un patrón de **prefijo/descripción**:\n\n- `feature/user-authentication` -- Agregando algo nuevo\n- `fix/login-crash` -- Corrigiendo un error\n- `hotfix/security-patch` -- Corrección urgente en producción\n\nUsa letras minúsculas, guiones en lugar de espacios, y mantenlo corto pero descriptivo."
     },
     {
+      "type": "analogy",
+      "title": "Nombres de ramas = Direcciones postales",
+      "body": "Imagina si tu dirección fuera simplemente \"mi casa\" en vez de \"Calle Principal 742.\" Nada de pizzas a domicilio, nada de correo, nadie podría encontrarte. Los nombres de las ramas son direcciones para tu trabajo. `feature/dark-mode` le dice a todos exactamente dónde encontrar el trabajo del modo oscuro, igual que una dirección correcta le dice al repartidor exactamente adónde ir."
+    },
+    {
       "type": "text",
       "title": "Errores comunes a evitar",
       "body": "- **Sin espacios ni mayúsculas** -- Algunas herramientas no los manejan bien\n- **Sin nombres vagos** -- `my-branch` o `test123` no le dice nada a nadie\n- **Sin novelas** -- Mantenlo bajo 30 caracteres cuando sea posible\n- **Sin caracteres especiales** -- Limítate a letras, números, guiones y barras diagonales"
+    },
+    {
+      "type": "motivation",
+      "body": "Las buenas convenciones de nombres demuestran profesionalismo. Cuando un reclutador o cliente ve ramas bien nombradas en tus repos de GitHub, ven a alguien que escribe código de calidad profesional -- y esa es la diferencia entre ser contratado o ser ignorado."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Imagina que necesitas entregar una carta al otro lado de la ciudad. Podrías usar un enorme camión de 18 ruedas, o podrías usar un mensajero en bicicleta. Ambos entregan la carta, pero uno usa muchos más recursos. Las **imágenes sin optimizar** son como usar un camión de mudanza para entregar una carta -- llevan muchos más datos de los necesarios para lo que realmente se muestra en pantalla."
     },
     {
+      "type": "analogy",
+      "title": "Imágenes = Pedir un espectacular de carretera para tu sala",
+      "body": "Imagina pedir un espectacular de carretera de 10 metros para colgar una foto familiar pequeña en tu sala. Claro, la foto está ahí, pero es absurdamente grande para el espacio. Eso es lo que hace cargar una imagen de 4000 píxeles para una tarjeta de 400 píxeles -- estás descargando 100 veces más datos de los necesarios. **Optimizar imágenes** es elegir el marco del tamaño correcto para la pared donde lo vas a colgar."
+    },
+    {
       "type": "text",
       "title": "La lista de verificación de optimización de imágenes",
       "body": "Cada imagen en tu página debería pasar esta lista:\n\n1. **Formato correcto** -- Usa WebP o AVIF en lugar de PNG/JPEG (30-50% más pequeño)\n2. **Tamaño correcto** -- No cargues una imagen de 4000px para una miniatura de 400px\n3. **Compresión correcta** -- Calidad 80 se ve idéntica a 100 pero es mucho más pequeña\n4. **Carga correcta** -- Las imágenes debajo del pliegue deberían usar carga diferida\n5. **Dimensiones correctas** -- Siempre establece width/height para prevenir cambios de layout"
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "// BAD: Full-size unoptimized image\n<img src=\"/photos/product-4000x3000.png\" />\n\n// GOOD: Optimized with all the right attributes\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Blue running shoes\"\n/>",
       "annotation": "La versión optimizada usa formato WebP, tiene el tamaño para coincidir con su tamaño de visualización, reserva espacio con width/height, carga de forma diferida e incluye texto alt para accesibilidad."
+    },
+    {
+      "type": "motivation",
+      "body": "Las imágenes suelen ser la razón principal por la que las páginas cargan lento. Optimizarlas es la victoria de rendimiento más fácil que tendrás -- y páginas de producto más rápidas significan más ventas y clientes felices que regresan."
     },
     {
       "type": "key_takeaway",

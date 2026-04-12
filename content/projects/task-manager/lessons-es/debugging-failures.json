@@ -14,11 +14,20 @@
       "body": "Un test que falla significa una de dos cosas: tu codigo tiene un bug, o tu test esta mal. Antes de asumir que es un bug en el codigo, lee el mensaje de error cuidadosamente, verifica si la configuracion del test es correcta y confirma que las expectativas del test coinciden con los requisitos actuales. Muchos 'bugs' son en realidad tests desactualizados."
     },
     {
+      "type": "analogy",
+      "title": "Depurar Es Como Ser Detective",
+      "body": "Un detective no asume quien lo hizo — primero examina la evidencia. El mensaje de error es tu informe de la escena del crimen, el stack trace es tu lista de testigos y ejecutar el test en aislamiento es tu sala de interrogacion. Sigue las pistas antes de saltar a conclusiones."
+    },
+    {
       "type": "code_example",
       "title": "Leyendo un Fallo de Test",
       "language": "text",
       "code": "FAIL: 'should return tasks sorted by due date'\n  Expected: ['Task A (Jan 1)', 'Task B (Jan 5)']\n  Received: ['Task B (Jan 5)', 'Task A (Jan 1)']\n\nThis tells you: the sort order is reversed.\nCheck: Is the sort function wrong? Or did the test expect the wrong order?",
       "annotation": "Siempre lee los valores esperados vs recibidos. A menudo te dicen exactamente que salio mal."
+    },
+    {
+      "type": "motivation",
+      "body": "Depurar rapidamente es un superpoder. Mientras mas rapido arreglas problemas, mas rapido lanzas funcionalidades que mantienen a los usuarios enganchados y pagando — y eso es lo que separa una app que genera dinero de una que no."
     },
     {
       "type": "key_takeaway",

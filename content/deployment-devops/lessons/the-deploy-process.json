@@ -14,6 +14,11 @@
       "body": "Deploying is like shipping a package. You **pack** your code (build it), **label** it (commit and push to GitHub), and **ship** it (the hosting platform picks it up and puts it live). Most modern platforms watch your GitHub repo and automatically deploy when you push new code."
     },
     {
+      "type": "analogy",
+      "title": "Deploy = Publishing a Book",
+      "body": "Writing code is like writing a book manuscript. But nobody can read it until you send it to the publisher (GitHub), they print it (build), and it shows up in bookstores (goes live). The deploy process is your publishing pipeline -- from final draft to bookshelves. And just like a publisher, modern platforms handle the printing and distribution automatically once you hand them the manuscript."
+    },
+    {
       "type": "text",
       "title": "The Modern Deploy Workflow",
       "body": "Here's how most developers deploy today:\n\n1. Write code locally\n2. Commit and push to GitHub\n3. The hosting platform detects the new code\n4. It builds your project automatically\n5. If the build succeeds, the new version goes live\n\nThis is called **Git-based deployment** and it's the standard for platforms like Vercel, Netlify, and Railway."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "git add .\ngit commit -m \"Ready for production\"\ngit push origin main",
       "annotation": "Once your repo is connected to a hosting platform, pushing to main is often all you need to trigger a deploy."
+    },
+    {
+      "type": "motivation",
+      "body": "The deploy process is the bridge between building something cool and actually making money from it. Once you nail this workflow, every app you vibecode is just a git push away from going live."
     },
     {
       "type": "key_takeaway",

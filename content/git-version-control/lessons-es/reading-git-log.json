@@ -26,9 +26,18 @@
       "annotation": "Usa `git log --oneline` para una vista rápida, luego `git show <hash>` para profundizar en un commit específico."
     },
     {
+      "type": "analogy",
+      "title": "Git Log = Cámaras de seguridad",
+      "body": "Imagina que roban una tienda. Lo primero que hace el detective es revisar las cámaras de seguridad -- quién estuvo en la tienda, a qué hora entró, qué hizo. `git log` es la cámara de seguridad de tu proyecto. Cuando aparece un bug, rebobinas las grabaciones para ver exactamente qué cambio lo introdujo y quién lo hizo."
+    },
+    {
       "type": "text",
       "title": "Por qué esto importa para la depuración",
       "body": "Cuando algo se rompe, `git log` es tu herramienta de detective. Puedes revisar los commits recientes para encontrar qué cambio probablemente causó el problema, luego usar `git show` para ver exactamente qué líneas se agregaron o eliminaron. Es mucho más rápido que adivinar."
+    },
+    {
+      "type": "motivation",
+      "body": "Depurar rápido es lo que convierte a un programador de $30/hora en un consultor de $150/hora. Dominar `git log` significa encontrar y arreglar bugs en minutos en vez de horas -- y esa velocidad es por la que los clientes pagan tarifas premium."
     },
     {
       "type": "key_takeaway",

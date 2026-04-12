@@ -14,6 +14,11 @@
       "body": "When you fill out a form, some fields have a red asterisk (*) meaning 'required.' You can't submit the form without filling them in. **NOT NULL** is the database version of that asterisk -- it means 'this column must have a value, you can't leave it blank.' Without NOT NULL, you get invisible empty values that cause crashes later."
     },
     {
+      "type": "analogy",
+      "title": "The Safety Net at the Circus",
+      "body": "NOT NULL and DEFAULT are like safety nets at a circus. The **NOT NULL net** catches any performer (data) that tries to jump without a harness (missing value) -- it stops the show immediately rather than letting someone fall. The **DEFAULT net** is softer -- if a performer forgets their costume, the circus gives them a standard one so the show can go on. Together, they make sure no one hits the ground."
+    },
+    {
       "type": "text",
       "title": "What is NULL?",
       "body": "**NULL** in a database means 'no value' or 'unknown.' It's not zero, not an empty string -- it's the absence of any value at all. NULL causes problems because:\n\n1. `NULL + 5` = NULL (not 5)\n2. `NULL = NULL` is false (NULL isn't equal to anything, even itself!)\n3. Your code might crash trying to call `.length` on NULL\n\nThe fix? Use **NOT NULL** on columns that should always have a value."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name is required\n  email TEXT NOT NULL UNIQUE,      -- email is required and unique\n  bio TEXT DEFAULT '',             -- optional, defaults to empty string\n  is_active BOOLEAN DEFAULT true,  -- defaults to true for new users\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-set to current time\n);",
       "annotation": "NOT NULL means the column is required. DEFAULT provides a value when one isn't specified. Use NOT NULL for essential data like name and email. Use DEFAULT for fields that have a sensible automatic value."
+    },
+    {
+      "type": "motivation",
+      "body": "NULL-related crashes are the number one reason vibecoded apps break in production. Setting up NOT NULL and DEFAULT correctly means your app will not crash when a user skips a form field -- and apps that do not crash are apps that keep their paying customers."
     },
     {
       "type": "key_takeaway",

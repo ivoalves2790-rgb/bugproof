@@ -19,6 +19,15 @@
       "body": "Un MVP (Producto Minimo Viable) no es la mitad de un auto — es una patineta. Es lo mas pequeno que realmente funciona y resuelve un problema. Nuestro MVP de gestor de tareas necesita permitir a los usuarios crear, completar y organizar tareas. Eso es todo. Sin resumenes con IA, sin colaboracion en equipo, sin diagramas de Gantt. Eso viene despues."
     },
     {
+      "type": "analogy",
+      "title": "El Puesto de Tacos Antes del Restaurante",
+      "body": "Piensa en construir un MVP como abrir un puesto de tacos antes de un restaurante completo. No necesitas un menu de 50 paginas, un sommelier y valet parking desde el primer dia. Necesitas buenos tacos, una forma de tomar pedidos y clientes contentos. Una vez que la gente haga fila por tus tacos, ENTONCES te expandes. Nuestro gestor de tareas es ese puesto de tacos — simple, enfocado y listo para servir."
+    },
+    {
+      "type": "motivation",
+      "body": "Todo producto SaaS exitoso empezo como un MVP simple. El gestor de tareas que vas a construir es el tipo de app por la que la gente paga $5-10/mes — y tu estas aprendiendo a crearlo con IA en una fraccion del tiempo."
+    },
+    {
       "type": "key_takeaway",
       "body": "Un MVP de gestor de tareas necesita: crear tareas, marcarlas como completadas, organizarlas por prioridad o fecha. Todo lo demas es un 'seria bueno tenerlo' que puede esperar."
     }

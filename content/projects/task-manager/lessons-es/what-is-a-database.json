@@ -19,6 +19,15 @@
       "body": "Almacenar datos sin una base de datos es como escribir todo en notas adhesivas — funciona hasta que pasa una brisa. Una base de datos es como un archivador con carpetas etiquetadas. Todo tiene un lugar, puedes encontrar cosas rapidamente, y nada desaparece cuando cierras el cajon. Para nuestro gestor de tareas, la base de datos almacena cada tarea, cada usuario y cada fecha limite — de manera confiable y permanente."
     },
     {
+      "type": "analogy",
+      "title": "Tu Cerebro vs. una Libreta",
+      "body": "Intenta memorizar 50 numeros de telefono. No puedes — tu cerebro los olvida con el tiempo. Eso es tu app sin base de datos. Ahora escribelos en una libreta con pestanas para cada letra. Puedes encontrar cualquier numero en segundos, y siguen ahi el mes siguiente. Una base de datos es la libreta de tu app — organizada, buscable y permanente."
+    },
+    {
+      "type": "motivation",
+      "body": "Ningun producto real existe sin una base de datos. En el momento en que aprendes a almacenar y recuperar datos, ya no estas construyendo proyectos de juguete — estas construyendo software que puede servir a usuarios reales y generar ingresos reales."
+    },
+    {
       "type": "key_takeaway",
       "body": "Una base de datos almacena los datos de tu app permanentemente para que sobrevivan refrescos de pagina, reinicios del servidor y sesiones de usuario. Sin una, tu gestor de tareas es solo un bloc de notas elegante que se borra solo."
     }

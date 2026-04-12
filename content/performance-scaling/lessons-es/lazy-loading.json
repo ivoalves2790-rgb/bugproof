@@ -14,6 +14,11 @@
       "body": "Netflix no descarga una película entera antes de que presiones play. Carga lo suficiente para empezar, luego sigue cargando más mientras miras. La **carga diferida** es la misma idea aplicada a páginas web -- no cargues imágenes, componentes o datos hasta que el usuario realmente los necesite."
     },
     {
+      "type": "analogy",
+      "title": "Carga diferida = Un buffet con cocina",
+      "body": "En un buffet inteligente, el chef no cocina todos los platos a la hora de apertura. Los platos populares están listos de entrada, pero los menos comunes se preparan al momento cuando alguien los pide. La **carga diferida** funciona igual -- sirves el contenido que los usuarios ven primero de inmediato, y solo preparas el resto cuando hacen scroll o navegan hacia él."
+    },
+    {
       "type": "text",
       "title": "¿Qué puede cargarse de forma diferida?",
       "body": "Casi cualquier cosa en una página puede cargarse de forma diferida:\n\n1. **Imágenes** -- Solo cargar imágenes cuando entran en vista (usa `loading=\"lazy\"`)\n2. **Componentes** -- Solo cargar componentes pesados cuando el usuario navega a ellos (React.lazy, importaciones dinámicas)\n3. **Datos** -- Solo obtener datos cuando el usuario abre una sección o pestaña\n4. **Scripts de terceros** -- Cargar analytics, widgets de chat, etc. después del contenido principal"
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- Loads immediately (good for hero/above-fold images) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Lazy loads when user scrolls near it -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
       "annotation": "El atributo nativo loading='lazy' del navegador retrasa la carga hasta que la imagen está cerca del viewport. ¡No se necesita JavaScript!"
+    },
+    {
+      "type": "motivation",
+      "body": "La carga diferida puede reducir tu tiempo de carga inicial en un 80% con solo unos cambios de atributos. Eso significa que los usuarios ven tu app casi al instante -- y una app que carga rápido es una app que consigue clientes que pagan, no estadísticas de rebote."
     },
     {
       "type": "key_takeaway",

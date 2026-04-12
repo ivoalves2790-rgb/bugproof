@@ -55,7 +55,8 @@ export type TeachBlock =
   | { type: "text"; title?: string; body: string }
   | { type: "code_example"; title?: string; language: string; code: string; annotation?: string }
   | { type: "analogy"; title?: string; body: string }
-  | { type: "key_takeaway"; body: string };
+  | { type: "key_takeaway"; body: string }
+  | { type: "motivation"; body: string };
 
 // Lesson data (lessons/*.json)
 export interface Lesson {

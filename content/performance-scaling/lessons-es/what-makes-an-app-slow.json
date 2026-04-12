@@ -14,6 +14,11 @@
       "body": "Imagina pedir comida en un restaurante. Una experiencia lenta puede ser causada por muchas cosas: una cocina lenta, demasiados clientes, un mesero que tarda una eternidad en traer el menú, o un cocinero que hace cada plato desde cero en lugar de preparar ingredientes de antemano. El **rendimiento de una app** funciona de la misma manera -- la lentitud puede venir de la red, el servidor, el navegador o tu código."
     },
     {
+      "type": "analogy",
+      "title": "Rendimiento = Tráfico en la autopista",
+      "body": "Piensa en tu app como una autopista en hora pico. Solo hay cierta cantidad de carriles (ancho de banda), y cada carro (solicitud) suma a la congestión. Un solo camión volcado (una imagen gigante sin comprimir o un script que bloquea) puede detener toda la autopista, aunque la mayoría de los carros sean pequeños y rápidos. **Optimizar el rendimiento** es como ser ingeniero de tránsito -- amplías carriles, despejas accidentes rápido y desvías el tráfico para que todo fluya."
+    },
+    {
       "type": "text",
       "title": "Los tres cuellos de botella",
       "body": "La mayoría de los problemas de rendimiento caen en tres categorías:\n\n1. **Red** -- Demasiados datos enviados, demasiadas solicitudes, respuestas lentas del servidor\n2. **Renderizado** -- El navegador luchando para pintar píxeles en la pantalla\n3. **Cómputo** -- Tu código haciendo demasiado trabajo (bucles pesados, cálculos innecesarios)\n\nLa solución depende de en qué categoría vive el problema."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Velocidad percibida vs real",
       "body": "Aquí hay un secreto: **qué tan rápida se siente tu app** importa más que qué tan rápida es realmente. Una página que muestra un skeleton de carga en 200ms y llena los datos a los 2 segundos *se siente* más rápida que una página en blanco que carga todo a los 1.5 segundos. Los usuarios odian quedarse mirando la nada."
+    },
+    {
+      "type": "motivation",
+      "body": "Si tu app se siente lenta, los usuarios cerrarán la pestaña antes de ver tus funciones -- o pagar por ellas. Entender qué hace lentas a las apps es el primer paso para construir productos que la gente realmente use."
     },
     {
       "type": "key_takeaway",

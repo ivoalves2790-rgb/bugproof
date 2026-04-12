@@ -14,6 +14,11 @@
       "body": "Imagine a chef who can cook any dish perfectly but leaves the kitchen a disaster afterward. Every pan is dirty, ingredients are scattered, and nothing is put back in its place. **AI coding tools** are like this chef -- they produce working code but don't think about where it fits in your project, what else already exists, or how the codebase should be organized."
     },
     {
+      "type": "analogy",
+      "title": "AI = A Brilliant Guest Who Doesn't Know Your House",
+      "body": "Imagine inviting a brilliant friend to help you cook dinner. They can make any recipe perfectly, but they don't know where you keep your pots, your spices, or your plates. So they leave ingredients on the counter, use a new pan for every step, and put the finished dish on the stove instead of the table. **AI writes great code but doesn't know your project's kitchen** -- it needs you to put things in the right place afterward."
+    },
+    {
       "type": "text",
       "title": "Why AI Makes Organizational Mistakes",
       "body": "AI tools generate code without full context:\n\n1. **No project awareness** -- AI doesn't know your file structure or existing patterns\n2. **One prompt at a time** -- Each response is independent; it doesn't remember choosing to put utilities in `lib/` earlier\n3. **Duplicates existing code** -- It writes a helper function you already have because it can't see your whole codebase\n4. **Inline everything** -- AI tends to put all logic in one file rather than splitting into proper modules"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "What You Need to Do After AI Generates Code",
       "body": "After AI writes code for you, always do a quick cleanup pass:\n\n- **Check for duplicates** -- Does this function already exist somewhere?\n- **Move to the right file** -- Should this logic live in a utility file or shared module?\n- **Rename unclear variables** -- AI often uses generic names like `data` or `result`\n- **Split large files** -- If a file grew past 200 lines, it probably does too many things"
+    },
+    {
+      "type": "motivation",
+      "body": "The vibecoder who cleans up AI output has a superpower: they ship fast AND deliver maintainable code. That's the difference between a $500 throwaway prototype and a $5,000 app with a maintenance contract that pays you monthly."
     },
     {
       "type": "key_takeaway",

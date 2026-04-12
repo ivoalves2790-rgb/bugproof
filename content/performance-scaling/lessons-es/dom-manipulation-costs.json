@@ -14,6 +14,11 @@
       "body": "Imagina el DOM como el plano de un edificio. Cada vez que cambias el plano (agregas una habitación, mueves una pared), el equipo de construcción tiene que parar, leer los cambios, averiguar qué se afecta y reconstruir. Si les entregas 100 cambios pequeños uno a la vez, reconstruyen 100 veces. Si agrupas los 100 cambios en un plano revisado, reconstruyen una vez. Por eso **agrupar cambios del DOM** es tan importante."
     },
     {
+      "type": "analogy",
+      "title": "DOM = Reorganizar muebles con mudanceros",
+      "body": "Imagina contratar mudanceros para reorganizar tu departamento. Cada vez que quieres mover un mueble, miden toda la habitación, mueven la pieza y miden de nuevo. Si les pides mover 50 cosas una por una, miden la habitación 100 veces. Pero si les das un plano completo desde el inicio, miden una vez, mueven todo y miden una vez más. Esa es la diferencia entre **actualizaciones individuales del DOM** y **actualizaciones agrupadas**."
+    },
+    {
       "type": "text",
       "title": "Por qué el acceso al DOM es lento",
       "body": "El DOM vive en una parte diferente del navegador que JavaScript. Cada vez que JS accede o modifica el DOM, está cruzando un puente entre dos sistemas. Este puente tiene un peaje:\n\n1. **Leer** (ej., element.offsetHeight) obliga al navegador a calcular el layout actual\n2. **Escribir** (ej., element.style.color = 'red') marca el layout como sucio, requiriendo recálculo\n3. **Leer y luego escribir en un bucle** es lo peor -- cada lectura fuerza el cálculo del layout, luego cada escritura lo invalida de nuevo"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Forces layout recalculation on every iteration\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ reads layout each time!\n}\n\n// GOOD: Read once, then write in a batch\nconst width = container.offsetWidth; // one read\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // only writes\n}",
       "annotation": "La versión mala lee offsetWidth dentro del bucle, lo que obliga al navegador a recalcular el layout en cada iteración porque la escritura anterior (style.width) lo invalidó. Esto se llama 'layout thrashing'."
+    },
+    {
+      "type": "motivation",
+      "body": "El layout thrashing es la razón oculta por la que las apps se sienten trabadas y lentas. Entender los costos del DOM te permite construir interfaces ultra fluidas que mantienen a los usuarios contentos, enganchados y dispuestos a pagar por tu producto."
     },
     {
       "type": "key_takeaway",

@@ -21,6 +21,15 @@
       "annotation": "Observa: cada UPDATE y DELETE incluye AND user_id = '...'. Esto previene que los usuarios modifiquen las tareas de otras personas. Nunca olvides este filtro."
     },
     {
+      "type": "analogy",
+      "title": "Las Consultas Son Como Pedirle a un Bibliotecario",
+      "body": "No recorres cada estante de una biblioteca para encontrar un libro. Le pides al bibliotecario: 'Necesito todos los libros de este autor, ordenados por ano.' Las consultas SQL funcionan igual — le dices a la base de datos exactamente que quieres (SELECT), donde buscar (FROM/WHERE) y como ordenarlo (ORDER BY). Un pedido vago te da los libros equivocados; una consulta precisa te da exactamente lo que necesitas."
+    },
+    {
+      "type": "motivation",
+      "body": "Las consultas CRUD son el motor detras de cada funcionalidad de tu app. Dominandolas, puedes construir cualquier funcionalidad que los usuarios pidan — listas de tareas, filtros, busqueda, dashboards. Cada nueva funcionalidad es una razon para que los usuarios se queden y paguen."
+    },
+    {
       "type": "key_takeaway",
       "body": "Siempre filtra las consultas por user_id para reforzar la propiedad de datos. Una consulta sin filtro de usuario es un agujero de seguridad — podria permitir que cualquiera lea, modifique o elimine las tareas de otro usuario."
     }

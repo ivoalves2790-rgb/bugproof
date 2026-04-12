@@ -14,11 +14,20 @@
       "body": "Antes de lanzar, necesitas verificar: todas las variables de entorno estan configuradas, HTTPS esta habilitado, el rastreo de errores esta configurado, hay una forma de revertir si algo sale mal, y alguien esta disponible para arreglar problemas. La mayoria de los desastres del dia de lanzamiento vienen de saltarse uno de estos basicos."
     },
     {
+      "type": "analogy",
+      "title": "El Lanzamiento Es Como la Noche de Estreno",
+      "body": "Una compania de teatro no abre las puertas sin verificar el sistema de sonido, las luces del escenario y las salidas de emergencia. Tu lanzamiento es tu noche de estreno — el publico es real, las primeras impresiones importan, y un recorrido de 10 minutos previo puede salvarte de un desastre vergonzoso."
+    },
+    {
       "type": "code_example",
       "title": "Esenciales Pre-Lanzamiento",
       "language": "text",
       "code": "[ ] Production env vars set and verified\n[ ] HTTPS enabled (automatic on Vercel)\n[ ] Error tracking configured (Sentry, etc.)\n[ ] Database migrations applied\n[ ] Auth working in production environment\n[ ] Rollback plan: know how to revert to previous deploy\n[ ] Open Graph / social meta tags set\n[ ] 404 page configured",
       "annotation": "Revisa cada punto. Una revision de 10 minutos de la lista puede prevenir una emergencia de 10 horas el dia del lanzamiento."
+    },
+    {
+      "type": "motivation",
+      "body": "El dia del lanzamiento es cuando tu proyecto vibecodeado se encuentra con el mundo real. Un lanzamiento fluido genera confianza, atrae adoptadores tempranos y prepara el escenario para tus primeros clientes que pagan."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "When you order delivery: (1) you look up the restaurant's number (DNS), (2) you call them (TCP connection), (3) you place your order (HTTP request), (4) the kitchen makes your food (server processing), (5) the driver brings it back (HTTP response), (6) you eat it (browser renders the page). Every website visit follows this same flow."
     },
     {
+      "type": "analogy",
+      "title": "The Full Journey = Sending a Package Across the Country",
+      "body": "Sending a package has many steps: you write the address (URL), the post office looks up the zip code route (DNS), the truck drives to the sorting facility (TCP), your package is loaded (HTTP request), the warehouse finds your item (server processing), and the truck delivers it to your door (HTTP response). If any step fails -- wrong address, closed road, warehouse fire -- the package doesn't arrive. Loading a web page works the same way."
+    },
+    {
       "type": "text",
       "title": "The Complete Lifecycle",
       "body": "Here's what happens when you type a URL and press Enter:\n\n1. **DNS Lookup** -- your browser finds the server's IP address\n2. **TCP Connection** -- your browser opens a connection to that IP\n3. **HTTP Request** -- your browser sends 'GET / HTTP/1.1'\n4. **Server Processing** -- the server builds the page\n5. **HTTP Response** -- the server sends back HTML\n6. **Rendering** -- your browser paints the page on screen"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "It's Not Just One Request",
       "body": "The first HTML file often references other files: CSS stylesheets, JavaScript files, images, and fonts. Your browser reads the HTML and sends **additional requests** for each of these resources. A single page load might involve 50-100 separate HTTP requests, all happening in parallel."
+    },
+    {
+      "type": "motivation",
+      "body": "Now you see the full picture of how the web works. This big-picture understanding is your superpower when vibecoding -- you can build apps that scale, debug problems fast, and ship products that actually make money because you understand every layer of the stack."
     },
     {
       "type": "key_takeaway",

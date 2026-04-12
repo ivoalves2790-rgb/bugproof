@@ -14,11 +14,20 @@
       "body": "Every test has three phases: Arrange (set up the data), Act (run the function), and Assert (check the result). A test for adding a task would create input data, call the addTask function, and verify the returned task has the right properties."
     },
     {
+      "type": "analogy",
+      "title": "Writing a Test Is Like Writing a Lab Report",
+      "body": "In science class, you set up an experiment (arrange), run it (act), and check the result against your hypothesis (assert). Writing a test follows the exact same steps — you're just the scientist and your code is the experiment."
+    },
+    {
       "type": "code_example",
       "title": "A Simple Unit Test",
       "language": "text",
       "code": "test('addTask creates a task with correct title and pending status', () => {\n  // Arrange\n  const input = { title: 'Buy groceries' };\n  \n  // Act\n  const task = addTask(input);\n  \n  // Assert\n  expect(task.title).toBe('Buy groceries');\n  expect(task.status).toBe('pending');\n  expect(task.id).toBeDefined();\n});",
       "annotation": "The Arrange-Act-Assert pattern keeps tests readable and focused on one behavior."
+    },
+    {
+      "type": "motivation",
+      "body": "Writing your first test is a milestone — it proves you can build software professionally. Apps with tests attract paying users because they work reliably, and that reliability is what turns a side project into income."
     },
     {
       "type": "key_takeaway",

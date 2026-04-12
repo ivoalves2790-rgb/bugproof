@@ -19,11 +19,20 @@
       "body": "Here's the typical workflow:\n\n1. **Create a branch** from main for your feature\n2. **Make commits** on your feature branch as you work\n3. **Switch back to main** when the feature is done\n4. **Merge** your feature branch into main\n\nThe key rule: you must be **standing on the branch that receives the changes** when you merge."
     },
     {
+      "type": "analogy",
+      "title": "Merging = Accepting a Delivery",
+      "body": "Think of merging like receiving a delivery at your front door. The delivery person (feature branch) brings the package to your house (main branch). You have to be home (standing on main) to accept the delivery. If you go to the warehouse instead, you've got it backwards -- the package doesn't end up at your house. That's why you switch to main before merging."
+    },
+    {
       "type": "code_example",
       "title": "The Correct Merge Workflow",
       "language": "bash",
       "code": "git checkout -b feature/payments   # Create & switch to feature branch\n# ... do your work, make commits ...\ngit checkout main                  # Switch BACK to main\ngit merge feature/payments         # Merge feature INTO main",
       "annotation": "The merge direction matters! You stand on main and pull the feature in -- not the other way around."
+    },
+    {
+      "type": "motivation",
+      "body": "Getting the merge workflow right is what separates tutorial-level knowledge from production-ready skills. Companies use this exact workflow hundreds of times a day -- nail it, and you can confidently join any dev team building apps with AI or otherwise."
     },
     {
       "type": "key_takeaway",

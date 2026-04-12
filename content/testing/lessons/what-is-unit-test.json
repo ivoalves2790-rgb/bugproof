@@ -14,6 +14,11 @@
       "body": "Before building a whole LEGO castle, you'd want to make sure each individual brick is solid -- no cracks, right shape, correct color. A **unit test** does the same for code. It tests ONE small piece (a function, a calculation) by itself. If all your individual bricks are solid, you can trust the castle you build with them."
     },
     {
+      "type": "analogy",
+      "title": "Unit Test = Checking Each Ingredient Before Baking",
+      "body": "Before baking a cake, you check each ingredient separately: Is the flour fresh? Are the eggs good? Is the sugar actually sugar and not salt? You don't wait until the cake is baked to find out. A **unit test** checks each 'ingredient' of your code individually, so when you combine them all, you know every piece is solid."
+    },
+    {
       "type": "text",
       "title": "What Makes a Test a 'Unit' Test?",
       "body": "A unit test has three properties:\n\n1. **Tests one thing** -- A single function or a single behavior\n2. **Runs in isolation** -- Doesn't depend on databases, APIs, or other services\n3. **Runs fast** -- Typically milliseconds, because there's no network or disk I/O\n\nIf your test needs a database running or makes API calls, it's probably an integration test, not a unit test."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// The function (the 'unit' we're testing)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// The unit test\ntest('capitalizes the first letter', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
       "annotation": "This test focuses on one function and one behavior. It doesn't need a database or server. It runs in milliseconds."
+    },
+    {
+      "type": "motivation",
+      "body": "AI can generate dozens of functions in seconds, but any one of them could have a subtle bug. Unit tests let you verify each piece individually, so you can confidently charge money for an app built on code you trust."
     },
     {
       "type": "key_takeaway",

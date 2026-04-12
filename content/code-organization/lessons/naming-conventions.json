@@ -14,6 +14,11 @@
       "body": "Road signs work because everyone agrees on what they look like. A red octagon means STOP everywhere. If each city invented its own sign shapes and colors, driving would be chaos. **Naming conventions** are the road signs of code -- they create predictability so developers know what to expect."
     },
     {
+      "type": "analogy",
+      "title": "Conventions = Uniforms in a Hospital",
+      "body": "In a hospital, doctors wear white coats, nurses wear scrubs, and patients wear gowns. Without even asking, you know who does what. **Naming conventions work the same way** -- when you see PascalCase, you know it's a component; camelCase means a variable or function; UPPER_SNAKE_CASE is a constant. The 'uniform' tells you the role instantly."
+    },
+    {
       "type": "text",
       "title": "JavaScript/React Naming Conventions",
       "body": "In the JavaScript/React world, these are the standard conventions:\n\n- **camelCase** for variables and functions: `userName`, `fetchProducts()`\n- **PascalCase** for React components and classes: `UserProfile`, `ShoppingCart`\n- **UPPER_SNAKE_CASE** for constants: `MAX_RETRY_COUNT`, `API_BASE_URL`\n- **camelCase** for file names: `userService.js`, `formatDate.js`\n- **PascalCase** for component files: `UserCard.jsx`, `Header.jsx`\n- **kebab-case** for CSS classes: `user-profile`, `nav-item`"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// Constants - UPPER_SNAKE_CASE\nconst MAX_LOGIN_ATTEMPTS = 5;\nconst API_BASE_URL = 'https://api.example.com';\n\n// Variables & functions - camelCase\nconst currentUser = getCurrentUser();\nconst isLoggedIn = checkAuthStatus();\n\n// React Component - PascalCase\nfunction UserDashboard({ userId }) {\n  const userOrders = fetchUserOrders(userId);\n  return <OrderList orders={userOrders} />;\n}",
       "annotation": "At a glance you can tell: UPPER_SNAKE_CASE is a constant, camelCase is a variable or function, PascalCase is a component. The convention carries meaning."
+    },
+    {
+      "type": "motivation",
+      "body": "Consistent naming conventions make your code look professional to other developers and clients reviewing your work. That professional polish is what turns a one-off freelance gig into a retainer contract with recurring monthly income."
     },
     {
       "type": "key_takeaway",

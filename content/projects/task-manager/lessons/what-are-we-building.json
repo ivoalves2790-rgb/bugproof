@@ -19,6 +19,15 @@
       "body": "An MVP (Minimum Viable Product) isn't half a car — it's a skateboard. It's the smallest thing that actually works and solves a problem. Our task manager MVP needs to let users create, complete, and organize tasks. That's it. No AI summaries, no team collaboration, no Gantt charts. Those come later."
     },
     {
+      "type": "analogy",
+      "title": "The Taco Stand Before the Restaurant",
+      "body": "Think of building an MVP like opening a taco stand before a full restaurant. You don't need a 50-page menu, a sommelier, and valet parking on day one. You need great tacos, a way to take orders, and happy customers. Once people are lining up for your tacos, THEN you expand. Our task manager is that taco stand — simple, focused, and ready to serve."
+    },
+    {
+      "type": "motivation",
+      "body": "Every successful SaaS product started as a simple MVP. The task manager you're about to build is the kind of app people pay $5-10/month for — and you're learning to build it with AI in a fraction of the time."
+    },
+    {
       "type": "key_takeaway",
       "body": "A task manager MVP needs: create tasks, mark them complete, organize by priority or date. Everything else is a 'nice to have' that can wait."
     }

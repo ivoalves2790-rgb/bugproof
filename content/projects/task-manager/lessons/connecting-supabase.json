@@ -21,6 +21,15 @@
       "annotation": "The keys come from environment variables, not hardcoded strings. NEXT_PUBLIC_ prefix makes them available in the browser. The anon key is safe to expose because RLS policies protect your data."
     },
     {
+      "type": "analogy",
+      "title": "Connecting Supabase Is Like Plugging In a USB Cable",
+      "body": "Your app and your database are two devices that need to talk. The Supabase client library is the cable, the project URL is the port you plug into, and the anon key is like the handshake that says 'yes, this device is allowed to connect.' One wrong setting and there's no connection — but get it right and data flows instantly."
+    },
+    {
+      "type": "motivation",
+      "body": "Connecting your app to a real database is the moment your project stops being a prototype and starts being a product. This is the step that makes your task manager capable of serving real users — and real users are what generate real income."
+    },
+    {
       "type": "key_takeaway",
       "body": "Store Supabase credentials in environment variables, never in your code. The anon key is designed to be public — it's Row Level Security (not the key itself) that protects your data. Always enable RLS on every table."
     }

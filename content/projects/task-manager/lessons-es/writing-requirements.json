@@ -14,11 +14,20 @@
       "body": "Los requisitos son una lista clara de lo que tu app debe hacer. Sin ellos, vagaras, olvidaras funcionalidades y construiras algo equivocado. Cuando usas IA para ayudarte a programar, los requisitos se vuelven aun mas criticos — la IA construye exactamente lo que describes, nada mas."
     },
     {
+      "type": "analogy",
+      "title": "Coordenadas GPS vs. 'Ve por Alla'",
+      "body": "Dar requisitos vagos a la IA es como decirle a un taxista 'llevame a un lugar bonito.' Podrias terminar en un buen restaurante o en un estacionamiento random. Requisitos claros son como dar coordenadas GPS exactas — el conductor sabe precisamente a donde ir, y llegas exactamente donde querias."
+    },
+    {
       "type": "code_example",
       "title": "Requisitos Malos vs Buenos",
       "language": "text",
       "code": "BAD:  \"Make a task app\"\nGOOD: \"Users can create tasks with a title (required)\n      and description (optional). Tasks have three\n      states: todo, in-progress, done. Users can\n      filter tasks by state.\"",
       "annotation": "El requisito malo no le da nada a la IA para trabajar. El bueno especifica exactamente que significa 'tarea' y como se comporta."
+    },
+    {
+      "type": "motivation",
+      "body": "Requisitos claros son tu superpoder como vibecoder. Mientras otros pierden horas yendo y viniendo con la IA, tu lo logras en un solo prompt y lanzas tu producto mas rapido — tiempo ahorrado es dinero ganado."
     },
     {
       "type": "key_takeaway",

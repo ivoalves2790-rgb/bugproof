@@ -14,6 +14,11 @@
       "body": "El testing manual es como lavar platos a mano. Lo haces tú mismo, uno por uno, y a veces se te pasa una mancha. El testing automatizado es como un lavavajillas -- lo cargas una vez, presionas un botón, y limpia todo de forma consistente cada vez. El lavavajillas no se cansa, no olvida un plato ni apura los últimos."
     },
     {
+      "type": "analogy",
+      "title": "Manual = Guardia de seguridad, Automatizado = Cámaras de seguridad",
+      "body": "Un guardia de seguridad solo puede vigilar una entrada a la vez, se cansa y toma descansos. Las cámaras de seguridad vigilan todas las entradas simultáneamente, 24/7, y nunca parpadean. El **testing manual** es el guardia -- genial para juicios de valor y notar que algo 'se siente raro'. El **testing automatizado** es el sistema de cámaras -- vigila todo a la vez y nunca se le escapa nada de lo que le dijiste que busque."
+    },
+    {
       "type": "text",
       "title": "Testing manual",
       "body": "**Testing manual** significa que TÚ verificas si las cosas funcionan:\n\n- Haces clic por la app en un navegador\n- Escribes en formularios y verificas el output\n- Pruebas diferentes escenarios a mano\n\nEs lento, inconsistente y no escala. Pero es bueno para explorar nuevas funcionalidades y verificar el diseño visual -- cosas que son difíciles de automatizar."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Testing automatizado",
       "body": "**Testing automatizado** significa que el CÓDIGO verifica si las cosas funcionan:\n\n- Los tests se ejecutan en segundos\n- Las mismas verificaciones cada vez, sin error humano\n- Se ejecuta automáticamente en cada push (via CI/CD)\n- Puede testear cientos de escenarios en el tiempo que toma testear uno manualmente\n\nEl costo inicial es escribir los tests, pero se pagan solos después de solo unas pocas ejecuciones."
+    },
+    {
+      "type": "motivation",
+      "body": "Puedes vibecodear una nueva funcionalidad en minutos, pero testear manualmente cada página después de cada cambio toma horas. Los tests automatizados te permiten lanzar actualizaciones a la velocidad que la IA escribe código -- sin el miedo de romper silenciosamente lo que ya te genera dinero."
     },
     {
       "type": "key_takeaway",

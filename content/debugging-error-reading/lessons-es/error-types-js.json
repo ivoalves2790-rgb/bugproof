@@ -14,6 +14,11 @@
       "body": "Cuando vas al doctor, no solo dicen 'estás enfermo.' Identifican el tipo: un resfriado, un esguince, una alergia. Los errores de JavaScript funcionan de la misma manera. Cada tipo de error te dice una categoría diferente de problema, lo que te apunta hacia un tipo diferente de solución."
     },
     {
+      "type": "analogy",
+      "title": "Los tipos de error son como luces de advertencia en el tablero",
+      "body": "El tablero de tu auto tiene diferentes luces de advertencia para diferentes problemas -- una para aceite bajo, otra para temperatura del motor, otra para presión de llantas. Cada luz te dice que un sistema diferente necesita atención y un tipo diferente de reparación. Los tipos de error de JavaScript funcionan igual: SyntaxError significa que tu gramática necesita arreglo, TypeError significa que mezclaste tipos de datos, y cada uno te apunta hacia una reparación diferente."
+    },
+    {
       "type": "text",
       "title": "Los cuatro tipos principales de error",
       "body": "JavaScript tiene cuatro tipos de error que verás con más frecuencia:\n\n1. **SyntaxError** -- tu código tiene un error gramatical y ni siquiera puede ejecutarse\n2. **ReferenceError** -- usaste un nombre de variable que no existe\n3. **TypeError** -- intentaste una operación en el tipo equivocado de valor\n4. **RangeError** -- un número está fuera del rango permitido"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// SyntaxError: missing closing bracket\nfunction greet( { console.log('hi'); }\n\n// ReferenceError: variable doesn't exist\nconsole.log(userName);\n\n// TypeError: wrong operation for this type\nconst num = 42;\nnum.toUpperCase();",
       "annotation": "Cada tipo de error apunta a un tipo diferente de error. SyntaxError significa gramática rota, ReferenceError significa un nombre faltante, TypeError significa una operación incompatible."
+    },
+    {
+      "type": "motivation",
+      "body": "Cuando la IA genera código con un TypeError o ReferenceError, saber la diferencia te permite decirle exactamente qué corregir en vez de empezar de cero. Esa velocidad es lo que convierte el vibecoding de un pasatiempo en ingresos reales."
     },
     {
       "type": "key_takeaway",

@@ -14,11 +14,20 @@
       "body": "Vercel is built by the creators of Next.js, making it the smoothest deployment option. You connect your GitHub repo, Vercel detects it's a Next.js app, and builds it automatically. But 'automatic' doesn't mean 'no issues' — missing env vars, build errors, and type errors are common first-deploy problems."
     },
     {
+      "type": "analogy",
+      "title": "Deploying Is Like Moving Into a New Apartment",
+      "body": "Everything worked in your old place, but in the new apartment the outlets are in different spots and the water pressure is different. Deploying to Vercel is similar — your code is the same, but the environment is new, and small differences (missing env vars, case-sensitive file systems) can trip you up."
+    },
+    {
       "type": "code_example",
       "title": "Common First-Deploy Errors",
       "language": "text",
       "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ You forgot to add env vars in Vercel dashboard\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript is stricter in production builds\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Case sensitivity: taskList.tsx vs TaskList.tsx (Linux is case-sensitive)",
       "annotation": "Most first-deploy failures are environment or build configuration issues, not code bugs."
+    },
+    {
+      "type": "motivation",
+      "body": "Every successful deploy puts your product in front of real users. Mastering Vercel deployments means you can go from idea to live app in hours, not weeks — and speed to market is how indie builders make money."
     },
     {
       "type": "key_takeaway",

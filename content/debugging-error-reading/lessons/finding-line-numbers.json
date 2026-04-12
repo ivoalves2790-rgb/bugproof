@@ -14,6 +14,11 @@
       "body": "When someone says 'look at page 47, paragraph 3,' you can go straight there. Error messages work the same way. They give you a file name and line number so you can jump directly to the problem instead of reading through your entire codebase."
     },
     {
+      "type": "analogy",
+      "title": "Line Numbers Are Like Apartment Numbers",
+      "body": "If a friend says 'I live in the building on Main Street, apartment 4B,' you don't knock on every door to find them. You go straight to 4B. Error line numbers work the same way -- the file name is the building and the line number is the apartment. Go directly there instead of searching the whole codebase."
+    },
+    {
       "type": "text",
       "title": "How to Read the Line Number",
       "body": "Error messages show the location like this: `File \"app.py\", line 12`. That means the crash happened on **line 12** of the file called **app.py**. Your code editor shows line numbers on the left side. Jump to that line -- the bug is right there or very close to it."
@@ -24,6 +29,10 @@
       "language": "python",
       "code": "colors = [\"red\", \"blue\"]\nprint(colors[2])  # IndexError: list index out of range",
       "annotation": "The list has 2 items at index 0 and 1. Asking for index 2 crashes because it doesn't exist. Python counts from 0, so a list with 2 items has indexes 0 and 1."
+    },
+    {
+      "type": "motivation",
+      "body": "Jumping straight to the right line number instead of guessing saves you hours every week. When you're building apps with AI to earn money, that saved time means more features shipped and more revenue generated."
     },
     {
       "type": "key_takeaway",

@@ -19,6 +19,15 @@
       "body": "Imagina un hotel sin llaves de habitacion. Cualquiera podria entrar a cualquier habitacion, tomar tus cosas o dormir en tu cama. La autenticacion es la tarjeta llave — demuestra cual habitacion es tuya. La autorizacion (un concepto relacionado) es lo que la tarjeta desbloquea: tu habitacion, la piscina, pero no la oficina del personal."
     },
     {
+      "type": "analogy",
+      "title": "Auth Es Como una Pulsera de Concierto",
+      "body": "En un festival de musica, tu pulsera demuestra que compraste una entrada (autenticacion). El color de tu pulsera determina si accedes al area VIP o solo a la zona general (autorizacion). Sin pulsera, los de seguridad ni te dejan pasar. Tu app funciona igual — sin login, sin acceso."
+    },
+    {
+      "type": "motivation",
+      "body": "La autenticacion es lo que hace tu app personal — y las apps personales son por las que la gente paga. Sin auth, no puedes tener cuentas de usuario, y sin cuentas de usuario, no puedes cobrar por funcionalidades premium."
+    },
+    {
       "type": "key_takeaway",
       "body": "La autenticacion verifica la identidad ('quien eres?'), la autorizacion controla el acceso ('que puedes hacer?'). Cualquier app que almacene datos especificos de usuario necesita ambas."
     }

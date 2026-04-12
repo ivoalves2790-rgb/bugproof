@@ -14,6 +14,11 @@
       "body": "A browser renders a page like building a house. First the **frame** goes up (HTML structure). Then the **paint and wallpaper** (CSS styling). Then the **furniture and appliances** (JavaScript interactivity). If any step is blocked, the whole build pauses -- just like a house can't be painted until the walls are up."
     },
     {
+      "type": "analogy",
+      "title": "Rendering Is Like Assembling IKEA Furniture",
+      "body": "When you build IKEA furniture, you follow steps in order: first the frame, then the shelves, then the doors. If a crucial piece is missing from the box, you're stuck waiting until you find it. Browsers work the same way -- they follow a strict order (HTML, then CSS, then paint), and if a file hasn't arrived yet, everything after it waits. A missing CSS file is like a missing shelf bracket -- nothing looks right until it shows up."
+    },
+    {
       "type": "text",
       "title": "The Rendering Pipeline",
       "body": "When your browser receives HTML, it follows these steps:\n\n1. **Parse HTML** -- builds the DOM (Document Object Model), a tree of elements\n2. **Parse CSS** -- figures out what styles apply to each element\n3. **Layout** -- calculates the size and position of every element\n4. **Paint** -- draws pixels to the screen\n5. **Composite** -- layers everything together\n\nIf CSS or JavaScript files are still loading, steps 2-5 can be blocked."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Render-Blocking Resources",
       "body": "Some files **block rendering** -- the browser won't paint anything until they're loaded:\n\n- **CSS files** block rendering because the browser won't show unstyled content\n- **JavaScript in the `<head>`** blocks parsing because it might modify the page\n\nThat's why large CSS files or slow-loading scripts cause the dreaded 'white screen' while the page loads."
+    },
+    {
+      "type": "motivation",
+      "body": "Speed is money. Studies show that every extra second of load time loses customers. When you vibecode with rendering performance in mind, your apps feel instant -- and fast apps convert visitors into paying users."
     },
     {
       "type": "key_takeaway",

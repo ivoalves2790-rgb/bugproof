@@ -14,6 +14,11 @@
       "body": "Imagina repintar toda tu casa cada vez que cuelgas un nuevo cuadro. Eso es lo que hacen los re-renderizados innecesarios -- el navegador redibuja componentes que en realidad no han cambiado. Un pintor **inteligente** solo repintaría la pared donde va el nuevo cuadro. React puede ser inteligente también, si le dices qué no ha cambiado."
     },
     {
+      "type": "analogy",
+      "title": "Re-renderizados = Reimprimir todo el periódico",
+      "body": "Imagina un periódico que reimprime cada página cada vez que cambia un solo titular. La imprenta funciona sin parar, los camiones de reparto se saturan y los lectores reciben su periódico tarde. Un periódico inteligente solo reimprime la página que cambió. La **memoización en React** hace lo mismo -- le dice a tu app que solo re-renderice los componentes que realmente tienen contenido nuevo, no toda la página."
+    },
+    {
       "type": "text",
       "title": "Por qué los re-renderizados son costosos",
       "body": "Cada vez que un componente React se re-renderiza, el navegador debe:\n\n1. Ejecutar tu función de componente de nuevo (ejecutando todo el código dentro)\n2. Comparar la nueva salida con la salida anterior (diffing)\n3. Actualizar el DOM real donde las cosas cambiaron (pintado)\n\nPara un componente pequeño, esto es rápido. Para una lista de 500 elementos, hacer esto en cada tecleo crea lag visible."
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "// BAD: Creates a new function on every render\n<ExpensiveList\n  items={items}\n  onSelect={(id) => setSelected(id)}\n/>\n\n// GOOD: Stable function reference\nconst handleSelect = useCallback(\n  (id) => setSelected(id),\n  []\n);\n<ExpensiveList items={items} onSelect={handleSelect} />",
       "annotation": "Cuando pasas una función flecha inline, React ve una función 'nueva' en cada renderizado y re-renderiza ExpensiveList. useCallback mantiene la misma referencia de función, así que React sabe que la prop no ha cambiado."
+    },
+    {
+      "type": "motivation",
+      "body": "Un campo de búsqueda que se traba en cada tecla hará que los usuarios abandonen tu app. Dominar el rendimiento de renderizado significa que tus apps vibecodeadas se sienten pulidas y profesionales -- del tipo en que los usuarios confían lo suficiente para sacar su tarjeta de crédito."
     },
     {
       "type": "key_takeaway",

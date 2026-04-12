@@ -19,6 +19,15 @@
       "body": "A component should do **one thing well**. If you find yourself describing a component with the word 'and' — like 'it fetches data AND renders a list AND handles filtering' — that component is doing too much. Break it into smaller pieces: a data-fetching wrapper, a list renderer, and a filter control."
     },
     {
+      "type": "analogy",
+      "title": "Components Are Like Kitchen Stations",
+      "body": "In a professional kitchen, there's a station for grilling, one for salads, one for desserts. Each station does one thing and does it well. If one chef tried to do everything at once, orders would pile up and food would burn. React components work the same way — each one owns a specific job, and together they serve the full experience."
+    },
+    {
+      "type": "motivation",
+      "body": "Thinking in components is how professional developers build apps that scale. When you structure your UI well, adding new features (and new revenue streams) to your product takes hours instead of weeks."
+    },
+    {
       "type": "key_takeaway",
       "body": "Good components are small, focused, and reusable. If a component is hard to name, it probably does too much. If you copy-paste JSX, you probably need a shared component. Start with fewer, larger components and break them apart as complexity grows."
     }

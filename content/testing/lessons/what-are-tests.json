@@ -14,6 +14,11 @@
       "body": "You know how a spell checker automatically underlines misspelled words as you type? You don't have to manually re-read every sentence -- the spell checker does it for you. **Tests** are like a spell checker for your code. They automatically check that your code does what it's supposed to do, so you don't have to manually verify everything yourself every time you make a change."
     },
     {
+      "type": "analogy",
+      "title": "Tests = A Taste Test Before Serving",
+      "body": "Every good chef tastes the food before sending it out to customers. They don't just hope the seasoning is right -- they verify it. **Tests** work the same way for your code. Before your users ever see it, tests let you 'taste' every feature to make sure it's right. If something is off, you catch it in the kitchen, not at the table."
+    },
+    {
       "type": "text",
       "title": "What Tests Actually Are",
       "body": "A test is a small piece of code that:\n\n1. **Sets up** a scenario (give this input...)\n2. **Runs** some code (call this function...)\n3. **Checks** the result (expect this output...)\n\nIf the result matches what you expected, the test **passes**. If it doesn't, the test **fails** and tells you exactly what went wrong."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// The function we want to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// The test\ntest('adds 2 + 3 to equal 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
       "annotation": "This test calls add(2, 3) and checks if the result is 5. If someone accidentally breaks the add function, this test will catch it."
+    },
+    {
+      "type": "motivation",
+      "body": "When you vibecode an app with AI, the code appears fast -- but bugs hide in the speed. Tests are how you make sure your AI-generated app actually works before real users (and real money) are on the line."
     },
     {
       "type": "key_takeaway",

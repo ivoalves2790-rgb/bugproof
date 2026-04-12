@@ -14,6 +14,11 @@
       "body": "Airlines have a weight limit for luggage. If your suitcase is over the limit, you pay extra and everything takes longer. Your JavaScript bundle is like that suitcase -- the heavier it is, the longer users wait. And just like packing, the solution is removing things you don't really need, not buying a bigger suitcase."
     },
     {
+      "type": "analogy",
+      "title": "Bundle Size = Stuffing Your Backpack for a Day Hike",
+      "body": "You're going on a short day hike, but you pack camping gear, winter clothes, scuba equipment, and a toolbox -- just in case. Now your backpack weighs 50 pounds and you can barely walk. That's what a bloated bundle does to your app -- it forces users to carry the weight of libraries and features they'll never use on this particular page. **Pack light, walk fast.**"
+    },
+    {
       "type": "text",
       "title": "Why Bundle Size Matters",
       "body": "Every kilobyte of JavaScript has a double cost:\n\n1. **Download time** -- Users must download the file before anything happens\n2. **Parse time** -- The browser must read and compile the JavaScript before it can run\n\nOn a slow 3G connection, 1MB of JavaScript takes about 10 seconds to download AND another few seconds to parse. That's why bundle size directly translates to load time."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Imports the entire lodash library (70KB+)\nimport _ from 'lodash';\nconst sorted = _.sortBy(users, 'name');\n\n// GOOD: Imports just the function you need (2KB)\nimport sortBy from 'lodash/sortBy';\nconst sorted = sortBy(users, 'name');",
       "annotation": "The first import pulls in 500+ lodash functions. The second import only includes sortBy and its dependencies. This is called tree-shaking, and it can cut library sizes by 90%."
+    },
+    {
+      "type": "motivation",
+      "body": "AI makes it easy to add libraries -- sometimes too easy. Keeping your bundle lean is how you make sure the apps you vibecode actually load fast on real phones with real data plans, which is where real paying users live."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "You know that one drawer in your house where everything ends up? Batteries, tape, scissors, old menus, keys to who-knows-what. **Refactoring** is like finally organizing that drawer: you don't throw anything away, you just put things where they belong. Batteries in one spot, tools in another, trash in the bin."
     },
     {
+      "type": "analogy",
+      "title": "Refactoring = Rearranging Furniture Without Remodeling",
+      "body": "You move the couch to the other wall, put the bookshelf by the window, and add a rug. The room has the same furniture but now it flows better and feels more livable. You didn't knock down any walls or buy new furniture. **Refactoring is rearranging your code's furniture** -- same functionality, better layout, easier to live with every day."
+    },
+    {
       "type": "text",
       "title": "What Refactoring Is (and Isn't)",
       "body": "Refactoring means **changing how code is organized without changing what it does**.\n\n- Moving a function to a different file = refactoring\n- Renaming a variable for clarity = refactoring\n- Splitting a big function into smaller ones = refactoring\n- Adding a new feature = NOT refactoring\n- Fixing a bug = NOT refactoring\n\nThe key: after refactoring, the app works exactly the same as before."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "BEFORE:\nsrc/\n  app.js            (400 lines - everything)\n\nAFTER:\nsrc/\n  components/\n    Header.jsx\n    ProductList.jsx\n  api/\n    products.js\n  utils/\n    formatPrice.js\n  app.js            (30 lines - just imports and routing)",
       "annotation": "The code is exactly the same, just organized into files by purpose. app.js went from 400 lines to 30 because each piece now lives in its own file."
+    },
+    {
+      "type": "motivation",
+      "body": "Refactoring is the skill that separates hobby coders from professional vibecodeers. A quick refactor after each AI generation keeps your codebase clean, which means you can keep adding features profitably for months instead of hitting a wall where everything breaks."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "When you visit a new city, you don't read every street sign in order. You get a map, find the landmarks, and navigate from there. **Reading unfamiliar code** works the same way -- start with the big picture (file structure, main entry point), identify landmarks (key functions, data flow), then zoom into the specific area you need."
     },
     {
+      "type": "analogy",
+      "title": "Reading Code = Being a Detective at a Crime Scene",
+      "body": "A detective doesn't read every document in a suspect's house. They look for clues: the entry point (the front door), trace the evidence (fingerprints and footprints), and zero in on the relevant room. **Reading unfamiliar code is detective work** -- you follow the data trail from where the problem appears back to where it originates, ignoring everything that isn't connected to your case."
+    },
+    {
       "type": "text",
       "title": "The Strategy for Reading Unfamiliar Code",
       "body": "Follow this order when diving into a new codebase:\n\n1. **File structure** -- Look at folder names to understand the project's shape\n2. **Entry point** -- Find where the app starts (index.js, App.js, main.py)\n3. **Data flow** -- Trace how data moves: where it comes from, where it's transformed, where it's displayed\n4. **The specific area** -- Once you understand the big picture, zoom into the file relevant to your task"
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "src/\n  components/     <- UI pieces\n    Header.jsx\n    ProductCard.jsx\n  hooks/          <- Custom React hooks\n    useAuth.js\n    useProducts.js\n  api/            <- Server communication\n    auth.js\n    products.js\n  utils/          <- Helper functions\n    formatPrice.js\n    validateEmail.js",
       "annotation": "Even without reading any code, this file structure tells you a lot: the app has products and authentication, the UI is in components/, data fetching is in api/, and shared logic is in utils/."
+    },
+    {
+      "type": "motivation",
+      "body": "Being able to read other people's code unlocks a whole category of paid work: fixing, extending, and maintaining existing apps. Most clients don't need a new app built from scratch -- they need someone who can jump into their codebase and improve it. That's recurring revenue waiting to happen."
     },
     {
       "type": "key_takeaway",

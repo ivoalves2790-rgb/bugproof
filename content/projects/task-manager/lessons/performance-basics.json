@@ -19,6 +19,15 @@
       "body": "Nobody wants to wait 20 minutes for a burger. Fast-food restaurants optimize everything: pre-heat the grill, prep ingredients in advance, and have a streamlined workflow. Your app should do the same: pre-load data, cache common requests, and minimize unnecessary work."
     },
     {
+      "type": "analogy",
+      "title": "Performance Is Like Packing a Suitcase",
+      "body": "If you pack everything you own for a weekend trip, your bag will be massive and slow you down at every step. A fast app is like a smartly packed carry-on — it brings only what's needed for the trip, leaving the rest behind. Ship less JavaScript, and your users get there faster."
+    },
+    {
+      "type": "motivation",
+      "body": "A one-second delay in page load can drop conversions by 7%. Fast apps keep users engaged, reduce churn, and directly impact your bottom line — performance optimization is literally money optimization."
+    },
+    {
       "type": "key_takeaway",
       "body": "The biggest performance wins usually come from three things: reducing the amount of JavaScript you ship, optimizing images, and caching data that doesn't change often."
     }

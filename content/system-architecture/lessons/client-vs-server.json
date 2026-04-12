@@ -14,6 +14,11 @@
       "body": "**Client-side** means code running on the user's device (their browser). **Server-side** means code running on a server you control. The key difference? The user can see and modify anything client-side. It's like the difference between a lock on YOUR door (server -- you control it) vs giving someone a padlock they can pick open (client -- they control it)."
     },
     {
+      "type": "analogy",
+      "title": "Client vs Server = Open-Book vs Closed-Book Exam",
+      "body": "A **client-side** check is like an open-book exam -- the student has all the answers in front of them and can change anything. A **server-side** check is like a closed-book exam proctored by a teacher -- the student can't cheat because they don't have access to the answer key. That's why you never trust the client to enforce rules on its own."
+    },
+    {
       "type": "text",
       "title": "What Should Run Where?",
       "body": "**Client-side** (browser) is good for:\n- Visual effects and animations\n- Form input validation (for quick user feedback)\n- Navigating between views\n\n**Server-side** (server) is required for:\n- Authentication and authorization checks\n- Database operations\n- Payment processing\n- Any security-sensitive logic"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Client-side admin check\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Anyone can open DevTools and type:\n// user.role = 'admin'\n\n// GOOD: Server-side admin check\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Forbidden' });\n  }\n  res.json(adminData);\n});",
       "annotation": "Client-side checks are for UX (hiding buttons), but the real security must happen on the server where the user can't tamper with it."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing where to put your logic is the difference between an app that gets hacked on day one and one that earns trust (and money) for years. Vibecoding is fast, but putting security in the right place is what keeps your revenue safe."
     },
     {
       "type": "key_takeaway",

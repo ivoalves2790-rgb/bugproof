@@ -14,6 +14,11 @@
       "body": "Imagine you walk through five rooms and trip in the last one. A stack trace is like a list of every room you walked through, in order, with the room you tripped in listed first. It shows the chain of function calls that led to the crash."
     },
     {
+      "type": "analogy",
+      "title": "A Stack Trace Is Like a Call History on Your Phone",
+      "body": "When you miss a call and want to know who called, you check your call history -- it shows the most recent call at the top. A stack trace is your code's call history. The most recent function call (where the crash happened) is at the top, and each line below shows who called whom, leading all the way back to where things started."
+    },
+    {
       "type": "text",
       "title": "How to Read a Stack Trace",
       "body": "A stack trace reads **top to bottom**:\n\n1. The **top line** is where the error actually happened -- start here\n2. Each line below it shows which function called the one above it\n3. **Skip framework lines** (like react-dom or node internals) -- focus on YOUR files\n\nThe top line of your own code is almost always where the bug is."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- YOUR code, start here\n    at renderWithHooks (react-dom.js:14985)  <-- framework, skip\n    at App (src/App.jsx:22)               <-- YOUR code, called UserCard",
       "annotation": "Start at the top line that mentions YOUR files (UserCard.jsx:8). That's where the crash happened. App.jsx:22 is where UserCard was called from."
+    },
+    {
+      "type": "motivation",
+      "body": "Stack traces look intimidating, but reading them is a superpower. Vibecoding pros who can decode a stack trace fix crashes in minutes instead of hours -- and that efficiency is what makes building and selling apps profitable."
     },
     {
       "type": "key_takeaway",

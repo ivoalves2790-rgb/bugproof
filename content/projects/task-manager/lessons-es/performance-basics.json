@@ -19,6 +19,15 @@
       "body": "Nadie quiere esperar 20 minutos por una hamburguesa. Los restaurantes de comida rapida optimizan todo: precalientan la parrilla, preparan ingredientes con anticipacion y tienen un flujo de trabajo optimizado. Tu app deberia hacer lo mismo: pre-cargar datos, almacenar en cache solicitudes comunes y minimizar el trabajo innecesario."
     },
     {
+      "type": "analogy",
+      "title": "El Rendimiento Es Como Hacer una Maleta",
+      "body": "Si empacas todo lo que tienes para un viaje de fin de semana, tu maleta sera enorme y te frenara en cada paso. Una app rapida es como un equipaje de mano bien preparado — lleva solo lo necesario para el viaje, dejando el resto atras. Envia menos JavaScript y tus usuarios llegan mas rapido."
+    },
+    {
+      "type": "motivation",
+      "body": "Un segundo de retraso en la carga puede reducir las conversiones un 7%. Las apps rapidas mantienen a los usuarios enganchados, reducen la desercion e impactan directamente tus ganancias — optimizar el rendimiento es literalmente optimizar el dinero."
+    },
+    {
       "type": "key_takeaway",
       "body": "Las mayores mejoras de rendimiento generalmente vienen de tres cosas: reducir la cantidad de JavaScript que envias, optimizar imagenes y almacenar en cache datos que no cambian a menudo."
     }

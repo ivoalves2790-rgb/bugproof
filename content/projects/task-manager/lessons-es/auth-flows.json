@@ -21,6 +21,15 @@
       "annotation": "Cada enfoque tiene diferentes ventajas y desventajas en cuanto a escalabilidad, seguridad y complejidad."
     },
     {
+      "type": "analogy",
+      "title": "Tres Formas de Demostrar Tu Edad",
+      "body": "Las sesiones son como mostrar tu identificacion cada vez — el portero revisa una lista para confirmar que eres valido. Los JWTs son como un sello en la mano — cualquiera puede leer el sello sin revisar la lista, pero no puedes quitartelo una vez que esta puesto. OAuth es como que un amigo en quien el portero confia responda por ti — nunca tienes que mostrar tu identificacion."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender los flujos de auth significa que puedes ofrecer login con Google y GitHub — la experiencia de registro que los usuarios esperan de productos profesionales. Menos friccion al registrarse significa mas usuarios, y mas usuarios significa mas ingresos."
+    },
+    {
       "type": "key_takeaway",
       "body": "Para la mayoria de las apps, usar un proveedor de autenticacion con soporte OAuth es el camino mas facil y seguro. Obtienes login con Google/GitHub y no necesitas gestionar contrasenas tu mismo."
     }

@@ -14,6 +14,11 @@
       "body": "Imagine a concert venue where everyone has to go through a single gate. Even though thousands of people are ready, only one line moves at a time. **Render-blocking resources** work the same way -- the browser finds a CSS file or JavaScript file in the <head> and stops everything to download and process it before showing any content to the user."
     },
     {
+      "type": "analogy",
+      "title": "Render-Blocking = Reading the Entire Manual Before Cooking",
+      "body": "Imagine you want to make pasta. Instead of just starting to boil water, you insist on reading the entire 200-page cookbook cover to cover first. Nothing happens in the kitchen until you're done reading. That's what **render-blocking resources** do to your page -- the browser insists on fully loading certain files before it shows the user anything, even though most of that content isn't needed right away."
+    },
+    {
       "type": "text",
       "title": "What Blocks Rendering?",
       "body": "Two types of resources block rendering by default:\n\n1. **CSS files** -- The browser won't show anything until all CSS in the <head> is loaded, because it doesn't want content to flash unstyled\n2. **JavaScript files** -- Scripts in the <head> without 'async' or 'defer' block HTML parsing completely\n\nThe more blocking resources you have, the longer users stare at a blank screen."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<!-- BLOCKING: Browser stops everything to load this -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- NON-BLOCKING: Browser continues while loading -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
       "annotation": "The 'defer' attribute downloads the script in parallel and runs it after HTML parsing. The 'async' attribute downloads in parallel and runs as soon as it's ready."
+    },
+    {
+      "type": "motivation",
+      "body": "A blank white screen for 3 seconds is all it takes for a user to hit the back button and find someone else's app. Eliminating render-blocking resources is one of the fastest ways to keep users -- and their wallets -- on your page."
     },
     {
       "type": "key_takeaway",

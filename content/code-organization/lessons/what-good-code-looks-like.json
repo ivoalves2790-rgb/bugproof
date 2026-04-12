@@ -14,6 +14,11 @@
       "body": "Good code is like good writing: each paragraph covers one topic, sentences are clear, and there's a logical flow. You don't need to be a genius to write good code, just like you don't need to be Shakespeare to write a clear email. The goal is that someone else (or future you) can read it without getting confused."
     },
     {
+      "type": "analogy",
+      "title": "Good Code = A Well-Organized Toolbox",
+      "body": "Think of a toolbox where every tool has its own slot: screwdrivers here, wrenches there, measuring tape in the front. You grab what you need in seconds. Now imagine a toolbox where everything is thrown in loose -- you cut your hand on a saw blade just looking for a wrench. **Good code gives every piece its own slot**, so you reach in and grab exactly what you need without getting hurt."
+    },
+    {
       "type": "text",
       "title": "The Single Responsibility Principle",
       "body": "The most important rule of clean code: **each function should do one thing**.\n\nAsk yourself: 'Can I describe what this function does without using the word AND?' If not, it's doing too much.\n\n- 'This function validates the form' -- good, one thing\n- 'This function validates the form AND sends the email AND updates the database' -- bad, three things"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Does three things\nfunction processOrder(order) {\n  // 40 lines of validation...\n  // 30 lines of payment processing...\n  // 20 lines of email sending...\n}\n\n// GOOD: Each function does one thing\nfunction processOrder(order) {\n  validateOrder(order);\n  chargePayment(order);\n  sendConfirmationEmail(order);\n}",
       "annotation": "The good version reads like a table of contents. You can understand the entire flow at a glance. If the email sending breaks, you know exactly where to look: sendConfirmationEmail()."
+    },
+    {
+      "type": "motivation",
+      "body": "Clients pay premium rates for code they can maintain after you hand it off. Writing clean, single-responsibility functions means clients come back with new projects instead of complaints -- that's how vibecoding becomes a sustainable income stream."
     },
     {
       "type": "key_takeaway",

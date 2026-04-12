@@ -14,6 +14,11 @@
       "body": "Imagina un bibliotecario que conoce la ubicación de cada libro. No buscas en los estantes tú mismo -- le dices al bibliotecario lo que quieres: 'Muéstrame todos los libros de ciencia ficción de Asimov publicados después de 1960.' SQL funciona de la misma manera. Describes qué datos quieres, y la base de datos los encuentra por ti."
     },
     {
+      "type": "analogy",
+      "title": "El Buscador de Google Para Tus Datos",
+      "body": "SQL es como un motor de busqueda para tus propios datos. Cuando buscas algo en Google, escribes lo que quieres y Google descubre donde encontrarlo. SQL funciona igual -- escribes SELECT name FROM users WHERE city = 'Austin' y la base de datos encuentra las filas correctas al instante. Nunca tienes que buscar en archivos o carpetas tu mismo."
+    },
+    {
       "type": "text",
       "title": "El Comando SQL Básico: SELECT",
       "body": "El comando SQL más común es **SELECT** -- recupera datos:\n\n1. `SELECT * FROM users` -- obtener TODAS las columnas de la tabla users\n2. `SELECT name, email FROM users` -- obtener solo las columnas name y email\n3. `SELECT * FROM users WHERE age > 21` -- obtener usuarios mayores de 21\n\nEl patrón básico es: **SELECT** (qué columnas) **FROM** (qué tabla) **WHERE** (qué filas)."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "SELECT name, price\nFROM products\nWHERE price < 50\nORDER BY price ASC;",
       "annotation": "Lee esto como: 'Obtén el nombre y precio de la tabla productos, pero solo productos más baratos que $50, y ordénalos del más barato al más caro.' SQL está diseñado para ser legible."
+    },
+    {
+      "type": "motivation",
+      "body": "SQL es el lenguaje universal de los datos. Ya sea que vibecodees un dashboard SaaS, una tienda en linea o un sistema de reservas, SQL es como obtienes los datos que hacen tu app util -- y las apps utiles son las que la gente paga."
     },
     {
       "type": "key_takeaway",

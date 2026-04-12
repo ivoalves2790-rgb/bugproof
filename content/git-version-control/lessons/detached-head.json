@@ -24,11 +24,20 @@
       "body": "Detached HEAD usually happens when you:\n\n- Check out a specific commit hash: `git checkout a1b2c3d`\n- Check out a tag: `git checkout v1.0`\n\nGit shows a scary warning, but nothing is broken. You can look around safely. The danger is only if you **make new commits** here -- they could be lost when you switch back to a branch."
     },
     {
+      "type": "analogy",
+      "title": "Detached HEAD = Writing on a Napkin",
+      "body": "Imagine you're at a restaurant and have a brilliant idea. You scribble it on a napkin. If you put that napkin in your pocket (create a branch), you'll have it forever. But if you leave it on the table and walk away (switch branches without saving), the napkin gets thrown away when the table is cleared. Detached HEAD commits are napkin notes -- brilliant but fragile unless you pocket them."
+    },
+    {
       "type": "code_example",
       "title": "The Rescue Move",
       "language": "bash",
       "code": "# If you're in detached HEAD and want to keep your work:\ngit checkout -b rescue-branch\n\n# This creates a new branch right where you are,\n# anchoring your commits so they won't be lost.",
       "annotation": "The fix is simple: just create a branch. This gives your commits a home so Git won't garbage-collect them."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to escape detached HEAD without losing work is an advanced skill that impresses in technical interviews. It shows you truly understand Git -- and developers who understand their tools deeply command higher salaries and better freelance rates."
     },
     {
       "type": "key_takeaway",

@@ -21,6 +21,15 @@
       "annotation": "Notice: every UPDATE and DELETE includes AND user_id = '...'. This prevents users from modifying other people's tasks. Never forget this filter."
     },
     {
+      "type": "analogy",
+      "title": "Queries Are Like Asking a Librarian",
+      "body": "You don't wander through every shelf in a library to find a book. You ask the librarian: 'I need all books by this author, sorted by year.' SQL queries work the same way — you tell the database exactly what you want (SELECT), where to look (FROM/WHERE), and how to sort it (ORDER BY). A vague request gets you the wrong books; a precise query gets exactly what you need."
+    },
+    {
+      "type": "motivation",
+      "body": "CRUD queries are the engine behind every feature in your app. Master them, and you can build any feature users ask for — task lists, filters, search, dashboards. Each new feature is a reason for users to stay and pay."
+    },
+    {
       "type": "key_takeaway",
       "body": "Always filter queries by user_id to enforce data ownership. A query without a user filter is a security hole — it could let anyone read, modify, or delete another user's tasks."
     }

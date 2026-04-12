@@ -14,6 +14,11 @@
       "body": "Un navegador renderiza una página como construir una casa. Primero se levanta la **estructura** (estructura HTML). Luego la **pintura y el papel tapiz** (estilos CSS). Luego los **muebles y electrodomésticos** (interactividad JavaScript). Si cualquier paso se bloquea, toda la construcción se pausa -- igual que una casa no puede ser pintada hasta que las paredes estén levantadas."
     },
     {
+      "type": "analogy",
+      "title": "Renderizar Es Como Armar un Mueble de IKEA",
+      "body": "Cuando armas un mueble de IKEA, sigues pasos en orden: primero el marco, luego las repisas, luego las puertas. Si falta una pieza clave en la caja, te quedas esperando hasta encontrarla. Los navegadores funcionan igual -- siguen un orden estricto (HTML, luego CSS, luego pintar), y si un archivo no ha llegado, todo lo que sigue espera. Un archivo CSS faltante es como un soporte de repisa que no esta -- nada se ve bien hasta que aparece."
+    },
+    {
       "type": "text",
       "title": "El Pipeline de Renderizado",
       "body": "Cuando tu navegador recibe HTML, sigue estos pasos:\n\n1. **Analizar HTML** -- construye el DOM (Modelo de Objetos del Documento), un árbol de elementos\n2. **Analizar CSS** -- determina qué estilos se aplican a cada elemento\n3. **Diseño** -- calcula el tamaño y posición de cada elemento\n4. **Pintar** -- dibuja píxeles en la pantalla\n5. **Composición** -- combina todas las capas\n\nSi los archivos CSS o JavaScript todavía están cargando, los pasos 2-5 pueden bloquearse."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Recursos que Bloquean el Renderizado",
       "body": "Algunos archivos **bloquean el renderizado** -- el navegador no pintará nada hasta que estén cargados:\n\n- **Archivos CSS** bloquean el renderizado porque el navegador no mostrará contenido sin estilo\n- **JavaScript en el `<head>`** bloquea el análisis porque podría modificar la página\n\nPor eso los archivos CSS grandes o los scripts de carga lenta causan la temida 'pantalla blanca' mientras la página carga."
+    },
+    {
+      "type": "motivation",
+      "body": "La velocidad es dinero. Los estudios muestran que cada segundo extra de carga pierde clientes. Cuando vibecodeas pensando en el rendimiento del renderizado, tus apps se sienten instantaneas -- y las apps rapidas convierten visitantes en usuarios que pagan."
     },
     {
       "type": "key_takeaway",

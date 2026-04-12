@@ -14,6 +14,11 @@
       "body": "A database table is like a spreadsheet with strict rules. In Google Sheets, you can put anything anywhere -- numbers in a name column, text in an age column. A database table says: 'The name column ONLY accepts text. The age column ONLY accepts numbers. And every row MUST have an ID.' These rules prevent messy, inconsistent data."
     },
     {
+      "type": "analogy",
+      "title": "The Parking Garage",
+      "body": "A database table is like a well-designed parking garage. Each **floor** is a column type (compact cars, SUVs, motorcycles), each **parking spot** is a cell, and each **parked car** is a row of data. You can't park a semi-truck in a compact spot -- the garage enforces rules about what fits where. And every spot has a unique number so you can always find your car. That's exactly how tables keep data organized and retrievable."
+    },
+    {
       "type": "text",
       "title": "Tables, Rows, and Columns",
       "body": "A database table has three parts:\n\n1. **Columns** (also called fields) -- define what KIND of data is stored (name, email, age)\n2. **Rows** (also called records) -- each row is one item (one user, one product, one order)\n3. **Cells** -- the intersection of a row and column (user #5's email)\n\nA 'users' table might have columns for id, name, email, and created_at, with one row per user."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "users table:\n+----+----------+---------------------+------------+\n| id | name     | email               | created_at |\n+----+----------+---------------------+------------+\n|  1 | Alice    | alice@example.com   | 2024-01-15 |\n|  2 | Bob      | bob@example.com     | 2024-02-20 |\n|  3 | Charlie  | charlie@example.com | 2024-03-10 |\n+----+----------+---------------------+------------+",
       "annotation": "Each column has a name and a data type. Each row is one user. The 'id' column uniquely identifies each row. This looks just like a spreadsheet, but with enforced rules about what data can go in each column."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how tables work is like knowing how to organize inventory in a store. When you vibecode an app with AI, you need to tell it what tables to create. Get this right and your app can handle thousands of paying customers with clean, reliable data."
     },
     {
       "type": "key_takeaway",

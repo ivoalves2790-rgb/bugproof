@@ -19,11 +19,20 @@
       "body": "A good commit message answers: **what changed and why?** Keep it short (under 50 characters for the first line), start with a verb, and be specific. The convention is to use **imperative mood** -- write it like a command.\n\n- **Good:** \"Fix login button not responding on mobile\"\n- **Bad:** \"fixed stuff\" or \"WIP\" or \"asdfjkl\""
     },
     {
+      "type": "analogy",
+      "title": "Commit Messages = Text Messages to Future You",
+      "body": "Imagine sending a text message to yourself six months from now. If you text \"stuff,\" future you will have no idea what you meant. But if you text \"Fixed the checkout bug that charged customers twice,\" future you will instantly know the context. Every commit message is a text to your future self -- make it count."
+    },
+    {
       "type": "code_example",
       "title": "Good vs Bad Examples",
       "language": "bash",
       "code": "# Good messages:\ngit commit -m \"Add email validation to signup form\"\ngit commit -m \"Fix crash when user uploads empty file\"\ngit commit -m \"Remove deprecated payment API calls\"\n\n# Bad messages:\ngit commit -m \"fix stuff\"\ngit commit -m \"WIP\"\ngit commit -m \"changes\"",
       "annotation": "Notice the good messages start with a verb (Add, Fix, Remove) and describe a specific change."
+    },
+    {
+      "type": "motivation",
+      "body": "Clean commit messages are what separate hobby coders from paid professionals. When clients or teammates review your Git history, good messages build trust and win repeat contracts."
     },
     {
       "type": "key_takeaway",

@@ -19,6 +19,15 @@
       "body": "Imagina que construyes una nueva habitacion en tu casa. En lugar de derribar una pared el dia de la mudanza y esperar que funcione, construyes la habitacion detras de una puerta. Abre la puerta para mostrarla a tus amigos primero. Si la plomeria tiene fugas, cierra la puerta y arreglala. Los feature flags son esa puerta — el codigo esta desplegado pero oculto hasta que estes listo."
     },
     {
+      "type": "analogy",
+      "title": "Los Despliegues Graduales Son Como la Pre-Apertura de un Restaurante",
+      "body": "Los restaurantes nuevos no abren para toda la ciudad el primer dia. Hacen una pre-apertura — invitan a amigos y familiares primero, resuelven los problemas y luego abren al publico. Los despliegues graduales de funcionalidades funcionan igual: deja que un grupo pequeno lo pruebe, arregla lo que se rompa y luego expandelo a todos. Nunca servirias a 500 comensales antes de probar la cocina con 10."
+    },
+    {
+      "type": "motivation",
+      "body": "Lanzar funcionalidades de forma segura es lo que separa los proyectos de hobby de los productos reales. Cuando puedes desplegar con confianza, iteras mas rapido — y una iteracion mas rapida significa que llegas a clientes que pagan antes."
+    },
+    {
       "type": "key_takeaway",
       "body": "Nunca despliegues una funcionalidad grande a todos los usuarios de una vez. Usa feature flags para despliegues graduales, monitorea las tasas de error durante el lanzamiento y siempre ten una forma de desactivar funcionalidades al instante."
     }

@@ -14,6 +14,11 @@
       "body": "Cuando cruzas una calle, automáticamente miras si vienen autos. No simplemente caminas a ciegas. El **pensamiento orientado a tests** es el mismo instinto aplicado al código. Antes de escribir una función, piensas: ¿qué inputs podrían romper esto? ¿Qué debería pasar con datos extraños? ¿Qué pasa si el usuario hace algo inesperado?"
     },
     {
+      "type": "analogy",
+      "title": "Pensamiento orientado a tests = Escribir el examen antes del libro de texto",
+      "body": "Imagina un profesor que escribe el examen final PRIMERO, y luego diseña el curso para asegurar que los estudiantes puedan aprobarlo. Eso es el **pensamiento orientado a tests**. Defines cómo se ve el éxito (el test) antes de construir la cosa (el código). De esta forma, nunca pierdes de vista qué significa 'terminado', y sabes el momento exacto en que lo lograste."
+    },
+    {
       "type": "text",
       "title": "La mentalidad orientada a tests",
       "body": "Antes de escribir cualquier código, pregúntate:\n\n1. **¿Qué debería hacer esta función?** -- Define el comportamiento esperado\n2. **¿Cuáles son los inputs normales?** -- El caso de uso típico\n3. **¿Cuáles son los casos límite?** -- Cadenas vacías, cero, null, números negativos\n4. **¿Qué debería pasar cuando las cosas salen mal?** -- Mensajes de error, valores por defecto, alternativas\n\nSi puedes responder estas preguntas, puedes escribir tests."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// Task: write a function that calculates a tip\n// Test-driven thinking:\n// - calculateTip(100, 15) should return 15\n// - calculateTip(100, 0) should return 0\n// - calculateTip(0, 15) should return 0\n// - calculateTip(-50, 15) should... throw an error?\n// - calculateTip(100, 150) should... is a 150% tip valid?",
       "annotation": "Nota cómo pensar en los tests ANTES de escribir código te ayuda a diseñar una mejor función. Descubres casos límite temprano."
+    },
+    {
+      "type": "motivation",
+      "body": "Cuando le dices a la IA qué construir, ya estás pensando en requisitos. Convierte esos requisitos en tests y acabas de construir una red de seguridad que protege tu app -- y tus ingresos -- cada vez que la IA escribe código nuevo."
     },
     {
       "type": "key_takeaway",

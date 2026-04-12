@@ -14,6 +14,11 @@
       "body": "Imagine painting a picture but being able to press 'undo' at any point and go back to how it looked five minutes ago. Git gives you that for code. When you're experimenting with AI-generated code, Git lets you try things out and revert if they don't work."
     },
     {
+      "type": "analogy",
+      "title": "Git Is Like Save Slots in a Video Game",
+      "body": "In a tough video game, you save before every boss fight so you can reload if things go wrong. Git works the same way for your code. Before letting AI make big changes, you save your progress with a commit. If the AI-generated code breaks everything, you just reload your last save. No stress, no lost work."
+    },
+    {
       "type": "text",
       "title": "The Safe AI Coding Workflow",
       "body": "Before using AI to write code, set up this workflow:\n\n1. **Initialize Git** so every change is tracked\n2. **Commit your starting point** as a clean baseline\n3. **Create a branch** for AI-generated code\n4. **Commit in small chunks** so you can revert individual changes\n\nThis way, you can always get back to working code if AI gives you something broken."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "git init\ngit add .\ngit commit -m \"Initial project setup\"\ngit checkout -b ai-feature",
       "annotation": "These four commands create a Git repo, save your current code, and create a separate branch for AI experiments. If things go wrong, you can switch back to your clean main branch."
+    },
+    {
+      "type": "motivation",
+      "body": "A solid workflow means you can experiment fearlessly with AI. The faster you iterate without breaking things, the more apps you can build and ship -- and every shipped app is a potential income stream."
     },
     {
       "type": "key_takeaway",

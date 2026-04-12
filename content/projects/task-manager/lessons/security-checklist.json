@@ -19,6 +19,15 @@
       "body": "You don't wait until someone breaks in to install locks. You lock up every night as a habit. Similarly, sanitizing inputs, using HTTPS, and validating on the server should be habits — not afterthoughts you add when something goes wrong."
     },
     {
+      "type": "analogy",
+      "title": "Security Is Like Your Immune System",
+      "body": "Your body doesn't wait to get sick before fighting germs — white blood cells are always on patrol. A secure app works the same way: input validation, rate limiting, and encryption run constantly in the background, quietly blocking threats before they cause harm."
+    },
+    {
+      "type": "motivation",
+      "body": "Users trust apps that protect their data. A secure app is one people pay for and recommend — every security habit you build now is an investment in a product worth real money."
+    },
+    {
       "type": "key_takeaway",
       "body": "The top three security habits: validate all input on the server, use parameterized queries (never concatenate SQL), and always use HTTPS in production."
     }

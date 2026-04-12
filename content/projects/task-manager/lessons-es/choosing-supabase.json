@@ -19,6 +19,15 @@
       "body": "Construir un backend desde cero es como mudarte a una casa vacia — necesitas comprar cada mueble. Supabase es un apartamento amueblado. La base de datos, autenticacion y almacenamiento ya estan configurados. Puedes reorganizar las cosas, pero no empiezas desde cero."
     },
     {
+      "type": "analogy",
+      "title": "El Buffet Libre de Backend",
+      "body": "Supabase es como un buffet libre de servicios backend. Base de datos? Sirvete. Autenticacion? Ya esta en la mesa. Actualizaciones en tiempo real? Toma un plato. Solo pagas mas cuando comes MUCHO — y para entonces, tu app ya es suficientemente exitosa para pagarlo."
+    },
+    {
+      "type": "motivation",
+      "body": "El nivel gratuito de Supabase te permite lanzar un producto real sin costo inicial. Eso significa que tus primeros clientes que pagan son ganancia pura — estas construyendo un negocio sin gastos fijos mientras aprendes."
+    },
+    {
       "type": "key_takeaway",
       "body": "Supabase proporciona PostgreSQL, autenticacion, almacenamiento y funcionalidades en tiempo real con un generoso nivel gratuito. Para un gestor de tareas, cubre todas las necesidades del backend sin requerir que construyas o administres un servidor."
     }

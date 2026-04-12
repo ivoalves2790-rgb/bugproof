@@ -14,6 +14,11 @@
       "body": "Imagina que has estado cocinando comidas increíbles en tu cocina casera. El despliegue es como abrir un restaurante -- estás tomando lo que funciona en casa y configurándolo para que el público también pueda disfrutarlo. Necesitas un local (servidor), una forma para que la gente te encuentre (nombre de dominio), y todo tiene que funcionar incluso cuando 100 clientes aparecen a la vez."
     },
     {
+      "type": "analogy",
+      "title": "Despliegue = Poner un Cartel Publicitario",
+      "body": "Has estado dibujando un poster increible en tu cuarto. Se ve genial, pero solo tu puedes verlo. El despliegue es como alquilar un cartel en la autopista y poner tu poster ahi. De repente, miles de personas que pasan pueden ver tu trabajo. Necesitas el tamano correcto (capacidad del servidor), una buena ubicacion (hosting confiable) y proteccion contra el clima (manejo de errores) para que se mantenga 24/7."
+    },
+    {
       "type": "text",
       "title": "Lo Que Realmente Significa el Despliegue",
       "body": "El despliegue es el proceso de tomar tu código de tu computadora y ponerlo en un servidor conectado a internet. Una vez desplegado, cualquiera con la URL puede visitar tu app.\n\nLa idea básica es simple:\n\n1. Escribes código en tu computadora\n2. Envías ese código a un servidor\n3. El servidor ejecuta tu código 24/7\n4. La gente visita tu URL y ve tu app"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Por Qué No Es Solo Copiar y Pegar",
       "body": "No puedes simplemente copiar la carpeta de tu proyecto a un servidor y listo. Tu código necesita ser **compilado** (optimizado para velocidad), **configurado** (conectado a bases de datos y servicios), y **servido** (preparado para manejar tráfico web). Las herramientas modernas automatizan la mayoría de esto, pero entender qué está pasando ayuda cuando las cosas salen mal."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada app que genera dinero empezo con alguien dando click en desplegar por primera vez. Dominar el despliegue significa que tus apps creadas con IA pueden pasar de tu laptop a clientes que pagan en minutos."
     },
     {
       "type": "key_takeaway",

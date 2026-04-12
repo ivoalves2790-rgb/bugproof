@@ -14,6 +14,11 @@
       "body": "Imagine a librarian who knows the location of every book. You don't search the shelves yourself -- you tell the librarian what you want: 'Show me all science fiction books by Asimov published after 1960.' SQL works the same way. You describe what data you want, and the database finds it for you."
     },
     {
+      "type": "analogy",
+      "title": "The Google Search for Your Data",
+      "body": "SQL is like a search engine for your own data. When you Google something, you type what you want and Google figures out where to find it. SQL works the same way -- you type SELECT name FROM users WHERE city = 'Austin' and the database instantly finds exactly the right rows. You never have to dig through files or folders yourself."
+    },
+    {
       "type": "text",
       "title": "The Basic SQL Command: SELECT",
       "body": "The most common SQL command is **SELECT** -- it retrieves data:\n\n1. `SELECT * FROM users` -- get ALL columns from the users table\n2. `SELECT name, email FROM users` -- get only the name and email columns\n3. `SELECT * FROM users WHERE age > 21` -- get users older than 21\n\nThe basic pattern is: **SELECT** (what columns) **FROM** (which table) **WHERE** (which rows)."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "SELECT name, price\nFROM products\nWHERE price < 50\nORDER BY price ASC;",
       "annotation": "Read this as: 'Get the name and price from the products table, but only products cheaper than $50, and sort them from cheapest to most expensive.' SQL is designed to be readable."
+    },
+    {
+      "type": "motivation",
+      "body": "SQL is the universal language of data. Whether you are vibecoding a SaaS dashboard, an e-commerce store, or a booking system, SQL is how you pull the data that makes your app useful -- and useful apps are the ones people pay for."
     },
     {
       "type": "key_takeaway",

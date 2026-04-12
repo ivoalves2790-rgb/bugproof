@@ -21,6 +21,15 @@
       "annotation": "Always hash passwords and never include sensitive data in API responses."
     },
     {
+      "type": "analogy",
+      "title": "Password Hashing Is Like a Shredder",
+      "body": "Imagine if instead of storing a master key to your house, you stored a shredded version of it. If someone breaks into your key storage, all they find is confetti — useless. But when you bring your actual key, the system can shred it the same way and compare the confetti patterns. That's hashing: the original password is never stored, just its irreversible fingerprint."
+    },
+    {
+      "type": "motivation",
+      "body": "A secure login flow is non-negotiable for any app that handles real users. Get this right and you've cleared the biggest trust hurdle — people will enter their email, create accounts, and eventually open their wallets."
+    },
+    {
       "type": "key_takeaway",
       "body": "Use an auth library or provider instead of building login from scratch. If you must build it, always hash passwords, validate on the server, and never expose sensitive data in responses."
     }

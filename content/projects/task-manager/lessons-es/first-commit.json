@@ -14,9 +14,18 @@
       "body": "Tu primer commit deberia contener solo los archivos generados del proyecto con un .gitignore limpio en su lugar. Sin funcionalidades extra, sin codigo experimental, sin contenido sobrante de la plantilla. Esto te da una linea base conocida y funcional a la que siempre puedes volver si algo sale mal."
     },
     {
+      "type": "analogy",
+      "title": "Sellando una Capsula del Tiempo",
+      "body": "Tu primer commit es como sellar una capsula del tiempo. Lo que metas ahi se preserva para siempre en el historial de tu proyecto. No echarias las llaves de tu casa en una capsula del tiempo — asi que tampoco hagas commit de tus claves API. Empacala con cuidado: solo contenido limpio e intencional."
+    },
+    {
       "type": "text",
       "title": "Verifica Antes de Hacer Commit",
       "body": "Siempre ejecuta `git status` antes de hacer commit para ver exactamente lo que estas a punto de guardar. Busca archivos que no deberian estar ahi — archivos .env con secretos reales, node_modules, salida de compilacion o archivos del sistema operativo como .DS_Store. Un primer commit limpio significa un historial de proyecto limpio."
+    },
+    {
+      "type": "motivation",
+      "body": "Este primer commit es la base de un producto real. Cada app exitosa que ves en la tienda empezo exactamente en este momento — alguien presionando 'commit' en un proyecto nuevo. Ahora eres una de esas personas."
     },
     {
       "type": "key_takeaway",

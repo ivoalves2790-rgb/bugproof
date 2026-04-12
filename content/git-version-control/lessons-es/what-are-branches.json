@@ -19,9 +19,18 @@
       "body": "Todo proyecto de Git comienza con una rama, generalmente llamada **main**. Esta es la versión \"oficial\" de tu proyecto -- el código estable y funcional. Debes evitar hacer cambios arriesgados directamente en main. En su lugar, creas una nueva rama para cada función o corrección."
     },
     {
+      "type": "analogy",
+      "title": "Ramas = Borradores de un ensayo",
+      "body": "Imagina que estás escribiendo un ensayo importante. En vez de editar el original directamente, haces una copia y experimentas -- reorganizas párrafos, pruebas una nueva introducción, agregas afirmaciones audaces. Si el borrador queda genial, reemplazas el original. Si es terrible, tiras la copia y el original queda intacto. Las ramas le dan a tu código esa misma red de seguridad."
+    },
+    {
       "type": "text",
       "title": "Por qué las ramas importan",
       "body": "Las ramas te permiten:\n\n- **Experimentar de forma segura** -- Prueba nuevas ideas sin romper el código que funciona\n- **Trabajar en paralelo** -- Varias personas pueden trabajar en diferentes funciones al mismo tiempo\n- **Mantenerte organizado** -- Cada rama tiene un propósito claro\n- **Fusionar cuando estés listo** -- Lleva tus cambios de vuelta a main solo cuando estén probados y funcionen"
+    },
+    {
+      "type": "motivation",
+      "body": "Las ramas son la forma en que equipos reales lanzan funcionalidades en startups y empresas tech. Entender branching significa que puedes contribuir a cualquier proyecto profesional -- y eso abre la puerta a trabajos remotos de desarrollo que pagan $80K-$200K."
     },
     {
       "type": "key_takeaway",

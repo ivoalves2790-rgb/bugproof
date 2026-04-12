@@ -14,6 +14,11 @@
       "body": "Un detective no adivina quién lo hizo. Sigue la evidencia: la escena del crimen, los testigos, las pistas. La depuración es el mismo proceso. El mensaje de error es tu primera pista, el archivo y número de línea te dicen dónde buscar, y leer el código revela qué pasó."
     },
     {
+      "type": "analogy",
+      "title": "Depurar es como solucionar problemas con una receta",
+      "body": "Si tu pastel sale plano, no tiras toda la cocina. Retrocedes paso a paso: ¿Le puse polvo de hornear? ¿Puse la temperatura correcta? ¿Mezclé demasiado? Depurar código es el mismo proceso -- sigues los pasos hacia atrás desde el fallo para encontrar la única cosa que salió mal."
+    },
+    {
       "type": "text",
       "title": "Los pasos de la investigación",
       "body": "Toda investigación de errores sigue el mismo patrón:\n\n1. **Ejecutar el código** y leer el mensaje de error\n2. **Encontrar el archivo y la línea** mencionados en el error\n3. **Mirar esa línea** y el código alrededor\n4. **Entender la discrepancia** entre lo que el código espera y lo que recibió\n\nEste proceso funciona para todos los lenguajes de programación y todos los tipos de errores."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "$ node index.js\nError: Cannot find module './helpers'\n    at index.js:3",
       "annotation": "Este error dice que el archivo 'helpers' no existe. Verifica qué archivos existen realmente (ls), luego mira la línea 3 de index.js para ver qué está intentando importar."
+    },
+    {
+      "type": "motivation",
+      "body": "Este proceso de investigación es exactamente el flujo de trabajo que usarás cada vez que el código generado por IA no funcione. Dominarlo significa que puedes construir y lanzar productos reales con vibecoding -- y productos reales significan dinero real."
     },
     {
       "type": "key_takeaway",

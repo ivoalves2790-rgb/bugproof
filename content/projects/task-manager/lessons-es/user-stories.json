@@ -14,11 +14,20 @@
       "body": "Una historia de usuario describe una funcionalidad desde la perspectiva de la persona que la usa. El formato es simple: **Como [usuario], quiero [accion], para que [beneficio]**. Esto te obliga a pensar en POR QUE existe una funcionalidad, no solo en que hace."
     },
     {
+      "type": "analogy",
+      "title": "Pidiendo en un Restaurante",
+      "body": "Imagina decirle al mesero 'traeme comida' vs. 'quiero el salmon a la parrilla, termino medio, con ensalada, sin cebolla.' Cuanto mas especifico tu pedido, mas probable que recibas exactamente lo que quieres. Las historias de usuario son tu forma de hacer un pedido preciso para las funcionalidades de tu app — quien tiene hambre, que quiere y por que le importa."
+    },
+    {
       "type": "code_example",
       "title": "Ejemplos de Historias de Usuario",
       "language": "text",
       "code": "GOOD: \"As a user, I want to set a due date\n       on my tasks, so that I can prioritize\n       what needs to be done first.\"\n\nBAD:  \"Add a date picker component\"\n\nGOOD: \"As a user, I want to filter tasks by\n       status, so that I can focus on what's\n       in progress.\"\n\nBAD:  \"Implement filtering\"",
       "annotation": "Los buenos ejemplos explican QUIEN lo quiere, QUE quiere y POR QUE. Los malos son solo tareas tecnicas sin contexto."
+    },
+    {
+      "type": "motivation",
+      "body": "Las apps que resuelven problemas reales consiguen clientes que pagan. Escribir historias de usuario te entrena a pensar como dueno de producto — la habilidad que separa a los aficionados de quienes lanzan apps rentables con IA."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Las cámaras de seguridad te muestran lo que está pasando en un punto específico. `console.log` hace lo mismo para tu código -- te muestra el valor de una variable en el momento exacto en que esa línea se ejecuta. Colócalo en el lugar correcto y verás la pista. Colócalo en el lugar equivocado y no verás nada útil."
     },
     {
+      "type": "analogy",
+      "title": "Console.log es como probar la comida mientras cocinas",
+      "body": "Un buen chef prueba el platillo en cada etapa -- después de agregar sal, después de hervir, antes de servir. No espera hasta que el plato esté en la mesa para descubrir que algo salió mal. Console.log es lo mismo: 'pruebas' tus variables en momentos clave para asegurarte de que los valores son los que esperas antes de que el código termine de ejecutarse."
+    },
+    {
       "type": "text",
       "title": "Dónde colocar tus logs",
       "body": "La regla clave: **registra DESPUÉS del código que cambia el valor**, no antes. Si quieres ver cómo se ve una variable después de un cálculo, pon el log después del cálculo. Estrategia común:\n\n1. Registra las entradas al **inicio** de una función\n2. Registra los resultados **después** de la lógica importante\n3. Registra dentro de los bucles para ver cada paso"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "function double(x) {\n  // Bad: logs before the calculation\n  console.log('result:', result); // ReferenceError!\n  const result = x * 2;\n\n  // Good: logs after the calculation\n  console.log('result:', result); // Shows the actual value\n  return result;\n}",
       "annotation": "Siempre coloca console.log después de la línea que crea o cambia el valor que quieres inspeccionar."
+    },
+    {
+      "type": "motivation",
+      "body": "Console.log es la herramienta numero uno que usan los pros del vibecoding para verificar que el código generado por IA realmente hace lo que quieren. Domina esto y podrás depurar cualquier app que construyas, lo que significa más apps lanzadas y más dinero en tu bolsillo."
     },
     {
       "type": "key_takeaway",

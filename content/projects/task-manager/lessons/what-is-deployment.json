@@ -19,6 +19,15 @@
       "body": "Cooking at home is localhost — it works, but only you eat. Deployment is opening a restaurant: you need a location (server), a sign (domain name), health inspections (security), and the ability to serve many people at once (scalability). The recipe is the same, but the logistics are completely different."
     },
     {
+      "type": "analogy",
+      "title": "Deployment Is Like Publishing a Book",
+      "body": "Writing a novel on your laptop is like running your app on localhost — only you can read it. Deployment is getting it published and placed on shelves worldwide. The story doesn't change, but now it needs a cover, an ISBN, a distributor, and a bookstore to actually reach readers."
+    },
+    {
+      "type": "motivation",
+      "body": "Deployment is the moment your project becomes a real product. Until your app is live on the internet, it can't attract users or make money — deploying is literally the step that unlocks revenue."
+    },
+    {
       "type": "key_takeaway",
       "body": "Modern platforms like Vercel and Netlify handle most deployment complexity for you. You push code, they build and serve it. Focus on what makes your app special, not server configuration."
     }

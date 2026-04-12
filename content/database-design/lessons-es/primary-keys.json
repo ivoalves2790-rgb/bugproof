@@ -14,6 +14,11 @@
       "body": "Imagina una escuela con dos estudiantes llamados 'Juan García.' Si solo usas nombres, no puedes distinguirlos. Por eso las escuelas asignan números de estudiante -- números únicos que identifican a cada estudiante. Una **clave primaria** es la misma idea: un identificador único para cada fila en una tabla, para que siempre puedas referirte a exactamente un registro específico."
     },
     {
+      "type": "analogy",
+      "title": "La Placa del Auto",
+      "body": "Dos personas pueden tener Toyotas Camry rojos identicos, pero cada auto tiene una **placa** unica. Esa placa nunca cambia aunque el auto se pinte de otro color o cambie de dueno. La policia, las aseguradoras y los estacionamientos usan la placa para identificar exactamente a cual auto se refieren. Una clave primaria es la placa de tus datos -- una etiqueta permanente y unica que elimina toda ambiguedad."
+    },
+    {
       "type": "text",
       "title": "¿Qué Hace una Buena Clave Primaria?",
       "body": "Una clave primaria debe ser:\n\n1. **Única** -- no puede haber dos filas con el mismo valor\n2. **No nula** -- cada fila debe tener una\n3. **Inmutable** -- nunca debería necesitar actualizarse\n\nLa mayoría de los desarrolladores usan un **entero auto-incremental** (1, 2, 3, 4...) o un **UUID** (una cadena aleatoria como 'a1b2c3d4-e5f6-...'). Nunca uses nombres, emails u otros datos reales como claves primarias -- pueden cambiar o tener duplicados."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-increments: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Now each user has a guaranteed unique ID\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- id is automatically set to 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- id is automatically set to 2 (different Alice, no confusion!)",
       "annotation": "SERIAL significa que la base de datos auto-genera el siguiente número. PRIMARY KEY significa que esta columna identifica de manera única cada fila. Dos usuarios llamados 'Alice' obtienen IDs diferentes."
+    },
+    {
+      "type": "motivation",
+      "body": "Las claves primarias son como tu app sabe cual cliente pago, cual pedido se envio y cual suscripcion renovar. Sin ellas, tu app vibecodeada confundiria usuarios y pagos -- y asi es como pierdes clientes y dinero rapidamente."
     },
     {
       "type": "key_takeaway",

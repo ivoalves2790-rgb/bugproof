@@ -19,6 +19,15 @@
       "body": "Imagine building a new room in your house. Instead of knocking down a wall on move-in day and hoping it works, you build the room behind a door. Open the door to show it to friends first. If the plumbing leaks, close the door and fix it. Feature flags are that door — the code is deployed but hidden until you're ready."
     },
     {
+      "type": "analogy",
+      "title": "Gradual Rollouts Are Like a Soft Restaurant Opening",
+      "body": "New restaurants don't open to the entire city on day one. They do a soft opening — invite friends and family first, work out the kinks, then open to the public. Gradual feature rollouts work the same way: let a small group try it, fix what breaks, then expand to everyone. You'd never serve 500 diners before testing the kitchen with 10."
+    },
+    {
+      "type": "motivation",
+      "body": "Shipping features safely is what separates hobby projects from real products. When you can deploy with confidence, you iterate faster — and faster iteration means you reach paying customers sooner."
+    },
+    {
       "type": "key_takeaway",
       "body": "Never deploy a big feature to all users at once. Use feature flags for gradual rollouts, monitor error rates during rollout, and always have a way to turn features off instantly."
     }

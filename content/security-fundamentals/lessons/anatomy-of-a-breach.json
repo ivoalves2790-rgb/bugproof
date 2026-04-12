@@ -14,6 +14,11 @@
       "body": "When a pipe bursts in your house, the first thing you do is shut off the water -- not mop the floor, not call the plumber, not post on social media. In a data breach, your first move is the same: stop the leak before doing anything else."
     },
     {
+      "type": "analogy",
+      "title": "Incident Response Is Like an ER Triage",
+      "body": "When someone arrives at the emergency room, doctors don't start with paperwork -- they stabilize the patient first, then diagnose, then treat. A data breach works the same way: contain the bleeding (stop the leak), assess the damage (check logs), notify the family (tell affected users), and then perform surgery (fix the root cause). Skipping straight to the fix while data is still leaking is like scheduling surgery while the patient is still in the ambulance."
+    },
+    {
       "type": "text",
       "title": "The Four Steps of Incident Response",
       "body": "When a security breach happens, follow these steps in order:\n\n1. **Contain** -- stop the leak immediately (disable the endpoint, revoke the key)\n2. **Assess** -- check logs to see how much data was accessed\n3. **Notify** -- tell affected users and your team\n4. **Fix** -- patch the vulnerability and add safeguards to prevent it from happening again"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// VULNERABLE: anyone can access any user's data\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// FIXED: check that the requester owns this data\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Forbidden' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
       "annotation": "The vulnerable version lets anyone fetch any user's data just by changing the ID in the URL. The fix adds authentication and checks that you can only access your own data."
+    },
+    {
+      "type": "motivation",
+      "body": "If you're building apps with AI and selling them to clients, a single data breach can destroy the trust you worked so hard to build -- and kill your revenue overnight. Knowing how to respond to incidents isn't just a skill, it's insurance for your business."
     },
     {
       "type": "key_takeaway",

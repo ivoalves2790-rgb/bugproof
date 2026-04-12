@@ -14,11 +14,20 @@
       "body": "A failing test means one of two things: your code has a bug, or your test is wrong. Before assuming it's a code bug, read the error message carefully, check if the test setup is correct, and verify the test expectations match the current requirements. Many 'bugs' are actually outdated tests."
     },
     {
+      "type": "analogy",
+      "title": "Debugging Is Like Being a Detective",
+      "body": "A detective doesn't assume who did it — they examine the evidence first. The error message is your crime scene report, the stack trace is your list of witnesses, and running the test in isolation is your interrogation room. Follow the clues before jumping to conclusions."
+    },
+    {
       "type": "code_example",
       "title": "Reading a Test Failure",
       "language": "text",
       "code": "FAIL: 'should return tasks sorted by due date'\n  Expected: ['Task A (Jan 1)', 'Task B (Jan 5)']\n  Received: ['Task B (Jan 5)', 'Task A (Jan 1)']\n\nThis tells you: the sort order is reversed.\nCheck: Is the sort function wrong? Or did the test expect the wrong order?",
       "annotation": "Always read the expected vs received values. They often tell you exactly what went wrong."
+    },
+    {
+      "type": "motivation",
+      "body": "Debugging quickly is a superpower. The faster you fix issues, the faster you ship features that keep users engaged and paying — and that's the difference between an app that makes money and one that doesn't."
     },
     {
       "type": "key_takeaway",

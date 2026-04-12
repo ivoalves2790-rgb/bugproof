@@ -26,9 +26,18 @@
       "annotation": "Use `git log --oneline` for a quick overview, then `git show <hash>` to dive into a specific commit."
     },
     {
+      "type": "analogy",
+      "title": "Git Log = Security Camera Footage",
+      "body": "Imagine a store gets robbed. The first thing the detective does is check the security camera footage -- who was in the store, what time did they enter, what did they do? `git log` is your project's security camera. When a bug appears, you rewind the footage to see exactly which change introduced it and who made it."
+    },
+    {
       "type": "text",
       "title": "Why This Matters for Debugging",
       "body": "When something breaks, `git log` is your detective tool. You can scan recent commits to find which change likely caused the problem, then use `git show` to see exactly what lines were added or removed. It's much faster than guessing."
+    },
+    {
+      "type": "motivation",
+      "body": "Debugging quickly is what turns a $30/hour coder into a $150/hour consultant. Mastering `git log` means you can find and fix bugs in minutes instead of hours -- and that speed is what clients pay premium rates for."
     },
     {
       "type": "key_takeaway",

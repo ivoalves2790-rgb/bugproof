@@ -19,6 +19,15 @@
       "body": "Piensa en el flujo de datos como pedir en un restaurante. El usuario (cliente) llena un formulario (hace un pedido). El frontend (mesero) lo envia a la API (cocina). La base de datos (despensa) almacena los ingredientes. Cuando obtienes datos, la cocina prepara el plato de la despensa y el mesero lo trae a la mesa. Si la comida esta mal, rastrear el problema: el mesero anoto mal el pedido, la cocina lo leyo mal, o la despensa estaba mal abastecida?"
     },
     {
+      "type": "analogy",
+      "title": "El Flujo de Datos Es Como una Entrega de Paquetes",
+      "body": "Cuando compras algo en linea, el paquete va: tu pedido -> almacen -> camion de entrega -> tu puerta. Si nunca llega, puedes rastrear cada paso: lo envio el almacen? Esta atascado el camion? Estaba mal la direccion? Los datos en tu app siguen el mismo camino rastreable. Cuando algo no aparece en la interfaz, revisas cada parada en la ruta."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender el flujo de datos es el superpoder que te permite depurar cualquier cosa. Cuando puedes rastrear un bug desde el clic de un boton hasta la base de datos y de vuelta, construyes apps confiables — del tipo en las que la gente confia para su trabajo diario y con gusto paga."
+    },
+    {
       "type": "key_takeaway",
       "body": "Los datos fluyen en un camino predecible: UI -> API -> Base de datos y de vuelta. Cuando algo se rompe, rastrea el flujo paso a paso. Revisa la pestana de red del navegador para errores de API, los logs de Supabase para errores de base de datos, y la interfaz para problemas de renderizado."
     }

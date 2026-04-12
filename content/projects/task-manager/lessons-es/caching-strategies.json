@@ -19,6 +19,15 @@
       "body": "No llamas a la tienda cada vez que quieres saber si tienes leche. Revisas el refrigerador (cache). Pero si alguien se tomo la leche y no actualizo la nota, pensaras que tienes leche cuando no es asi. Eso es un cache obsoleto — y es el problema mas dificil del cache."
     },
     {
+      "type": "analogy",
+      "title": "El Cache Es Como Tener Favoritos en Marcado Rapido",
+      "body": "Podrias buscar el numero de tu mejor amigo en la guia telefonica cada vez que llamas, pero es mas rapido guardarlo como contacto. El cache guarda el resultado de busquedas costosas para no repetir el trabajo. Solo asegurate de actualizar el contacto si cambian de numero."
+    },
+    {
+      "type": "motivation",
+      "body": "El cache hace que tu app se sienta instantanea, y las apps que se sienten instantaneas les ganan usuarios a los competidores lentos. La ventaja de velocidad que obtienes con cache inteligente se traduce directamente en mejor retencion y mas ingresos."
+    },
+    {
       "type": "key_takeaway",
       "body": "Almacena en cache agresivamente los datos que cambian con poca frecuencia (configuracion del usuario, listas de categorias). Almacena con cuidado los datos que cambian a menudo (listas de tareas, notificaciones) con tiempos de expiracion cortos o invalidacion en tiempo real."
     }

@@ -14,6 +14,11 @@
       "body": "Before filling a closet, you decide: shirts here, pants there, shoes on the bottom. If you just throw everything in randomly, finding anything later is a nightmare. **Schema design** is organizing your database closet -- deciding what tables you need, what columns each has, and how they relate to each other, BEFORE you start filling them with data."
     },
     {
+      "type": "analogy",
+      "title": "The City Planner",
+      "body": "Schema design is like city planning. Before building a single house, a city planner decides where roads go, which zones are residential vs. commercial, and where the plumbing and electrical lines run. If you build houses first and plan roads later, you end up with a chaotic city where nothing connects. Designing your schema first means your data has clear neighborhoods (tables), well-paved roads (relationships), and no dead ends."
+    },
+    {
       "type": "text",
       "title": "Questions to Ask When Designing a Schema",
       "body": "Before creating tables, ask:\n\n1. **What things does my app deal with?** (users, products, orders = separate tables)\n2. **What do I need to know about each thing?** (user: name, email, password = columns)\n3. **How do these things relate?** (a user HAS many orders = relationship)\n4. **What must always have a value?** (name = NOT NULL, bio = optional)\n5. **What must be unique?** (email = UNIQUE, name = can duplicate)"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "One Table Per 'Thing'",
       "body": "The most important rule: **each type of thing gets its own table**.\n\n- Users go in a `users` table\n- Products go in a `products` table\n- Orders go in an `orders` table\n\nDon't mash everything into one giant table. If you find yourself repeating the same data in multiple rows (like the user's name appearing in every order), that's a sign you need a separate table."
+    },
+    {
+      "type": "motivation",
+      "body": "Schema design is the highest-leverage skill in vibecoding. A well-designed schema lets you build features fast -- user accounts, payments, subscriptions, analytics -- all from the same solid foundation. Get the schema right once, and every feature you add makes money without painful rewrites."
     },
     {
       "type": "key_takeaway",

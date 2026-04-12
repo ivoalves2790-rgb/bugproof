@@ -14,6 +14,11 @@
       "body": "Un equilibrista PUEDE actuar sin red de seguridad. Pero un resbalón y es un desastre. Una red de seguridad no te ayuda a caminar mejor -- te atrapa cuando caes. Los **tests** son tu red de seguridad. No escriben tu código por ti, pero te atrapan cuando un cambio accidentalmente rompe algo."
     },
     {
+      "type": "analogy",
+      "title": "Tests = Detectores de humo en tu casa",
+      "body": "No instalas detectores de humo porque esperas un incendio cada día. Los instalas porque la ÚNICA vez que algo sale mal, salvan todo. Los **tests** son los detectores de humo de tu código. Se quedan en silencio en el fondo, y en el momento en que algo se prende fuego -- una funcionalidad rota, un cálculo malo -- gritan fuerte antes de que el daño se propague."
+    },
+    {
       "type": "text",
       "title": "Las verdaderas razones por las que importan los tests",
       "body": "Los tests te ahorran tiempo y estrés de cuatro grandes maneras:\n\n1. **Detectan bugs temprano** -- Encuentran problemas en 2 segundos en lugar de descubrirlos por usuarios enojados\n2. **Cambia código sin miedo** -- Refactoriza sabiendo que los tests te dirán si rompiste algo\n3. **Documentan el comportamiento** -- Los tests muestran exactamente qué se supone que debe hacer tu código\n4. **Duerme mejor** -- Despliega un viernes sabiendo que tus tests pasaron"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "El costo de NO testear",
       "body": "Sin tests, cada cambio es riesgoso. Tienes que verificar todo manualmente. ¿El login sigue funcionando? ¿El checkout sigue procesando pagos? ¿La búsqueda sigue devolviendo resultados? Esta verificación manual toma tiempo, e inevitablemente se te pasará algo. Un bug no detectado en un sistema de pagos puede costar dinero real."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada bug que llega a tus usuarios es una solicitud de reembolso, una mala reseña o un cliente perdido. Cuando lanzas apps generadas con IA, los tests son la diferencia entre un proyecto que genera dinero y uno que destruye tu reputación de la noche a la mañana."
     },
     {
       "type": "key_takeaway",

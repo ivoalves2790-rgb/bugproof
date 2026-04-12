@@ -19,9 +19,18 @@
       "body": "Most teams use a **prefix/description** pattern:\n\n- `feature/user-authentication` -- Adding something new\n- `fix/login-crash` -- Fixing a bug\n- `hotfix/security-patch` -- Urgent production fix\n\nUse lowercase letters, hyphens instead of spaces, and keep it short but descriptive."
     },
     {
+      "type": "analogy",
+      "title": "Branch Names = Street Addresses",
+      "body": "Imagine if your home address was just \"my house\" instead of \"742 Evergreen Terrace.\" No pizza delivery, no mail, nobody could find you. Branch names are addresses for your work. `feature/dark-mode` tells everyone exactly where to find the dark mode work, just like a proper address tells the delivery driver exactly where to go."
+    },
+    {
       "type": "text",
       "title": "Common Mistakes to Avoid",
       "body": "- **No spaces or capitals** -- Some tools handle them poorly\n- **No vague names** -- `my-branch` or `test123` tells nobody anything\n- **No novels** -- Keep it under 30 characters when possible\n- **No special characters** -- Stick to letters, numbers, hyphens, and forward slashes"
+    },
+    {
+      "type": "motivation",
+      "body": "Good naming conventions signal professionalism. When a hiring manager or client sees well-named branches in your GitHub repos, they see someone who writes production-quality code -- and that's the difference between getting hired or getting passed over."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Your app needs somewhere to live on the internet. **Hosting** is like renting an apartment for your code. Some platforms give you a tiny studio that's free (great for small projects). Others give you a whole building with a doorman and maintenance team (for big apps with lots of users)."
     },
     {
+      "type": "analogy",
+      "title": "Hosting = Choosing a Gym Membership",
+      "body": "Picking a hosting platform is like choosing a gym. Some gyms are huge with every machine imaginable but cost a fortune and overwhelm beginners (AWS). Others are small, friendly studios with just the essentials and a free trial (Vercel, Netlify). You don't need the mega-gym to get fit -- start small and upgrade when you outgrow it."
+    },
+    {
       "type": "text",
       "title": "The Big Three for Beginners",
       "body": "If you're just getting started, these three platforms are the most popular:\n\n1. **Vercel** -- Best for frontend apps and Next.js projects. Deploys from GitHub automatically.\n2. **Netlify** -- Great for static sites and frontend apps. Simple drag-and-drop deploys.\n3. **Railway** -- Best when you need a backend server and database. Like Vercel but for full-stack apps."
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Free Tiers and Limits",
       "body": "Most hosting platforms have a **free tier** -- you can deploy small projects without paying anything. But free tiers have limits:\n\n- Limited bandwidth (how much data your app can send)\n- Limited compute time (your app might sleep after inactivity)\n- Limited storage (small databases only)\n\nFor learning and small projects, free tiers are more than enough."
+    },
+    {
+      "type": "motivation",
+      "body": "Free hosting tiers mean you can launch your vibecoded app and start getting users without spending a cent. The platform grows with you as your app starts making money."
     },
     {
       "type": "key_takeaway",

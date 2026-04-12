@@ -14,6 +14,11 @@
       "body": "A car's dashboard lets you adjust things without rebuilding the engine -- temperature, radio station, mirror positions. **Configuration** in software works the same way. You should be able to change settings (database URL, API endpoints, feature flags) without rewriting code."
     },
     {
+      "type": "analogy",
+      "title": "Config = TV Remote Buttons",
+      "body": "A TV remote has buttons for volume, channel, and input -- you can change any of them without opening up the TV and rewiring it. Good configuration patterns work the same way: you should be able to swap your database, change an API key, or toggle a feature without touching a single line of code. Hardcoding values is like soldering the channel dial to channel 5 -- it works at your house but nobody else can use it."
+    },
+    {
       "type": "text",
       "title": "The #1 Config Rule: Never Hardcode Secrets",
       "body": "The most important rule: **never put values that change between environments directly in your code**. Instead, read them from environment variables:\n\n- Database URLs\n- API keys and secrets\n- Service endpoints\n- Feature flags\n- Port numbers"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// BAD: Hardcoded values\nconst db = connect('postgresql://admin:password123@localhost:5432/myapp');\n\n// GOOD: Read from environment\nconst db = connect(process.env.DATABASE_URL);\n\n// GOOD: With a fallback for development\nconst port = process.env.PORT || 3000;",
       "annotation": "The fallback pattern (|| 3000) lets you skip setting PORT in development while requiring it in production."
+    },
+    {
+      "type": "motivation",
+      "body": "Clean configuration patterns mean you can launch the same vibecoded app for different clients just by changing env vars. One codebase, multiple revenue streams."
     },
     {
       "type": "key_takeaway",

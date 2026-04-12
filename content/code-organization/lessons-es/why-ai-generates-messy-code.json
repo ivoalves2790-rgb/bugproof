@@ -14,6 +14,11 @@
       "body": "Imagina un chef que puede cocinar cualquier plato perfectamente pero deja la cocina hecha un desastre después. Cada sartén está sucia, los ingredientes están dispersos y nada se guardó en su lugar. Las **herramientas de codificación con IA** son como este chef -- producen código funcional pero no piensan en dónde encaja en tu proyecto, qué más ya existe o cómo debería organizarse el código base."
     },
     {
+      "type": "analogy",
+      "title": "IA = Un invitado brillante que no conoce tu casa",
+      "body": "Imagina invitar a un amigo brillante a ayudarte a cocinar. Puede hacer cualquier receta perfectamente, pero no sabe dónde guardas las ollas, las especias ni los platos. Así que deja ingredientes en el mostrador, usa una sartén nueva para cada paso y pone el plato terminado en la estufa en vez de la mesa. **La IA escribe código genial pero no conoce la cocina de tu proyecto** -- necesita que tú pongas las cosas en el lugar correcto después."
+    },
+    {
       "type": "text",
       "title": "Por qué la IA comete errores de organización",
       "body": "Las herramientas de IA generan código sin contexto completo:\n\n1. **Sin conocimiento del proyecto** -- La IA no conoce tu estructura de archivos ni patrones existentes\n2. **Un prompt a la vez** -- Cada respuesta es independiente; no recuerda haber decidido poner utilidades en `lib/` antes\n3. **Duplica código existente** -- Escribe una función auxiliar que ya tienes porque no puede ver todo tu código base\n4. **Todo inline** -- La IA tiende a poner toda la lógica en un archivo en lugar de dividir en módulos apropiados"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "Qué necesitas hacer después de que la IA genera código",
       "body": "Después de que la IA escribe código para ti, siempre haz una pasada de limpieza rápida:\n\n- **Busca duplicados** -- ¿Esta función ya existe en algún lugar?\n- **Mueve al archivo correcto** -- ¿Esta lógica debería vivir en un archivo de utilidades o módulo compartido?\n- **Renombra variables poco claras** -- La IA a menudo usa nombres genéricos como `data` o `result`\n- **Divide archivos grandes** -- Si un archivo creció más de 200 líneas, probablemente hace demasiadas cosas"
+    },
+    {
+      "type": "motivation",
+      "body": "El vibecoder que limpia el código generado por IA tiene un superpoder: entrega rápido Y código mantenible. Esa es la diferencia entre un prototipo desechable de $500 y una app de $5,000 con un contrato de mantenimiento que te paga cada mes."
     },
     {
       "type": "key_takeaway",

@@ -14,11 +14,20 @@
       "body": "Before going live, you need to verify: all environment variables are set, HTTPS is enabled, error tracking is configured, there's a way to roll back if something goes wrong, and someone is available to fix issues. Most launch-day disasters come from skipping one of these basics."
     },
     {
+      "type": "analogy",
+      "title": "Going Live Is Like Opening Night",
+      "body": "A theater company doesn't open the doors without checking the sound system, stage lights, and emergency exits. Going live is your opening night — the audience is real, first impressions matter, and a 10-minute walkthrough beforehand can save you from an embarrassing disaster."
+    },
+    {
       "type": "code_example",
       "title": "Pre-Launch Essentials",
       "language": "text",
       "code": "[ ] Production env vars set and verified\n[ ] HTTPS enabled (automatic on Vercel)\n[ ] Error tracking configured (Sentry, etc.)\n[ ] Database migrations applied\n[ ] Auth working in production environment\n[ ] Rollback plan: know how to revert to previous deploy\n[ ] Open Graph / social meta tags set\n[ ] 404 page configured",
       "annotation": "Walk through each item. A 10-minute checklist review can prevent a 10-hour launch-day emergency."
+    },
+    {
+      "type": "motivation",
+      "body": "Launch day is when your vibecoded project meets the real world. A smooth launch builds trust, attracts early adopters, and sets the stage for your first paying customers."
     },
     {
       "type": "key_takeaway",

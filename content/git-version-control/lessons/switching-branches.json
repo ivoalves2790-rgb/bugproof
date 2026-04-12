@@ -14,6 +14,11 @@
       "body": "Think of branches like different rooms in a house, each set up for a different project. When you switch branches, Git instantly rearranges your project folder to match that branch's version of the files. It's like walking into a different room where everything is set up exactly how you left it."
     },
     {
+      "type": "analogy",
+      "title": "Switching Branches = Changing TV Channels",
+      "body": "Think of switching branches like changing channels on a TV with a built-in DVR. Each channel (branch) has its own recorded content. When you switch channels, the picture changes instantly. But if you were recording something on the current channel, you need to hit \"save\" first -- otherwise your recording gets corrupted. That's why you commit before switching."
+    },
+    {
       "type": "text",
       "title": "Commit Before You Switch!",
       "body": "This is the most important rule: **always commit (or stash) your changes before switching branches.** If you have uncommitted changes, Git might refuse to switch to protect your work. Uncommitted changes could get mixed up between branches or be lost entirely."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "git status                          # Check for uncommitted changes\ngit add .                           # Stage changes\ngit commit -m \"Save my progress\"    # Commit first!\ngit checkout main                   # Now safe to switch\ngit checkout -b feature/search-bar  # Create + switch in one step",
       "annotation": "Always check `git status` before switching. If it shows changes, commit them first."
+    },
+    {
+      "type": "motivation",
+      "body": "Being able to juggle multiple features at once is what makes you valuable on a team. Vibecoding an app with AI? You'll constantly switch between branches for different features -- this skill keeps your work organized and your clients happy."
     },
     {
       "type": "key_takeaway",

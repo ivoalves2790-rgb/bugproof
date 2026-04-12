@@ -14,6 +14,11 @@
       "body": "Piensa en un show de Broadway. No pasas directo de leer el guion a actuar para una audiencia. Hay etapas: **lecturas de mesa** (desarrollo), **ensayos generales** (staging), y **noche de estreno** (producción). Cada etapa atrapa diferentes problemas, y preferirías atraparlos antes de que la audiencia los vea."
     },
     {
+      "type": "analogy",
+      "title": "Entornos = Probar un Nuevo Platillo del Menu",
+      "body": "Un restaurante no pone un platillo nuevo en el menu sin probarlo. Primero, el chef experimenta en la cocina (desarrollo). Luego el personal hace una prueba de sabor (staging). Solo despues de que todos estan de acuerdo en que esta listo, va al menu para los clientes que pagan (produccion). Saltar directo de los experimentos de cocina al plato del cliente es como terminas con malas resenas."
+    },
+    {
       "type": "text",
       "title": "Los Tres Entornos",
       "body": "La mayoría de los equipos usan tres entornos:\n\n1. **Desarrollo** -- Tu máquina local. Puedes romper cosas libremente, experimentar y depurar con errores detallados.\n2. **Staging** -- Una copia de producción usada para pruebas finales. Misma configuración de servidor, misma estructura de base de datos, pero con datos de prueba. Solo tu equipo puede verlo.\n3. **Producción** -- Lo real. Usuarios reales, datos reales, dinero real. Los errores aquí afectan a personas reales."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Development (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Production (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
       "annotation": "Nota cómo desarrollo usa localhost y claves de prueba, mientras producción usa servidores reales y claves API en vivo."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender los entornos significa que puedes probar cambios arriesgados sin romper tu app en vivo. Tu producto creado con IA sigue generando dinero mientras construyes la siguiente funcionalidad de forma segura."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Imagine you want to call a pizza place. You know its name ('Mario's Pizza') but not its phone number. So you look it up in a phone book. **DNS** (Domain Name System) works exactly like this. You know the name (`google.com`) and DNS looks up the number (`142.250.80.46`) so your browser can connect."
     },
     {
+      "type": "analogy",
+      "title": "DNS Is Like a GPS for the Internet",
+      "body": "When you type an address into your car's GPS, it doesn't just know where '123 Elm Street' is -- it looks it up in a huge map database and gives you directions. **DNS** does the same thing for web addresses. You type 'youtube.com' and DNS looks it up in its massive directory, then points your browser to the right server. Without DNS, you'd need to memorize the coordinates of every place you want to visit."
+    },
+    {
       "type": "text",
       "title": "Why Do We Need DNS?",
       "body": "Computers find each other using **IP addresses** -- numbers like `192.168.1.1`. But humans are terrible at remembering numbers. DNS lets us use friendly names like `youtube.com` instead of `142.250.190.78`. Every time you visit a website, a DNS lookup happens first -- your browser asks 'What's the IP address for this name?'"
@@ -22,6 +27,10 @@
       "type": "text",
       "title": "The DNS Lookup Process",
       "body": "When you type `example.com`, here's what happens:\n\n1. Your browser checks its **cache** -- did I look this up recently?\n2. If not, it asks your **router** (your home Wi-Fi)\n3. If the router doesn't know, it asks your **ISP's DNS server**\n4. If nobody knows, it goes all the way to the **root DNS servers** that know everything\n5. The answer travels back down the chain and gets cached for next time"
+    },
+    {
+      "type": "motivation",
+      "body": "When you launch an app and buy a domain, DNS is what connects your brand name to your actual server. Understanding DNS means you can vibecode, deploy, and go live without panicking when your domain doesn't work immediately."
     },
     {
       "type": "key_takeaway",

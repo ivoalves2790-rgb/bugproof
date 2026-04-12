@@ -14,6 +14,11 @@
       "body": "Un edificio necesita cimientos anchos y sólidos (baratos, rápidos), pisos regulares en el medio, y un pequeño penthouse arriba (caro, lujoso). Si construyes un edificio que es mayormente penthouse con cimientos diminutos, se derrumba. La **pirámide de testing** funciona de la misma manera -- necesitas muchos tests rápidos y baratos en la base y menos tests lentos y caros en la cima."
     },
     {
+      "type": "analogy",
+      "title": "La pirámide = Un sistema de salud",
+      "body": "Un buen sistema de salud tiene muchos chequeos rápidos (presión arterial, temperatura) que detectan la mayoría de problemas temprano, algunos estudios especializados (análisis de sangre, radiografías) para temas más profundos, y pocos procedimientos caros (resonancias, cirugías) para casos serios. La **pirámide de testing** sigue la misma lógica -- muchos tests unitarios rápidos atrapan la mayoría de bugs, tests de integración detectan problemas de conexión, y unos pocos tests E2E caros verifican flujos críticos."
+    },
+    {
       "type": "text",
       "title": "Las tres capas",
       "body": "La pirámide de testing tiene tres capas:\n\n1. **Tests unitarios** (base, MUCHOS) -- Testean funciones individuales. Súper rápidos, se ejecutan en milisegundos. Escribe muchos de estos.\n2. **Tests de integración** (medio, ALGUNOS) -- Testean cómo las piezas trabajan juntas. Más lentos, pero detectan bugs de conexión.\n3. **Tests de extremo a extremo (E2E)** (cima, POCOS) -- Testean toda la app como un usuario real. Los más lentos, pero testean el flujo completo.\n\nLa proporción debería ser aproximadamente: 70% unitarios, 20% integración, 10% E2E."
@@ -24,6 +29,10 @@
       "language": "bash",
       "code": "# Unit tests: test a single function\n# Speed: ~50 tests per second\nnpm run test:unit     # Done in 2 seconds\n\n# Integration tests: test API endpoints\n# Speed: ~5 tests per second\nnpm run test:int      # Done in 30 seconds\n\n# E2E tests: test full user flows in a browser\n# Speed: ~1 test per 10 seconds\nnpm run test:e2e      # Done in 5 minutes",
       "annotation": "Los tests unitarios se ejecutan 100 veces más rápido que los tests E2E. Por eso quieres más de ellos."
+    },
+    {
+      "type": "motivation",
+      "body": "Un suite de tests lento significa despliegues lentos, y despliegues lentos significan que no puedes reaccionar a los usuarios lo suficientemente rápido. La pirámide mantiene tus tests ultrarrápidos para que puedas lanzar funcionalidades construidas con IA a diario -- la velocidad que convierte un proyecto secundario en un negocio."
     },
     {
       "type": "key_takeaway",

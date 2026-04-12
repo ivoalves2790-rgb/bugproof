@@ -14,11 +14,20 @@
       "body": "A user flow test simulates what a real user does: open the app, log in, create a task, mark it complete. These are integration or E2E tests that verify multiple components work together. They catch bugs that unit tests miss, like a form that submits but doesn't actually save to the database."
     },
     {
+      "type": "analogy",
+      "title": "User Flow Tests Are Like a Dress Rehearsal",
+      "body": "A theater doesn't check only that each actor knows their lines (unit tests). They run a full dress rehearsal with costumes, lighting, and scene changes (flow tests). Only by running the whole show together can you catch problems like a missed entrance or a prop that's not in the right place."
+    },
+    {
       "type": "code_example",
       "title": "A User Flow Test",
       "language": "text",
       "code": "test('user can create and complete a task', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('New Task');\n  await fillInput('Task title', 'Buy milk');\n  await clickButton('Save');\n  \n  expect(await getText('.task-list')).toContain('Buy milk');\n  \n  await clickCheckbox('Buy milk');\n  expect(await getText('.completed-tasks')).toContain('Buy milk');\n});",
       "annotation": "This test covers the complete user journey — login, create, and complete — catching integration issues that unit tests would miss."
+    },
+    {
+      "type": "motivation",
+      "body": "The user flows you test are the same ones that bring in revenue — sign up, use the product, come back. Making sure those paths work flawlessly is how you build a product people are willing to pay for."
     },
     {
       "type": "key_takeaway",

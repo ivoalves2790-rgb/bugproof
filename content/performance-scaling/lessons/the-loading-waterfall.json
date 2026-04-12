@@ -14,6 +14,11 @@
       "body": "When a browser loads a page, it's like an assembly line. First it downloads the HTML, then it discovers CSS and JavaScript files it needs, then it downloads those, then it finds images referenced in the CSS, and so on. Each step can't start until the previous one finishes. This chain of dependent downloads is called a **waterfall**."
     },
     {
+      "type": "analogy",
+      "title": "Waterfall = Waiting for Friends to Get Ready",
+      "body": "You've planned a group trip. But Sarah can't leave until Tom picks her up, Tom can't leave until he gets the address from you, and you can't send the address until you confirm the restaurant. Everyone is waiting on someone else. A **loading waterfall** is the same -- each file waits for another to finish before it can even start. Breaking these unnecessary chains lets everyone get ready at the same time."
+    },
+    {
       "type": "text",
       "title": "What a Waterfall Shows",
       "body": "A waterfall chart in DevTools shows every file your page requests, lined up on a timeline. You can see:\n\n1. **What** was downloaded (HTML, CSS, JS, images, fonts)\n2. **When** each download started and finished\n3. **How long** each request took\n4. **What blocked what** -- which files had to wait for others\n\nLong bars and late-starting requests are your clues to what's slow."
@@ -24,6 +29,10 @@
       "language": "html",
       "code": "<head>\n  <link rel=\"stylesheet\" href=\"/styles.css\">\n  <script src=\"/analytics.js\"></script>\n  <script src=\"/chat-widget.js\"></script>\n  <script src=\"/app.js\"></script>\n</head>",
       "annotation": "Each script blocks the next one from loading. The browser downloads them one by one instead of in parallel. Moving scripts to the bottom of the body or adding 'async'/'defer' fixes this."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing how to read a waterfall chart means you can spot the exact bottleneck that's making users bail. Fix one chained dependency and you might cut load time in half -- keeping users engaged and paying."
     },
     {
       "type": "key_takeaway",

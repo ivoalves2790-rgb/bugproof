@@ -14,6 +14,11 @@
       "body": "¿Recuerdas la clase de ciencias? Cada experimento sigue el mismo patrón: preparar tu equipo (**Arrange**), ejecutar el experimento (**Act**), verificar tus resultados (**Assert**). Los tests siguen exactamente el mismo patrón. Esto los hace fáciles de leer y consistentes en todo tu código base."
     },
     {
+      "type": "analogy",
+      "title": "AAA = Pedir en un restaurante",
+      "body": "Piensa en comer fuera: haces **Arrange** eligiendo tu mesa y leyendo el menú, haces **Act** al hacer tu pedido, y haces **Assert** al verificar que la comida coincide con lo que pediste. Si te traen pasta cuando pediste pizza, algo salió mal. Los tests funcionan igual -- preparar, hacer la cosa, verificar el resultado."
+    },
+    {
       "type": "text",
       "title": "Las tres A's",
       "body": "**Arrange** -- Prepara todo lo que tu test necesita: crea variables, prepara datos de test, configura el escenario.\n\n**Act** -- Llama a la función o realiza la acción que estás testeando. Esto suele ser UNA línea de código.\n\n**Assert** -- Verifica que el resultado coincida con lo que esperabas. Si no coincide, el test falla."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "test('calculates total with tax', () => {\n  // ARRANGE: set up the inputs\n  const price = 100;\n  const taxRate = 0.08;\n\n  // ACT: call the function\n  const result = calculateTotal(price, taxRate);\n\n  // ASSERT: check the result\n  expect(result).toBe(108);\n});",
       "annotation": "Cada sección tiene un trabajo claro. Si este test falla, sabes que la función calculateTotal devolvió algo diferente a 108."
+    },
+    {
+      "type": "motivation",
+      "body": "El patrón AAA hace que tus tests sean limpios y predecibles, lo que significa que cuando la IA genera código que rompe algo, lo descubres en segundos -- no después de que un cliente presente una queja. Tests limpios protegen ingresos limpios."
     },
     {
       "type": "key_takeaway",

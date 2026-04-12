@@ -14,6 +14,11 @@
       "body": "Así como un semáforo te indica verde/amarillo/rojo, los códigos de estado HTTP le dicen a tu navegador qué pasó. **2xx** (verde) = éxito. **3xx** (amarillo) = redirección, ve a otro lugar. **4xx** (rojo para ti) = cometiste un error. **5xx** (rojo para ellos) = el servidor falló. El primer dígito te indica la categoría al instante."
     },
     {
+      "type": "analogy",
+      "title": "Los Codigos de Estado Son Como Calificaciones",
+      "body": "Piensa en los codigos de estado como calificaciones en una boleta. **200** es un 10 (perfecto, aqui estan tus datos). **404** es como recibir tu tarea marcada con 'el tema no existe.' **500** es el profesor diciendo 'disculpa, perdi tu examen' -- no es tu culpa, el sistema fallo. Igual que las calificaciones te dicen que salio bien o mal, los codigos de estado le dicen a tu app exactamente que paso."
+    },
+    {
       "type": "text",
       "title": "Los Códigos de Estado Más Comunes",
       "body": "Los verás todo el tiempo:\n\n1. **200 OK** -- todo funcionó\n2. **201 Created** -- se creó un nuevo recurso (como después de registrarse)\n3. **301 Moved Permanently** -- esta página se movió, ve aquí en su lugar\n4. **400 Bad Request** -- enviaste algo que el servidor no entiende\n5. **401 Unauthorized** -- necesitas iniciar sesión primero\n6. **403 Forbidden** -- iniciaste sesión pero no tienes permiso\n7. **404 Not Found** -- esta página no existe\n8. **500 Internal Server Error** -- algo se rompió en el servidor"
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'User not found' });\n  }\n  res.status(200).json(user);\n});",
       "annotation": "El servidor establece explícitamente el código de estado. 404 le dice al navegador 'este usuario no existe' mientras que 200 significa 'aquí está el usuario que pediste.' El frontend puede verificar estos códigos para decidir qué mostrar."
+    },
+    {
+      "type": "motivation",
+      "body": "Las apps que manejan errores bien mantienen a los usuarios contentos y pagando. Cuando vibecodeas codigos de estado correctos, tu app puede mostrar mensajes de error amigables en vez de romperse -- y esa es la diferencia entre usuarios que se van y usuarios que se quedan."
     },
     {
       "type": "key_takeaway",

@@ -14,6 +14,11 @@
       "body": "Imagine asking someone for directions and they confidently say 'turn left on Oak Street' -- but Oak Street doesn't exist. They're not lying; they genuinely think it's there. AI hallucinations are the same: the AI invents methods, libraries, or APIs that sound real but don't exist."
     },
     {
+      "type": "analogy",
+      "title": "Hallucinations Are Like Autocorrect Gone Wrong",
+      "body": "You know when autocorrect changes your text to a word that looks right but is completely wrong for the sentence? You don't notice until someone reads it and gets confused. AI hallucinations are the same -- the code looks natural and plausible, but it references things that simply don't exist, and you won't catch it unless you look closely."
+    },
+    {
       "type": "text",
       "title": "What AI Hallucinations Look Like",
       "body": "Common hallucinations include:\n\n1. **Fake methods** -- like `.toTitleCase()` in JavaScript (doesn't exist)\n2. **Invented libraries** -- referencing npm packages that were never published\n3. **Wrong API signatures** -- using a real function but with the wrong parameters\n4. **Made-up config options** -- settings that sound right but aren't supported\n\nThe dangerous part is that hallucinated code **looks completely normal** until you try to run it."
@@ -24,6 +29,10 @@
       "language": "javascript",
       "code": "// AI-generated code with a hallucination\nconst name = 'john doe';\nconst formatted = name.toTitleCase(); // This method doesn't exist!\n\n// What actually works in JavaScript\nconst formatted = name.charAt(0).toUpperCase() + name.slice(1);",
       "annotation": "JavaScript strings have no toTitleCase() method. The AI invented it because it sounds like it should exist. Always verify that methods and APIs are real before using AI-generated code."
+    },
+    {
+      "type": "motivation",
+      "body": "Catching hallucinations before they hit production separates amateur vibecoding from professional app-building. Ship reliable code, earn user trust, and build a reputation that brings in paying customers."
     },
     {
       "type": "key_takeaway",

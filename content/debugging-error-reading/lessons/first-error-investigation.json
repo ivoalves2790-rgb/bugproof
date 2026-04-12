@@ -14,6 +14,11 @@
       "body": "A detective doesn't guess who did it. They follow the evidence: the crime scene, the witnesses, the clues. Debugging is the same process. The error message is your first clue, the file and line number tell you where to look, and reading the code reveals what happened."
     },
     {
+      "type": "analogy",
+      "title": "Debugging Is Like Troubleshooting a Recipe",
+      "body": "If your cake comes out flat, you don't throw away the whole kitchen. You retrace your steps: Did I add baking powder? Did I set the right temperature? Did I mix too long? Debugging code is the same process -- you follow the steps backward from the failure to find the one thing that went wrong."
+    },
+    {
       "type": "text",
       "title": "The Investigation Steps",
       "body": "Every error investigation follows the same pattern:\n\n1. **Run the code** and read the error message\n2. **Find the file and line** mentioned in the error\n3. **Look at that line** and the code around it\n4. **Understand the mismatch** between what the code expects and what it got\n\nThis process works for every programming language and every type of error."
@@ -24,6 +29,10 @@
       "language": "text",
       "code": "$ node index.js\nError: Cannot find module './helpers'\n    at index.js:3",
       "annotation": "This error says the file 'helpers' doesn't exist. Check what files actually exist (ls), then look at line 3 of index.js to see what it's trying to import."
+    },
+    {
+      "type": "motivation",
+      "body": "This investigation process is the exact workflow you'll use every time AI-generated code doesn't work. Mastering it means you can confidently build and launch real products with vibecoding -- and real products mean real money."
     },
     {
       "type": "key_takeaway",

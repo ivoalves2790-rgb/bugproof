@@ -14,6 +14,11 @@
       "body": "Imagine if you had to download an entire encyclopedia before you could read one article. That's what a single JavaScript bundle does -- it forces users to download code for every page, even pages they'll never visit. **Code splitting** is like splitting the encyclopedia into chapters that load on demand."
     },
     {
+      "type": "analogy",
+      "title": "Code Splitting = Grocery Delivery in Bags",
+      "body": "Imagine if your grocery delivery service sent you every single item from the store, even though you only ordered eggs and milk. You'd wait forever for the truck to arrive. **Code splitting** is like having the delivery service send only what you ordered now, and delivering the rest later if you add to your order. Users get what they need fast, without downloading the entire store."
+    },
+    {
       "type": "text",
       "title": "How Code Splitting Works",
       "body": "Instead of one giant JavaScript file, code splitting creates multiple smaller files:\n\n1. **Route-based splitting** -- Each page becomes its own chunk (dashboard.js, settings.js, admin.js)\n2. **Component-based splitting** -- Heavy components load only when rendered (chart library, rich text editor)\n3. **Library splitting** -- Vendor code (React, lodash) goes in a separate chunk that caches well\n\nThe user only downloads the code needed for the page they're viewing."
@@ -24,6 +29,10 @@
       "language": "jsx",
       "code": "import React, { lazy, Suspense } from 'react';\n\n// These are loaded on-demand, not upfront\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
       "annotation": "Each page component is wrapped in lazy(), so its JavaScript file only downloads when the user navigates to that route. Suspense shows a loading fallback while the chunk downloads."
+    },
+    {
+      "type": "motivation",
+      "body": "Code splitting is how apps built with AI go from hobby projects to professional products. When your dashboard loads in 2 seconds instead of 10, users stick around long enough to hit that subscribe button."
     },
     {
       "type": "key_takeaway",

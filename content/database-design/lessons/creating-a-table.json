@@ -14,6 +14,11 @@
       "body": "Creating a table is like designing a paper form before printing hundreds of copies. You decide what fields to include (name, author, price), what format each field uses (text, number, date), and which fields are required. Once the form is designed, everyone fills in the same structure."
     },
     {
+      "type": "analogy",
+      "title": "The Blueprint Before Building",
+      "body": "Creating a table is like drawing the blueprint for a house before pouring any concrete. You decide how many rooms (columns), what each room is for (data types), and which rooms are mandatory (NOT NULL). If you skip the blueprint and start building randomly, you end up with doors that lead to walls. A good CREATE TABLE statement is your blueprint -- plan it once, and every record that moves in fits perfectly."
+    },
+    {
       "type": "text",
       "title": "The CREATE TABLE Command",
       "body": "The basic pattern is:\n\n```\nCREATE TABLE table_name (\n  column_name DATA_TYPE CONSTRAINTS,\n  column_name DATA_TYPE CONSTRAINTS\n);\n```\n\nYou define each column with a name, a data type, and optional constraints like NOT NULL, PRIMARY KEY, UNIQUE, or DEFAULT."
@@ -24,6 +29,10 @@
       "language": "sql",
       "code": "CREATE TABLE books (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  title TEXT NOT NULL,\n  author TEXT NOT NULL,\n  price DECIMAL(8, 2) NOT NULL,\n  pages INTEGER,\n  published_year INTEGER,\n  in_stock BOOLEAN DEFAULT true\n);",
       "annotation": "AUTOINCREMENT makes the id count up automatically (1, 2, 3...). title, author, and price are required (NOT NULL). pages and published_year are optional. in_stock defaults to true."
+    },
+    {
+      "type": "motivation",
+      "body": "Creating tables is the first real step in building a production app. When you vibecode a SaaS product, the AI needs you to describe your tables. Nail this skill and you can spin up apps with proper data storage that are ready for paying users from day one."
     },
     {
       "type": "key_takeaway",
