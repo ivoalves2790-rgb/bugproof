@@ -8,7 +8,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { Lesson } from "@/lib/types/content.types";
 import { TeachSlides } from "@/components/exercises/TeachSlides";
 import { useT, useLanguage } from "@/lib/i18n/use-language";
-import { getRandomMessage, COMPLETION_MESSAGES, TEACHING_MESSAGES, EXERCISE_START_MESSAGES } from "@/lib/motivation/messages";
+import { getRandomMessage, COMPLETION_MESSAGES } from "@/lib/motivation/messages";
 
 interface LessonPlayerProps {
   courseSlug: string;
@@ -32,8 +32,6 @@ export function LessonPlayer({
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
   const [motivation] = useState(() => getRandomMessage(COMPLETION_MESSAGES, locale));
-  const [teachMotivation] = useState(() => getRandomMessage(TEACHING_MESSAGES, locale));
-  const [exerciseMotivation] = useState(() => getRandomMessage(EXERCISE_START_MESSAGES, locale));
   const [error, setError] = useState<string | null>(null);
   const [score, setScore] = useState(0);
 
@@ -159,10 +157,7 @@ export function LessonPlayer({
         </div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <h2 className="mb-2 text-lg font-bold">{lesson.title}</h2>
-          <div className="mb-4 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-3 py-2">
-            <p className="text-[11px] font-semibold text-terminal-red leading-relaxed">{teachMotivation}</p>
-          </div>
+          <h2 className="mb-4 text-lg font-bold">{lesson.title}</h2>
         </motion.div>
 
         <TeachSlides blocks={lesson.teach} onComplete={handleTeachComplete} />
@@ -196,9 +191,6 @@ export function LessonPlayer({
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-6">
         <h2 className="text-lg font-bold">{lesson.title}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{lesson.intro}</p>
-        <div className="mt-3 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-3 py-2">
-          <p className="text-[11px] font-semibold text-terminal-red leading-relaxed">{exerciseMotivation}</p>
-        </div>
       </motion.div>
 
       {/* Exercise */}

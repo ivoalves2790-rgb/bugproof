@@ -158,6 +158,18 @@ body {
   animation: fill-progress 0.8s ease-out;
 }
 
+/* Motivation banner pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(255, 70, 70, 0.1);
+    border-color: rgba(255, 70, 70, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 70, 70, 0.25);
+    border-color: rgba(255, 70, 70, 0.6);
+  }
+}
+
 /* Swipe card styles */
 .swipe-card {
   touch-action: pan-y;

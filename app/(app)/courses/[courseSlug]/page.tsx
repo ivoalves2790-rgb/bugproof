@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/Badge";
 import Link from "next/link";
 import { CourseProgress } from "./course-progress";
 import { useLanguage } from "@/lib/i18n/use-language";
-import { getRandomMessage, COURSE_PAGE_MESSAGES } from "@/lib/motivation/messages";
 
 interface UnitInfo {
   slug: string;
@@ -29,7 +28,6 @@ export default function CoursePage() {
   const [units, setUnits] = useState<UnitInfo[]>([]);
   const [longDescription, setLongDescription] = useState("");
   const [loading, setLoading] = useState(true);
-  const [motivation] = useState(() => getRandomMessage(COURSE_PAGE_MESSAGES, locale));
 
   useEffect(() => {
     async function loadCourse() {
@@ -115,12 +113,6 @@ export default function CoursePage() {
           totalLessons={courseIndex.lessonCount}
           units={units.map((u) => ({ slug: u.slug, lessonCount: u.lessonCount }))}
         />
-      </div>
-
-      <div className="mb-4 rounded-lg border border-terminal-red/30 bg-terminal-red/10 px-4 py-3">
-        <p className="text-xs font-semibold text-terminal-red leading-relaxed">
-          {motivation}
-        </p>
       </div>
 
       <div className="space-y-3">
