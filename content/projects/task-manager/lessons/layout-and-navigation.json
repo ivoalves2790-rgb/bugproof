@@ -1,0 +1,104 @@
+{
+  "slug": "layout-and-navigation",
+  "title": "Layout and Navigation Decisions",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager needs a layout structure and navigation system. The choices you make now determine how the app feels to use on both mobile and desktop. Let's see how you handle the key decisions.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Layout Sets the Stage",
+      "body": "Your app's layout is the skeleton everything hangs on. In Next.js, the root layout wraps every page and is the right place for persistent UI like navigation bars and sidebars. A well-structured layout means pages focus only on their own content, with shared chrome handled once."
+    },
+    {
+      "type": "text",
+      "title": "Mobile-First, Desktop-Enhanced",
+      "body": "Most people check their tasks on their phone. If you design for desktop first and then try to cram it onto mobile, the experience will feel broken. Start with the mobile layout — a single column, touch-friendly buttons, bottom navigation — and then **enhance** for desktop with a sidebar or wider grid."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use Next.js layout files to define shared structure, design mobile-first using Tailwind's responsive prefixes, and keep navigation simple. A task manager needs at most 3-4 top-level navigation items. If you need more, your scope is too big."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're setting up the main layout for your task manager in Next.js. The app has three sections: a task list, a settings page, and a profile page. How do you structure the navigation?",
+        "choices": [
+          { "id": "sidebar-desktop", "text": "Build a fixed sidebar with links to all three sections, visible at all times on every screen size", "nextNode": "fixed-sidebar", "score": 1 },
+          { "id": "mobile-first-nav", "text": "Start with a bottom tab bar for mobile with icons for each section, then switch to a sidebar on larger screens using responsive classes", "nextNode": "responsive-nav", "score": 4 },
+          { "id": "hamburger-only", "text": "Use a hamburger menu on all screen sizes to keep the UI minimal", "nextNode": "hamburger", "score": 1 }
+        ]
+      },
+      "responsive-nav": {
+        "narrative": "Your bottom tab bar works great on mobile. On desktop, the sidebar shows section names alongside icons. Now you need to decide where to put the 'Add Task' action. It's the most important action in the entire app. Where does it go?",
+        "choices": [
+          { "id": "fab-button", "text": "A floating action button (FAB) in the bottom-right corner on mobile, and a prominent 'Add Task' button at the top of the sidebar on desktop", "nextNode": "excellent-end", "score": 4 },
+          { "id": "in-nav", "text": "Add it as the center item in the bottom tab bar on mobile", "nextNode": "nav-action-end", "score": 2 },
+          { "id": "page-only", "text": "Put the 'Add Task' button only on the task list page, at the top of the list", "nextNode": "page-only-end", "score": 2 }
+        ]
+      },
+      "fixed-sidebar": {
+        "narrative": "On desktop, the sidebar looks fine. But on mobile, the fixed sidebar takes up half the screen width, leaving barely any room for the task list. Users can see only 2-3 tasks at a time. What do you do?",
+        "choices": [
+          { "id": "make-responsive", "text": "Convert the sidebar to a bottom tab bar on mobile using Tailwind responsive classes: 'hidden md:flex' for sidebar, 'flex md:hidden' for bottom bar", "nextNode": "recovery-end", "score": 3 },
+          { "id": "collapsible", "text": "Make the sidebar collapsible with a toggle button", "nextNode": "collapsible-end", "score": 2 }
+        ]
+      },
+      "hamburger": {
+        "narrative": "The hamburger menu hides all navigation behind a tap. On mobile, users have to tap the hamburger, wait for the menu to animate open, find their section, and tap again. That's 3 actions to navigate. Analytics show users rarely visit Settings or Profile because the navigation is hidden.",
+        "choices": [
+          { "id": "add-bottom-bar", "text": "Replace the hamburger with a visible bottom tab bar on mobile so navigation is always one tap away", "nextNode": "recovery-end", "score": 3 },
+          { "id": "keep-hamburger", "text": "Keep the hamburger but make it bigger and add a tooltip saying 'Menu'", "nextNode": "hidden-nav-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your layout is responsive and intuitive. Mobile users have a thumb-friendly bottom bar and a prominent FAB for the most important action. Desktop users get a full sidebar with clear labels. The 'Add Task' button is always visible and accessible, no matter the screen size.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Perfect execution! Mobile-first responsive navigation with a prominent primary action is professional-grade UX. The FAB pattern is proven in apps like Google Tasks and Todoist because it puts the most important action where the user's thumb naturally rests.",
+        "choices": []
+      },
+      "recovery-end": {
+        "narrative": "After fixing the navigation to be responsive, the app feels much better on mobile. You lost some time, but the result is solid. The bottom bar gives users one-tap access to each section.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "You got to a good place, but starting with mobile-first would have saved you the rework. Remember: design for the smallest screen first, then enhance for larger ones. Tailwind's responsive prefixes (md:, lg:) make this natural.",
+        "choices": []
+      },
+      "nav-action-end": {
+        "narrative": "The center tab works, but it breaks the mental model of tab bars. Users expect tabs to navigate between sections, not trigger actions. Some users keep accidentally tapping 'Add Task' when they meant to go to Settings (the tab next to it).",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Mixing navigation and actions in a tab bar is confusing. Tab bars should navigate between views. Primary actions like 'Add Task' work better as a floating action button (FAB) or a separate button outside the nav bar. Keep navigation and actions visually distinct.",
+        "choices": []
+      },
+      "page-only-end": {
+        "narrative": "The button works on the task list page, but users on the Settings or Profile pages have to navigate back to the task list just to add a task. Quick capture — the ability to add a task from anywhere — is lost.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "The primary action should be accessible from any screen. Users think of tasks at random moments and need to capture them instantly. A globally visible 'Add Task' button (like a FAB) ensures users can always capture a task without navigating first.",
+        "choices": []
+      },
+      "collapsible-end": {
+        "narrative": "The collapsible sidebar works, but it adds complexity: you need to manage open/closed state, handle the animation, and the toggle button takes up space. On mobile, users still have to tap to open it, defeating the purpose of visible navigation.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Collapsible sidebars add state management complexity for minimal benefit on mobile. On desktop they make sense (like VS Code's sidebar), but on mobile, a bottom tab bar is simpler and more thumb-friendly. Use different navigation patterns for different screen sizes.",
+        "choices": []
+      },
+      "hidden-nav-end": {
+        "narrative": "Making the hamburger bigger doesn't solve the core problem: navigation is still hidden. Users don't explore what they can't see. Engagement with Settings and Profile remains low, and new users struggle to discover features.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Visible navigation wins over hidden navigation every time. Research consistently shows that hamburger menus reduce feature discovery and engagement. For an app with only 3-4 sections, there's no reason to hide them. Show them all in a bottom tab bar.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["layout", "responsive-design", "navigation", "mobile-first"]
+  }
+}

@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { CodeBlock } from "@/components/code/CodeBlock";
 import { evaluateSwipeCard, type SwipeCardResult } from "@/lib/engine/exercise-evaluator";
 import type { SwipeToJudgeExercise, SwipeCard } from "@/lib/types/content.types";
+import { useT } from "@/lib/i18n/use-language";
+import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
 
 interface SwipeToJudgeProps {
   exercise: SwipeToJudgeExercise;
@@ -23,6 +25,7 @@ interface CardFeedback {
 const SWIPE_THRESHOLD = 80;
 
 export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
+  const t = useT();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardState, setCardState] = useState<CardState>("idle");
   const [feedback, setFeedback] = useState<CardFeedback | null>(null);
@@ -69,10 +72,10 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
             {score === cards.length
-              ? "Perfect score! You nailed every one."
+              ? t("swipe.perfect")
               : score >= cards.length * 0.7
-                ? "Nice work! You have solid judgment."
-                : "Keep practicing - you'll get there."}
+                ? t("swipe.good")
+                : t("swipe.tryAgain")}
           </p>
         </div>
       </motion.div>
@@ -84,10 +87,10 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
       {/* Progress indicator */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>
-          Card {currentIndex + 1} / {cards.length}
+          {t("swipe.card")} {currentIndex + 1} {t("swipe.of")} {cards.length}
         </span>
         <span>
-          Score: <span className="text-terminal-green">{score}</span>
+          {t("swipe.score")}: <span className="text-terminal-green">{score}</span>
         </span>
       </div>
 
@@ -188,7 +191,7 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
             className="flex-1"
             onClick={() => handleJudge(false)}
           >
-            <span className="mr-1">&#x1F44E;</span> Bad Practice
+            &#x1F44E;
           </Button>
           <Button
             variant="primary"
@@ -196,7 +199,7 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
             className="flex-1"
             onClick={() => handleJudge(true)}
           >
-            <span className="mr-1">&#x1F44D;</span> Good Practice
+            &#x1F44D;
           </Button>
         </div>
       )}
@@ -289,7 +292,7 @@ function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
 
       {/* Card content */}
       <div className="mt-6">
-        <p className="text-sm text-foreground leading-relaxed">{card.content}</p>
+        <p className="text-sm text-foreground leading-relaxed"><GlossaryHighlighter text={card.content} /></p>
 
         {card.codeExample && (
           <div className="mt-3">

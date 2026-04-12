@@ -1,0 +1,103 @@
+{
+  "slug": "first-commit",
+  "title": "Your First Commit",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "You've set up your Next.js project and you're ready to make your first commit. The habits you build now will follow you throughout the project. Let's see if you start clean.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The First Commit Sets the Standard",
+      "body": "Your first commit should contain only the scaffolded project files with a clean .gitignore in place. No extra features, no experimental code, no leftover template content. This gives you a known-good baseline you can always return to if things go wrong."
+    },
+    {
+      "type": "text",
+      "title": "Check Before You Commit",
+      "body": "Always run `git status` before committing to see exactly what you're about to save. Check for files that shouldn't be there — .env files with real secrets, node_modules, build output, or OS files like .DS_Store. A clean first commit means a clean project history."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Before your first commit: verify .gitignore is correct, run git status to check what's staged, and write a clear commit message. This 60-second ritual prevents problems that are painful to fix later."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You just ran create-next-app and your task manager project is scaffolded. You want to make your first git commit. What do you do first?",
+        "choices": [
+          { "id": "check-status", "text": "Run 'git status' to see what files are about to be committed", "nextNode": "review-files", "score": 3 },
+          { "id": "add-all-commit", "text": "Run 'git add . && git commit -m initial commit' immediately", "nextNode": "blind-commit", "score": 1 },
+          { "id": "start-coding", "text": "Skip the commit and start building features — you'll commit later when there's something worth saving", "nextNode": "no-commit-end", "score": 0 }
+        ]
+      },
+      "review-files": {
+        "narrative": "git status shows your project files. You notice that create-next-app already initialized git and created a .gitignore. You also see a .env.local file you created with your Supabase keys. What do you do?",
+        "choices": [
+          { "id": "check-gitignore", "text": "Open .gitignore to verify .env.local is listed, then check that no secrets appear in git status", "nextNode": "verify-gitignore", "score": 3 },
+          { "id": "commit-anyway", "text": "The .gitignore is probably fine — just commit everything that shows up in git status", "nextNode": "leaked-secrets", "score": 0 }
+        ]
+      },
+      "blind-commit": {
+        "narrative": "You committed everything without checking. The commit includes a .env.local file with your Supabase API key and a .DS_Store file from macOS. The API key is now in your git history. Even if you delete the file later, it's still recoverable from old commits.",
+        "choices": [
+          { "id": "try-to-fix", "text": "Delete the .env.local, add it to .gitignore, and make a new commit", "nextNode": "partial-fix-end", "score": 1 },
+          { "id": "rewrite-history", "text": "Use git to rewrite history and remove the file from all commits, then rotate the exposed API key", "nextNode": "good-fix-end", "score": 3 }
+        ]
+      },
+      "verify-gitignore": {
+        "narrative": "You confirm .env.local is in .gitignore. git status shows only the project scaffolding files — no secrets, no node_modules, no build files. Everything looks clean. Time to commit. What message do you write?",
+        "choices": [
+          { "id": "good-message", "text": "git commit -m 'Initialize Next.js project with TypeScript, Tailwind, and ESLint'", "nextNode": "clean-commit-end", "score": 3 },
+          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "lazy-message-end", "score": 1 }
+        ]
+      },
+      "leaked-secrets": {
+        "narrative": "Your Supabase API key is now committed to git history. If you ever push this repo to GitHub, the key will be publicly visible. Bots scan GitHub for exposed keys and can compromise your database within minutes.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Always check what you're committing. A committed secret is extremely hard to fully remove from git history. The safest response is to rotate the key immediately and use git filter-branch or BFG to scrub it from history.",
+        "choices": []
+      },
+      "no-commit-end": {
+        "narrative": "You build features for three hours without committing. Then you accidentally delete a component file and break the import chain. Without any commits, there's no way to recover the file. You have to rewrite it from memory.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Commits are save points. The first thing you should do after creating a project is commit the initial scaffolding. This gives you a clean baseline to return to if anything goes wrong.",
+        "choices": []
+      },
+      "clean-commit-end": {
+        "narrative": "Your first commit is clean: only scaffolding files, no secrets, and a descriptive message. You now have a known-good baseline. If you ever need to start over on a feature, you can reset to this commit with confidence.",
+        "isEnd": true,
+        "finalScore": 9,
+        "feedback": "Perfect. You checked the files, verified .gitignore, and wrote a clear message. This first commit is your safety net for the entire project. Every commit from here should follow this same discipline.",
+        "choices": []
+      },
+      "lazy-message-end": {
+        "narrative": "The commit is clean and safe, but the message 'init' doesn't tell you anything. Two months from now, when you're searching git history for when TypeScript was configured, 'init' won't help.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Your commit hygiene was good but the message was lazy. A clear first commit message like 'Initialize Next.js project with TypeScript and Tailwind' documents your tech stack choices right in the history.",
+        "choices": []
+      },
+      "partial-fix-end": {
+        "narrative": "The .env.local file is gone from the latest commit, but it still exists in the first commit's history. Anyone who clones the repo can check out that old commit and see the key. The secret is still compromised.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Deleting a file and making a new commit doesn't remove it from history. You need to rewrite git history (using BFG Repo-Cleaner or git filter-branch) AND rotate the compromised key. Prevention is always easier than cleanup.",
+        "choices": []
+      },
+      "good-fix-end": {
+        "narrative": "You rewrite the git history to remove the .env.local file, update .gitignore, and rotate your Supabase API key in the dashboard. The old key no longer works, so even if someone finds it in a cached copy, it's useless.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Good recovery. You did the two essential things: removed the secret from history AND rotated the key. But this entire crisis was avoidable by checking git status and .gitignore before the first commit.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["git", "gitignore", "commit", "api-key"]
+  }
+}

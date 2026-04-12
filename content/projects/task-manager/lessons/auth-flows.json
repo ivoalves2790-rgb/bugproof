@@ -1,0 +1,69 @@
+{
+  "slug": "auth-flows",
+  "title": "Auth Flows Explained",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "There are several ways to handle authentication — JWTs, sessions, OAuth. Each has trade-offs. Swipe right on correct statements, left on misconceptions.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The Big Three Auth Patterns",
+      "body": "Session-based auth stores a session ID in a cookie and keeps user data on the server. JWT (JSON Web Tokens) encodes user info into a signed token the client stores. OAuth lets users log in with an existing account like Google or GitHub, so you never handle their password at all."
+    },
+    {
+      "type": "code_example",
+      "title": "JWT vs Session Cookie",
+      "language": "text",
+      "code": "Session: Browser sends cookie → Server looks up session in DB → Returns user data\n\nJWT: Browser sends token in header → Server decodes token (no DB lookup) → Returns user data\n\nOAuth: User clicks 'Sign in with Google' → Google verifies identity → Your app gets a token",
+      "annotation": "Each approach has different trade-offs around scalability, security, and complexity."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "For most apps, using an auth provider with OAuth support is the easiest and most secure path. You get Google/GitHub login and don't need to manage passwords yourself."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "JWTs are stateless — the server doesn't need to store session data in a database to verify them",
+        "isGoodPractice": true,
+        "explanation": "Correct. JWTs contain all the info needed to verify the user, encoded and signed. The server just checks the signature without a database lookup."
+      },
+      {
+        "id": "c2",
+        "content": "You should store JWTs in localStorage because it's the simplest approach",
+        "isGoodPractice": false,
+        "explanation": "localStorage is vulnerable to XSS attacks. Any JavaScript on the page can read it. Prefer httpOnly cookies which JavaScript can't access."
+      },
+      {
+        "id": "c3",
+        "content": "OAuth means you never have to store or handle user passwords in your own database",
+        "isGoodPractice": true,
+        "explanation": "With OAuth, the identity provider (Google, GitHub) handles passwords. Your app only receives a token confirming the user's identity — much less risky."
+      },
+      {
+        "id": "c4",
+        "content": "Once a JWT is issued, there's no way to revoke it before it expires",
+        "isGoodPractice": true,
+        "explanation": "This is a real trade-off of JWTs. Since they're stateless, you can't easily invalidate them. Workarounds exist (blocklists, short expiry) but they add complexity."
+      },
+      {
+        "id": "c5",
+        "content": "Session-based auth is outdated and should never be used in modern apps",
+        "isGoodPractice": false,
+        "explanation": "Sessions are still widely used and work great for server-rendered apps. They're easy to revoke and well-understood. The right choice depends on your architecture."
+      },
+      {
+        "id": "c6",
+        "content": "Refresh tokens let you keep sessions alive without making the user log in again every few minutes",
+        "isGoodPractice": true,
+        "explanation": "Refresh tokens are long-lived tokens used to get new short-lived access tokens. This balances security (short access windows) with user experience (not constantly re-logging in)."
+      }
+    ],
+    "glossaryTerms": ["jwt", "oauth", "session"]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "branch-workflow-bug",
+  "title": "Errores en el flujo de trabajo con ramas",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Un desarrollador está intentando crear una rama de función, hacer algo de trabajo y fusionarla de vuelta. Pero cometió un error común en el que los principiantes suelen caer. ¿Puedes detectarlo?",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El flujo de trabajo con ramas de función = Línea de ensamblaje",
+      "body": "Imagina una fábrica de autos. La línea de ensamblaje principal produce autos terminados. Cuando los ingenieros quieren probar un nuevo diseño de motor, no experimentan en la línea principal -- configuran una **estación de trabajo lateral**, construyen y prueban el motor allí, y solo lo instalan en la línea principal una vez que está comprobado que funciona. Ese es el flujo de trabajo con ramas de función."
+    },
+    {
+      "type": "text",
+      "title": "Cómo los equipos usan las ramas",
+      "body": "Este es el flujo de trabajo típico:\n\n1. **Crear una rama** desde main para tu función\n2. **Hacer commits** en tu rama de función mientras trabajas\n3. **Volver a main** cuando la función esté terminada\n4. **Fusionar** tu rama de función en main\n\nLa regla clave: debes estar **parado en la rama que recibe los cambios** cuando fusionas."
+    },
+    {
+      "type": "code_example",
+      "title": "El flujo correcto de fusión",
+      "language": "bash",
+      "code": "git checkout -b feature/payments   # Create & switch to feature branch\n# ... do your work, make commits ...\ngit checkout main                  # Switch BACK to main\ngit merge feature/payments         # Merge feature INTO main",
+      "annotation": "¡La dirección de la fusión importa! Te paras en main y traes la función -- no al revés."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Para fusionar una función en main, primero cámbiate a main con `git checkout main`, luego ejecuta `git merge feature/tu-rama` -- siempre párate en la rama receptora."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "git checkout -b feature/payments", "isBuggy": false },
+      { "line": 2, "text": "# ... make changes to payment.js ...", "isBuggy": false },
+      { "line": 3, "text": "git add payment.js", "isBuggy": false },
+      { "line": 4, "text": "git commit -m \"Add payment processing\"", "isBuggy": false },
+      { "line": 5, "text": "git merge main", "isBuggy": true },
+      { "line": 6, "text": "git push origin feature/payments", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "El desarrollador quiere fusionar su rama de función EN main, pero lo está haciendo al revés. Toca la línea con el error.",
+    "fixes": [
+      { "id": "a", "text": "git checkout main && git merge feature/payments", "isCorrect": true },
+      { "id": "b", "text": "git merge feature/payments", "isCorrect": false },
+      { "id": "c", "text": "git merge --force main", "isCorrect": false },
+      { "id": "d", "text": "git rebase main", "isCorrect": false }
+    ],
+    "explanation": "Cuando ejecutas 'git merge main' estando en la rama de función, estás fusionando main EN tu rama de función -- lo opuesto a lo que se pretendía. Para fusionar tu función EN main, necesitas primero cambiarte a main con 'git checkout main', luego ejecutar 'git merge feature/payments'. Piénsalo así: siempre te paras en la rama que recibe los cambios.",
+    "glossaryTerms": ["merge", "branch", "git-checkout"]
+  }
+}

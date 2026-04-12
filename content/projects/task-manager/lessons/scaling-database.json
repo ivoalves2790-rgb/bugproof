@@ -1,0 +1,77 @@
+{
+  "slug": "scaling-database",
+  "title": "Scaling Your Database",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager is growing. Users are reporting that loading their task list takes 5+ seconds. The database is the bottleneck. How do you fix it without rewriting everything?",
+  "teach": [
+    {
+      "type": "text",
+      "title": "When Your Database Gets Slow",
+      "body": "As your data grows, queries that were fast with 100 rows become slow with 100,000 rows. The usual culprits: missing indexes on columns you filter or sort by, queries that fetch more data than needed (SELECT *), and N+1 query problems where your code runs a separate query for each item in a list."
+    },
+    {
+      "type": "code_example",
+      "title": "Common Database Performance Fixes",
+      "language": "text",
+      "code": "SLOW: SELECT * FROM tasks WHERE user_id = 123\n  → No index on user_id, scans every row\n\nFAST: CREATE INDEX idx_tasks_user_id ON tasks(user_id);\n  → Database jumps directly to matching rows\n\nSLOW: Fetching 10,000 tasks then filtering in JavaScript\nFAST: SELECT * FROM tasks WHERE user_id = 123 LIMIT 20 OFFSET 0;\n  → Let the database do the filtering and pagination",
+      "annotation": "Indexes and pagination are the two most impactful database optimizations. They solve 80% of performance problems."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Before adding infrastructure, optimize your queries. Add indexes on frequently filtered columns, use pagination, and select only the columns you need. These changes are free and often 10-100x faster."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Users report that loading their task list takes 8 seconds. You check the database and find that the tasks table has 500,000 rows. The query SELECT * FROM tasks WHERE user_id = $1 ORDER BY created_at DESC has no index on user_id. What do you do first?",
+        "choices": [
+          { "id": "a", "text": "Upgrade to a larger database server with more RAM and CPU", "nextNode": "throw-money", "score": 1 },
+          { "id": "b", "text": "Add an index on the user_id column and add pagination to limit results to 20 per page", "nextNode": "add-index", "score": 4 },
+          { "id": "c", "text": "Switch to a NoSQL database like MongoDB because SQL can't handle this much data", "nextNode": "switch-db", "score": 0 }
+        ]
+      },
+      "throw-money": {
+        "narrative": "The bigger server helps temporarily — load times drop to 3 seconds. But the fundamental problem (no index, no pagination) remains. As data grows, you'll need an even bigger server and the costs keep climbing.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Throwing hardware at a software problem is expensive and unsustainable. An index takes one line of SQL and solves the problem for free. Always optimize before scaling up.",
+        "choices": []
+      },
+      "add-index": {
+        "narrative": "You add an index on user_id and implement pagination (20 tasks per page). Load time drops from 8 seconds to 200ms. But you notice the task detail page is also slow — it loads the task plus all its comments in separate queries. What do you do?",
+        "choices": [
+          { "id": "b1", "text": "Use a JOIN query to fetch the task and its comments in a single database call", "nextNode": "join-query", "score": 3 },
+          { "id": "b2", "text": "Cache the task details page since tasks don't change often", "nextNode": "cache-approach", "score": 2 }
+        ]
+      },
+      "switch-db": {
+        "narrative": "Migrating to a different database is a massive undertaking — rewriting queries, changing the schema, migrating data. Three weeks later, you discover MongoDB has the same performance issues without indexes. The database type was never the problem.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Switching databases rarely solves performance problems. The same indexing and query optimization principles apply everywhere. Optimize your current setup before considering a migration.",
+        "choices": []
+      },
+      "join-query": {
+        "narrative": "A single JOIN query replaces 20+ separate queries. The task detail page now loads in 150ms. Your database is humming along efficiently with proper indexes, pagination, and optimized queries.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "This is textbook database optimization. Indexes, pagination, and JOIN queries solve the vast majority of database performance problems. No new infrastructure needed.",
+        "choices": []
+      },
+      "cache-approach": {
+        "narrative": "Caching helps, but you still have the N+1 query problem. Every cache miss is slow. You eventually add the JOIN query too, making the cache less necessary but still useful.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Caching is a valid strategy but it's treating the symptom, not the cause. Fix the underlying query first, then add caching as an enhancement.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["database-index", "pagination", "n-plus-one"]
+  }
+}

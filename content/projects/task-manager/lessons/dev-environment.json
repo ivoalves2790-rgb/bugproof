@@ -1,0 +1,73 @@
+{
+  "slug": "dev-environment",
+  "title": "Setting Up Your Dev Environment",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "A good dev environment saves you hours of frustration. Swipe right on solid setup practices, left on habits that will slow you down.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Your Workspace Matters",
+      "body": "Before you write a single line of code, your dev environment needs to be ready. This means having Node.js installed, a good code editor (VS Code is the go-to), and a terminal you're comfortable with. Skipping this step is like trying to cook in a kitchen with no knives."
+    },
+    {
+      "type": "text",
+      "title": "Consistency Is Key",
+      "body": "Professional teams use tools like `.nvmrc` files to lock the Node.js version, `.editorconfig` for consistent formatting, and `package.json` scripts so every developer runs the same commands. These small files prevent the classic 'works on my machine' problem."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Invest 30 minutes setting up your environment properly and you'll save hours debugging weird issues later. Use a version manager for Node.js, pick one editor and learn it well, and always check that your tools are up to date."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "node-version-manager",
+        "content": "Use nvm or fnm to manage your Node.js version so you can switch between projects easily",
+        "isGoodPractice": true,
+        "explanation": "Version managers let you pin the exact Node.js version per project. Different projects may need different versions, and a version manager makes switching painless."
+      },
+      {
+        "id": "global-install-everything",
+        "content": "Install all your project dependencies globally with npm install -g so they're available everywhere",
+        "isGoodPractice": false,
+        "explanation": "Global installs cause version conflicts between projects. Always install project dependencies locally with npm install so each project gets the versions it needs."
+      },
+      {
+        "id": "vscode-extensions",
+        "content": "Install ESLint and Prettier extensions in VS Code for automatic code formatting and error catching",
+        "isGoodPractice": true,
+        "explanation": "These extensions catch errors as you type and keep your code formatted consistently. They pay for themselves within minutes."
+      },
+      {
+        "id": "skip-git-config",
+        "content": "Skip configuring your git username and email because you can always do it later",
+        "isGoodPractice": false,
+        "explanation": "Git won't let you commit without a name and email. Setting this up first avoids a confusing error message the moment you try to make your first commit."
+      },
+      {
+        "id": "check-node-version",
+        "content": "Run 'node --version' and 'npm --version' to verify everything is installed correctly before starting a project",
+        "isGoodPractice": true,
+        "explanation": "A quick version check takes 5 seconds and can save you from mysterious build errors caused by outdated or missing tools."
+      },
+      {
+        "id": "random-node-version",
+        "content": "Download whatever Node.js version pops up first on Google and install it without checking compatibility",
+        "isGoodPractice": false,
+        "explanation": "Next.js requires specific minimum Node.js versions. Grabbing a random version can lead to cryptic errors. Always check the docs for the recommended version."
+      },
+      {
+        "id": "nvmrc-file",
+        "content": "Add an .nvmrc file to your project so teammates automatically use the correct Node.js version",
+        "isGoodPractice": true,
+        "explanation": "An .nvmrc file documents the exact Node.js version your project needs. When a teammate runs 'nvm use', it picks up the right version automatically."
+      }
+    ],
+    "glossaryTerms": ["node-js", "npm", "dev-environment"]
+  }
+}

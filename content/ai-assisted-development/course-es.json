@@ -1,0 +1,22 @@
+{
+  "slug": "ai-assisted-development",
+  "title": "Desarrollo Asistido por IA",
+  "description": "Prompts para mejor codigo y revision de resultados de IA",
+  "longDescription": "Las herramientas de codificacion con IA estan transformando como se construye el software. Ya sea que uses ChatGPT, Claude, GitHub Copilot o Cursor, saber como trabajar CON la IA te hace dramaticamente mas productivo -- y saber cuando NO confiar en ella te mantiene fuera de problemas. Este curso te ensena las habilidades reales detras del vibe coding: crear prompts que produzcan codigo funcional, entender que puede y que no puede hacer la IA, detectar errores sutiles en el codigo generado por IA y construir flujos de trabajo que combinen tu creatividad con la velocidad de la IA. Aprenderas por que el contexto importa, como dividir problemas en piezas amigables para la IA y que verificar siempre antes de enviar codigo escrito por IA a produccion.",
+  "icon": "bot",
+  "color": "#E17055",
+  "prerequisites": [],
+  "units": [
+    { "slug": "ai-basics", "title": "How AI Coding Tools Work", "order": 1 },
+    { "slug": "prompting", "title": "Prompting for Better Code", "order": 2 },
+    { "slug": "reviewing-output", "title": "Reviewing AI Output", "order": 3 },
+    { "slug": "when-ai-fails", "title": "When AI Gets It Wrong", "order": 4 },
+    { "slug": "ai-workflows", "title": "AI-Powered Workflows", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "environment-config",
+  "title": "Entorno y Configuración",
+  "description": "Variables de entorno, secretos y configuración entre entornos",
+  "order": 2,
+  "courseSlug": "deployment-devops",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-env-variables", "title": "¿Qué Son las Variables de Entorno?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "dotenv-files", "title": "El Archivo .env", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "secrets-management", "title": "Gestión de Secretos", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "dev-staging-production", "title": "Dev vs Staging vs Producción", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "config-patterns", "title": "Patrones de Configuración", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "works-on-my-machine", "title": "Funciona en Mi Máquina", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

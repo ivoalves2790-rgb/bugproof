@@ -1,0 +1,73 @@
+{
+  "slug": "version-control-basics",
+  "title": "Version Control Basics",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "Git keeps your code safe and lets you undo mistakes. Swipe right on good git habits, left on practices that will cause you pain.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Git Is Your Safety Net",
+      "body": "Git tracks every change you make to your code. If you break something, you can go back to a working version. If you want to try a risky feature, you can create a branch so your main code stays safe. Without git, one bad change can destroy hours of work with no way to recover."
+    },
+    {
+      "type": "text",
+      "title": "The .gitignore Is Non-Negotiable",
+      "body": "A `.gitignore` file tells git which files NOT to track. You never want to commit `node_modules/` (thousands of dependency files), `.env` files (secret API keys), or `.next/` (build output). create-next-app generates a `.gitignore` for you, but always double-check it before your first commit."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Initialize git immediately when you start a project. Commit early, commit often, and write clear commit messages. A good .gitignore protects you from accidentally sharing secrets or bloating your repository."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "commit-often",
+        "content": "Make small, frequent commits after completing each meaningful piece of work",
+        "isGoodPractice": true,
+        "explanation": "Small commits are easy to understand, easy to review, and easy to revert. If something breaks, you only lose a small amount of work."
+      },
+      {
+        "id": "commit-node-modules",
+        "content": "Commit your node_modules folder so teammates don't have to run npm install",
+        "isGoodPractice": false,
+        "explanation": "node_modules contains thousands of files and can be hundreds of megabytes. It should always be in .gitignore. Teammates run npm install to get their own copy."
+      },
+      {
+        "id": "clear-messages",
+        "content": "Write commit messages like 'Add task creation form with title and description fields'",
+        "isGoodPractice": true,
+        "explanation": "Descriptive messages tell you exactly what changed without opening the code. When you need to find when a feature was added, clear messages are invaluable."
+      },
+      {
+        "id": "commit-env",
+        "content": "Commit your .env file so your API keys and database URLs are backed up in the repo",
+        "isGoodPractice": false,
+        "explanation": "Never commit .env files. They contain secrets like API keys and database passwords. If your repo is ever public, those secrets are exposed. Use .env.example with placeholder values instead."
+      },
+      {
+        "id": "gitignore-first",
+        "content": "Check your .gitignore before making your very first commit to make sure secrets and build files are excluded",
+        "isGoodPractice": true,
+        "explanation": "It's much harder to remove a file from git history after it's been committed. Checking .gitignore first prevents accidental commits of sensitive files."
+      },
+      {
+        "id": "vague-messages",
+        "content": "Write commit messages like 'fix stuff' or 'update' or 'asdfgh'",
+        "isGoodPractice": false,
+        "explanation": "Vague messages are useless when you're trying to understand what changed. Three months from now, 'fix stuff' tells you nothing. Take 10 seconds to write a real message."
+      },
+      {
+        "id": "env-example",
+        "content": "Create a .env.example file with placeholder values so new developers know which environment variables they need",
+        "isGoodPractice": true,
+        "explanation": "A .env.example file documents which variables the project needs without exposing real values. New developers copy it to .env and fill in their own keys."
+      }
+    ],
+    "glossaryTerms": ["git", "gitignore", "commit"]
+  }
+}

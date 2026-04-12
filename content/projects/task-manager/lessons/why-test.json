@@ -1,0 +1,67 @@
+{
+  "slug": "why-test",
+  "title": "Why Test?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Testing feels like extra work — until a bug makes it to production and you spend three hours debugging what a test would have caught in three seconds. Let's explore why testing matters.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Tests Are Your Safety Net",
+      "body": "Tests are automated checks that verify your code works as expected. When you change something, tests tell you instantly if you broke something else. Without them, every code change is a leap of faith — you won't know it's broken until a user reports it."
+    },
+    {
+      "type": "analogy",
+      "title": "Tests Are Like Spell Check",
+      "body": "You could proofread every document manually, but spell check catches most mistakes instantly and automatically. Tests do the same for code. You still need to think about what you're writing, but tests catch the obvious mistakes before anyone else sees them."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tests save time in the long run. Writing a test takes minutes; debugging a production bug takes hours. The confidence to change code fearlessly is worth the upfront investment."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Tests give you confidence to refactor code without fear of breaking existing features",
+        "isGoodPractice": true,
+        "explanation": "This is one of the biggest benefits. Without tests, developers avoid refactoring because they can't be sure nothing will break, leading to messy code over time."
+      },
+      {
+        "id": "c2",
+        "content": "You should write tests only after you find bugs, to prevent them from happening again",
+        "isGoodPractice": false,
+        "explanation": "While regression tests are valuable, writing tests before or alongside code catches bugs early. Waiting for bugs means users find them first."
+      },
+      {
+        "id": "c3",
+        "content": "A project with 100% test coverage is guaranteed to be bug-free",
+        "isGoodPractice": false,
+        "explanation": "Coverage measures which lines ran, not whether the tests check the right things. You can have 100% coverage with tests that never assert anything. Focus on testing behavior, not hitting a number."
+      },
+      {
+        "id": "c4",
+        "content": "Tests serve as living documentation that shows how your code is supposed to work",
+        "isGoodPractice": true,
+        "explanation": "Good test names describe behavior: 'should mark task as complete when checkbox is clicked'. New developers can read tests to understand what the code does."
+      },
+      {
+        "id": "c5",
+        "content": "Manual testing by clicking through the app is sufficient for a small project",
+        "isGoodPractice": false,
+        "explanation": "Manual testing doesn't scale. As your app grows, you can't click through every feature after every change. Automated tests run in seconds and catch regressions you'd miss."
+      },
+      {
+        "id": "c6",
+        "content": "Start by testing the most critical paths in your app — like creating and completing tasks",
+        "isGoodPractice": true,
+        "explanation": "You don't need to test everything at once. Start with the features that would be most damaging if they broke, then expand coverage over time."
+      }
+    ],
+    "glossaryTerms": ["regression", "test-coverage"]
+  }
+}

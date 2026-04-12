@@ -1,0 +1,67 @@
+{
+  "slug": "what-is-deployment",
+  "title": "Que Es el Despliegue?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Tu gestor de tareas funciona en tu laptop — ahora es momento de ponerlo en internet para que cualquiera pueda usarlo. Exploremos que significa realmente el despliegue.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "De Localhost al Mundo",
+      "body": "El despliegue es el proceso de llevar tu app de 'funciona en mi maquina' a 'funciona para todos en internet'. Implica subir tu codigo a un servidor, configurar una base de datos, configurar un nombre de dominio y asegurarte de que todo funcione de manera confiable 24/7."
+    },
+    {
+      "type": "analogy",
+      "title": "El Despliegue Es Como Abrir un Restaurante",
+      "body": "Cocinar en casa es localhost — funciona, pero solo tu comes. El despliegue es abrir un restaurante: necesitas un local (servidor), un letrero (nombre de dominio), inspecciones sanitarias (seguridad) y la capacidad de servir a muchas personas a la vez (escalabilidad). La receta es la misma, pero la logistica es completamente diferente."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las plataformas modernas como Vercel y Netlify manejan la mayor parte de la complejidad del despliegue por ti. Subes codigo, ellos lo compilan y lo sirven. Enfocate en lo que hace especial a tu app, no en la configuracion del servidor."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Las plataformas de despliegue modernas pueden desplegar tu app automaticamente cuando subes cambios a la rama principal",
+        "isGoodPractice": true,
+        "explanation": "Esto se llama despliegue continuo. Plataformas como Vercel observan tu repositorio Git y despliegan automaticamente al hacer push, asi que lanzar actualizaciones es tan facil como fusionar un pull request."
+      },
+      {
+        "id": "c2",
+        "content": "Necesitas comprar y gestionar tu propio servidor fisico para desplegar una app web",
+        "isGoodPractice": false,
+        "explanation": "Las plataformas en la nube y los proveedores serverless manejan la infraestructura por ti. Gestionar servidores fisicos es complejo, costoso e innecesario para la mayoria de las apps."
+      },
+      {
+        "id": "c3",
+        "content": "Desplegar a un entorno de staging primero para probar cambios antes de que lleguen a usuarios reales",
+        "isGoodPractice": true,
+        "explanation": "Un entorno de staging replica produccion sin afectar a usuarios reales. Detecta problemas como variables de entorno rotas o configuraciones erroneas de API antes de que lleguen a tus usuarios."
+      },
+      {
+        "id": "c4",
+        "content": "Esta bien desplegar directamente desde tu laptop a produccion usando FTP",
+        "isGoodPractice": false,
+        "explanation": "Los despliegues por FTP son manuales, propensos a errores y evitan las verificaciones de CI/CD. Usa despliegues basados en Git para que los cambios sean rastreados, revisados y desplegados de manera consistente."
+      },
+      {
+        "id": "c5",
+        "content": "Los despliegues de preview te permiten probar cada pull request en una URL real antes de fusionar",
+        "isGoodPractice": true,
+        "explanation": "Los despliegues de preview son una de las funcionalidades modernas mas utiles. Cada PR obtiene su propia URL para que los companeros de equipo puedan revisar la app ejecutandose, no solo el codigo."
+      },
+      {
+        "id": "c6",
+        "content": "Una vez que tu app esta desplegada, terminaste — no necesitas monitorear ni mantenerla",
+        "isGoodPractice": false,
+        "explanation": "El despliegue es el comienzo, no el final. Necesitas monitorear errores, problemas de rendimiento y vulnerabilidades de seguridad. Las apps requieren mantenimiento continuo."
+      }
+    ],
+    "glossaryTerms": ["continuous-deployment", "staging"]
+  }
+}

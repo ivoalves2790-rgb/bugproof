@@ -1,0 +1,68 @@
+{
+  "slug": "what-is-a-url",
+  "title": "¿Qué es una URL?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Cada vez que visitas un sitio web, escribes (o haces clic en) una URL. Pero, ¿qué significan realmente todas esas partes? Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Una URL Es Como una Dirección Postal",
+      "body": "Cuando envías una carta, necesitas una dirección: Calle Principal 123, Apt 4, Springfield. Una **URL** funciona de la misma manera para internet. Le dice a tu navegador exactamente a dónde ir -- qué edificio (servidor), qué apartamento (ruta), e incluso qué habitación (página específica)."
+    },
+    {
+      "type": "text",
+      "title": "Las Partes de una URL",
+      "body": "Una URL como `https://www.example.com/products/shoes?color=red` tiene varias partes:\n\n1. **Protocolo** (`https://`) -- cómo comunicarse (como elegir entre teléfono o correo electrónico)\n2. **Dominio** (`www.example.com`) -- con qué servidor hablar (la dirección del edificio)\n3. **Ruta** (`/products/shoes`) -- qué página quieres (el número de habitación)\n4. **Cadena de consulta** (`?color=red`) -- detalles adicionales (como una nota en tu carta)"
+    },
+    {
+      "type": "code_example",
+      "title": "Una URL Real Desglosada",
+      "language": "text",
+      "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocol:  https://\nDomain:    api.weather.com\nPath:      /forecast/daily\nQuery:     ?city=london&units=metric",
+      "annotation": "El símbolo & separa múltiples parámetros de consulta. Aquí estamos pidiendo el pronóstico de Londres en unidades métricas."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Una URL es la dirección de algo en internet. Le dice a tu navegador qué protocolo usar, con qué servidor contactar, qué página obtener, y cualquier detalle adicional a incluir."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El 'https' en una URL representa el protocolo -- le dice al navegador CÓMO comunicarse con el servidor.",
+        "isGoodPractice": true,
+        "explanation": "HTTPS significa Protocolo de Transferencia de Hipertexto Seguro. Es como elegir enviar una carta sellada en vez de una postal. La 'S' significa que la comunicación está encriptada para que nadie pueda leerla en tránsito."
+      },
+      {
+        "id": "card-2",
+        "content": "El nombre de dominio 'google.com' es la dirección real de la computadora de Google en internet.",
+        "isGoodPractice": false,
+        "explanation": "Los nombres de dominio son etiquetas amigables para humanos, no direcciones reales. La dirección real es un número IP como 142.250.80.46. Tu navegador usa DNS (como una guía telefónica) para buscar la dirección real a partir del nombre de dominio."
+      },
+      {
+        "id": "card-3",
+        "content": "La ruta '/products/shoes' en una URL funciona como una ruta de carpetas en tu computadora.",
+        "isGoodPractice": true,
+        "explanation": "La ruta le dice al servidor qué recurso quieres, y usa barras igual que las carpetas en tu computadora. /products/shoes significa 'dentro de la sección de productos, muéstrame zapatos.' El servidor usa esta ruta para determinar qué contenido enviar de vuelta."
+      },
+      {
+        "id": "card-4",
+        "content": "Siempre necesitas escribir la URL completa incluyendo 'https://' para visitar un sitio web.",
+        "isGoodPractice": false,
+        "explanation": "Los navegadores modernos son lo suficientemente inteligentes para agregar el protocolo por ti. Cuando escribes 'google.com', tu navegador automáticamente agrega 'https://' antes de enviar la petición. Está ahí detrás de escena -- simplemente no necesitas escribirlo."
+      },
+      {
+        "id": "card-5",
+        "content": "La cadena de consulta '?search=cats' en una URL envía información adicional al servidor.",
+        "isGoodPractice": true,
+        "explanation": "Las cadenas de consulta son como llenar un formulario y adjuntarlo a tu petición. El servidor lee estos pares clave-valor y los usa para personalizar lo que envía de vuelta. Así es como funcionan los resultados de búsqueda, filtros y números de página en las URLs."
+      }
+    ],
+    "glossaryTerms": ["url", "domain", "protocol", "query-string"]
+  }
+}

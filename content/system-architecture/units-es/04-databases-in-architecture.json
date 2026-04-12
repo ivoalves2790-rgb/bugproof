@@ -1,0 +1,16 @@
+{
+  "slug": "databases-in-architecture",
+  "title": "Bases de Datos en la Arquitectura",
+  "description": "Comprende dónde encajan las bases de datos en el sistema, cómo el backend se comunica con ellas, y por qué la persistencia de datos importa",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "where-data-lives", "title": "¿Dónde Viven los Datos?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "sql-vs-nosql-architecture", "title": "SQL vs NoSQL en la Arquitectura", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "orm-basics", "title": "ORMs: El Código Habla con las Bases de Datos", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "data-flow-full-stack", "title": "Flujo de Datos: Del Botón a la Base de Datos", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "caching-layer", "title": "La Capa de Caché", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "database-connections", "title": "Pools de Conexiones y Límites", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

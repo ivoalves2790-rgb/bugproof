@@ -1,0 +1,58 @@
+{
+  "slug": "client-vs-server",
+  "title": "Lado del Cliente vs Lado del Servidor",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "Un desarrollador junior puso lógica sensible en el lugar equivocado -- está verificando si un usuario tiene acceso de administrador en el lado del cliente (en el navegador), lo que significa que cualquier usuario podría evadirlo con las DevTools.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Cliente = Tu Computadora, Servidor = Su Computadora",
+      "body": "**Lado del cliente** significa código que se ejecuta en el dispositivo del usuario (su navegador). **Lado del servidor** significa código que se ejecuta en un servidor que tú controlas. ¿La diferencia clave? El usuario puede ver y modificar cualquier cosa del lado del cliente. Es como la diferencia entre una cerradura en TU puerta (servidor -- tú la controlas) vs darle a alguien un candado que pueden forzar (cliente -- ellos lo controlan)."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué Debería Ejecutarse Dónde?",
+      "body": "**Lado del cliente** (navegador) es bueno para:\n- Efectos visuales y animaciones\n- Validación de entradas de formulario (para retroalimentación rápida al usuario)\n- Navegar entre vistas\n\n**Lado del servidor** (servidor) es requerido para:\n- Verificaciones de autenticación y autorización\n- Operaciones de base de datos\n- Procesamiento de pagos\n- Cualquier lógica sensible a la seguridad"
+    },
+    {
+      "type": "code_example",
+      "title": "El Peligro de la Seguridad del Lado del Cliente",
+      "language": "javascript",
+      "code": "// BAD: Client-side admin check\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Anyone can open DevTools and type:\n// user.role = 'admin'\n\n// GOOD: Server-side admin check\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Forbidden' });\n  }\n  res.json(adminData);\n});",
+      "annotation": "Las verificaciones del lado del cliente son para la experiencia de usuario (ocultar botones), pero la seguridad real debe ocurrir en el servidor donde el usuario no puede manipularla."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El código del lado del cliente se ejecuta en el navegador y puede ser inspeccionado o modificado por los usuarios. El código del lado del servidor se ejecuta en tu servidor y está a salvo de manipulaciones. Las verificaciones de seguridad SIEMPRE deben ocurrir en el lado del servidor."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "// Frontend code (runs in the browser)", "isBuggy": false },
+      { "line": 2, "text": "async function deleteUser(userId) {", "isBuggy": false },
+      { "line": 3, "text": "  const currentUser = JSON.parse(localStorage.getItem('user'));", "isBuggy": false },
+      { "line": 4, "text": "  if (currentUser.role === 'admin') {", "isBuggy": true },
+      { "line": 5, "text": "    await fetch(`/api/users/${userId}`, { method: 'DELETE' });", "isBuggy": false },
+      { "line": 6, "text": "    alert('User deleted!');", "isBuggy": false },
+      { "line": 7, "text": "  } else {", "isBuggy": false },
+      { "line": 8, "text": "    alert('Only admins can delete users');", "isBuggy": false },
+      { "line": 9, "text": "  }", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "Este código verifica permisos de administrador en el lado del cliente (en el navegador). Cualquier usuario podría abrir las DevTools, cambiar su rol en localStorage a 'admin', y eliminar otros usuarios. Encuentra la línea donde ocurre la verificación insegura.",
+    "fixes": [
+      { "id": "a", "text": "Eliminar la verificación del lado del cliente y dejar que el endpoint /api/users/:id del servidor verifique los permisos de administrador", "isCorrect": true },
+      { "id": "b", "text": "Encriptar el valor del rol en localStorage para que los usuarios no puedan cambiarlo", "isCorrect": false },
+      { "id": "c", "text": "Usar sessionStorage en lugar de localStorage para mejor seguridad", "isCorrect": false },
+      { "id": "d", "text": "Verificar currentUser.isAdmin en lugar de currentUser.role", "isCorrect": false }
+    ],
+    "explanation": "Cualquier verificación en JavaScript del navegador puede ser evadida. LocalStorage puede ser editado libremente en las DevTools. La verificación del lado del cliente en la línea 4 solo es útil para la experiencia de usuario (ocultar el botón de eliminar a los no administradores), pero la autorización REAL debe ocurrir en el servidor. El endpoint DELETE /api/users/:id debe verificar que el usuario que hace la petición sea realmente un administrador antes de eliminar a alguien.",
+    "glossaryTerms": ["client-side", "server-side", "authorization", "localStorage"]
+  }
+}

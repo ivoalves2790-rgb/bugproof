@@ -1,0 +1,93 @@
+{
+  "slug": "mocking-basics",
+  "title": "Fundamentos de mocking",
+  "type": "incident_response",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Tu función llama a una API externa. No puedes (y no deberías) llamar a la API real en tus tests -- es lenta, cuesta dinero y podría estar caída. El mocking te permite simular dependencias externas. Un suite de tests está llamando a una API real y causando problemas. Descubre la solución.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Mocking = Usar un doble de acción",
+      "body": "En una película, las escenas peligrosas usan dobles de acción en lugar del actor real. El doble se ve igual, actúa el mismo rol, pero tú controlas exactamente lo que pasa. El **mocking** es usar un doble de acción para las dependencias de tu código. En lugar de llamar a una API real, creas una versión falsa que devuelve exactamente lo que quieres."
+    },
+    {
+      "type": "text",
+      "title": "¿Por qué hacer mock?",
+      "body": "Haces mock de dependencias porque:\n\n1. **Velocidad** -- Las llamadas reales a APIs toman 100ms+. Los mocks toman 0ms.\n2. **Confiabilidad** -- Las APIs reales pueden estar caídas o con límite de uso. Los mocks siempre funcionan.\n3. **Control** -- Puedes simular errores, respuestas vacías y casos límite.\n4. **Costo** -- Algunas APIs cobran por solicitud. No desperdicies dinero en tests.\n5. **Aislamiento** -- Estás testeando TU código, no la API."
+    },
+    {
+      "type": "code_example",
+      "title": "Antes y después del mocking",
+      "language": "javascript",
+      "code": "// WITHOUT mocking: calls real API (slow, unreliable)\ntest('displays weather', async () => {\n  const weather = await fetchWeather('NYC'); // Real API call!\n  expect(weather.temp).toBeDefined();\n});\n\n// WITH mocking: fake the API response (fast, reliable)\ntest('displays weather', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'sunny'\n  });\n  const weather = await fetchWeather('NYC'); // Returns fake data!\n  expect(weather.temp).toBe(72);\n});",
+      "annotation": "El mock devuelve datos falsos al instante. Tu test se ejecuta en milisegundos y funciona incluso cuando la API está caída."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El mocking reemplaza dependencias reales (APIs, bases de datos) con versiones falsas que tú controlas. Esto hace que los tests sean rápidos, confiables y capaces de simular cualquier escenario incluyendo errores."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "El suite de tests de tu equipo funcionaba bien hasta hoy. Ahora 5 tests están fallando con 'Error: Request timeout -- api.weather.com did not respond'. Los tests llaman a una API de clima real. La API parece tener una interrupción. Tu pipeline de CI/CD está bloqueado -- no hay despliegues hasta que los tests pasen. ¿Qué haces?",
+        "choices": [
+          { "id": "a", "text": "Hacer mock de la API de clima en los tests para que no dependan del servicio real", "nextNode": "mock-api", "score": 10 },
+          { "id": "b", "text": "Omitir los tests fallidos hasta que la API vuelva a estar en línea", "nextNode": "skip-tests", "score": 3 },
+          { "id": "c", "text": "Esperar a que la API regrese y re-ejecutar los tests", "nextNode": "wait", "score": 1 }
+        ]
+      },
+      "mock-api": {
+        "narrative": "¡Buena idea! Reemplazas las llamadas reales a la API con mocks. Ahora los tests siempre devuelven datos predecibles. Pero un compañero pregunta: 'Si hacemos mock de la API, ¿cómo sabemos que nuestro código realmente funciona con la API real?' Buena pregunta. ¿Cuál es tu respuesta?",
+        "choices": [
+          { "id": "a", "text": "Los tests unitarios usan mocks por velocidad; unos pocos tests de integración pueden testear la API real por separado", "nextNode": "correct-strategy", "score": 10 },
+          { "id": "b", "text": "No lo sabemos -- los mocks siempre son suficientes", "nextNode": "overconfident", "score": 4 }
+        ]
+      },
+      "skip-tests": {
+        "narrative": "Omites los tests y despliegas. Una hora después, descubres que un cambio de código accidentalmente rompió la visualización del clima -- la función ahora se bloquea con el formato de respuesta de la API. Si los tests no se hubieran omitido, habrían detectado esto (incluso con mocks que devuelven el formato esperado).",
+        "choices": [
+          { "id": "a", "text": "Ok, déjame configurar mocks en lugar de omitir tests", "nextNode": "mock-api", "score": 5 }
+        ]
+      },
+      "wait": {
+        "narrative": "Tres horas después, la API sigue caída. Tu equipo no puede desplegar ningún código. Un desarrollador terminó una corrección urgente de bug pero está atorada en el pipeline. Los tests que dependen de servicios externos siempre eventualmente te bloquearán así.",
+        "choices": [
+          { "id": "a", "text": "Déjame hacer mock de la API para no depender de ella", "nextNode": "mock-api", "score": 3 }
+        ]
+      },
+      "correct-strategy": {
+        "narrative": "¡Perfecto! Configuras el mock para devolver datos realistas:\n\njest.mock('./weatherApi', () => ({\n  getWeather: jest.fn(() => Promise.resolve({ temp: 72, condition: 'sunny' }))\n}));\n\nTambién mantienes 2 tests de integración que se ejecutan contra la API real en un suite de tests separado (sin bloquear despliegues). ¿Cómo manejas el testing de escenarios de error?",
+        "choices": [
+          { "id": "a", "text": "Crear diferentes mocks para respuestas de éxito, error y vacías", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Solo testear el caso de éxito -- los errores son raros", "nextNode": "end-okay", "score": 5 }
+        ]
+      },
+      "overconfident": {
+        "narrative": "Los mocks son geniales para tests unitarios, pero no pueden verificar que tu código funcione con el formato de respuesta REAL de la API. Si la API cambia su estructura de respuesta, tus mocks no lo detectarán. Unos pocos tests de integración contra la API real (en un suite de tests que no bloquee) proporcionan esa confianza.",
+        "choices": [
+          { "id": "a", "text": "Entendido -- usar mocks para tests unitarios pero mantener unos pocos tests de integración para la API real", "nextNode": "end-okay", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Creas tres escenarios de mock: éxito (temp: 72), error de API (status 500) y respuesta vacía (sin datos). Tus tests ahora cubren todos los caminos -- camino feliz, manejo de errores y casos límite. El suite de tests se ejecuta en 0.5 segundos en lugar de 30 segundos y nunca falla por interrupciones de la API.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente! Usaste mocks para hacer los tests rápidos y confiables, creaste múltiples escenarios de mock para testear diferentes caminos, y mantuviste tests de integración separados para verificación de la API real. Esto es exactamente cómo los equipos profesionales manejan dependencias externas en tests."
+      },
+      "end-okay": {
+        "narrative": "El mock desbloquea tu pipeline y los tests pasan de nuevo. Pero solo testear el camino de éxito significa que tu código de manejo de errores no está testeado. ¿Qué pasa cuando la API devuelve un error 500? Tus usuarios podrían ver un crash en lugar de un mensaje de error amigable.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Hacer mock de la API fue la decisión correcta, pero solo testear el camino feliz es riesgoso. Siempre haz mock de escenarios de error también -- errores de API, timeouts y respuestas inesperadas. Estas son las situaciones donde tu app es más probable que crashee en producción."
+      }
+    },
+    "glossaryTerms": ["mock", "dependency", "integration-test"]
+  }
+}

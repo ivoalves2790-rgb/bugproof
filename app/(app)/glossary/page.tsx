@@ -1,36 +1,42 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import glossaryData from "@/content/glossary.json";
+import glossaryDataEn from "@/content/glossary.json";
+import glossaryDataEs from "@/content/glossary-es.json";
 import type { GlossaryTerm } from "@/lib/types/content.types";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { IconSearch } from "@/components/ui/Icons";
+import { useLanguage } from "@/lib/i18n/use-language";
 
-const glossary = glossaryData as GlossaryTerm[];
+const glossaryMap: Record<string, GlossaryTerm[]> = {
+  en: glossaryDataEn as GlossaryTerm[],
+  es: glossaryDataEs as GlossaryTerm[],
+};
 
 export default function GlossaryPage() {
+  const { locale, t } = useLanguage();
+  const glossary = glossaryMap[locale] || glossaryMap.en;
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
     if (!search) return glossary;
     const q = search.toLowerCase();
     return glossary.filter(
-      (t) =>
-        t.term.toLowerCase().includes(q) ||
-        t.definition.toLowerCase().includes(q)
+      (term) =>
+        term.term.toLowerCase().includes(q) ||
+        term.definition.toLowerCase().includes(q)
     );
-  }, [search]);
+  }, [search, glossary]);
 
   return (
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold">
-          <span className="text-terminal-green">{">"}</span> Glossary
+          <span className="text-terminal-green">{">"}</span> {t("glossary.title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {glossary.length} terms explained in plain English. No jargon to
-          explain jargon.
+          {glossary.length} {t("glossary.subtitle")}
         </p>
       </div>
 
@@ -42,7 +48,7 @@ export default function GlossaryPage() {
         />
         <input
           type="text"
-          placeholder="Search terms..."
+          placeholder={t("glossary.search")}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full rounded-lg border border-border bg-surface-2 py-2 pl-9 pr-3 text-sm outline-none focus:border-terminal-green"
@@ -59,7 +65,9 @@ export default function GlossaryPage() {
             </p>
             {term.example && (
               <div className="mt-2 rounded-lg bg-surface-2 p-2 text-xs text-muted-foreground">
-                <span className="text-terminal-amber">Example: </span>
+                <span className="text-terminal-amber">
+                  {locale === "es" ? "Ejemplo: " : "Example: "}
+                </span>
                 {term.example}
               </div>
             )}
@@ -74,7 +82,9 @@ export default function GlossaryPage() {
         ))}
         {filtered.length === 0 && (
           <p className="py-8 text-center text-sm text-muted-foreground">
-            No terms found for &quot;{search}&quot;
+            {locale === "es"
+              ? `No se encontraron terminos para "${search}"`
+              : `No terms found for "${search}"`}
           </p>
         )}
       </div>

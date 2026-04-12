@@ -1,0 +1,85 @@
+{
+  "slug": "how-browsers-render",
+  "title": "Cómo los Navegadores Renderizan Páginas",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "El sitio web de tu equipo carga pero muestra una pantalla blanca durante 3 segundos antes de que aparezca el contenido. Los usuarios se están quejando. Necesitas entender cómo los navegadores renderizan páginas para encontrar el cuello de botella.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Renderizar = Construir una Casa",
+      "body": "Un navegador renderiza una página como construir una casa. Primero se levanta la **estructura** (estructura HTML). Luego la **pintura y el papel tapiz** (estilos CSS). Luego los **muebles y electrodomésticos** (interactividad JavaScript). Si cualquier paso se bloquea, toda la construcción se pausa -- igual que una casa no puede ser pintada hasta que las paredes estén levantadas."
+    },
+    {
+      "type": "text",
+      "title": "El Pipeline de Renderizado",
+      "body": "Cuando tu navegador recibe HTML, sigue estos pasos:\n\n1. **Analizar HTML** -- construye el DOM (Modelo de Objetos del Documento), un árbol de elementos\n2. **Analizar CSS** -- determina qué estilos se aplican a cada elemento\n3. **Diseño** -- calcula el tamaño y posición de cada elemento\n4. **Pintar** -- dibuja píxeles en la pantalla\n5. **Composición** -- combina todas las capas\n\nSi los archivos CSS o JavaScript todavía están cargando, los pasos 2-5 pueden bloquearse."
+    },
+    {
+      "type": "text",
+      "title": "Recursos que Bloquean el Renderizado",
+      "body": "Algunos archivos **bloquean el renderizado** -- el navegador no pintará nada hasta que estén cargados:\n\n- **Archivos CSS** bloquean el renderizado porque el navegador no mostrará contenido sin estilo\n- **JavaScript en el `<head>`** bloquea el análisis porque podría modificar la página\n\nPor eso los archivos CSS grandes o los scripts de carga lenta causan la temida 'pantalla blanca' mientras la página carga."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los navegadores analizan HTML en un DOM, aplican estilos CSS, calculan diseños y pintan píxeles. Los archivos CSS y JavaScript pueden bloquear este proceso, causando cargas de página lentas. Entender este pipeline te ayuda a corregir problemas de rendimiento."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Los usuarios reportan una pantalla blanca de 3 segundos antes de que tu sitio web aparezca. Abres Chrome DevTools y revisas la pestaña Network. Ves que un archivo JavaScript de 2MB (bundle.js) se está cargando en el <head> de la página. Este archivo tarda 2.8 segundos en descargarse. ¿Cuál es el problema?",
+        "choices": [
+          { "id": "a", "text": "El archivo JavaScript en el <head> está bloqueando al navegador de renderizar cualquier cosa", "nextNode": "correct-blocking", "score": 10 },
+          { "id": "b", "text": "El servidor es demasiado lento para responder", "nextNode": "wrong-server", "score": 3 },
+          { "id": "c", "text": "El archivo HTML en sí es demasiado grande", "nextNode": "wrong-html", "score": 2 }
+        ]
+      },
+      "correct-blocking": {
+        "narrative": "¡Exactamente! Una etiqueta <script> en el <head> bloquea al navegador de renderizar hasta que el script se descarga y ejecuta. Un archivo de 2MB que tarda 2.8 segundos significa que los usuarios no ven nada durante casi 3 segundos. ¿Cómo deberíamos arreglar esto?",
+        "choices": [
+          { "id": "a", "text": "Mover el script al final del <body> o agregar el atributo 'defer'", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Hacer el archivo JavaScript más pequeño", "nextNode": "end-good", "score": 7 },
+          { "id": "c", "text": "Eliminar JavaScript completamente", "nextNode": "wrong-remove", "score": 2 }
+        ]
+      },
+      "wrong-server": {
+        "narrative": "La pestaña Network muestra que el servidor responde en 200ms -- eso es rápido. El retraso está en el lado del cliente: el navegador está esperando a que un archivo JavaScript grande termine de descargarse antes de renderizar cualquier cosa. El archivo es el cuello de botella, no el servidor.",
+        "choices": [
+          { "id": "a", "text": "Entonces el archivo JavaScript está bloqueando al navegador de renderizar", "nextNode": "correct-blocking", "score": 5 }
+        ]
+      },
+      "wrong-html": {
+        "narrative": "El archivo HTML es solo de 15KB y carga en 100ms. El problema es el archivo JavaScript de 2MB referenciado en el <head> -- el navegador detiene el renderizado mientras descarga y analiza ese script.",
+        "choices": [
+          { "id": "a", "text": "El JavaScript en el head es el problema que bloquea el renderizado", "nextNode": "correct-blocking", "score": 5 }
+        ]
+      },
+      "wrong-remove": {
+        "narrative": "El sitio necesita JavaScript para la interactividad. Pero no necesita bloquear la página de mostrar contenido mientras el JS carga. Hay un punto medio -- dejar que el HTML y CSS se rendericen primero mientras JavaScript carga en segundo plano.",
+        "choices": [
+          { "id": "a", "text": "Cargar el script con defer para que no bloquee el renderizado", "nextNode": "end-great", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "Agregas 'defer' a la etiqueta script: <script defer src='bundle.js'>. Ahora el navegador renderiza el HTML y CSS inmediatamente mientras el JavaScript se descarga en segundo plano. La pantalla blanca desapareció -- los usuarios ven contenido de inmediato, y JavaScript se activa cuando está listo.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Identificaste que un script que bloquea el renderizado en el <head> estaba causando la pantalla blanca y lo arreglaste con el atributo 'defer'. Esta es una de las mejoras de rendimiento más comunes en desarrollo web. El atributo 'defer' le dice al navegador que descargue el script en segundo plano y lo ejecute después de que el HTML sea analizado."
+      },
+      "end-good": {
+        "narrative": "Hacer el archivo más pequeño ayuda, pero incluso un archivo más pequeño en el <head> bloqueará el renderizado. La mejor solución es combinar ambos: hacerlo más pequeño Y agregar 'defer' para que no bloquee el renderizado en absoluto.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Reducir el tamaño del archivo siempre es bueno, pero el problema central es que los scripts en el <head> bloquean el renderizado. Agregar 'defer' o mover el script al final del <body> eliminaría la pantalla blanca independientemente del tamaño del archivo."
+      }
+    },
+    "glossaryTerms": ["rendering", "dom", "render-blocking", "defer"]
+  }
+}

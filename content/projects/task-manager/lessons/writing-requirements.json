@@ -1,0 +1,91 @@
+{
+  "slug": "writing-requirements",
+  "title": "Writing Clear Requirements",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "You need to describe your task manager to an AI assistant. The quality of your description determines the quality of what gets built. Make good choices.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Requirements = Your App's Blueprint",
+      "body": "Requirements are a clear list of what your app should do. Without them, you'll wander, forget features, and build the wrong thing. When using AI to help you code, requirements become even more critical — the AI builds exactly what you describe, nothing more."
+    },
+    {
+      "type": "code_example",
+      "title": "Bad vs Good Requirements",
+      "language": "text",
+      "code": "BAD:  \"Make a task app\"\nGOOD: \"Users can create tasks with a title (required)\n      and description (optional). Tasks have three\n      states: todo, in-progress, done. Users can\n      filter tasks by state.\"",
+      "annotation": "The bad requirement gives the AI nothing to work with. The good one specifies exactly what 'task' means and how it behaves."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Good requirements answer: What can the user DO? What DATA does each thing have? What are the STATES or RULES? Write these down before you prompt any AI."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're ready to describe your task manager to an AI coding assistant. You open the chat and think about how to start. What do you write first?",
+        "choices": [
+          { "id": "vague", "text": "\"Build me a task manager app\"", "nextNode": "vague-result", "score": 0 },
+          { "id": "features", "text": "\"I need a task manager with these features: ...\" and list the core features", "nextNode": "features-result", "score": 3 },
+          { "id": "technical", "text": "\"Use React and PostgreSQL to create a CRUD app for tasks\"", "nextNode": "technical-result", "score": 1 }
+        ]
+      },
+      "vague-result": {
+        "narrative": "The AI generates a very basic todo app with just a text input and a list. No priorities, no due dates, no status tracking. It works, but it's not what you wanted. What do you do?",
+        "choices": [
+          { "id": "start-over", "text": "Start over with a detailed prompt describing exactly what you need", "nextNode": "good-recovery", "score": 3 },
+          { "id": "add-on", "text": "Ask the AI to 'make it better' without specifics", "nextNode": "bad-end", "score": 0 }
+        ]
+      },
+      "features-result": {
+        "narrative": "Good start! The AI asks a follow-up question: 'Should tasks have due dates? How should they be sorted?' How do you respond?",
+        "choices": [
+          { "id": "specify", "text": "\"Yes, tasks have: title (required), description (optional), due date (optional), priority (low/medium/high), status (todo/in-progress/done). Default sort by priority then due date.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "delegate", "text": "\"Just do whatever makes sense\"", "nextNode": "mediocre-end", "score": 1 }
+        ]
+      },
+      "technical-result": {
+        "narrative": "The AI starts building, but you only told it the tech stack, not what the app should actually do. It creates a generic CRUD interface. The data model has only 'title' and 'completed'. What now?",
+        "choices": [
+          { "id": "add-fields", "text": "Add the missing fields and behaviors one by one in follow-up prompts", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "rewrite", "text": "Write a complete feature spec first, then give it to the AI in one clear prompt", "nextNode": "good-recovery", "score": 3 }
+        ]
+      },
+      "good-recovery": {
+        "narrative": "You rewrite your prompt with specific features, data fields, and user flows. The AI generates a much better result. It takes one round of back-and-forth to fine-tune, and you end up with a solid foundation.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "You recovered well! Starting with detailed requirements would have saved a round trip, but you recognized the problem and fixed it. Remember: specify features, data fields, and rules upfront.",
+        "choices": []
+      },
+      "great-end": {
+        "narrative": "The AI generates a comprehensive task manager with exactly the fields and sorting you specified. The data model is clean, the UI matches your requirements, and you can start building immediately.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Excellent! You specified features, data fields, constraints, and defaults. This is exactly how to communicate with AI — be specific about what you want, and it will deliver.",
+        "choices": []
+      },
+      "mediocre-end": {
+        "narrative": "The AI builds something that kind of works, but you'll need several more rounds of prompting to get it right. Each round risks introducing inconsistencies.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "The app works, but the iterative approach led to a messy result. Next time, invest time upfront writing clear, specific requirements. It saves time overall.",
+        "choices": []
+      },
+      "bad-end": {
+        "narrative": "The AI makes random improvements — adds a color picker, a tag system, but still no priorities or due dates. You're further from your goal than when you started.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Vague prompts get vague results. 'Make it better' means nothing to an AI. Always specify exactly what you want changed.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["requirements", "crud", "data-model"]
+  }
+}

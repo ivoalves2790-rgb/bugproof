@@ -1,0 +1,54 @@
+{
+  "slug": "build-vs-dev",
+  "title": "Modo Build vs Modo Dev",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Cuando ejecutas tu app localmente, estás en 'modo de desarrollo'. Pero producción usa un 'modo de compilación' completamente diferente. El despliegue de un desarrollador está fallando porque mezcló los dos. Encuentra el error.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Modo Dev = Ensayo, Modo Build = Noche de Estreno",
+      "body": "Piensa en una producción teatral. El **modo dev** es el ensayo -- las luces están encendidas, puedes parar y reiniciar, alguien te lee notas, y está bien si las cosas no son perfectas. El **modo build** es la noche de estreno -- todo está pulido, optimizado y funcionando a toda velocidad para la audiencia. No ensayarías frente a una multitud, y no harías la función de estreno con las luces de la sala encendidas."
+    },
+    {
+      "type": "text",
+      "title": "Qué Cambia Entre Modos",
+      "body": "**Modo de desarrollo** (`npm run dev`):\n- Recarga rápida cuando cambias código\n- Mensajes de error detallados con números de línea\n- Sin optimización -- carga lento pero inicia rápido\n- Muestra advertencias útiles en la consola\n\n**Build de producción** (`npm run build`):\n- El código se minifica (comprime para ser diminuto)\n- Las imágenes se optimizan\n- El código no usado se elimina (tree-shaking)\n- Los mensajes de error son genéricos (por seguridad)"
+    },
+    {
+      "type": "code_example",
+      "title": "Los Dos Comandos",
+      "language": "bash",
+      "code": "# Development: start a local server with hot reloading\nnpm run dev\n\n# Production: create an optimized build\nnpm run build\nnpm start        # serve the built version",
+      "annotation": "Siempre prueba `npm run build` localmente antes de desplegar. Si falla en tu máquina, fallará en el servidor también."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El modo dev es para programar (retroalimentación rápida, errores detallados). El modo build es para producción (optimizado, comprimido, rápido para los usuarios). Siempre ejecuta `npm run build` antes de desplegar."
+    }
+  ],
+  "exercise": {
+    "language": "json",
+    "code": [
+      { "line": 1, "text": "// package.json scripts", "isBuggy": false },
+      { "line": 2, "text": "\"scripts\": {", "isBuggy": false },
+      { "line": 3, "text": "  \"dev\": \"next dev\",", "isBuggy": false },
+      { "line": 4, "text": "  \"build\": \"next build\",", "isBuggy": false },
+      { "line": 5, "text": "  \"start\": \"next dev\"", "isBuggy": true },
+      { "line": 6, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "La app se despliega exitosamente pero funciona extremadamente lento en producción y muestra mensajes de error detallados a los usuarios. La plataforma de hosting ejecuta 'npm run build' y luego 'npm start'. Encuentra la línea que causa el problema.",
+    "fixes": [
+      { "id": "a", "text": "\"start\": \"next start\"", "isCorrect": true },
+      { "id": "b", "text": "\"start\": \"next build\"", "isCorrect": false },
+      { "id": "c", "text": "\"start\": \"next dev --production\"", "isCorrect": false },
+      { "id": "d", "text": "\"start\": \"node server.js\"", "isCorrect": false }
+    ],
+    "explanation": "El script 'start' debería ejecutar 'next start' para servir el build de producción optimizado. En su lugar, está ejecutando 'next dev' que inicia un servidor de desarrollo -- lento, sin optimizar, y mostrando mensajes de error detallados a los usuarios. El paso de build se ejecutó bien, pero la app está sirviendo la versión de desarrollo en lugar de la versión compilada.",
+    "glossaryTerms": ["dev-mode", "production-build", "npm-scripts"]
+  }
+}

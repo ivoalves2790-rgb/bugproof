@@ -1,0 +1,73 @@
+{
+  "slug": "dev-environment",
+  "title": "Configurando Tu Entorno de Desarrollo",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "Un buen entorno de desarrollo te ahorra horas de frustracion. Desliza a la derecha en practicas solidas de configuracion, a la izquierda en habitos que te van a ralentizar.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Tu Espacio de Trabajo Importa",
+      "body": "Antes de escribir una sola linea de codigo, tu entorno de desarrollo necesita estar listo. Esto significa tener Node.js instalado, un buen editor de codigo (VS Code es el estandar), y una terminal con la que te sientas comodo. Saltarte este paso es como intentar cocinar en una cocina sin cuchillos."
+    },
+    {
+      "type": "text",
+      "title": "La Consistencia Es Clave",
+      "body": "Los equipos profesionales usan herramientas como archivos `.nvmrc` para fijar la version de Node.js, `.editorconfig` para formato consistente, y scripts en `package.json` para que cada desarrollador ejecute los mismos comandos. Estos pequenos archivos previenen el clasico problema de 'funciona en mi maquina'."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Invierte 30 minutos configurando tu entorno correctamente y ahorraras horas depurando problemas extranos despues. Usa un gestor de versiones para Node.js, elige un editor y aprendelo bien, y siempre verifica que tus herramientas esten actualizadas."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "node-version-manager",
+        "content": "Usa nvm o fnm para gestionar tu version de Node.js para poder cambiar entre proyectos facilmente",
+        "isGoodPractice": true,
+        "explanation": "Los gestores de versiones te permiten fijar la version exacta de Node.js por proyecto. Diferentes proyectos pueden necesitar diferentes versiones, y un gestor de versiones hace el cambio sin dolor."
+      },
+      {
+        "id": "global-install-everything",
+        "content": "Instala todas las dependencias de tu proyecto globalmente con npm install -g para que esten disponibles en todas partes",
+        "isGoodPractice": false,
+        "explanation": "Las instalaciones globales causan conflictos de versiones entre proyectos. Siempre instala las dependencias del proyecto localmente con npm install para que cada proyecto obtenga las versiones que necesita."
+      },
+      {
+        "id": "vscode-extensions",
+        "content": "Instala las extensiones de ESLint y Prettier en VS Code para formato automatico de codigo y deteccion de errores",
+        "isGoodPractice": true,
+        "explanation": "Estas extensiones detectan errores mientras escribes y mantienen tu codigo formateado de manera consistente. Se pagan solas en minutos."
+      },
+      {
+        "id": "skip-git-config",
+        "content": "Omite configurar tu nombre de usuario y email de git porque siempre puedes hacerlo despues",
+        "isGoodPractice": false,
+        "explanation": "Git no te dejara hacer commit sin un nombre y email. Configurar esto primero evita un mensaje de error confuso en el momento en que intentes hacer tu primer commit."
+      },
+      {
+        "id": "check-node-version",
+        "content": "Ejecuta 'node --version' y 'npm --version' para verificar que todo esta instalado correctamente antes de empezar un proyecto",
+        "isGoodPractice": true,
+        "explanation": "Una verificacion rapida de version toma 5 segundos y puede salvarte de errores misteriosos de compilacion causados por herramientas desactualizadas o faltantes."
+      },
+      {
+        "id": "random-node-version",
+        "content": "Descarga cualquier version de Node.js que aparezca primero en Google e instalala sin verificar compatibilidad",
+        "isGoodPractice": false,
+        "explanation": "Next.js requiere versiones minimas especificas de Node.js. Tomar una version al azar puede llevar a errores crípticos. Siempre revisa la documentacion para la version recomendada."
+      },
+      {
+        "id": "nvmrc-file",
+        "content": "Agrega un archivo .nvmrc a tu proyecto para que los companeros de equipo usen automaticamente la version correcta de Node.js",
+        "isGoodPractice": true,
+        "explanation": "Un archivo .nvmrc documenta la version exacta de Node.js que tu proyecto necesita. Cuando un companero ejecuta 'nvm use', selecciona la version correcta automaticamente."
+      }
+    ],
+    "glossaryTerms": ["node-js", "npm", "dev-environment"]
+  }
+}

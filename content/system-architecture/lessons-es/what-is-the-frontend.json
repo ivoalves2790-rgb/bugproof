@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-the-frontend",
+  "title": "¿Qué es el Frontend?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "El frontend es todo lo que el usuario ve e interactúa. Pero hay conceptos erróneos comunes sobre qué cuenta como 'frontend' y de qué es responsable. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El Frontend Es Como el Comedor de un Restaurante",
+      "body": "Un restaurante tiene dos mitades: el **comedor** (donde se sientan los clientes) y la **cocina** (donde se prepara la comida). El frontend es el comedor. Es todo lo que el cliente ve -- el menú, la decoración, los platos. El cliente nunca va a la cocina, pero interactúa con todo en el comedor."
+    },
+    {
+      "type": "text",
+      "title": "Qué Incluye el Frontend",
+      "body": "El frontend es el código que se ejecuta **en el navegador del usuario**. Está construido con tres tecnologías principales:\n\n1. **HTML** -- la estructura (encabezados, párrafos, botones)\n2. **CSS** -- el estilo (colores, fuentes, diseños)\n3. **JavaScript** -- la interactividad (clics, animaciones, validación de formularios)\n\nFrameworks como React, Vue y Angular agregan estructura sobre estas tres."
+    },
+    {
+      "type": "text",
+      "title": "El Trabajo del Frontend",
+      "body": "El frontend es responsable de:\n\n1. **Mostrar datos** al usuario (texto, imágenes, listas)\n2. **Manejar interacciones** (clics en botones, escritura en formularios, desplazamiento)\n3. **Hacer peticiones** al backend para obtener datos\n4. **Actualizar la pantalla** cuando llegan nuevos datos\n\nNO almacena datos permanentemente, no gestiona cuentas de usuario ni procesa pagos -- ese es el trabajo del backend."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El frontend es el código que se ejecuta en el navegador del usuario. Maneja todo lo que el usuario ve e interactúa, usando HTML para la estructura, CSS para el estilo, y JavaScript para la interactividad."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El código del frontend se ejecuta en la computadora del usuario, dentro de su navegador web.",
+        "isGoodPractice": true,
+        "explanation": "Cuando visitas un sitio web, el servidor envía archivos HTML, CSS y JavaScript a tu navegador. Tu navegador luego ejecuta ese código localmente en tu dispositivo. Por eso puedes hacer clic derecho en cualquier página web y 'Ver código fuente' -- el código está ahí mismo en tu máquina."
+      },
+      {
+        "id": "card-2",
+        "content": "El frontend es un lugar seguro para almacenar contraseñas y claves API ya que los usuarios no pueden ver el código.",
+        "isGoodPractice": false,
+        "explanation": "¡Los usuarios SÍ PUEDEN ver todo el código del frontend! Cualquiera puede abrir las DevTools del navegador e inspeccionar cada línea de JavaScript, cada petición de red y cada variable. Nunca pongas datos sensibles en el código del frontend -- es completamente visible para cualquiera que visite tu sitio."
+      },
+      {
+        "id": "card-3",
+        "content": "Un botón que cambia de color cuando pasas el cursor por encima es manejado por el frontend.",
+        "isGoodPractice": true,
+        "explanation": "Los efectos hover, animaciones, cambios de color y otras interacciones visuales son todo trabajo del frontend. Este ejemplo específico es manejado por CSS (la pseudo-clase :hover). No se necesita comunicación con el servidor -- todo sucede instantáneamente en el navegador."
+      },
+      {
+        "id": "card-4",
+        "content": "El frontend se conecta directamente a la base de datos para obtener datos del usuario.",
+        "isGoodPractice": false,
+        "explanation": "El frontend NUNCA habla directamente con la base de datos. Eso sería un problema de seguridad masivo -- cualquiera podría modificar el código del frontend para robar o eliminar todos tus datos. En su lugar, el frontend habla con el backend a través de APIs, y el backend habla con la base de datos."
+      },
+      {
+        "id": "card-5",
+        "content": "HTML, CSS y JavaScript son las tres tecnologías principales del desarrollo frontend.",
+        "isGoodPractice": true,
+        "explanation": "HTML proporciona estructura, CSS proporciona estilo, y JavaScript proporciona interactividad. Cada framework de frontend (React, Vue, Angular) está construido sobre estas tres. Entenderlas es esencial incluso si usas un framework."
+      }
+    ],
+    "glossaryTerms": ["frontend", "html", "css", "javascript", "browser"]
+  }
+}

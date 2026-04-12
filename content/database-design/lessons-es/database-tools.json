@@ -1,0 +1,98 @@
+{
+  "slug": "database-tools",
+  "title": "Herramientas y GUIs de Bases de Datos",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Acabas de unirte a un equipo y necesitas revisar la base de datos de producción para depurar un problema. Pero nunca te has conectado a una base de datos remota antes. Recorramos el proceso y aprendamos sobre las herramientas que usan los desarrolladores.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Herramientas de Base de Datos = Diferentes Formas de Leer un Libro",
+      "body": "Puedes leer un libro yendo a la biblioteca (línea de comandos), usando un lector electrónico (GUI de base de datos), o haciendo que alguien te lo lea (ORM en tu código). Las tres te dan el mismo contenido, solo de diferentes maneras. Las herramientas de base de datos son iguales -- diferentes interfaces para los mismos datos."
+    },
+    {
+      "type": "text",
+      "title": "Tres Formas de Acceder a una Base de Datos",
+      "body": "Los desarrolladores típicamente usan una de estas:\n\n1. **Línea de comandos** (`psql` para PostgreSQL, `sqlite3` para SQLite) -- rápida, poderosa, pero solo texto\n2. **Herramientas GUI** (TablePlus, DBeaver, pgAdmin) -- visual, genial para explorar datos\n3. **Desde tu código** (usando un ORM o constructor de consultas) -- cómo tu app accede a la base de datos\n\nLa mayoría de los desarrolladores usan una GUI para explorar y la línea de comandos o código para hacer cambios."
+    },
+    {
+      "type": "text",
+      "title": "Cadenas de Conexión",
+      "body": "Para conectarte a una base de datos, necesitas una **cadena de conexión** -- una dirección que le dice a tu herramienta dónde está la base de datos:\n\n`postgresql://username:password@hostname:5432/database_name`\n\nEsto incluye: el tipo de base de datos, tus credenciales de inicio de sesión, la dirección del servidor, el número de puerto, y qué base de datos abrir. Esta cadena generalmente se almacena en una variable de entorno por seguridad."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Puedes acceder a una base de datos a través de la línea de comandos, una herramienta visual GUI, o desde el código de tu aplicación. Las cadenas de conexión le dicen a tus herramientas dónde vive la base de datos. Nunca escribas cadenas de conexión directamente en tu código fuente -- usa variables de entorno."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu líder de equipo dice: 'Un usuario reporta que no puede ver sus pedidos. Revisa la base de datos para ver si sus datos existen. La información de conexión está en el archivo .env.' ¿Cuál es tu primer paso?",
+        "choices": [
+          { "id": "a", "text": "Revisar el archivo .env para la cadena de conexión de la base de datos", "nextNode": "found-env", "score": 10 },
+          { "id": "b", "text": "Abrir el código de producción y buscar la URL de la base de datos en los archivos fuente", "nextNode": "wrong-source", "score": 3 },
+          { "id": "c", "text": "Pedirle la contraseña al líder del equipo", "nextNode": "partial-ask", "score": 5 }
+        ]
+      },
+      "found-env": {
+        "narrative": "Encuentras el archivo .env con: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. Ahora necesitas conectarte. ¿Qué herramienta usas?",
+        "choices": [
+          { "id": "a", "text": "Usar una herramienta GUI como TablePlus -- más fácil para navegar y buscar datos visualmente", "nextNode": "gui-choice", "score": 10 },
+          { "id": "b", "text": "Usar la herramienta de línea de comandos psql", "nextNode": "cli-choice", "score": 8 },
+          { "id": "c", "text": "Escribir un script rápido en el código de tu app para consultar la base de datos", "nextNode": "code-choice", "score": 5 }
+        ]
+      },
+      "wrong-source": {
+        "narrative": "¡Las cadenas de conexión NUNCA deberían estar en el código fuente -- contienen contraseñas! La práctica estándar es almacenarlas en archivos .env (que no se commitean a git) o en variables de entorno configuradas en el servidor. Revisa el archivo .env en su lugar.",
+        "choices": [
+          { "id": "a", "text": "Correcto, revisar el archivo .env para la cadena de conexión", "nextNode": "found-env", "score": 5 }
+        ]
+      },
+      "partial-ask": {
+        "narrative": "Eso funciona, pero la información de conexión ya debería estar documentada en el archivo .env -- ese es el lugar estándar donde los equipos almacenan credenciales de base de datos. Revisa ahí primero para no molestar a tu líder.",
+        "choices": [
+          { "id": "a", "text": "Déjame revisar el archivo .env primero", "nextNode": "found-env", "score": 7 }
+        ]
+      },
+      "gui-choice": {
+        "narrative": "Pegas la cadena de conexión en TablePlus y te conectas. Puedes ver todas las tablas visualmente. Navegas a la tabla 'orders', buscas el ID del usuario y encuentras... cero pedidos. Pero la tabla 'users' muestra que el usuario existe. ¿Qué revisas después?",
+        "choices": [
+          { "id": "a", "text": "Verificar si el ID del usuario en la tabla de pedidos coincide con su ID de usuario real", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Verificar si la tabla de pedidos está vacía para todos", "nextNode": "end-good", "score": 7 }
+        ]
+      },
+      "cli-choice": {
+        "narrative": "Ejecutas psql con la cadena de conexión y te conectas. Consultas: SELECT * FROM orders WHERE user_id = 42; y obtienes cero resultados. El usuario existe en la tabla users pero no tiene pedidos. ¡Una GUI habría hecho la exploración más fácil, pero la línea de comandos también funciona!",
+        "choices": [
+          { "id": "a", "text": "Verificar si el user_id en los pedidos recientes coincide con este usuario", "nextNode": "end-great", "score": 10 }
+        ]
+      },
+      "code-choice": {
+        "narrative": "Escribir código para una consulta única es excesivo. Una herramienta GUI o la línea de comandos te permite explorar datos interactivamente, lo cual es mucho más rápido para depurar. Reserva las consultas basadas en código para la lógica de tu aplicación.",
+        "choices": [
+          { "id": "a", "text": "Déjame usar una herramienta GUI en su lugar para exploración rápida", "nextNode": "gui-choice", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "Descubres que el usuario recientemente cambió su correo electrónico y se re-registró, creando una nueva cuenta con user_id 87. Sus pedidos antiguos están vinculados al user_id 42. ¡Los datos están ahí -- solo están vinculados a su cuenta anterior! Reportas el hallazgo al equipo.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Gran investigación! Encontraste la cadena de conexión en el archivo .env (el lugar correcto), usaste una herramienta apropiada para conectarte, y diagnosticaste una discrepancia de user_id. Este tipo de trabajo detectivesco con bases de datos es una tarea diaria para desarrolladores backend."
+      },
+      "end-good": {
+        "narrative": "Revisas y otros usuarios SÍ tienen pedidos -- es solo este usuario específico quien no tiene ninguno. Eso descarta un problema a nivel del sistema y apunta a un problema específico del usuario. ¡Buen pensamiento sistemático!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "¡Buen enfoque! Verificar si el problema es específico del usuario o del sistema completo es una estrategia de depuración inteligente. El siguiente paso sería mirar datos relacionados (como el historial de la cuenta del usuario) para encontrar por qué faltan sus pedidos."
+      }
+    },
+    "glossaryTerms": ["connection-string", "gui", "psql", "environment-variable"]
+  }
+}

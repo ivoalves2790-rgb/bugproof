@@ -1,0 +1,69 @@
+{
+  "slug": "environment-variables",
+  "title": "Variables de Entorno",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Las variables de entorno almacenan secretos y configuracion que cambian entre desarrollo y produccion. Si las configuras mal, tu app filtra claves de API o se conecta a la base de datos equivocada.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Que Son las Variables de Entorno?",
+      "body": "Las variables de entorno son pares clave-valor que configuran tu app sin escribir valores directamente en el codigo. DATABASE_URL podria apuntar a localhost en desarrollo y a tu base de datos de produccion en produccion. API_KEY se mantiene secreta porque nunca esta en tu codigo — se configura en la plataforma de despliegue."
+    },
+    {
+      "type": "code_example",
+      "title": "Variables de Entorno en la Practica",
+      "language": "text",
+      "code": "# .env.local (development - never committed)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Production (set in Vercel dashboard)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (committed - shows what vars are needed)\nDATABASE_URL=\nAPI_KEY=",
+      "annotation": "Mantiene un archivo .env.example para que los nuevos desarrolladores sepan que variables configurar, sin exponer los valores reales."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Nunca hagas commit de archivos .env con secretos reales. Agrega .env a .gitignore, usa .env.example para documentacion y configura los valores de produccion en el panel de tu plataforma de despliegue."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Agregar archivos .env a .gitignore para que los secretos nunca terminen en tu historial de Git",
+        "isGoodPractice": true,
+        "explanation": "Una vez que un secreto esta en el historial de Git, es extremadamente dificil eliminarlo. Incluso si borras el archivo, el secreto permanece en commits anteriores. Previene esto agregando .env a .gitignore desde el primer dia."
+      },
+      {
+        "id": "c2",
+        "content": "Prefija las variables de entorno del lado del cliente con NEXT_PUBLIC_ para que esten disponibles en el navegador",
+        "isGoodPractice": true,
+        "explanation": "Next.js (y frameworks similares) solo exponen al navegador las variables de entorno con prefijo NEXT_PUBLIC_. Esto previene la filtracion accidental de secretos del servidor al cliente."
+      },
+      {
+        "id": "c3",
+        "content": "Almacenar la contrasena de tu base de datos directamente en el codigo como respaldo en caso de que la variable de entorno no este configurada",
+        "isGoodPractice": false,
+        "explanation": "Las credenciales de respaldo escritas en el codigo son un riesgo de seguridad y se incluyen en el control de versiones. Si falta una variable de entorno, la app deberia fallar con un error claro, no recurrir a secretos escritos en el codigo."
+      },
+      {
+        "id": "c4",
+        "content": "Usar diferentes valores de variables de entorno para desarrollo, staging y produccion",
+        "isGoodPractice": true,
+        "explanation": "Cada entorno deberia tener su propia base de datos, claves de API y configuracion. Esto previene que el trabajo de desarrollo afecte accidentalmente los datos de produccion."
+      },
+      {
+        "id": "c5",
+        "content": "Compartir tu archivo .env en Slack para que los nuevos miembros del equipo puedan configurarse rapidamente",
+        "isGoodPractice": false,
+        "explanation": "Los mensajes de Slack persisten y pueden ser buscados. Usa un gestor de secretos seguro o haz que cada desarrollador genere sus propias credenciales. Comparte .env.example en su lugar para mostrar que variables se necesitan."
+      },
+      {
+        "id": "c6",
+        "content": "Validar que todas las variables de entorno requeridas estan presentes cuando la app se inicia",
+        "isGoodPractice": true,
+        "explanation": "Falla rapido y ruidosamente. Si DATABASE_URL falta, falla inmediatamente con un mensaje claro en lugar de fallar silenciosamente despues cuando un usuario intenta guardar una tarea."
+      }
+    ],
+    "glossaryTerms": ["env-var", "gitignore"]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "slug": "folder-structure",
+  "title": "Organizing Your Project Files",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "A clean folder structure makes your project navigable and maintainable. Swipe right on solid organization practices, left on messy habits that will haunt you later.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The App Router Structure",
+      "body": "Next.js uses the `app/` directory to define your routes. Each folder inside `app/` becomes a URL path. A `page.tsx` file inside a folder makes it a route. A `layout.tsx` file wraps pages in shared UI. This convention means your folder structure IS your routing — no config needed."
+    },
+    {
+      "type": "text",
+      "title": "Where Does Everything Else Go?",
+      "body": "Beyond `app/`, you'll want a `components/` folder for reusable UI, a `lib/` folder for utilities and database helpers, and a `types/` folder for TypeScript type definitions. Some teams put components next to the pages that use them, others centralize everything. Either works — the key is picking a convention and sticking with it."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Your folder structure should make it obvious where to find things. If another developer opens your project, they should be able to find any file within 10 seconds. Name folders clearly, group related files together, and never put everything in the root."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "components-folder",
+        "content": "Create a /components folder with subfolders like /components/ui for buttons and inputs, and /components/tasks for task-specific components",
+        "isGoodPractice": true,
+        "explanation": "Grouping components by category makes them easy to find and reuse. A developer looking for the TaskCard component knows to check /components/tasks/."
+      },
+      {
+        "id": "everything-in-root",
+        "content": "Put all your component files directly in the root of the project alongside package.json and next.config.js",
+        "isGoodPractice": false,
+        "explanation": "Dumping files in the root creates a mess. After 20 components, you'll have 30+ files at the top level and no way to find anything quickly."
+      },
+      {
+        "id": "page-per-route",
+        "content": "Create app/tasks/page.tsx for the tasks list and app/tasks/[id]/page.tsx for individual task pages",
+        "isGoodPractice": true,
+        "explanation": "This follows the Next.js App Router convention exactly. The folder structure mirrors your URL paths: /tasks and /tasks/123."
+      },
+      {
+        "id": "single-css-file",
+        "content": "Put all your styles in one massive styles.css file with 2,000 lines of CSS",
+        "isGoodPractice": false,
+        "explanation": "One giant CSS file becomes impossible to maintain. With Tailwind CSS, styles live right in the components, so you rarely need separate CSS files at all."
+      },
+      {
+        "id": "lib-folder",
+        "content": "Create a /lib folder for database helpers, utility functions, and API client code",
+        "isGoodPractice": true,
+        "explanation": "Separating business logic from UI components keeps both clean. When you need to change how tasks are fetched, you go to /lib, not dig through component files."
+      },
+      {
+        "id": "random-names",
+        "content": "Name your files things like helpers2.ts, stuff.tsx, and temp-final-v3.tsx",
+        "isGoodPractice": false,
+        "explanation": "File names should describe what they contain. 'helpers2' and 'stuff' tell you nothing. Use descriptive names like task-actions.ts or create-task-form.tsx."
+      },
+      {
+        "id": "layout-file",
+        "content": "Use app/layout.tsx for shared UI like the navigation bar and footer that appears on every page",
+        "isGoodPractice": true,
+        "explanation": "The root layout is the perfect place for persistent UI. Next.js renders it once and keeps it across page navigations, which is both cleaner code and better performance."
+      }
+    ],
+    "glossaryTerms": ["app-router", "component", "routing"]
+  }
+}

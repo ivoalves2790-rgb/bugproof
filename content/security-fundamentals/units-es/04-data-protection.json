@@ -1,0 +1,16 @@
+{
+  "slug": "data-protection",
+  "title": "Protección de datos",
+  "description": "Cifrado, HTTPS, almacenamiento seguro y mantener seguros los datos de los usuarios",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "encryption-basics", "title": "Fundamentos de cifrado", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "https-everywhere", "title": "HTTPS y TLS", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "data-breach-response", "title": "Respuesta a filtración de datos", "type": "incident_response", "order": 3, "difficulty": 3 },
+    { "slug": "hashing-vs-encryption", "title": "Hashing vs Cifrado", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "secure-api-keys", "title": "Gestionando claves de API", "type": "terminal_sim", "order": 5, "difficulty": 2 },
+    { "slug": "sensitive-data-exposure", "title": "Datos sensibles en los logs", "type": "bug_hunt", "order": 6, "difficulty": 2 }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "performance-basics",
+  "title": "Fundamentos de Rendimiento",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Tu gestor de tareas esta en produccion y la gente lo esta usando. Pero algunas paginas cargan lento y los usuarios se van. Aprendamos que hace rapidas a las apps web — y que las hace lentas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Por Que Importa el Rendimiento",
+      "body": "Los usuarios esperan que las paginas carguen en menos de 2 segundos. Cada segundo extra de tiempo de carga aumenta dramaticamente las tasas de rebote. El rendimiento no es solo velocidad — es experiencia del usuario, rankings de SEO e incluso tasas de conversion. Una app rapida se siente profesional y confiable."
+    },
+    {
+      "type": "analogy",
+      "title": "El Rendimiento Es Como un Restaurante de Comida Rapida",
+      "body": "Nadie quiere esperar 20 minutos por una hamburguesa. Los restaurantes de comida rapida optimizan todo: precalientan la parrilla, preparan ingredientes con anticipacion y tienen un flujo de trabajo optimizado. Tu app deberia hacer lo mismo: pre-cargar datos, almacenar en cache solicitudes comunes y minimizar el trabajo innecesario."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las mayores mejoras de rendimiento generalmente vienen de tres cosas: reducir la cantidad de JavaScript que envias, optimizar imagenes y almacenar en cache datos que no cambian a menudo."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Cargar de forma diferida los componentes que no son visibles en la pantalla inicial para reducir el tamano del bundle inicial",
+        "isGoodPractice": true,
+        "explanation": "La division de codigo y la carga diferida significan que los usuarios solo descargan el JavaScript que necesitan ahora. Un gestor de tareas no necesita cargar el codigo de la pagina de configuracion hasta que el usuario navegue alli."
+      },
+      {
+        "id": "c2",
+        "content": "Cargar todos tus datos en el lado del cliente despues de que la pagina se renderice para mantener rapida la respuesta del servidor",
+        "isGoodPractice": false,
+        "explanation": "La obtencion de datos en el lado del cliente causa un spinner de carga despues de que aparece la pagina. El renderizado del lado del servidor o la generacion estatica envia los datos con el HTML, para que la pagina sea usable inmediatamente."
+      },
+      {
+        "id": "c3",
+        "content": "Optimizar imagenes usando formatos modernos como WebP y sirviendo versiones de tamano apropiado",
+        "isGoodPractice": true,
+        "explanation": "Las imagenes son a menudo los recursos mas pesados en una pagina. Usar WebP en lugar de PNG puede reducir el tamano del archivo entre 30-50%. El componente Image de Next.js hace esto automaticamente."
+      },
+      {
+        "id": "c4",
+        "content": "La optimizacion prematura — gastar tiempo optimizando codigo que ya es suficientemente rapido — es una perdida de tiempo",
+        "isGoodPractice": true,
+        "explanation": "No optimices a ciegas. Mide primero con herramientas como Lighthouse o Chrome DevTools. Arregla los cuellos de botella reales, no lo que crees que podria ser lento."
+      },
+      {
+        "id": "c5",
+        "content": "Instalar tantos paquetes npm como sea necesario — mientras mas funcionalidades tenga tu app, mejor la experiencia del usuario",
+        "isGoodPractice": false,
+        "explanation": "Cada paquete agrega al tamano de tu bundle. Una libreria de selector de fechas podria agregar 50KB. Evalua si realmente necesitas cada dependencia o si existe una solucion mas simple."
+      },
+      {
+        "id": "c6",
+        "content": "Usar una Red de Distribucion de Contenido (CDN) para servir recursos estaticos desde servidores cercanos a tus usuarios",
+        "isGoodPractice": true,
+        "explanation": "Los CDNs almacenan en cache tus archivos estaticos (imagenes, CSS, JS) en servidores de todo el mundo. Un usuario en Tokio obtiene archivos de un servidor en Tokio en lugar de esperar una respuesta desde Nueva York. Vercel hace esto automaticamente."
+      }
+    ],
+    "glossaryTerms": ["lazy-loading", "cdn"]
+  }
+}

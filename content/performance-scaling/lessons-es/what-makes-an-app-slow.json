@@ -1,0 +1,66 @@
+{
+  "slug": "what-makes-an-app-slow",
+  "title": "¿Qué hace lenta a una app?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Cada app que hayas abandonado con frustración probablemente era lenta. Pero ¿qué hace realmente que una app se sienta lenta? No siempre es lo que imaginarías. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Rendimiento = Velocidad del restaurante",
+      "body": "Imagina pedir comida en un restaurante. Una experiencia lenta puede ser causada por muchas cosas: una cocina lenta, demasiados clientes, un mesero que tarda una eternidad en traer el menú, o un cocinero que hace cada plato desde cero en lugar de preparar ingredientes de antemano. El **rendimiento de una app** funciona de la misma manera -- la lentitud puede venir de la red, el servidor, el navegador o tu código."
+    },
+    {
+      "type": "text",
+      "title": "Los tres cuellos de botella",
+      "body": "La mayoría de los problemas de rendimiento caen en tres categorías:\n\n1. **Red** -- Demasiados datos enviados, demasiadas solicitudes, respuestas lentas del servidor\n2. **Renderizado** -- El navegador luchando para pintar píxeles en la pantalla\n3. **Cómputo** -- Tu código haciendo demasiado trabajo (bucles pesados, cálculos innecesarios)\n\nLa solución depende de en qué categoría vive el problema."
+    },
+    {
+      "type": "text",
+      "title": "Velocidad percibida vs real",
+      "body": "Aquí hay un secreto: **qué tan rápida se siente tu app** importa más que qué tan rápida es realmente. Una página que muestra un skeleton de carga en 200ms y llena los datos a los 2 segundos *se siente* más rápida que una página en blanco que carga todo a los 1.5 segundos. Los usuarios odian quedarse mirando la nada."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las apps lentas son causadas por problemas de red, cuellos de botella de renderizado o cómputo pesado. Qué tan rápida se siente para el usuario importa tanto como el tiempo de carga real."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Cargar una imagen de 5MB para una miniatura pequeña es un error de rendimiento común.",
+        "isGoodPractice": true,
+        "explanation": "Este es uno de los asesinos de rendimiento más comunes. Si muestras una imagen a 100x100 píxeles, no hay razón para descargar un archivo de resolución completa de 5MB. Redimensiona y comprime las imágenes para que coincidan con su tamaño de visualización."
+      },
+      {
+        "id": "card-2",
+        "content": "Más JavaScript siempre significa una página más lenta.",
+        "isGoodPractice": false,
+        "explanation": "No es solo la cantidad de JavaScript -- es cuándo y cómo se carga. Un script de 500KB que carga después de que la página es visible causa menos lentitud percibida que un script de 50KB que bloquea el renderizado de la página. La división de código y la carga diferida te permiten tener mucho JavaScript sin ralentizar la carga inicial."
+      },
+      {
+        "id": "card-3",
+        "content": "Un spinner de carga o una pantalla skeleton puede hacer que una app se sienta más rápida incluso si el tiempo de carga es el mismo.",
+        "isGoodPractice": true,
+        "explanation": "El rendimiento percibido es rendimiento real desde la perspectiva del usuario. Mostrar feedback visual inmediato (un skeleton, spinner o contenido de marcador de posición) les dice a los usuarios que algo está pasando. Una pantalla en blanco sin feedback se siente rota, incluso si carga más rápido en general."
+      },
+      {
+        "id": "card-4",
+        "content": "Hacer 50 solicitudes API pequeñas es igual de rápido que hacer 1 solicitud más grande.",
+        "isGoodPractice": false,
+        "explanation": "Cada solicitud HTTP tiene sobrecarga: búsqueda DNS, conexión TCP, handshake TLS y latencia de ida y vuelta. 50 solicitudes significan 50 veces esa sobrecarga. Combinar solicitudes (o usar técnicas como batching y GraphQL) puede reducir dramáticamente el tiempo total de carga."
+      },
+      {
+        "id": "card-5",
+        "content": "La optimización de rendimiento siempre debería ser lo primero que hagas al construir una app.",
+        "isGoodPractice": false,
+        "explanation": "Esta es una trampa clásica llamada optimización prematura. Primero construye algo que funcione, luego mide dónde están los cuellos de botella reales, luego optimiza esos puntos específicos. Adivinar los problemas de rendimiento desperdicia tiempo y a menudo optimiza lo incorrecto."
+      }
+    ],
+    "glossaryTerms": ["perceived-performance", "bottleneck", "premature-optimization"]
+  }
+}

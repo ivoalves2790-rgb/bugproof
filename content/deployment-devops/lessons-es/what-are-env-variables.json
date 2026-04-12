@@ -1,0 +1,68 @@
+{
+  "slug": "what-are-env-variables",
+  "title": "¿Qué Son las Variables de Entorno?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Tu app necesita diferentes configuraciones dependiendo de dónde se ejecute -- tu laptop, un servidor de pruebas, o el sitio de producción real. Las variables de entorno son cómo manejas esto. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Variables de Entorno = Gafetes en un Evento",
+      "body": "Imagina que estás organizando un evento. Cada sede tiene diferentes números de contacto, contraseñas de wifi y capacidades de sala. En lugar de imprimir estos detalles en cada póster, los pones en un gafete que cambia por sede. Las **variables de entorno** funcionan de la misma manera -- son configuraciones que cambian dependiendo de dónde se ejecute tu app, sin cambiar tu código real."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué Son Realmente?",
+      "body": "Las variables de entorno (o \"env vars\") son **pares clave-valor** que viven fuera de tu código. Le dicen a tu app cosas como:\n\n- A qué base de datos conectarse\n- Cuáles son tus claves API\n- Si mostrar información de depuración\n- En qué puerto ejecutarse\n\nLo hermoso es que el mismo código puede comportarse diferente solo cambiando estas variables."
+    },
+    {
+      "type": "code_example",
+      "title": "Usando Variables de Entorno en JavaScript",
+      "language": "javascript",
+      "code": "// Access an environment variable\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Running in production mode');\n} else {\n  console.log('Running in development mode');\n}",
+      "annotation": "process.env te da acceso a todas las variables de entorno. Los valores vienen de fuera de tu código."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las variables de entorno son configuraciones que viven fuera de tu código y cambian según dónde se ejecute tu app. Mantienen datos sensibles como claves API fuera de tu código fuente."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Las variables de entorno te permiten usar diferentes URLs de base de datos para desarrollo y producción sin cambiar tu código.",
+        "isGoodPractice": true,
+        "explanation": "¡Esto es exactamente para lo que son las variables de entorno! Tu máquina local apunta a una base de datos de prueba, mientras producción apunta a la real. Mismo código, diferente configuración."
+      },
+      {
+        "id": "card-2",
+        "content": "Está bien poner tus claves API directamente en tu código JavaScript ya que el código se minifica de todas formas.",
+        "isGoodPractice": false,
+        "explanation": "La minificación solo acorta los nombres de variables -- no oculta tus claves. Cualquiera puede ver tu JavaScript en el navegador y encontrar esas claves. Siempre usa variables de entorno para datos sensibles."
+      },
+      {
+        "id": "card-3",
+        "content": "Las variables de entorno se nombran usando MAYUSCULAS_CON_GUIONES_BAJOS por convención.",
+        "isGoodPractice": true,
+        "explanation": "Esta es una convención ampliamente seguida. Nombres como DATABASE_URL, API_KEY y NODE_ENV hacen inmediatamente claro que un valor es una variable de entorno."
+      },
+      {
+        "id": "card-4",
+        "content": "Deberías committear tus variables de entorno a Git para que tu equipo pueda usarlas.",
+        "isGoodPractice": false,
+        "explanation": "¡Nunca committees variables de entorno a Git! A menudo contienen secretos como claves API y contraseñas de base de datos. En su lugar, compártelas a través de canales seguros y cada desarrollador configura su propio archivo .env localmente."
+      },
+      {
+        "id": "card-5",
+        "content": "Las variables de entorno solo pueden almacenar cadenas de texto, no números u objetos.",
+        "isGoodPractice": true,
+        "explanation": "Las variables de entorno siempre son cadenas. Si necesitas un número, lo parseas: parseInt(process.env.PORT). Si necesitas un booleano, lo comparas: process.env.DEBUG === 'true'. Esto sorprende a algunos principiantes."
+      }
+    ],
+    "glossaryTerms": ["environment-variable", "process-env", "api-key"]
+  }
+}

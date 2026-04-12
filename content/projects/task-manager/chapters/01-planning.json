@@ -1,0 +1,16 @@
+{
+  "slug": "planning",
+  "title": "Planning Your App",
+  "description": "Before you write a single line of code, learn to think through what you're building. Good planning prevents 90% of project failures.",
+  "order": 1,
+  "phase": "planning",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "what-are-we-building", "title": "What Are We Building?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "features-vs-scope-creep", "title": "Features vs Scope Creep", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "writing-requirements", "title": "Writing Clear Requirements", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "user-stories", "title": "Thinking in User Stories", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "planning-with-ai", "title": "Planning with AI", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["system-architecture"]
+}

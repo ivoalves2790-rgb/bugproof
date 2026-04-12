@@ -66,7 +66,16 @@ export interface Lesson {
   xpReward: number;
   intro: string;
   teach?: TeachBlock[];
-  exercise: BugHuntExercise | SwipeToJudgeExercise | IncidentResponseExercise | TerminalSimExercise;
+  chapterSlug?: string;
+  projectSlug?: string;
+  exercise:
+    | BugHuntExercise
+    | SwipeToJudgeExercise
+    | IncidentResponseExercise
+    | TerminalSimExercise
+    | PromptChallengeExercise
+    | CodeReviewExercise
+    | ArchitectureDecisionExercise;
 }
 
 // Bug Hunt exercise
@@ -171,4 +180,132 @@ export interface AssessmentOption {
   id: string;
   text: string;
   isCorrect?: boolean;
+}
+
+// --- Project system types ---
+
+export type ProjectPhase =
+  | "planning"
+  | "tech-stack"
+  | "setup"
+  | "building"
+  | "database"
+  | "auth-security"
+  | "testing"
+  | "deployment"
+  | "scaling";
+
+export interface ProjectIndex {
+  slug: string;
+  title: string;
+  description: string;
+  icon: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  estimatedHours: number;
+  chapterCount: number;
+  lessonCount: number;
+  color: string;
+  isPremium: boolean;
+  techStack: string[];
+}
+
+export interface Project {
+  slug: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  icon: string;
+  color: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  isPremium: boolean;
+  techStack: string[];
+  chapters: ChapterRef[];
+  courseMapping: Record<string, string[]>;
+}
+
+export interface ChapterRef {
+  slug: string;
+  title: string;
+  order: number;
+  phase: ProjectPhase;
+}
+
+export interface Chapter {
+  slug: string;
+  title: string;
+  description: string;
+  order: number;
+  phase: ProjectPhase;
+  projectSlug: string;
+  lessons: ProjectLessonRef[];
+  relatedCourses: string[];
+}
+
+export interface ProjectLessonRef {
+  slug: string;
+  title: string;
+  type: ExerciseType;
+  order: number;
+  difficulty: 1 | 2 | 3;
+}
+
+// --- New exercise types ---
+
+// Prompt Challenge
+export interface PromptChallengeExercise {
+  scenario: string;
+  context: string;
+  criteria: PromptCriterion[];
+  idealPrompt: string;
+  idealPromptAnnotation: string;
+  badPromptExample: string;
+  badPromptAnnotation: string;
+  glossaryTerms: string[];
+}
+
+export interface PromptCriterion {
+  id: string;
+  label: string;
+  description: string;
+  weight: number;
+  keywords?: string[];
+}
+
+// Code Review
+export interface CodeReviewExercise {
+  language: string;
+  code: CodeLine[];
+  issues: CodeIssue[];
+  context: string;
+  prompt: string;
+  glossaryTerms: string[];
+}
+
+export interface CodeIssue {
+  id: string;
+  lineNumbers: number[];
+  category: "security" | "performance" | "maintainability" | "correctness";
+  severity: "critical" | "warning" | "info";
+  title: string;
+  explanation: string;
+  suggestedFix: string;
+}
+
+// Architecture Decision
+export interface ArchitectureDecisionExercise {
+  scenario: string;
+  context: string;
+  decisions: ArchitectureChoice[];
+  glossaryTerms: string[];
+}
+
+export interface ArchitectureChoice {
+  id: string;
+  label: string;
+  description: string;
+  pros: string[];
+  cons: string[];
+  isRecommended: boolean;
+  consequence: string;
+  score: number;
 }

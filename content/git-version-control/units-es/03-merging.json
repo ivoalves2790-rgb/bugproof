@@ -1,0 +1,16 @@
+{
+  "slug": "merging",
+  "title": "Fusión",
+  "description": "Combina el trabajo de diferentes ramas y resuelve conflictos",
+  "order": 3,
+  "courseSlug": "git-version-control",
+  "tier": "intermediate",
+  "lessons": [
+    { "slug": "what-is-merging", "title": "¿Qué es la fusión?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "fast-forward-merge", "title": "Fusiones fast-forward", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "merge-conflicts", "title": "Entendiendo los conflictos de fusión", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "resolving-conflicts", "title": "Resolviendo conflictos de fusión", "type": "terminal_sim", "order": 4, "difficulty": 3 },
+    { "slug": "merge-gone-wrong", "title": "Cuando una fusión sale mal", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "merge-vs-rebase", "title": "Merge vs Rebase", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

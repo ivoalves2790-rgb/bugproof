@@ -1,0 +1,91 @@
+{
+  "slug": "putting-it-together",
+  "title": "El Viaje Completo de una Petición",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Escribes 'www.coolshop.com' en tu navegador y presionas Enter. MUCHO sucede detrás de escena. Vamos a rastrear el viaje completo desde la pulsación de tecla hasta la página renderizada.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El Viaje Completo = Pedir Comida a Domicilio",
+      "body": "Cuando pides comida a domicilio: (1) buscas el número del restaurante (DNS), (2) los llamas (conexión TCP), (3) haces tu pedido (petición HTTP), (4) la cocina prepara tu comida (procesamiento del servidor), (5) el repartidor te la trae (respuesta HTTP), (6) la comes (el navegador renderiza la página). Cada visita a un sitio web sigue este mismo flujo."
+    },
+    {
+      "type": "text",
+      "title": "El Ciclo de Vida Completo",
+      "body": "Esto es lo que sucede cuando escribes una URL y presionas Enter:\n\n1. **Búsqueda DNS** -- tu navegador encuentra la dirección IP del servidor\n2. **Conexión TCP** -- tu navegador abre una conexión a esa IP\n3. **Petición HTTP** -- tu navegador envía 'GET / HTTP/1.1'\n4. **Procesamiento del servidor** -- el servidor construye la página\n5. **Respuesta HTTP** -- el servidor envía de vuelta el HTML\n6. **Renderizado** -- tu navegador pinta la página en la pantalla"
+    },
+    {
+      "type": "text",
+      "title": "No Es Solo Una Petición",
+      "body": "El primer archivo HTML a menudo referencia otros archivos: hojas de estilo CSS, archivos JavaScript, imágenes y fuentes. Tu navegador lee el HTML y envía **peticiones adicionales** para cada uno de estos recursos. Una sola carga de página puede involucrar entre 50 y 100 peticiones HTTP separadas, todas ocurriendo en paralelo."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cargar una página web involucra búsqueda DNS, establecer una conexión, enviar una petición HTTP, procesamiento del servidor, recibir la respuesta y renderizar. Una sola página a menudo genera docenas de peticiones adicionales para CSS, JavaScript e imágenes."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Escribes www.coolshop.com en tu navegador y presionas Enter. ¿Cuál es la primera cosa que necesita suceder?",
+        "choices": [
+          { "id": "a", "text": "Búsqueda DNS -- encontrar la dirección IP de coolshop.com", "nextNode": "after-dns", "score": 10 },
+          { "id": "b", "text": "Enviar una petición HTTP para la página principal", "nextNode": "wrong-http-first", "score": 3 },
+          { "id": "c", "text": "Comenzar a renderizar la página", "nextNode": "wrong-render-first", "score": 1 }
+        ]
+      },
+      "after-dns": {
+        "narrative": "DNS resuelve coolshop.com a 93.184.216.34. Ahora tu navegador sabe DÓNDE enviar la petición. ¿Qué sucede después?",
+        "choices": [
+          { "id": "a", "text": "Abrir una conexión TCP al servidor en esa dirección IP", "nextNode": "after-tcp", "score": 10 },
+          { "id": "b", "text": "Enviar la petición HTTP inmediatamente", "nextNode": "close-tcp", "score": 5 }
+        ]
+      },
+      "wrong-http-first": {
+        "narrative": "No puedes enviar una petición todavía -- no sabes DÓNDE enviarla. Tu navegador solo conoce el nombre 'coolshop.com,' no la dirección real. Primero, DNS tiene que traducir ese nombre en una dirección IP.",
+        "choices": [
+          { "id": "a", "text": "Correcto, primero la búsqueda DNS para obtener la dirección IP", "nextNode": "after-dns", "score": 5 }
+        ]
+      },
+      "wrong-render-first": {
+        "narrative": "¡No hay nada que renderizar todavía! Tu navegador no ha recibido ningún HTML. Primero necesita encontrar el servidor, conectarse a él, solicitar la página y recibir la respuesta. Solo entonces puede comenzar a renderizar.",
+        "choices": [
+          { "id": "a", "text": "OK, necesitamos encontrar el servidor primero con DNS", "nextNode": "after-dns", "score": 5 }
+        ]
+      },
+      "after-tcp": {
+        "narrative": "La conexión TCP está establecida (esto incluye el handshake TLS para HTTPS). Ahora tu navegador envía: GET / HTTP/1.1. El servidor procesa la petición y envía de vuelta HTML. Tu navegador comienza a renderizar pero nota que el HTML referencia un archivo CSS y 3 imágenes. ¿Qué sucede?",
+        "choices": [
+          { "id": "a", "text": "El navegador envía peticiones HTTP adicionales para cada uno de esos archivos", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "El servidor envía automáticamente todos los archivos de una vez", "nextNode": "end-ok", "score": 4 }
+        ]
+      },
+      "close-tcp": {
+        "narrative": "¡Casi! Tu navegador sí envía la petición HTTP, pero primero necesita establecer una conexión TCP -- un canal confiable entre tu computadora y el servidor. Piensa en ello como marcar un número de teléfono antes de hablar. El handshake TCP asegura que ambos lados estén listos para comunicarse.",
+        "choices": [
+          { "id": "a", "text": "Entendido -- primero la conexión TCP, luego la petición HTTP", "nextNode": "after-tcp", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "El navegador analiza el HTML, descubre que necesita style.css, logo.png, hero.jpg y promo.png, y lanza peticiones para todos ellos. Los navegadores modernos envían estas en paralelo para mayor velocidad. Una vez que todo llega, la página está completamente renderizada.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Rastreaste el viaje completo: búsqueda DNS, conexión TCP, petición HTTP, respuesta del servidor, y peticiones adicionales para recursos extra. Esto es exactamente lo que sucede cada vez que visitas cualquier sitio web. Entender este flujo te ayuda a depurar problemas de carga -- si una página es lenta, puedes determinar qué paso es el cuello de botella."
+      },
+      "end-ok": {
+        "narrative": "En realidad, el servidor solo envía lo que fue específicamente solicitado. El navegador tiene que descubrir que necesita esos archivos extra leyendo el HTML, y luego enviar peticiones separadas para cada uno. HTTP/2 moderno puede ser más inteligente sobre esto, pero el navegador sigue dirigiendo el proceso.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "¡Acertaste la mayor parte del flujo! La idea clave es que cargar una página generalmente involucra muchas peticiones, no solo una. El HTML inicial es solo el punto de partida -- referencia CSS, JavaScript, imágenes y fuentes que cada uno requiere su propia petición."
+      }
+    },
+    "glossaryTerms": ["dns", "tcp", "http-request", "rendering"]
+  }
+}

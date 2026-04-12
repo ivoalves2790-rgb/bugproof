@@ -1,0 +1,16 @@
+{
+  "slug": "auth-security",
+  "title": "Auth & Security",
+  "description": "Add login and signup, protect your routes, and learn the basics of keeping your app secure.",
+  "order": 6,
+  "phase": "auth-security",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "why-authentication", "title": "Why Authentication?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "auth-flows", "title": "Auth Flows Explained", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "implementing-login", "title": "Implementing Login", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "protecting-routes", "title": "Protecting Routes", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "security-checklist", "title": "Security Checklist", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["security-fundamentals"]
+}

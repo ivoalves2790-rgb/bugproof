@@ -1,0 +1,67 @@
+{
+  "slug": "why-test",
+  "title": "Por Que Hacer Tests?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Hacer tests se siente como trabajo extra — hasta que un bug llega a produccion y pasas tres horas depurando lo que un test habria detectado en tres segundos. Exploremos por que hacer tests importa.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Los Tests Son Tu Red de Seguridad",
+      "body": "Los tests son verificaciones automatizadas que comprueban que tu codigo funciona como se espera. Cuando cambias algo, los tests te dicen al instante si rompiste algo mas. Sin ellos, cada cambio de codigo es un salto de fe — no sabras que esta roto hasta que un usuario lo reporte."
+    },
+    {
+      "type": "analogy",
+      "title": "Los Tests Son Como el Corrector Ortografico",
+      "body": "Podrias revisar cada documento manualmente, pero el corrector ortografico detecta la mayoria de los errores al instante y automaticamente. Los tests hacen lo mismo con el codigo. Aun necesitas pensar en lo que escribes, pero los tests detectan los errores obvios antes de que alguien mas los vea."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los tests ahorran tiempo a largo plazo. Escribir un test toma minutos; depurar un bug en produccion toma horas. La confianza para cambiar codigo sin miedo vale la inversion inicial."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Los tests te dan confianza para refactorizar codigo sin miedo a romper funcionalidades existentes",
+        "isGoodPractice": true,
+        "explanation": "Este es uno de los mayores beneficios. Sin tests, los desarrolladores evitan refactorizar porque no pueden estar seguros de que nada se rompera, lo que lleva a codigo desordenado con el tiempo."
+      },
+      {
+        "id": "c2",
+        "content": "Deberias escribir tests solo despues de encontrar bugs, para prevenir que vuelvan a ocurrir",
+        "isGoodPractice": false,
+        "explanation": "Aunque los tests de regresion son valiosos, escribir tests antes o junto con el codigo detecta bugs temprano. Esperar a los bugs significa que los usuarios los encuentran primero."
+      },
+      {
+        "id": "c3",
+        "content": "Un proyecto con 100% de cobertura de tests esta garantizado de estar libre de bugs",
+        "isGoodPractice": false,
+        "explanation": "La cobertura mide que lineas se ejecutaron, no si los tests verifican las cosas correctas. Puedes tener 100% de cobertura con tests que nunca afirman nada. Enfocate en probar comportamiento, no en alcanzar un numero."
+      },
+      {
+        "id": "c4",
+        "content": "Los tests sirven como documentacion viva que muestra como se supone que funciona tu codigo",
+        "isGoodPractice": true,
+        "explanation": "Los buenos nombres de test describen comportamiento: 'deberia marcar la tarea como completada cuando se hace clic en la casilla'. Los nuevos desarrolladores pueden leer los tests para entender que hace el codigo."
+      },
+      {
+        "id": "c5",
+        "content": "Las pruebas manuales haciendo clic en la app son suficientes para un proyecto pequeno",
+        "isGoodPractice": false,
+        "explanation": "Las pruebas manuales no escalan. A medida que tu app crece, no puedes hacer clic en cada funcionalidad despues de cada cambio. Los tests automatizados se ejecutan en segundos y detectan regresiones que no encontrarias."
+      },
+      {
+        "id": "c6",
+        "content": "Empieza probando los caminos mas criticos en tu app — como crear y completar tareas",
+        "isGoodPractice": true,
+        "explanation": "No necesitas probar todo de una vez. Empieza con las funcionalidades que serian mas daninas si se rompieran, luego expande la cobertura con el tiempo."
+      }
+    ],
+    "glossaryTerms": ["regression", "test-coverage"]
+  }
+}

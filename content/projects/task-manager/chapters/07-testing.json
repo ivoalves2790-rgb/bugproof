@@ -1,0 +1,16 @@
+{
+  "slug": "testing",
+  "title": "Testing",
+  "description": "Write tests to make sure your app actually works. Learn the types of tests and when to use each one.",
+  "order": 7,
+  "phase": "testing",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "why-test", "title": "Why Test?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "types-of-tests", "title": "Types of Tests", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "writing-first-test", "title": "Writing Your First Test", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "testing-user-flows", "title": "Testing User Flows", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "debugging-failures", "title": "Debugging Test Failures", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["testing"]
+}

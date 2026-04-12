@@ -1,0 +1,16 @@
+{
+  "slug": "building-ui",
+  "title": "Construyendo la Interfaz",
+  "description": "Convierte tus disenos en componentes reales. Construye la tarjeta de tarea, formularios y el layout con los que los usuarios interactuaran.",
+  "order": 4,
+  "phase": "building",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "component-thinking", "title": "Pensando en Componentes", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "tailwind-basics", "title": "Estilos con Tailwind", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "building-task-card", "title": "Construyendo la Tarjeta de Tarea", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "form-design", "title": "Disenando el Formulario de Tareas", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "layout-and-navigation", "title": "Layout y Navegacion", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["code-organization", "debugging-error-reading"]
+}

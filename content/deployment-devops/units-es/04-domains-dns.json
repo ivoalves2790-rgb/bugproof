@@ -1,0 +1,8 @@
+{
+  "slug": "domains-dns",
+  "title": "Dominios y DNS",
+  "description": "Cómo los nombres de dominio, los registros DNS y HTTPS funcionan juntos",
+  "order": 4,
+  "courseSlug": "deployment-devops",
+  "tier": "intermediate"
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "creating-a-table",
+  "title": "Creando Tu Primera Tabla",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "¡Es hora de crear tu propia tabla de base de datos desde cero! Estás construyendo una app de librería y necesitas una tabla para almacenar libros. Usaremos SQLite para crear la tabla, insertar algunos datos y consultarla.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "CREATE TABLE = Diseñar un Formulario",
+      "body": "Crear una tabla es como diseñar un formulario en papel antes de imprimir cientos de copias. Decides qué campos incluir (nombre, autor, precio), qué formato usa cada campo (texto, número, fecha), y qué campos son obligatorios. Una vez que el formulario está diseñado, todos llenan la misma estructura."
+    },
+    {
+      "type": "text",
+      "title": "El Comando CREATE TABLE",
+      "body": "El patrón básico es:\n\n```\nCREATE TABLE table_name (\n  column_name DATA_TYPE CONSTRAINTS,\n  column_name DATA_TYPE CONSTRAINTS\n);\n```\n\nDefines cada columna con un nombre, un tipo de datos, y restricciones opcionales como NOT NULL, PRIMARY KEY, UNIQUE, o DEFAULT."
+    },
+    {
+      "type": "code_example",
+      "title": "Una Definición Completa de Tabla",
+      "language": "sql",
+      "code": "CREATE TABLE books (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  title TEXT NOT NULL,\n  author TEXT NOT NULL,\n  price DECIMAL(8, 2) NOT NULL,\n  pages INTEGER,\n  published_year INTEGER,\n  in_stock BOOLEAN DEFAULT true\n);",
+      "annotation": "AUTOINCREMENT hace que el id cuente automáticamente (1, 2, 3...). title, author y price son obligatorios (NOT NULL). pages y published_year son opcionales. in_stock tiene valor por defecto true."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "CREATE TABLE define una nueva tabla con columnas, tipos de datos y restricciones. Siempre incluye una PRIMARY KEY, marca las columnas esenciales como NOT NULL, y usa DEFAULT para columnas con valores automáticos sensatos."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/bookstore",
+    "initialFiles": [],
+    "steps": [
+      {
+        "instruction": "Let's create a new SQLite database for our bookstore. Open a new database file called bookstore.db.",
+        "expectedCommand": "sqlite3 bookstore.db",
+        "acceptAlternatives": [],
+        "output": "SQLite version 3.42.0\nEnter \".help\" for usage hints.\nsqlite>",
+        "hint": "Type 'sqlite3 bookstore.db' to create and open the database."
+      },
+      {
+        "instruction": "Now create a 'books' table with columns: id (integer primary key), title (text, required), author (text, required), and price (decimal, required). Use AUTOINCREMENT for the id.",
+        "expectedCommand": "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, author TEXT NOT NULL, price DECIMAL(8,2) NOT NULL);",
+        "acceptAlternatives": ["CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, author TEXT NOT NULL, price DECIMAL(8, 2) NOT NULL);", "CREATE TABLE books(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT NOT NULL,author TEXT NOT NULL,price DECIMAL(8,2) NOT NULL);"],
+        "output": "",
+        "hint": "Use CREATE TABLE books (...); with the columns defined inside the parentheses."
+      },
+      {
+        "instruction": "The table was created. Let's insert a book. Add 'The Pragmatic Programmer' by 'David Thomas' priced at 44.99.",
+        "expectedCommand": "INSERT INTO books (title, author, price) VALUES ('The Pragmatic Programmer', 'David Thomas', 44.99);",
+        "acceptAlternatives": ["INSERT INTO books(title, author, price) VALUES('The Pragmatic Programmer', 'David Thomas', 44.99);"],
+        "output": "",
+        "hint": "Use INSERT INTO books (title, author, price) VALUES ('...', '...', ...);"
+      },
+      {
+        "instruction": "Now let's verify the book was inserted. Select all records from the books table.",
+        "expectedCommand": "SELECT * FROM books;",
+        "acceptAlternatives": ["select * from books;"],
+        "output": "1|The Pragmatic Programmer|David Thomas|44.99",
+        "hint": "Use SELECT * FROM books; to see all rows."
+      }
+    ],
+    "completionMessage": "You just created a database table from scratch, inserted a record, and queried it back! Notice how the id was automatically set to 1 -- that's AUTOINCREMENT doing its job. The title, author, and price columns are all NOT NULL, so the database will reject any book without those fields. This is the foundation of database design: define your structure first, then fill it with data.",
+    "glossaryTerms": ["create-table", "autoincrement", "insert", "not-null"]
+  }
+}

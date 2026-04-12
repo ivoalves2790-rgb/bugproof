@@ -1,0 +1,73 @@
+{
+  "slug": "what-is-a-database",
+  "title": "Que Es una Base de Datos?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Antes de almacenar una sola tarea, necesitas entender que es y que no es realmente una base de datos. Desliza a la derecha en afirmaciones verdaderas, a la izquierda en falsas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Por Que Tu App Necesita una Base de Datos",
+      "body": "Ahora mismo, si un usuario crea una tarea y refresca la pagina, desaparece. Eso es porque los datos solo viven en la memoria del navegador. Una base de datos es un lugar estructurado para **almacenar y recuperar datos permanentemente**. Piensa en ella como la memoria a largo plazo de tu app — sin ella, tu gestor de tareas tiene amnesia."
+    },
+    {
+      "type": "analogy",
+      "title": "Archivador vs. Notas Adhesivas",
+      "body": "Almacenar datos sin una base de datos es como escribir todo en notas adhesivas — funciona hasta que pasa una brisa. Una base de datos es como un archivador con carpetas etiquetadas. Todo tiene un lugar, puedes encontrar cosas rapidamente, y nada desaparece cuando cierras el cajon. Para nuestro gestor de tareas, la base de datos almacena cada tarea, cada usuario y cada fecha limite — de manera confiable y permanente."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Una base de datos almacena los datos de tu app permanentemente para que sobrevivan refrescos de pagina, reinicios del servidor y sesiones de usuario. Sin una, tu gestor de tareas es solo un bloc de notas elegante que se borra solo."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "permanent-storage",
+        "content": "Una base de datos almacena datos permanentemente para que sobrevivan cuando los usuarios cierran el navegador",
+        "isGoodPractice": true,
+        "explanation": "Correcto! La persistencia es el proposito central de una base de datos. Sin ella, todas las tareas desaparecerian al recargar la pagina."
+      },
+      {
+        "id": "only-sql",
+        "content": "Todas las bases de datos requieren que escribas consultas SQL para almacenar y recuperar datos",
+        "isGoodPractice": false,
+        "explanation": "No es cierto. Mientras las bases de datos SQL (como PostgreSQL) usan SQL, las bases de datos NoSQL como MongoDB usan metodos de consulta diferentes. Hay muchos tipos de bases de datos con diferentes interfaces."
+      },
+      {
+        "id": "multiple-users",
+        "content": "Una base de datos permite que multiples usuarios accedan a los mismos datos sin sobreescribir el trabajo del otro",
+        "isGoodPractice": true,
+        "explanation": "Correcto! Las bases de datos manejan acceso concurrente — asi que si dos usuarios crean tareas al mismo tiempo, ambas tareas se guardan correctamente."
+      },
+      {
+        "id": "frontend-only",
+        "content": "Puedes usar localStorage en el navegador como la base de datos principal de tu app para produccion",
+        "isGoodPractice": false,
+        "explanation": "localStorage es util para cache, pero esta limitado a un navegador en un dispositivo, no tiene aplicacion de estructura y puede ser limpiado por el usuario. No es una base de datos real."
+      },
+      {
+        "id": "structured-data",
+        "content": "Una base de datos relacional organiza datos en tablas con filas y columnas, similar a una hoja de calculo",
+        "isGoodPractice": true,
+        "explanation": "Correcto! Las bases de datos relacionales como PostgreSQL (que usa Supabase) almacenan datos en tablas estructuradas. Cada fila es un registro, cada columna es un campo."
+      },
+      {
+        "id": "no-rules",
+        "content": "Las bases de datos no imponen ninguna regla — puedes almacenar cualquier dato en cualquier formato en cualquier lugar",
+        "isGoodPractice": false,
+        "explanation": "Incorrecto. Las bases de datos imponen esquemas, tipos de datos y restricciones. Por ejemplo, puedes requerir que cada tarea debe tener un titulo, o que una fecha limite debe ser una fecha valida."
+      },
+      {
+        "id": "query-speed",
+        "content": "Las bases de datos pueden buscar entre millones de registros en milisegundos usando indices",
+        "isGoodPractice": true,
+        "explanation": "Correcto! Los indices son como la tabla de contenidos de un libro — permiten que la base de datos salte directamente a los datos que necesitas en lugar de escanear cada fila."
+      }
+    ],
+    "glossaryTerms": ["database", "sql", "schema"]
+  }
+}

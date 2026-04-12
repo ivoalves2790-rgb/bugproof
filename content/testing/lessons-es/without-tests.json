@@ -1,0 +1,93 @@
+{
+  "slug": "without-tests",
+  "title": "Qué pasa sin tests",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Estás trabajando en una app de e-commerce en crecimiento con cero tests. El equipo sigue lanzando funcionalidades rápido, pero últimamente las cosas se siguen rompiendo. Un simple cambio de CSS acaba de romper todo el flujo de checkout. Experimenta de primera mano lo que pasa cuando omites el testing.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Sin tests = Conducir sin espejos",
+      "body": "Conducir sin espejos laterales parece estar bien... hasta que necesitas cambiar de carril. No tienes idea de qué hay detrás o al lado tuyo. Sin tests, no puedes ver qué podrían afectar tus cambios de código. Cada cambio es un cambio de carril sin espejos -- podrías estar bien, o podrías chocar con algo que ni sabías que estaba ahí."
+    },
+    {
+      "type": "text",
+      "title": "La decadencia lenta de un código sin tests",
+      "body": "Al principio, no tener tests parece estar bien -- la app es pequeña y conoces cada línea. Pero a medida que crece:\n\n1. **Semana 1**: App pequeña, recuerdas todo. Sin bugs.\n2. **Mes 3**: La app es más grande. Los bugs se cuelan ocasionalmente.\n3. **Mes 6**: Nadie recuerda cómo funciona el código viejo. Los cambios rompen cosas.\n4. **Año 1**: Todos tienen miedo de tocar cualquier cosa. Las nuevas funcionalidades toman 3 veces más porque hay roturas inesperadas."
+    },
+    {
+      "type": "text",
+      "title": "El factor miedo",
+      "body": "La peor consecuencia de no tener tests es el **miedo**. Los desarrolladores tienen miedo de cambiar código porque no saben qué se va a romper. En lugar de limpiar código desordenado, agregan parches encima. En lugar de refactorizar, copian y pegan. El código base empeora cada vez más porque nadie se atreve a mejorarlo."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Sin tests, los códigos base se deterioran lentamente. Los desarrolladores tienen miedo de cambiar código, los bugs se filtran a producción, y cada nueva funcionalidad corre el riesgo de romper las anteriores."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu app de e-commerce tiene 50 páginas y cero tests. Necesitas actualizar la función de formato de moneda para soportar euros. Se usa en docenas de lugares: páginas de productos, carrito, checkout, recibos e informes de administración. ¿Cómo lo abordas?",
+        "choices": [
+          { "id": "a", "text": "Cambiar la función y verificar manualmente cada página donde se usa", "nextNode": "manual-check", "score": 5 },
+          { "id": "b", "text": "Escribir tests para la función de formato primero, luego cambiarla", "nextNode": "write-tests-first", "score": 10 },
+          { "id": "c", "text": "Crear una función nueva en lugar de modificar la existente", "nextNode": "duplicate", "score": 3 }
+        ]
+      },
+      "manual-check": {
+        "narrative": "Pasas 2 horas haciendo clic manualmente por la app. Las páginas de productos se ven bien. El carrito se ve bien. Despliegas. El lunes por la mañana, descubres que la página de informes de administración (que olvidaste revisar) muestra los precios como NaN. El equipo de finanzas ha estado exportando informes rotos todo el fin de semana.",
+        "choices": [
+          { "id": "a", "text": "Arreglar el informe de administración y agregar tests para que esto no pase de nuevo", "nextNode": "end-learned", "score": 7 },
+          { "id": "b", "text": "Arreglar el informe de administración y seguir adelante", "nextNode": "end-poor", "score": 3 }
+        ]
+      },
+      "write-tests-first": {
+        "narrative": "Escribes 8 tests para el formateador de moneda: dólares, euros, montos cero, montos negativos, números grandes, moneda faltante, valores nulos y el formato de informe de administración. Luego actualizas la función. 6 tests pasan, 2 fallan -- el formato del informe de administración y el manejo de nulos se rompieron. Los arreglas en 5 minutos. ¿Qué haces después?",
+        "choices": [
+          { "id": "a", "text": "Ejecutar todos los tests una vez más, luego desplegar con confianza", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "También verificar manualmente algunas páginas por seguridad", "nextNode": "end-great", "score": 10 }
+        ]
+      },
+      "duplicate": {
+        "narrative": "Ahora tienes dos funciones de formato haciendo casi lo mismo. Algunas páginas usan la vieja, algunas usan la nueva. En 3 meses, alguien cambiará una y olvidará la otra. Así es como los códigos base sin tests empeoran con el tiempo -- la gente tiene miedo de modificar código existente, así que lo duplican.",
+        "choices": [
+          { "id": "a", "text": "En realidad, déjame escribir tests para la función original y modificarla correctamente", "nextNode": "write-tests-first", "score": 5 }
+        ]
+      },
+      "end-learned": {
+        "narrative": "Arreglas el informe y escribes tests. Este bug le costó al equipo de finanzas un fin de semana de datos malos. Si hubieras tenido tests, esos 2 segundos de ejecución de tests habrían detectado esto antes de que llegara a producción.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "¡Al menos aprendiste la lección! El testing manual pasó por alto el informe de administración porque es fácil olvidar páginas que no usas seguido. Los tests verifican todo automáticamente, cada vez. Escribe los tests ahora y nunca tendrás este problema de nuevo."
+      },
+      "end-poor": {
+        "narrative": "Arreglas el problema inmediato pero no agregas tests. La próxima vez que alguien cambie la función de formato, lo mismo probablemente pasará de nuevo -- quizás en una página diferente que olvidaste revisar. Sin tests, solo estás jugando a aplastar topos con los bugs.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Arreglar el bug sin agregar tests significa que seguirás teniendo el mismo tipo de problema. Los 15 minutos que toma escribir tests para esta función evitarían horas de depuración en el futuro."
+      },
+      "end-good": {
+        "narrative": "Los 8 tests pasan. Despliegas con confianza, sabiendo que cada formato -- dólares, euros, casos límite -- ha sido verificado. Si alguien modifica esta función en el futuro, los tests detectarán cualquier problema inmediatamente.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Este es el enfoque correcto! Escribir tests antes de modificar código compartido se llama 'test-first' y es increíblemente efectivo. Los tests detectaron 2 bugs en 2 segundos que habrían tomado horas en descubrir manualmente."
+      },
+      "end-great": {
+        "narrative": "Tests + una verificación manual rápida es el estándar de oro. Los tests verifican la lógica, y tu verificación manual detecta problemas visuales que los tests podrían pasar por alto (como que el formato se vea raro en la página). Despliegas con confianza.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Lo mejor de ambos mundos! Los tests automatizados detectaron los bugs de lógica, y tu verificación manual confirmó la presentación visual. Esta combinación es lo que los equipos profesionales usan para cambios críticos."
+      }
+    },
+    "glossaryTerms": ["regression", "test-first", "codebase-decay"]
+  }
+}

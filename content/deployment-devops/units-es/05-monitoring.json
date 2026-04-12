@@ -1,0 +1,8 @@
+{
+  "slug": "monitoring",
+  "title": "Monitoreo y Reversiones",
+  "description": "Vigilando tu app en producción y recuperándote cuando las cosas salen mal",
+  "order": 5,
+  "courseSlug": "deployment-devops",
+  "tier": "advanced"
+}

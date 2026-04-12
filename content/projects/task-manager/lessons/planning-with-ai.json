@@ -1,0 +1,103 @@
+{
+  "slug": "planning-with-ai",
+  "title": "Planning with AI",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "You're about to use AI to help plan your task manager. The decisions you make here will shape the entire project. Choose wisely.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "AI Is Your Junior Developer",
+      "body": "Think of AI as a very fast, very eager junior developer. It will do exactly what you ask — which means if you ask poorly, you get poor results. Your job is to be the **senior developer**: set the direction, define the constraints, and review the output critically."
+    },
+    {
+      "type": "analogy",
+      "title": "The GPS Analogy",
+      "body": "AI is like a GPS: it can find the route, but YOU need to know the destination. If you type in the wrong address, the GPS will confidently drive you to the wrong place. Same with AI — it will confidently build the wrong thing if your prompt is wrong."
+    },
+    {
+      "type": "code_example",
+      "title": "Structuring an AI Planning Session",
+      "language": "text",
+      "code": "Step 1: Define the goal\n  \"I'm building a task manager for personal use\"\n\nStep 2: List the features (from your user stories)\n  \"Core features: create, complete, delete, due dates\"\n\nStep 3: Set constraints\n  \"Tech: Next.js + Supabase. Mobile-first. Ship in 2 weeks.\"\n\nStep 4: Ask for a plan, not code\n  \"Give me a project plan with milestones, not code yet\"",
+      "annotation": "Notice: you're asking for a PLAN first, not jumping straight to code. This is what separates thoughtful builders from chaotic ones."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use AI for planning BEFORE coding. Ask it to poke holes in your plan, suggest what you might be missing, and identify risks. But always review its suggestions critically — you're the architect, it's the assistant."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You open your AI assistant to plan the task manager project. You have your feature list and user stories ready. How do you begin the planning session?",
+        "choices": [
+          { "id": "jump-to-code", "text": "\"Generate a Next.js task manager app with Supabase\"", "nextNode": "code-first", "score": 0 },
+          { "id": "plan-first", "text": "\"I'm building a task manager. Here are my features: [list]. Help me create a project plan with milestones.\"", "nextNode": "plan-first", "score": 4 },
+          { "id": "ask-ai-to-decide", "text": "\"What should I build? Give me a project idea\"", "nextNode": "ai-decides", "score": 1 }
+        ]
+      },
+      "code-first": {
+        "narrative": "The AI generates 500 lines of code. It works, sort of — but the data model doesn't match your feature list, there's no auth, and the UI is generic. You've skipped planning and now you're debugging someone else's architecture decisions. What do you do?",
+        "choices": [
+          { "id": "scrap-restart", "text": "Scrap it. Go back and plan properly, THEN code.", "nextNode": "good-recovery", "score": 3 },
+          { "id": "patch-it", "text": "Try to fix the generated code piece by piece", "nextNode": "patch-end", "score": 1 }
+        ]
+      },
+      "plan-first": {
+        "narrative": "The AI suggests a 4-milestone plan: 1) Setup + data model, 2) Core CRUD UI, 3) Filtering + sorting, 4) Polish + deploy. It also flags a question: 'Will users need accounts, or is this local-only?' How do you handle this?",
+        "choices": [
+          { "id": "answer-and-continue", "text": "\"Users need accounts — we'll use Supabase Auth. Add a milestone 0 for auth setup.\" Then ask the AI to identify other risks.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "skip-auth", "text": "\"Skip auth for now, we'll add it later\"", "nextNode": "skip-auth-end", "score": 2 }
+        ]
+      },
+      "ai-decides": {
+        "narrative": "The AI suggests a recipe app, a habit tracker, and a budget tool. None of these are what you wanted. You've wasted time because the AI didn't know you already had a plan.",
+        "choices": [
+          { "id": "redirect", "text": "\"Actually, I already know what I'm building. Let me share my feature list...\"", "nextNode": "good-recovery", "score": 2 },
+          { "id": "go-with-it", "text": "Pick the habit tracker because it sounds fun", "nextNode": "distracted-end", "score": 0 }
+        ]
+      },
+      "good-recovery": {
+        "narrative": "You share your feature list and user stories. The AI creates a solid project plan. You're back on track, though you lost some time.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "You recovered by bringing your own plan to the AI. Remember: come to the AI with a clear goal and constraints. Let it help you plan, don't let it decide for you.",
+        "choices": []
+      },
+      "excellent-end": {
+        "narrative": "The AI produces a detailed milestone plan with risk flags. You review it, adjust the timeline, and add notes about which parts you'll prompt the AI for. You now have a clear roadmap before writing any code.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Perfect approach! You brought your own vision, used AI for planning (not just coding), addressed architectural questions early, and asked for risk analysis. This is how senior developers work.",
+        "choices": []
+      },
+      "skip-auth-end": {
+        "narrative": "You proceed without auth. Three milestones later, you realize every feature assumes a logged-in user. You now have to retrofit auth into the entire codebase — a much bigger job than adding it at the start.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Auth is foundational — it touches everything (data ownership, API security, UI state). When the AI flags a decision like this, address it immediately rather than deferring it.",
+        "choices": []
+      },
+      "patch-end": {
+        "narrative": "After hours of patching, the code sort of works but is a Frankenstein of your changes and the AI's original. The architecture is inconsistent and hard to extend.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Patching generated code without understanding its architecture leads to a fragile mess. It's almost always faster to plan properly and then generate, rather than generate and then fix.",
+        "choices": []
+      },
+      "distracted-end": {
+        "narrative": "You spend two days on a habit tracker before realizing you wanted to build a task manager. The habit tracker code is useless for your real project.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Don't let AI decide what YOU should build. Come with your own vision. AI is a tool, not a leader.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["prompt-engineering", "architecture", "mvp"]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-deployment",
+  "title": "¿Qué es el Despliegue?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Has construido tu app y funciona genial en tu laptop. Pero, ¿cómo llega de tu máquina a internet real donde cualquiera puede usarla? Ese proceso se llama despliegue. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Despliegue = Día de Mudanza",
+      "body": "Imagina que has estado cocinando comidas increíbles en tu cocina casera. El despliegue es como abrir un restaurante -- estás tomando lo que funciona en casa y configurándolo para que el público también pueda disfrutarlo. Necesitas un local (servidor), una forma para que la gente te encuentre (nombre de dominio), y todo tiene que funcionar incluso cuando 100 clientes aparecen a la vez."
+    },
+    {
+      "type": "text",
+      "title": "Lo Que Realmente Significa el Despliegue",
+      "body": "El despliegue es el proceso de tomar tu código de tu computadora y ponerlo en un servidor conectado a internet. Una vez desplegado, cualquiera con la URL puede visitar tu app.\n\nLa idea básica es simple:\n\n1. Escribes código en tu computadora\n2. Envías ese código a un servidor\n3. El servidor ejecuta tu código 24/7\n4. La gente visita tu URL y ve tu app"
+    },
+    {
+      "type": "text",
+      "title": "Por Qué No Es Solo Copiar y Pegar",
+      "body": "No puedes simplemente copiar la carpeta de tu proyecto a un servidor y listo. Tu código necesita ser **compilado** (optimizado para velocidad), **configurado** (conectado a bases de datos y servicios), y **servido** (preparado para manejar tráfico web). Las herramientas modernas automatizan la mayoría de esto, pero entender qué está pasando ayuda cuando las cosas salen mal."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El despliegue es el proceso de poner tu app en un servidor para que cualquiera en internet pueda usarla. Involucra compilar, configurar y servir tu código."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El despliegue significa poner tu app en un servidor para que la gente pueda acceder a ella a través de internet.",
+        "isGoodPractice": true,
+        "explanation": "¡Eso es exactamente lo que es el despliegue! Tomas código de tu computadora local y lo pones en un servidor que siempre está conectado a internet, para que cualquiera con la URL pueda usar tu app."
+      },
+      {
+        "id": "card-2",
+        "content": "Necesitas copiar manualmente cada archivo a un servidor usando memorias USB para desplegar.",
+        "isGoodPractice": false,
+        "explanation": "Aunque así funcionaban las cosas hace décadas, el despliegue moderno usa Git y herramientas automatizadas. Envías tu código, y la plataforma se encarga del resto -- ¡no se necesitan memorias USB!"
+      },
+      {
+        "id": "card-3",
+        "content": "Una vez desplegada, tu app se ejecuta en la computadora de alguien más (un servidor) en lugar de la tuya.",
+        "isGoodPractice": true,
+        "explanation": "Exactamente correcto. Cuando despliegas, tu código se ejecuta en un servidor en un centro de datos en algún lugar. Ese servidor siempre está encendido, siempre conectado, y puede manejar muchos visitantes a la vez -- a diferencia de tu laptop."
+      },
+      {
+        "id": "card-4",
+        "content": "Solo necesitas desplegar una vez y tu app se actualizará automáticamente cada vez que cambies tu código.",
+        "isGoodPractice": false,
+        "explanation": "Cambiar el código en tu laptop no actualiza automáticamente el servidor. Necesitas desplegar de nuevo cada vez que quieras que los cambios estén en vivo. Sin embargo, los pipelines de CI/CD pueden automatizar este proceso (aprenderemos sobre esos más adelante)."
+      },
+      {
+        "id": "card-5",
+        "content": "Tu app puede funcionar perfectamente en tu computadora pero fallar completamente cuando se despliega.",
+        "isGoodPractice": true,
+        "explanation": "¡Este es uno de los problemas más comunes en el despliegue! Las diferencias entre tu configuración local y el servidor -- variables de entorno faltantes, versiones de software diferentes, o archivos faltantes -- pueden causar que tu app falle aunque funcione perfectamente en local."
+      }
+    ],
+    "glossaryTerms": ["deployment", "server", "production"]
+  }
+}

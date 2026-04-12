@@ -1,0 +1,16 @@
+{
+  "slug": "naming-things",
+  "title": "Nombrando cosas",
+  "description": "Nombres de variables, nombres de funciones, nombres de archivos y convenciones",
+  "order": 2,
+  "courseSlug": "code-organization",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "variable-naming", "title": "Nombres de variables", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "function-naming", "title": "Nombres de funciones", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "file-naming", "title": "Nombres de archivos", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "naming-conventions", "title": "Convenciones de nombres", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "boolean-naming", "title": "Nombres de booleanos", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "avoiding-abbreviations", "title": "Evitando abreviaciones", "type": "incident_response", "order": 6, "difficulty": 2 }
+  ]
+}

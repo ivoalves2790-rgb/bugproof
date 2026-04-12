@@ -1,0 +1,66 @@
+{
+  "slug": "hosting-platforms",
+  "title": "Plataformas de Hosting",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Hay docenas de lugares donde puedes desplegar tu app. Algunos son geniales para principiantes, algunos están diseñados para grandes empresas. Aprendamos qué plataformas coinciden con qué necesidades. Desliza a la derecha si es una BUENA coincidencia, o a la izquierda si es MALA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Hosting = Alquilar un Apartamento",
+      "body": "Tu app necesita un lugar donde vivir en internet. El **hosting** es como alquilar un apartamento para tu código. Algunas plataformas te dan un pequeño estudio gratuito (genial para proyectos pequeños). Otras te dan un edificio entero con portero y equipo de mantenimiento (para apps grandes con muchos usuarios)."
+    },
+    {
+      "type": "text",
+      "title": "Las Tres Grandes para Principiantes",
+      "body": "Si estás empezando, estas tres plataformas son las más populares:\n\n1. **Vercel** -- La mejor para apps frontend y proyectos Next.js. Despliega desde GitHub automáticamente.\n2. **Netlify** -- Genial para sitios estáticos y apps frontend. Despliegues simples de arrastrar y soltar.\n3. **Railway** -- La mejor cuando necesitas un servidor backend y base de datos. Como Vercel pero para apps full-stack."
+    },
+    {
+      "type": "text",
+      "title": "Niveles Gratuitos y Límites",
+      "body": "La mayoría de las plataformas de hosting tienen un **nivel gratuito** -- puedes desplegar proyectos pequeños sin pagar nada. Pero los niveles gratuitos tienen límites:\n\n- Ancho de banda limitado (cuántos datos puede enviar tu app)\n- Tiempo de cómputo limitado (tu app podría dormirse después de inactividad)\n- Almacenamiento limitado (solo bases de datos pequeñas)\n\nPara aprender y proyectos pequeños, los niveles gratuitos son más que suficientes."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Vercel, Netlify y Railway son las plataformas de hosting más amigables para principiantes. Todas ofrecen niveles gratuitos perfectos para aprender y proyectos pequeños."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Usar Vercel para un proyecto frontend de Next.js.",
+        "isGoodPractice": true,
+        "explanation": "Vercel fue literalmente construido por los creadores de Next.js. Es la combinación perfecta -- entiende las características de Next.js como el renderizado del lado del servidor y las rutas API de forma nativa."
+      },
+      {
+        "id": "card-2",
+        "content": "Usar Netlify para alojar una API backend de Python con base de datos.",
+        "isGoodPractice": false,
+        "explanation": "Netlify está diseñado principalmente para sitios estáticos y apps frontend. Para un backend en Python con base de datos, querrías algo como Railway, Render o Fly.io que soporte servidores backend y bases de datos."
+      },
+      {
+        "id": "card-3",
+        "content": "Empezar con AWS o Google Cloud cuando estás desplegando tu primer proyecto.",
+        "isGoodPractice": false,
+        "explanation": "AWS y Google Cloud son poderosos pero muy complejos. Están diseñados para equipos con experiencia en DevOps. Para tu primer proyecto, quédate con Vercel, Netlify o Railway -- ellos manejan la mayoría de la complejidad por ti."
+      },
+      {
+        "id": "card-4",
+        "content": "Usar Railway cuando tu app necesita tanto un servidor backend como una base de datos.",
+        "isGoodPractice": true,
+        "explanation": "Railway es genial para apps full-stack. Puede ejecutar tu servidor backend y provisionar una base de datos (como PostgreSQL) con solo unos clics. Es una de las formas más simples de desplegar una app completa."
+      },
+      {
+        "id": "card-5",
+        "content": "Desplegar un sitio web estático de portafolio en el nivel gratuito de Netlify.",
+        "isGoodPractice": true,
+        "explanation": "Esto es exactamente en lo que Netlify destaca. Un sitio de portafolio estático usa mínimo ancho de banda y cómputo, así que el nivel gratuito es perfecto. Incluso puedes arrastrar y soltar la carpeta de tu proyecto para desplegar."
+      }
+    ],
+    "glossaryTerms": ["hosting", "static-site", "free-tier"]
+  }
+}

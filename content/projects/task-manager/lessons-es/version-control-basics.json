@@ -1,0 +1,73 @@
+{
+  "slug": "version-control-basics",
+  "title": "Fundamentos de Control de Versiones",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "Git mantiene tu codigo seguro y te permite deshacer errores. Desliza a la derecha en buenos habitos de git, a la izquierda en practicas que te causaran dolor.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Git Es Tu Red de Seguridad",
+      "body": "Git rastrea cada cambio que haces en tu codigo. Si rompes algo, puedes volver a una version funcional. Si quieres probar una funcionalidad riesgosa, puedes crear una rama para que tu codigo principal se mantenga seguro. Sin git, un mal cambio puede destruir horas de trabajo sin forma de recuperarlo."
+    },
+    {
+      "type": "text",
+      "title": "El .gitignore No Es Negociable",
+      "body": "Un archivo `.gitignore` le dice a git que archivos NO rastrear. Nunca quieres hacer commit de `node_modules/` (miles de archivos de dependencias), archivos `.env` (claves API secretas), o `.next/` (salida de compilacion). create-next-app genera un `.gitignore` por ti, pero siempre verificalo antes de tu primer commit."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Inicializa git inmediatamente cuando empiezas un proyecto. Haz commit temprano, haz commit seguido, y escribe mensajes de commit claros. Un buen .gitignore te protege de compartir secretos accidentalmente o inflar tu repositorio."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "commit-often",
+        "content": "Haz commits pequenos y frecuentes despues de completar cada pieza significativa de trabajo",
+        "isGoodPractice": true,
+        "explanation": "Los commits pequenos son faciles de entender, faciles de revisar y faciles de revertir. Si algo se rompe, solo pierdes una pequena cantidad de trabajo."
+      },
+      {
+        "id": "commit-node-modules",
+        "content": "Haz commit de tu carpeta node_modules para que los companeros no tengan que ejecutar npm install",
+        "isGoodPractice": false,
+        "explanation": "node_modules contiene miles de archivos y puede ser de cientos de megabytes. Siempre debe estar en .gitignore. Los companeros ejecutan npm install para obtener su propia copia."
+      },
+      {
+        "id": "clear-messages",
+        "content": "Escribe mensajes de commit como 'Agregar formulario de creacion de tareas con campos de titulo y descripcion'",
+        "isGoodPractice": true,
+        "explanation": "Los mensajes descriptivos te dicen exactamente que cambio sin abrir el codigo. Cuando necesites encontrar cuando se agrego una funcionalidad, los mensajes claros son invaluables."
+      },
+      {
+        "id": "commit-env",
+        "content": "Haz commit de tu archivo .env para que tus claves API y URLs de base de datos esten respaldadas en el repositorio",
+        "isGoodPractice": false,
+        "explanation": "Nunca hagas commit de archivos .env. Contienen secretos como claves API y contrasenas de base de datos. Si tu repositorio alguna vez es publico, esos secretos quedan expuestos. Usa .env.example con valores de ejemplo en su lugar."
+      },
+      {
+        "id": "gitignore-first",
+        "content": "Verifica tu .gitignore antes de hacer tu primer commit para asegurarte de que los secretos y archivos de compilacion esten excluidos",
+        "isGoodPractice": true,
+        "explanation": "Es mucho mas dificil eliminar un archivo del historial de git despues de que se ha hecho commit. Verificar .gitignore primero previene commits accidentales de archivos sensibles."
+      },
+      {
+        "id": "vague-messages",
+        "content": "Escribe mensajes de commit como 'arreglar cosas' o 'actualizar' o 'asdfgh'",
+        "isGoodPractice": false,
+        "explanation": "Los mensajes vagos son inutiles cuando intentas entender que cambio. Tres meses despues, 'arreglar cosas' no te dice nada. Toma 10 segundos para escribir un mensaje real."
+      },
+      {
+        "id": "env-example",
+        "content": "Crea un archivo .env.example con valores de ejemplo para que los nuevos desarrolladores sepan que variables de entorno necesitan",
+        "isGoodPractice": true,
+        "explanation": "Un archivo .env.example documenta que variables necesita el proyecto sin exponer valores reales. Los nuevos desarrolladores lo copian a .env y llenan sus propias claves."
+      }
+    ],
+    "glossaryTerms": ["git", "gitignore", "commit"]
+  }
+}

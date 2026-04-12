@@ -1,0 +1,69 @@
+{
+  "slug": "first-commit",
+  "title": "Tu primer commit",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Un commit es como un punto de guardado en un videojuego. Captura una instantánea de tu proyecto en un momento específico. Vamos a crear tu primer commit.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Commits = Puntos de guardado",
+      "body": "En un videojuego, guardas tu progreso para poder volver a ese punto exacto si algo sale mal. Un **commit** en Git funciona de la misma manera -- es una instantánea de todo tu proyecto en un momento en el tiempo. Siempre puedes volver a cualquier punto de guardado."
+    },
+    {
+      "type": "text",
+      "title": "El flujo de trabajo en 3 pasos",
+      "body": "Hacer un commit es un proceso de tres pasos:\n\n1. **Preparar (stage)** -- Elige qué archivos quieres incluir en este punto de guardado (`git add`)\n2. **Confirmar (commit)** -- Toma la instantánea con un mensaje corto describiendo qué cambió (`git commit`)\n3. **Subir (push)** -- Sube tu punto de guardado a GitHub para que esté respaldado en línea (`git push`)\n\nPor ahora, nos enfocaremos en los pasos 1 y 2."
+    },
+    {
+      "type": "code_example",
+      "title": "Los comandos que usarás",
+      "language": "bash",
+      "code": "git init                          # Start tracking this folder\ngit add .                         # Stage all files\ngit status                        # See what's staged\ngit commit -m \"Initial commit\"    # Save the snapshot",
+      "annotation": "No te preocupes por memorizar estos -- practicarás cada uno en el ejercicio."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un commit es un punto de guardado para tu proyecto -- prepara tus cambios con `git add`, luego guárdalos con `git commit -m \"tu mensaje\"`."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["index.html", "style.css"],
+    "steps": [
+      {
+        "instruction": "Primero, inicializa un nuevo repositorio Git en esta carpeta. Esto le dice a Git que comience a rastrear los cambios aquí.",
+        "expectedCommand": "git init",
+        "acceptAlternatives": [],
+        "output": "Initialized empty Git repository in ~/my-project/.git/",
+        "hint": "El comando es 'git' seguido de una palabra corta que significa 'inicializar' o 'comenzar'."
+      },
+      {
+        "instruction": "Ahora agrega ambos archivos al área de preparación. El área de preparación es como un carrito de compras -- eliges lo que quieres incluir antes de pagar.",
+        "expectedCommand": "git add .",
+        "acceptAlternatives": ["git add --all", "git add -A", "git add index.html style.css"],
+        "output": "",
+        "hint": "Usa 'git add' seguido de un punto (.) para agregar todo en la carpeta actual."
+      },
+      {
+        "instruction": "Verifica el estado para ver qué está preparado y listo para el commit.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\n\nNo commits yet\n\nChanges to be committed:\n  (use \"git rm --cached <file>...\" to unstage)\n\n\tnew file:   index.html\n\tnew file:   style.css",
+        "hint": "El comando es 'git status' -- muestra el estado actual de tu directorio de trabajo."
+      },
+      {
+        "instruction": "Todo se ve bien. Ahora guarda esta instantánea con un mensaje descriptivo.",
+        "expectedCommand": "git commit -m \"Initial commit\"",
+        "acceptAlternatives": ["git commit -m \"initial commit\"", "git commit -m \"first commit\"", "git commit -m \"Initial Commit\""],
+        "output": "[main (root-commit) a1b2c3d] Initial commit\n 2 files changed, 0 insertions(+), 0 deletions(-)\n create mode 100644 index.html\n create mode 100644 style.css",
+        "hint": "Usa 'git commit -m' seguido de tu mensaje entre comillas. Prueba algo como \"Initial commit\"."
+      }
+    ],
+    "completionMessage": "¡Acabas de hacer tu primer commit! Este punto de guardado ahora está permanentemente registrado en tu historial de Git. Siempre puedes volver a este estado exacto de tu proyecto.",
+    "glossaryTerms": ["git-init", "staging-area", "commit"]
+  }
+}

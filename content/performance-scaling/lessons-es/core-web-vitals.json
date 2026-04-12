@@ -1,0 +1,68 @@
+{
+  "slug": "core-web-vitals",
+  "title": "Core Web Vitals explicados",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Google usa tres métricas llamadas Core Web Vitals para medir qué tan rápido se siente tu sitio. Afectan el posicionamiento en buscadores y la experiencia del usuario. Veamos si puedes distinguir los hechos de la ficción. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Web Vitals = Chequeo médico",
+      "body": "Cuando vas al doctor, te revisan la presión arterial, el ritmo cardíaco y la temperatura -- tres números clave que dicen mucho sobre tu salud general. Los **Core Web Vitals** son la misma idea para sitios web: tres mediciones específicas que te dicen qué tan saludable es el rendimiento de tu sitio. Google eligió estas tres porque capturan lo que realmente les importa a los usuarios."
+    },
+    {
+      "type": "text",
+      "title": "Las tres métricas vitales",
+      "body": "1. **LCP (Largest Contentful Paint)** -- Cuánto tiempo hasta que el elemento visible más grande se carga. Piensa en: imagen principal o encabezado. Objetivo: menos de 2.5 segundos.\n\n2. **INP (Interaction to Next Paint)** -- Cuánto tiempo hasta que la página responde después de que un usuario hace clic o escribe. Objetivo: menos de 200 milisegundos.\n\n3. **CLS (Cumulative Layout Shift)** -- Cuánto se mueve el contenido de la página mientras carga. Objetivo: menos de 0.1."
+    },
+    {
+      "type": "code_example",
+      "title": "Un problema de CLS en acción",
+      "language": "html",
+      "code": "<!-- BAD: Image has no dimensions, causes layout shift -->\n<img src=\"/hero.jpg\">\n\n<!-- GOOD: Browser reserves space before image loads -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
+      "annotation": "Sin width y height, el navegador no sabe cuánto espacio necesita la imagen. Cuando finalmente carga, todo lo de abajo salta hacia abajo -- eso es un cambio de layout."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los Core Web Vitals miden tres cosas: qué tan rápido aparece el contenido principal (LCP), qué tan rápido responde la página a la interacción (INP) y cuánto salta el layout (CLS). Afectan tanto la experiencia del usuario como el posicionamiento en búsquedas de Google."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "LCP mide cuánto tiempo hasta que el primer píxel aparece en pantalla.",
+        "isGoodPractice": false,
+        "explanation": "LCP mide el Largest Contentful Paint -- cuánto tiempo hasta que el elemento visible más grande (como una imagen principal o encabezado) termina de cargarse. El primer píxel se mide con una métrica diferente llamada FCP (First Contentful Paint). LCP se trata del contenido principal, no del primer pintado."
+      },
+      {
+        "id": "card-2",
+        "content": "Agregar atributos width y height a las imágenes puede mejorar tu puntuación de CLS.",
+        "isGoodPractice": true,
+        "explanation": "Cuando estableces width y height en una etiqueta de imagen, el navegador puede reservar la cantidad correcta de espacio antes de que la imagen se descargue. Sin ellos, el contenido de la página se desplaza cuando la imagen aparece repentinamente y empuja todo hacia abajo. Este salto es exactamente lo que mide CLS."
+      },
+      {
+        "id": "card-3",
+        "content": "Los Core Web Vitals solo importan para SEO -- los usuarios regulares no notan la diferencia.",
+        "isGoodPractice": false,
+        "explanation": "Los Core Web Vitals fueron elegidos específicamente porque miden cosas que los usuarios SÍ notan. Los usuarios notan cuando una página tarda 5 segundos en mostrar contenido (LCP), cuando los botones no responden a los clics (INP) y cuando el texto salta mientras intentan leer (CLS). Google los mide porque a los usuarios les importan."
+      },
+      {
+        "id": "card-4",
+        "content": "Una respuesta lenta de API puede perjudicar tu puntuación de LCP si el contenido principal depende de esos datos.",
+        "isGoodPractice": true,
+        "explanation": "Si tu sección principal muestra datos de una llamada API, el LCP no se medirá hasta que esos datos lleguen y se rendericen. Una API lenta significa LCP lento. Por eso el renderizado del lado del servidor y la generación estática son populares -- pueden mostrar contenido sin esperar llamadas API del lado del cliente."
+      },
+      {
+        "id": "card-5",
+        "content": "Necesitas puntuar perfectamente en las tres Core Web Vitals para posicionar bien en Google.",
+        "isGoodPractice": false,
+        "explanation": "No necesitas perfección. Google usa Web Vitals como una de muchas señales de posicionamiento, y usan umbrales (bueno, necesita mejora, pobre) en lugar de puntuaciones exactas. Cumplir el umbral de 'bueno' para las tres ayuda, pero la relevancia del contenido sigue siendo el factor de posicionamiento más importante."
+      }
+    ],
+    "glossaryTerms": ["lcp", "inp", "cls", "core-web-vitals"]
+  }
+}

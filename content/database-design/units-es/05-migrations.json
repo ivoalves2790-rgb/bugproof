@@ -1,0 +1,16 @@
+{
+  "slug": "migrations",
+  "title": "Migraciones y Evolución",
+  "description": "Aprende cómo cambiar de forma segura la estructura de tu base de datos con el tiempo sin perder datos ni romper tu aplicación",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-migrations", "title": "Por Qué Existen las Migraciones", "type": "swipe_to_judge", "order": 1, "difficulty": 2 },
+    { "slug": "writing-a-migration", "title": "Escribiendo Tu Primera Migración", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "alter-table", "title": "ALTER TABLE: Cambiando la Estructura", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "data-migrations", "title": "Migraciones de Datos", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "rollbacks", "title": "Revirtiendo Errores", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "migration-best-practices", "title": "Mejores Prácticas de Migraciones", "type": "swipe_to_judge", "order": 6, "difficulty": 3 }
+  ]
+}

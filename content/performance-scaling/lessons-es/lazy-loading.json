@@ -1,0 +1,68 @@
+{
+  "slug": "lazy-loading",
+  "title": "Carga diferida",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "¿Por qué cargar algo que el usuario aún no puede ver? La carga diferida significa solo cargar recursos cuando realmente se necesitan. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Carga diferida = Streaming de Netflix",
+      "body": "Netflix no descarga una película entera antes de que presiones play. Carga lo suficiente para empezar, luego sigue cargando más mientras miras. La **carga diferida** es la misma idea aplicada a páginas web -- no cargues imágenes, componentes o datos hasta que el usuario realmente los necesite."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué puede cargarse de forma diferida?",
+      "body": "Casi cualquier cosa en una página puede cargarse de forma diferida:\n\n1. **Imágenes** -- Solo cargar imágenes cuando entran en vista (usa `loading=\"lazy\"`)\n2. **Componentes** -- Solo cargar componentes pesados cuando el usuario navega a ellos (React.lazy, importaciones dinámicas)\n3. **Datos** -- Solo obtener datos cuando el usuario abre una sección o pestaña\n4. **Scripts de terceros** -- Cargar analytics, widgets de chat, etc. después del contenido principal"
+    },
+    {
+      "type": "code_example",
+      "title": "Carga diferida de imágenes",
+      "language": "html",
+      "code": "<!-- Loads immediately (good for hero/above-fold images) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Lazy loads when user scrolls near it -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
+      "annotation": "El atributo nativo loading='lazy' del navegador retrasa la carga hasta que la imagen está cerca del viewport. ¡No se necesita JavaScript!"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La carga diferida retrasa los recursos hasta que se necesitan, reduciendo la carga inicial de la página. Usa loading='lazy' en imágenes debajo del pliegue, importaciones dinámicas para componentes pesados y difiere scripts de terceros."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Deberías cargar de forma diferida la imagen principal en la parte superior de la página.",
+        "isGoodPractice": false,
+        "explanation": "La imagen principal es lo primero que ven los usuarios -- está 'encima del pliegue'. Cargarla de forma diferida haría que se cargue MÁS TARDE, perjudicando el rendimiento percibido. Solo carga de forma diferida las imágenes que están debajo del viewport en la carga inicial. Dale alta prioridad a las imágenes principales con fetchpriority='high'."
+      },
+      {
+        "id": "card-2",
+        "content": "El atributo nativo loading='lazy' del navegador funciona sin ninguna biblioteca de JavaScript.",
+        "isGoodPractice": true,
+        "explanation": "Los navegadores modernos soportan nativamente loading='lazy' en elementos img e iframe. El navegador automáticamente retrasa la carga hasta que el elemento está cerca del viewport. No se necesita código de Intersection Observer ni biblioteca de terceros."
+      },
+      {
+        "id": "card-3",
+        "content": "Cargar un componente de forma diferida significa que el código para él no se descarga hasta que se necesita.",
+        "isGoodPractice": true,
+        "explanation": "Cuando usas React.lazy() o import() dinámico, el empaquetador separa ese componente en un archivo JavaScript aparte. Ese archivo solo se descarga cuando el componente se renderiza por primera vez. Esto se llama división de código y reduce el bundle inicial que los usuarios deben descargar."
+      },
+      {
+        "id": "card-4",
+        "content": "La carga diferida hace que cada carga de página sea más rápida sin desventajas.",
+        "isGoodPractice": false,
+        "explanation": "La carga diferida retrasa cuándo se cargan las cosas, lo que significa que si un usuario hace scroll rápido, podría ver un destello de espacio vacío antes de que aparezca el contenido. También agrega pequeños retrasos de carga al navegar a secciones cargadas de forma diferida. La clave es cargar de forma diferida el contenido no crítico, no todo."
+      },
+      {
+        "id": "card-5",
+        "content": "Una página de producto con 100 imágenes debería cargar de forma diferida al menos las que están debajo del pliegue.",
+        "isGoodPractice": true,
+        "explanation": "Cargar 100 imágenes de entrada sería extremadamente lento. Cargar de forma diferida las imágenes que aún no son visibles significa que el navegador solo descarga las primeras imágenes visibles inmediatamente. A medida que el usuario hace scroll, más imágenes se cargan justo a tiempo. Esto puede reducir el tiempo de carga inicial en un 80% o más."
+      }
+    ],
+    "glossaryTerms": ["lazy-loading", "above-the-fold", "intersection-observer", "dynamic-import"]
+  }
+}

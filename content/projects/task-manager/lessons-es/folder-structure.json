@@ -1,0 +1,73 @@
+{
+  "slug": "folder-structure",
+  "title": "Organizando los Archivos de Tu Proyecto",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "Una estructura de carpetas limpia hace tu proyecto navegable y mantenible. Desliza a la derecha en practicas solidas de organizacion, a la izquierda en habitos desordenados que te perseguiran despues.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "La Estructura del App Router",
+      "body": "Next.js usa el directorio `app/` para definir tus rutas. Cada carpeta dentro de `app/` se convierte en una ruta URL. Un archivo `page.tsx` dentro de una carpeta la convierte en una ruta. Un archivo `layout.tsx` envuelve las paginas en interfaz compartida. Esta convencion significa que tu estructura de carpetas ES tu enrutamiento — sin configuracion necesaria."
+    },
+    {
+      "type": "text",
+      "title": "Donde Va Todo lo Demas?",
+      "body": "Mas alla de `app/`, querras una carpeta `components/` para interfaz reutilizable, una carpeta `lib/` para utilidades y helpers de base de datos, y una carpeta `types/` para definiciones de tipos de TypeScript. Algunos equipos ponen los componentes junto a las paginas que los usan, otros centralizan todo. Ambos enfoques funcionan — lo clave es elegir una convencion y mantenerla."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tu estructura de carpetas deberia hacer obvio donde encontrar las cosas. Si otro desarrollador abre tu proyecto, deberia poder encontrar cualquier archivo en 10 segundos. Nombra las carpetas claramente, agrupa archivos relacionados y nunca pongas todo en la raiz."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "components-folder",
+        "content": "Crear una carpeta /components con subcarpetas como /components/ui para botones e inputs, y /components/tasks para componentes especificos de tareas",
+        "isGoodPractice": true,
+        "explanation": "Agrupar componentes por categoria los hace faciles de encontrar y reutilizar. Un desarrollador buscando el componente TaskCard sabe que debe revisar /components/tasks/."
+      },
+      {
+        "id": "everything-in-root",
+        "content": "Poner todos tus archivos de componentes directamente en la raiz del proyecto junto a package.json y next.config.js",
+        "isGoodPractice": false,
+        "explanation": "Tirar archivos en la raiz crea un desorden. Despues de 20 componentes, tendras 30+ archivos en el nivel superior y ninguna forma de encontrar nada rapidamente."
+      },
+      {
+        "id": "page-per-route",
+        "content": "Crear app/tasks/page.tsx para la lista de tareas y app/tasks/[id]/page.tsx para paginas de tareas individuales",
+        "isGoodPractice": true,
+        "explanation": "Esto sigue la convencion del App Router de Next.js exactamente. La estructura de carpetas refleja tus rutas URL: /tasks y /tasks/123."
+      },
+      {
+        "id": "single-css-file",
+        "content": "Poner todos tus estilos en un archivo masivo styles.css con 2,000 lineas de CSS",
+        "isGoodPractice": false,
+        "explanation": "Un archivo CSS gigante se vuelve imposible de mantener. Con Tailwind CSS, los estilos viven directamente en los componentes, asi que rara vez necesitas archivos CSS separados."
+      },
+      {
+        "id": "lib-folder",
+        "content": "Crear una carpeta /lib para helpers de base de datos, funciones utilitarias y codigo del cliente API",
+        "isGoodPractice": true,
+        "explanation": "Separar la logica de negocio de los componentes de interfaz mantiene ambos limpios. Cuando necesites cambiar como se obtienen las tareas, vas a /lib, no a buscar entre archivos de componentes."
+      },
+      {
+        "id": "random-names",
+        "content": "Nombrar tus archivos como helpers2.ts, stuff.tsx y temp-final-v3.tsx",
+        "isGoodPractice": false,
+        "explanation": "Los nombres de archivos deben describir lo que contienen. 'helpers2' y 'stuff' no te dicen nada. Usa nombres descriptivos como task-actions.ts o create-task-form.tsx."
+      },
+      {
+        "id": "layout-file",
+        "content": "Usar app/layout.tsx para interfaz compartida como la barra de navegacion y el footer que aparece en cada pagina",
+        "isGoodPractice": true,
+        "explanation": "El layout raiz es el lugar perfecto para interfaz persistente. Next.js lo renderiza una vez y lo mantiene a traves de las navegaciones de pagina, lo que es codigo mas limpio y mejor rendimiento."
+      }
+    ],
+    "glossaryTerms": ["app-router", "component", "routing"]
+  }
+}

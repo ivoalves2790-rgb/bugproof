@@ -75,17 +75,18 @@ export function ExerciseRenderer({ lesson, onComplete }: ExerciseRendererProps) 
       );
 
     case "terminal_sim":
-      // Terminal sim exercise is handled elsewhere - placeholder for now
+    case "prompt_challenge":
+    case "code_review":
+    case "architecture_decision":
       return (
         <div className="rounded-lg border border-border bg-surface p-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Terminal Simulator exercises are not yet supported in this renderer.
+            This exercise type is coming soon.
           </p>
         </div>
       );
 
     default: {
-      const _exhaustive: never = lesson.type;
       return (
         <div className="rounded-lg border border-terminal-red/30 bg-terminal-red/5 p-4">
           <p className="text-sm text-terminal-red">

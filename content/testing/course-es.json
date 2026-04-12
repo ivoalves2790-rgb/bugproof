@@ -1,0 +1,17 @@
+{
+  "slug": "testing",
+  "title": "Testing",
+  "description": "Por que testear, que testear y conceptos basicos de pruebas unitarias, de integracion y end-to-end",
+  "longDescription": "El testing es tu red de seguridad. Cada vez que cambias codigo, las pruebas verifican automaticamente que nada se haya roto. Este curso te ensena por que el testing importa (incluso para proyectos pequenos), que tipos de pruebas existen, que probar y que omitir, y como escribir pruebas que realmente detecten errores en lugar de solo marcar casillas.",
+  "icon": "check-circle",
+  "color": "#A29BFE",
+  "prerequisites": [],
+  "units": [
+    { "slug": "why-test", "title": "Why Test?", "order": 1 },
+    { "slug": "unit-tests", "title": "Unit Tests", "order": 2 },
+    { "slug": "integration-tests", "title": "Integration Tests", "order": 3 },
+    { "slug": "what-to-test", "title": "What to Test", "order": 4 },
+    { "slug": "testing-in-practice", "title": "Testing in Practice", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

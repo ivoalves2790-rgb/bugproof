@@ -1,0 +1,9 @@
+{
+  "slug": "separation-of-concerns",
+  "title": "Separación de responsabilidades",
+  "description": "Manteniendo la lógica, los datos y la presentación separados",
+  "order": 4,
+  "courseSlug": "code-organization",
+  "tier": "intermediate",
+  "lessons": []
+}

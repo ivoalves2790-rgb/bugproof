@@ -27,24 +27,50 @@ const courseLabels: Record<string, string> = {
 export default function AssessmentResultsPage() {
   const router = useRouter();
   const [results, setResults] = useState<ReturnType<typeof scoreAssessment> | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("assessmentAnswers");
-    if (!stored) {
-      router.push("/assessment");
-      return;
+    try {
+      // Read answers from URL hash first, then sessionStorage
+      let raw: string | null = null;
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        try {
+          raw = atob(hash);
+        } catch {
+          // invalid base64, fall through
+        }
+      }
+      if (!raw) {
+        raw = sessionStorage.getItem("assessmentAnswers");
+      }
+      if (!raw) {
+        router.push("/assessment");
+        return;
+      }
+
+      const answers: AssessmentAnswer[] = JSON.parse(raw);
+
+      // Build question -> course slug map
+      const courseSlugMap: Record<string, CourseSlug> = {};
+      for (const q of assessmentData.questions) {
+        courseSlugMap[q.id] = q.courseSlug as CourseSlug;
+      }
+
+      setResults(scoreAssessment(answers, courseSlugMap));
+    } catch (e) {
+      setError(e instanceof Error ? e.message + "\n" + e.stack : String(e));
     }
-
-    const answers: AssessmentAnswer[] = JSON.parse(stored);
-
-    // Build question -> course slug map
-    const courseSlugMap: Record<string, CourseSlug> = {};
-    for (const q of assessmentData.questions) {
-      courseSlugMap[q.id] = q.courseSlug as CourseSlug;
-    }
-
-    setResults(scoreAssessment(answers, courseSlugMap));
   }, [router]);
+
+  if (error) {
+    return (
+      <div className="mx-auto max-w-lg p-4">
+        <h2 className="text-lg font-bold text-terminal-red">Debug: Error loading results</h2>
+        <pre className="mt-2 rounded bg-surface-2 p-3 text-xs text-muted-foreground overflow-auto max-h-60 whitespace-pre-wrap">{error}</pre>
+      </div>
+    );
+  }
 
   if (!results) return null;
 

@@ -1,0 +1,66 @@
+{
+  "slug": "why-ai-generates-messy-code",
+  "title": "Por qué la IA genera código desordenado",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "Las herramientas de codificación con IA son increíbles para generar código funcional, pero tienen puntos ciegos cuando se trata de organización. Entender estos puntos ciegos te ayuda a saber qué arreglar después de que la IA escribe tu código. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "IA = Gran chef, mal administrador de cocina",
+      "body": "Imagina un chef que puede cocinar cualquier plato perfectamente pero deja la cocina hecha un desastre después. Cada sartén está sucia, los ingredientes están dispersos y nada se guardó en su lugar. Las **herramientas de codificación con IA** son como este chef -- producen código funcional pero no piensan en dónde encaja en tu proyecto, qué más ya existe o cómo debería organizarse el código base."
+    },
+    {
+      "type": "text",
+      "title": "Por qué la IA comete errores de organización",
+      "body": "Las herramientas de IA generan código sin contexto completo:\n\n1. **Sin conocimiento del proyecto** -- La IA no conoce tu estructura de archivos ni patrones existentes\n2. **Un prompt a la vez** -- Cada respuesta es independiente; no recuerda haber decidido poner utilidades en `lib/` antes\n3. **Duplica código existente** -- Escribe una función auxiliar que ya tienes porque no puede ver todo tu código base\n4. **Todo inline** -- La IA tiende a poner toda la lógica en un archivo en lugar de dividir en módulos apropiados"
+    },
+    {
+      "type": "text",
+      "title": "Qué necesitas hacer después de que la IA genera código",
+      "body": "Después de que la IA escribe código para ti, siempre haz una pasada de limpieza rápida:\n\n- **Busca duplicados** -- ¿Esta función ya existe en algún lugar?\n- **Mueve al archivo correcto** -- ¿Esta lógica debería vivir en un archivo de utilidades o módulo compartido?\n- **Renombra variables poco claras** -- La IA a menudo usa nombres genéricos como `data` o `result`\n- **Divide archivos grandes** -- Si un archivo creció más de 200 líneas, probablemente hace demasiadas cosas"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La IA genera código funcional pero no puede organizar tu proyecto. Duplica código existente, usa nombres genéricos y pone todo inline. Siempre haz una pasada de limpieza: busca duplicados, mueve código a los archivos correctos y renombra variables poco claras."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Las herramientas de IA entienden la estructura completa de tu proyecto y ponen el código nuevo en el archivo correcto automáticamente.",
+        "isGoodPractice": false,
+        "explanation": "La mayoría de las herramientas de IA trabajan con contexto limitado -- usualmente solo el archivo actual o unos pocos archivos que has compartido. No ven tu estructura completa de carpetas, archivos de utilidades existentes ni convenciones del equipo. Por eso la IA a menudo crea nuevas funciones de utilidad en lugar de reutilizar las que ya tienes."
+      },
+      {
+        "id": "card-2",
+        "content": "Después de obtener código de la IA, deberías verificar si duplica lógica que ya existe en tu proyecto.",
+        "isGoodPractice": true,
+        "explanation": "La IA no sabe qué hay en tus otros archivos. Si ya tienes una función formatDate() en utils.js, la IA felizmente escribirá una nueva en lugar de importar la tuya. Siempre verifica: ¿esta funcionalidad ya existe en algún lugar del proyecto?"
+      },
+      {
+        "id": "card-3",
+        "content": "El código generado por IA que funciona correctamente no necesita ninguna refactorización.",
+        "isGoodPractice": false,
+        "explanation": "Que el código funcione es el paso uno. Pero el código generado por IA a menudo tiene problemas de organización: todo metido en un archivo, nombres de variables genéricos, lógica duplicada y sin consideración de las convenciones de tu proyecto. Una pasada de limpieza de 5 minutos después de cada generación de IA previene que la deuda técnica se acumule."
+      },
+      {
+        "id": "card-4",
+        "content": "Pedirle a la IA que renombre variables en tu código es un buen uso de las herramientas de IA.",
+        "isGoodPractice": true,
+        "explanation": "¡La IA es realmente buena renombrando y refactorizando! Puedes pegar código con malos nombres y pedirle a la IA que sugiera mejores nombres basados en el contexto. La IA entiende qué hace el código y puede sugerir nombres descriptivos como userEmail en lugar de str1. Usa las fortalezas de la IA para arreglar las debilidades de la IA."
+      },
+      {
+        "id": "card-5",
+        "content": "Darle a la IA más contexto sobre la estructura de tu proyecto lleva a código mejor organizado.",
+        "isGoodPractice": true,
+        "explanation": "Cuando le dices a la IA sobre la estructura de tu proyecto (dónde van las utilidades, tus convenciones de nombres, qué bibliotecas usas), genera código que encaja mejor. Contexto como 'Mantenemos las llamadas API en src/api/ y usamos camelCase para funciones' ayuda a la IA a coincidir con tus patrones en lugar de inventar los suyos."
+      }
+    ],
+    "glossaryTerms": ["technical-debt", "refactoring", "code-duplication"]
+  }
+}

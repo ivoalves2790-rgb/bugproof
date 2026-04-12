@@ -1,0 +1,69 @@
+{
+  "slug": "the-deploy-process",
+  "title": "El Proceso de Despliegue",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Recorramos los pasos reales de desplegar un proyecto. Enviarás código a GitHub y lo conectarás a una plataforma de hosting -- el flujo de trabajo moderno estándar.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Desplegar = Enviar un Paquete",
+      "body": "Desplegar es como enviar un paquete. **Empacas** tu código (lo compilas), lo **etiquetas** (commit y push a GitHub), y lo **envías** (la plataforma de hosting lo recoge y lo pone en vivo). La mayoría de las plataformas modernas vigilan tu repositorio de GitHub y despliegan automáticamente cuando envías código nuevo."
+    },
+    {
+      "type": "text",
+      "title": "El Flujo de Trabajo Moderno de Despliegue",
+      "body": "Así es como la mayoría de los desarrolladores despliegan hoy:\n\n1. Escriben código localmente\n2. Hacen commit y push a GitHub\n3. La plataforma de hosting detecta el nuevo código\n4. Compila tu proyecto automáticamente\n5. Si la compilación tiene éxito, la nueva versión sale en vivo\n\nEsto se llama **despliegue basado en Git** y es el estándar para plataformas como Vercel, Netlify y Railway."
+    },
+    {
+      "type": "code_example",
+      "title": "Los Comandos Que Usarás",
+      "language": "bash",
+      "code": "git add .\ngit commit -m \"Ready for production\"\ngit push origin main",
+      "annotation": "Una vez que tu repositorio está conectado a una plataforma de hosting, hacer push a main a menudo es todo lo que necesitas para activar un despliegue."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El despliegue moderno está basado en Git: envía tu código a GitHub, y la plataforma de hosting automáticamente lo compila y despliega."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["src/App.js", "package.json", "README.md"],
+    "steps": [
+      {
+        "instruction": "First, check which files have changed since your last commit.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch main\nChanges not staged for commit:\n  modified:   src/App.js\n  modified:   package.json",
+        "hint": "Use the git command that shows the current state of your working directory."
+      },
+      {
+        "instruction": "Stage all your changes for commit.",
+        "expectedCommand": "git add .",
+        "acceptAlternatives": ["git add --all", "git add -A"],
+        "output": "",
+        "hint": "Use 'git add' with a dot to stage everything."
+      },
+      {
+        "instruction": "Commit your changes with a message describing what you did.",
+        "expectedCommand": "git commit -m \"Ready for production\"",
+        "acceptAlternatives": ["git commit -m \"ready for production\"", "git commit -m \"Deploy to production\"", "git commit -m \"Initial deploy\""],
+        "output": "[main 4f2a1b3] Ready for production\n 2 files changed, 15 insertions(+), 3 deletions(-)",
+        "hint": "Use 'git commit -m' followed by a message in quotes."
+      },
+      {
+        "instruction": "Push your code to GitHub. The hosting platform is watching this repo and will deploy automatically.",
+        "expectedCommand": "git push origin main",
+        "acceptAlternatives": ["git push"],
+        "output": "Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 412 bytes | 412.00 KiB/s, done.\nTo github.com:yourname/my-app.git\n   a1b2c3d..4f2a1b3  main -> main\n\n✓ Deploy triggered! Check your hosting dashboard for build status.",
+        "hint": "Push to the 'origin' remote on the 'main' branch."
+      }
+    ],
+    "completionMessage": "Your code is now on GitHub and the hosting platform has picked it up. In a minute or two, your app will be live on the internet with a real URL anyone can visit!",
+    "glossaryTerms": ["git-push", "deployment", "build"]
+  }
+}

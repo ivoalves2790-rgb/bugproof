@@ -1,0 +1,16 @@
+{
+  "slug": "reading-errors",
+  "title": "Leyendo mensajes de error",
+  "description": "Aprende a descifrar los mensajes de error en lugar de entrar en pánico cuando veas texto rojo en tu consola",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "what-is-an-error", "title": "¿Qué es un error?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "anatomy-of-error", "title": "Anatomía de un mensaje de error", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "reading-stack-traces", "title": "Leyendo trazas de pila", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "error-types-js", "title": "Tipos de errores en JavaScript", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "finding-line-numbers", "title": "Encontrando la línea correcta", "type": "bug_hunt", "order": 5, "difficulty": 1 },
+    { "slug": "first-error-investigation", "title": "Tu primera investigación de errores", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

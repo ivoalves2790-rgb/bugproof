@@ -1,0 +1,8 @@
+{
+  "slug": "integration-tests",
+  "title": "Tests de integración",
+  "description": "Testeando cómo múltiples partes de tu app trabajan juntas",
+  "order": 3,
+  "courseSlug": "testing",
+  "tier": "intermediate"
+}

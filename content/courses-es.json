@@ -1,0 +1,102 @@
+[
+  {
+    "slug": "git-version-control",
+    "title": "Git y Control de Versiones",
+    "description": "Commits, ramas, merge y como deshacer errores",
+    "icon": "git-branch",
+    "order": 1,
+    "unitCount": 5,
+    "lessonCount": 30,
+    "color": "#F05032"
+  },
+  {
+    "slug": "debugging-error-reading",
+    "title": "Depuracion y Lectura de Errores",
+    "description": "Stack traces, consola y depuracion sistematica",
+    "icon": "bug",
+    "order": 2,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#FF6B6B"
+  },
+  {
+    "slug": "security-fundamentals",
+    "title": "Fundamentos de Seguridad",
+    "description": "XSS, inyeccion SQL, auth, claves API, conceptos OWASP",
+    "icon": "shield",
+    "order": 3,
+    "unitCount": 6,
+    "lessonCount": 32,
+    "color": "#4ECDC4"
+  },
+  {
+    "slug": "system-architecture",
+    "title": "Arquitectura de Sistemas",
+    "description": "Frontend, backend, bases de datos, APIs y flujo de peticiones",
+    "icon": "server",
+    "order": 4,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#45B7D1"
+  },
+  {
+    "slug": "database-design",
+    "title": "Diseno de Bases de Datos",
+    "description": "Esquemas, relaciones, migraciones y consultas",
+    "icon": "database",
+    "order": 5,
+    "unitCount": 5,
+    "lessonCount": 30,
+    "color": "#96CEB4"
+  },
+  {
+    "slug": "deployment-devops",
+    "title": "Despliegue y DevOps",
+    "description": "Hosting, variables de entorno, CI/CD, dominios y DNS",
+    "icon": "cloud",
+    "order": 6,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#FECA57"
+  },
+  {
+    "slug": "testing",
+    "title": "Testing",
+    "description": "Por que testear, que testear, pruebas unitarias/integracion/e2e",
+    "icon": "check-circle",
+    "order": 7,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#A29BFE"
+  },
+  {
+    "slug": "performance-scaling",
+    "title": "Rendimiento y Escalabilidad",
+    "description": "Consultas N+1, cache, lazy loading, profiling",
+    "icon": "zap",
+    "order": 8,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#FD79A8"
+  },
+  {
+    "slug": "code-organization",
+    "title": "Organizacion de Codigo",
+    "description": "Estructura de archivos, nombres, separacion de responsabilidades",
+    "icon": "folder-code",
+    "order": 9,
+    "unitCount": 5,
+    "lessonCount": 26,
+    "color": "#00B894"
+  },
+  {
+    "slug": "ai-assisted-development",
+    "title": "Desarrollo Asistido por IA",
+    "description": "Prompts para mejor codigo, revision de output de IA",
+    "icon": "bot",
+    "order": 10,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#E17055"
+  }
+]

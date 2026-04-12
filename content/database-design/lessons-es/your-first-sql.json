@@ -1,0 +1,69 @@
+{
+  "slug": "your-first-sql",
+  "title": "Tu Primer Comando SQL",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "SQL es el lenguaje que usas para hablar con una base de datos. Se lee casi como inglés: 'SELECT name FROM users WHERE age > 18.' Ejecutemos algunos comandos SQL reales y veamos los resultados.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SQL Es Como Preguntarle a un Bibliotecario",
+      "body": "Imagina un bibliotecario que conoce la ubicación de cada libro. No buscas en los estantes tú mismo -- le dices al bibliotecario lo que quieres: 'Muéstrame todos los libros de ciencia ficción de Asimov publicados después de 1960.' SQL funciona de la misma manera. Describes qué datos quieres, y la base de datos los encuentra por ti."
+    },
+    {
+      "type": "text",
+      "title": "El Comando SQL Básico: SELECT",
+      "body": "El comando SQL más común es **SELECT** -- recupera datos:\n\n1. `SELECT * FROM users` -- obtener TODAS las columnas de la tabla users\n2. `SELECT name, email FROM users` -- obtener solo las columnas name y email\n3. `SELECT * FROM users WHERE age > 21` -- obtener usuarios mayores de 21\n\nEl patrón básico es: **SELECT** (qué columnas) **FROM** (qué tabla) **WHERE** (qué filas)."
+    },
+    {
+      "type": "code_example",
+      "title": "Leyendo SQL Como Inglés",
+      "language": "sql",
+      "code": "SELECT name, price\nFROM products\nWHERE price < 50\nORDER BY price ASC;",
+      "annotation": "Lee esto como: 'Obtén el nombre y precio de la tabla productos, pero solo productos más baratos que $50, y ordénalos del más barato al más caro.' SQL está diseñado para ser legible."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "SQL se lee como inglés: SELECT lo que quieres FROM qué tabla WHERE se cumplan las condiciones. La base de datos hace todo el trabajo pesado de encontrar y ordenar los datos por ti."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/database-project",
+    "initialFiles": ["shop.db"],
+    "steps": [
+      {
+        "instruction": "Let's connect to a SQLite database and see what's inside. Open the shop database.",
+        "expectedCommand": "sqlite3 shop.db",
+        "acceptAlternatives": [],
+        "output": "SQLite version 3.42.0\nEnter \".help\" for usage hints.\nsqlite>",
+        "hint": "Type 'sqlite3' followed by the database filename."
+      },
+      {
+        "instruction": "Let's see what tables exist in this database. Use the .tables command.",
+        "expectedCommand": ".tables",
+        "acceptAlternatives": [".table"],
+        "output": "customers  orders  products",
+        "hint": "Type '.tables' to list all tables in the database."
+      },
+      {
+        "instruction": "There are 3 tables: customers, orders, and products. Let's look at all the products. Write a SELECT query to get everything from the products table.",
+        "expectedCommand": "SELECT * FROM products;",
+        "acceptAlternatives": ["select * from products;", "SELECT * FROM products"],
+        "output": "1|Wireless Headphones|49.99|Electronics\n2|Coffee Mug|12.99|Kitchen\n3|Laptop Stand|79.99|Electronics\n4|Notebook|5.99|Stationery\n5|Phone Case|19.99|Electronics\n6|Water Bottle|24.99|Kitchen",
+        "hint": "Use 'SELECT * FROM products;' -- the * means 'all columns'."
+      },
+      {
+        "instruction": "Now let's find only the electronics. Add a WHERE clause to filter by category.",
+        "expectedCommand": "SELECT * FROM products WHERE category = 'Electronics';",
+        "acceptAlternatives": ["select * from products where category = 'Electronics';", "SELECT * FROM products WHERE category='Electronics';"],
+        "output": "1|Wireless Headphones|49.99|Electronics\n3|Laptop Stand|79.99|Electronics\n5|Phone Case|19.99|Electronics",
+        "hint": "Add WHERE category = 'Electronics' after the table name."
+      }
+    ],
+    "completionMessage": "You just ran real SQL queries! You connected to a database, listed its tables, selected all records, and filtered by a condition. These four operations -- connect, explore, select, and filter -- are what you'll do every single day when working with databases. SQL reads almost like English, which makes it one of the most beginner-friendly languages in programming.",
+    "glossaryTerms": ["sql", "select", "where", "table"]
+  }
+}

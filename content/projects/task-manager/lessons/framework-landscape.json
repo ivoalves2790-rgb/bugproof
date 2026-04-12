@@ -1,0 +1,73 @@
+{
+  "slug": "framework-landscape",
+  "title": "The Framework Landscape",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "tech-stack",
+  "projectSlug": "task-manager",
+  "intro": "There are dozens of JavaScript frameworks out there. Swipe right on smart framework-picking strategies, left on common mistakes beginners make when choosing one.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Frameworks Are Tools, Not Tribes",
+      "body": "React, Vue, Svelte, Angular — they all build UIs. The best framework is the one that fits your project's needs, has good docs, and has a community you can lean on when you're stuck. Don't pick a framework because of Twitter hype."
+    },
+    {
+      "type": "analogy",
+      "title": "Picking a Framework = Picking a Vehicle",
+      "body": "Building a task manager with Angular is like driving a semi-truck to the grocery store. It works, but it's overkill. You want something the right size for the job — powerful enough to handle your needs, simple enough that you won't get lost."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Choose a framework based on: project complexity, community size, available learning resources, and how well it matches what you're building. Ignore hype cycles."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "community-size",
+        "content": "Pick a framework with a large community so you can find answers when you get stuck",
+        "isGoodPractice": true,
+        "explanation": "A large community means more tutorials, Stack Overflow answers, and third-party libraries. When you hit a wall, someone has already solved your problem."
+      },
+      {
+        "id": "newest-framework",
+        "content": "Always pick the newest framework because it must be the best",
+        "isGoodPractice": false,
+        "explanation": "New frameworks often have incomplete docs, fewer tutorials, and breaking changes. Maturity matters — especially when you're learning."
+      },
+      {
+        "id": "match-project",
+        "content": "Consider what your project needs before picking a framework — a static blog has different needs than a real-time app",
+        "isGoodPractice": true,
+        "explanation": "Different frameworks excel at different things. Matching the tool to the job saves you from fighting the framework later."
+      },
+      {
+        "id": "twitter-hype",
+        "content": "A framework got 10,000 likes on Twitter this week, so switch your project to it immediately",
+        "isGoodPractice": false,
+        "explanation": "Social media hype is not a technical evaluation. A trending tweet tells you nothing about whether a framework fits your task manager."
+      },
+      {
+        "id": "check-docs",
+        "content": "Read the framework's official documentation and try the getting-started tutorial before committing",
+        "isGoodPractice": true,
+        "explanation": "Docs quality directly impacts your speed. If the docs are confusing before you start, they'll be worse when you're debugging at 2 AM."
+      },
+      {
+        "id": "resume-driven",
+        "content": "Pick a framework you've never heard of just because a job posting mentioned it once",
+        "isGoodPractice": false,
+        "explanation": "Resume-driven development leads to poor choices. Learn tools because they solve your problem, not to pad your LinkedIn."
+      },
+      {
+        "id": "ecosystem-check",
+        "content": "Check if the framework has good support for things you'll need, like routing, auth, and database integration",
+        "isGoodPractice": true,
+        "explanation": "A task manager needs routing, forms, and data fetching at minimum. Checking the ecosystem upfront prevents painful workarounds later."
+      }
+    ],
+    "glossaryTerms": ["framework", "ecosystem"]
+  }
+}

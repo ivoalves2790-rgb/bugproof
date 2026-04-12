@@ -1,0 +1,16 @@
+{
+  "slug": "database",
+  "title": "Database & Data",
+  "description": "Design your data model, write queries, and connect your app to Supabase. Where your tasks actually live.",
+  "order": 5,
+  "phase": "database",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "what-is-a-database", "title": "What Is a Database?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "tables-and-schemas", "title": "Tables & Schemas", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "writing-queries", "title": "Writing Queries", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "connecting-supabase", "title": "Connecting to Supabase", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "data-flow", "title": "Data Flow in Your App", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["database-design"]
+}

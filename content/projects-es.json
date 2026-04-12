@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "task-manager",
+    "title": "Gestor de Tareas",
+    "description": "Construye una app de gestion de tareas full-stack desde cero — planificacion, codigo, despliegue.",
+    "icon": "clipboard-list",
+    "difficulty": "beginner",
+    "estimatedHours": 12,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#4ECDC4",
+    "isPremium": false,
+    "techStack": ["Next.js", "Supabase", "Tailwind CSS"]
+  },
+  {
+    "slug": "social-feed",
+    "title": "Feed Social",
+    "description": "Crea un feed social en tiempo real con publicaciones, likes y perfiles de usuario.",
+    "icon": "message-circle",
+    "difficulty": "intermediate",
+    "estimatedHours": 16,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#45B7D1",
+    "isPremium": false,
+    "techStack": ["Next.js", "Supabase", "Tailwind CSS"]
+  },
+  {
+    "slug": "ecommerce",
+    "title": "Tienda E-Commerce",
+    "description": "Construye una tienda con pagos, inventario y gestion de pedidos.",
+    "icon": "shopping-cart",
+    "difficulty": "advanced",
+    "estimatedHours": 24,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#E17055",
+    "isPremium": true,
+    "techStack": ["Next.js", "Supabase", "Stripe", "Tailwind CSS"]
+  }
+]

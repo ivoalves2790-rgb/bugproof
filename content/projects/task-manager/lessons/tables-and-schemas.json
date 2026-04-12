@@ -1,0 +1,75 @@
+{
+  "slug": "tables-and-schemas",
+  "title": "Tables & Schemas",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Designing your database schema is like drawing a blueprint before building a house. Swipe right on good schema design practices, left on bad ones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Designing Your Task Manager's Schema",
+      "body": "A schema defines the **structure** of your database: what tables exist, what columns each table has, and what type of data each column holds. For our task manager, we need to decide: What information does a task have? How do tasks relate to users? Getting this right now saves hours of painful refactoring later."
+    },
+    {
+      "type": "code_example",
+      "title": "A Task Table in SQL",
+      "language": "sql",
+      "code": "CREATE TABLE tasks (\n  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,\n  title       TEXT NOT NULL,\n  description TEXT,\n  is_complete BOOLEAN DEFAULT false,\n  due_date    TIMESTAMP,\n  priority    TEXT CHECK (priority IN ('low','medium','high')),\n  user_id     UUID REFERENCES auth.users(id) NOT NULL,\n  created_at  TIMESTAMP DEFAULT now()\n);",
+      "annotation": "Each column has a name, a type, and optional constraints. NOT NULL means the field is required. DEFAULT sets a fallback value. REFERENCES creates a relationship to another table."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A good schema enforces data quality at the database level. Use NOT NULL for required fields, sensible defaults, proper data types, and foreign keys to connect related tables. The database should reject bad data before your app ever sees it."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "uuid-primary-key",
+        "content": "Using a UUID as the primary key for tasks instead of a simple auto-incrementing number",
+        "isGoodPractice": true,
+        "explanation": "UUIDs are globally unique and don't reveal how many records exist. They're the standard for modern apps and work well with Supabase's auth system."
+      },
+      {
+        "id": "no-not-null",
+        "content": "Making every column nullable so your app never crashes from missing data",
+        "isGoodPractice": false,
+        "explanation": "This hides bugs instead of preventing them. A task without a title is broken data. Use NOT NULL on required fields so the database rejects incomplete records immediately."
+      },
+      {
+        "id": "foreign-key",
+        "content": "Adding a user_id foreign key on the tasks table that references the users table",
+        "isGoodPractice": true,
+        "explanation": "Foreign keys create relationships between tables. This ensures every task belongs to a real user and prevents orphaned records if a user is deleted."
+      },
+      {
+        "id": "store-everything-in-one-table",
+        "content": "Putting user info, task data, and settings all in one massive table to keep things simple",
+        "isGoodPractice": false,
+        "explanation": "This creates a tangled mess. Separate tables for separate concerns — users, tasks, and settings each get their own table, connected by foreign keys."
+      },
+      {
+        "id": "created-at",
+        "content": "Adding a created_at timestamp column with a default of now() so you know when each task was made",
+        "isGoodPractice": true,
+        "explanation": "Timestamps are essential for sorting, debugging, and auditing. Setting a default means you never have to manually pass the creation time."
+      },
+      {
+        "id": "string-for-dates",
+        "content": "Storing due dates as plain text strings like '2025-03-15' instead of using a TIMESTAMP type",
+        "isGoodPractice": false,
+        "explanation": "Text strings can't be sorted or compared as dates. The database won't stop you from storing 'not-a-date'. Always use proper date/time types for date data."
+      },
+      {
+        "id": "check-constraint",
+        "content": "Using a CHECK constraint to limit priority values to 'low', 'medium', or 'high'",
+        "isGoodPractice": true,
+        "explanation": "CHECK constraints enforce valid values at the database level. This prevents your app from accidentally storing 'urgent' or 'super-high' as a priority."
+      }
+    ],
+    "glossaryTerms": ["schema", "primary-key", "foreign-key", "constraint"]
+  }
+}

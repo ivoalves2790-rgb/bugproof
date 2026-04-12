@@ -1,0 +1,68 @@
+{
+  "slug": "dev-staging-production",
+  "title": "Dev vs Staging vs Producción",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Los equipos profesionales no solo tienen 'mi laptop' y 'el sitio en vivo'. Tienen múltiples entornos para probar en diferentes etapas. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Entornos = Etapas de Ensayo",
+      "body": "Piensa en un show de Broadway. No pasas directo de leer el guion a actuar para una audiencia. Hay etapas: **lecturas de mesa** (desarrollo), **ensayos generales** (staging), y **noche de estreno** (producción). Cada etapa atrapa diferentes problemas, y preferirías atraparlos antes de que la audiencia los vea."
+    },
+    {
+      "type": "text",
+      "title": "Los Tres Entornos",
+      "body": "La mayoría de los equipos usan tres entornos:\n\n1. **Desarrollo** -- Tu máquina local. Puedes romper cosas libremente, experimentar y depurar con errores detallados.\n2. **Staging** -- Una copia de producción usada para pruebas finales. Misma configuración de servidor, misma estructura de base de datos, pero con datos de prueba. Solo tu equipo puede verlo.\n3. **Producción** -- Lo real. Usuarios reales, datos reales, dinero real. Los errores aquí afectan a personas reales."
+    },
+    {
+      "type": "code_example",
+      "title": "Diferente Configuración Por Entorno",
+      "language": "bash",
+      "code": "# Development (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Production (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
+      "annotation": "Nota cómo desarrollo usa localhost y claves de prueba, mientras producción usa servidores reales y claves API en vivo."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Desarrollo es para construir, staging es para probar, producción es para los usuarios. Cada entorno tiene su propia configuración para prevenir que los datos de prueba se mezclen con los datos reales."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Staging debería ser lo más similar posible a producción -- mismo tipo de servidor, mismo motor de base de datos.",
+        "isGoodPractice": true,
+        "explanation": "Todo el punto de staging es atrapar problemas antes de producción. Si staging es diferente de producción, los errores pueden pasar desapercibidos. Mismo servidor, misma base de datos, misma configuración -- solo con datos de prueba."
+      },
+      {
+        "id": "card-2",
+        "content": "Está bien probar nuevas funcionalidades directamente en producción ya que siempre puedes revertir.",
+        "isGoodPractice": false,
+        "explanation": "Probar en producción significa que los usuarios reales ven tus errores. Incluso con reversiones, los usuarios podrían experimentar errores, datos perdidos o tiempo de inactividad. Siempre prueba en staging primero -- para eso es."
+      },
+      {
+        "id": "card-3",
+        "content": "Tu entorno de desarrollo debería usar claves API de prueba, nunca las claves reales de producción.",
+        "isGoodPractice": true,
+        "explanation": "Usar claves API reales en desarrollo es peligroso. Podrías accidentalmente enviar correos reales, cobrar tarjetas de crédito reales, o modificar datos reales. Las claves de prueba existen específicamente para desarrollo y staging."
+      },
+      {
+        "id": "card-4",
+        "content": "Los proyectos pequeños con solo un desarrollador no necesitan un entorno de staging.",
+        "isGoodPractice": true,
+        "explanation": "Para proyectos personales pequeños, ir directo de desarrollo a producción está bien. Staging agrega complejidad que solo vale la pena cuando múltiples personas están desplegando o cuando los errores en producción tienen consecuencias serias."
+      },
+      {
+        "id": "card-5",
+        "content": "Deberías usar tu base de datos de producción para staging para que los datos de prueba sean realistas.",
+        "isGoodPractice": false,
+        "explanation": "¡Nunca conectes staging a tu base de datos de producción! Un error en staging podría eliminar o corromper datos reales de usuarios. Usa una base de datos separada con datos de muestra que imiten producción sin contener información real de usuarios."
+      }
+    ],
+    "glossaryTerms": ["development-environment", "staging", "production"]
+  }
+}

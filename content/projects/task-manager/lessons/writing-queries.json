@@ -1,0 +1,105 @@
+{
+  "slug": "writing-queries",
+  "title": "Writing Queries",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager's database is set up and the tables are ready. Now you need to write the SQL queries that power every feature. One wrong query and users could see each other's tasks — or lose data entirely.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "CRUD: The Four Operations",
+      "body": "Every database interaction falls into one of four categories: **Create** (INSERT), **Read** (SELECT), **Update** (UPDATE), and **Delete** (DELETE). Your task manager needs all four: creating new tasks, fetching the task list, marking tasks complete, and deleting tasks. Each operation is a SQL query that tells the database exactly what to do."
+    },
+    {
+      "type": "code_example",
+      "title": "The Queries Behind Your Task Manager",
+      "language": "sql",
+      "code": "-- Create a task\nINSERT INTO tasks (title, user_id) VALUES ('Buy groceries', '...');\n\n-- Read all tasks for a user\nSELECT * FROM tasks WHERE user_id = '...' ORDER BY created_at DESC;\n\n-- Mark a task complete\nUPDATE tasks SET is_complete = true WHERE id = '...' AND user_id = '...';\n\n-- Delete a task\nDELETE FROM tasks WHERE id = '...' AND user_id = '...';",
+      "annotation": "Notice: every UPDATE and DELETE includes AND user_id = '...'. This prevents users from modifying other people's tasks. Never forget this filter."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always filter queries by user_id to enforce data ownership. A query without a user filter is a security hole — it could let anyone read, modify, or delete another user's tasks."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your task manager needs a 'show my tasks' feature. You're writing the query to fetch a user's tasks from the database. How do you write it?",
+        "choices": [
+          { "id": "select-all", "text": "SELECT * FROM tasks; — grab everything, filter in the frontend", "nextNode": "no-filter", "score": 0 },
+          { "id": "select-filtered", "text": "SELECT * FROM tasks WHERE user_id = $1 ORDER BY created_at DESC;", "nextNode": "good-query", "score": 4 },
+          { "id": "select-no-order", "text": "SELECT * FROM tasks WHERE user_id = $1;", "nextNode": "missing-order", "score": 2 }
+        ]
+      },
+      "no-filter": {
+        "narrative": "Your query returns every task from every user in the database. During testing with 3 users, User A can see User B's private tasks. A beta tester reports the bug publicly. How do you respond?",
+        "choices": [
+          { "id": "add-filter", "text": "Immediately add a WHERE user_id = $1 clause and deploy a hotfix", "nextNode": "recovered-end", "score": 3 },
+          { "id": "frontend-filter", "text": "Filter the results in JavaScript on the frontend before rendering", "nextNode": "frontend-filter-end", "score": 1 }
+        ]
+      },
+      "good-query": {
+        "narrative": "Your query works perfectly — each user only sees their own tasks, sorted newest first. Now you need to add a 'mark task complete' feature. How do you write the UPDATE query?",
+        "choices": [
+          { "id": "update-with-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1 AND user_id = $2;", "nextNode": "excellent-end", "score": 4 },
+          { "id": "update-no-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1;", "nextNode": "insecure-update-end", "score": 1 }
+        ]
+      },
+      "missing-order": {
+        "narrative": "The query returns the right tasks, but they appear in a random order. Users complain that newly created tasks show up at the bottom or in the middle of the list. How do you fix it?",
+        "choices": [
+          { "id": "add-order-by", "text": "Add ORDER BY created_at DESC to show newest tasks first", "nextNode": "decent-end", "score": 3 },
+          { "id": "sort-frontend", "text": "Sort the tasks in JavaScript after fetching them", "nextNode": "frontend-sort-end", "score": 1 }
+        ]
+      },
+      "recovered-end": {
+        "narrative": "The hotfix goes out within the hour. The data leak is patched, but the damage was done — users saw other people's tasks. You add Row Level Security policies to prevent this class of bug entirely.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "You recovered, but filtering should have been there from the start. Always include a user_id filter and consider using Row Level Security (RLS) as a safety net so the database enforces access rules even if your query has a bug.",
+        "choices": []
+      },
+      "frontend-filter-end": {
+        "narrative": "The data still travels from the database to the frontend with everyone's tasks included. A tech-savvy user opens the browser's Network tab and sees all users' tasks in the API response. You've hidden the problem in the UI but the security hole is still wide open.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Never rely on frontend filtering for security. The raw API response contains all the data — anyone with browser dev tools can see it. Security must be enforced at the database or API level, not in the UI.",
+        "choices": []
+      },
+      "excellent-end": {
+        "narrative": "Your task manager is secure and functional. Every query filters by user_id, ensuring users can only interact with their own data. The sorted results make the UI feel polished and predictable.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Excellent work! You followed two critical rules: always filter by user_id for data ownership, and always include ORDER BY for consistent results. These habits prevent the most common database bugs in production apps.",
+        "choices": []
+      },
+      "insecure-update-end": {
+        "narrative": "A user discovers they can mark anyone's tasks as complete by guessing task IDs. Since UUIDs are hard to guess it takes a while to find, but a determined attacker writes a script to try random IDs. Your app has a broken access control vulnerability.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Always include user_id in UPDATE and DELETE queries. Filtering by ID alone means anyone who knows (or guesses) a task ID can modify it. The user_id check ensures only the task owner can make changes.",
+        "choices": []
+      },
+      "decent-end": {
+        "narrative": "Adding ORDER BY fixes the display order. Users now see their newest tasks at the top. You make a mental note to always define sort order in your queries rather than leaving it to chance.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Good fix. Databases return results in an undefined order unless you specify ORDER BY. Sorting in the database is faster and more reliable than sorting in JavaScript, especially as your data grows.",
+        "choices": []
+      },
+      "frontend-sort-end": {
+        "narrative": "It works for now, but as users accumulate hundreds of tasks, the frontend struggles to sort large arrays. The page becomes sluggish. You eventually move the sorting to the database query where it belongs.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Databases are optimized for sorting — they use indexes and efficient algorithms. Sorting in the frontend means downloading unsorted data and doing extra work in the browser. Let the database handle it with ORDER BY.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["crud", "sql", "rls"]
+  }
+}

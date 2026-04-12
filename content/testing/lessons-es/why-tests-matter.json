@@ -1,0 +1,91 @@
+{
+  "slug": "why-tests-matter",
+  "title": "Por qué importan los tests",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Acabas de unirte a una pequeña startup. El código base tiene cero tests. Tu primera tarea es agregar una nueva funcionalidad de pagos. Después de lanzarla, las cosas empiezan a salir mal. Veamos por qué los tests habrían salvado el día.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tests = Red de seguridad para un equilibrista",
+      "body": "Un equilibrista PUEDE actuar sin red de seguridad. Pero un resbalón y es un desastre. Una red de seguridad no te ayuda a caminar mejor -- te atrapa cuando caes. Los **tests** son tu red de seguridad. No escriben tu código por ti, pero te atrapan cuando un cambio accidentalmente rompe algo."
+    },
+    {
+      "type": "text",
+      "title": "Las verdaderas razones por las que importan los tests",
+      "body": "Los tests te ahorran tiempo y estrés de cuatro grandes maneras:\n\n1. **Detectan bugs temprano** -- Encuentran problemas en 2 segundos en lugar de descubrirlos por usuarios enojados\n2. **Cambia código sin miedo** -- Refactoriza sabiendo que los tests te dirán si rompiste algo\n3. **Documentan el comportamiento** -- Los tests muestran exactamente qué se supone que debe hacer tu código\n4. **Duerme mejor** -- Despliega un viernes sabiendo que tus tests pasaron"
+    },
+    {
+      "type": "text",
+      "title": "El costo de NO testear",
+      "body": "Sin tests, cada cambio es riesgoso. Tienes que verificar todo manualmente. ¿El login sigue funcionando? ¿El checkout sigue procesando pagos? ¿La búsqueda sigue devolviendo resultados? Esta verificación manual toma tiempo, e inevitablemente se te pasará algo. Un bug no detectado en un sistema de pagos puede costar dinero real."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los tests detectan bugs temprano, te permiten cambiar código con confianza, documentan el comportamiento esperado y previenen regresiones. El tiempo que dedicas a escribir tests ahorra mucho más tiempo en depuración después."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Has agregado una funcionalidad de código de descuento al checkout. Funciona genial en tus pruebas locales. Despliegas a producción el jueves por la tarde. El viernes por la mañana, recibes un mensaje de pánico: '¡Los clientes están obteniendo 100% de descuento en todos los pedidos!' ¿Qué pasó?",
+        "choices": [
+          { "id": "a", "text": "Revisar el código de cálculo de descuento en busca de bugs", "nextNode": "check-code", "score": 10 },
+          { "id": "b", "text": "Desactivar inmediatamente la funcionalidad de descuento", "nextNode": "disable-feature", "score": 7 },
+          { "id": "c", "text": "Verificar si alguien ingresó un código de descuento fraudulento", "nextNode": "check-fraud", "score": 3 }
+        ]
+      },
+      "check-code": {
+        "narrative": "Miras la función de descuento y encuentras el bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nCuando alguien ingresa 20 para un descuento del 20%, la función calcula price - (price * 20), lo que hace que el total sea masivamente negativo. Debería dividir entre 100 primero. ¿Cómo habrían ayudado los tests?",
+        "choices": [
+          { "id": "a", "text": "Un test verificando applyDiscount(100, 20) === 80 habría detectado esto al instante", "nextNode": "test-would-help", "score": 10 },
+          { "id": "b", "text": "Los tests no habrían ayudado -- este es un error de lógica que necesitas pensar bien", "nextNode": "tests-do-help", "score": 3 }
+        ]
+      },
+      "disable-feature": {
+        "narrative": "Buena idea detener la hemorragia. Desactivas la funcionalidad de descuento. Pero ahora necesitas averiguar qué salió mal y arreglarlo. Mirando el cálculo de descuento...\n\napplyDiscount(100, 20) debería devolver 80 pero devuelve -1900.\n\nLa función está tratando el porcentaje como un multiplicador (20x) en lugar de dividir entre 100 primero (0.20x).",
+        "choices": [
+          { "id": "a", "text": "Arreglar el bug y agregar un test para que esto nunca pase de nuevo", "nextNode": "test-would-help", "score": 7 }
+        ]
+      },
+      "check-fraud": {
+        "narrative": "No es fraude -- los códigos de descuento son legítimos. El problema es que el cálculo está mal. Incluso un código de descuento válido del 20% resulta en pedidos con totales negativos porque la función multiplica por 20 en lugar de 0.20.",
+        "choices": [
+          { "id": "a", "text": "Revisar el código de cálculo de descuento", "nextNode": "check-code", "score": 5 }
+        ]
+      },
+      "test-would-help": {
+        "narrative": "¡Exacto! Un test simple como:\n\ntest('20% discount on $100 = $80', () => {\n  expect(applyDiscount(100, 20)).toBe(80);\n});\n\nEste habría fallado inmediatamente cuando escribiste el código con bugs, antes de que llegara a producción. ¿Cuál es tu conclusión?",
+        "choices": [
+          { "id": "a", "text": "Debería escribir tests para cualquier código que involucre cálculos o dinero", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Debería testear todo antes de cada despliegue", "nextNode": "end-okay", "score": 6 }
+        ]
+      },
+      "tests-do-help": {
+        "narrative": "En realidad, ¡los tests son PERFECTOS para detectar errores de lógica! Ese es su trabajo principal. Un test que dice 'un descuento del 20% en $100 debería ser igual a $80' habría fallado inmediatamente con el código con bugs, haciendo el error obvio antes de que lo desplegaras.",
+        "choices": [
+          { "id": "a", "text": "Entendido -- los tests detectan exactamente este tipo de errores de cálculo", "nextNode": "end-good", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Arreglas la función de descuento (dividiendo entre 100), escribes cinco tests cubriendo diferentes montos de descuento incluyendo casos límite como 0% y 100%, y despliegas la corrección. Los tests evitarán que este bug regrese, incluso si alguien refactoriza el código después.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Gran razonamiento! El código que maneja dinero, cálculos o lógica de negocio crítica siempre debería tener tests. Un test de 30 segundos habría evitado que este bug llegara a producción y habría ahorrado dinero real."
+      },
+      "end-okay": {
+        "narrative": "Testear todo es admirable pero impráctico. La clave es testear las partes más importantes -- especialmente cualquier cosa que involucre dinero, datos de usuarios o lógica de negocio central. Unos pocos tests enfocados valen más que intentar testear cada línea.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Buen instinto, pero sé estratégico con el testing. Enfócate en código que maneja dinero, datos de usuarios, autenticación y lógica de negocio central. No necesitas 100% de cobertura de tests -- necesitas los tests correctos en los lugares correctos."
+      }
+    },
+    "glossaryTerms": ["regression", "safety-net", "test-coverage"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "apis",
+  "title": "APIs y Flujo de Datos",
+  "description": "Descubre cómo las diferentes partes de una aplicación se comunican a través de APIs -- los contratos que mantienen unido al software moderno",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "what-is-an-api", "title": "¿Qué es una API?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "rest-basics", "title": "REST: El Lenguaje de las APIs Web", "type": "terminal_sim", "order": 2, "difficulty": 2 },
+    { "slug": "json-data-format", "title": "JSON: Cómo Viajan los Datos", "type": "bug_hunt", "order": 3, "difficulty": 1 },
+    { "slug": "endpoints-and-routes", "title": "Endpoints y Rutas", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "http-methods", "title": "GET, POST, PUT, DELETE", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "api-design-basics", "title": "Fundamentos del Diseño de APIs", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

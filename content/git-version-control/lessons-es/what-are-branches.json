@@ -1,0 +1,66 @@
+{
+  "slug": "what-are-branches",
+  "title": "¿Qué son las ramas?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Las ramas son una de las funciones más poderosas de Git. Te permiten crear versiones paralelas de tu proyecto para que puedas trabajar en nuevas funcionalidades sin romper lo que ya funciona. Desliza a la derecha para afirmaciones VERDADERAS y a la izquierda para FALSAS.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Ramas = Universos paralelos",
+      "body": "Imagina que pudieras dividirte en dos líneas de tiempo alternas. En una línea de tiempo intentas agregar una nueva función arriesgada. En la otra, todo se mantiene estable y funcionando. Si la función resulta bien, fusionas las líneas de tiempo de nuevo. Si no funciona, simplemente descartas esa línea de tiempo. Eso es exactamente lo que hacen las **ramas** en Git."
+    },
+    {
+      "type": "text",
+      "title": "La rama principal",
+      "body": "Todo proyecto de Git comienza con una rama, generalmente llamada **main**. Esta es la versión \"oficial\" de tu proyecto -- el código estable y funcional. Debes evitar hacer cambios arriesgados directamente en main. En su lugar, creas una nueva rama para cada función o corrección."
+    },
+    {
+      "type": "text",
+      "title": "Por qué las ramas importan",
+      "body": "Las ramas te permiten:\n\n- **Experimentar de forma segura** -- Prueba nuevas ideas sin romper el código que funciona\n- **Trabajar en paralelo** -- Varias personas pueden trabajar en diferentes funciones al mismo tiempo\n- **Mantenerte organizado** -- Cada rama tiene un propósito claro\n- **Fusionar cuando estés listo** -- Lleva tus cambios de vuelta a main solo cuando estén probados y funcionen"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Una rama es una versión paralela de tu proyecto -- trabaja en funcionalidades en su propia rama y luego fusiona de vuelta a main cuando estén listas."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Una rama es como un universo paralelo para tu código -- los cambios en una rama no afectan a otras ramas.",
+        "isGoodPractice": true,
+        "explanation": "Exactamente correcto. Piensa en las ramas como líneas de tiempo alternas. Puedes experimentar libremente en una rama de función sabiendo que tu rama principal se mantiene segura y funcional. Cuando la función esté lista, fusionas las líneas de tiempo de nuevo."
+      },
+      {
+        "id": "card-2",
+        "content": "Crear una rama copia todos los archivos de tu proyecto a una nueva carpeta.",
+        "isGoodPractice": false,
+        "explanation": "Git es mucho más eficiente que eso. Una rama es simplemente un puntero ligero a un commit. No ocupa casi espacio en disco y se crea instantáneamente. Git no duplica archivos -- solo recuerda a qué commit apunta cada rama."
+      },
+      {
+        "id": "card-3",
+        "content": "Deberías hacer todo tu trabajo directamente en la rama main.",
+        "isGoodPractice": false,
+        "explanation": "Trabajar directamente en main es arriesgado. Si tus cambios introducen un error, la rama principal se rompe para todos. La mejor práctica es crear una nueva rama para cada función o corrección, probarla y luego fusionarla de vuelta a main cuando esté lista."
+      },
+      {
+        "id": "card-4",
+        "content": "Todo repositorio Git comienza con una rama predeterminada, generalmente llamada 'main'.",
+        "isGoodPractice": true,
+        "explanation": "Cuando ejecutas 'git init', Git crea tu primera rama automáticamente. Antes se llamaba 'master' por defecto, pero la mayoría de los proyectos ahora usan 'main'. Esta rama típicamente representa la versión estable y lista para producción de tu código."
+      },
+      {
+        "id": "card-5",
+        "content": "Puedes tener tantas ramas como quieras en un repositorio.",
+        "isGoodPractice": true,
+        "explanation": "No hay un límite práctico. Los proyectos grandes a menudo tienen docenas o incluso cientos de ramas a la vez -- una para cada función en desarrollo, cada error que se corrige o cada experimento que se intenta. Las ramas son baratas y rápidas de crear."
+      }
+    ],
+    "glossaryTerms": ["branch", "main-branch", "feature-branch"]
+  }
+}

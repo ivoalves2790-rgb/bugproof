@@ -1,0 +1,84 @@
+{
+  "slug": "protecting-routes",
+  "title": "Protegiendo Rutas",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Tu gestor de tareas tiene login funcionando, pero un usuario curioso descubre que puede acceder a las tareas de otras personas simplemente cambiando la URL. Es hora de asegurar tus rutas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Proteccion de Rutas 101",
+      "body": "Las rutas protegidas son paginas o endpoints de API que requieren autenticacion. En el frontend, rediriges a los usuarios no autenticados al login. En el backend, un middleware verifica un token o sesion valida antes de procesar cualquier solicitud. Ambas capas son necesarias — las protecciones del frontend mejoran la experiencia del usuario, pero las verificaciones del backend imponen la seguridad real."
+    },
+    {
+      "type": "code_example",
+      "title": "Las Dos Capas de Proteccion de Rutas",
+      "language": "text",
+      "code": "Frontend: User visits /dashboard → Check if logged in → If not, redirect to /login\n\nBackend: API receives GET /api/tasks → Middleware checks auth token → If invalid, return 401\n                                      → If valid, only return THAT user's tasks",
+      "annotation": "La proteccion del frontend es para la experiencia del usuario (redireccion). La proteccion del backend es para la seguridad (bloqueo). Nunca confies solo en el frontend."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Siempre aplica la autorizacion en el servidor. Las protecciones de rutas del frontend son una conveniencia para los usuarios, no una medida de seguridad. Cada endpoint de API debe verificar quien esta haciendo la solicitud."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Un usuario llamado Alex descubre que visitando /api/tasks?userId=42 puede ver las tareas de otro usuario. Tu API devuelve tareas basandose en el parametro userId de la query sin verificar quien esta logueado. Como respondes?",
+        "choices": [
+          { "id": "a", "text": "Ocultar el parametro userId de la URL del frontend para que los usuarios no puedan verlo", "nextNode": "hide-param", "score": 0 },
+          { "id": "b", "text": "Agregar middleware que extraiga el ID de usuario del token de auth en lugar del parametro de query", "nextNode": "fix-middleware", "score": 4 },
+          { "id": "c", "text": "Agregar una verificacion en el frontend que prevenga navegar a las paginas de otros usuarios", "nextNode": "frontend-only", "score": 1 }
+        ]
+      },
+      "hide-param": {
+        "narrative": "Ocultar el parametro no ayuda — cualquiera con las herramientas de desarrollo del navegador puede ver las llamadas a la API y cambiar el userId. En horas, alguien en Twitter publica sobre la vulnerabilidad.",
+        "choices": [
+          { "id": "a1", "text": "OK, implementar verificaciones de auth adecuadas en el servidor ahora", "nextNode": "fix-middleware", "score": 3 },
+          { "id": "a2", "text": "Agregar limitacion de tasa para frenar a los atacantes", "nextNode": "band-aid-end", "score": 1 }
+        ]
+      },
+      "fix-middleware": {
+        "narrative": "Agregas middleware de auth que lee el ID de usuario del token JWT verificado, no del parametro de query. Ahora GET /api/tasks siempre devuelve las tareas del usuario logueado. Pero notas que el endpoint PUT /api/tasks/:id todavia no verifica si la tarea pertenece al usuario actual. Que haces?",
+        "choices": [
+          { "id": "b1", "text": "Auditar todos los endpoints de API y agregar verificaciones de propiedad a cada uno que acceda a datos de usuario", "nextNode": "full-audit", "score": 3 },
+          { "id": "b2", "text": "Solo arreglar el endpoint PUT y seguir adelante", "nextNode": "partial-fix-end", "score": 1 }
+        ]
+      },
+      "frontend-only": {
+        "narrative": "La verificacion del frontend funciona en el navegador, pero un usuario usa curl para llamar tu API directamente, evadiendo el frontend por completo. Todavia puede acceder a los datos de cualquier usuario.",
+        "choices": [
+          { "id": "c1", "text": "Implementar middleware del lado del servidor para validar auth en cada solicitud de API", "nextNode": "fix-middleware", "score": 3 },
+          { "id": "c2", "text": "Bloquear solicitudes curl verificando el header User-Agent", "nextNode": "band-aid-end", "score": 0 }
+        ]
+      },
+      "full-audit": {
+        "narrative": "Auditas los 12 endpoints de API, agregas verificaciones de propiedad a cada uno y escribes tests para verificar que el acceso no autorizado devuelve 403. La vulnerabilidad esta completamente parcheada.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Este es el enfoque correcto. Un endpoint vulnerable generalmente significa que otros tambien lo son. Una auditoria completa con tests asegura que detectes todo y previene regresiones.",
+        "choices": []
+      },
+      "partial-fix-end": {
+        "narrative": "El endpoint PUT esta arreglado, pero el endpoint DELETE todavia permite a los usuarios eliminar las tareas de otros. Una semana despues, alguien lo explota y los usuarios pierden datos.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Arreglar un endpoint a la vez es como jugar whack-a-mole. Cuando encuentres un bug de autorizacion, audita todos los endpoints sistematicamente — el mismo patron probablemente se repite.",
+        "choices": []
+      },
+      "band-aid-end": {
+        "narrative": "Tu solucion temporal se evade facilmente. El problema central — autorizacion faltante del lado del servidor — permanece. Los datos de usuario continuan filtrandose.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "La seguridad por oscuridad (ocultar parametros, bloquear user agents) nunca funciona. La seguridad real requiere que el servidor verifique la identidad y aplique la propiedad de datos en cada solicitud.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["middleware", "authorization"]
+  }
+}

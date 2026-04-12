@@ -1,0 +1,67 @@
+{
+  "slug": "caching-strategies",
+  "title": "Caching Strategies",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Caching means storing data so you don't have to fetch it again. Done right, it makes your app feel instant. Done wrong, it shows users stale data. Let's sort out the good from the bad.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Is Caching?",
+      "body": "Caching stores a copy of data closer to where it's needed. Instead of querying the database every time someone loads their task list, you cache the result and serve the cached version until something changes. The tricky part is knowing when to invalidate the cache — showing stale data is worse than no cache at all."
+    },
+    {
+      "type": "analogy",
+      "title": "Caching Is Like a Sticky Note on Your Fridge",
+      "body": "You don't call the grocery store every time you want to know if you have milk. You check the fridge (cache). But if someone drank the milk and didn't update the note, you'll think you have milk when you don't. That's a stale cache — and it's the hardest problem in caching."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cache data that changes infrequently (user settings, category lists) aggressively. Cache data that changes often (task lists, notifications) carefully with short expiry times or real-time invalidation."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Cache the list of task categories since they rarely change, but invalidate when a user adds a new category",
+        "isGoodPractice": true,
+        "explanation": "Categories change infrequently, making them ideal for caching. Invalidating on mutation (adding/editing/deleting) ensures freshness without constant refetching."
+      },
+      {
+        "id": "c2",
+        "content": "Cache everything with no expiration time to maximize performance",
+        "isGoodPractice": false,
+        "explanation": "Without expiration, caches grow forever and serve increasingly stale data. Always set a TTL (time to live) or implement event-based invalidation."
+      },
+      {
+        "id": "c3",
+        "content": "Use stale-while-revalidate to show cached data immediately while fetching fresh data in the background",
+        "isGoodPractice": true,
+        "explanation": "This pattern gives the best of both worlds: instant loading from cache and eventual consistency from background refetching. It's ideal for data that's fine being a few seconds old."
+      },
+      {
+        "id": "c4",
+        "content": "Cache user-specific data in a shared cache where any user might receive another user's cached tasks",
+        "isGoodPractice": false,
+        "explanation": "This is a serious data leak. Shared caches must be keyed by user ID. Without proper cache keys, User A might see User B's private tasks. Always include the user identifier in cache keys."
+      },
+      {
+        "id": "c5",
+        "content": "After a user creates a new task, immediately update the local cache before the server confirms the save",
+        "isGoodPractice": true,
+        "explanation": "This is called optimistic updating. The UI feels instant because you update the local state immediately. If the server save fails, you roll back. It dramatically improves perceived performance."
+      },
+      {
+        "id": "c6",
+        "content": "Implement complex multi-layer caching from day one, even before you have performance problems",
+        "isGoodPractice": false,
+        "explanation": "Caching adds complexity and introduces stale data bugs. Start without caching, measure performance, and add caching only where needed. Don't solve problems you don't have yet."
+      }
+    ],
+    "glossaryTerms": ["cache-invalidation", "ttl", "optimistic-update"]
+  }
+}

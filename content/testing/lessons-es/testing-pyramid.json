@@ -1,0 +1,53 @@
+{
+  "slug": "testing-pyramid",
+  "title": "La pirámide de testing",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "No todos los tests son iguales. Algunos son rápidos y baratos, otros son lentos y caros. La pirámide de testing te ayuda a decidir cuántos de cada tipo escribir. Un equipo tiene su pirámide invertida -- encuentra el problema.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "La pirámide = Los cimientos de un edificio",
+      "body": "Un edificio necesita cimientos anchos y sólidos (baratos, rápidos), pisos regulares en el medio, y un pequeño penthouse arriba (caro, lujoso). Si construyes un edificio que es mayormente penthouse con cimientos diminutos, se derrumba. La **pirámide de testing** funciona de la misma manera -- necesitas muchos tests rápidos y baratos en la base y menos tests lentos y caros en la cima."
+    },
+    {
+      "type": "text",
+      "title": "Las tres capas",
+      "body": "La pirámide de testing tiene tres capas:\n\n1. **Tests unitarios** (base, MUCHOS) -- Testean funciones individuales. Súper rápidos, se ejecutan en milisegundos. Escribe muchos de estos.\n2. **Tests de integración** (medio, ALGUNOS) -- Testean cómo las piezas trabajan juntas. Más lentos, pero detectan bugs de conexión.\n3. **Tests de extremo a extremo (E2E)** (cima, POCOS) -- Testean toda la app como un usuario real. Los más lentos, pero testean el flujo completo.\n\nLa proporción debería ser aproximadamente: 70% unitarios, 20% integración, 10% E2E."
+    },
+    {
+      "type": "code_example",
+      "title": "Comparación de velocidad",
+      "language": "bash",
+      "code": "# Unit tests: test a single function\n# Speed: ~50 tests per second\nnpm run test:unit     # Done in 2 seconds\n\n# Integration tests: test API endpoints\n# Speed: ~5 tests per second\nnpm run test:int      # Done in 30 seconds\n\n# E2E tests: test full user flows in a browser\n# Speed: ~1 test per 10 seconds\nnpm run test:e2e      # Done in 5 minutes",
+      "annotation": "Los tests unitarios se ejecutan 100 veces más rápido que los tests E2E. Por eso quieres más de ellos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La pirámide de testing dice: escribe muchos tests unitarios rápidos, algunos tests de integración y pocos tests E2E lentos. Esto te da el mejor equilibrio entre velocidad y cobertura."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Team's test suite breakdown:", "isBuggy": false },
+      { "line": 2, "text": "# Unit tests:        5 tests", "isBuggy": false },
+      { "line": 3, "text": "# Integration tests:  10 tests", "isBuggy": false },
+      { "line": 4, "text": "# E2E tests:         85 tests", "isBuggy": true },
+      { "line": 5, "text": "# Total run time:    45 minutes", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "El suite de tests de este equipo toma 45 minutos en ejecutarse y su pipeline de CI es dolorosamente lento. Mirando su distribución de tests, ¿qué capa es el problema?",
+    "fixes": [
+      { "id": "a", "text": "# E2E tests:         10 tests (mover lógica a tests unitarios)", "isCorrect": true },
+      { "id": "b", "text": "# E2E tests:         85 tests (ejecutar en paralelo)", "isCorrect": false },
+      { "id": "c", "text": "# E2E tests:         0 tests (eliminarlos todos)", "isCorrect": false },
+      { "id": "d", "text": "# E2E tests:         85 tests (omitir durante CI)", "isCorrect": false }
+    ],
+    "explanation": "El equipo tiene una pirámide de testing invertida -- 85 tests E2E y solo 5 tests unitarios. Los tests E2E son el tipo más lento (cada uno abre un navegador y simula clics), así que 85 de ellos toman una eternidad. La corrección es mover la mayor parte de esa lógica de testing a tests unitarios rápidos y mantener solo los flujos de usuario críticos como tests E2E. Esto sigue la pirámide: muchos tests unitarios en la base, pocos tests E2E en la cima.",
+    "glossaryTerms": ["testing-pyramid", "unit-test", "e2e-test"]
+  }
+}

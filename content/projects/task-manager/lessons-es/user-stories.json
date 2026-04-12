@@ -1,0 +1,69 @@
+{
+  "slug": "user-stories",
+  "title": "Pensando en Historias de Usuario",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "Las historias de usuario describen funcionalidades desde la perspectiva del usuario. Juzga si cada una esta bien escrita o necesita mejoras.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Que Son las Historias de Usuario?",
+      "body": "Una historia de usuario describe una funcionalidad desde la perspectiva de la persona que la usa. El formato es simple: **Como [usuario], quiero [accion], para que [beneficio]**. Esto te obliga a pensar en POR QUE existe una funcionalidad, no solo en que hace."
+    },
+    {
+      "type": "code_example",
+      "title": "Ejemplos de Historias de Usuario",
+      "language": "text",
+      "code": "GOOD: \"As a user, I want to set a due date\n       on my tasks, so that I can prioritize\n       what needs to be done first.\"\n\nBAD:  \"Add a date picker component\"\n\nGOOD: \"As a user, I want to filter tasks by\n       status, so that I can focus on what's\n       in progress.\"\n\nBAD:  \"Implement filtering\"",
+      "annotation": "Los buenos ejemplos explican QUIEN lo quiere, QUE quiere y POR QUE. Los malos son solo tareas tecnicas sin contexto."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las historias de usuario te mantienen enfocado en resolver problemas reales para usuarios reales. Cuando estes tentado a agregar una funcionalidad, escribela primero como historia de usuario. Si no puedes explicar el 'para que', la funcionalidad tal vez no sea necesaria."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "good-create",
+        "content": "Como usuario, quiero crear tareas con un titulo y descripcion opcional, para poder capturar lo que necesito hacer",
+        "isGoodPractice": true,
+        "explanation": "Usuario claro, accion clara, beneficio claro. Esta es una historia de usuario bien formada."
+      },
+      {
+        "id": "bad-technical",
+        "content": "Implementar un endpoint de API REST POST /api/tasks que acepte un cuerpo JSON",
+        "isGoodPractice": false,
+        "explanation": "Este es un detalle de implementacion, no una historia de usuario. Describe COMO, no QUE o POR QUE."
+      },
+      {
+        "id": "good-filter",
+        "content": "Como usuario, quiero ver solo mis tareas incompletas, para poder enfocarme en lo que aun necesita hacerse",
+        "isGoodPractice": true,
+        "explanation": "La clausula 'para que' explica por que importa el filtrado — se trata de enfoque, no solo de interfaz."
+      },
+      {
+        "id": "bad-vague",
+        "content": "Los usuarios deberian poder hacer cosas con las tareas",
+        "isGoodPractice": false,
+        "explanation": "Demasiado vago. Que cosas? 'Hacer cosas' podria significar cualquier cosa. Las historias de usuario necesitan acciones especificas."
+      },
+      {
+        "id": "good-complete",
+        "content": "Como usuario, quiero marcar tareas como completadas, para poder seguir mi progreso y sentirme realizado",
+        "isGoodPractice": true,
+        "explanation": "Nota el beneficio emocional — 'sentirme realizado'. Entender la motivacion del usuario lleva a mejor diseno."
+      },
+      {
+        "id": "bad-no-why",
+        "content": "Como usuario, quiero agregar etiquetas a las tareas",
+        "isGoodPractice": false,
+        "explanation": "Falta la parte del 'para que'. Sin una razon, esto podria ser desvio de alcance. Por que necesitan etiquetas? Para organizar? Para buscar? La razon importa."
+      }
+    ],
+    "glossaryTerms": ["user-story", "requirements"]
+  }
+}

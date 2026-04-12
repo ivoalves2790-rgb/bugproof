@@ -1,0 +1,73 @@
+{
+  "slug": "what-is-a-database",
+  "title": "What Is a Database?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Before you store a single task, you need to understand what a database actually is and isn't. Swipe right on true statements, left on false ones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Why Your App Needs a Database",
+      "body": "Right now, if a user creates a task and refreshes the page, it's gone. That's because the data only lives in the browser's memory. A database is a structured place to **permanently store and retrieve data**. Think of it as your app's long-term memory — without it, your task manager has amnesia."
+    },
+    {
+      "type": "analogy",
+      "title": "Filing Cabinet vs. Sticky Notes",
+      "body": "Storing data without a database is like writing everything on sticky notes — it works until a breeze comes through. A database is like a filing cabinet with labeled folders. Everything has a place, you can find things quickly, and nothing disappears when you close the drawer. For our task manager, the database stores every task, every user, and every due date — reliably and permanently."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A database stores your app's data permanently so it survives page refreshes, server restarts, and user sessions. Without one, your task manager is just a fancy notepad that erases itself."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "permanent-storage",
+        "content": "A database stores data permanently so it survives when users close the browser",
+        "isGoodPractice": true,
+        "explanation": "Correct! Persistence is the core purpose of a database. Without it, all tasks would vanish on page reload."
+      },
+      {
+        "id": "only-sql",
+        "content": "All databases require you to write SQL queries to store and retrieve data",
+        "isGoodPractice": false,
+        "explanation": "Not true. While SQL databases (like PostgreSQL) use SQL, NoSQL databases like MongoDB use different query methods. There are many types of databases with different interfaces."
+      },
+      {
+        "id": "multiple-users",
+        "content": "A database lets multiple users access the same data without overwriting each other's work",
+        "isGoodPractice": true,
+        "explanation": "Correct! Databases handle concurrent access — so if two users create tasks at the same time, both tasks are saved properly."
+      },
+      {
+        "id": "frontend-only",
+        "content": "You can use localStorage in the browser as your app's main database for production",
+        "isGoodPractice": false,
+        "explanation": "localStorage is useful for caching, but it's limited to one browser on one device, has no structure enforcement, and can be cleared by the user. It's not a real database."
+      },
+      {
+        "id": "structured-data",
+        "content": "A relational database organizes data into tables with rows and columns, similar to a spreadsheet",
+        "isGoodPractice": true,
+        "explanation": "Correct! Relational databases like PostgreSQL (which Supabase uses) store data in structured tables. Each row is a record, each column is a field."
+      },
+      {
+        "id": "no-rules",
+        "content": "Databases don't enforce any rules — you can store any data in any format anywhere",
+        "isGoodPractice": false,
+        "explanation": "Wrong. Databases enforce schemas, data types, and constraints. For example, you can require that every task must have a title, or that a due date must be a valid date."
+      },
+      {
+        "id": "query-speed",
+        "content": "Databases can search through millions of records in milliseconds using indexes",
+        "isGoodPractice": true,
+        "explanation": "Correct! Indexes are like a book's table of contents — they let the database jump straight to the data you need instead of scanning every row."
+      }
+    ],
+    "glossaryTerms": ["database", "sql", "schema"]
+  }
+}

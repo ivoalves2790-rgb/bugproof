@@ -1,0 +1,74 @@
+{
+  "slug": "what-is-an-error",
+  "title": "¿Qué es un error?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Los errores no son un castigo -- son mensajes de tu computadora tratando de ayudarte a resolver un problema. Pero muchos principiantes tienen una idea equivocada sobre lo que significan los errores. Desliza a la DERECHA si la afirmación es verdadera, o a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Los errores son como la luz de revisión del motor",
+      "body": "Cuando la luz de revisión del motor de tu auto se enciende, no significa que el auto esté destruido. Significa que el auto detectó un problema y te está informando. Los mensajes de error funcionan de la misma manera -- son la forma en que tu código dice 'algo salió mal, esto es lo que sé al respecto.'"
+    },
+    {
+      "type": "text",
+      "title": "Qué pasa realmente cuando el código falla",
+      "body": "Cuando tu programa llega a una línea que no puede ejecutar, **deja de ejecutarse** en ese punto y crea un mensaje de error. El mensaje incluye:\n\n1. El **tipo** de error (qué categoría de problema)\n2. Una **descripción** (qué salió mal específicamente)\n3. La **ubicación** (qué archivo y número de línea)\n\nTu trabajo es leer estas tres piezas y usarlas para encontrar la solución."
+    },
+    {
+      "type": "code_example",
+      "title": "Un mensaje de error típico",
+      "language": "text",
+      "code": "TypeError: Cannot read properties of undefined (reading 'name')\n    at getUser (app.js:15)\n    at main (app.js:42)",
+      "annotation": "Este error te dice tres cosas: el tipo es TypeError, el problema es que algo es undefined, y ocurrió en la línea 15 de app.js."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los errores son mensajes útiles, no castigos. Cada error te dice qué salió mal, qué tipo de error es y exactamente dónde buscar. Lee el mensaje antes de intentar arreglar algo."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Un mensaje de error significa que rompiste algo permanentemente.",
+        "isGoodPractice": false,
+        "explanation": "Los errores casi nunca rompen nada permanentemente. Son simplemente tu programa diciendo 'me confundí y me detuve.' Puedes arreglar el problema y ejecutar el código de nuevo. Piensa en los errores como un botón de pausa, no un botón de autodestrucción."
+      },
+      {
+        "id": "card-2",
+        "content": "Los mensajes de error generalmente te dicen qué archivo y número de línea causó el problema.",
+        "isGoodPractice": true,
+        "explanation": "Esta es una de las partes más útiles de un mensaje de error. La ruta del archivo y el número de línea te señalan directamente dónde ocurrió el problema. Siempre busca estos primero -- te ahorran buscar entre cientos de líneas de código."
+      },
+      {
+        "id": "card-3",
+        "content": "Si tu código no tiene errores, definitivamente está funcionando correctamente.",
+        "isGoodPractice": false,
+        "explanation": "No tener errores solo significa que tu código no se cayó. Aún podría tener errores de lógica -- como una calculadora que se ejecuta sin errores pero da respuestas incorrectas. Los errores detectan problemas de sintaxis y tiempo de ejecución, pero no pueden decirte si tu lógica está equivocada."
+      },
+      {
+        "id": "card-4",
+        "content": "Los desarrolladores experimentados ven errores todos los días.",
+        "isGoodPractice": true,
+        "explanation": "Incluso los desarrolladores senior con décadas de experiencia ven errores constantemente. La diferencia es que no entran en pánico -- leen el mensaje, lo entienden y arreglan el problema rápidamente. Ver errores es una parte normal de la programación, no una señal de que eres malo en esto."
+      },
+      {
+        "id": "card-5",
+        "content": "Deberías leer el mensaje de error antes de intentar arreglar algo.",
+        "isGoodPractice": true,
+        "explanation": "Esta es la regla número uno de depuración. La mayoría de los principiantes se saltan el mensaje de error y empiezan a adivinar soluciones. El mensaje de error literalmente está tratando de decirte qué salió mal. Léelo primero y arreglarás las cosas mucho más rápido."
+      },
+      {
+        "id": "card-6",
+        "content": "El texto rojo en la consola siempre significa que algo está seriamente mal.",
+        "isGoodPractice": false,
+        "explanation": "El texto rojo puede significar cosas diferentes. Algunos son errores críticos que tumban tu aplicación. Otros son advertencias sobre problemas menores o incluso solo avisos de obsolescencia sobre funciones que se eliminarán en el futuro. Siempre lee el texto real, no solo el color."
+      }
+    ],
+    "glossaryTerms": ["error", "runtime-error", "syntax-error"]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "slug": "security-checklist",
+  "title": "Security Checklist",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Before shipping your task manager, run through this security checklist. Swipe right on practices you should follow, left on dangerous ones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Security Is Not Optional",
+      "body": "Security isn't a feature you add at the end — it's a mindset throughout development. Common vulnerabilities like SQL injection, XSS (cross-site scripting), and CSRF (cross-site request forgery) are well-understood, and preventing them is straightforward if you follow best practices."
+    },
+    {
+      "type": "analogy",
+      "title": "Security Is Like Locking Your Doors",
+      "body": "You don't wait until someone breaks in to install locks. You lock up every night as a habit. Similarly, sanitizing inputs, using HTTPS, and validating on the server should be habits — not afterthoughts you add when something goes wrong."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The top three security habits: validate all input on the server, use parameterized queries (never concatenate SQL), and always use HTTPS in production."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Use parameterized queries or an ORM instead of concatenating user input into SQL strings",
+        "isGoodPractice": true,
+        "explanation": "Parameterized queries prevent SQL injection by treating user input as data, never as SQL code. This is one of the most important security practices."
+      },
+      {
+        "id": "c2",
+        "content": "Store API keys and database credentials directly in your source code for easy access",
+        "isGoodPractice": false,
+        "explanation": "Credentials in source code end up in git history and can leak through public repos. Use environment variables and never commit secrets to version control."
+      },
+      {
+        "id": "c3",
+        "content": "Set HTTP security headers like Content-Security-Policy and X-Frame-Options on your server",
+        "isGoodPractice": true,
+        "explanation": "Security headers protect against XSS, clickjacking, and other browser-based attacks. Most frameworks have middleware that sets these automatically."
+      },
+      {
+        "id": "c4",
+        "content": "Disable CORS entirely so any website can call your API — it makes development easier",
+        "isGoodPractice": false,
+        "explanation": "Wide-open CORS means any website can make requests to your API on behalf of your users. Configure CORS to only allow your own frontend domain."
+      },
+      {
+        "id": "c5",
+        "content": "Rate limit login attempts to prevent brute-force password attacks",
+        "isGoodPractice": true,
+        "explanation": "Without rate limiting, attackers can try millions of password combinations. Limiting to 5-10 attempts per minute per IP makes brute force impractical."
+      },
+      {
+        "id": "c6",
+        "content": "Show detailed error messages with stack traces to users so they can report bugs more easily",
+        "isGoodPractice": false,
+        "explanation": "Stack traces reveal your tech stack, file structure, and potential vulnerabilities. Show generic errors to users and log detailed errors server-side."
+      }
+    ],
+    "glossaryTerms": ["sql-injection", "xss", "cors"]
+  }
+}

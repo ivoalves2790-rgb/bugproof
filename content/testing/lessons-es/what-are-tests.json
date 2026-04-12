@@ -1,0 +1,68 @@
+{
+  "slug": "what-are-tests",
+  "title": "¿Qué son los tests?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Antes de escribir un solo test, aclaremos qué son realmente los tests y qué no son. Hay muchos conceptos erróneos por ahí. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tests = Corrector ortográfico para tu código",
+      "body": "¿Sabes cómo un corrector ortográfico subraya automáticamente las palabras mal escritas mientras escribes? No tienes que releer manualmente cada oración -- el corrector lo hace por ti. Los **tests** son como un corrector ortográfico para tu código. Verifican automáticamente que tu código hace lo que se supone que debe hacer, para que no tengas que verificar todo manualmente cada vez que haces un cambio."
+    },
+    {
+      "type": "text",
+      "title": "Qué son realmente los tests",
+      "body": "Un test es un pequeño fragmento de código que:\n\n1. **Prepara** un escenario (dado este input...)\n2. **Ejecuta** algo de código (llama a esta función...)\n3. **Verifica** el resultado (espera este output...)\n\nSi el resultado coincide con lo que esperabas, el test **pasa**. Si no, el test **falla** y te dice exactamente qué salió mal."
+    },
+    {
+      "type": "code_example",
+      "title": "Tu primer vistazo a un test",
+      "language": "javascript",
+      "code": "// The function we want to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// The test\ntest('adds 2 + 3 to equal 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
+      "annotation": "Este test llama a add(2, 3) y verifica si el resultado es 5. Si alguien accidentalmente rompe la función add, este test lo detectará."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los tests son código que verifica tu otro código. Preparan un escenario, ejecutan una función y verifican que el resultado coincide con lo que esperabas."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Los tests son código que verifica automáticamente que tu otro código funciona correctamente.",
+        "isGoodPractice": true,
+        "explanation": "¡Exactamente! Los tests son simplemente código que ejecuta tus funciones con inputs conocidos y verifica que los outputs sean correctos. Automatizan el proceso de verificación."
+      },
+      {
+        "id": "card-2",
+        "content": "Solo necesitas tests para proyectos grandes y complejos con equipos grandes.",
+        "isGoodPractice": false,
+        "explanation": "Incluso los proyectos pequeños en solitario se benefician de los tests. Si tu proyecto tiene lógica (cálculos, validación de formularios, procesamiento de datos), los tests te ahorran tiempo al detectar bugs antes que los usuarios. Cuanto más pequeño es el proyecto, más rápido se ejecutan los tests."
+      },
+      {
+        "id": "card-3",
+        "content": "Un test que pasa significa 'este comportamiento específico funciona correctamente ahora mismo'.",
+        "isGoodPractice": true,
+        "explanation": "Los tests verifican comportamientos específicos. Si add(2, 3) devuelve 5, el test pasa. No garantiza que toda la app esté libre de bugs -- solo que esta cosa particular funciona como se espera."
+      },
+      {
+        "id": "card-4",
+        "content": "Los tests garantizan que tu app tiene cero bugs.",
+        "isGoodPractice": false,
+        "explanation": "Los tests solo pueden verificar lo que les dices que verifiquen. Reducen drásticamente los bugs, pero no pueden detectar todo. Podrías pasar por alto casos límite, o el test mismo podría tener una expectativa incorrecta. Los tests son una red de seguridad, no una garantía."
+      },
+      {
+        "id": "card-5",
+        "content": "Los tests se ejecutan automáticamente y te dan feedback instantáneo cuando algo se rompe.",
+        "isGoodPractice": true,
+        "explanation": "¡Este es uno de los mayores beneficios! Haces un cambio, ejecutas tus tests, y en segundos sabes si algo se rompió. Sin tests, tendrías que hacer clic manualmente por toda tu app para verificar."
+      }
+    ],
+    "glossaryTerms": ["test", "assertion", "test-runner"]
+  }
+}

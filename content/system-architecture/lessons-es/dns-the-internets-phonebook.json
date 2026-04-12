@@ -1,0 +1,98 @@
+{
+  "slug": "dns-the-internets-phonebook",
+  "title": "DNS: La Guía Telefónica de Internet",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Tu amigo dice: '¡Mi sitio web está caído! ¡Nadie puede acceder!' Investigarás y descubrirás cómo funciona realmente el DNS -- el sistema que traduce nombres de dominio en direcciones IP.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "DNS Es Como una Guía Telefónica",
+      "body": "Imagina que quieres llamar a una pizzería. Conoces su nombre ('Pizza de Mario') pero no su número de teléfono. Así que lo buscas en la guía telefónica. **DNS** (Sistema de Nombres de Dominio) funciona exactamente así. Conoces el nombre (`google.com`) y DNS busca el número (`142.250.80.46`) para que tu navegador pueda conectarse."
+    },
+    {
+      "type": "text",
+      "title": "¿Por Qué Necesitamos DNS?",
+      "body": "Las computadoras se encuentran entre sí usando **direcciones IP** -- números como `192.168.1.1`. Pero los humanos somos terribles recordando números. DNS nos permite usar nombres amigables como `youtube.com` en lugar de `142.250.190.78`. Cada vez que visitas un sitio web, primero ocurre una búsqueda DNS -- tu navegador pregunta '¿Cuál es la dirección IP de este nombre?'"
+    },
+    {
+      "type": "text",
+      "title": "El Proceso de Búsqueda DNS",
+      "body": "Cuando escribes `example.com`, esto es lo que sucede:\n\n1. Tu navegador revisa su **caché** -- ¿busqué esto recientemente?\n2. Si no, le pregunta a tu **router** (tu Wi-Fi doméstico)\n3. Si el router no sabe, le pregunta al **servidor DNS de tu ISP**\n4. Si nadie sabe, va hasta los **servidores DNS raíz** que lo saben todo\n5. La respuesta viaja de vuelta por la cadena y se almacena en caché para la próxima vez"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "DNS traduce nombres de dominio legibles por humanos (como google.com) en direcciones IP legibles por máquinas (como 142.250.80.46). Sin DNS, tendrías que memorizar números para cada sitio web."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu amigo acaba de lanzar su sitio web en www.coolstore.com. Te dice: 'Compré el dominio hace una hora y lo apunté a mi servidor, pero cuando escribo la URL obtengo un error: DNS_PROBE_FINISHED_NXDOMAIN.' ¿Qué significa este error?",
+        "choices": [
+          { "id": "a", "text": "DNS no pudo encontrar una dirección IP para ese nombre de dominio", "nextNode": "correct-dns", "score": 10 },
+          { "id": "b", "text": "El servidor está caído y no responde", "nextNode": "wrong-server-down", "score": 3 },
+          { "id": "c", "text": "El código del sitio web tiene un error", "nextNode": "wrong-code-bug", "score": 1 }
+        ]
+      },
+      "correct-dns": {
+        "narrative": "¡Correcto! NXDOMAIN significa 'Dominio No Existente' -- DNS buscó coolstore.com pero no pudo encontrar ninguna dirección IP para él. Tu amigo dice que actualizó la configuración DNS en su registrador de dominios hace una hora. ¿Qué está pasando probablemente?",
+        "choices": [
+          { "id": "a", "text": "Los cambios de DNS tardan en propagarse por internet (propagación)", "nextNode": "correct-propagation", "score": 10 },
+          { "id": "b", "text": "Probablemente escribió la dirección IP incorrecta en la configuración DNS", "nextNode": "possible-typo", "score": 5 },
+          { "id": "c", "text": "El registrador de dominios está fallando", "nextNode": "wrong-registrar", "score": 2 }
+        ]
+      },
+      "wrong-server-down": {
+        "narrative": "No exactamente. Si el servidor estuviera caído, obtendrías un error diferente -- como un tiempo de espera agotado o conexión rechazada. El error NXDOMAIN ocurre antes en el proceso: tu navegador ni siquiera puede encontrar DÓNDE está el servidor. Es un problema de DNS, no del servidor.",
+        "choices": [
+          { "id": "a", "text": "Entonces, ¿DNS no pudo encontrar la dirección IP del nombre de dominio?", "nextNode": "correct-dns", "score": 5 }
+        ]
+      },
+      "wrong-code-bug": {
+        "narrative": "Un error en el código solo importaría si tu navegador pudiera realmente alcanzar el servidor. El error NXDOMAIN ocurre antes de que se haga cualquier conexión -- tu navegador todavía está intentando averiguar DÓNDE enviar la petición. Está atascado en el paso de DNS.",
+        "choices": [
+          { "id": "a", "text": "OK, entonces es un problema de DNS -- el nombre de dominio no se puede resolver", "nextNode": "correct-dns", "score": 5 }
+        ]
+      },
+      "correct-propagation": {
+        "narrative": "¡Exactamente! La propagación de DNS puede tardar hasta 48 horas. Los servidores DNS de todo el mundo almacenan resultados en caché y no buscan actualizaciones de inmediato. Tu amigo debería esperar unas horas más. Mientras tanto, ¿qué puede hacer para verificar que su configuración es correcta?",
+        "choices": [
+          { "id": "a", "text": "Usar una herramienta de búsqueda DNS para verificar si los registros están configurados correctamente", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Solo esperar y desear lo mejor", "nextNode": "end-ok", "score": 5 }
+        ]
+      },
+      "possible-typo": {
+        "narrative": "¡Eso es posible! Pero como acaba de hacer el cambio, la razón más probable es la propagación de DNS -- toma tiempo para que los cambios de DNS se propaguen por internet. Los servidores DNS almacenan resultados en caché y solo se actualizan periódicamente, lo cual puede tomar de minutos a 48 horas.",
+        "choices": [
+          { "id": "a", "text": "Entonces deberíamos esperar la propagación y también verificar la configuración", "nextNode": "end-great", "score": 7 }
+        ]
+      },
+      "wrong-registrar": {
+        "narrative": "Los registradores de dominios casi nunca se caen completamente. El problema mucho más común es la propagación de DNS -- cuando actualizas los registros DNS, toma tiempo para que todos los servidores DNS del mundo obtengan la nueva información.",
+        "choices": [
+          { "id": "a", "text": "Entonces necesitamos esperar a que los cambios DNS se propaguen", "nextNode": "correct-propagation", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "Usas un verificador de DNS en línea y confirmas que el registro A apunta a la dirección IP correcta. El verificador muestra que algunos servidores DNS ya tienen el nuevo registro mientras otros todavía muestran el antiguo. ¡Propagación clásica! Le dices a tu amigo que espere unas horas más.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente trabajo! Identificaste que NXDOMAIN significa que DNS no puede encontrar el dominio, entendiste que la propagación de DNS toma tiempo, y sugeriste usar una herramienta de búsqueda para verificar la configuración. Los problemas de DNS son uno de los más comunes al lanzar un nuevo sitio web."
+      },
+      "end-ok": {
+        "narrative": "Esperar probablemente funcionará, pero es mejor verificar primero que la configuración DNS sea correcta. Si hay un error tipográfico en la dirección IP, esperar no ayudará. Usar una herramienta de búsqueda DNS toma 10 segundos y te da tranquilidad.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Identificaste correctamente la propagación de DNS como el problema, pero ser proactivo verificando los registros DNS es un buen hábito. Siempre verifica tu configuración con una herramienta de búsqueda DNS en lugar de solo esperar y desear lo mejor."
+      }
+    },
+    "glossaryTerms": ["dns", "ip-address", "domain", "dns-propagation"]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "debugging-failures",
+  "title": "Debugging Test Failures",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Your tests are failing and you need to figure out why. Is it a real bug or a bad test? Swipe right on good debugging practices, left on bad ones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "When Tests Fail",
+      "body": "A failing test means one of two things: your code has a bug, or your test is wrong. Before assuming it's a code bug, read the error message carefully, check if the test setup is correct, and verify the test expectations match the current requirements. Many 'bugs' are actually outdated tests."
+    },
+    {
+      "type": "code_example",
+      "title": "Reading a Test Failure",
+      "language": "text",
+      "code": "FAIL: 'should return tasks sorted by due date'\n  Expected: ['Task A (Jan 1)', 'Task B (Jan 5)']\n  Received: ['Task B (Jan 5)', 'Task A (Jan 1)']\n\nThis tells you: the sort order is reversed.\nCheck: Is the sort function wrong? Or did the test expect the wrong order?",
+      "annotation": "Always read the expected vs received values. They often tell you exactly what went wrong."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Read the error message first — not the code. Most test failures tell you exactly what went wrong if you read the output carefully."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "When a test fails, read the error message and compare expected vs actual values before looking at code",
+        "isGoodPractice": true,
+        "explanation": "The error output usually tells you exactly what went wrong. Jumping into code before reading the error wastes time and leads you down wrong paths."
+      },
+      {
+        "id": "c2",
+        "content": "If a test is failing, delete it and rewrite it from scratch",
+        "isGoodPractice": false,
+        "explanation": "Understand why it's failing first. The test might be correct and revealing a real bug. Deleting it could hide a legitimate problem."
+      },
+      {
+        "id": "c3",
+        "content": "Run the failing test in isolation to rule out interference from other tests",
+        "isGoodPractice": true,
+        "explanation": "Tests sometimes fail because a previous test left behind dirty state (modified database, changed global variables). Running in isolation confirms if the test itself is broken or if it's an ordering issue."
+      },
+      {
+        "id": "c4",
+        "content": "Mark flaky tests as 'skip' so they don't block the CI pipeline",
+        "isGoodPractice": false,
+        "explanation": "Skipping flaky tests is a temporary measure at best. Flaky tests often hide real bugs. Fix the root cause — usually timing issues, shared state, or brittle selectors."
+      },
+      {
+        "id": "c5",
+        "content": "Check if recent code changes match what the test expects — the test might need updating for new requirements",
+        "isGoodPractice": true,
+        "explanation": "Requirements change. If you renamed a field from 'done' to 'completed', tests checking for 'done' will fail. That's not a bug — the test just needs to reflect the new contract."
+      },
+      {
+        "id": "c6",
+        "content": "If tests pass locally but fail in CI, the tests are probably fine — just retry the CI build",
+        "isGoodPractice": false,
+        "explanation": "Different environments reveal real issues: timezone differences, missing environment variables, database state. Investigate the environment difference instead of blindly retrying."
+      }
+    ],
+    "glossaryTerms": ["ci", "flaky-test"]
+  }
+}

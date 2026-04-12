@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { useT } from "@/lib/i18n/use-language";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -14,6 +15,7 @@ export default function SignupPage() {
   const [error, setError] = useState("");
   const router = useRouter();
   const supabase = createClient();
+  const t = useT();
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
@@ -56,10 +58,10 @@ export default function SignupPage() {
     <div>
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold">
-          <span className="text-terminal-green">{">"}</span> Sign up
+          <span className="text-terminal-green">{">"}</span> {t("signup.title")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Start your engineering journey
+          {t("signup.subtitle")}
         </p>
       </div>
 
@@ -68,19 +70,19 @@ export default function SignupPage() {
         className="w-full"
         onClick={handleGoogleLogin}
       >
-        Continue with Google
+        {t("signup.google")}
       </Button>
 
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
-        <span className="text-xs text-muted-foreground">or</span>
+        <span className="text-xs text-muted-foreground">{t("signup.or")}</span>
         <div className="h-px flex-1 bg-border" />
       </div>
 
       <form onSubmit={handleSignup} className="space-y-4">
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
-            Display Name
+            {t("signup.displayName")}
           </label>
           <input
             type="text"
@@ -93,7 +95,7 @@ export default function SignupPage() {
         </div>
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
-            Email
+            {t("signup.email")}
           </label>
           <input
             type="email"
@@ -106,7 +108,7 @@ export default function SignupPage() {
         </div>
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
-            Password
+            {t("signup.password")}
           </label>
           <input
             type="password"
@@ -124,14 +126,14 @@ export default function SignupPage() {
         )}
 
         <Button type="submit" className="w-full" loading={loading}>
-          Create Account
+          {t("signup.submit")}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Already have an account?{" "}
+        {t("signup.hasAccount")}{" "}
         <Link href="/login" className="text-terminal-green hover:underline">
-          Log in
+          {t("signup.login")}
         </Link>
       </p>
     </div>

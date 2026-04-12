@@ -1,0 +1,66 @@
+{
+  "slug": "manual-vs-automated",
+  "title": "Testing manual vs automatizado",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Has estado testeando tu código haciendo clic por el navegador y verificando si las cosas se ven bien. Eso es testing manual -- y tiene algunas desventajas serias. Comparemos el testing manual y el automatizado. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Manual = Lavar a mano, Automatizado = Lavavajillas",
+      "body": "El testing manual es como lavar platos a mano. Lo haces tú mismo, uno por uno, y a veces se te pasa una mancha. El testing automatizado es como un lavavajillas -- lo cargas una vez, presionas un botón, y limpia todo de forma consistente cada vez. El lavavajillas no se cansa, no olvida un plato ni apura los últimos."
+    },
+    {
+      "type": "text",
+      "title": "Testing manual",
+      "body": "**Testing manual** significa que TÚ verificas si las cosas funcionan:\n\n- Haces clic por la app en un navegador\n- Escribes en formularios y verificas el output\n- Pruebas diferentes escenarios a mano\n\nEs lento, inconsistente y no escala. Pero es bueno para explorar nuevas funcionalidades y verificar el diseño visual -- cosas que son difíciles de automatizar."
+    },
+    {
+      "type": "text",
+      "title": "Testing automatizado",
+      "body": "**Testing automatizado** significa que el CÓDIGO verifica si las cosas funcionan:\n\n- Los tests se ejecutan en segundos\n- Las mismas verificaciones cada vez, sin error humano\n- Se ejecuta automáticamente en cada push (via CI/CD)\n- Puede testear cientos de escenarios en el tiempo que toma testear uno manualmente\n\nEl costo inicial es escribir los tests, pero se pagan solos después de solo unas pocas ejecuciones."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El testing manual es bueno para explorar y verificaciones visuales. El testing automatizado es más rápido, más confiable y detecta regresiones. Los mejores equipos usan ambos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El testing manual es más rápido que el testing automatizado cuando solo necesitas verificar una cosa una vez.",
+        "isGoodPractice": true,
+        "explanation": "Para una verificación rápida de una sola vez, hacer clic por la app es más rápido que escribir un test completo. Los tests automatizados se pagan cuando necesitas verificar lo mismo repetidamente -- después de cada cambio de código."
+      },
+      {
+        "id": "card-2",
+        "content": "Los tests automatizados pueden detectar bugs que fueron introducidos por un cambio de código que hiciste en un archivo completamente diferente.",
+        "isGoodPractice": true,
+        "explanation": "Este es uno de los mayores beneficios de los tests automatizados. Cuando cambias el archivo A, podrías accidentalmente romper algo en el archivo C. Los tests automatizados verifican todo, así que detectan estos bugs de 'efecto dominó' que nunca pensarías en testear manualmente."
+      },
+      {
+        "id": "card-3",
+        "content": "Deberías reemplazar todo el testing manual con testing automatizado.",
+        "isGoodPractice": false,
+        "explanation": "Algunas cosas se testean mejor manualmente -- como el diseño visual, la experiencia de usuario y el testing exploratorio (probar cosas al azar para ver qué se rompe). El mejor enfoque es tests automatizados para la lógica y testing manual para verificaciones visuales y de UX."
+      },
+      {
+        "id": "card-4",
+        "content": "Si tu app tiene tests automatizados, nunca necesitas testear manualmente de nuevo.",
+        "isGoodPractice": false,
+        "explanation": "Los tests automatizados verifican lo que les dijiste que verificaran. No pueden notar que un botón se ve raro, que la fuente está mal, o que el layout está roto en móvil. El testing manual detecta problemas visuales y de UX que los tests automatizados pasan por alto."
+      },
+      {
+        "id": "card-5",
+        "content": "Ejecutar tests automatizados antes de cada despliegue previene que las regresiones lleguen a producción.",
+        "isGoodPractice": true,
+        "explanation": "Una regresión es cuando algo que antes funcionaba deja de funcionar. Ejecutar tu suite de tests completo antes de cada despliegue es la mejor manera de detectar regresiones temprano. Si un test falla, el despliegue debería bloquearse hasta que se arregle."
+      }
+    ],
+    "glossaryTerms": ["manual-testing", "automated-testing", "regression"]
+  }
+}

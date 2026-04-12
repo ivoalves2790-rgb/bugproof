@@ -1,0 +1,76 @@
+{
+  "slug": "creating-branches",
+  "title": "Creando ramas",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Estás trabajando en una aplicación de blog y quieres agregar un modo oscuro. En lugar de cambiar el código principal directamente, crearás una rama separada para trabajar de forma segura.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Cómo funciona la creación de ramas",
+      "body": "Cuando creas una rama, Git no copia tus archivos. Solo crea un pequeño marcador (llamado **puntero**) que dice \"esta rama comienza aquí.\" Sucede instantáneamente y no ocupa casi espacio. Por eso los desarrolladores crean ramas constantemente -- son baratas y rápidas."
+    },
+    {
+      "type": "code_example",
+      "title": "Los comandos para ramificar",
+      "language": "bash",
+      "code": "git branch                       # List all branches\ngit branch feature/dark-mode     # Create a new branch\ngit checkout feature/dark-mode   # Switch to it\n\n# Or do both at once:\ngit checkout -b feature/dark-mode",
+      "annotation": "El atajo `git checkout -b <nombre>` crea Y cambia a la rama en un solo comando. Lo usarás mucho."
+    },
+    {
+      "type": "text",
+      "title": "Crear vs cambiar",
+      "body": "**Importante:** `git branch <nombre>` solo crea la rama -- no te cambia a ella. Sigues en tu rama anterior hasta que ejecutes `git checkout <nombre>`. El asterisco (*) junto al nombre de una rama en la salida de `git branch` te indica en cuál estás actualmente."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Crea una rama con `git branch <nombre>`, cámbiate a ella con `git checkout <nombre>`, o haz ambas cosas a la vez con `git checkout -b <nombre>`."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/blog-app",
+    "initialFiles": ["index.html", "style.css", "app.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "Primero, verifica en qué rama estás actualmente.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "* main",
+        "hint": "Escribe 'git branch' para ver todas las ramas. El asterisco (*) muestra en cuál estás."
+      },
+      {
+        "instruction": "Crea una nueva rama llamada 'feature/dark-mode' para tu trabajo de modo oscuro.",
+        "expectedCommand": "git branch feature/dark-mode",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Usa 'git branch' seguido del nombre de la nueva rama: git branch feature/dark-mode"
+      },
+      {
+        "instruction": "Lista las ramas de nuevo para confirmar que tu nueva rama fue creada.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "  feature/dark-mode\n* main",
+        "hint": "Escribe 'git branch' para ver todas las ramas. Observa que aún estás en main (el asterisco)."
+      },
+      {
+        "instruction": "Cámbiate a tu nueva rama para que tus cambios se guarden allí en lugar de en main.",
+        "expectedCommand": "git checkout feature/dark-mode",
+        "acceptAlternatives": ["git switch feature/dark-mode"],
+        "output": "Switched to branch 'feature/dark-mode'",
+        "hint": "Usa 'git checkout' o 'git switch' seguido del nombre de la rama para moverte a ella."
+      },
+      {
+        "instruction": "Verifica que ahora estás en la rama de la función.",
+        "expectedCommand": "git branch",
+        "acceptAlternatives": ["git branch --list"],
+        "output": "* feature/dark-mode\n  main",
+        "hint": "Escribe 'git branch' -- el asterisco debería estar ahora junto a feature/dark-mode."
+      }
+    ],
+    "completionMessage": "¡Has creado y cambiado a una rama de función! Cualquier commit que hagas ahora solo existirá en 'feature/dark-mode'. La rama main se mantiene intacta hasta que estés listo para fusionar. Consejo profesional: 'git checkout -b feature/dark-mode' crea Y cambia en un solo comando.",
+    "glossaryTerms": ["branch", "git-checkout", "git-switch", "feature-branch"]
+  }
+}

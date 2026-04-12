@@ -1,0 +1,16 @@
+{
+  "slug": "building-ui",
+  "title": "Building the UI",
+  "description": "Turn your designs into real components. Build the task card, forms, and layout that users will interact with.",
+  "order": 4,
+  "phase": "building",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "component-thinking", "title": "Thinking in Components", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "tailwind-basics", "title": "Styling with Tailwind", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "building-task-card", "title": "Building the Task Card", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "form-design", "title": "Designing the Task Form", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "layout-and-navigation", "title": "Layout & Navigation", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["code-organization", "debugging-error-reading"]
+}

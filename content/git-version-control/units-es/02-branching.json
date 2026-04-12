@@ -1,0 +1,16 @@
+{
+  "slug": "branching",
+  "title": "Ramificaciones",
+  "description": "Crea líneas de tiempo paralelas para trabajar en funcionalidades sin romper nada",
+  "order": 2,
+  "courseSlug": "git-version-control",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-branches", "title": "¿Qué son las ramas?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "creating-branches", "title": "Creando ramas", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "switching-branches", "title": "Cambiando de rama", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "branch-naming", "title": "Convenciones de nombres de ramas", "type": "swipe_to_judge", "order": 4, "difficulty": 1 },
+    { "slug": "branch-workflow-bug", "title": "Errores en el flujo de trabajo con ramas", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "detached-head", "title": "El misterio del HEAD desconectado", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "scaling",
+  "title": "Escalabilidad y Proximos Pasos",
+  "description": "Tu app esta en produccion! Aprende a manejar el crecimiento, mejorar el rendimiento y planificar tus proximas funcionalidades.",
+  "order": 9,
+  "phase": "scaling",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "performance-basics", "title": "Fundamentos de Rendimiento", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "caching-strategies", "title": "Estrategias de Cache", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "scaling-database", "title": "Escalando Tu Base de Datos", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "adding-features", "title": "Agregando Funcionalidades de Forma Segura", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "whats-next", "title": "Que Sigue?", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["performance-scaling"]
+}

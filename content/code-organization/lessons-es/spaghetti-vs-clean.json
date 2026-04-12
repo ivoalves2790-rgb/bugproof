@@ -1,0 +1,66 @@
+{
+  "slug": "spaghetti-vs-clean",
+  "title": "Código espagueti vs código limpio",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-organization-matters",
+  "courseSlug": "code-organization",
+  "intro": "Trabajar con cierto código es un placer. Otro código te hace querer renunciar y convertirte en agricultor. La diferencia usualmente no se trata de algoritmos inteligentes -- se trata de organización. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Código = Cocina",
+      "body": "Imagina dos cocinas. En la primera, cada utensilio tiene su lugar, los ingredientes están etiquetados y las recetas están en una carpeta. En la segunda, todo está apilado en el mostrador, las especias están en cajones al azar y no hay receta a la vista. Ambas cocinas pueden hacer la cena, pero ¿en cuál quieres cocinar todos los días? La **organización de código** es la diferencia entre estas dos cocinas."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué es el código espagueti?",
+      "body": "El **código espagueti** es código donde todo está enredado:\n\n- Las funciones tienen 500 líneas y hacen 12 cosas diferentes\n- Las variables se llaman `x`, `temp`, `data2`\n- La misma lógica se copia y pega en 6 lugares\n- Cambias una cosa y tres funcionalidades no relacionadas se rompen\n\nSe llama espagueti porque si intentas jalar de un hilo, todo el plato viene con él."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué hace limpio al código?",
+      "body": "El código limpio no se trata de perfección. Sigue unas pocas reglas prácticas:\n\n1. **Cada función hace una cosa** -- y su nombre dice qué es esa cosa\n2. **Las variables describen su contenido** -- `userEmail` no `str1`\n3. **Los archivos son pequeños y enfocados** -- un componente por archivo, no todo en un mega-archivo\n4. **Sin copiar y pegar** -- la lógica compartida vive en un solo lugar\n5. **Puedes encontrar cosas** -- la estructura de archivos tiene sentido"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El código espagueti enreda todo junto, haciendo los cambios riesgosos y difícil encontrar cosas. El código limpio mantiene las cosas separadas, bien nombradas y fáciles de navegar. No necesitas perfección -- solo organización consistente."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Una función de 500 líneas que maneja registro de usuario, envío de email y actualizaciones de base de datos está bien organizada porque todo está en un solo lugar.",
+        "isGoodPractice": false,
+        "explanation": "Tener todo en un solo lugar no es organización -- es un cajón de desastre. Una función de 500 líneas haciendo tres cosas diferentes es difícil de testear, difícil de depurar y difícil de modificar. Si el envío de email se rompe, tienes que leer 500 líneas para encontrarlo. Cada tarea debería ser su propia función."
+      },
+      {
+        "id": "card-2",
+        "content": "Si tu código funciona correctamente, no importa cómo está organizado.",
+        "isGoodPractice": false,
+        "explanation": "El código que funciona hoy todavía necesita ser cambiado mañana. Necesitarás agregar funcionalidades, corregir bugs e integrar nuevos desarrolladores. El código desorganizado que 'funciona' se convierte en una pesadilla en el momento en que alguien necesita cambiarlo. La mayor parte del tiempo de un desarrollador se gasta leyendo código, no escribiéndolo."
+      },
+      {
+        "id": "card-3",
+        "content": "Dividir una función grande en funciones más pequeñas y bien nombradas hace que el código sea más fácil de entender.",
+        "isGoodPractice": true,
+        "explanation": "Las funciones pequeñas con nombres claros actúan como títulos de capítulos en un libro. En lugar de leer 200 líneas para entender qué pasa durante el checkout, ves: validateCart(), calculateTotal(), processPayment(), sendConfirmation(). Puedes entender el flujo de un vistazo y profundizar en los detalles solo cuando sea necesario."
+      },
+      {
+        "id": "card-4",
+        "content": "Copiar y pegar código es más rápido que crear una función reutilizable.",
+        "isGoodPractice": false,
+        "explanation": "Es más rápido ahora mismo, pero crea una pesadilla de mantenimiento. Cuando encuentras un bug en el código copiado, tienes que arreglarlo en todos los lugares donde se pegó. Si te olvidas de un lugar, tienes comportamiento inconsistente. Una función reutilizable significa arreglar el bug una vez, en un lugar, y cada llamador obtiene la corrección."
+      },
+      {
+        "id": "card-5",
+        "content": "El código limpio toma más tiempo para escribir inicialmente pero ahorra tiempo a largo plazo.",
+        "isGoodPractice": true,
+        "explanation": "Escribir un nombre de variable claro toma 2 segundos extra. Encontrar un bug en código lleno de nombres como 'x' y 'temp' toma 2 horas extra. El código limpio es una inversión: un poco más de esfuerzo al inicio ahorra tiempo enorme al depurar, agregar funcionalidades o cuando alguien más necesita entender tu código."
+      }
+    ],
+    "glossaryTerms": ["spaghetti-code", "clean-code", "refactoring"]
+  }
+}

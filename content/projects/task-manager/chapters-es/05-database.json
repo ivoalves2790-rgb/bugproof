@@ -1,0 +1,16 @@
+{
+  "slug": "database",
+  "title": "Base de Datos y Datos",
+  "description": "Disena tu modelo de datos, escribe consultas y conecta tu app a Supabase. Donde realmente viven tus tareas.",
+  "order": 5,
+  "phase": "database",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "what-is-a-database", "title": "Que Es una Base de Datos?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "tables-and-schemas", "title": "Tablas y Esquemas", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "writing-queries", "title": "Escribiendo Consultas", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "connecting-supabase", "title": "Conectando con Supabase", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "data-flow", "title": "Flujo de Datos en Tu App", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["database-design"]
+}

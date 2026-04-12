@@ -1,0 +1,80 @@
+{
+  "slug": "code-splitting",
+  "title": "División de código",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "Tu app de una sola página carga un bundle de JavaScript de 2MB antes de mostrar algo. Los usuarios en conexiones lentas esperan más de 10 segundos. La app tiene un dashboard, una página de configuración, un panel de administración y una biblioteca de gráficos -- pero la mayoría de los usuarios solo visitan el dashboard. Es hora de dividir las cosas.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "División de código = Capítulos en un libro",
+      "body": "Imagina si tuvieras que descargar una enciclopedia entera antes de poder leer un artículo. Eso es lo que hace un solo bundle de JavaScript -- obliga a los usuarios a descargar código para cada página, incluso páginas que nunca visitarán. La **división de código** es como dividir la enciclopedia en capítulos que se cargan bajo demanda."
+    },
+    {
+      "type": "text",
+      "title": "Cómo funciona la división de código",
+      "body": "En lugar de un archivo JavaScript gigante, la división de código crea múltiples archivos más pequeños:\n\n1. **División basada en rutas** -- Cada página se convierte en su propio fragmento (dashboard.js, settings.js, admin.js)\n2. **División basada en componentes** -- Los componentes pesados se cargan solo cuando se renderizan (biblioteca de gráficos, editor de texto enriquecido)\n3. **División de bibliotecas** -- El código de terceros (React, lodash) va en un fragmento separado que se cachea bien\n\nEl usuario solo descarga el código necesario para la página que está viendo."
+    },
+    {
+      "type": "code_example",
+      "title": "React.lazy para división por rutas",
+      "language": "jsx",
+      "code": "import React, { lazy, Suspense } from 'react';\n\n// These are loaded on-demand, not upfront\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
+      "annotation": "Cada componente de página está envuelto en lazy(), así que su archivo JavaScript solo se descarga cuando el usuario navega a esa ruta. Suspense muestra un fallback de carga mientras el fragmento se descarga."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La división de código separa tu JavaScript en fragmentos más pequeños que se cargan bajo demanda. Divide por ruta (cada página es un fragmento), por componente (las bibliotecas pesadas cargan cuando se necesitan) y por proveedor (el código de terceros se cachea por separado)."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "El bundle único de tu app es de 2MB. Lo analizas y encuentras:\n\n- Código del dashboard: 200KB\n- Página de configuración: 150KB\n- Panel de administración: 300KB\n- Biblioteca de gráficos (usada solo en admin): 600KB\n- Generador de PDF (usado solo en configuración): 400KB\n- React compartido + utilidades: 350KB\n\nEl 80% de los usuarios solo visitan el dashboard. ¿Cuál es tu primera estrategia de división de código?",
+        "choices": [
+          { "id": "a", "text": "Dividir por ruta -- cada página se convierte en su propio fragmento", "nextNode": "route-split", "score": 10 },
+          { "id": "b", "text": "Separar la biblioteca de gráficos en su propio fragmento ya que es la más grande", "nextNode": "chart-split", "score": 6 },
+          { "id": "c", "text": "Minificar todo más agresivamente para hacer el bundle único más pequeño", "nextNode": "minify-only", "score": 2 }
+        ]
+      },
+      "route-split": {
+        "narrative": "Divides la app en fragmentos basados en rutas:\n\n- Fragmento principal (código compartido): 350KB\n- Fragmento del dashboard: 200KB\n- Configuración + generador de PDF: 550KB\n- Admin + gráficos: 900KB\n\nAhora los usuarios del dashboard solo descargan 550KB en lugar de 2MB. Pero el fragmento de admin sigue siendo 900KB. ¿Qué haces al respecto?",
+        "choices": [
+          { "id": "a", "text": "También cargar de forma diferida la biblioteca de gráficos para que solo se cargue cuando el componente de gráficos se renderice", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "900KB está bien ya que solo los admins lo ven", "nextNode": "end-okay", "score": 6 }
+        ]
+      },
+      "chart-split": {
+        "narrative": "Separar la biblioteca de gráficos ayuda, pero sigues enviando 1.4MB a los usuarios del dashboard que no necesitan la página de configuración, el panel de administración ni el generador de PDF. La división basada en rutas sería más impactante como primer paso.",
+        "choices": [
+          { "id": "a", "text": "Empezar con la división basada en rutas en su lugar", "nextNode": "route-split", "score": 7 }
+        ]
+      },
+      "minify-only": {
+        "narrative": "Tu código ya está minificado. Podrías exprimir otro 5-10%, pero el problema fundamental permanece: estás enviando 2MB de código a usuarios que solo necesitan 200KB. La solución no es archivos más pequeños -- es menos archivos cargados de entrada.",
+        "choices": [
+          { "id": "a", "text": "Probar la división de código en lugar de solo compresión", "nextNode": "route-split", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Ahora tu desglose de carga es:\n\n- Usuarios del dashboard: 350KB (compartido) + 200KB (dashboard) = 550KB\n- Usuarios de configuración: + 550KB cuando navegan ahí\n- Usuarios admin: + 300KB para admin, luego + 600KB para gráficos solo cuando abren la pestaña de gráficos\n\nEl tiempo de carga del dashboard bajó de 10 segundos a menos de 3 segundos en conexiones lentas.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Estrategia perfecta! La división basada en rutas dio la mayor ganancia al evitar que los usuarios del dashboard descarguen código de admin y configuración. Luego la división a nivel de componente de la biblioteca de gráficos aseguró que incluso los usuarios admin no carguen 600KB de gráficos hasta que realmente los vean. Este enfoque en capas es exactamente cómo las apps en producción manejan la división de código."
+      },
+      "end-okay": {
+        "narrative": "La división por rutas sola es una gran victoria para la mayoría de los usuarios. El rendimiento de la página de admin podría ser mejor, pero es un trade-off razonable si los usuarios admin están en conexiones rápidas.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "La división basada en rutas fue el primer movimiento correcto y dio la mayor ganancia de rendimiento. Para la página de admin, cargar de forma diferida la biblioteca de gráficos de 600KB ayudaría, especialmente para usuarios admin en conexiones más lentas. Pero en general, has reducido la carga inicial para el 80% de los usuarios de 2MB a 550KB."
+      }
+    },
+    "glossaryTerms": ["code-splitting", "lazy-loading", "bundle", "chunk"]
+  }
+}

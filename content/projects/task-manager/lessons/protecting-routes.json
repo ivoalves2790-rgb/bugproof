@@ -1,0 +1,84 @@
+{
+  "slug": "protecting-routes",
+  "title": "Protecting Routes",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager has login working, but a curious user discovers they can access other people's tasks just by changing the URL. Time to lock down your routes.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Route Protection 101",
+      "body": "Protected routes are pages or API endpoints that require authentication. On the frontend, you redirect unauthenticated users to login. On the backend, middleware checks for a valid session or token before processing any request. Both layers are needed — frontend guards improve UX, but backend checks enforce real security."
+    },
+    {
+      "type": "code_example",
+      "title": "The Two Layers of Route Protection",
+      "language": "text",
+      "code": "Frontend: User visits /dashboard → Check if logged in → If not, redirect to /login\n\nBackend: API receives GET /api/tasks → Middleware checks auth token → If invalid, return 401\n                                      → If valid, only return THAT user's tasks",
+      "annotation": "Frontend protection is for UX (redirecting). Backend protection is for security (blocking). Never rely on frontend alone."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always enforce authorization on the server. Frontend route guards are a convenience for users, not a security measure. Every API endpoint must verify who is making the request."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "A user named Alex discovers that by visiting /api/tasks?userId=42 they can see another user's tasks. Your API returns tasks based on the userId query parameter without checking who's logged in. How do you respond?",
+        "choices": [
+          { "id": "a", "text": "Hide the userId parameter from the frontend URL so users can't see it", "nextNode": "hide-param", "score": 0 },
+          { "id": "b", "text": "Add middleware that extracts the user ID from the auth token instead of the query parameter", "nextNode": "fix-middleware", "score": 4 },
+          { "id": "c", "text": "Add a frontend check that prevents navigating to other users' pages", "nextNode": "frontend-only", "score": 1 }
+        ]
+      },
+      "hide-param": {
+        "narrative": "Hiding the parameter doesn't help — anyone with browser dev tools can see the API calls and change the userId. Within hours, someone on Twitter posts about the vulnerability.",
+        "choices": [
+          { "id": "a1", "text": "Okay, implement proper server-side auth checks now", "nextNode": "fix-middleware", "score": 3 },
+          { "id": "a2", "text": "Add rate limiting to slow down attackers", "nextNode": "band-aid-end", "score": 1 }
+        ]
+      },
+      "fix-middleware": {
+        "narrative": "You add auth middleware that reads the user ID from the verified JWT token, not the query parameter. Now GET /api/tasks always returns the logged-in user's tasks. But you notice the PUT /api/tasks/:id endpoint still doesn't check if the task belongs to the current user. What do you do?",
+        "choices": [
+          { "id": "b1", "text": "Audit all API endpoints and add ownership checks to every one that accesses user data", "nextNode": "full-audit", "score": 3 },
+          { "id": "b2", "text": "Just fix the PUT endpoint and move on", "nextNode": "partial-fix-end", "score": 1 }
+        ]
+      },
+      "frontend-only": {
+        "narrative": "The frontend check works in the browser, but a user uses curl to call your API directly, bypassing the frontend entirely. They can still access any user's data.",
+        "choices": [
+          { "id": "c1", "text": "Implement server-side middleware to validate auth on every API request", "nextNode": "fix-middleware", "score": 3 },
+          { "id": "c2", "text": "Block curl requests by checking the User-Agent header", "nextNode": "band-aid-end", "score": 0 }
+        ]
+      },
+      "full-audit": {
+        "narrative": "You audit all 12 API endpoints, add ownership checks to each one, and write tests to verify unauthorized access returns 403. The vulnerability is fully patched.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "This is the right approach. One vulnerable endpoint usually means others are too. A full audit with tests ensures you catch everything and prevents regressions.",
+        "choices": []
+      },
+      "partial-fix-end": {
+        "narrative": "The PUT endpoint is fixed, but the DELETE endpoint still lets users delete each other's tasks. A week later, someone exploits it and users lose data.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Fixing one endpoint at a time is whack-a-mole. When you find an authorization bug, audit all endpoints systematically — the same pattern likely repeats.",
+        "choices": []
+      },
+      "band-aid-end": {
+        "narrative": "Your band-aid solution is easily bypassed. The core problem — missing server-side authorization — remains. User data continues to leak.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Security through obscurity (hiding params, blocking user agents) never works. Real security requires the server to verify identity and enforce data ownership on every request.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["middleware", "authorization"]
+  }
+}

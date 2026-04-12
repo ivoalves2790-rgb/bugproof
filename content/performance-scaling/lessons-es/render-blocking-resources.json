@@ -1,0 +1,58 @@
+{
+  "slug": "render-blocking-resources",
+  "title": "Recursos que bloquean el renderizado",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "Una página muestra una pantalla blanca durante 3 segundos antes de que aparezca algo. El HTML está bien y el servidor responde rápido -- el problema está en la etiqueta <head>. Los recursos que bloquean el renderizado están impidiendo que el navegador muestre algo. Encuentra la línea que causa el mayor retraso.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Bloqueo de renderizado = Embotellamiento en la puerta",
+      "body": "Imagina un lugar de conciertos donde todos tienen que pasar por una sola puerta. Aunque miles de personas están listas, solo una fila se mueve a la vez. Los **recursos que bloquean el renderizado** funcionan igual -- el navegador encuentra un archivo CSS o JavaScript en el <head> y detiene todo para descargarlo y procesarlo antes de mostrar cualquier contenido al usuario."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué bloquea el renderizado?",
+      "body": "Dos tipos de recursos bloquean el renderizado por defecto:\n\n1. **Archivos CSS** -- El navegador no mostrará nada hasta que todo el CSS en el <head> esté cargado, porque no quiere que el contenido aparezca sin estilo\n2. **Archivos JavaScript** -- Los scripts en el <head> sin 'async' o 'defer' bloquean el análisis del HTML completamente\n\nCuantos más recursos de bloqueo tengas, más tiempo los usuarios se quedan mirando una pantalla en blanco."
+    },
+    {
+      "type": "code_example",
+      "title": "Con bloqueo vs sin bloqueo",
+      "language": "html",
+      "code": "<!-- BLOCKING: Browser stops everything to load this -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- NON-BLOCKING: Browser continues while loading -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
+      "annotation": "El atributo 'defer' descarga el script en paralelo y lo ejecuta después del análisis del HTML. El atributo 'async' descarga en paralelo y ejecuta tan pronto como esté listo."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los recursos que bloquean el renderizado (CSS y JS en el <head> sin async/defer) obligan al navegador a detenerse y esperar antes de mostrar algo. Agrega 'defer' o 'async' a los scripts, y pon solo CSS crítico en el <head>."
+    }
+  ],
+  "exercise": {
+    "language": "html",
+    "code": [
+      { "line": 1, "text": "<head>", "isBuggy": false },
+      { "line": 2, "text": "  <meta charset=\"UTF-8\">", "isBuggy": false },
+      { "line": 3, "text": "  <title>My App</title>", "isBuggy": false },
+      { "line": 4, "text": "  <link rel=\"stylesheet\" href=\"/styles.css\">", "isBuggy": false },
+      { "line": 5, "text": "  <script src=\"/vendor/jquery.min.js\"></script>", "isBuggy": false },
+      { "line": 6, "text": "  <script src=\"/vendor/lodash.full.js\"></script>", "isBuggy": true },
+      { "line": 7, "text": "  <script src=\"/analytics.js\"></script>", "isBuggy": false },
+      { "line": 8, "text": "  <script src=\"/chat-widget.js\"></script>", "isBuggy": false },
+      { "line": 9, "text": "  <link rel=\"stylesheet\" href=\"/print-styles.css\">", "isBuggy": false },
+      { "line": 10, "text": "</head>", "isBuggy": false }
+    ],
+    "correctBuggyLine": 6,
+    "prompt": "Cuatro archivos JavaScript se cargan en el <head> sin async ni defer, bloqueando todo el renderizado. El mayor infractor es una biblioteca de utilidades masiva cargada de forma síncrona. ¿Qué línea causa el mayor retraso?",
+    "fixes": [
+      { "id": "a", "text": "<script src=\"/vendor/lodash.full.js\" defer></script>", "isCorrect": true },
+      { "id": "b", "text": "<script src=\"/vendor/lodash.min.js\"></script>", "isCorrect": false },
+      { "id": "c", "text": "<!-- removed lodash entirely -->", "isCorrect": false },
+      { "id": "d", "text": "<script src=\"/vendor/lodash.full.js\" type=\"module\"></script>", "isCorrect": false }
+    ],
+    "explanation": "Cargar la biblioteca Lodash completa sin minificar de forma síncrona en el <head> es el mayor infractor. Es un archivo grande que bloquea todo. Agregar 'defer' permite al navegador descargarlo en paralelo mientras continúa analizando el HTML y mostrando contenido. La opción B (minificada) es más pequeña pero sigue bloqueando. La opción C elimina funcionalidad que podrías necesitar. La opción D lo cambia a un módulo, que se difiere por defecto pero podría romper código no modular que depende de él. La corrección más limpia es 'defer', que descarga en paralelo y ejecuta después del análisis del HTML.",
+    "glossaryTerms": ["render-blocking", "defer", "async", "critical-rendering-path"]
+  }
+}

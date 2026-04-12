@@ -1,0 +1,53 @@
+{
+  "slug": "config-patterns",
+  "title": "Patrones de Configuración",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Los buenos patrones de configuración mantienen tu app flexible y segura. Un desarrollador escribió valores directamente en el código que deberían ser configurables. Encuentra el error que causará problemas en producción.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Configuración = El Tablero de un Auto",
+      "body": "El tablero de un auto te permite ajustar cosas sin reconstruir el motor -- temperatura, estación de radio, posiciones de espejos. La **configuración** en software funciona de la misma manera. Deberías poder cambiar configuraciones (URL de base de datos, endpoints de API, feature flags) sin reescribir código."
+    },
+    {
+      "type": "text",
+      "title": "La Regla #1 de Configuración: Nunca Escribir Secretos Directamente",
+      "body": "La regla más importante: **nunca pongas valores que cambian entre entornos directamente en tu código**. En su lugar, léelos de variables de entorno:\n\n- URLs de base de datos\n- Claves API y secretos\n- Endpoints de servicios\n- Feature flags\n- Números de puerto"
+    },
+    {
+      "type": "code_example",
+      "title": "Mala vs Buena Configuración",
+      "language": "javascript",
+      "code": "// BAD: Hardcoded values\nconst db = connect('postgresql://admin:password123@localhost:5432/myapp');\n\n// GOOD: Read from environment\nconst db = connect(process.env.DATABASE_URL);\n\n// GOOD: With a fallback for development\nconst port = process.env.PORT || 3000;",
+      "annotation": "El patrón de respaldo (|| 3000) te permite omitir establecer PORT en desarrollo mientras lo requieres en producción."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Nunca escribas directamente en el código valores que difieren entre entornos. Usa process.env para todo lo configurable, con valores por defecto sensatos para desarrollo."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "// Server configuration", "isBuggy": false },
+      { "line": 2, "text": "const port = process.env.PORT || 3000;", "isBuggy": false },
+      { "line": 3, "text": "const apiUrl = 'http://localhost:4000/api';", "isBuggy": true },
+      { "line": 4, "text": "const dbUrl = process.env.DATABASE_URL;", "isBuggy": false },
+      { "line": 5, "text": "const debug = process.env.NODE_ENV !== 'production';", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "Esta app funciona bien localmente pero en producción todas las llamadas API fallan. El desarrollador usó variables de entorno para la mayoría de la configuración pero se le pasó una. Encuentra el valor escrito directamente en el código.",
+    "fixes": [
+      { "id": "a", "text": "const apiUrl = process.env.API_URL || 'http://localhost:4000/api';", "isCorrect": true },
+      { "id": "b", "text": "const apiUrl = 'https://api.production.com/api';", "isCorrect": false },
+      { "id": "c", "text": "const apiUrl = process.env.API_URL;", "isCorrect": false },
+      { "id": "d", "text": "const apiUrl = `http://${process.env.HOST}:4000/api`;", "isCorrect": false }
+    ],
+    "explanation": "La URL de la API está escrita directamente como 'http://localhost:4000/api'. Esto funciona en la máquina del desarrollador pero falla en producción porque no hay localhost -- la API vive en una URL diferente en el servidor. La corrección lee de una variable de entorno (API_URL) y usa localhost como respaldo para desarrollo. Este patrón -- variable de entorno con un valor por defecto -- es el enfoque estándar.",
+    "glossaryTerms": ["hardcoding", "configuration", "environment-variable"]
+  }
+}

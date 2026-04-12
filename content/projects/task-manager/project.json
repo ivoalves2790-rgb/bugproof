@@ -1,0 +1,33 @@
+{
+  "slug": "task-manager",
+  "title": "Task Manager",
+  "description": "Build a full-stack task management app from scratch.",
+  "longDescription": "You'll go from a blank screen to a deployed, working task manager. Along the way you'll learn to plan features, pick a tech stack, write prompts for AI, build a UI, design a database, add authentication, test your code, and ship it to the world.",
+  "icon": "clipboard-list",
+  "color": "#4ECDC4",
+  "difficulty": "beginner",
+  "isPremium": false,
+  "techStack": ["Next.js", "Supabase", "Tailwind CSS"],
+  "chapters": [
+    { "slug": "planning", "title": "Planning Your App", "order": 1, "phase": "planning" },
+    { "slug": "tech-stack", "title": "Choosing Your Stack", "order": 2, "phase": "tech-stack" },
+    { "slug": "setup", "title": "Project Setup", "order": 3, "phase": "setup" },
+    { "slug": "building-ui", "title": "Building the UI", "order": 4, "phase": "building" },
+    { "slug": "database", "title": "Database & Data", "order": 5, "phase": "database" },
+    { "slug": "auth-security", "title": "Auth & Security", "order": 6, "phase": "auth-security" },
+    { "slug": "testing", "title": "Testing", "order": 7, "phase": "testing" },
+    { "slug": "deployment", "title": "Deployment", "order": 8, "phase": "deployment" },
+    { "slug": "scaling", "title": "Scaling & Next Steps", "order": 9, "phase": "scaling" }
+  ],
+  "courseMapping": {
+    "planning": ["system-architecture"],
+    "tech-stack": ["system-architecture", "ai-assisted-development"],
+    "setup": ["git-version-control", "deployment-devops"],
+    "building-ui": ["code-organization", "debugging-error-reading"],
+    "database": ["database-design"],
+    "auth-security": ["security-fundamentals"],
+    "testing": ["testing"],
+    "deployment": ["deployment-devops"],
+    "scaling": ["performance-scaling"]
+  }
+}

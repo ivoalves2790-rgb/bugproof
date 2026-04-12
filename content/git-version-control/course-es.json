@@ -1,0 +1,22 @@
+{
+  "slug": "git-version-control",
+  "title": "Git y Control de Versiones",
+  "description": "Commits, ramas, fusiones y como deshacer errores",
+  "longDescription": "Git es la columna vertebral del desarrollo de software moderno. Ya sea que trabajes solo o en equipo, Git rastrea cada cambio que haces para que puedas experimentar libremente, colaborar sin caos y recuperarte de los errores. Este curso te lleva desde cero hasta la confianza: aprenderas que hace Git realmente por dentro, como guardar y organizar tu trabajo con commits, crear lineas de tiempo paralelas con ramas, combinar trabajo con fusiones, sincronizar con repositorios remotos como GitHub y deshacer practicamente cualquier cosa que salga mal. Al final, dejaras de temer la linea de comandos y empezaras a usar Git como una red de seguridad para tu codigo.",
+  "icon": "git-branch",
+  "color": "#F05032",
+  "prerequisites": [],
+  "units": [
+    { "slug": "basics", "title": "Git Basics", "order": 1 },
+    { "slug": "branching", "title": "Branching", "order": 2 },
+    { "slug": "merging", "title": "Merging", "order": 3 },
+    { "slug": "remotes", "title": "Remotes & GitHub", "order": 4 },
+    { "slug": "undoing", "title": "Undoing Changes", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

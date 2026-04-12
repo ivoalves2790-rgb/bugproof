@@ -36,17 +36,6 @@ export default function RootLayout({
     <html lang="en" className={`${geistMono.variable} h-full overflow-x-hidden`}>
       <body className="min-h-full w-full max-w-[100vw] overflow-x-hidden bg-background text-foreground font-mono antialiased">
         {children}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js');
-                });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   );

@@ -1,0 +1,73 @@
+{
+  "slug": "what-are-we-building",
+  "title": "Que Vamos a Construir?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "Antes de escribir codigo, asegurate de entender lo que un gestor de tareas realmente necesita. Desliza a la derecha para funcionalidades que pertenecen a nuestro MVP, a la izquierda para las que no.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Bienvenido a Tu Primera Construccion",
+      "body": "A lo largo de los proximos 9 capitulos, construiras una app real de gestion de tareas desde cero. No es un tutorial donde copias y pegas codigo — tomaras decisiones, escribiras prompts, revisaras codigo y lanzaras algo real."
+    },
+    {
+      "type": "analogy",
+      "title": "MVP = Patineta, No una Rueda",
+      "body": "Un MVP (Producto Minimo Viable) no es la mitad de un auto — es una patineta. Es lo mas pequeno que realmente funciona y resuelve un problema. Nuestro MVP de gestor de tareas necesita permitir a los usuarios crear, completar y organizar tareas. Eso es todo. Sin resumenes con IA, sin colaboracion en equipo, sin diagramas de Gantt. Eso viene despues."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un MVP de gestor de tareas necesita: crear tareas, marcarlas como completadas, organizarlas por prioridad o fecha. Todo lo demas es un 'seria bueno tenerlo' que puede esperar."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "create-task",
+        "content": "Los usuarios pueden crear una tarea con un titulo y una descripcion opcional",
+        "isGoodPractice": true,
+        "explanation": "Esta es la funcionalidad principal. Sin crear tareas, no hay gestor de tareas."
+      },
+      {
+        "id": "complete-task",
+        "content": "Los usuarios pueden marcar una tarea como completada con una casilla de verificacion",
+        "isGoodPractice": true,
+        "explanation": "Completar tareas es el objetivo principal. Esto es esencial para un MVP."
+      },
+      {
+        "id": "ai-summaries",
+        "content": "La IA genera un resumen diario de tu productividad",
+        "isGoodPractice": false,
+        "explanation": "Funcionalidad interesante, pero demasiado compleja para un MVP. Esto requiere una integracion de IA, seguimiento de uso y mas. Guardalo para la v2."
+      },
+      {
+        "id": "delete-task",
+        "content": "Los usuarios pueden eliminar tareas que ya no necesitan",
+        "isGoodPractice": true,
+        "explanation": "CRUD basico. Si los usuarios pueden crear tareas, necesitan poder eliminarlas."
+      },
+      {
+        "id": "team-sharing",
+        "content": "Compartir tareas con miembros del equipo y asignarlas a personas",
+        "isGoodPractice": false,
+        "explanation": "La colaboracion es una funcionalidad enorme que requiere gestion de usuarios, permisos, notificaciones y mas. No es material para un MVP."
+      },
+      {
+        "id": "due-date",
+        "content": "Establecer una fecha limite en las tareas",
+        "isGoodPractice": true,
+        "explanation": "Simple y util. Las fechas limite ayudan a los usuarios a priorizar y son faciles de implementar con un selector de fechas."
+      },
+      {
+        "id": "gantt-chart",
+        "content": "Visualizar tareas en un diagrama de Gantt",
+        "isGoodPractice": false,
+        "explanation": "Los diagramas de Gantt son componentes de interfaz complejos. Muy fuera del alcance del MVP. Una lista simple ordenada por fecha funciona bien."
+      }
+    ],
+    "glossaryTerms": ["mvp", "crud"]
+  }
+}

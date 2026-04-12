@@ -1,0 +1,71 @@
+{
+  "slug": "what-is-git",
+  "title": "¿Qué es Git?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Git es el sistema de control de versiones más popular del mundo. Pero hay muchos mitos y malentendidos sobre lo que realmente hace. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Control de versiones = Historial de revisiones",
+      "body": "¿Sabes cómo Google Docs te permite hacer clic en \"Historial de versiones\" y ver cada cambio que alguien haya hecho? Incluso puedes volver a una versión anterior si algo salió mal. El **control de versiones** es esa misma idea, pero para toda la carpeta de tu proyecto -- cada archivo, cada cambio, rastreado a lo largo del tiempo."
+    },
+    {
+      "type": "text",
+      "title": "Entonces, ¿qué es Git?",
+      "body": "Git es la herramienta de control de versiones más popular del mundo. Se ejecuta en tu computadora y mantiene una línea de tiempo completa de cada cambio que haces en tu proyecto. Piensa en él como un **sistema de deshacer ilimitado** que recuerda todo -- quién cambió qué, cuándo y por qué."
+    },
+    {
+      "type": "text",
+      "title": "¿Por qué debería importarte?",
+      "body": "Incluso si estás construyendo aplicaciones con herramientas de IA, las cosas se rompen. Git te permite:\n\n1. Volver a una versión funcional cuando algo se rompe\n2. Intentar experimentos arriesgados sin miedo\n3. Colaborar con otros sin sobrescribir el trabajo de los demás\n4. Mantener un historial claro de qué cambió y por qué"
+    },
+    {
+      "type": "text",
+      "title": "Git vs GitHub -- ¡Son diferentes!",
+      "body": "**Git** es la herramienta que se ejecuta en tu computadora y rastrea los cambios. **GitHub** es un sitio web donde puedes almacenar tus proyectos Git en línea y colaborar con otros. Puedes usar Git sin GitHub, pero la mayoría de los equipos usan ambos juntos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Git es una herramienta de control de versiones que rastrea cada cambio en tu proyecto -- como un historial de deshacer ilimitado para todo tu código fuente."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Git guarda una copia completa de cada archivo cada vez que haces un commit.",
+        "isGoodPractice": false,
+        "explanation": "Git es más inteligente que eso. Almacena instantáneas y usa compresión delta, lo que significa que solo guarda las diferencias entre versiones. Por eso los repositorios de Git se mantienen sorprendentemente pequeños incluso con miles de commits."
+      },
+      {
+        "id": "card-2",
+        "content": "Git funciona completamente en tu máquina local -- no necesitas conexión a internet para usarlo.",
+        "isGoodPractice": true,
+        "explanation": "Este es uno de los superpoderes de Git. A diferencia de sistemas más antiguos, Git almacena el historial completo del repositorio en tu computadora. Solo necesitas internet cuando haces push o pull desde un remoto como GitHub."
+      },
+      {
+        "id": "card-3",
+        "content": "Git y GitHub son lo mismo.",
+        "isGoodPractice": false,
+        "explanation": "Git es la herramienta de control de versiones que se ejecuta en tu máquina. GitHub es un sitio web que aloja repositorios Git en línea y agrega funciones de colaboración como los pull requests. Puedes usar Git sin GitHub."
+      },
+      {
+        "id": "card-4",
+        "content": "Git rastrea los cambios en tus archivos a lo largo del tiempo, como un historial de guardado detallado.",
+        "isGoodPractice": true,
+        "explanation": "Piensa en Git como un historial de deshacer ilimitado para todo tu proyecto. Cada commit es un punto de guardado al que puedes volver en cualquier momento. Por eso los desarrolladores lo llaman control de versiones."
+      },
+      {
+        "id": "card-5",
+        "content": "Necesitas saber programar para usar Git.",
+        "isGoodPractice": false,
+        "explanation": "Git puede rastrear cualquier tipo de archivo -- código, texto, archivos de configuración, incluso imágenes. Diseñadores, escritores y científicos de datos usan Git. Interactúas con él a través de comandos de terminal, no escribiendo código."
+      }
+    ],
+    "glossaryTerms": ["version-control", "commit", "repository"]
+  }
+}

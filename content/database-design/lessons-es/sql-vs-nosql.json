@@ -1,0 +1,66 @@
+{
+  "slug": "sql-vs-nosql",
+  "title": "SQL vs NoSQL",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Hay dos grandes familias de bases de datos: SQL (tablas estructuradas) y NoSQL (documentos flexibles). Hay mucho debate sobre cuál es 'mejor,' pero ambas tienen su lugar. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SQL = Hoja de Cálculo, NoSQL = Cuaderno",
+      "body": "Las **bases de datos SQL** son como una hoja de cálculo -- cada fila tiene las mismas columnas, todo es estructurado y predecible. Las **bases de datos NoSQL** son como un cuaderno -- cada página puede tener contenido diferente, y eres libre de organizar las cosas como quieras. Las hojas de cálculo son geniales cuando conoces tu estructura; los cuadernos son geniales cuando cada entrada es diferente."
+    },
+    {
+      "type": "text",
+      "title": "Bases de Datos SQL (Relacionales)",
+      "body": "Las bases de datos SQL almacenan datos en **tablas** con columnas fijas:\n\n1. **PostgreSQL** -- la más popular para proyectos nuevos\n2. **MySQL** -- usada por WordPress, Facebook, Twitter\n3. **SQLite** -- ligera, genial para apps pequeñas y móviles\n\nLes hablas usando **SQL** (Lenguaje de Consulta Estructurado). Son geniales cuando tus datos tienen estructura y relaciones claras."
+    },
+    {
+      "type": "text",
+      "title": "Bases de Datos NoSQL",
+      "body": "Las bases de datos NoSQL almacenan datos de manera más flexible:\n\n1. **MongoDB** -- almacena documentos tipo JSON (la NoSQL más popular)\n2. **Redis** -- almacena pares clave-valor en memoria (súper rápido)\n3. **Firebase** -- base de datos de documentos en tiempo real de Google\n\nSon geniales cuando cada registro puede tener campos diferentes, o cuando necesitas velocidad extrema o flexibilidad."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las bases de datos SQL usan tablas estructuradas y son geniales para datos con relaciones claras. Las bases de datos NoSQL son más flexibles y geniales para datos variados o velocidad extrema. La mayoría de los principiantes deberían comenzar con SQL (PostgreSQL) porque el pensamiento estructurado te ayuda a aprender buenos hábitos de diseño de datos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Las bases de datos SQL almacenan datos en tablas con filas y columnas, como una hoja de cálculo.",
+        "isGoodPractice": true,
+        "explanation": "Cada tabla SQL tiene un conjunto fijo de columnas (como el encabezado de una hoja de cálculo), y cada fila es un registro. Por ejemplo, una tabla 'users' podría tener columnas para id, nombre, email y created_at. Cada fila de usuario tiene exactamente esas columnas."
+      },
+      {
+        "id": "card-2",
+        "content": "Las bases de datos NoSQL siempre son más rápidas que las bases de datos SQL.",
+        "isGoodPractice": false,
+        "explanation": "El rendimiento depende del caso de uso, no del tipo de base de datos. Las bases de datos SQL con índices adecuados pueden ser increíblemente rápidas. Las bases de datos NoSQL pueden ser más rápidas para ciertos patrones (como caché con Redis) pero más lentas para consultas complejas con joins. La 'mejor' base de datos depende de lo que tu app necesite."
+      },
+      {
+        "id": "card-3",
+        "content": "En una base de datos NoSQL como MongoDB, diferentes documentos en la misma colección pueden tener campos diferentes.",
+        "isGoodPractice": true,
+        "explanation": "Esta es una característica clave de las bases de datos de documentos. Un documento de usuario podría tener un campo 'phone' mientras otro no. Esta flexibilidad es útil cuando tus datos no siempre tienen la misma forma. Las bases de datos SQL requieren que cada fila tenga las mismas columnas."
+      },
+      {
+        "id": "card-4",
+        "content": "Siempre deberías elegir NoSQL para aplicaciones web modernas.",
+        "isGoodPractice": false,
+        "explanation": "Las bases de datos SQL (especialmente PostgreSQL) son la opción más común para aplicaciones web y son usadas por la mayoría de startups y empresas de tecnología. Son confiables, bien comprendidas y manejan la mayoría de casos de uso perfectamente. NoSQL es una gran herramienta para situaciones específicas, no una opción por defecto."
+      },
+      {
+        "id": "card-5",
+        "content": "SQL significa Lenguaje de Consulta Estructurado -- es el lenguaje usado para hablar con bases de datos relacionales.",
+        "isGoodPractice": true,
+        "explanation": "SQL es un lenguaje estándar soportado por todas las bases de datos relacionales (PostgreSQL, MySQL, SQLite, etc.). Escribes comandos SQL como SELECT, INSERT, UPDATE y DELETE para interactuar con tus datos. Aprender SQL es una de las habilidades más valiosas en el desarrollo de software."
+      }
+    ],
+    "glossaryTerms": ["sql", "nosql", "relational-database", "document-database"]
+  }
+}

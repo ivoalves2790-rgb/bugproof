@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-the-backend",
+  "title": "¿Qué es el Backend?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "El backend es la parte oculta de una aplicación -- el servidor, la base de datos y toda la lógica que el usuario nunca ve directamente. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El Backend Es Como la Cocina",
+      "body": "¿Recuerdas el restaurante? La **cocina** es el backend. Los clientes (usuarios) nunca la ven, pero es donde sucede el trabajo real -- tomar pedidos, preparar comida, gestionar inventario y asegurar que todo sea seguro para comer. El mesero (API) lleva las peticiones del comedor (frontend) a la cocina (backend) y de vuelta."
+    },
+    {
+      "type": "text",
+      "title": "Qué Hace el Backend",
+      "body": "El backend es código que se ejecuta en un **servidor** -- una computadora que tú controlas. Se encarga de:\n\n1. **Lógica de negocio** -- reglas como 'los usuarios no pueden comprar más de 5 artículos'\n2. **Almacenamiento de datos** -- guardar y leer de bases de datos\n3. **Autenticación** -- verificar contraseñas y gestionar sesiones de inicio de sesión\n4. **Seguridad** -- mantener los secretos a salvo y validar todas las entradas\n5. **Procesamiento pesado** -- enviar correos electrónicos, redimensionar imágenes, generar reportes"
+    },
+    {
+      "type": "text",
+      "title": "Lenguajes Comunes de Backend",
+      "body": "El backend puede escribirse en muchos lenguajes:\n\n1. **JavaScript** (Node.js) -- el mismo lenguaje que el frontend\n2. **Python** (Django, Flask) -- popular por su legibilidad\n3. **Ruby** (Rails) -- famoso por el desarrollo rápido\n4. **Java** (Spring) -- común en grandes empresas\n5. **Go** -- rápido, usado para servicios de alto rendimiento\n\nA diferencia del frontend (que debe usar JavaScript en los navegadores), puedes elegir cualquier lenguaje para el backend."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El backend es el código que se ejecuta en un servidor. Maneja la lógica de negocio, el almacenamiento de datos, la autenticación y la seguridad. Los usuarios nunca ven el código del backend, por eso es seguro para operaciones sensibles como procesar pagos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El backend se ejecuta en un servidor, no en el navegador del usuario.",
+        "isGoodPractice": true,
+        "explanation": "El código del backend se ejecuta en una computadora (servidor) que tú controlas, típicamente en un centro de datos o proveedor de nube. Los usuarios interactúan con él indirectamente a través de peticiones API, pero nunca ven ni ejecutan el código del backend real."
+      },
+      {
+        "id": "card-2",
+        "content": "La verificación de contraseñas debe ocurrir en el backend, no en el frontend.",
+        "isGoodPractice": true,
+        "explanation": "Si verificas las contraseñas en el código del frontend, cualquiera podría abrir las DevTools, leer la lógica de comparación de contraseñas y evadirla. El backend es el único lugar seguro para manejar la autenticación porque los usuarios no pueden ver ni modificar el código del lado del servidor."
+      },
+      {
+        "id": "card-3",
+        "content": "Necesitas usar el mismo lenguaje de programación tanto para el frontend como para el backend.",
+        "isGoodPractice": false,
+        "explanation": "El frontend y el backend pueden usar lenguajes completamente diferentes. El único lenguaje que los navegadores entienden es JavaScript (para el frontend), pero el backend puede usar Python, Ruby, Java, Go o cualquier otro lenguaje. Se comunican a través de HTTP, que es agnóstico al lenguaje."
+      },
+      {
+        "id": "card-4",
+        "content": "El backend es responsable de guardar los datos del usuario permanentemente en una base de datos.",
+        "isGoodPractice": true,
+        "explanation": "Cuando un usuario se registra, envía un formulario o publica un comentario, el frontend envía esos datos al backend, que los valida y los almacena en una base de datos. El backend es el guardián de todos los datos que necesitan persistir."
+      },
+      {
+        "id": "card-5",
+        "content": "Todos los sitios web necesitan un backend.",
+        "isGoodPractice": false,
+        "explanation": "Los sitios web estáticos simples (como un portafolio personal con solo HTML y CSS) no necesitan un backend en absoluto. Son solo archivos servidos directamente al navegador. Solo necesitas un backend cuando tienes datos dinámicos, cuentas de usuario o procesamiento del lado del servidor."
+      }
+    ],
+    "glossaryTerms": ["backend", "server", "business-logic", "authentication"]
+  }
+}

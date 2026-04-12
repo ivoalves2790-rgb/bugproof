@@ -1,0 +1,67 @@
+{
+  "slug": "performance-basics",
+  "title": "Performance Basics",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager is live and people are using it. But some pages load slowly and users are bouncing. Let's learn what makes web apps fast — and what slows them down.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Why Performance Matters",
+      "body": "Users expect pages to load in under 2 seconds. Every extra second of load time increases bounce rates dramatically. Performance isn't just about speed — it's about user experience, SEO rankings, and even conversion rates. A fast app feels professional and trustworthy."
+    },
+    {
+      "type": "analogy",
+      "title": "Performance Is Like a Fast-Food Restaurant",
+      "body": "Nobody wants to wait 20 minutes for a burger. Fast-food restaurants optimize everything: pre-heat the grill, prep ingredients in advance, and have a streamlined workflow. Your app should do the same: pre-load data, cache common requests, and minimize unnecessary work."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The biggest performance wins usually come from three things: reducing the amount of JavaScript you ship, optimizing images, and caching data that doesn't change often."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Lazy load components that aren't visible on the initial screen to reduce the initial bundle size",
+        "isGoodPractice": true,
+        "explanation": "Code splitting and lazy loading mean users only download the JavaScript they need right now. A task manager doesn't need to load the settings page code until the user navigates there."
+      },
+      {
+        "id": "c2",
+        "content": "Load all your data on the client side after the page renders to keep the server response fast",
+        "isGoodPractice": false,
+        "explanation": "Client-side data fetching causes a loading spinner after the page appears. Server-side rendering or static generation sends the data with the HTML, so the page is usable immediately."
+      },
+      {
+        "id": "c3",
+        "content": "Optimize images by using modern formats like WebP and serving appropriately sized versions",
+        "isGoodPractice": true,
+        "explanation": "Images are often the heaviest assets on a page. Using WebP instead of PNG can reduce file size by 30-50%. Next.js's Image component does this automatically."
+      },
+      {
+        "id": "c4",
+        "content": "Premature optimization — spending time optimizing code that's already fast enough — is a waste of time",
+        "isGoodPractice": true,
+        "explanation": "Don't optimize blindly. Measure first with tools like Lighthouse or Chrome DevTools. Fix the actual bottlenecks, not what you guess might be slow."
+      },
+      {
+        "id": "c5",
+        "content": "Install as many npm packages as needed — the more features your app has, the better the user experience",
+        "isGoodPractice": false,
+        "explanation": "Every package adds to your bundle size. A date picker library might add 50KB. Evaluate whether you really need each dependency or if a simpler solution exists."
+      },
+      {
+        "id": "c6",
+        "content": "Use a Content Delivery Network (CDN) to serve static assets from servers close to your users",
+        "isGoodPractice": true,
+        "explanation": "CDNs cache your static files (images, CSS, JS) on servers worldwide. A user in Tokyo gets files from a Tokyo server instead of waiting for a response from New York. Vercel does this automatically."
+      }
+    ],
+    "glossaryTerms": ["lazy-loading", "cdn"]
+  }
+}

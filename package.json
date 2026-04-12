@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "sed -i.bak \"s/__BUILD_TIME__/$(date +%s)/\" public/sw.js && rm -f public/sw.js.bak",
+    "postbuild": "sed -i.bak \"s/bugproof-[0-9]*/bugproof-__BUILD_TIME__/\" public/sw.js && rm -f public/sw.js.bak",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
@@ -17,6 +19,7 @@
     "next-pwa": "^5.6.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "stripe": "^22.0.1",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {

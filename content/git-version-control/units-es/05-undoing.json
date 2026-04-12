@@ -1,0 +1,16 @@
+{
+  "slug": "undoing",
+  "title": "Deshaciendo cambios",
+  "description": "Revierte commits, quita archivos del staging y recupérate de errores",
+  "order": 5,
+  "courseSlug": "git-version-control",
+  "tier": "advanced",
+  "lessons": [
+    { "slug": "undoing-overview", "title": "Formas de deshacer en Git", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "unstaging-files", "title": "Quitando archivos del staging", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "amending-commits", "title": "Enmendando commits", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "revert-vs-reset", "title": "Revert vs Reset", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "accidental-force-push", "title": "El force push accidental", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "recovering-lost-work", "title": "Recuperando trabajo perdido", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

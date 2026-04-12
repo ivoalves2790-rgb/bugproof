@@ -1,0 +1,81 @@
+{
+  "slug": "whats-next",
+  "title": "Que Sigue?",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Tu gestor de tareas esta en produccion, funcionando y creciendo! Ahora es momento de planificar lo que viene. Toma decisiones inteligentes sobre el futuro de tu app.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Construiste Algo Real",
+      "body": "Felicitaciones — pasaste de una pantalla en blanco a una app desplegada y funcionando. Planificaste funcionalidades, elegiste un stack, construiste una interfaz, disenaste una base de datos, agregaste auth, escribiste tests y lanzaste a produccion. Ese es el ciclo completo de desarrollo de software."
+    },
+    {
+      "type": "text",
+      "title": "Que Viene Despues de la V1?",
+      "body": "Ahora que tu MVP esta en produccion, obtendras retroalimentacion real de los usuarios. Algunas funcionalidades que pensaste eran esenciales no se usaran. Algunas cosas en las que no pensaste seran solicitadas constantemente. Escucha a tus usuarios, pero filtra a traves de tu vision de producto."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La V1 es solo el comienzo. Usa datos y retroalimentacion real de los usuarios para guiar lo que construyes despues. Resiste el impulso de agregar todo — mantente enfocado en lo que mas importa."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu gestor de tareas lleva dos semanas en produccion. Tienes 200 usuarios activos. Has recopilado retroalimentacion y tienes tiempo de desarrollo limitado. Donde te enfocas ahora?",
+        "choices": [
+          { "id": "all-features", "text": "Construir todas las funcionalidades que los usuarios pidieron — compartir con equipo, resumenes con IA, sincronizacion con calendario, app movil", "nextNode": "overwhelmed", "score": 0 },
+          { "id": "top-requests", "text": "Analizar que funcionalidades fueron mas solicitadas y elegir las 2-3 principales para construir", "nextNode": "focused", "score": 4 },
+          { "id": "rewrite", "text": "Reescribir la app desde cero con una mejor arquitectura ahora que sabes lo que quieren los usuarios", "nextNode": "rewrite-trap", "score": 1 }
+        ]
+      },
+      "overwhelmed": {
+        "narrative": "Intentas construir todo a la vez. Despues de un mes, nada esta terminado. Funcionalidades a medio construir crean bugs y los usuarios estan confundidos por una experiencia inconsistente. Que haces?",
+        "choices": [
+          { "id": "stop-prioritize", "text": "Parar, eliminar funcionalidades a medio terminar y enfocarte en las 2 mas solicitadas", "nextNode": "recovery", "score": 3 },
+          { "id": "keep-going", "text": "Seguir adelante e intentar terminar todo", "nextNode": "burnout-end", "score": 0 }
+        ]
+      },
+      "focused": {
+        "narrative": "Identificas que el 80% de los usuarios quieren recordatorios de fecha limite y una mejor experiencia movil. Planificas ambas funcionalidades en sprints de 2 semanas cada una. Lanzas los recordatorios de fecha limite primero. El uso sube un 40%. Cual es tu siguiente movimiento?",
+        "choices": [
+          { "id": "mobile", "text": "Lanzar las mejoras moviles como estaba planeado, luego reevaluar prioridades", "nextNode": "great-end", "score": 4 },
+          { "id": "pivot", "text": "Olvidar lo movil — agregar 5 funcionalidades mas mientras tienes impulso", "nextNode": "recovery", "score": 1 }
+        ]
+      },
+      "rewrite-trap": {
+        "narrative": "Pasas 6 semanas reescribiendo. La nueva version tiene menos funcionalidades que la anterior. Los usuarios se van porque nada nuevo se ha lanzado. Has caido en la 'trampa de la reescritura.'",
+        "choices": [
+          { "id": "learn", "text": "Detener la reescritura, volver a la app que funciona e iterar sobre ella", "nextNode": "recovery", "score": 3 }
+        ]
+      },
+      "recovery": {
+        "narrative": "Vuelves al camino enfocandote en 2 funcionalidades de alto impacto. Toma un mes extra, pero la app mejora y los usuarios regresan.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Te recuperaste! La leccion clave: el enfoque supera a la amplitud. Construye 2 funcionalidades bien en lugar de 10 funcionalidades mal. Itera basandote en datos, no en intuicion.",
+        "choices": []
+      },
+      "great-end": {
+        "narrative": "Tu gestor de tareas crece de manera constante. Cada mes lanzas 2-3 mejoras enfocadas basadas en datos de usuarios. Despues de 3 meses, tienes 1,000 usuarios activos y un roadmap de producto claro. Has construido un producto real.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Asi se construyen productos exitosos — lanza, mide, aprende, repite. Te mantuviste enfocado, escuchaste a los usuarios y tomaste decisiones basadas en datos. Felicitaciones por completar el proyecto del Gestor de Tareas!",
+        "choices": []
+      },
+      "burnout-end": {
+        "narrative": "Despues de 2 meses de esfuerzo intenso, estas agotado y la app tiene bugs. Los usuarios se van por problemas de confiabilidad. Intentar construir todo a la vez no construyo nada bien.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "El scope creep es el asesino numero 1 de proyectos personales. Siempre prioriza de forma despiadada. Es mejor lanzar 2 funcionalidades pulidas que 10 rotas.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["mvp", "iteration", "scope-creep"]
+  }
+}

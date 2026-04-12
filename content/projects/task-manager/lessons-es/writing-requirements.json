@@ -1,0 +1,91 @@
+{
+  "slug": "writing-requirements",
+  "title": "Escribiendo Requisitos Claros",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "Necesitas describir tu gestor de tareas a un asistente de IA. La calidad de tu descripcion determina la calidad de lo que se construye. Toma buenas decisiones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Requisitos = El Plano de Tu App",
+      "body": "Los requisitos son una lista clara de lo que tu app debe hacer. Sin ellos, vagaras, olvidaras funcionalidades y construiras algo equivocado. Cuando usas IA para ayudarte a programar, los requisitos se vuelven aun mas criticos — la IA construye exactamente lo que describes, nada mas."
+    },
+    {
+      "type": "code_example",
+      "title": "Requisitos Malos vs Buenos",
+      "language": "text",
+      "code": "BAD:  \"Make a task app\"\nGOOD: \"Users can create tasks with a title (required)\n      and description (optional). Tasks have three\n      states: todo, in-progress, done. Users can\n      filter tasks by state.\"",
+      "annotation": "El requisito malo no le da nada a la IA para trabajar. El bueno especifica exactamente que significa 'tarea' y como se comporta."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los buenos requisitos responden: Que puede HACER el usuario? Que DATOS tiene cada cosa? Cuales son los ESTADOS o REGLAS? Escribe esto antes de dar cualquier prompt a la IA."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Estas listo para describir tu gestor de tareas a un asistente de programacion con IA. Abres el chat y piensas en como empezar. Que escribes primero?",
+        "choices": [
+          { "id": "vague", "text": "\"Construyeme una app de gestion de tareas\"", "nextNode": "vague-result", "score": 0 },
+          { "id": "features", "text": "\"Necesito un gestor de tareas con estas funcionalidades: ...\" y listas las funcionalidades principales", "nextNode": "features-result", "score": 3 },
+          { "id": "technical", "text": "\"Usa React y PostgreSQL para crear una app CRUD para tareas\"", "nextNode": "technical-result", "score": 1 }
+        ]
+      },
+      "vague-result": {
+        "narrative": "La IA genera una app de tareas muy basica con solo un campo de texto y una lista. Sin prioridades, sin fechas limite, sin seguimiento de estado. Funciona, pero no es lo que querias. Que haces?",
+        "choices": [
+          { "id": "start-over", "text": "Empezar de nuevo con un prompt detallado describiendo exactamente lo que necesitas", "nextNode": "good-recovery", "score": 3 },
+          { "id": "add-on", "text": "Pedirle a la IA que 'lo mejore' sin especificos", "nextNode": "bad-end", "score": 0 }
+        ]
+      },
+      "features-result": {
+        "narrative": "Buen comienzo! La IA hace una pregunta de seguimiento: 'Las tareas deberian tener fechas limite? Como deberian ordenarse?' Como respondes?",
+        "choices": [
+          { "id": "specify", "text": "\"Si, las tareas tienen: titulo (requerido), descripcion (opcional), fecha limite (opcional), prioridad (baja/media/alta), estado (por hacer/en progreso/hecho). Ordenar por defecto por prioridad y luego fecha limite.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "delegate", "text": "\"Solo haz lo que tenga sentido\"", "nextNode": "mediocre-end", "score": 1 }
+        ]
+      },
+      "technical-result": {
+        "narrative": "La IA empieza a construir, pero solo le dijiste el stack tecnologico, no lo que la app realmente debe hacer. Crea una interfaz CRUD generica. El modelo de datos solo tiene 'titulo' y 'completado'. Y ahora?",
+        "choices": [
+          { "id": "add-fields", "text": "Agregar los campos y comportamientos faltantes uno por uno en prompts de seguimiento", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "rewrite", "text": "Escribir una especificacion completa de funcionalidades primero, luego darsela a la IA en un prompt claro", "nextNode": "good-recovery", "score": 3 }
+        ]
+      },
+      "good-recovery": {
+        "narrative": "Reescribes tu prompt con funcionalidades especificas, campos de datos y flujos de usuario. La IA genera un resultado mucho mejor. Toma una ronda de ida y vuelta para afinar, y terminas con una base solida.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Te recuperaste bien! Empezar con requisitos detallados habria ahorrado un viaje de ida y vuelta, pero reconociste el problema y lo corregiste. Recuerda: especifica funcionalidades, campos de datos y reglas desde el inicio.",
+        "choices": []
+      },
+      "great-end": {
+        "narrative": "La IA genera un gestor de tareas completo con exactamente los campos y el ordenamiento que especificaste. El modelo de datos es limpio, la interfaz coincide con tus requisitos y puedes empezar a construir inmediatamente.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Excelente! Especificaste funcionalidades, campos de datos, restricciones y valores por defecto. Asi es exactamente como comunicarse con la IA — se especifico sobre lo que quieres y lo entregara.",
+        "choices": []
+      },
+      "mediocre-end": {
+        "narrative": "La IA construye algo que mas o menos funciona, pero necesitaras varias rondas mas de prompts para hacerlo bien. Cada ronda arriesga introducir inconsistencias.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "La app funciona, pero el enfoque iterativo llevo a un resultado desordenado. La proxima vez, invierte tiempo al inicio escribiendo requisitos claros y especificos. Ahorra tiempo en general.",
+        "choices": []
+      },
+      "bad-end": {
+        "narrative": "La IA hace mejoras aleatorias — agrega un selector de colores, un sistema de etiquetas, pero aun sin prioridades ni fechas limite. Estas mas lejos de tu objetivo que cuando empezaste.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Prompts vagos generan resultados vagos. 'Mejoralo' no significa nada para una IA. Siempre especifica exactamente lo que quieres cambiar.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["requirements", "crud", "data-model"]
+  }
+}

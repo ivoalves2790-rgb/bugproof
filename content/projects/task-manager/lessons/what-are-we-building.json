@@ -1,0 +1,73 @@
+{
+  "slug": "what-are-we-building",
+  "title": "What Are We Building?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "Before coding anything, let's make sure you understand what a task manager actually needs. Swipe right for features that belong in our MVP, left for ones that don't.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Welcome to Your First Build",
+      "body": "Over the next 9 chapters, you'll build a real task manager app from scratch. Not a tutorial where you copy-paste code — you'll make decisions, write prompts, review code, and ship something real."
+    },
+    {
+      "type": "analogy",
+      "title": "MVP = Skateboard, Not a Wheel",
+      "body": "An MVP (Minimum Viable Product) isn't half a car — it's a skateboard. It's the smallest thing that actually works and solves a problem. Our task manager MVP needs to let users create, complete, and organize tasks. That's it. No AI summaries, no team collaboration, no Gantt charts. Those come later."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A task manager MVP needs: create tasks, mark them complete, organize by priority or date. Everything else is a 'nice to have' that can wait."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "create-task",
+        "content": "Users can create a task with a title and optional description",
+        "isGoodPractice": true,
+        "explanation": "This is the core feature. Without creating tasks, there's no task manager."
+      },
+      {
+        "id": "complete-task",
+        "content": "Users can mark a task as done with a checkbox",
+        "isGoodPractice": true,
+        "explanation": "Completing tasks is the whole point. This is essential for an MVP."
+      },
+      {
+        "id": "ai-summaries",
+        "content": "AI generates a daily summary of your productivity",
+        "isGoodPractice": false,
+        "explanation": "Cool feature, but way too complex for an MVP. This requires an AI integration, usage tracking, and more. Save it for v2."
+      },
+      {
+        "id": "delete-task",
+        "content": "Users can delete tasks they no longer need",
+        "isGoodPractice": true,
+        "explanation": "Basic CRUD. If users can create tasks, they need to be able to remove them."
+      },
+      {
+        "id": "team-sharing",
+        "content": "Share tasks with team members and assign them to people",
+        "isGoodPractice": false,
+        "explanation": "Collaboration is a huge feature that requires user management, permissions, notifications, and more. Not MVP material."
+      },
+      {
+        "id": "due-date",
+        "content": "Set a due date on tasks",
+        "isGoodPractice": true,
+        "explanation": "Simple and useful. Due dates help users prioritize and are easy to implement with a date picker."
+      },
+      {
+        "id": "gantt-chart",
+        "content": "Visualize tasks on a Gantt chart timeline",
+        "isGoodPractice": false,
+        "explanation": "Gantt charts are complex UI components. Way beyond MVP scope. A simple list sorted by date works fine."
+      }
+    ],
+    "glossaryTerms": ["mvp", "crud"]
+  }
+}

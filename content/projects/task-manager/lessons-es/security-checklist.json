@@ -1,0 +1,67 @@
+{
+  "slug": "security-checklist",
+  "title": "Lista de Verificacion de Seguridad",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Antes de lanzar tu gestor de tareas, repasa esta lista de verificacion de seguridad. Desliza a la derecha en practicas que deberias seguir, a la izquierda en las peligrosas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "La Seguridad No Es Opcional",
+      "body": "La seguridad no es una funcionalidad que agregas al final — es una mentalidad a lo largo del desarrollo. Vulnerabilidades comunes como inyeccion SQL, XSS (cross-site scripting) y CSRF (cross-site request forgery) son bien entendidas, y prevenirlas es sencillo si sigues las mejores practicas."
+    },
+    {
+      "type": "analogy",
+      "title": "La Seguridad Es Como Cerrar Tus Puertas con Llave",
+      "body": "No esperas hasta que alguien entre a robar para instalar cerraduras. Cierras con llave cada noche como habito. De manera similar, sanitizar entradas, usar HTTPS y validar en el servidor deberian ser habitos — no cosas que agregas despues cuando algo sale mal."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los tres habitos de seguridad principales: valida toda la entrada en el servidor, usa consultas parametrizadas (nunca concatenes SQL) y siempre usa HTTPS en produccion."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Usar consultas parametrizadas o un ORM en lugar de concatenar entrada del usuario en cadenas SQL",
+        "isGoodPractice": true,
+        "explanation": "Las consultas parametrizadas previenen la inyeccion SQL al tratar la entrada del usuario como datos, nunca como codigo SQL. Esta es una de las practicas de seguridad mas importantes."
+      },
+      {
+        "id": "c2",
+        "content": "Almacenar claves de API y credenciales de base de datos directamente en tu codigo fuente para facil acceso",
+        "isGoodPractice": false,
+        "explanation": "Las credenciales en el codigo fuente terminan en el historial de git y pueden filtrarse a traves de repositorios publicos. Usa variables de entorno y nunca hagas commit de secretos al control de versiones."
+      },
+      {
+        "id": "c3",
+        "content": "Configurar headers de seguridad HTTP como Content-Security-Policy y X-Frame-Options en tu servidor",
+        "isGoodPractice": true,
+        "explanation": "Los headers de seguridad protegen contra XSS, clickjacking y otros ataques basados en el navegador. La mayoria de los frameworks tienen middleware que los configura automaticamente."
+      },
+      {
+        "id": "c4",
+        "content": "Deshabilitar CORS por completo para que cualquier sitio web pueda llamar a tu API — hace el desarrollo mas facil",
+        "isGoodPractice": false,
+        "explanation": "CORS completamente abierto significa que cualquier sitio web puede hacer solicitudes a tu API en nombre de tus usuarios. Configura CORS para permitir solo tu propio dominio de frontend."
+      },
+      {
+        "id": "c5",
+        "content": "Limitar la tasa de intentos de login para prevenir ataques de fuerza bruta de contrasenas",
+        "isGoodPractice": true,
+        "explanation": "Sin limitacion de tasa, los atacantes pueden probar millones de combinaciones de contrasenas. Limitar a 5-10 intentos por minuto por IP hace que la fuerza bruta sea impractica."
+      },
+      {
+        "id": "c6",
+        "content": "Mostrar mensajes de error detallados con stack traces a los usuarios para que puedan reportar bugs mas facilmente",
+        "isGoodPractice": false,
+        "explanation": "Los stack traces revelan tu stack tecnologico, estructura de archivos y vulnerabilidades potenciales. Muestra errores genericos a los usuarios y registra errores detallados en el servidor."
+      }
+    ],
+    "glossaryTerms": ["sql-injection", "xss", "cors"]
+  }
+}

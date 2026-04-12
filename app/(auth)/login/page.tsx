@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { useT } from "@/lib/i18n/use-language";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const router = useRouter();
   const supabase = createClient();
+  const t = useT();
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -48,10 +50,10 @@ export default function LoginPage() {
     <div>
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold">
-          <span className="text-terminal-green">{">"}</span> Log in
+          <span className="text-terminal-green">{">"}</span> {t("login.title")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Welcome back, engineer
+          {t("login.subtitle")}
         </p>
       </div>
 
@@ -60,19 +62,19 @@ export default function LoginPage() {
         className="w-full"
         onClick={handleGoogleLogin}
       >
-        Continue with Google
+        {t("login.google")}
       </Button>
 
       <div className="my-6 flex items-center gap-3">
         <div className="h-px flex-1 bg-border" />
-        <span className="text-xs text-muted-foreground">or</span>
+        <span className="text-xs text-muted-foreground">{t("login.or")}</span>
         <div className="h-px flex-1 bg-border" />
       </div>
 
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
-            Email
+            {t("login.email")}
           </label>
           <input
             type="email"
@@ -85,7 +87,7 @@ export default function LoginPage() {
         </div>
         <div>
           <label className="mb-1 block text-xs text-muted-foreground">
-            Password
+            {t("login.password")}
           </label>
           <input
             type="password"
@@ -102,14 +104,14 @@ export default function LoginPage() {
         )}
 
         <Button type="submit" className="w-full" loading={loading}>
-          Log in
+          {t("login.submit")}
         </Button>
       </form>
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        New here?{" "}
+        {t("login.newHere")}{" "}
         <Link href="/signup" className="text-terminal-green hover:underline">
-          Create an account
+          {t("login.createAccount")}
         </Link>
       </p>
     </div>

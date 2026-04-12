@@ -1,0 +1,8 @@
+{
+  "slug": "ci-cd",
+  "title": "Pipelines de CI/CD",
+  "description": "Pruebas y despliegue automatizados con integración y entrega continua",
+  "order": 3,
+  "courseSlug": "deployment-devops",
+  "tier": "intermediate"
+}

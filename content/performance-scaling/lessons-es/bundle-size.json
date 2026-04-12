@@ -1,0 +1,76 @@
+{
+  "slug": "bundle-size",
+  "title": "Tamaño del bundle",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "El bundle de JavaScript de tu app sigue creciendo. Cada nueva funcionalidad agrega otra biblioteca, y nadie está verificando el costo. Usemos herramientas de línea de comandos para medir tu bundle, encontrar las dependencias pesadas y recortar la grasa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tamaño del bundle = Peso de la maleta",
+      "body": "Las aerolíneas tienen un límite de peso para el equipaje. Si tu maleta sobrepasa el límite, pagas extra y todo toma más tiempo. Tu bundle de JavaScript es como esa maleta -- cuanto más pesado, más esperan los usuarios. Y al igual que empacar, la solución es eliminar cosas que realmente no necesitas, no comprar una maleta más grande."
+    },
+    {
+      "type": "text",
+      "title": "Por qué importa el tamaño del bundle",
+      "body": "Cada kilobyte de JavaScript tiene un doble costo:\n\n1. **Tiempo de descarga** -- Los usuarios deben descargar el archivo antes de que pase algo\n2. **Tiempo de análisis** -- El navegador debe leer y compilar el JavaScript antes de poder ejecutarlo\n\nEn una conexión 3G lenta, 1MB de JavaScript tarda unos 10 segundos en descargarse Y otros cuantos segundos en analizarse. Por eso el tamaño del bundle se traduce directamente en tiempo de carga."
+    },
+    {
+      "type": "code_example",
+      "title": "Importa solo lo que necesitas",
+      "language": "javascript",
+      "code": "// BAD: Imports the entire lodash library (70KB+)\nimport _ from 'lodash';\nconst sorted = _.sortBy(users, 'name');\n\n// GOOD: Imports just the function you need (2KB)\nimport sortBy from 'lodash/sortBy';\nconst sorted = sortBy(users, 'name');",
+      "annotation": "La primera importación trae más de 500 funciones de lodash. La segunda importación solo incluye sortBy y sus dependencias. Esto se llama tree-shaking, y puede reducir el tamaño de las bibliotecas en un 90%."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cada kilobyte de JavaScript cuesta tiempo de descarga Y tiempo de análisis. Importa solo lo que necesitas de las bibliotecas, audita regularmente tus dependencias y establece un presupuesto de rendimiento para detectar la hinchazón temprano."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["package.json", "src/", "node_modules/"],
+    "steps": [
+      {
+        "instruction": "Verifiquemos cuántas dependencias tiene tu proyecto. Esto te da una idea de qué tan hinchado podría estar.",
+        "expectedCommand": "npm ls --depth=0",
+        "acceptAlternatives": ["npm list --depth=0", "yarn list --depth=0"],
+        "output": "my-app@1.0.0\n+-- react@18.2.0\n+-- react-dom@18.2.0\n+-- axios@1.4.0\n+-- lodash@4.17.21\n+-- moment@2.29.4\n+-- chart.js@4.3.0\n+-- react-icons@4.10.1\n+-- @mui/material@5.14.0\n+-- date-fns@2.30.0\n+-- uuid@9.0.0\n`-- 14 more dependencies",
+        "hint": "Usa 'npm ls --depth=0' para listar tus dependencias directas sin mostrar sus sub-dependencias."
+      },
+      {
+        "instruction": "¡Tienes tanto moment COMO date-fns -- dos bibliotecas de fechas haciendo lo mismo! Verifiquemos qué paquetes son los más pesados. Usa npm para verificar el tamaño instalado de moment.",
+        "expectedCommand": "du -sh node_modules/moment",
+        "acceptAlternatives": ["du -sh ./node_modules/moment"],
+        "output": "4.2M\tnode_modules/moment",
+        "hint": "Usa 'du -sh' para verificar el tamaño en disco del paquete moment en node_modules."
+      },
+      {
+        "instruction": "¡4.2 MB para moment! La mayoría son archivos de localización para cada idioma. date-fns ya está instalado y hace lo mismo pero es tree-shakeable. Eliminemos moment.",
+        "expectedCommand": "npm uninstall moment",
+        "acceptAlternatives": ["yarn remove moment", "npm remove moment", "npm rm moment"],
+        "output": "removed 1 package in 1.2s",
+        "hint": "Usa 'npm uninstall' seguido del nombre del paquete para eliminarlo."
+      },
+      {
+        "instruction": "Ahora verifiquemos si alguna de tus dependencias tiene alternativas más pequeñas conocidas. Usa el verificador de tamaño inspirado en bundlephobia.",
+        "expectedCommand": "npx package-size lodash axios uuid",
+        "acceptAlternatives": ["npx cost-of-modules"],
+        "output": "Package sizes (minified + gzipped):\n  lodash     71.5 KB  (consider: lodash-es for tree-shaking)\n  axios      13.6 KB  (consider: native fetch API - 0 KB)\n  uuid        2.4 KB  (consider: crypto.randomUUID() - 0 KB)",
+        "hint": "Usa 'npx package-size' para verificar el tamaño gzipped de los paquetes y ver si existen alternativas más pequeñas."
+      },
+      {
+        "instruction": "¡Buenas ideas! axios puede reemplazarse con la API fetch nativa, y uuid puede usar el crypto.randomUUID() nativo. Eliminemos axios ya que fetch está integrado en cada navegador moderno.",
+        "expectedCommand": "npm uninstall axios",
+        "acceptAlternatives": ["yarn remove axios", "npm remove axios", "npm rm axios"],
+        "output": "removed 6 packages in 0.8s",
+        "hint": "Usa 'npm uninstall axios' para eliminarlo. Reemplazarás las llamadas a axios con la API fetch nativa."
+      }
+    ],
+    "completionMessage": "Has eliminado moment (4.2MB / ~71KB gzipped) y axios (13.6KB gzipped) usando alternativas nativas que cuestan cero bytes. Combinado con cambiar a lodash-es para tree-shaking, podrías reducir tu bundle en más de 100KB gzipped. Siempre cuestiona si necesitas una biblioteca para algo que la plataforma proporciona nativamente.",
+    "glossaryTerms": ["bundle-size", "tree-shaking", "dependency", "gzip"]
+  }
+}

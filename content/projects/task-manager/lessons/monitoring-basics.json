@@ -1,0 +1,67 @@
+{
+  "slug": "monitoring-basics",
+  "title": "Monitoring Basics",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Your app is live. But how do you know if it's actually working? Monitoring helps you see problems before your users do. Swipe right on good monitoring practices.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Why Monitor Your App?",
+      "body": "Once your app is deployed, you can't see what's happening unless you set up monitoring. Error tracking tools like Sentry catch JavaScript errors before users report them. Analytics show which features people use. Uptime monitors alert you if the site goes down at 3 AM."
+    },
+    {
+      "type": "analogy",
+      "title": "Monitoring Is Like a Car Dashboard",
+      "body": "You don't drive blindfolded. Your car's dashboard shows speed, fuel level, and engine warnings. Monitoring gives your app a dashboard — error rates, response times, and user counts. Without it, you're driving blind and won't know something is wrong until the engine is on fire."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Start with three things: error tracking (Sentry or similar), uptime monitoring (is the site up?), and basic analytics (are people using it?). You can add more sophisticated monitoring later."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Set up error tracking so you're notified when users encounter JavaScript errors",
+        "isGoodPractice": true,
+        "explanation": "Error tracking tools capture errors in production with full context (browser, URL, user action). You'll know about bugs before users bother to report them."
+      },
+      {
+        "id": "c2",
+        "content": "Check your app manually once a day to make sure it's still working",
+        "isGoodPractice": false,
+        "explanation": "Manual checks don't scale and miss overnight issues. Automated uptime monitors check every few minutes and alert you immediately when something breaks."
+      },
+      {
+        "id": "c3",
+        "content": "Log important actions like user signups and task creations so you can track adoption",
+        "isGoodPractice": true,
+        "explanation": "Structured logging of key events helps you understand how people use your app. It also helps debug issues — you can trace what happened before an error occurred."
+      },
+      {
+        "id": "c4",
+        "content": "Log every single detail including request headers and full request bodies to catch all possible issues",
+        "isGoodPractice": false,
+        "explanation": "Over-logging creates noise, increases costs, and can accidentally log sensitive data like passwords or tokens. Log what matters: errors, key events, and performance metrics."
+      },
+      {
+        "id": "c5",
+        "content": "Set up alerts for error rate spikes so you know when a deployment breaks something",
+        "isGoodPractice": true,
+        "explanation": "A sudden increase in errors often means a bad deployment. Automated alerts let you catch and roll back quickly instead of waiting for user complaints."
+      },
+      {
+        "id": "c6",
+        "content": "Monitoring is only necessary for apps with thousands of users — small apps don't need it",
+        "isGoodPractice": false,
+        "explanation": "Even small apps benefit from monitoring. With fewer users, each one matters more. If your 10 users all hit a bug and none report it, you'd never know without monitoring."
+      }
+    ],
+    "glossaryTerms": ["error-tracking", "uptime-monitoring"]
+  }
+}

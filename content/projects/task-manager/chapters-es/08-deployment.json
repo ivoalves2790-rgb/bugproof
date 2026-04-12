@@ -1,0 +1,16 @@
+{
+  "slug": "deployment",
+  "title": "Despliegue",
+  "description": "Lanza tu app al mundo. Aprende sobre entornos, pipelines de despliegue y monitoreo.",
+  "order": 8,
+  "phase": "deployment",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "what-is-deployment", "title": "Que Es el Despliegue?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "environment-variables", "title": "Variables de Entorno", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "deploying-to-vercel", "title": "Desplegando en Vercel", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "monitoring-basics", "title": "Fundamentos de Monitoreo", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "going-live-checklist", "title": "Lista para Salir en Vivo", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["deployment-devops"]
+}

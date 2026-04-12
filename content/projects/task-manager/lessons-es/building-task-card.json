@@ -1,0 +1,103 @@
+{
+  "slug": "building-task-card",
+  "title": "Construyendo la Tarjeta de Tarea",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "Estas construyendo el componente de interfaz mas importante de tu gestor de tareas: la tarjeta de tarea. Cada decision de diseno que tomes aqui afecta como los usuarios interactuan con sus tareas. Veamos como lo abordas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "La Tarjeta de Tarea Es el Nucleo de Tu App",
+      "body": "La tarjeta de tarea es lo que los usuarios ven e interactuan mas. Necesita mostrar la informacion correcta de un vistazo — titulo, estado, tal vez una fecha limite — sin estar saturada. Piensa en ella como una nota adhesiva fisica: suficiente informacion para ser util, pero no tanta que sea abrumadora."
+    },
+    {
+      "type": "text",
+      "title": "Disenando para la Interaccion",
+      "body": "Una tarjeta de tarea no es solo una pantalla — los usuarios van a hacer clic, completarla, tal vez arrastrarla. Construye tu componente con **estados de interaccion** en mente desde el inicio: efectos hover, estados activos, estilos de completado. Una tarjeta sin retroalimentacion visual cuando pasas el cursor se siente rota, aunque tecnicamente funcione."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Empieza con la tarjeta minima viable — titulo y un boton de completar. Agrega informacion (fecha limite, prioridad, etiquetas) solo cuando tus historias de usuario lo requieran. Cada dato en la tarjeta compite por atencion, asi que se intencional con lo que muestras."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Estas creando el componente TaskCard. Tu disenador envio un mockup mostrando el titulo de la tarea, estado, fecha limite, prioridad, etiquetas, avatar del asignado, fecha de creacion, vista previa de descripcion y un menu de acciones. Como abordas la construccion?",
+        "choices": [
+          { "id": "build-everything", "text": "Construir la tarjeta completa con las 9 piezas de informacion del mockup de una sola vez", "nextNode": "overloaded", "score": 0 },
+          { "id": "start-minimal", "text": "Empezar solo con el titulo y una casilla de completar, luego agregar campos uno por uno segun la prioridad", "nextNode": "minimal-start", "score": 4 },
+          { "id": "copy-design-system", "text": "Encontrar un componente de tarjeta de tarea de una libreria de UI y personalizarlo para que coincida con el mockup", "nextNode": "library-card", "score": 2 }
+        ]
+      },
+      "minimal-start": {
+        "narrative": "Gran eleccion. Tu TaskCard minima funciona y se ve limpia. Ahora los requisitos del producto dicen que necesitas mostrar la fecha limite. La fecha limite puede estar en el futuro, hoy o vencida. Como manejas los diferentes estados?",
+        "choices": [
+          { "id": "conditional-styling", "text": "Crear un sub-componente <DueDateBadge> con clases condicionales de Tailwind: verde para futuro, amarillo para hoy, rojo para vencida", "nextNode": "excellent-end", "score": 4 },
+          { "id": "just-text", "text": "Mostrar la fecha como texto plano sin distincion visual entre vencida y futura", "nextNode": "plain-date-end", "score": 1 }
+        ]
+      },
+      "overloaded": {
+        "narrative": "La tarjeta esta saturada de informacion. En movil, el texto es diminuto y el layout se rompe. Los usuarios en pruebas dicen que no pueden escanear rapidamente su lista de tareas porque cada tarjeta es un muro de datos. Cual es tu solucion?",
+        "choices": [
+          { "id": "hide-on-mobile", "text": "Usar clases responsivas para ocultar la mayoria de campos en movil, mostrando solo titulo y estado", "nextNode": "responsive-recovery", "score": 3 },
+          { "id": "smaller-font", "text": "Hacer la fuente mas pequena para que todo quepa", "nextNode": "tiny-text-end", "score": 0 }
+        ]
+      },
+      "library-card": {
+        "narrative": "Instalaste una libreria de UI y personalizaste su componente Card. Se ve bien, pero la tarjeta de la libreria no soporta un estado 'completado' con texto tachado, y sobreescribir los estilos CSS de la libreria requiere luchar contra su especificidad. Que haces?",
+        "choices": [
+          { "id": "build-own", "text": "Construir tu propio TaskCard desde cero usando la tarjeta de la libreria como referencia visual, pero con tus propios estilos de Tailwind", "nextNode": "own-card-end", "score": 3 },
+          { "id": "force-override", "text": "Usar sobreescrituras con !important y CSS personalizado para forzar que la tarjeta de la libreria se vea bien", "nextNode": "override-end", "score": 1 }
+        ]
+      },
+      "responsive-recovery": {
+        "narrative": "El enfoque responsivo funciona. En movil muestras titulo y estado; en escritorio muestras la tarjeta completa. Los usuarios pueden escanear la lista rapidamente en cualquier dispositivo. Perdiste tiempo construyendo todo de una vez, pero te recuperaste.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Te recuperaste bien haciendo la tarjeta responsiva. Pero la leccion es: empieza minimo y agrega complejidad segun la prioridad. Si hubieras empezado con la tarjeta minima, no habrias necesitado ocultar cosas despues.",
+        "choices": []
+      },
+      "excellent-end": {
+        "narrative": "Tu TaskCard esta limpia y funcional. El sub-componente <DueDateBadge> maneja la logica de fechas por separado, asi que la tarjeta principal se mantiene simple. Los usuarios detectan inmediatamente las tareas vencidas gracias a la insignia roja. El componente es facil de probar porque cada pieza esta aislada.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Excelente enfoque! Empezar minimo y extraer sub-componentes para logica compleja (como formato de fechas con estilos condicionales) mantiene tu codigo limpio y cada pieza testeable. Este es diseno de componentes de nivel profesional.",
+        "choices": []
+      },
+      "plain-date-end": {
+        "narrative": "La fecha aparece, pero los usuarios siguen perdiendo tareas vencidas porque '2024-01-15' se ve igual ya sea que este vencida o a una semana. Un usuario se queja de que perdio una fecha limite porque nada en la tarjeta senalaba urgencia.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Las fechas necesitan contexto visual. Una cadena de fecha cruda obliga a los usuarios a hacer calculo mental. Insignias codificadas por color o tiempo relativo ('2 dias vencida') hacen la urgencia inmediatamente obvia. La interfaz deberia reducir la carga cognitiva, no agregarla.",
+        "choices": []
+      },
+      "tiny-text-end": {
+        "narrative": "Ahora la tarjeta cabe en movil, pero nadie puede leerla. Los usuarios hacen zoom constantemente. Las pruebas de accesibilidad senalan la fuente diminuta como un fallo. Hiciste el problema de layout peor, no mejor.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Encoger el texto nunca es la respuesta. Si el contenido no cabe, tienes demasiado contenido — no muy poco espacio. Elimina u oculta informacion de baja prioridad en lugar de hacer todo ilegible.",
+        "choices": []
+      },
+      "own-card-end": {
+        "narrative": "Tu TaskCard personalizado usa Tailwind para todos los estilos y soporta todos los estados que necesitas: por defecto, hover, completado (con opacidad y tachado), y vencido. Sin conflictos de libreria, control total.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Buena recuperacion. Las librerias de UI son geniales para componentes genericos (botones, modales), pero componentes altamente especificos del dominio como un TaskCard a menudo es mejor construirlos desde cero. Obtienes control total sobre estados y estilos sin luchar contra la libreria.",
+        "choices": []
+      },
+      "override-end": {
+        "narrative": "La tarjeta se ve bien, pero el CSS es un desorden de sobreescrituras. Cuando la libreria se actualiza, la mitad de tus sobreescrituras se rompen. Otro desarrollador del equipo no puede entender por que los estilos se comportan de forma extrana. El mantenimiento se convierte en una pesadilla.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Luchar contra el CSS de una libreria de UI es una batalla perdida. Si necesitas sobreescribir mas de unos pocos estilos, es mejor construir el componente tu mismo. Los componentes de libreria funcionan mejor cuando los usas tal como son, no cuando los fuerzas a tener una forma diferente.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["component", "responsive-design", "accessibility"]
+  }
+}

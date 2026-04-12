@@ -1,0 +1,105 @@
+{
+  "slug": "reading-git-log",
+  "title": "Leyendo el registro de Git",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Tu compañero de equipo dice que el último despliegue rompió la página de inicio de sesión. El sitio funcionaba bien ayer. Necesitas usar el historial de Git para descubrir qué cambió y quién lo cambió.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Git Log = El diario de tu proyecto",
+      "body": "Imagina que tu proyecto lleva un diario. Cada vez que alguien hace un commit, se escribe una entrada: quién lo hizo, cuándo y una nota corta sobre qué cambió. `git log` te permite abrir ese diario y leer cada entrada, de la más nueva a la más antigua."
+    },
+    {
+      "type": "text",
+      "title": "Lo que verás en el registro",
+      "body": "Cada entrada en `git log` muestra:\n\n- **Hash del commit** -- Un ID único como `a1b2c3d` (piensa en él como un número de serie para ese punto de guardado)\n- **Autor** -- Quién hizo el cambio\n- **Fecha** -- Cuándo sucedió\n- **Mensaje** -- Lo que dijeron que cambiaron\n\nEl commit más reciente aparece en la parte superior."
+    },
+    {
+      "type": "code_example",
+      "title": "Comandos útiles del registro",
+      "language": "bash",
+      "code": "git log                # Full history with details\ngit log --oneline      # Compact view: hash + message\ngit show a1b2c3d       # See exactly what changed in one commit",
+      "annotation": "Usa `git log --oneline` para una vista rápida, luego `git show <hash>` para profundizar en un commit específico."
+    },
+    {
+      "type": "text",
+      "title": "Por qué esto importa para la depuración",
+      "body": "Cuando algo se rompe, `git log` es tu herramienta de detective. Puedes revisar los commits recientes para encontrar qué cambio probablemente causó el problema, luego usar `git show` para ver exactamente qué líneas se agregaron o eliminaron. Es mucho más rápido que adivinar."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "`git log` muestra el historial completo de tu proyecto -- úsalo para descubrir qué cambió, cuándo y por quién cuando algo sale mal."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "La página de inicio de sesión muestra una pantalla blanca después del despliegue de hoy. Tu compañero de equipo está en pánico. ¿Cuál es tu primer movimiento?",
+        "choices": [
+          { "id": "a", "text": "Ejecutar 'git log' para ver los commits recientes", "nextNode": "check-log", "score": 10 },
+          { "id": "b", "text": "Revertir inmediatamente a la versión de ayer", "nextNode": "revert-blind", "score": 3 },
+          { "id": "c", "text": "Empezar a reescribir la página de inicio de sesión desde cero", "nextNode": "rewrite", "score": 0 }
+        ]
+      },
+      "check-log": {
+        "narrative": "¡Buena decisión! Ejecutas 'git log --oneline' y ves:\n\na1b2c3d Fix navbar styling\nb4e5f6a Update login form validation\nc7d8e9f Add new marketing banner\nd0e1f2a Initial deploy setup\n\nUno de estos commits probablemente causó el problema. ¿Cuál investigas primero?",
+        "choices": [
+          { "id": "a", "text": "Revisar 'b4e5f6a Update login form validation' -- toca directamente el login", "nextNode": "found-commit", "score": 10 },
+          { "id": "b", "text": "Revisar 'a1b2c3d Fix navbar styling' -- es el más reciente", "nextNode": "wrong-commit", "score": 5 },
+          { "id": "c", "text": "Revisar todos los commits uno por uno empezando por el más antiguo", "nextNode": "slow-path", "score": 3 }
+        ]
+      },
+      "revert-blind": {
+        "narrative": "Reviertes sin verificar qué cambió. La página de inicio de sesión funciona de nuevo, pero ahora el nuevo banner de marketing que tu jefe pidió también desapareció. No está contento. Habría sido mejor revisar el registro primero para entender qué rompió las cosas específicamente.",
+        "choices": [
+          { "id": "a", "text": "Volver y revisar el registro para entender qué pasó", "nextNode": "check-log", "score": 5 }
+        ]
+      },
+      "rewrite": {
+        "narrative": "Reescribir toda la página de inicio de sesión tomaría horas y perderías todas las mejoras recientes. El historial de Git tiene la respuesta -- solo necesitas ver qué cambió recientemente.",
+        "choices": [
+          { "id": "a", "text": "De acuerdo, déjame revisar git log en su lugar", "nextNode": "check-log", "score": 3 }
+        ]
+      },
+      "found-commit": {
+        "narrative": "Ejecutas 'git show b4e5f6a' y ves que el commit cambió la URL de acción del formulario a una ruta inválida. ¡Ese es el error! Ahora sabes exactamente qué línea arreglar. ¿Cómo procedes?",
+        "choices": [
+          { "id": "a", "text": "Arreglar solo la URL rota y hacer un nuevo commit", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Revertir el commit completo", "nextNode": "end-okay", "score": 7 }
+        ]
+      },
+      "wrong-commit": {
+        "narrative": "El commit de estilos de la barra de navegación solo cambió colores CSS -- nada que rompería el inicio de sesión. Deberías buscar commits que realmente toquen código relacionado con el login.",
+        "choices": [
+          { "id": "a", "text": "Revisar 'b4e5f6a Update login form validation' en su lugar", "nextNode": "found-commit", "score": 5 }
+        ]
+      },
+      "slow-path": {
+        "narrative": "Verificar desde el commit más antiguo hacia arriba eventualmente funcionará, pero es lento. Una mejor estrategia es mirar los mensajes de los commits y verificar primero los más probablemente relacionados con la función rota.",
+        "choices": [
+          { "id": "a", "text": "Enfocarme en el commit relacionado con login en su lugar", "nextNode": "found-commit", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Arreglaste solo la URL rota, hiciste commit de la corrección y desplegaste. El inicio de sesión funciona perfectamente y ninguna otra función se vio afectada. Tu compañero de equipo está impresionado por lo rápido que diagnosticaste el problema usando el historial de Git.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente trabajo! Usaste 'git log' para revisar el historial reciente, identificaste el commit más probable por su mensaje, usaste 'git show' para ver exactamente qué cambió e hiciste una corrección específica. Así es exactamente como los desarrolladores experimentados depuran problemas en producción."
+      },
+      "end-okay": {
+        "narrative": "Revertir todo el commit arregló el login pero también eliminó las mejoras válidas de validación del formulario. Tendrás que rehacer ese trabajo después. Una corrección más específica habría sido mejor.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "¡Encontraste el commit correcto, lo cual es genial! Pero revertir el commit completo eliminó cambios buenos junto con los malos. La próxima vez, intenta arreglar solo la línea rota para conservar las partes buenas."
+      }
+    },
+    "glossaryTerms": ["git-log", "git-show", "commit-hash"]
+  }
+}

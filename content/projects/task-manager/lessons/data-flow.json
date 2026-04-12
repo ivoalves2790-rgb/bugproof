@@ -1,0 +1,73 @@
+{
+  "slug": "data-flow",
+  "title": "Data Flow",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Data flows through your task manager like water through pipes — from the database, through the API, into the UI, and back again. Swipe right on correct data flow patterns, left on incorrect ones.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The Round Trip of a Task",
+      "body": "When a user creates a task, the data travels a specific path: **UI form -> API call -> Supabase client -> PostgreSQL database**. When they load the task list, it reverses: **Database -> Supabase API -> your app -> rendered in the UI**. Understanding this round trip helps you debug problems — if tasks aren't showing up, you can check each step in the chain to find where it breaks."
+    },
+    {
+      "type": "analogy",
+      "title": "The Restaurant Analogy",
+      "body": "Think of data flow like ordering at a restaurant. The user (customer) fills out a form (places an order). The frontend (waiter) sends it to the API (kitchen). The database (pantry) stores the ingredients. When you fetch data, the kitchen prepares the dish from the pantry and the waiter brings it to the table. If the food is wrong, you trace the problem: did the waiter write down the wrong order, did the kitchen misread it, or was the pantry stocked wrong?"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Data flows in a predictable path: UI -> API -> Database and back. When something breaks, trace the flow step by step. Check the browser's network tab for API errors, Supabase logs for database errors, and the UI for rendering issues."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "optimistic-updates",
+        "content": "Updating the UI immediately when a user completes a task, then syncing with the database in the background",
+        "isGoodPractice": true,
+        "explanation": "This is called an optimistic update. It makes the app feel instant. If the database update fails, you revert the UI and show an error. Most modern apps use this pattern."
+      },
+      {
+        "id": "direct-db-from-browser",
+        "content": "Having the browser connect directly to PostgreSQL using a database connection string",
+        "isGoodPractice": false,
+        "explanation": "Never expose database credentials to the browser. The Supabase client uses a secure API layer with authentication — it never gives the browser direct database access."
+      },
+      {
+        "id": "loading-states",
+        "content": "Showing a loading spinner while fetching tasks from the database, then rendering the list when the data arrives",
+        "isGoodPractice": true,
+        "explanation": "Database calls take time (network latency). Loading states prevent the UI from looking broken or empty during the fetch. Always handle the loading, success, and error states."
+      },
+      {
+        "id": "no-error-handling",
+        "content": "Assuming every database call succeeds and not handling errors in your data fetching code",
+        "isGoodPractice": false,
+        "explanation": "Network requests fail. Databases go down. Users lose internet. Always wrap data calls in try/catch and show meaningful error messages instead of a blank screen or cryptic crash."
+      },
+      {
+        "id": "rls-enforcement",
+        "content": "Using Supabase Row Level Security so the database filters data by user, rather than filtering only in your app code",
+        "isGoodPractice": true,
+        "explanation": "RLS is defense in depth. Even if your frontend has a bug that forgets a user filter, the database itself enforces the access rules. This is a critical security pattern."
+      },
+      {
+        "id": "polling-every-second",
+        "content": "Fetching the entire task list from the database every second to check for changes",
+        "isGoodPractice": false,
+        "explanation": "Polling every second wastes bandwidth and database resources. Use Supabase's realtime subscriptions to get notified of changes, or re-fetch only when the user takes an action."
+      },
+      {
+        "id": "validate-before-insert",
+        "content": "Validating user input on both the frontend and the backend before inserting data into the database",
+        "isGoodPractice": true,
+        "explanation": "Frontend validation gives instant feedback. Backend validation prevents malicious or malformed data from ever reaching the database. You need both — frontend alone can be bypassed."
+      }
+    ],
+    "glossaryTerms": ["optimistic-update", "rls", "realtime"]
+  }
+}

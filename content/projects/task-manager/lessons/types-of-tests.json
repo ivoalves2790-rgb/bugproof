@@ -1,0 +1,67 @@
+{
+  "slug": "types-of-tests",
+  "title": "Types of Tests",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Unit tests, integration tests, end-to-end tests — each serves a different purpose and catches different kinds of bugs. Let's sort out which is which.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The Testing Pyramid",
+      "body": "Unit tests check individual functions in isolation — fast and cheap to run. Integration tests check that multiple pieces work together, like your API talking to the database. End-to-end (E2E) tests simulate a real user clicking through the app. You want many unit tests, some integration tests, and a few E2E tests."
+    },
+    {
+      "type": "analogy",
+      "title": "Building a Car vs. Test Driving It",
+      "body": "Unit tests check individual car parts (does the engine start?). Integration tests check that parts work together (does the engine connect to the transmission?). E2E tests are the full test drive (can you drive from A to B?). You need all three, but it's cheaper to test parts individually first."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Follow the testing pyramid: many fast unit tests at the base, some integration tests in the middle, and a few critical E2E tests at the top."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Unit tests should test one function or component in isolation, with external dependencies mocked out",
+        "isGoodPractice": true,
+        "explanation": "Isolation is the key feature of unit tests. Mocking the database, API calls, and other dependencies keeps tests fast and focused on the logic being tested."
+      },
+      {
+        "id": "c2",
+        "content": "End-to-end tests are fast and cheap to maintain, so you should write them for every feature",
+        "isGoodPractice": false,
+        "explanation": "E2E tests are the slowest and most brittle type. They break when the UI changes and take minutes to run. Use them only for critical user flows, not every feature."
+      },
+      {
+        "id": "c3",
+        "content": "Integration tests verify that your API correctly reads and writes to the database",
+        "isGoodPractice": true,
+        "explanation": "This is a classic integration test — checking that two systems (your code and the database) work together. Unit tests with mocked databases can't catch real query bugs."
+      },
+      {
+        "id": "c4",
+        "content": "If you have good E2E tests, you don't need unit tests because E2E covers everything",
+        "isGoodPractice": false,
+        "explanation": "E2E tests are too slow and coarse to catch every bug. A failing E2E test tells you something is broken but not where. Unit tests pinpoint the exact function that failed."
+      },
+      {
+        "id": "c5",
+        "content": "A unit test for a task manager might check that the 'addTask' function returns a task with the correct title and default status",
+        "isGoodPractice": true,
+        "explanation": "This is a good unit test — it checks one function, verifies specific output, and doesn't depend on a database or UI."
+      },
+      {
+        "id": "c6",
+        "content": "You should always write all three types of tests before starting any feature",
+        "isGoodPractice": false,
+        "explanation": "You can't write meaningful E2E tests before the feature exists. Start with unit tests during development, add integration tests for data flows, and add E2E tests once the UI is stable."
+      }
+    ],
+    "glossaryTerms": ["unit-test", "integration-test", "e2e-test"]
+  }
+}

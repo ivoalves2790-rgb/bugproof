@@ -1,0 +1,76 @@
+{
+  "slug": "going-live-checklist",
+  "title": "Lista de Verificacion para el Lanzamiento",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "El dia del lanzamiento ha llegado. Estas a punto de compartir tu gestor de tareas con el mundo. Pero primero, aseguremonos de que no hayas olvidado nada critico.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "La Lista de Verificacion del Lanzamiento",
+      "body": "Antes de lanzar, necesitas verificar: todas las variables de entorno estan configuradas, HTTPS esta habilitado, el rastreo de errores esta configurado, hay una forma de revertir si algo sale mal, y alguien esta disponible para arreglar problemas. La mayoria de los desastres del dia de lanzamiento vienen de saltarse uno de estos basicos."
+    },
+    {
+      "type": "code_example",
+      "title": "Esenciales Pre-Lanzamiento",
+      "language": "text",
+      "code": "[ ] Production env vars set and verified\n[ ] HTTPS enabled (automatic on Vercel)\n[ ] Error tracking configured (Sentry, etc.)\n[ ] Database migrations applied\n[ ] Auth working in production environment\n[ ] Rollback plan: know how to revert to previous deploy\n[ ] Open Graph / social meta tags set\n[ ] 404 page configured",
+      "annotation": "Revisa cada punto. Una revision de 10 minutos de la lista puede prevenir una emergencia de 10 horas el dia del lanzamiento."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Lanza pequeno, lanza preparado. No anuncies a miles si no has probado el entorno de produccion. Comparte con 10 personas primero, arregla lo que se rompa y luego abre las compuertas."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Son las 9 AM del dia del lanzamiento. Tu gestor de tareas esta desplegado en Vercel y todo se ve bien. Estas a punto de compartir el enlace en redes sociales. Pero no has probado el entorno de produccion aun — solo desarrollo. Que haces?",
+        "choices": [
+          { "id": "a", "text": "Publicar el enlace ahora — funciono en desarrollo, deberia estar bien", "nextNode": "yolo-launch", "score": 0 },
+          { "id": "b", "text": "Hacer una prueba de humo rapida: registrarse, crear una tarea, completarla, eliminarla — todo en produccion", "nextNode": "smoke-test", "score": 4 },
+          { "id": "c", "text": "Retrasar el lanzamiento una semana para hacer pruebas QA extensas", "nextNode": "over-delay", "score": 1 }
+        ]
+      },
+      "yolo-launch": {
+        "narrative": "Publicas el enlace. En 30 minutos, alguien intenta registrarse y obtiene una pantalla en blanco. La URL de redireccion de auth de Supabase todavia esta configurada a localhost. Te apresuras a arreglarlo mientras la gente tuitea sobre tu app rota. Las primeras impresiones se perdieron.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Una prueba de humo de 5 minutos en produccion habria detectado el problema de redireccion de auth antes de que alguien mas lo viera. Siempre prueba el entorno real antes de anunciar tu lanzamiento.",
+        "choices": []
+      },
+      "smoke-test": {
+        "narrative": "Buena decision. Intentas registrarte y el flujo de auth falla — la URL de redireccion OAuth esta configurada a localhost. La arreglas en el panel de Supabase, vuelves a probar y todo funciona. Que sigue antes de lanzar?",
+        "choices": [
+          { "id": "b1", "text": "Compartir con 5 amigos primero, arreglar cualquier problema que encuentren y luego hacer el lanzamiento publico", "nextNode": "soft-launch", "score": 3 },
+          { "id": "b2", "text": "Todo funciona ahora — lanzar publicamente de inmediato", "nextNode": "quick-launch", "score": 2 }
+        ]
+      },
+      "over-delay": {
+        "narrative": "Un retraso de una semana para un proyecto personal mata tu impulso. Para cuando lanzas, has perdido el interes. Haces un compromiso: hacer una sesion de pruebas enfocada de 2 horas hoy y lanzar esta tarde.",
+        "choices": [
+          { "id": "c1", "text": "Ejecutar los flujos criticos en produccion y lanzar hoy", "nextNode": "smoke-test", "score": 3 }
+        ]
+      },
+      "soft-launch": {
+        "narrative": "Tus amigos encuentran dos problemas pequenos: un error tipografico en la pagina principal y una etiqueta de boton confusa. Arreglas ambos en 20 minutos, redespliegas y lanzas publicamente con confianza. El lanzamiento sale sin problemas.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Un lanzamiento suave con testers de confianza es el estandar de oro. Encuentran los problemas vergonzosos antes de que el publico lo haga, y puedes arreglarlos con calma en lugar de apurarte.",
+        "choices": []
+      },
+      "quick-launch": {
+        "narrative": "El lanzamiento sale mayormente bien. Algunos usuarios reportan problemas menores de UI, pero nada esta roto. Arreglas los problemas conforme llegan.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Un lanzamiento aceptable. La prueba de humo te salvo del bug de auth, pero un lanzamiento suave con amigos habria detectado los problemas de UI restantes tambien.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["smoke-test", "rollback"]
+  }
+}

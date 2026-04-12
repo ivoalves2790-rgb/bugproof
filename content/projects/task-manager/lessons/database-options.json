@@ -1,0 +1,106 @@
+{
+  "slug": "database-options",
+  "title": "Picking the Right Database",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "tech-stack",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager needs a database to store tasks. There are many options, and the wrong choice can cost you days of rework. Make the right call.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "SQL vs NoSQL: The Big Fork in the Road",
+      "body": "SQL databases (like PostgreSQL) store data in structured tables with rows and columns. NoSQL databases (like MongoDB) store data as flexible documents. For a task manager with clear data relationships — users have tasks, tasks have categories — SQL is usually the better fit."
+    },
+    {
+      "type": "code_example",
+      "title": "Task Data: SQL vs NoSQL",
+      "language": "text",
+      "code": "SQL (PostgreSQL):\n  tasks table: id | title | status | due_date | user_id\n  Clean, structured, easy to query and filter.\n\nNoSQL (MongoDB):\n  { title: '...', status: '...', due_date: '...', user: {...} }\n  Flexible, but relationships get messy fast.",
+      "annotation": "When your data has clear structure and relationships (tasks belong to users), SQL keeps things clean. NoSQL shines when data shapes are unpredictable."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "For a task manager, you want a SQL database. Your data is structured (tasks, users, categories), you need reliable queries (filter by status, sort by date), and SQL handles this perfectly."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're setting up the database for your task manager. Your app needs to store tasks with titles, statuses, due dates, and priorities. Tasks belong to users. You need filtering and sorting. What type of database do you choose?",
+        "choices": [
+          { "id": "sql", "text": "A SQL database like PostgreSQL — my data is structured and relational", "nextNode": "sql-path", "score": 3 },
+          { "id": "nosql", "text": "A NoSQL database like MongoDB — I want flexibility", "nextNode": "nosql-path", "score": 1 },
+          { "id": "localstorage", "text": "Just use localStorage in the browser — no server needed", "nextNode": "local-path", "score": 0 }
+        ]
+      },
+      "sql-path": {
+        "narrative": "Good choice. PostgreSQL is reliable and perfect for structured data like tasks. Now you need to decide how to host it. What's your approach?",
+        "choices": [
+          { "id": "managed", "text": "Use a managed database service like Supabase or Neon so I don't have to manage servers", "nextNode": "managed-end", "score": 4 },
+          { "id": "self-host", "text": "Install PostgreSQL on my own server so I have full control", "nextNode": "selfhost-end", "score": 2 },
+          { "id": "local-only", "text": "Just run it locally on my laptop for now", "nextNode": "localdb-end", "score": 1 }
+        ]
+      },
+      "nosql-path": {
+        "narrative": "You set up MongoDB and start building. Things work at first, but when you try to query 'all tasks for user X sorted by due date and filtered by status,' the query gets complicated. Joining user data with tasks requires extra work. What do you do?",
+        "choices": [
+          { "id": "switch-sql", "text": "Switch to PostgreSQL now before you're in too deep", "nextNode": "switch-end", "score": 3 },
+          { "id": "push-through", "text": "Keep going with MongoDB — you'll figure out the queries eventually", "nextNode": "nosql-end", "score": 1 }
+        ]
+      },
+      "local-path": {
+        "narrative": "You build the whole app using localStorage. It works on your laptop, but then you realize: the data disappears when the user clears their browser. There's no way to sync across devices. And your friend can't see their tasks on their phone. What now?",
+        "choices": [
+          { "id": "add-db", "text": "Add a real database — you need server-side persistence", "nextNode": "switch-end", "score": 3 },
+          { "id": "keep-local", "text": "Keep localStorage and just tell users not to clear their browser data", "nextNode": "local-end", "score": 0 }
+        ]
+      },
+      "managed-end": {
+        "narrative": "You sign up for a managed PostgreSQL service. In 5 minutes, you have a production-ready database with automatic backups, connection pooling, and a dashboard to inspect your data. You can focus on building features instead of managing infrastructure.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Perfect choice. A managed SQL database gives you the structure your task data needs without the ops headache. Services like Supabase even add auth and real-time features out of the box.",
+        "choices": []
+      },
+      "selfhost-end": {
+        "narrative": "You spend two days setting up PostgreSQL on a VPS, configuring backups, setting up SSL, and troubleshooting connection issues. It works, but you haven't written a single line of task manager code yet.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Self-hosting works, but for a learning project, it's a time sink. Managed services let you skip the DevOps and focus on building. Save self-hosting for when you need custom configurations.",
+        "choices": []
+      },
+      "localdb-end": {
+        "narrative": "Your app works on your machine, but it can't be deployed or shared with anyone. When you eventually need to move to a hosted database, you'll need to migrate everything.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Local-only databases are fine for quick experiments, but a task manager needs to be accessible from anywhere. Start with a hosted solution so deployment is seamless.",
+        "choices": []
+      },
+      "switch-end": {
+        "narrative": "Smart move. You switch to PostgreSQL with a managed service. The migration costs you a few hours, but your queries are now clean and fast. Filtering tasks by status and sorting by date takes one simple SQL query.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Recognizing a wrong choice early and switching is a valuable skill. SQL is the right fit for structured, relational data. Next time, match your data shape to the database type from the start.",
+        "choices": []
+      },
+      "nosql-end": {
+        "narrative": "You spend days writing complex aggregation pipelines for queries that would be one line in SQL. The app works, but every new feature requires fighting the database instead of building the feature.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "NoSQL can work, but it's the wrong tool for structured, relational data. When your data has clear relationships (users own tasks, tasks have categories), SQL makes your life much easier.",
+        "choices": []
+      },
+      "local-end": {
+        "narrative": "Users lose their tasks constantly. Nobody wants to use the app. The project fizzles out because the foundation was broken from the start.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "localStorage is not a database. It has size limits, no queries, no multi-device sync, and vanishes when the browser data is cleared. Always use a real database for data that matters.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["sql", "nosql", "managed-database"]
+  }
+}

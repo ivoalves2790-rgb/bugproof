@@ -1,0 +1,77 @@
+{
+  "slug": "deploying-to-vercel",
+  "title": "Deploying to Vercel",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "It's deployment day. You connect your repo to Vercel, hit deploy, and... the build fails. Welcome to the real world of deployment debugging.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Deploying a Next.js App",
+      "body": "Vercel is built by the creators of Next.js, making it the smoothest deployment option. You connect your GitHub repo, Vercel detects it's a Next.js app, and builds it automatically. But 'automatic' doesn't mean 'no issues' — missing env vars, build errors, and type errors are common first-deploy problems."
+    },
+    {
+      "type": "code_example",
+      "title": "Common First-Deploy Errors",
+      "language": "text",
+      "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ You forgot to add env vars in Vercel dashboard\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript is stricter in production builds\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Case sensitivity: taskList.tsx vs TaskList.tsx (Linux is case-sensitive)",
+      "annotation": "Most first-deploy failures are environment or build configuration issues, not code bugs."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always run the production build locally (npm run build) before deploying. It catches most build errors that won't appear in development mode."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You push your task manager to GitHub and connect the repo to Vercel. The build starts and immediately fails with: 'Error: NEXT_PUBLIC_SUPABASE_URL is not defined.' What do you do?",
+        "choices": [
+          { "id": "a", "text": "Hardcode the Supabase URL directly in the code so the build doesn't need env vars", "nextNode": "hardcode", "score": 0 },
+          { "id": "b", "text": "Add the environment variables in the Vercel project settings dashboard, then redeploy", "nextNode": "add-env-vars", "score": 4 },
+          { "id": "c", "text": "Push your .env file to the repo so Vercel can read it", "nextNode": "push-env", "score": 0 }
+        ]
+      },
+      "hardcode": {
+        "narrative": "The build passes, but now your Supabase URL is visible in the public source code. Anyone can find your database endpoint. A security-conscious colleague flags the issue.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Even URLs should be treated as configuration, not hardcoded values. Environment variables exist precisely for values that change between environments and should not be public.",
+        "choices": []
+      },
+      "add-env-vars": {
+        "narrative": "You add the env vars in Vercel settings. The build passes. But the app shows a blank page. The browser console reveals: 'TypeError: Cannot read properties of undefined.' What's your next step?",
+        "choices": [
+          { "id": "b1", "text": "Check Vercel's deployment logs and the browser console to find the exact failing component", "nextNode": "debug-logs", "score": 3 },
+          { "id": "b2", "text": "Run npm run build locally to reproduce the issue in a local production build", "nextNode": "local-build", "score": 4 }
+        ]
+      },
+      "push-env": {
+        "narrative": "You accidentally push your .env file with your real Supabase service role key. Within minutes, a bot scraping GitHub finds it. You get an email from Supabase warning about exposed credentials. You immediately rotate keys and add .env to .gitignore.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Never push .env files to Git. Even after deletion, secrets remain in Git history. Always add .env to .gitignore before your first commit, and rotate any leaked credentials immediately.",
+        "choices": []
+      },
+      "debug-logs": {
+        "narrative": "The logs show a component is trying to read a property from data that hasn't loaded yet. You add a loading state check and the app works perfectly on the next deploy.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Good debugging process. Deployment logs and browser console are your best friends. The loading state issue is common — data fetching behaves differently in production vs development.",
+        "choices": []
+      },
+      "local-build": {
+        "narrative": "Running 'npm run build' locally reveals the exact same error with a full stack trace pointing to a component that doesn't handle the loading state. You fix it locally, push, and Vercel auto-deploys successfully.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Running the production build locally is the best practice. It reproduces most deployment issues with a faster feedback loop than pushing and waiting for Vercel to build.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["ci-cd", "environment-variable"]
+  }
+}

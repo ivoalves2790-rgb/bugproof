@@ -1,0 +1,68 @@
+{
+  "slug": "what-is-unit-test",
+  "title": "¿Qué es un test unitario?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "unit-tests",
+  "courseSlug": "testing",
+  "intro": "Los tests unitarios son la base de todo el testing. Testean las piezas más pequeñas de tu código de forma aislada. Separemos los hechos de la ficción sobre qué son y qué no son los tests unitarios. Desliza a la derecha si la afirmación es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Test unitario = Probar un solo bloque de LEGO",
+      "body": "Antes de construir un castillo de LEGO completo, querrías asegurarte de que cada bloque individual es sólido -- sin grietas, forma correcta, color correcto. Un **test unitario** hace lo mismo con el código. Testea UNA pequeña pieza (una función, un cálculo) por sí sola. Si todos tus bloques individuales son sólidos, puedes confiar en el castillo que construyes con ellos."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué hace que un test sea un test 'unitario'?",
+      "body": "Un test unitario tiene tres propiedades:\n\n1. **Testea una sola cosa** -- Una sola función o un solo comportamiento\n2. **Se ejecuta de forma aislada** -- No depende de bases de datos, APIs u otros servicios\n3. **Se ejecuta rápido** -- Típicamente milisegundos, porque no hay I/O de red ni disco\n\nSi tu test necesita una base de datos ejecutándose o hace llamadas a APIs, probablemente es un test de integración, no un test unitario."
+    },
+    {
+      "type": "code_example",
+      "title": "Un test unitario simple",
+      "language": "javascript",
+      "code": "// The function (the 'unit' we're testing)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// The unit test\ntest('capitalizes the first letter', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
+      "annotation": "Este test se enfoca en una función y un comportamiento. No necesita una base de datos ni servidor. Se ejecuta en milisegundos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un test unitario testea una pequeña pieza de código de forma aislada. Es rápido, enfocado y no depende de servicios externos como bases de datos o APIs."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Un test unitario debería testear una sola función o comportamiento de forma aislada.",
+        "isGoodPractice": true,
+        "explanation": "¡Esa es la definición de un test unitario! 'Unitario' significa una pieza pequeña y aislada. Testea una cosa a la vez para que cuando un test falle, sepas exactamente qué se rompió."
+      },
+      {
+        "id": "card-2",
+        "content": "Un test unitario que verifica si un usuario puede iniciar sesión, navegar productos y completar una compra está bien diseñado.",
+        "isGoodPractice": false,
+        "explanation": "Eso está testeando todo un recorrido de usuario -- es un test de extremo a extremo, no un test unitario. Un test unitario testearía solo la función de validación de login, o solo el cálculo de precios, cada uno de forma aislada."
+      },
+      {
+        "id": "card-3",
+        "content": "Los tests unitarios deberían ejecutarse en milisegundos, no en segundos.",
+        "isGoodPractice": true,
+        "explanation": "La velocidad es una característica definitoria de los tests unitarios. Como testean funciones puras sin llamadas de red ni consultas a bases de datos, deberían ser extremadamente rápidos. Si tu test unitario toma segundos, probablemente no es un verdadero test unitario."
+      },
+      {
+        "id": "card-4",
+        "content": "Un buen test unitario se conecta a la base de datos para verificar que los datos se guardaron correctamente.",
+        "isGoodPractice": false,
+        "explanation": "Si un test se conecta a una base de datos, es un test de integración, no un test unitario. Los tests unitarios se ejecutan de forma aislada -- sin bases de datos, sin APIs, sin sistema de archivos. Se usa 'mocking' para simular estas dependencias."
+      },
+      {
+        "id": "card-5",
+        "content": "Tener muchos tests unitarios pequeños es mejor que tener unos pocos tests grandes que verifican todo.",
+        "isGoodPractice": true,
+        "explanation": "Muchos tests pequeños son mejores porque cuando uno falla, inmediatamente sabes qué función específica se rompió. Un test grande que verifica 20 cosas te dice 'algo está mal en algún lugar' -- no muy útil para depurar."
+      }
+    ],
+    "glossaryTerms": ["unit-test", "isolation", "test-runner"]
+  }
+}

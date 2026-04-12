@@ -1,0 +1,76 @@
+{
+  "slug": "going-live-checklist",
+  "title": "Going Live Checklist",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Launch day is here. You're about to share your task manager with the world. But first, let's make sure you haven't forgotten anything critical.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The Launch Checklist",
+      "body": "Before going live, you need to verify: all environment variables are set, HTTPS is enabled, error tracking is configured, there's a way to roll back if something goes wrong, and someone is available to fix issues. Most launch-day disasters come from skipping one of these basics."
+    },
+    {
+      "type": "code_example",
+      "title": "Pre-Launch Essentials",
+      "language": "text",
+      "code": "[ ] Production env vars set and verified\n[ ] HTTPS enabled (automatic on Vercel)\n[ ] Error tracking configured (Sentry, etc.)\n[ ] Database migrations applied\n[ ] Auth working in production environment\n[ ] Rollback plan: know how to revert to previous deploy\n[ ] Open Graph / social meta tags set\n[ ] 404 page configured",
+      "annotation": "Walk through each item. A 10-minute checklist review can prevent a 10-hour launch-day emergency."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Launch small, launch ready. Don't announce to thousands if you haven't tested the production environment. Share with 10 people first, fix what breaks, then open the floodgates."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "It's 9 AM on launch day. Your task manager is deployed to Vercel and everything looks good. You're about to share the link on social media. But you haven't tested the production environment yet — only development. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Post the link now — it worked in development, it should be fine", "nextNode": "yolo-launch", "score": 0 },
+          { "id": "b", "text": "Do a quick smoke test: sign up, create a task, complete it, delete it — all in production", "nextNode": "smoke-test", "score": 4 },
+          { "id": "c", "text": "Delay the launch by a week to do extensive QA testing", "nextNode": "over-delay", "score": 1 }
+        ]
+      },
+      "yolo-launch": {
+        "narrative": "You post the link. Within 30 minutes, someone tries to sign up and gets a blank screen. The Supabase auth redirect URL is still set to localhost. You scramble to fix it while people are tweeting about your broken app. First impressions are lost.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "A 5-minute production smoke test would have caught the auth redirect issue before anyone else saw it. Always test the real environment before announcing your launch.",
+        "choices": []
+      },
+      "smoke-test": {
+        "narrative": "Good call. You try to sign up and the auth flow fails — the OAuth redirect URL is set to localhost. You fix it in the Supabase dashboard, retest, and everything works. What's next before launching?",
+        "choices": [
+          { "id": "b1", "text": "Share with 5 friends first, fix any issues they find, then do the public launch", "nextNode": "soft-launch", "score": 3 },
+          { "id": "b2", "text": "Everything works now — launch publicly immediately", "nextNode": "quick-launch", "score": 2 }
+        ]
+      },
+      "over-delay": {
+        "narrative": "A week-long delay for a side project kills your momentum. By the time you launch, you've lost interest. You compromise: do a 2-hour focused test session today and launch this afternoon.",
+        "choices": [
+          { "id": "c1", "text": "Run through the critical flows in production and launch today", "nextNode": "smoke-test", "score": 3 }
+        ]
+      },
+      "soft-launch": {
+        "narrative": "Your friends find two small issues: a typo on the homepage and a confusing button label. You fix both in 20 minutes, redeploy, and launch publicly with confidence. The launch goes smoothly.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "A soft launch with trusted testers is the gold standard. They find the embarrassing issues before the public does, and you can fix them calmly instead of scrambling.",
+        "choices": []
+      },
+      "quick-launch": {
+        "narrative": "The launch goes mostly well. A few users report minor UI issues, but nothing is broken. You fix issues as they come in.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "An acceptable launch. The smoke test saved you from the auth bug, but a soft launch with friends would have caught the remaining UI issues too.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["smoke-test", "rollback"]
+  }
+}

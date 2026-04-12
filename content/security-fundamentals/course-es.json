@@ -1,0 +1,22 @@
+{
+  "slug": "security-fundamentals",
+  "title": "Fundamentos de Seguridad",
+  "description": "XSS, inyeccion SQL, autenticacion, claves API y conceptos basicos de OWASP",
+  "longDescription": "Cada linea de codigo que escribes es una puerta potencial -- y los atacantes estan constantemente revisando los accesos. Este curso te ensena a pensar como un atacante para que puedas defenderte como un profesional. Aprenderas como funcionan realmente los ataques de cross-site scripting (XSS), inyeccion SQL y CSRF al ver patrones de codigo vulnerable reales. Entenderas por que las claves API en el codigo del frontend son una bomba de tiempo, como se vulneran los sistemas de autenticacion y que significa realmente el OWASP Top 10 para tu trabajo diario. Mas importante aun, aprenderas los habitos de codificacion segura que evitan que estas vulnerabilidades lleguen a produccion. La seguridad no es trabajo de alguien mas -- esta integrada en cada funcion que escribes, cada entrada que aceptas y cada secreto que almacenas.",
+  "icon": "shield",
+  "color": "#4ECDC4",
+  "prerequisites": [],
+  "units": [
+    { "slug": "security-mindset", "title": "The Security Mindset", "order": 1 },
+    { "slug": "common-attacks", "title": "Common Web Attacks", "order": 2 },
+    { "slug": "authentication", "title": "Authentication & Authorization", "order": 3 },
+    { "slug": "data-protection", "title": "Protecting Data", "order": 4 },
+    { "slug": "secure-coding", "title": "Secure Coding Practices", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

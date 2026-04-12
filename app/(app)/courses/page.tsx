@@ -1,17 +1,21 @@
+"use client";
+
 import { getCourses } from "@/lib/content/loader";
 import { CourseCard } from "@/components/course/CourseCard";
+import { useLanguage } from "@/lib/i18n/use-language";
 
 export default function CoursesPage() {
-  const courses = getCourses();
+  const { locale, t } = useLanguage();
+  const courses = getCourses(locale);
 
   return (
     <div>
       <div className="mb-6">
         <h1 className="text-2xl font-bold">
-          <span className="text-terminal-green">{">"}</span> All Courses
+          <span className="text-terminal-green">{">"}</span> {t("courses.title")}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          {courses.length} courses covering everything an engineer needs to know.
+          {courses.length} {t("courses.subtitle")}
         </p>
       </div>
 

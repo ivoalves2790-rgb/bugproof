@@ -1,0 +1,16 @@
+{
+  "slug": "testing",
+  "title": "Pruebas",
+  "description": "Escribe pruebas para asegurarte de que tu app realmente funciona. Aprende los tipos de pruebas y cuando usar cada una.",
+  "order": 7,
+  "phase": "testing",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "why-test", "title": "Por Que Hacer Pruebas?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "types-of-tests", "title": "Tipos de Pruebas", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "writing-first-test", "title": "Escribiendo Tu Primera Prueba", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "testing-user-flows", "title": "Probando Flujos de Usuario", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "debugging-failures", "title": "Depurando Fallos en Pruebas", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["testing"]
+}

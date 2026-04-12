@@ -1,0 +1,68 @@
+{
+  "slug": "features-vs-scope-creep",
+  "title": "Features vs Scope Creep",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "Scope creep kills projects. Judge whether each scenario is good planning discipline or a scope creep trap.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The #1 Project Killer",
+      "body": "Most apps never ship. The reason isn't bad code or hard bugs — it's scope creep. That's when you keep adding 'just one more feature' until the project is so big you abandon it. Vibe coders are especially vulnerable because AI makes it feel easy to add features."
+    },
+    {
+      "type": "analogy",
+      "title": "The Restaurant Menu Problem",
+      "body": "A restaurant with 200 items on the menu can't be great at all of them. A focused menu with 10 items done well beats a bloated one every time. Your app is the same — 5 polished features beat 50 half-built ones."
+    },
+    {
+      "type": "code_example",
+      "title": "A Scope Creep Conversation",
+      "language": "text",
+      "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
+      "annotation": "Each feature alone seems small, but they compound. Every feature means more code, more bugs, more edge cases."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Write down your MVP features BEFORE you start. If a new idea comes up, add it to a 'v2 ideas' list, not to your current sprint. Ship first, improve later."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "v2-list",
+        "content": "When you think of a cool feature, you write it in a 'Future Ideas' doc instead of building it right away",
+        "isGoodPractice": true,
+        "explanation": "This is the best way to handle feature ideas without losing them or derailing your project."
+      },
+      {
+        "id": "just-one-more",
+        "content": "You're almost done but think 'let me just add dark mode real quick before I ship'",
+        "isGoodPractice": false,
+        "explanation": "Classic scope creep. 'Real quick' features never are. Ship first, dark mode second."
+      },
+      {
+        "id": "mvp-checklist",
+        "content": "Before starting, you write down exactly 5 core features and commit to shipping only those",
+        "isGoodPractice": true,
+        "explanation": "A clear, limited feature list is your best defense against scope creep."
+      },
+      {
+        "id": "user-requests",
+        "content": "A friend says 'you should add a Pomodoro timer' so you immediately start building it",
+        "isGoodPractice": false,
+        "explanation": "Feature requests from users are valuable — but they go on the v2 list, not the current sprint."
+      },
+      {
+        "id": "cut-features",
+        "content": "You realize your app has 12 planned features and cut it down to 6 to ship faster",
+        "isGoodPractice": true,
+        "explanation": "Cutting scope is a sign of maturity. Shipping something small that works beats a big thing that doesn't."
+      }
+    ],
+    "glossaryTerms": ["scope-creep", "mvp", "sprint"]
+  }
+}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 import type { TerminalSimExercise } from "@/lib/types/content.types";
+import { useT } from "@/lib/i18n/use-language";
 
 interface TerminalSimulatorProps {
   exercise: TerminalSimExercise;
@@ -17,6 +18,7 @@ interface TerminalLine {
 }
 
 export function TerminalSimulator({ exercise, onComplete }: TerminalSimulatorProps) {
+  const t = useT();
   const [currentStep, setCurrentStep] = useState(0);
   const [input, setInput] = useState("");
   const [lines, setLines] = useState<TerminalLine[]>([]);
@@ -67,7 +69,7 @@ export function TerminalSimulator({ exercise, onComplete }: TerminalSimulatorPro
       if (step.output) {
         newLines.push({ type: "output", text: step.output });
       }
-      newLines.push({ type: "success", text: "Correct!" });
+      newLines.push({ type: "success", text: t("terminal.correct") });
 
       const nextStep = currentStep + 1;
       if (nextStep < exercise.steps.length) {
@@ -91,12 +93,12 @@ export function TerminalSimulator({ exercise, onComplete }: TerminalSimulatorPro
       if (attempts >= 1) {
         newLines.push({
           type: "error",
-          text: `Hint: ${step.hint}`,
+          text: `${t("terminal.hint")}: ${step.hint}`,
         });
       } else {
         newLines.push({
           type: "error",
-          text: "Not quite. Try again.",
+          text: t("terminal.tryAgain"),
         });
       }
     }

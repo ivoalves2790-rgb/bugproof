@@ -1,0 +1,68 @@
+{
+  "slug": "trust-no-input",
+  "title": "No confíes en ninguna entrada",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "security-mindset",
+  "courseSlug": "security-fundamentals",
+  "intro": "La regla #1 de seguridad: nunca confíes en la entrada del usuario. Pero no son solo los campos de formulario -- los datos pueden llegar desde URLs, cookies, cabeceras, APIs e incluso tu propia base de datos si fue llenada por usuarios. Desliza a la derecha si la práctica es SEGURA, o a la izquierda si es INSEGURA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "La entrada es como correo de desconocidos",
+      "body": "No abrirías un paquete misterioso dejado en tu puerta y lo conectarías a tu computadora. La entrada del usuario es lo mismo -- podría ser un mensaje amigable, o podría ser algo malicioso. Cada pieza de datos que viene de fuera de tu código necesita ser inspeccionada antes de confiar en ella."
+    },
+    {
+      "type": "text",
+      "title": "Dónde se esconde la entrada peligrosa",
+      "body": "La entrada del usuario no son solo campos de formulario. Incluye:\n\n1. **Parámetros de URL** -- todo lo que está después del `?` en una dirección web\n2. **Cookies y cabeceras** -- enviadas con cada solicitud\n3. **Respuestas de API** -- datos de servicios externos\n4. **Valores de la base de datos** -- si los usuarios metieron datos, podría contener ataques\n\nCualquier dato que tú no hayas escrito debe tratarse como potencialmente dañino."
+    },
+    {
+      "type": "code_example",
+      "title": "Manejo inseguro vs seguro de entradas",
+      "language": "javascript",
+      "code": "// UNSAFE: directly using URL input in HTML\nconst name = req.query.name;\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;\n\n// SAFE: escape the input first\nconst name = escapeHtml(req.query.name);\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;",
+      "annotation": "Sin escapar, un atacante podría establecer name como una etiqueta de script y ejecutar código malicioso en los navegadores de tus usuarios. Siempre sanitiza o escapa la salida."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Nunca confíes en ningún dato que venga de fuera de tu código. Valida la entrada del lado del servidor, escapa la salida antes de mostrarla y usa listas blancas (valores permitidos) en lugar de listas negras (valores bloqueados)."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Usar el valor de un parámetro de URL directamente en tu HTML sin escaparlo.",
+        "isGoodPractice": false,
+        "explanation": "Esta es la configuración clásica para un ataque XSS reflejado. Un atacante crea una URL como tusitio.com/?name=<script>robarCookies()</script> y engaña a un usuario para que haga clic. El script se ejecuta en el navegador de la víctima con acceso completo a su sesión. Siempre sanitiza y escapa la salida."
+      },
+      {
+        "id": "card-2",
+        "content": "Validar la entrada del formulario tanto del lado del cliente (navegador) COMO del lado del servidor.",
+        "isGoodPractice": true,
+        "explanation": "La validación del lado del cliente mejora la experiencia del usuario, pero puede ser completamente evadida -- cualquiera puede abrir las DevTools y modificar la solicitud. La validación del lado del servidor es la verdadera barrera de seguridad. Necesitas ambas: cliente para la experiencia de usuario, servidor para la seguridad."
+      },
+      {
+        "id": "card-3",
+        "content": "Verificar la extensión del archivo (.jpg, .png) para confirmar que un archivo subido es seguro.",
+        "isGoodPractice": false,
+        "explanation": "Las extensiones de archivo se falsifican trivialmente. Un atacante puede subir malware.php renombrado como profile.jpg. La validación adecuada de archivos verifica el contenido real del archivo (bytes mágicos), restringe el tamaño del archivo, almacena las subidas fuera del directorio web y usa una cabecera Content-Disposition para prevenir la ejecución."
+      },
+      {
+        "id": "card-4",
+        "content": "Usar una lista blanca de caracteres permitidos para la entrada de nombre de usuario en lugar de intentar bloquear caracteres malos.",
+        "isGoodPractice": true,
+        "explanation": "Las listas blancas (permitir solo estos caracteres) son mucho más seguras que las listas negras (bloquear estos caracteres malos). Los atacantes constantemente encuentran formas creativas de evadir las listas negras con trucos de codificación y casos extremos. Si defines 'solo se permiten letras, números y guiones bajos,' no hay espacio para la inyección."
+      },
+      {
+        "id": "card-5",
+        "content": "Confiar en los datos de tu propia base de datos sin sanitizarlos antes de renderizarlos en HTML.",
+        "isGoodPractice": false,
+        "explanation": "Si datos enviados por usuarios llegaron a tu base de datos, podrían contener scripts maliciosos. Esto se llama XSS almacenado -- la carga maliciosa vive en tu base de datos y ataca a cada usuario que ve esos datos. Siempre escapa la salida sin importar de dónde vengan los datos."
+      }
+    ],
+    "glossaryTerms": ["xss", "input-validation", "sanitization", "whitelist"]
+  }
+}

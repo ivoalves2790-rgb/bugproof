@@ -1,0 +1,16 @@
+{
+  "slug": "why-organization-matters",
+  "title": "Por qué importa la organización",
+  "description": "Código espagueti vs código limpio, el costo de la desorganización y tu primera refactorización",
+  "order": 1,
+  "courseSlug": "code-organization",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "spaghetti-vs-clean", "title": "Código espagueti vs código limpio", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "why-ai-generates-messy-code", "title": "Por qué la IA genera código desordenado", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "cost-of-disorganization", "title": "El costo de la desorganización", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "what-good-code-looks-like", "title": "Cómo se ve el buen código", "type": "bug_hunt", "order": 4, "difficulty": 1 },
+    { "slug": "reading-other-peoples-code", "title": "Leyendo el código de otros", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "your-first-refactor", "title": "Tu primera refactorización", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

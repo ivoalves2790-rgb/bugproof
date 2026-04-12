@@ -1,0 +1,76 @@
+{
+  "slug": "implementing-login",
+  "title": "Implementando el Login",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Estas agregando login a tu gestor de tareas. Un usuario reporta que no puede iniciar sesion y descubres que la implementacion de auth tiene algunos problemas fundamentales. Como lo arreglas?",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Construyendo un Flujo de Login",
+      "body": "Un flujo de login solido tiene tres partes: un formulario que recopila credenciales, validacion del lado del servidor que las verifica y gestion de sesiones que recuerda al usuario. Cada parte tiene errores comunes — validacion debil, manejo de errores faltante o almacenamiento inseguro de tokens."
+    },
+    {
+      "type": "code_example",
+      "title": "Errores Comunes de Login",
+      "language": "text",
+      "code": "BAD: if (password === storedPassword)  // plain text comparison\nGOOD: if (await bcrypt.compare(password, hashedPassword))\n\nBAD: res.json({ token, password })  // leaking password in response\nGOOD: res.json({ token, user: { id, email } })",
+      "annotation": "Siempre hashea las contrasenas y nunca incluyas datos sensibles en las respuestas de la API."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Usa una libreria o proveedor de auth en lugar de construir el login desde cero. Si debes construirlo, siempre hashea las contrasenas, valida en el servidor y nunca expongas datos sensibles en las respuestas."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Un usuario reporta que no puede iniciar sesion en tu gestor de tareas. Revisas el endpoint de login y descubres que la contrasena se esta comparando en texto plano, y el mensaje de error dice 'Contrasena incorrecta para el usuario john@example.com'. Cual es tu primera prioridad?",
+        "choices": [
+          { "id": "a", "text": "Solo arreglar el mensaje de error para que sea menos especifico", "nextNode": "surface-fix", "score": 1 },
+          { "id": "b", "text": "Arreglar la comparacion de contrasena en texto plano primero, luego abordar el mensaje de error", "nextNode": "fix-hashing", "score": 4 },
+          { "id": "c", "text": "Reescribir todo el sistema de auth desde cero", "nextNode": "overhaul", "score": 1 }
+        ]
+      },
+      "surface-fix": {
+        "narrative": "Cambias el error a 'Credenciales invalidas' — mejor, pero las contrasenas aun se almacenan y comparan en texto plano. Una filtracion de la base de datos expondria la contrasena de cada usuario. Dos meses despues, tu base de datos es vulnerada y cada contrasena en texto plano de los usuarios se filtra.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Las contrasenas en texto plano son una vulnerabilidad de seguridad critica. Un mensaje de error vago no protege contra filtraciones de base de datos — el hashing si. Siempre prioriza la solucion de seguridad sobre los cambios cosmeticos.",
+        "choices": []
+      },
+      "fix-hashing": {
+        "narrative": "Buena decision. Implementas hashing con bcrypt y actualizas el mensaje de error a un generico 'Email o contrasena invalidos'. Ahora necesitas manejar las contrasenas existentes en texto plano en la base de datos. Cual es tu enfoque?",
+        "choices": [
+          { "id": "b1", "text": "Escribir una migracion que hashee todas las contrasenas existentes, luego actualizar el login para usar bcrypt.compare", "nextNode": "migration-done", "score": 3 },
+          { "id": "b2", "text": "Forzar a todos los usuarios a restablecer sus contrasenas en el proximo inicio de sesion", "nextNode": "forced-reset", "score": 2 }
+        ]
+      },
+      "overhaul": {
+        "narrative": "Reescribir desde cero es arriesgado y lento. Los usuarios aun no pueden iniciar sesion. Tu lider de equipo pregunta por que la correccion de un bug de login se esta convirtiendo en un proyecto de dos semanas. Reduces el alcance para solo arreglar los problemas criticos primero.",
+        "choices": [
+          { "id": "c1", "text": "Arreglar el hashing y los mensajes de error, planificar la reescritura mayor para despues", "nextNode": "fix-hashing", "score": 3 }
+        ]
+      },
+      "migration-done": {
+        "narrative": "Escribes un script de migracion que hashea todas las contrasenas existentes con bcrypt, actualizas el endpoint de login para usar bcrypt.compare y despliegas. Todo funciona y los usuarios pueden iniciar sesion de forma segura.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Excelente. Priorizaste la correccion de seguridad, manejaste los datos legados con una migracion y usaste mensajes de error genericos. Asi es como se deben manejar los bugs de auth en produccion.",
+        "choices": []
+      },
+      "forced-reset": {
+        "narrative": "Los usuarios estan molestos por el restablecimiento forzado, pero las contrasenas ahora estan correctamente hasheadas de aqui en adelante. Algunos usuarios abandonan la app debido a la inconveniencia.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Los restablecimientos forzados funcionan pero afectan la experiencia del usuario. Una migracion en segundo plano que hashea las contrasenas existentes es mas fluida — los usuarios nunca notan el cambio.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["bcrypt", "hashing"]
+  }
+}

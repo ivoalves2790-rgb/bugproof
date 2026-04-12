@@ -224,6 +224,17 @@ export function IconThumbsDown({ size, ...props }: IconProps) {
   );
 }
 
+export function IconHammer({ size, ...props }: IconProps) {
+  return (
+    <svg {...defaultProps(size)} {...props}>
+      <path d="M15 12l-8.5 8.5a2.12 2.12 0 01-3-3L12 9" />
+      <path d="M17.64 15L22 10.64" />
+      <path d="M20.91 11.7l-1.25-1.25a2.12 2.12 0 00-3 0L14 13.17" />
+      <path d="M18.71 7.21a3.75 3.75 0 00-5.3 0L12 8.62" />
+    </svg>
+  );
+}
+
 export function IconLock({ size, ...props }: IconProps) {
   return (
     <svg {...defaultProps(size)} {...props}>

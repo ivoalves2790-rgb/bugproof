@@ -1,0 +1,100 @@
+{
+  "slug": "works-on-my-machine",
+  "title": "Funciona en Mi Máquina",
+  "type": "incident_response",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Es viernes por la tarde. Despliegas una funcionalidad que pasó todas las pruebas locales. Cinco minutos después, la app se cae en producción. Tu consola muestra un error que nunca has visto. Es hora de depurar la frase más famosa del software: '¡Pero funciona en mi máquina!'",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "La Analogía de la Cocina",
+      "body": "Imagina una receta que funciona perfectamente en tu cocina pero falla en un restaurante. ¿Por qué? Diferente temperatura del horno, diferente altitud, diferente marca de harina. Tu cocina (desarrollo) y el restaurante (producción) se ven similares pero tienen diferencias sutiles. Lo mismo pasa con el código -- tu laptop y el servidor son **entornos** diferentes con diferentes configuraciones."
+    },
+    {
+      "type": "text",
+      "title": "Los 5 Errores Principales de 'Funciona en Mi Máquina'",
+      "body": "Estas son las razones más comunes por las que el código funciona localmente pero falla en producción:\n\n1. **Variables de entorno faltantes** -- Las configuraste localmente pero olvidaste agregarlas en el servidor\n2. **Rutas de archivo sensibles a mayúsculas** -- Mac/Windows ignoran mayúsculas, Linux no\n3. **Diferentes versiones de Node.js** -- Tu laptop tiene v20, el servidor tiene v18\n4. **Dependencias faltantes** -- Un paquete está instalado globalmente en tu máquina pero no en package.json\n5. **URLs de localhost escritas directamente** -- localhost no existe en el servidor"
+    },
+    {
+      "type": "code_example",
+      "title": "Un Error Traicionero",
+      "language": "javascript",
+      "code": "// This works on Mac but fails on Linux\nimport Header from './components/header';\n// File is actually named: Header.js\n\n// This works locally but fails in production\nconst API = 'http://localhost:3001/api';\n// Production API is at https://api.myapp.com\n\n// This works when you have sharp installed globally\nconst sharp = require('sharp'); // Not in package.json!",
+      "annotation": "Cada uno de estos se ve correcto en tu máquina pero fallará en el servidor por diferentes razones."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los errores de 'funciona en mi máquina' son causados por diferencias entre tu entorno local y el servidor. Siempre prueba tu build localmente, verifica las variables de entorno y haz coincidir las versiones de Node."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Desplegaste una nueva funcionalidad a las 4pm del viernes. El despliegue tuvo éxito, pero los usuarios están reportando una página blanca en blanco. Tu versión local funciona perfectamente. El log de errores de producción muestra: 'TypeError: Cannot read properties of undefined (reading \"NEXT_PUBLIC_API_URL\")'. ¿Por dónde empiezas?",
+        "choices": [
+          { "id": "a", "text": "Verificar si NEXT_PUBLIC_API_URL está configurada en las variables de entorno de la plataforma de hosting", "nextNode": "check-env", "score": 10 },
+          { "id": "b", "text": "Revertir a la versión anterior inmediatamente, investigar el lunes", "nextNode": "rollback-first", "score": 5 },
+          { "id": "c", "text": "Agregar un try-catch alrededor del código que usa esa variable", "nextNode": "band-aid", "score": 2 }
+        ]
+      },
+      "check-env": {
+        "narrative": "Abres el dashboard de Vercel y miras las variables de entorno. ¡NEXT_PUBLIC_API_URL falta! La tenías en tu archivo .env local pero nunca la agregaste a Vercel. La agregas y redespliegas. Pero el sitio todavía muestra una página en blanco. Los logs ahora muestran un error diferente: 'Error: connect ECONNREFUSED 127.0.0.1:5432'. ¿Qué está pasando?",
+        "choices": [
+          { "id": "a", "text": "El DATABASE_URL está apuntando a localhost -- necesita la URL de la base de datos de producción", "nextNode": "fix-db", "score": 10 },
+          { "id": "b", "text": "El servidor de base de datos está caído -- contactar al proveedor de hosting", "nextNode": "wrong-diagnosis", "score": 3 },
+          { "id": "c", "text": "Intentar reiniciar el despliegue", "nextNode": "restart", "score": 1 }
+        ]
+      },
+      "rollback-first": {
+        "narrative": "Revertir pone la versión anterior en vivo de nuevo -- buen instinto para proteger a los usuarios. Pero todavía necesitas arreglar el problema. Mirando el mensaje de error, es sobre una variable de entorno faltante. Esto es un problema de configuración, no de código.",
+        "choices": [
+          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 5 }
+        ]
+      },
+      "band-aid": {
+        "narrative": "Un try-catch silenciaría el error pero la funcionalidad seguiría rota -- necesita esa URL de API para funcionar. La causa raíz es que la variable no existe en producción. Necesitas configurarla correctamente.",
+        "choices": [
+          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 3 }
+        ]
+      },
+      "fix-db": {
+        "narrative": "Lo encontraste -- DATABASE_URL estaba configurada con la cadena de conexión de localhost de desarrollo. La actualizas a la URL de la base de datos de producción y redespliegas. ¡El sitio vuelve a la vida! ¿Cuál es tu paso final para prevenir que esto pase de nuevo?",
+        "choices": [
+          { "id": "a", "text": "Crear un archivo .env.example listando todas las variables requeridas y agregar un checklist de despliegue", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Enviar un mensaje al equipo explicando qué pasó", "nextNode": "end-okay", "score": 6 }
+        ]
+      },
+      "wrong-diagnosis": {
+        "narrative": "127.0.0.1 ES localhost -- el error está diciendo que la app está intentando conectarse a una base de datos en la misma máquina. Pero en producción, la base de datos está en un servidor completamente diferente. La variable de entorno DATABASE_URL debe estar apuntando a localhost.",
+        "choices": [
+          { "id": "a", "text": "Actualizar DATABASE_URL a la URL de la base de datos de producción", "nextNode": "fix-db", "score": 5 }
+        ]
+      },
+      "restart": {
+        "narrative": "Reiniciar no ayudará -- la variable de entorno todavía está apuntando al lugar equivocado. El error 'ECONNREFUSED 127.0.0.1' significa que la app está intentando conectarse a localhost, que no tiene una base de datos en producción.",
+        "choices": [
+          { "id": "a", "text": "Actualizar DATABASE_URL a la URL de la base de datos de producción", "nextNode": "fix-db", "score": 3 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Creas un archivo .env.example listando cada variable requerida con valores de ejemplo, lo agregas al repositorio, y actualizas el checklist de despliegue del equipo para incluir 'verificar que todas las variables de entorno estén configuradas'. Los futuros despliegues serán mucho más seguros.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente depuración y prevención! Identificaste dos variables de entorno faltantes, las arreglaste, y configuraste salvaguardas para el futuro. El patrón .env.example es estándar de la industria -- documenta qué variables necesita tu app sin exponer los valores reales."
+      },
+      "end-okay": {
+        "narrative": "Buena comunicación, pero sin un archivo .env.example o checklist, el mismo error probablemente pasará de nuevo la próxima vez que alguien despliegue. Una corrección sistémica es mejor que un mensaje único.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Arreglaste el problema inmediato -- buen trabajo. Pero para prevenir que pase de nuevo, crea un archivo .env.example que liste todas las variables requeridas. De esta manera, cualquiera que despliegue puede verificar rápidamente que todas las variables estén configuradas."
+      }
+    },
+    "glossaryTerms": ["environment-variable", "production", "localhost"]
+  }
+}

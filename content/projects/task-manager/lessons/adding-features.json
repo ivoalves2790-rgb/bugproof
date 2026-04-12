@@ -1,0 +1,67 @@
+{
+  "slug": "adding-features",
+  "title": "Adding Features Safely",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager is live and users want new features. But shipping new code to all users at once is risky. Let's learn about feature flags, gradual rollouts, and safe deployment practices.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Ship Without Fear",
+      "body": "Feature flags let you deploy new code without activating it for everyone. You can enable a feature for 5% of users, verify it works, then gradually roll it out to 100%. If something goes wrong, you flip the flag off instantly — no rollback, no redeployment needed."
+    },
+    {
+      "type": "analogy",
+      "title": "Feature Flags Are Like a Light Switch",
+      "body": "Imagine building a new room in your house. Instead of knocking down a wall on move-in day and hoping it works, you build the room behind a door. Open the door to show it to friends first. If the plumbing leaks, close the door and fix it. Feature flags are that door — the code is deployed but hidden until you're ready."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Never deploy a big feature to all users at once. Use feature flags for gradual rollouts, monitor error rates during rollout, and always have a way to turn features off instantly."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Use feature flags to deploy new features to a small percentage of users before rolling out to everyone",
+        "isGoodPractice": true,
+        "explanation": "Gradual rollouts limit the blast radius. If a feature has a bug, only 5% of users are affected instead of all of them. You catch issues early with minimal impact."
+      },
+      {
+        "id": "c2",
+        "content": "Ship all new features behind long-lived feature flags that stay in the code indefinitely",
+        "isGoodPractice": false,
+        "explanation": "Feature flags are meant to be temporary. Once a feature is fully rolled out and stable, remove the flag. Old flags create technical debt and make the code harder to understand."
+      },
+      {
+        "id": "c3",
+        "content": "Deploy small, incremental changes frequently rather than large releases every few weeks",
+        "isGoodPractice": true,
+        "explanation": "Small deploys are easier to debug. If you deploy one change and something breaks, you know what caused it. With 50 changes in one release, finding the problem is much harder."
+      },
+      {
+        "id": "c4",
+        "content": "Save up multiple features and deploy them all at once on a Friday afternoon",
+        "isGoodPractice": false,
+        "explanation": "Never deploy big changes on Fridays. If something breaks, you're debugging over the weekend. Deploy early in the week when the team is available to respond to issues."
+      },
+      {
+        "id": "c5",
+        "content": "Write database migrations that are backward-compatible so the old code still works if you need to roll back",
+        "isGoodPractice": true,
+        "explanation": "If you rename a column and deploy new code, rolling back means the old code can't find the column. Instead, add the new column first, migrate data, then remove the old one in a later deploy."
+      },
+      {
+        "id": "c6",
+        "content": "If a feature flag is off, the code behind it doesn't need to be tested",
+        "isGoodPractice": false,
+        "explanation": "Untested code behind feature flags can break the app when enabled. Test both the on and off states. A flag-gated feature that crashes when enabled is worse than no feature at all."
+      }
+    ],
+    "glossaryTerms": ["feature-flag", "rollout", "backward-compatible"]
+  }
+}

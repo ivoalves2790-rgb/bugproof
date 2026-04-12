@@ -1,0 +1,16 @@
+{
+  "slug": "auth-security",
+  "title": "Autenticacion y Seguridad",
+  "description": "Agrega inicio de sesion y registro, protege tus rutas y aprende los fundamentos para mantener tu app segura.",
+  "order": 6,
+  "phase": "auth-security",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "why-authentication", "title": "Por Que Autenticacion?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "auth-flows", "title": "Flujos de Autenticacion Explicados", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "implementing-login", "title": "Implementando el Login", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "protecting-routes", "title": "Protegiendo Rutas", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "security-checklist", "title": "Lista de Verificacion de Seguridad", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["security-fundamentals"]
+}

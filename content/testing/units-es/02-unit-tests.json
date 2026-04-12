@@ -1,0 +1,16 @@
+{
+  "slug": "unit-tests",
+  "title": "Tests unitarios",
+  "description": "Escribiendo tus primeros tests unitarios con arrange-act-assert",
+  "order": 2,
+  "courseSlug": "testing",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-is-unit-test", "title": "¿Qué es un test unitario?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "arrange-act-assert", "title": "Arrange, Act, Assert", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "testing-functions", "title": "Testeando funciones", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "testing-edge-cases", "title": "Testeando casos límite", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "mocking-basics", "title": "Fundamentos de mocking", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "your-first-test", "title": "Tu primer test", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

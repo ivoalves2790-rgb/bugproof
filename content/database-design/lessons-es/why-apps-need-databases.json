@@ -1,0 +1,66 @@
+{
+  "slug": "why-apps-need-databases",
+  "title": "Por Qué las Apps Necesitan Bases de Datos",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Toda aplicación almacena datos en algún lugar. Pero, ¿por qué no podemos simplemente guardar todo en un archivo normal? Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Una Base de Datos Es Como un Archivador",
+      "body": "Imagina que manejas un negocio. PODRÍAS tirar todos tus papeles en una caja grande. Pero encontrar cualquier cosa sería una pesadilla. Un **archivador** organiza los papeles en cajones y carpetas etiquetadas para que puedas encontrar exactamente lo que necesitas al instante. Una base de datos hace lo mismo con los datos de tu aplicación."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué Pasa Sin una Base de Datos?",
+      "body": "Podrías almacenar datos en un archivo de texto o JSON. Pero esto falla rápidamente:\n\n1. **Velocidad** -- leer un archivo gigante para encontrar un registro es lento\n2. **Concurrencia** -- ¿qué pasa si dos usuarios intentan escribir al mismo tiempo?\n3. **Seguridad** -- ¿qué pasa si la app se cae a mitad de escritura y corrompe el archivo?\n4. **Consultas** -- ¿cómo encuentras todos los pedidos mayores a $50 del martes pasado?\n\nLas bases de datos resuelven todos estos problemas."
+    },
+    {
+      "type": "text",
+      "title": "Lo Que Te Da una Base de Datos",
+      "body": "Una base de datos es software especializado diseñado para almacenar y recuperar datos eficientemente. Te da:\n\n1. **Búsquedas rápidas** -- encuentra registros en milisegundos, incluso con millones de filas\n2. **Escrituras seguras** -- los datos nunca quedan a medio escribir ni se corrompen\n3. **Consultas** -- haz preguntas complejas sobre tus datos\n4. **Concurrencia** -- maneja miles de usuarios leyendo y escribiendo simultáneamente"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las bases de datos son software especializado para almacenar, organizar y recuperar datos. Son más rápidas, seguras y poderosas que almacenar datos en archivos planos. Cualquier aplicación que necesite recordar algo necesita una base de datos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Una base de datos es solo un nombre elegante para guardar datos en un archivo JSON.",
+        "isGoodPractice": false,
+        "explanation": "Una base de datos es mucho más que un archivo. Es software especializado que maneja búsquedas rápidas, escrituras seguras, acceso concurrente de múltiples usuarios y consultas complejas. Un archivo JSON no puede hacer nada de eso de manera confiable a escala."
+      },
+      {
+        "id": "card-2",
+        "content": "Las bases de datos pueden encontrar registros específicos entre millones de filas en milisegundos.",
+        "isGoodPractice": true,
+        "explanation": "Las bases de datos usan estructuras de datos inteligentes llamadas índices (como el índice de un libro) para saltar directamente a los datos que necesitas en lugar de escanear cada fila. Por eso incluso las bases de datos enormes se sienten instantáneas cuando buscas."
+      },
+      {
+        "id": "card-3",
+        "content": "Si tu aplicación solo tiene unos pocos usuarios, no necesitas una base de datos -- un archivo está bien.",
+        "isGoodPractice": false,
+        "explanation": "Incluso las aplicaciones pequeñas se benefician de las bases de datos. ¿Qué pasa cuando tu archivo se corrompe? ¿Cuando dos peticiones ocurren simultáneamente? ¿Cuando necesitas encontrar registros por diferentes criterios? Las bases de datos manejan todo esto. La sobrecarga de usar una es mínima comparada con los problemas que previene."
+      },
+      {
+        "id": "card-4",
+        "content": "Las bases de datos pueden manejar miles de usuarios leyendo y escribiendo datos al mismo tiempo.",
+        "isGoodPractice": true,
+        "explanation": "Esto se llama concurrencia, y es una de las principales razones por las que existen las bases de datos. Usan bloqueos, transacciones y otros mecanismos para asegurar que las lecturas y escrituras simultáneas no corrompan datos ni den resultados inconsistentes."
+      },
+      {
+        "id": "card-5",
+        "content": "Si se corta la electricidad mientras una base de datos está escribiendo, los datos podrían quedar a medio escribir y corromperse.",
+        "isGoodPractice": false,
+        "explanation": "Las bases de datos usan una característica llamada transacciones para prevenir esto. Una transacción es 'todo o nada' -- o la escritura completa se realiza exitosamente, o no cambia nada en absoluto. Si se pierde la energía a mitad de escritura, la base de datos vuelve al último estado seguro al reiniciar."
+      }
+    ],
+    "glossaryTerms": ["database", "query", "concurrency", "transaction"]
+  }
+}

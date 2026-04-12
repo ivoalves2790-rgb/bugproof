@@ -7,6 +7,8 @@ import { IconX, IconHeart } from "@/components/ui/Icons";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { Lesson } from "@/lib/types/content.types";
 import { TeachSlides } from "@/components/exercises/TeachSlides";
+import { useT, useLanguage } from "@/lib/i18n/use-language";
+import { getRandomMessage, COMPLETION_MESSAGES } from "@/lib/motivation/messages";
 
 interface LessonPlayerProps {
   courseSlug: string;
@@ -25,28 +27,48 @@ export function LessonPlayer({
   onComplete,
   onExit,
 }: LessonPlayerProps) {
+  const t = useT();
+  const { locale } = useLanguage();
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [phase, setPhase] = useState<Phase>("loading");
+  const [motivation] = useState(() => getRandomMessage(COMPLETION_MESSAGES, locale));
   const [error, setError] = useState<string | null>(null);
   const [score, setScore] = useState(0);
 
   useEffect(() => {
     async function loadLesson() {
       try {
-        const lessonModule = await import(
-          `@/content/${courseSlug}/lessons/${lessonSlug}.json`
-        );
-        const data = lessonModule.default as Lesson;
+        const locale = localStorage.getItem("bugproof:language") || "en";
+        let data: Lesson | null = null;
+
+        // Try locale-specific content first
+        if (locale !== "en") {
+          try {
+            const localeModule = await import(
+              `@/content/${courseSlug}/lessons-${locale}/${lessonSlug}.json`
+            );
+            data = localeModule.default as Lesson;
+          } catch {
+            // Fall back to English
+          }
+        }
+
+        if (!data) {
+          const lessonModule = await import(
+            `@/content/${courseSlug}/lessons/${lessonSlug}.json`
+          );
+          data = lessonModule.default as Lesson;
+        }
+
         setLesson(data);
-        // If lesson has teach blocks, show them first. Otherwise go straight to exercise.
         setPhase(data.teach && data.teach.length > 0 ? "teaching" : "exercising");
       } catch {
-        setError("Lesson not found. This content is coming soon!");
+        setError(t("lesson.comingSoon"));
         setPhase("loading");
       }
     }
     loadLesson();
-  }, [courseSlug, lessonSlug]);
+  }, [courseSlug, lessonSlug, t]);
 
   function handleTeachComplete() {
     setPhase("exercising");
@@ -63,7 +85,7 @@ export function LessonPlayer({
       <div className="flex min-h-[50vh] items-center justify-center">
         <div className="text-center">
           <div className="mb-3 inline-block h-8 w-8 animate-spin rounded-full border-2 border-terminal-green border-t-transparent" />
-          <p className="text-sm text-muted-foreground">Loading lesson...</p>
+          <p className="text-sm text-muted-foreground">{t("lesson.loading")}</p>
         </div>
       </div>
     );
@@ -74,12 +96,12 @@ export function LessonPlayer({
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center text-center">
         <div className="mb-4 text-4xl">{"{ }"}</div>
-        <h2 className="text-lg font-bold">Content Coming Soon</h2>
+        <h2 className="text-lg font-bold">{t("lesson.comingSoon")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          {error || "This lesson is still being written."}
+          {error || t("lesson.notWritten")}
         </p>
         <Button variant="secondary" className="mt-4" onClick={onExit}>
-          Go Back
+          {t("lesson.goBack")}
         </Button>
       </div>
     );
@@ -97,18 +119,21 @@ export function LessonPlayer({
           {score >= 80 ? "++" : score >= 50 ? "+" : "~"}
         </div>
         <h2 className="text-xl font-bold">
-          {score >= 80 ? "Excellent!" : score >= 50 ? "Good job!" : "Keep practicing!"}
+          {score >= 80 ? t("lesson.excellent") : score >= 50 ? t("lesson.goodJob") : t("lesson.keepPracticing")}
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          You scored {score}% on this lesson
+          {t("lesson.scored", { score })}
         </p>
         <div className="mt-6 flex items-center gap-2 text-xp-gold">
           <span className="text-2xl font-bold xp-float">
             +{lesson.xpReward} XP
           </span>
         </div>
-        <Button className="mt-8" onClick={() => onComplete(score, lesson.xpReward)}>
-          Continue
+        <p className="mt-4 max-w-xs text-xs text-terminal-green/80 italic">
+          {motivation}
+        </p>
+        <Button className="mt-6" onClick={() => onComplete(score, lesson.xpReward)}>
+          {t("lesson.continue")}
         </Button>
       </motion.div>
     );
@@ -124,10 +149,10 @@ export function LessonPlayer({
             <IconX size={20} />
           </button>
           <div className="flex-1">
-            <ProgressBar value={0} size="sm" color="green" />
+            <ProgressBar value={25} size="sm" color="green" />
           </div>
           <div className="rounded bg-terminal-green/10 px-2 py-0.5 text-[10px] font-medium text-terminal-green">
-            LEARN
+            {t("lesson.learn")}
           </div>
         </div>
 
@@ -153,7 +178,7 @@ export function LessonPlayer({
         </div>
         <div className="flex items-center gap-2">
           <div className="rounded bg-terminal-amber/10 px-2 py-0.5 text-[10px] font-medium text-terminal-amber">
-            PRACTICE
+            {t("lesson.practice")}
           </div>
           <div className="flex items-center gap-1">
             <IconHeart size={16} className="text-heart-red" />
@@ -205,6 +230,11 @@ function ExerciseDispatch({
           mod = await import("@/components/exercises/TerminalSimulator");
           setComp(() => mod.TerminalSimulator);
           break;
+        case "prompt_challenge":
+        case "code_review":
+        case "architecture_decision":
+          // New exercise types — coming in Phase 2
+          break;
       }
     }
     load();
@@ -218,5 +248,24 @@ function ExerciseDispatch({
     );
   }
 
-  return <Comp exercise={lesson.exercise} onComplete={onComplete} />;
+  return (
+    <Comp
+      exercise={lesson.exercise}
+      onComplete={(result: Record<string, number | boolean> | number) => {
+        if (typeof result === "number") {
+          onComplete(result);
+        } else if (result && typeof result.score === "number") {
+          const total =
+            (typeof result.total === "number" ? result.total : 0) ||
+            (typeof result.maxScore === "number" ? result.maxScore : 0) ||
+            1;
+          onComplete(Math.round(((result.score as number) / total) * 100));
+        } else if (result && typeof result.correct === "boolean") {
+          onComplete(result.correct ? 100 : 0);
+        } else {
+          onComplete(0);
+        }
+      }}
+    />
+  );
 }

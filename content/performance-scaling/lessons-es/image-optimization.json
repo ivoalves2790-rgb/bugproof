@@ -1,0 +1,60 @@
+{
+  "slug": "image-optimization",
+  "title": "Optimización de imágenes",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "Una página de listado de productos carga 24 imágenes de productos, pero tarda 12 segundos en cargar completamente en móvil. Las imágenes son el problema. Encuentra la línea en este componente React que está causando el mayor impacto en el rendimiento.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Imágenes = Camiones de mudanza",
+      "body": "Imagina que necesitas entregar una carta al otro lado de la ciudad. Podrías usar un enorme camión de 18 ruedas, o podrías usar un mensajero en bicicleta. Ambos entregan la carta, pero uno usa muchos más recursos. Las **imágenes sin optimizar** son como usar un camión de mudanza para entregar una carta -- llevan muchos más datos de los necesarios para lo que realmente se muestra en pantalla."
+    },
+    {
+      "type": "text",
+      "title": "La lista de verificación de optimización de imágenes",
+      "body": "Cada imagen en tu página debería pasar esta lista:\n\n1. **Formato correcto** -- Usa WebP o AVIF en lugar de PNG/JPEG (30-50% más pequeño)\n2. **Tamaño correcto** -- No cargues una imagen de 4000px para una miniatura de 400px\n3. **Compresión correcta** -- Calidad 80 se ve idéntica a 100 pero es mucho más pequeña\n4. **Carga correcta** -- Las imágenes debajo del pliegue deberían usar carga diferida\n5. **Dimensiones correctas** -- Siempre establece width/height para prevenir cambios de layout"
+    },
+    {
+      "type": "code_example",
+      "title": "Antes y después",
+      "language": "jsx",
+      "code": "// BAD: Full-size unoptimized image\n<img src=\"/photos/product-4000x3000.png\" />\n\n// GOOD: Optimized with all the right attributes\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Blue running shoes\"\n/>",
+      "annotation": "La versión optimizada usa formato WebP, tiene el tamaño para coincidir con su tamaño de visualización, reserva espacio con width/height, carga de forma diferida e incluye texto alt para accesibilidad."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las imágenes suelen ser los recursos más pesados en una página. Usa formatos modernos (WebP/AVIF), redimensiona a las dimensiones de visualización, comprime a calidad 80, carga diferida las imágenes debajo del pliegue, y siempre establece width y height."
+    }
+  ],
+  "exercise": {
+    "language": "jsx",
+    "code": [
+      { "line": 1, "text": "function ProductCard({ product }) {", "isBuggy": false },
+      { "line": 2, "text": "  return (", "isBuggy": false },
+      { "line": 3, "text": "    <div className=\"product-card\">", "isBuggy": false },
+      { "line": 4, "text": "      <img", "isBuggy": false },
+      { "line": 5, "text": "        src={product.originalPhoto}", "isBuggy": true },
+      { "line": 6, "text": "        alt={product.name}", "isBuggy": false },
+      { "line": 7, "text": "      />", "isBuggy": false },
+      { "line": 8, "text": "      <h3>{product.name}</h3>", "isBuggy": false },
+      { "line": 9, "text": "      <p>${product.price}</p>", "isBuggy": false },
+      { "line": 10, "text": "    </div>", "isBuggy": false },
+      { "line": 11, "text": "  );", "isBuggy": false },
+      { "line": 12, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "Cada producto tiene tanto originalPhoto (4000x3000 PNG, ~3MB) como thumbnail (400x300 WebP, ~30KB). La tarjeta muestra imágenes a 400x300 píxeles. ¿Qué línea carga la fuente de imagen equivocada?",
+    "fixes": [
+      { "id": "a", "text": "src={product.thumbnail}", "isCorrect": true },
+      { "id": "b", "text": "src={product.originalPhoto} width={400}", "isCorrect": false },
+      { "id": "c", "text": "src={product.originalPhoto} loading=\"lazy\"", "isCorrect": false },
+      { "id": "d", "text": "src={product.originalPhoto.replace('.png', '.webp')}", "isCorrect": false }
+    ],
+    "explanation": "El componente usa product.originalPhoto -- un PNG de resolución completa de 3MB -- cuando solo necesita una miniatura de 30KB. Con 24 productos en la página, son 72MB de imágenes en lugar de 720KB. Simplemente cambiar a product.thumbnail usa imágenes ya dimensionadas y optimizadas para la visualización de 400x300 de la tarjeta. Las opciones B y C siguen descargando el archivo de 3MB. La opción D cambia el formato pero no la resolución.",
+    "glossaryTerms": ["image-optimization", "thumbnail", "webp"]
+  }
+}

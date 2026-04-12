@@ -1,0 +1,66 @@
+{
+  "slug": "branch-naming",
+  "title": "Convenciones de nombres de ramas",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Los nombres de las ramas pueden parecer triviales, pero en un equipo con docenas de ramas, un buen nombre marca la diferencia entre el orden y el caos. Desliza a la derecha para nombres de rama BUENOS y a la izquierda para MALOS.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Nombres de ramas = Etiquetas de carpetas",
+      "body": "Imagina un archivador donde cada carpeta está etiquetada como \"cosas\" o \"varios.\" Nunca encontrarías nada. Ahora imagina carpetas etiquetadas como \"impuestos-2024,\" \"seguro-auto,\" \"recibos-médicos.\" Instantáneamente útiles. Los nombres de las ramas funcionan de la misma manera -- buenos nombres hacen un proyecto manejable, malos nombres crean caos."
+    },
+    {
+      "type": "text",
+      "title": "La convención de nombres",
+      "body": "La mayoría de los equipos usan un patrón de **prefijo/descripción**:\n\n- `feature/user-authentication` -- Agregando algo nuevo\n- `fix/login-crash` -- Corrigiendo un error\n- `hotfix/security-patch` -- Corrección urgente en producción\n\nUsa letras minúsculas, guiones en lugar de espacios, y mantenlo corto pero descriptivo."
+    },
+    {
+      "type": "text",
+      "title": "Errores comunes a evitar",
+      "body": "- **Sin espacios ni mayúsculas** -- Algunas herramientas no los manejan bien\n- **Sin nombres vagos** -- `my-branch` o `test123` no le dice nada a nadie\n- **Sin novelas** -- Mantenlo bajo 30 caracteres cuando sea posible\n- **Sin caracteres especiales** -- Limítate a letras, números, guiones y barras diagonales"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Nombra las ramas con un prefijo y una descripción corta usando minúsculas y guiones -- como `feature/dark-mode` o `fix/login-crash`."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "feature/user-authentication",
+        "isGoodPractice": true,
+        "explanation": "Esto sigue una convención clara: un prefijo de categoría (feature/) seguido de un nombre descriptivo usando guiones. Cualquiera en el equipo puede ver de un vistazo que esta rama agrega una nueva función relacionada con la autenticación de usuarios."
+      },
+      {
+        "id": "card-2",
+        "content": "my-branch",
+        "isGoodPractice": false,
+        "explanation": "¿La rama de quién? ¿Qué hace? Cuando un proyecto tiene 50 ramas, 'my-branch' no le dice nada a nadie. Usa un nombre descriptivo que explique para qué es la rama, como 'feature/dark-mode' o 'fix/login-crash'."
+      },
+      {
+        "id": "card-3",
+        "content": "fix/header-overflow-on-mobile",
+        "isGoodPractice": true,
+        "explanation": "¡Gran nombre! El prefijo 'fix/' indica que es una corrección de error, y la descripción explica claramente qué error se está corrigiendo. Un compañero de equipo puede revisar el pull request e inmediatamente entender el contexto."
+      },
+      {
+        "id": "card-4",
+        "content": "test123",
+        "isGoodPractice": false,
+        "explanation": "Esto parece un nombre desechable. Incluso para experimentos, usa algo como 'experiment/new-api-approach'. Nombres como 'test123' se acumulan como ramas misteriosas que nadie se atreve a eliminar porque nadie sabe qué contienen."
+      },
+      {
+        "id": "card-5",
+        "content": "Feature/Add New Dashboard With Updated Charts And User Preferences",
+        "isGoodPractice": false,
+        "explanation": "Los nombres de las ramas no deben tener espacios ni letras mayúsculas (algunos sistemas no los manejan bien). Mantenlo corto y usa guiones: 'feature/dashboard-redesign'. La descripción del pull request es donde van las explicaciones largas."
+      }
+    ],
+    "glossaryTerms": ["branch", "branch-naming", "feature-branch"]
+  }
+}

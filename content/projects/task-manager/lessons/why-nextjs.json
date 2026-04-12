@@ -1,0 +1,73 @@
+{
+  "slug": "why-nextjs",
+  "title": "Why Next.js?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "tech-stack",
+  "projectSlug": "task-manager",
+  "intro": "We're using Next.js for our task manager. Swipe right on real advantages of Next.js, left on myths or misconceptions people spread about it.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Next.js = React with Superpowers",
+      "body": "Next.js is a React framework that handles the boring stuff for you: routing, server-side rendering, API endpoints, and deployment. Instead of stitching together 10 libraries yourself, Next.js gives you a batteries-included setup."
+    },
+    {
+      "type": "analogy",
+      "title": "React vs Next.js = Engine vs Car",
+      "body": "React is a great engine, but you still need to build the car around it — routing, server logic, build tools. Next.js gives you the whole car, ready to drive. You can still pop the hood and customize, but you start with something that works."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Next.js gives us file-based routing, built-in API routes, server-side rendering, and easy deployment. That's exactly what our task manager needs to go from zero to production fast."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "file-routing",
+        "content": "Next.js uses file-based routing, so you create pages by adding files to a folder instead of configuring a router",
+        "isGoodPractice": true,
+        "explanation": "File-based routing is one of Next.js's biggest wins. Create a file, get a route. No router config to maintain. For our task manager, each page is just a file."
+      },
+      {
+        "id": "only-big-apps",
+        "content": "Next.js is only worth using for large enterprise applications with huge teams",
+        "isGoodPractice": false,
+        "explanation": "Next.js scales down just as well as it scales up. It's perfect for solo projects and small apps. The structure it provides actually helps beginners stay organized."
+      },
+      {
+        "id": "api-routes",
+        "content": "Next.js lets you write backend API endpoints in the same project, so you don't need a separate server",
+        "isGoodPractice": true,
+        "explanation": "API routes mean your frontend and backend live in one codebase. For a task manager, this simplifies everything — no CORS issues, no separate deploy."
+      },
+      {
+        "id": "need-react-expert",
+        "content": "You need to be a React expert before you can touch Next.js",
+        "isGoodPractice": false,
+        "explanation": "You need to know React basics like components and state, but Next.js actually makes many things easier than raw React. You can learn both together."
+      },
+      {
+        "id": "ssr-benefit",
+        "content": "Server-side rendering in Next.js helps your pages load faster and improves SEO",
+        "isGoodPractice": true,
+        "explanation": "SSR means the server sends a fully rendered page to the browser. Users see content immediately instead of a blank screen. Search engines can index it too."
+      },
+      {
+        "id": "always-ssr",
+        "content": "Every single page in a Next.js app must use server-side rendering, no exceptions",
+        "isGoodPractice": false,
+        "explanation": "Next.js gives you choices: static generation, server-side rendering, or client-side rendering. You pick what fits each page. The dashboard can be client-rendered while the landing page is static."
+      },
+      {
+        "id": "deployment",
+        "content": "Next.js apps can be deployed easily to platforms like Vercel with zero configuration",
+        "isGoodPractice": true,
+        "explanation": "Vercel (the company behind Next.js) makes deployment dead simple. Push to Git, get a live URL. For a task manager project, this means you can ship fast."
+      }
+    ],
+    "glossaryTerms": ["ssr", "api-routes", "file-based-routing"]
+  }
+}

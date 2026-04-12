@@ -1,0 +1,98 @@
+{
+  "slug": "connecting-supabase",
+  "title": "Connecting Supabase",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Your database schema is ready and your queries are written. Now it's time to connect your Next.js task manager to Supabase so your app can actually talk to the database. One wrong configuration and nothing works.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Supabase: Your Backend in a Box",
+      "body": "Supabase gives you a PostgreSQL database, authentication, and an API — all without building a backend from scratch. Your Next.js app communicates with Supabase using a **client library** that handles the connection, authentication, and query execution. You initialize the client with two keys: a **project URL** and an **anon key** (a public API key that works with Row Level Security)."
+    },
+    {
+      "type": "code_example",
+      "title": "Initializing the Supabase Client",
+      "language": "typescript",
+      "code": "// lib/supabase.ts\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;\nconst supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;\n\nexport const supabase = createClient(supabaseUrl, supabaseAnonKey);",
+      "annotation": "The keys come from environment variables, not hardcoded strings. NEXT_PUBLIC_ prefix makes them available in the browser. The anon key is safe to expose because RLS policies protect your data."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Store Supabase credentials in environment variables, never in your code. The anon key is designed to be public — it's Row Level Security (not the key itself) that protects your data. Always enable RLS on every table."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You've created a Supabase project and have your URL and keys. You need to connect your Next.js task manager to the database. Where do you store the credentials?",
+        "choices": [
+          { "id": "hardcode", "text": "Paste them directly into your code: const url = 'https://abc123.supabase.co'", "nextNode": "hardcoded", "score": 0 },
+          { "id": "env-file", "text": "Put them in a .env.local file and reference them with process.env", "nextNode": "env-setup", "score": 4 },
+          { "id": "config-json", "text": "Create a config.json file with the keys and import it", "nextNode": "config-json", "score": 1 }
+        ]
+      },
+      "hardcoded": {
+        "narrative": "You push your code to GitHub. Your Supabase URL and keys are now visible in your public repository. A bot scrapes GitHub for exposed keys and starts spamming your database with junk data within minutes. What now?",
+        "choices": [
+          { "id": "rotate-keys", "text": "Immediately rotate the keys in Supabase dashboard, move them to .env.local, and add .env.local to .gitignore", "nextNode": "recovered-end", "score": 3 },
+          { "id": "delete-commit", "text": "Delete the commit from GitHub and hope nobody saw it", "nextNode": "delete-commit-end", "score": 1 }
+        ]
+      },
+      "env-setup": {
+        "narrative": "Your .env.local is set up correctly. Now you're writing the code to fetch tasks from Supabase. Where do you make the database call?",
+        "choices": [
+          { "id": "server-side", "text": "In a server component or API route, using the Supabase service role key for server-side operations", "nextNode": "server-good", "score": 3 },
+          { "id": "client-direct", "text": "Directly in your React component using the anon key with RLS enabled", "nextNode": "client-good", "score": 4 }
+        ]
+      },
+      "config-json": {
+        "narrative": "The config.json gets committed to your repository. Unlike .env.local (which is in .gitignore by default), JSON files are tracked by Git. Your keys are now in version control.",
+        "choices": [
+          { "id": "move-to-env", "text": "Delete config.json, move keys to .env.local, and purge the file from Git history", "nextNode": "env-setup", "score": 2 },
+          { "id": "gitignore-json", "text": "Just add config.json to .gitignore going forward", "nextNode": "gitignore-late-end", "score": 1 }
+        ]
+      },
+      "server-good": {
+        "narrative": "Your server-side approach works, but you realize the service role key bypasses Row Level Security entirely. You're relying on your own code to enforce access rules rather than the database.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Server-side fetching with the service role key works but is riskier. The service role key has full database access with no RLS protection. For most operations in a task manager, using the anon key with RLS on the client is simpler and safer — the database enforces who can see what.",
+        "choices": []
+      },
+      "client-good": {
+        "narrative": "Your client uses the anon key with RLS policies that filter tasks by the authenticated user. The database automatically ensures each user only sees their own tasks. Even if your frontend code has a bug, the database won't leak data.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Perfect setup! The anon key plus RLS is Supabase's recommended pattern. The database becomes your security layer — even a buggy frontend can't expose other users' data because the database enforces the rules. This is defense in depth.",
+        "choices": []
+      },
+      "recovered-end": {
+        "narrative": "You rotate the keys, secure your environment variables, and add RLS policies. The damage was limited because you acted fast. You also add a pre-commit hook to scan for exposed secrets.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Good recovery, but exposed keys can be found by bots in seconds. Always use .env.local from the start, and consider tools like git-secrets or GitHub's built-in secret scanning to catch accidental exposure before it happens.",
+        "choices": []
+      },
+      "delete-commit-end": {
+        "narrative": "Deleting a commit from GitHub doesn't remove it from forks, caches, or bots that already scraped it. Your keys are compromised and junk data keeps flowing in. You eventually have to rotate the keys anyway.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Once a secret is pushed to a public repo, consider it compromised permanently. Git history preserves everything, and bots scrape GitHub constantly. The only fix is rotating the credentials immediately — deleting the commit is not enough.",
+        "choices": []
+      },
+      "gitignore-late-end": {
+        "narrative": "Adding it to .gitignore prevents future commits, but the keys are already in your Git history. Anyone who clones the repo can see them by browsing old commits.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Adding a file to .gitignore only affects future commits. Past commits still contain the file. You need to purge the file from Git history AND rotate the compromised keys. Always use .env.local for secrets — Next.js already includes it in .gitignore by default.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["environment-variables", "rls", "anon-key"]
+  }
+}

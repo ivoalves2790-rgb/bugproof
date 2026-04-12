@@ -1,0 +1,84 @@
+{
+  "slug": "testing-user-flows",
+  "title": "Probando Flujos de Usuario",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Los tests unitarios verifican funciones individuales, pero los usuarios reales no llaman funciones — hacen clic en botones, llenan formularios y navegan paginas. Probemos los recorridos reales de los usuarios a traves de tu gestor de tareas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Que Es un Test de Flujo de Usuario?",
+      "body": "Un test de flujo de usuario simula lo que hace un usuario real: abrir la app, iniciar sesion, crear una tarea, marcarla como completada. Estos son tests de integracion o E2E que verifican que multiples componentes funcionen juntos. Detectan bugs que los tests unitarios no encuentran, como un formulario que se envia pero que en realidad no guarda en la base de datos."
+    },
+    {
+      "type": "code_example",
+      "title": "Un Test de Flujo de Usuario",
+      "language": "text",
+      "code": "test('user can create and complete a task', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('New Task');\n  await fillInput('Task title', 'Buy milk');\n  await clickButton('Save');\n  \n  expect(await getText('.task-list')).toContain('Buy milk');\n  \n  await clickCheckbox('Buy milk');\n  expect(await getText('.completed-tasks')).toContain('Buy milk');\n});",
+      "annotation": "Este test cubre el recorrido completo del usuario — login, crear y completar — detectando problemas de integracion que los tests unitarios no encontrarian."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Prueba los flujos de usuario criticos de extremo a extremo: registrarse, crear una tarea, completar una tarea. Si estos se rompen, tu app esta fundamentalmente rota. Todo lo demas es secundario."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Estas escribiendo tests de flujo de usuario para el gestor de tareas. El product manager dice que el flujo mas importante es: el usuario inicia sesion, crea una tarea, establece una fecha limite y la completa. Como lo abordas?",
+        "choices": [
+          { "id": "a", "text": "Escribir un test E2E masivo que cubra desde el login hasta la completacion de la tarea", "nextNode": "one-big-test", "score": 2 },
+          { "id": "b", "text": "Dividirlo en tests de integracion enfocados: uno para login, uno para creacion de tarea, uno para completacion de tarea", "nextNode": "balanced-approach", "score": 4 },
+          { "id": "c", "text": "Solo escribir tests unitarios para cada componente ya que son mas rapidos", "nextNode": "unit-only", "score": 1 }
+        ]
+      },
+      "one-big-test": {
+        "narrative": "Tu test E2E funciona pero tarda 30 segundos en ejecutarse y se rompe cada vez que la UI cambia. Cuando falla, el error dice 'element not found' pero no sabes que paso fallo. Agregas etiquetas descriptivas y divides en tests mas pequenos.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Buena recuperacion. Los tests enfocados son mas faciles de mantener y depurar. Aprendiste de primera mano por que un test gigante es dificil de manejar.",
+        "choices": []
+      },
+      "balanced-approach": {
+        "narrative": "Tus tests estan limpios: el login se prueba por separado, la creacion de tareas usa un estado pre-autenticado y la completacion se basa en una tarea pre-creada. Pero el PM pregunta: 'Como se que el flujo completo funciona si esta dividido?' Que dices?",
+        "choices": [
+          { "id": "b1", "text": "Agregar un test de humo que ejecute el flujo completo de extremo a extremo, mientras mantienes los tests detallados separados", "nextNode": "smoke-test", "score": 3 },
+          { "id": "b2", "text": "Los tests de integracion cubren cada pieza — si todas las piezas funcionan, el flujo funciona", "nextNode": "good-enough-end", "score": 2 }
+        ]
+      },
+      "unit-only": {
+        "narrative": "Todos los tests unitarios pasan. Pero cuando un usuario intenta crear una tarea, el formulario se envia exitosamente pero no aparece ninguna tarea en la lista. La API y el frontend son correctos por separado — el bug esta en como se comunican.",
+        "choices": [
+          { "id": "c1", "text": "Agregar tests de integracion que verifiquen que la API y el frontend funcionan juntos", "nextNode": "balanced-approach", "score": 3 },
+          { "id": "c2", "text": "Depurar el problema especifico y agregar un test unitario para el", "nextNode": "miss-end", "score": 1 }
+        ]
+      },
+      "smoke-test": {
+        "narrative": "Tienes tests de integracion detallados para cada pieza, mas un test de humo que ejecuta el flujo completo. El test de humo detecta problemas de integracion, mientras que los tests enfocados senalan exactamente donde estan los bugs. Lo mejor de ambos mundos.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Estrategia perfecta. Tests detallados para depuracion mas un test de humo para confianza. Asi es como los equipos profesionales prueban flujos de usuario criticos.",
+        "choices": []
+      },
+      "good-enough-end": {
+        "narrative": "Tus tests de integracion detectan la mayoria de los problemas. Ocasionalmente un bug de flujo completo se escapa, pero lo detectas en QA. Un compromiso razonable para una ejecucion de tests mas rapida.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Esto funciona pero no es ideal. Un unico test de extremo a extremo de humo agrega minima sobrecarga y detecta los vacios de integracion. Considera agregar uno para el flujo mas critico.",
+        "choices": []
+      },
+      "miss-end": {
+        "narrative": "Arreglas este bug especifico, pero el patron se repite. Los tests unitarios siguen pasando mientras los bugs de integracion siguen llegando a produccion.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Los tests unitarios verifican partes en aislamiento. Los tests de integracion verifican que las partes funcionen juntas. Necesitas ambos — especialmente para flujos de datos entre frontend y backend.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["smoke-test", "flaky-test"]
+  }
+}

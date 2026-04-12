@@ -1,0 +1,89 @@
+{
+  "slug": "create-nextjs-app",
+  "title": "Creating Your Next.js App",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "You're ready to create the Next.js project for your task manager. The choices you make during setup will shape how easy the project is to work with. Let's see how you handle it.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "create-next-app Does the Heavy Lifting",
+      "body": "The command `npx create-next-app@latest` scaffolds a full Next.js project with sensible defaults. It asks you a series of questions about TypeScript, ESLint, Tailwind CSS, and the App Router. For our task manager, we want TypeScript (catches bugs early), ESLint (catches mistakes), Tailwind (styles fast), and the App Router (the modern way to build Next.js apps)."
+    },
+    {
+      "type": "text",
+      "title": "Why These Defaults Matter",
+      "body": "TypeScript adds types to JavaScript, which means your editor can warn you about bugs before you even run the code. Tailwind CSS lets you style components without switching between files. The App Router uses the `app/` directory and gives you layouts, loading states, and server components out of the box."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Always use create-next-app to start a Next.js project. Pick TypeScript, ESLint, and Tailwind CSS. These aren't optional extras — they're tools that prevent bugs and save time from day one."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You open your terminal to create the Next.js project for your task manager. What command do you run?",
+        "choices": [
+          { "id": "correct-command", "text": "npx create-next-app@latest task-manager", "nextNode": "options-screen", "score": 3 },
+          { "id": "manual-setup", "text": "mkdir task-manager && npm init -y && npm install next react react-dom", "nextNode": "manual-setup", "score": 1 },
+          { "id": "clone-template", "text": "Search GitHub for 'next.js task manager template' and clone someone else's project", "nextNode": "cloned-template", "score": 0 }
+        ]
+      },
+      "options-screen": {
+        "narrative": "create-next-app asks you a series of setup questions. It prompts: 'Would you like to use TypeScript?' How do you answer this and the remaining prompts?",
+        "choices": [
+          { "id": "yes-all-good", "text": "Yes to TypeScript, Yes to ESLint, Yes to Tailwind, Yes to App Router, No to src/ directory", "nextNode": "good-setup", "score": 3 },
+          { "id": "no-typescript", "text": "No to TypeScript because it looks complicated. Yes to everything else.", "nextNode": "no-ts-end", "score": 1 }
+        ]
+      },
+      "manual-setup": {
+        "narrative": "You've manually installed the packages, but now you have no config files, no TypeScript setup, no linting, and no project structure. You'll need to create next.config.js, tsconfig.json, and set up ESLint manually. What do you do?",
+        "choices": [
+          { "id": "scrap-use-cli", "text": "Delete this folder and use create-next-app instead", "nextNode": "recovery-end", "score": 3 },
+          { "id": "configure-manually", "text": "Spend the next hour configuring everything by hand", "nextNode": "manual-end", "score": 1 }
+        ]
+      },
+      "cloned-template": {
+        "narrative": "You cloned a template from 2022. It uses the Pages Router (deprecated pattern), has 47 dependencies you don't understand, and the README says 'Work in progress, do not use in production.' The code doesn't match any current Next.js tutorial.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Cloning random templates gives you someone else's tech debt and outdated patterns. create-next-app always gives you the latest stable setup with zero baggage. Start fresh.",
+        "choices": []
+      },
+      "good-setup": {
+        "narrative": "Your project is created with TypeScript, ESLint, Tailwind, and the App Router. You run 'npm run dev' and see the Next.js welcome page at localhost:3000. Clean, modern, ready to build on.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Excellent choices. TypeScript catches bugs at compile time, ESLint enforces code quality, Tailwind speeds up styling, and the App Router is the future of Next.js. You're set up for success.",
+        "choices": []
+      },
+      "no-ts-end": {
+        "narrative": "The project works, but without TypeScript you'll miss out on autocomplete, type checking, and early bug detection. Three days later, you pass a string where a number was expected and spend an hour hunting a bug that TypeScript would have caught instantly.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "TypeScript feels like extra work at first, but it pays for itself immediately through better autocomplete and error catching. For any project you plan to maintain, always choose TypeScript.",
+        "choices": []
+      },
+      "recovery-end": {
+        "narrative": "Smart move. You delete the manual setup, run create-next-app, and in 30 seconds you have a fully configured project. The CLI handled all the config files you would have spent an hour writing.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Recognizing when you've taken the hard road and switching to the easier one is a valuable skill. create-next-app exists so you don't have to configure boilerplate by hand.",
+        "choices": []
+      },
+      "manual-end": {
+        "narrative": "After an hour of configuring, you have a working setup. But your tsconfig.json is missing some compiler options that create-next-app includes, and your ESLint config doesn't have the Next.js-specific rules. Subtle bugs will creep in later.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Manual setup is educational but impractical for real projects. The official CLI is maintained by the Next.js team and includes configs tuned for their framework. Use it.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["next-js", "typescript", "app-router"]
+  }
+}

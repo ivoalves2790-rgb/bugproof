@@ -1,0 +1,16 @@
+{
+  "slug": "security-mindset",
+  "title": "La mentalidad de seguridad",
+  "description": "Piensa como un atacante para defender como un profesional -- no confíes en nada, valida todo",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "trust-no-input", "title": "No confíes en ninguna entrada", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "anatomy-of-a-breach", "title": "Anatomía de una filtración de datos", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "secrets-in-code", "title": "Secretos ocultos en el código", "type": "bug_hunt", "order": 3, "difficulty": 1 },
+    { "slug": "scanning-for-secrets", "title": "Escaneando en busca de secretos filtrados", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "attack-surface", "title": "Entendiendo la superficie de ataque", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "env-variables", "title": "Variables de entorno y archivos .env", "type": "terminal_sim", "order": 6, "difficulty": 1 }
+  ]
+}

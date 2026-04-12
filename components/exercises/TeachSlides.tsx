@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 import { IconChevronLeft, IconChevronRight } from "@/components/ui/Icons";
 import type { TeachBlock } from "@/lib/types/content.types";
+import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
 
 interface TeachSlidesProps {
   blocks: TeachBlock[];
@@ -246,7 +247,7 @@ function InlineRich({ text }: { text: string }) {
             </code>
           );
         }
-        return <span key={i}>{part}</span>;
+        return <GlossaryHighlighter key={i} text={part} />;
       })}
     </>
   );

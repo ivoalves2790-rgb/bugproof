@@ -1,0 +1,16 @@
+{
+  "slug": "queries",
+  "title": "Escribiendo Consultas",
+  "description": "Domina los comandos SQL que usarás todos los días -- SELECT, WHERE, ORDER BY, GROUP BY, y más",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "select-basics", "title": "SELECT: Obteniendo Datos", "type": "terminal_sim", "order": 1, "difficulty": 1 },
+    { "slug": "where-clauses", "title": "WHERE: Filtrando Resultados", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "order-and-limit", "title": "ORDER BY y LIMIT", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "aggregate-functions", "title": "COUNT, SUM, AVG", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "group-by", "title": "GROUP BY: Resumiendo Datos", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "subqueries", "title": "Subconsultas", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

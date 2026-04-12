@@ -1,0 +1,9 @@
+{
+  "slug": "backend-performance",
+  "title": "Rendimiento del backend",
+  "description": "Consultas N+1, indexación de bases de datos y tiempos de respuesta de APIs",
+  "order": 3,
+  "courseSlug": "performance-scaling",
+  "tier": "intermediate",
+  "lessons": []
+}

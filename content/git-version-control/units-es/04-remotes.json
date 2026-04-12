@@ -1,0 +1,16 @@
+{
+  "slug": "remotes",
+  "title": "Remotos y GitHub",
+  "description": "Push, pull, clone y colaboración con repositorios remotos",
+  "order": 4,
+  "courseSlug": "git-version-control",
+  "tier": "intermediate",
+  "lessons": [
+    { "slug": "what-are-remotes", "title": "¿Qué son los remotos?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "cloning-repos", "title": "Clonando un repositorio", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "push-and-pull", "title": "Push y Pull", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "push-rejected", "title": "¡Push rechazado!", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "pull-requests", "title": "Pull Requests", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "remote-workflow-bugs", "title": "Errores en el flujo de trabajo remoto", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

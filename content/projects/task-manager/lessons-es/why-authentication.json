@@ -1,0 +1,67 @@
+{
+  "slug": "why-authentication",
+  "title": "Por Que Autenticacion?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Tu gestor de tareas funciona genial localmente, pero una vez que esta en linea, cualquiera podria leer o eliminar las tareas de cualquier otro. Exploremos por que la autenticacion importa y que protege realmente.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Que Es la Autenticacion?",
+      "body": "La autenticacion es como tu app responde la pregunta 'Quien eres?' Cuando un usuario inicia sesion, la app verifica su identidad y luego usa esa identidad para decidir que datos puede ver y modificar. Sin auth, cada usuario ve todas las tareas — o peor, puede eliminarlas."
+    },
+    {
+      "type": "analogy",
+      "title": "Auth Es Como una Tarjeta de Hotel",
+      "body": "Imagina un hotel sin llaves de habitacion. Cualquiera podria entrar a cualquier habitacion, tomar tus cosas o dormir en tu cama. La autenticacion es la tarjeta llave — demuestra cual habitacion es tuya. La autorizacion (un concepto relacionado) es lo que la tarjeta desbloquea: tu habitacion, la piscina, pero no la oficina del personal."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La autenticacion verifica la identidad ('quien eres?'), la autorizacion controla el acceso ('que puedes hacer?'). Cualquier app que almacene datos especificos de usuario necesita ambas."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Sin autenticacion, cualquier visitante de tu app podria ver, editar o eliminar las tareas de cualquier usuario",
+        "isGoodPractice": true,
+        "explanation": "Correcto. Sin auth, no hay forma de distinguir entre usuarios, asi que todos los datos son esencialmente publicos para cualquiera que encuentre la URL."
+      },
+      {
+        "id": "c2",
+        "content": "Solo necesitas autenticacion si tu app maneja pagos",
+        "isGoodPractice": false,
+        "explanation": "Cualquier app con datos especificos de usuario necesita auth — no solo apps de pagos. Un gestor de tareas almacena tareas personales que no deberian ser visibles para desconocidos."
+      },
+      {
+        "id": "c3",
+        "content": "La autenticacion deberia agregarse temprano en el desarrollo, no adjuntarse al final",
+        "isGoodPractice": true,
+        "explanation": "Agregar auth despues a menudo requiere reescribir modelos de datos y rutas de API. Planificarla desde el inicio ahorra grandes dolores de cabeza de refactorizacion."
+      },
+      {
+        "id": "c4",
+        "content": "Almacenar contrasenas de usuarios en texto plano en tu base de datos esta bien siempre que la base de datos sea privada",
+        "isGoodPractice": false,
+        "explanation": "Nunca almacenes contrasenas en texto plano. Las bases de datos son vulneradas. Siempre hashea las contrasenas con un algoritmo fuerte como bcrypt. Muchas filtraciones exponen contrasenas en texto plano porque los desarrolladores asumieron que su base de datos era segura."
+      },
+      {
+        "id": "c5",
+        "content": "Usar un proveedor de auth de terceros como Supabase Auth o Auth0 es una decision inteligente para la mayoria de los proyectos",
+        "isGoodPractice": true,
+        "explanation": "Los proveedores de auth manejan el hashing de contrasenas, gestion de sesiones, flujos OAuth y actualizaciones de seguridad. Construir tu propio auth es propenso a errores y rara vez vale la pena para la mayoria de las apps."
+      },
+      {
+        "id": "c6",
+        "content": "Es seguro verificar la identidad del usuario solo en el frontend y confiar en lo que el navegador envia al servidor",
+        "isGoodPractice": false,
+        "explanation": "Las verificaciones del frontend pueden ser evadidas con las herramientas de desarrollo del navegador. El servidor siempre debe verificar la identidad del usuario de forma independiente — nunca confies en el cliente."
+      }
+    ],
+    "glossaryTerms": ["authentication", "authorization"]
+  }
+}

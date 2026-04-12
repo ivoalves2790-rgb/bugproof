@@ -1,0 +1,75 @@
+{
+  "slug": "tables-and-schemas",
+  "title": "Tablas y Esquemas",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Disenar el esquema de tu base de datos es como dibujar un plano antes de construir una casa. Desliza a la derecha en buenas practicas de diseno de esquemas, a la izquierda en malas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Disenando el Esquema de Tu Gestor de Tareas",
+      "body": "Un esquema define la **estructura** de tu base de datos: que tablas existen, que columnas tiene cada tabla y que tipo de datos contiene cada columna. Para nuestro gestor de tareas, necesitamos decidir: Que informacion tiene una tarea? Como se relacionan las tareas con los usuarios? Hacer esto bien ahora ahorra horas de refactorizacion dolorosa despues."
+    },
+    {
+      "type": "code_example",
+      "title": "Una Tabla de Tareas en SQL",
+      "language": "sql",
+      "code": "CREATE TABLE tasks (\n  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,\n  title       TEXT NOT NULL,\n  description TEXT,\n  is_complete BOOLEAN DEFAULT false,\n  due_date    TIMESTAMP,\n  priority    TEXT CHECK (priority IN ('low','medium','high')),\n  user_id     UUID REFERENCES auth.users(id) NOT NULL,\n  created_at  TIMESTAMP DEFAULT now()\n);",
+      "annotation": "Cada columna tiene un nombre, un tipo y restricciones opcionales. NOT NULL significa que el campo es requerido. DEFAULT establece un valor por defecto. REFERENCES crea una relacion con otra tabla."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un buen esquema impone calidad de datos a nivel de base de datos. Usa NOT NULL para campos requeridos, valores predeterminados sensatos, tipos de datos apropiados y claves foraneas para conectar tablas relacionadas. La base de datos deberia rechazar datos malos antes de que tu app los vea."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "uuid-primary-key",
+        "content": "Usar un UUID como clave primaria para tareas en lugar de un numero auto-incremental simple",
+        "isGoodPractice": true,
+        "explanation": "Los UUIDs son globalmente unicos y no revelan cuantos registros existen. Son el estandar para apps modernas y funcionan bien con el sistema de autenticacion de Supabase."
+      },
+      {
+        "id": "no-not-null",
+        "content": "Hacer cada columna nullable para que tu app nunca falle por datos faltantes",
+        "isGoodPractice": false,
+        "explanation": "Esto oculta bugs en lugar de prevenirlos. Una tarea sin titulo son datos rotos. Usa NOT NULL en campos requeridos para que la base de datos rechace registros incompletos inmediatamente."
+      },
+      {
+        "id": "foreign-key",
+        "content": "Agregar una clave foranea user_id en la tabla de tareas que referencia la tabla de usuarios",
+        "isGoodPractice": true,
+        "explanation": "Las claves foraneas crean relaciones entre tablas. Esto asegura que cada tarea pertenece a un usuario real y previene registros huerfanos si un usuario es eliminado."
+      },
+      {
+        "id": "store-everything-in-one-table",
+        "content": "Poner informacion de usuarios, datos de tareas y configuracion todo en una tabla masiva para mantenerlo simple",
+        "isGoodPractice": false,
+        "explanation": "Esto crea un enredo. Tablas separadas para preocupaciones separadas — usuarios, tareas y configuracion cada uno obtiene su propia tabla, conectadas por claves foraneas."
+      },
+      {
+        "id": "created-at",
+        "content": "Agregar una columna de marca de tiempo created_at con un valor por defecto de now() para saber cuando se creo cada tarea",
+        "isGoodPractice": true,
+        "explanation": "Las marcas de tiempo son esenciales para ordenar, depurar y auditar. Establecer un valor por defecto significa que nunca tienes que pasar manualmente el tiempo de creacion."
+      },
+      {
+        "id": "string-for-dates",
+        "content": "Almacenar fechas limite como cadenas de texto plano como '2025-03-15' en lugar de usar un tipo TIMESTAMP",
+        "isGoodPractice": false,
+        "explanation": "Las cadenas de texto no se pueden ordenar ni comparar como fechas. La base de datos no te impedira almacenar 'no-es-una-fecha'. Siempre usa tipos de fecha/hora apropiados para datos de fechas."
+      },
+      {
+        "id": "check-constraint",
+        "content": "Usar una restriccion CHECK para limitar los valores de prioridad a 'low', 'medium' o 'high'",
+        "isGoodPractice": true,
+        "explanation": "Las restricciones CHECK imponen valores validos a nivel de base de datos. Esto previene que tu app almacene accidentalmente 'urgente' o 'super-alta' como prioridad."
+      }
+    ],
+    "glossaryTerms": ["schema", "primary-key", "foreign-key", "constraint"]
+  }
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { IconHeart, IconFlame, IconStar } from "@/components/ui/Icons";
 
 interface TopBarProps {
@@ -8,7 +9,29 @@ interface TopBarProps {
   xp: number;
 }
 
-export function TopBar({ hearts, streak, xp }: TopBarProps) {
+export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defaultXP }: TopBarProps) {
+  const [hearts, setHearts] = useState(defaultHearts);
+  const [streak, setStreak] = useState(defaultStreak);
+  const [xp, setXP] = useState(defaultXP);
+
+  useEffect(() => {
+    const savedXP = parseInt(localStorage.getItem("bugproof:totalXP") || "0", 10);
+    if (savedXP > 0) setXP(savedXP);
+
+    // Count total completed lessons for streak estimation
+    let totalCompleted = 0;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key?.startsWith("progress:")) {
+        const completed: string[] = JSON.parse(localStorage.getItem(key) || "[]");
+        totalCompleted += completed.length;
+      }
+    }
+    if (totalCompleted > 0) {
+      setStreak(Math.min(totalCompleted, 7)); // Rough streak based on activity
+    }
+  }, []);
+
   return (
     <div className="fixed top-0 left-0 right-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 md:pl-60">
       {/* Mobile logo - only shown on mobile */}

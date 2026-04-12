@@ -1,0 +1,73 @@
+{
+  "slug": "component-thinking",
+  "title": "Thinking in Components",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "React apps are built from components. Judge whether each approach to component design is a good practice or a bad one.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Are Components?",
+      "body": "Components are the building blocks of a React UI. Each component is a self-contained piece that handles its own rendering and logic. Think of them like LEGO bricks: simple on their own, but powerful when combined. The key is deciding **where to draw the boundaries** between components."
+    },
+    {
+      "type": "text",
+      "title": "The Single Responsibility Principle",
+      "body": "A component should do **one thing well**. If you find yourself describing a component with the word 'and' — like 'it fetches data AND renders a list AND handles filtering' — that component is doing too much. Break it into smaller pieces: a data-fetching wrapper, a list renderer, and a filter control."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Good components are small, focused, and reusable. If a component is hard to name, it probably does too much. If you copy-paste JSX, you probably need a shared component. Start with fewer, larger components and break them apart as complexity grows."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "good-small-component",
+        "content": "Creating a separate <TaskStatusBadge> component that just displays a colored badge based on task status",
+        "isGoodPractice": true,
+        "explanation": "This is a small, focused component with a single responsibility. It's easy to reuse, test, and modify. Exactly how components should work."
+      },
+      {
+        "id": "bad-god-component",
+        "content": "Building one giant <TaskManager> component that contains the task list, the add form, filters, sorting, and the detail view all in a single file",
+        "isGoodPractice": false,
+        "explanation": "This 'god component' does way too much. It will be hundreds of lines long, impossible to test in isolation, and painful to modify. Break it into smaller, focused components."
+      },
+      {
+        "id": "good-composition",
+        "content": "Using a <PageLayout> component that accepts children so different pages can share the same header and sidebar structure",
+        "isGoodPractice": true,
+        "explanation": "Composition through children is a core React pattern. This keeps your layout consistent while letting each page control its own content."
+      },
+      {
+        "id": "bad-prop-drilling",
+        "content": "Passing a task object through 6 levels of components just because the deeply nested <DueDate> component needs the due date",
+        "isGoodPractice": false,
+        "explanation": "Prop drilling through many levels is a sign of poor component structure. Either restructure your components so <DueDate> is closer to the data, or use context to avoid threading props through intermediate layers."
+      },
+      {
+        "id": "good-reusable-button",
+        "content": "Creating a generic <Button> component with variant props (primary, secondary, danger) instead of separate <PrimaryButton>, <SecondaryButton>, and <DangerButton> components",
+        "isGoodPractice": true,
+        "explanation": "A single Button with variants is easier to maintain than three separate components. The API is consistent, and adding a new variant is just a new prop value, not a new file."
+      },
+      {
+        "id": "bad-premature-abstraction",
+        "content": "Before writing any feature code, creating an abstract <DataFetcher>, <FormBuilder>, and <ListRenderer> framework that can theoretically handle any data type",
+        "isGoodPractice": false,
+        "explanation": "This is premature abstraction. You don't know what patterns will emerge yet. Build the specific features first (tasks, forms), then extract shared patterns once you see real duplication."
+      },
+      {
+        "id": "good-naming",
+        "content": "Naming your component <TaskListItem> so it's immediately clear it renders one item inside a task list",
+        "isGoodPractice": true,
+        "explanation": "Clear, descriptive naming makes your codebase self-documenting. Anyone reading the code instantly knows what this component does and where it lives in the UI hierarchy."
+      }
+    ],
+    "glossaryTerms": ["component", "composition", "single-responsibility"]
+  }
+}

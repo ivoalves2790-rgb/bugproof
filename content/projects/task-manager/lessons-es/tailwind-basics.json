@@ -1,0 +1,73 @@
+{
+  "slug": "tailwind-basics",
+  "title": "Mejores Practicas de Tailwind CSS",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "Tailwind CSS te permite dar estilo a componentes con clases utilitarias directamente en tu markup. Juzga si cada practica de Tailwind es buena o mala.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Por Que Tailwind?",
+      "body": "Tailwind CSS usa clases utilitarias pequenas y de proposito unico como `p-4` (padding), `text-lg` (tamano de fuente) y `bg-blue-500` (color de fondo). En lugar de escribir CSS en archivos separados e inventar nombres de clases, compones estilos directamente en tu JSX. Esto mantiene los estilos junto al markup que afectan y elimina el problema del CSS muerto."
+    },
+    {
+      "type": "text",
+      "title": "Controlando Listas de Clases Largas",
+      "body": "La queja mas comun sobre Tailwind son las cadenas de clases largas. La solucion no es evitar Tailwind — es **extraer componentes**. Si una lista de clases aparece en multiples lugares, eso es una senal de que necesitas un componente React, no una clase CSS personalizada. El componente se convierte en tu abstraccion reutilizable."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tailwind funciona mejor cuando se combina con diseno basado en componentes. Usa clases utilitarias para estilizar, extrae componentes React cuando veas duplicacion, y aprovecha el sistema de diseno de Tailwind (escala de espaciado, paleta de colores) para mantener tu interfaz consistente sin esfuerzo manual."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "good-semantic-grouping",
+        "content": "Organizar las clases de Tailwind en un orden consistente: layout (flex, grid) primero, luego espaciado (p, m), luego tipografia (text, font), luego colores (bg, text), luego efectos (shadow, rounded)",
+        "isGoodPractice": true,
+        "explanation": "El orden consistente de clases hace que las cadenas largas de clases sean escaneables. Siempre sabes donde buscar un tipo especifico de estilo. Muchos equipos adoptan un orden estandar y lo imponen con herramientas como prettier-plugin-tailwindcss."
+      },
+      {
+        "id": "bad-arbitrary-values",
+        "content": "Usar valores arbitrarios en todas partes como p-[13px], mt-[7px] y text-[15px] en lugar de las escalas integradas de espaciado y tamano de Tailwind",
+        "isGoodPractice": false,
+        "explanation": "Los valores arbitrarios evaden el sistema de diseno de Tailwind, llevando a espaciado y tamano inconsistentes en tu app. Apegate a la escala integrada (p-3, mt-2, text-sm) para que todo se alinee a un ritmo consistente."
+      },
+      {
+        "id": "good-responsive",
+        "content": "Usar prefijos responsivos como 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' para hacer que la lista de tareas se adapte de movil a escritorio",
+        "isGoodPractice": true,
+        "explanation": "Los prefijos responsivos de Tailwind hacen que el diseno mobile-first sea directo. El estilo base se aplica a movil, luego md: y lg: agregan sobreescrituras para pantallas mas grandes. Sin media queries necesarias."
+      },
+      {
+        "id": "bad-important-overrides",
+        "content": "Agregar el prefijo ! para forzar sobreescrituras como '!text-red-500 !font-bold' porque tus estilos siguen siendo sobreescritos por otras clases",
+        "isGoodPractice": false,
+        "explanation": "Si necesitas !important para que los estilos funcionen, la estructura de tu componente tiene un problema. Arregla la causa raiz (estilos en conflicto, especificidad incorrecta) en lugar de forzar sobreescrituras. Usar ! hace los estilos fragiles y dificiles de depurar."
+      },
+      {
+        "id": "good-dark-mode",
+        "content": "Usar la variante dark: de Tailwind como 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white' para soportar tanto temas claros como oscuros",
+        "isGoodPractice": true,
+        "explanation": "La variante dark: es la forma idiomatica de manejar el modo oscuro en Tailwind. Mantiene ambos temas visibles en un solo lugar y funciona con la deteccion integrada de modo oscuro de Tailwind."
+      },
+      {
+        "id": "bad-inline-styles",
+        "content": "Mezclar clases de Tailwind con estilos inline como <div className='flex' style={{ marginTop: '20px', color: '#333' }}>",
+        "isGoodPractice": false,
+        "explanation": "Mezclar estilos inline con Tailwind anula el proposito de un sistema utilitario. Usa mt-5 y text-gray-700 en su lugar. Los estilos inline no pueden usar prefijos responsivos, modo oscuro o estados hover."
+      },
+      {
+        "id": "good-extract-component",
+        "content": "Cuando la misma combinacion de 'rounded-lg shadow-md p-4 bg-white border border-gray-200' aparece en 5 tarjetas diferentes, extraer un componente React reutilizable <Card>",
+        "isGoodPractice": true,
+        "explanation": "Este es exactamente el movimiento correcto. No uses @apply para crear una abstraccion CSS — crea un componente React en su lugar. El componente es tu unidad reutilizable, y puede llevar comportamiento (onClick, children) junto con sus estilos."
+      }
+    ],
+    "glossaryTerms": ["utility-css", "responsive-design", "design-system"]
+  }
+}

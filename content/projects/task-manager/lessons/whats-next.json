@@ -1,0 +1,81 @@
+{
+  "slug": "whats-next",
+  "title": "What's Next?",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "scaling",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager is live, working, and growing! Now it's time to plan what comes next. Make smart decisions about your app's future.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "You Built Something Real",
+      "body": "Congratulations — you went from a blank screen to a deployed, working app. You planned features, chose a stack, built a UI, designed a database, added auth, wrote tests, and shipped to production. That's the full software development lifecycle."
+    },
+    {
+      "type": "text",
+      "title": "What Comes After V1?",
+      "body": "Now that your MVP is live, you'll get real user feedback. Some features you thought were essential will go unused. Some things you didn't think of will be requested constantly. Listen to your users, but filter through your product vision."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "V1 is just the beginning. Use real user data and feedback to guide what you build next. Resist the urge to add everything — stay focused on what matters most."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your task manager has been live for two weeks. You have 200 active users. You've collected feedback and have limited development time. Where do you focus next?",
+        "choices": [
+          { "id": "all-features", "text": "Build every feature users requested — team sharing, AI summaries, calendar sync, mobile app", "nextNode": "overwhelmed", "score": 0 },
+          { "id": "top-requests", "text": "Analyze which features were requested most and pick the top 2-3 to build", "nextNode": "focused", "score": 4 },
+          { "id": "rewrite", "text": "Rewrite the app from scratch with a better architecture now that you know what users want", "nextNode": "rewrite-trap", "score": 1 }
+        ]
+      },
+      "overwhelmed": {
+        "narrative": "You try to build everything at once. After a month, nothing is finished. Half-built features create bugs, and users are confused by an inconsistent experience. What do you do?",
+        "choices": [
+          { "id": "stop-prioritize", "text": "Stop, remove half-finished features, and focus on the top 2 most requested ones", "nextNode": "recovery", "score": 3 },
+          { "id": "keep-going", "text": "Push through and try to finish everything", "nextNode": "burnout-end", "score": 0 }
+        ]
+      },
+      "focused": {
+        "narrative": "You identify that 80% of users want due date reminders and a better mobile experience. You scope both features to 2-week sprints each. You ship due date reminders first. Usage jumps 40%. What's your next move?",
+        "choices": [
+          { "id": "mobile", "text": "Ship the mobile improvements as planned, then reassess priorities", "nextNode": "great-end", "score": 4 },
+          { "id": "pivot", "text": "Forget mobile — add 5 more features while you have momentum", "nextNode": "recovery", "score": 1 }
+        ]
+      },
+      "rewrite-trap": {
+        "narrative": "You spend 6 weeks rewriting. The new version has fewer features than the old one. Users leave because nothing new has shipped. You've fallen into the 'rewrite trap.'",
+        "choices": [
+          { "id": "learn", "text": "Stop the rewrite, go back to the working app, and iterate on it instead", "nextNode": "recovery", "score": 3 }
+        ]
+      },
+      "recovery": {
+        "narrative": "You get back on track by focusing on 2 high-impact features. It takes an extra month, but the app improves and users come back.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "You recovered! The key lesson: focus beats breadth. Build 2 features well rather than 10 features poorly. Iterate based on data, not gut feeling.",
+        "choices": []
+      },
+      "great-end": {
+        "narrative": "Your task manager grows steadily. Each month you ship 2-3 focused improvements based on user data. After 3 months, you have 1,000 active users and a clear product roadmap. You've built a real product.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "This is how successful products are built — ship, measure, learn, repeat. You stayed focused, listened to users, and made data-driven decisions. Congratulations on completing the Task Manager project!",
+        "choices": []
+      },
+      "burnout-end": {
+        "narrative": "After 2 months of crunch, you're burned out and the app is buggy. Users leave because of reliability issues. Trying to build everything at once built nothing well.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Scope creep is the #1 killer of side projects. Always prioritize ruthlessly. It's better to ship 2 polished features than 10 broken ones.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["mvp", "iteration", "scope-creep"]
+  }
+}

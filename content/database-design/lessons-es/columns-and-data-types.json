@@ -1,0 +1,55 @@
+{
+  "slug": "columns-and-data-types",
+  "title": "Columnas y Tipos de Datos",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "Un desarrollador está creando una tabla para almacenar información de productos, pero eligió el tipo de datos incorrecto para la columna de precio. Esto causa que los precios pierdan sus decimales -- ¡$49.99 se convierte en $49!",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Tipos de Datos = Formas de Contenedores",
+      "body": "Piensa en los tipos de datos como diferentes formas de contenedores. Un **agujero redondo** (INTEGER) solo acepta piezas redondas (números enteros). Un **agujero cuadrado** (TEXT) acepta piezas cuadradas (palabras y oraciones). Un **agujero especial** (DECIMAL) acepta valores monetarios con centavos. Si intentas meter una pieza cuadrada en un agujero redondo, las cosas se rompen. Elegir el contenedor correcto para cada tipo de datos es una parte clave del diseño de bases de datos."
+    },
+    {
+      "type": "text",
+      "title": "Tipos de Datos Comunes",
+      "body": "Cada columna tiene un tipo de datos que controla qué valores puede contener:\n\n1. **INTEGER** -- números enteros (1, 42, -7). Usar para IDs, cantidades, edades\n2. **TEXT** / **VARCHAR** -- cadenas de texto ('Alice', 'hello world'). Usar para nombres, emails, descripciones\n3. **DECIMAL** / **NUMERIC** -- números precisos con decimales (49.99, 3.14). ¡Usar para dinero!\n4. **BOOLEAN** -- verdadero o falso. Usar para flags como is_active, is_admin\n5. **TIMESTAMP** -- fecha y hora (2024-03-15 14:30:00). Usar para created_at, updated_at"
+    },
+    {
+      "type": "code_example",
+      "title": "Elegir el Tipo Correcto Importa",
+      "language": "sql",
+      "code": "-- BAD: price as INTEGER loses decimal places\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price INTEGER  -- $49.99 becomes $49!\n);\n\n-- GOOD: price as DECIMAL keeps cents\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price DECIMAL(10, 2)  -- 10 digits total, 2 after the decimal\n);",
+      "annotation": "DECIMAL(10, 2) significa hasta 10 dígitos en total con 2 después del punto decimal. Esto almacena correctamente valores como 49.99, 1299.00 y 0.50. ¡Nunca uses INTEGER o FLOAT para dinero!"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cada columna necesita el tipo de datos correcto: INTEGER para números enteros, TEXT para cadenas, DECIMAL para dinero, BOOLEAN para verdadero/falso, y TIMESTAMP para fechas. Los tipos de datos incorrectos causan pérdida de datos o errores."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "CREATE TABLE products (", "isBuggy": false },
+      { "line": 2, "text": "  id INTEGER PRIMARY KEY,", "isBuggy": false },
+      { "line": 3, "text": "  name TEXT NOT NULL,", "isBuggy": false },
+      { "line": 4, "text": "  price INTEGER NOT NULL,", "isBuggy": true },
+      { "line": 5, "text": "  description TEXT,", "isBuggy": false },
+      { "line": 6, "text": "  in_stock BOOLEAN DEFAULT true", "isBuggy": false },
+      { "line": 7, "text": ");", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "Los productos se insertan con precios como 49.99, pero cuando los consultas, aparecen como 49. ¡La parte decimal se está perdiendo! Encuentra la columna con el tipo de datos incorrecto.",
+    "fixes": [
+      { "id": "a", "text": "price DECIMAL(10, 2) NOT NULL,", "isCorrect": true },
+      { "id": "b", "text": "price FLOAT NOT NULL,", "isCorrect": false },
+      { "id": "c", "text": "price TEXT NOT NULL,", "isCorrect": false },
+      { "id": "d", "text": "price BIGINT NOT NULL,", "isCorrect": false }
+    ],
+    "explanation": "INTEGER solo almacena números enteros, así que 49.99 se trunca a 49. Para dinero, siempre usa DECIMAL(10, 2) que almacena exactamente 2 decimales. ¿Por qué no FLOAT? Porque los números de punto flotante tienen pequeños errores de redondeo (49.99 podría convertirse en 49.989999999...), lo cual es inaceptable para cálculos financieros. DECIMAL almacena valores exactos.",
+    "glossaryTerms": ["data-type", "integer", "decimal", "varchar"]
+  }
+}

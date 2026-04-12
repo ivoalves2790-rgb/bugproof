@@ -1,0 +1,8 @@
+{
+  "slug": "testing-in-practice",
+  "title": "Testing en la práctica",
+  "description": "Flujos de trabajo de testing del mundo real, integración con CI y cultura de testing",
+  "order": 5,
+  "courseSlug": "testing",
+  "tier": "advanced"
+}

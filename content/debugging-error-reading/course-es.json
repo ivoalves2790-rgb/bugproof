@@ -1,0 +1,22 @@
+{
+  "slug": "debugging-error-reading",
+  "title": "Depuracion y Lectura de Errores",
+  "description": "Trazas de pila, consola y depuracion sistematica",
+  "longDescription": "Cuando tu codigo falla, el mensaje de error esta tratando de ayudarte -- si sabes como leerlo. La mayoria de los principiantes se quedan mirando un muro de texto rojo, entran en panico y empiezan a cambiar cosas al azar. Este curso te ensena a mantener la calma y ser metodico. Aprenderas a leer mensajes de error como un detective lee pistas: entendiendo que significa cada parte de una traza de pila, donde mirar primero y como reducir el problema. Dominaras las DevTools del navegador, la depuracion con console.log y tecnicas sistematicas que los desarrolladores experimentados usan a diario. Al final, no temeras los errores -- los recibiras como guias utiles que te senalan directamente el problema.",
+  "icon": "bug",
+  "color": "#FF6B6B",
+  "prerequisites": [],
+  "units": [
+    { "slug": "reading-errors", "title": "Reading Error Messages", "order": 1 },
+    { "slug": "console-debugging", "title": "Console & DevTools", "order": 2 },
+    { "slug": "systematic-debugging", "title": "Systematic Debugging", "order": 3 },
+    { "slug": "common-errors", "title": "Common Error Patterns", "order": 4 },
+    { "slug": "debugging-in-practice", "title": "Real-World Debugging", "order": 5 }
+  ],
+  "levelThresholds": {
+    "novice": 0,
+    "apprentice": 500,
+    "engineer": 1500,
+    "architect": 3000
+  }
+}

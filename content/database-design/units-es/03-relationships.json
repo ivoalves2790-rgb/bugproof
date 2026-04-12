@@ -1,0 +1,16 @@
+{
+  "slug": "relationships",
+  "title": "Relaciones",
+  "description": "Conecta tus tablas entre sí con claves foráneas y comprende las relaciones uno-a-muchos, muchos-a-muchos y uno-a-uno",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-relationships", "title": "Por Qué las Tablas Necesitan Relaciones", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "foreign-keys", "title": "Claves Foráneas: Conectando Tablas", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "one-to-many", "title": "Relaciones Uno-a-Muchos", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "many-to-many", "title": "Relaciones Muchos-a-Muchos", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "join-tables", "title": "JOIN: Consultando Entre Tablas", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "normalization-basics", "title": "Fundamentos de Normalización", "type": "incident_response", "order": 6, "difficulty": 3 }
+  ]
+}

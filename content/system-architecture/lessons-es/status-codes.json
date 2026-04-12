@@ -1,0 +1,55 @@
+{
+  "slug": "status-codes",
+  "title": "Códigos de Estado HTTP",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "Un desarrollador está construyendo el manejo de errores para su aplicación, pero mezcló algunos códigos de estado HTTP. El código usa el código de estado incorrecto para un error de 'no encontrado', lo que confundirá a cualquier frontend que lea la respuesta.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Los Códigos de Estado Son Como Semáforos",
+      "body": "Así como un semáforo te indica verde/amarillo/rojo, los códigos de estado HTTP le dicen a tu navegador qué pasó. **2xx** (verde) = éxito. **3xx** (amarillo) = redirección, ve a otro lugar. **4xx** (rojo para ti) = cometiste un error. **5xx** (rojo para ellos) = el servidor falló. El primer dígito te indica la categoría al instante."
+    },
+    {
+      "type": "text",
+      "title": "Los Códigos de Estado Más Comunes",
+      "body": "Los verás todo el tiempo:\n\n1. **200 OK** -- todo funcionó\n2. **201 Created** -- se creó un nuevo recurso (como después de registrarse)\n3. **301 Moved Permanently** -- esta página se movió, ve aquí en su lugar\n4. **400 Bad Request** -- enviaste algo que el servidor no entiende\n5. **401 Unauthorized** -- necesitas iniciar sesión primero\n6. **403 Forbidden** -- iniciaste sesión pero no tienes permiso\n7. **404 Not Found** -- esta página no existe\n8. **500 Internal Server Error** -- algo se rompió en el servidor"
+    },
+    {
+      "type": "code_example",
+      "title": "Usando Códigos de Estado en Express.js",
+      "language": "javascript",
+      "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'User not found' });\n  }\n  res.status(200).json(user);\n});",
+      "annotation": "El servidor establece explícitamente el código de estado. 404 le dice al navegador 'este usuario no existe' mientras que 200 significa 'aquí está el usuario que pediste.' El frontend puede verificar estos códigos para decidir qué mostrar."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los códigos de estado HTTP son números de 3 dígitos que le dicen al navegador qué pasó. 2xx significa éxito, 4xx significa que el cliente cometió un error, y 5xx significa que el servidor falló. Siempre usa el código correcto para que los frontends puedan manejar los errores adecuadamente."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "app.get('/products/:id', (req, res) => {", "isBuggy": false },
+      { "line": 2, "text": "  const product = db.findProduct(req.params.id);", "isBuggy": false },
+      { "line": 3, "text": "  if (!product) {", "isBuggy": false },
+      { "line": 4, "text": "    return res.status(200).json({ error: 'Product not found' });", "isBuggy": true },
+      { "line": 5, "text": "  }", "isBuggy": false },
+      { "line": 6, "text": "  res.status(200).json(product);", "isBuggy": false },
+      { "line": 7, "text": "});", "isBuggy": false }
+    ],
+    "correctBuggyLine": 4,
+    "prompt": "El frontend verifica el código de estado para saber si la petición fue exitosa. Pero cuando un producto no se encuentra, el servidor envía el estado 200 (OK) con un mensaje de error. El frontend piensa que todo está bien e intenta mostrar un producto que no existe. Encuentra la línea con el error.",
+    "fixes": [
+      { "id": "a", "text": "return res.status(404).json({ error: 'Product not found' });", "isCorrect": true },
+      { "id": "b", "text": "return res.status(500).json({ error: 'Product not found' });", "isCorrect": false },
+      { "id": "c", "text": "return res.status(200).json({ found: false });", "isCorrect": false },
+      { "id": "d", "text": "return res.status(401).json({ error: 'Product not found' });", "isCorrect": false }
+    ],
+    "explanation": "El código de estado 200 significa 'OK, todo funcionó.' Enviar 200 con un mensaje de error es contradictorio -- el frontend ve 200 y piensa que la petición fue exitosa. El estado 404 significa 'No Encontrado,' que es exactamente lo que pasó. El frontend puede verificar el 404 y mostrar una página de 'producto no encontrado' en lugar de intentar renderizar datos indefinidos.",
+    "glossaryTerms": ["status-code", "404", "200", "http-response"]
+  }
+}

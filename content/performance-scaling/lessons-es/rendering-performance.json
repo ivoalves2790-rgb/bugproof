@@ -1,0 +1,63 @@
+{
+  "slug": "rendering-performance",
+  "title": "Rendimiento de renderizado",
+  "type": "bug_hunt",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "Un componente React se re-renderiza más de 200 veces cuando el usuario escribe en un campo de búsqueda, haciendo toda la página laggy. El componente renderiza una lista grande de elementos y los filtra en cada tecleo. Encuentra la línea que causa re-renderizados innecesarios.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Re-renderizados = Repintar una pared",
+      "body": "Imagina repintar toda tu casa cada vez que cuelgas un nuevo cuadro. Eso es lo que hacen los re-renderizados innecesarios -- el navegador redibuja componentes que en realidad no han cambiado. Un pintor **inteligente** solo repintaría la pared donde va el nuevo cuadro. React puede ser inteligente también, si le dices qué no ha cambiado."
+    },
+    {
+      "type": "text",
+      "title": "Por qué los re-renderizados son costosos",
+      "body": "Cada vez que un componente React se re-renderiza, el navegador debe:\n\n1. Ejecutar tu función de componente de nuevo (ejecutando todo el código dentro)\n2. Comparar la nueva salida con la salida anterior (diffing)\n3. Actualizar el DOM real donde las cosas cambiaron (pintado)\n\nPara un componente pequeño, esto es rápido. Para una lista de 500 elementos, hacer esto en cada tecleo crea lag visible."
+    },
+    {
+      "type": "code_example",
+      "title": "Previniendo re-renderizados innecesarios",
+      "language": "jsx",
+      "code": "// BAD: Creates a new function on every render\n<ExpensiveList\n  items={items}\n  onSelect={(id) => setSelected(id)}\n/>\n\n// GOOD: Stable function reference\nconst handleSelect = useCallback(\n  (id) => setSelected(id),\n  []\n);\n<ExpensiveList items={items} onSelect={handleSelect} />",
+      "annotation": "Cuando pasas una función flecha inline, React ve una función 'nueva' en cada renderizado y re-renderiza ExpensiveList. useCallback mantiene la misma referencia de función, así que React sabe que la prop no ha cambiado."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "React re-renderiza componentes cuando sus props o estado cambian. Los re-renderizados innecesarios ocurren cuando creas nuevos objetos, arrays o funciones en cada renderizado. Usa useMemo, useCallback y React.memo para decirle a React qué no ha cambiado."
+    }
+  ],
+  "exercise": {
+    "language": "jsx",
+    "code": [
+      { "line": 1, "text": "function SearchPage() {", "isBuggy": false },
+      { "line": 2, "text": "  const [query, setQuery] = useState('');", "isBuggy": false },
+      { "line": 3, "text": "  const [items] = useState(generateLargeList());", "isBuggy": false },
+      { "line": 4, "text": "", "isBuggy": false },
+      { "line": 5, "text": "  const filtered = items.filter(item =>", "isBuggy": true },
+      { "line": 6, "text": "    item.name.toLowerCase().includes(query.toLowerCase())", "isBuggy": false },
+      { "line": 7, "text": "  );", "isBuggy": false },
+      { "line": 8, "text": "", "isBuggy": false },
+      { "line": 9, "text": "  return (", "isBuggy": false },
+      { "line": 10, "text": "    <div>", "isBuggy": false },
+      { "line": 11, "text": "      <input onChange={e => setQuery(e.target.value)} />", "isBuggy": false },
+      { "line": 12, "text": "      <ItemList items={filtered} />", "isBuggy": false },
+      { "line": 13, "text": "    </div>", "isBuggy": false },
+      { "line": 14, "text": "  );", "isBuggy": false },
+      { "line": 15, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 5,
+    "prompt": "Cada tecleo re-renderiza el componente. El filtro se ejecuta en los 5,000 elementos cada vez, creando un array completamente nuevo que obliga a ItemList a re-renderizarse. ¿Qué línea debería ser memoizada para evitar recalcular en cada renderizado?",
+    "fixes": [
+      { "id": "a", "text": "const filtered = useMemo(() => items.filter(item => item.name.toLowerCase().includes(query.toLowerCase())), [items, query]);", "isCorrect": true },
+      { "id": "b", "text": "const filtered = useCallback(() => items.filter(...), [items, query]);", "isCorrect": false },
+      { "id": "c", "text": "const filtered = React.memo(items.filter(...));", "isCorrect": false },
+      { "id": "d", "text": "const filtered = useState(items.filter(...))[0];", "isCorrect": false }
+    ],
+    "explanation": "La operación de filtro crea un nuevo array en cada renderizado, incluso si query no ha cambiado (por ejemplo, cuando un componente padre se re-renderiza). Envolverlo en useMemo con [items, query] como dependencias significa que el filtro costoso solo se re-ejecuta cuando los items o query realmente cambian. useCallback (opción B) es para memoizar funciones, no valores. React.memo (opción C) es para componentes, no cálculos. useState (opción D) no se actualizaría cuando query cambia.",
+    "glossaryTerms": ["useMemo", "re-render", "memoization", "virtual-dom"]
+  }
+}

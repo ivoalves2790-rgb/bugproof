@@ -1,0 +1,67 @@
+{
+  "slug": "why-authentication",
+  "title": "Why Authentication?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager works great locally, but once it goes online, anyone could read or delete anyone else's tasks. Let's explore why authentication matters and what it actually protects.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Is Authentication?",
+      "body": "Authentication is how your app answers the question 'Who are you?' When a user logs in, the app verifies their identity and then uses that identity to decide what data they can see and modify. Without auth, every user sees every task — or worse, can delete them."
+    },
+    {
+      "type": "analogy",
+      "title": "Auth Is Like a Hotel Key Card",
+      "body": "Imagine a hotel with no room keys. Anyone could walk into any room, take your stuff, or sleep in your bed. Authentication is the key card — it proves which room is yours. Authorization (a related concept) is what the key card unlocks: your room, the pool, but not the staff office."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Authentication verifies identity ('who are you?'), authorization controls access ('what can you do?'). Any app that stores user-specific data needs both."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Without authentication, any visitor to your app could view, edit, or delete any user's tasks",
+        "isGoodPractice": true,
+        "explanation": "Correct. Without auth, there's no way to distinguish between users, so all data is essentially public to anyone who finds the URL."
+      },
+      {
+        "id": "c2",
+        "content": "You only need authentication if your app handles payments",
+        "isGoodPractice": false,
+        "explanation": "Any app with user-specific data needs auth — not just payment apps. A task manager stores personal tasks that shouldn't be visible to strangers."
+      },
+      {
+        "id": "c3",
+        "content": "Authentication should be added early in development, not bolted on at the end",
+        "isGoodPractice": true,
+        "explanation": "Adding auth later often requires rewriting data models and API routes. Planning for it early saves major refactoring headaches."
+      },
+      {
+        "id": "c4",
+        "content": "Storing user passwords in plain text in your database is fine as long as the database is private",
+        "isGoodPractice": false,
+        "explanation": "Never store passwords in plain text. Databases get breached. Always hash passwords with a strong algorithm like bcrypt. Many breaches expose plain-text passwords because developers assumed their database was safe."
+      },
+      {
+        "id": "c5",
+        "content": "Using a third-party auth provider like Supabase Auth or Auth0 is a smart choice for most projects",
+        "isGoodPractice": true,
+        "explanation": "Auth providers handle password hashing, session management, OAuth flows, and security updates. Rolling your own auth is error-prone and rarely worth it for most apps."
+      },
+      {
+        "id": "c6",
+        "content": "It's safe to check user identity only on the frontend and trust whatever the browser sends to the server",
+        "isGoodPractice": false,
+        "explanation": "Frontend checks can be bypassed with browser dev tools. The server must always verify the user's identity independently — never trust the client."
+      }
+    ],
+    "glossaryTerms": ["authentication", "authorization"]
+  }
+}

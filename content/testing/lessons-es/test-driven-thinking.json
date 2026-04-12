@@ -1,0 +1,69 @@
+{
+  "slug": "test-driven-thinking",
+  "title": "Pensamiento orientado a tests",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "why-test",
+  "courseSlug": "testing",
+  "intro": "Antes de siquiera escribir código de tests, puedes empezar a pensar como un tester. El pensamiento orientado a tests significa preguntar '¿cómo verificaría que esto funciona?' antes de construir algo. Practiquemos esta mentalidad.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Pensar como un tester = Preguntar '¿Qué podría salir mal?'",
+      "body": "Cuando cruzas una calle, automáticamente miras si vienen autos. No simplemente caminas a ciegas. El **pensamiento orientado a tests** es el mismo instinto aplicado al código. Antes de escribir una función, piensas: ¿qué inputs podrían romper esto? ¿Qué debería pasar con datos extraños? ¿Qué pasa si el usuario hace algo inesperado?"
+    },
+    {
+      "type": "text",
+      "title": "La mentalidad orientada a tests",
+      "body": "Antes de escribir cualquier código, pregúntate:\n\n1. **¿Qué debería hacer esta función?** -- Define el comportamiento esperado\n2. **¿Cuáles son los inputs normales?** -- El caso de uso típico\n3. **¿Cuáles son los casos límite?** -- Cadenas vacías, cero, null, números negativos\n4. **¿Qué debería pasar cuando las cosas salen mal?** -- Mensajes de error, valores por defecto, alternativas\n\nSi puedes responder estas preguntas, puedes escribir tests."
+    },
+    {
+      "type": "code_example",
+      "title": "Pensando en una función",
+      "language": "javascript",
+      "code": "// Task: write a function that calculates a tip\n// Test-driven thinking:\n// - calculateTip(100, 15) should return 15\n// - calculateTip(100, 0) should return 0\n// - calculateTip(0, 15) should return 0\n// - calculateTip(-50, 15) should... throw an error?\n// - calculateTip(100, 150) should... is a 150% tip valid?",
+      "annotation": "Nota cómo pensar en los tests ANTES de escribir código te ayuda a diseñar una mejor función. Descubres casos límite temprano."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El pensamiento orientado a tests significa definir el comportamiento esperado antes de escribir código. Pregunta: ¿qué debería hacer esto, cuáles son los casos límite y qué debería pasar cuando las cosas salen mal?"
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["src/utils.js", "tests/utils.test.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "Necesitas construir un validador de contraseñas. Antes de escribir cualquier código, pensemos en qué testear. Primero, ejecuta el suite de tests para ver el estado actual.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "PASS  tests/utils.test.js\n\nTest Suites: 1 passed, 1 total\nTests:       0 total\nTime:        0.5s\n\nNo tests found. Your test file is empty -- time to add some!",
+        "hint": "Ejecuta el suite de tests con el comando estándar de npm para testing."
+      },
+      {
+        "instruction": "Ahora pensemos test-first. Abre el archivo de test para escribir nuestras expectativas ANTES de escribir la función real. Mira el archivo de test.",
+        "expectedCommand": "cat tests/utils.test.js",
+        "acceptAlternatives": ["less tests/utils.test.js", "more tests/utils.test.js"],
+        "output": "// tests/utils.test.js\n// TODO: Add tests for validatePassword()\n//\n// Think about:\n// - What makes a valid password?\n// - What should be rejected?\n// - Edge cases?",
+        "hint": "Usa 'cat' para ver el contenido del archivo de test."
+      },
+      {
+        "instruction": "El archivo de test tiene indicaciones para pensar. Ahora ejecuta los tests de nuevo -- deberían fallar ya que no hemos escrito la función todavía. Esta es la forma TDD: escribe tests que fallen primero.",
+        "expectedCommand": "npm test",
+        "acceptAlternatives": ["npm run test", "npx jest"],
+        "output": "FAIL  tests/utils.test.js\n  validatePassword\n    ✗ rejects passwords shorter than 8 characters (2ms)\n    ✗ accepts passwords 8 characters or longer (1ms)\n    ✗ rejects passwords without a number (1ms)\n    ✗ handles empty string input (1ms)\n\nTests: 4 failed, 4 total\nTime: 0.8s\n\nAll tests failing -- exactly what we want! Now write the function to make them pass.",
+        "hint": "Ejecuta npm test de nuevo para ver los tests que fallan."
+      },
+      {
+        "instruction": "Los tests están fallando como se esperaba. Este es el ciclo Rojo-Verde-Refactorizar: Rojo (tests fallan), Verde (escribe código para que pasen), Refactorizar (limpia). Ahora veamos cómo se ve la función validadora real.",
+        "expectedCommand": "cat src/utils.js",
+        "acceptAlternatives": ["less src/utils.js", "more src/utils.js"],
+        "output": "// src/utils.js\n\nfunction validatePassword(password) {\n  // TODO: implement this function\n  // It should:\n  // - Return false if password is less than 8 characters\n  // - Return false if password has no numbers\n  // - Return true if it passes all checks\n}\n\nmodule.exports = { validatePassword };",
+        "hint": "Usa 'cat' para ver el archivo de código fuente."
+      }
+    ],
+    "completionMessage": "¡Has practicado el pensamiento orientado a tests! La idea clave es: pensar en los tests antes del código te obliga a definir claramente qué significa 'funcionando'. Descubriste casos límite (cadena vacía, sin números) antes de escribir una sola línea de código de implementación.",
+    "glossaryTerms": ["tdd", "red-green-refactor", "edge-case"]
+  }
+}

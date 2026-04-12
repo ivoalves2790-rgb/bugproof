@@ -1,0 +1,84 @@
+{
+  "slug": "testing-user-flows",
+  "title": "Testing User Flows",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Unit tests check individual functions, but real users don't call functions — they click buttons, fill forms, and navigate pages. Let's test actual user journeys through your task manager.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Is a User Flow Test?",
+      "body": "A user flow test simulates what a real user does: open the app, log in, create a task, mark it complete. These are integration or E2E tests that verify multiple components work together. They catch bugs that unit tests miss, like a form that submits but doesn't actually save to the database."
+    },
+    {
+      "type": "code_example",
+      "title": "A User Flow Test",
+      "language": "text",
+      "code": "test('user can create and complete a task', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('New Task');\n  await fillInput('Task title', 'Buy milk');\n  await clickButton('Save');\n  \n  expect(await getText('.task-list')).toContain('Buy milk');\n  \n  await clickCheckbox('Buy milk');\n  expect(await getText('.completed-tasks')).toContain('Buy milk');\n});",
+      "annotation": "This test covers the complete user journey — login, create, and complete — catching integration issues that unit tests would miss."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Test the critical user flows end-to-end: sign up, create a task, complete a task. If these break, your app is fundamentally broken. Everything else is secondary."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're writing user flow tests for the task manager. The product manager says the most important flow is: User logs in, creates a task, sets a due date, and completes it. How do you approach this?",
+        "choices": [
+          { "id": "a", "text": "Write one massive E2E test covering login through task completion", "nextNode": "one-big-test", "score": 2 },
+          { "id": "b", "text": "Break it into focused integration tests: one for login, one for task creation, one for task completion", "nextNode": "balanced-approach", "score": 4 },
+          { "id": "c", "text": "Only write unit tests for each component since they're faster", "nextNode": "unit-only", "score": 1 }
+        ]
+      },
+      "one-big-test": {
+        "narrative": "Your E2E test works but takes 30 seconds to run and breaks whenever the UI changes. When it fails, the error says 'element not found' but you don't know which step failed. You add descriptive labels and split into smaller tests.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Good recovery. Focused tests are easier to maintain and debug. You learned firsthand why one giant test is hard to work with.",
+        "choices": []
+      },
+      "balanced-approach": {
+        "narrative": "Your tests are clean: login is tested separately, task creation uses a pre-authenticated state, and completion builds on a pre-created task. But the PM asks: 'How do I know the full flow works if it's split up?' What do you say?",
+        "choices": [
+          { "id": "b1", "text": "Add one smoke test that runs the full flow end-to-end, while keeping the detailed tests separate", "nextNode": "smoke-test", "score": 3 },
+          { "id": "b2", "text": "The integration tests cover each piece — if all pieces work, the flow works", "nextNode": "good-enough-end", "score": 2 }
+        ]
+      },
+      "unit-only": {
+        "narrative": "All unit tests pass. But when a user tries to create a task, the form submits successfully yet no task appears in the list. The API and frontend are both correct in isolation — the bug is in how they communicate.",
+        "choices": [
+          { "id": "c1", "text": "Add integration tests that check the API and frontend work together", "nextNode": "balanced-approach", "score": 3 },
+          { "id": "c2", "text": "Debug the specific issue and add a unit test for it", "nextNode": "miss-end", "score": 1 }
+        ]
+      },
+      "smoke-test": {
+        "narrative": "You have detailed integration tests for each piece, plus one smoke test that runs the full flow. The smoke test catches integration issues, while the focused tests pinpoint exactly where bugs are. Best of both worlds.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Perfect strategy. Detailed tests for debugging plus a smoke test for confidence. This is how professional teams test critical user flows.",
+        "choices": []
+      },
+      "good-enough-end": {
+        "narrative": "Your integration tests catch most issues. Occasionally a full-flow bug slips through, but you catch it in QA. A reasonable trade-off for faster test execution.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "This works but isn't ideal. A single end-to-end smoke test adds minimal overhead and catches the integration gaps. Consider adding one for the most critical flow.",
+        "choices": []
+      },
+      "miss-end": {
+        "narrative": "You fix this specific bug, but the pattern repeats. Unit tests keep passing while integration bugs keep slipping through to production.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Unit tests verify parts in isolation. Integration tests verify the parts work together. You need both — especially for data flows between frontend and backend.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["smoke-test", "flaky-test"]
+  }
+}

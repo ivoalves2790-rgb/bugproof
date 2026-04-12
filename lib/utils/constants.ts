@@ -39,6 +39,9 @@ export const EXERCISE_TYPES = [
   "swipe_to_judge",
   "incident_response",
   "terminal_sim",
+  "prompt_challenge",
+  "code_review",
+  "architecture_decision",
 ] as const;
 
 export type ExerciseType = (typeof EXERCISE_TYPES)[number];
@@ -62,7 +65,7 @@ export type CourseSlug = (typeof COURSE_SLUGS)[number];
 // Navigation items
 export const NAV_ITEMS = [
   { label: "Home", href: "/dashboard", icon: "home" },
-  { label: "Courses", href: "/courses", icon: "book" },
-  { label: "Glossary", href: "/glossary", icon: "search" },
+  { label: "Build", href: "/projects", icon: "hammer" },
+  { label: "Library", href: "/courses", icon: "book" },
   { label: "Profile", href: "/profile", icon: "user" },
 ] as const;

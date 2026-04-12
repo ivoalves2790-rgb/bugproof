@@ -3,11 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
-import { NAV_ITEMS } from "@/lib/utils/constants";
-import { IconHome, IconBook, IconSearch, IconUser } from "@/components/ui/Icons";
+import { useT } from "@/lib/i18n/use-language";
+import { IconHome, IconBook, IconHammer, IconUser, IconSearch } from "@/components/ui/Icons";
+
+const NAV_ITEMS = [
+  { key: "nav.home", href: "/dashboard", icon: "home" },
+  { key: "nav.build", href: "/projects", icon: "hammer" },
+  { key: "nav.library", href: "/courses", icon: "book" },
+  { key: "nav.glossary", href: "/glossary", icon: "search" },
+  { key: "nav.profile", href: "/profile", icon: "user" },
+];
 
 const iconMap: Record<string, (props: { size?: number }) => React.ReactElement> = {
   home: IconHome,
+  hammer: IconHammer,
   book: IconBook,
   search: IconSearch,
   user: IconUser,
@@ -15,6 +24,7 @@ const iconMap: Record<string, (props: { size?: number }) => React.ReactElement> 
 
 export function BottomNav() {
   const pathname = usePathname();
+  const t = useT();
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface safe-bottom md:hidden">
@@ -34,7 +44,7 @@ export function BottomNav() {
               )}
             >
               {Icon && <Icon size={20} />}
-              {item.label}
+              {t(item.key)}
             </Link>
           );
         })}

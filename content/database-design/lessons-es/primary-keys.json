@@ -1,0 +1,100 @@
+{
+  "slug": "primary-keys",
+  "title": "Claves Primarias: El ID de Cada Fila",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "La app de tu equipo tiene un error: cuando dos usuarios se registran con el mismo nombre, la app actualiza el perfil del usuario equivocado. ¿El problema? La tabla usa la columna de nombre para identificar usuarios en lugar de una clave primaria adecuada.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Claves Primarias = Números de Identificación",
+      "body": "Imagina una escuela con dos estudiantes llamados 'Juan García.' Si solo usas nombres, no puedes distinguirlos. Por eso las escuelas asignan números de estudiante -- números únicos que identifican a cada estudiante. Una **clave primaria** es la misma idea: un identificador único para cada fila en una tabla, para que siempre puedas referirte a exactamente un registro específico."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué Hace una Buena Clave Primaria?",
+      "body": "Una clave primaria debe ser:\n\n1. **Única** -- no puede haber dos filas con el mismo valor\n2. **No nula** -- cada fila debe tener una\n3. **Inmutable** -- nunca debería necesitar actualizarse\n\nLa mayoría de los desarrolladores usan un **entero auto-incremental** (1, 2, 3, 4...) o un **UUID** (una cadena aleatoria como 'a1b2c3d4-e5f6-...'). Nunca uses nombres, emails u otros datos reales como claves primarias -- pueden cambiar o tener duplicados."
+    },
+    {
+      "type": "code_example",
+      "title": "Creando una Tabla con Clave Primaria",
+      "language": "sql",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-increments: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Now each user has a guaranteed unique ID\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- id is automatically set to 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- id is automatically set to 2 (different Alice, no confusion!)",
+      "annotation": "SERIAL significa que la base de datos auto-genera el siguiente número. PRIMARY KEY significa que esta columna identifica de manera única cada fila. Dos usuarios llamados 'Alice' obtienen IDs diferentes."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cada tabla necesita una clave primaria -- un identificador único para cada fila. Usa enteros auto-incrementales (SERIAL) o UUIDs. Nunca uses datos del mundo real como nombres o emails como claves primarias porque pueden cambiar o duplicarse."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Los usuarios reportan un error extraño: cuando actualizan su perfil, a veces el perfil de otro usuario cambia. Miras la tabla users y descubres que no tiene clave primaria -- la app identifica usuarios por su columna de nombre. Dos usuarios se llaman 'Alex Johnson.' Cuando la app ejecuta UPDATE users SET bio = 'new bio' WHERE name = 'Alex Johnson', ¿qué pasa?",
+        "choices": [
+          { "id": "a", "text": "Ambos Alex Johnson obtienen la misma bio -- la cláusula WHERE coincide con dos filas", "nextNode": "correct-both", "score": 10 },
+          { "id": "b", "text": "Solo el primer Alex Johnson se actualiza", "nextNode": "wrong-first", "score": 3 },
+          { "id": "c", "text": "La base de datos lanza un error por el nombre duplicado", "nextNode": "wrong-error", "score": 2 }
+        ]
+      },
+      "correct-both": {
+        "narrative": "¡Exactamente! WHERE name = 'Alex Johnson' coincide con AMBAS filas, así que ambos usuarios obtienen la misma bio. Por eso nunca debes identificar filas por nombre. ¿Cómo deberíamos arreglar esta tabla?",
+        "choices": [
+          { "id": "a", "text": "Agregar una columna id auto-incremental como clave primaria", "nextNode": "correct-fix", "score": 10 },
+          { "id": "b", "text": "Usar la columna email como clave primaria ya que los emails son únicos", "nextNode": "partial-email", "score": 5 },
+          { "id": "c", "text": "Solo asegurarse de que los usuarios no puedan tener nombres duplicados", "nextNode": "wrong-unique-name", "score": 2 }
+        ]
+      },
+      "wrong-first": {
+        "narrative": "SQL no tiene el concepto de 'primera' o 'segunda' fila -- las filas en una tabla no tienen un orden inherente. La cláusula WHERE coincide con TODAS las filas que cumplen la condición. Ambos Alex Johnson coinciden con WHERE name = 'Alex Johnson', así que ambos se actualizan.",
+        "choices": [
+          { "id": "a", "text": "Entonces ambas filas se modifican porque el WHERE coincide con ambas", "nextNode": "correct-both", "score": 5 }
+        ]
+      },
+      "wrong-error": {
+        "narrative": "La base de datos no lanzará un error -- tener nombres duplicados es perfectamente válido. La columna name no tiene restricción UNIQUE. SQL felizmente actualizará cada fila que coincida con la cláusula WHERE, incluso si son 100 filas. ¡Ese es exactamente el problema!",
+        "choices": [
+          { "id": "a", "text": "Entonces ambos Alex Johnson obtienen la misma actualización", "nextNode": "correct-both", "score": 5 }
+        ]
+      },
+      "correct-fix": {
+        "narrative": "Agregas: ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY. Ahora cada usuario tiene un ID numérico único. La app usa UPDATE users SET bio = 'new bio' WHERE id = 42 en lugar de WHERE name = 'Alex Johnson'. ¡Problema resuelto! ¿Cuál es la ventaja de usar un entero auto-incremental?",
+        "choices": [
+          { "id": "a", "text": "Siempre es único, nunca cambia, y la base de datos lo genera automáticamente", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Es más fácil de escribir que un UUID", "nextNode": "end-ok", "score": 5 }
+        ]
+      },
+      "partial-email": {
+        "narrative": "Los emails son únicos, pero no son ideales como claves primarias. Los usuarios cambian sus direcciones de correo, lo que requeriría actualizar la clave primaria en todos los lugares donde se referencia. Una buena clave primaria nunca debería cambiar. Un entero auto-incremental (1, 2, 3...) es mejor porque nunca cambia.",
+        "choices": [
+          { "id": "a", "text": "Usar un id auto-incremental en su lugar ya que nunca cambia", "nextNode": "correct-fix", "score": 7 }
+        ]
+      },
+      "wrong-unique-name": {
+        "narrative": "Forzar nombres únicos es una experiencia de usuario terrible -- ¿qué pasa si dos personas genuinamente se llaman 'Alex Johnson'? No puedes decirle a una de ellas que no puede usar su nombre real. La solución es darle a cada fila su propio identificador único que esté separado de cualquier dato del mundo real.",
+        "choices": [
+          { "id": "a", "text": "Agregar una columna id auto-incremental como clave primaria", "nextNode": "correct-fix", "score": 5 }
+        ]
+      },
+      "end-great": {
+        "narrative": "El id auto-incremental se genera automáticamente (nunca lo estableces manualmente), es único garantizado (no hay duplicados posibles), y nunca necesita cambiar. Incluso si un usuario cambia su nombre, email o cualquier otro campo, su id permanece igual. El error está corregido.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Identificaste correctamente que identificar filas por datos no únicos causa errores, y que las claves primarias auto-incrementales resuelven esto permanentemente. Este es un concepto fundamental: cada tabla debería tener una clave primaria, y debería ser un identificador único sin significado, no datos del mundo real."
+      },
+      "end-ok": {
+        "narrative": "Cierto, pero las razones principales son más importantes: es único garantizado, se genera automáticamente y nunca necesita cambiar. Esas propiedades lo hacen una manera confiable de identificar cualquier fila para siempre.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Los beneficios clave de los IDs auto-incrementales son: generación automática (sin trabajo manual), unicidad garantizada (sin duplicados), e inmutabilidad (nunca cambian incluso cuando otros datos sí lo hacen). Estas propiedades los hacen la opción estándar para claves primarias."
+      }
+    },
+    "glossaryTerms": ["primary-key", "serial", "uuid", "unique-constraint"]
+  }
+}

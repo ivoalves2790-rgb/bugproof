@@ -6,6 +6,7 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
 import { COURSE_ICONS } from "@/components/ui/Icons";
 import type { CourseIndex } from "@/lib/types/content.types";
+import { useT } from "@/lib/i18n/use-language";
 
 interface CourseCardProps {
   course: CourseIndex;
@@ -14,6 +15,7 @@ interface CourseCardProps {
 }
 
 export function CourseCard({ course, progress = 0, level }: CourseCardProps) {
+  const t = useT();
   const Icon = COURSE_ICONS[course.icon];
 
   return (
@@ -58,7 +60,7 @@ export function CourseCard({ course, progress = 0, level }: CourseCardProps) {
                 animated={false}
               />
               <div className="mt-1 flex justify-between text-[10px] text-muted">
-                <span>{course.lessonCount} lessons</span>
+                <span>{course.lessonCount} {t("courses.lessons")}</span>
                 <span>{progress}%</span>
               </div>
             </div>

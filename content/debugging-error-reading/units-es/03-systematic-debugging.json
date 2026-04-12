@@ -1,0 +1,16 @@
+{
+  "slug": "systematic-debugging",
+  "title": "Depuración sistemática",
+  "description": "Deja de adivinar y comienza a depurar con un proceso lógico y repetible",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "reproduce-the-bug", "title": "Reproducir el error", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "binary-search-debugging", "title": "Depuración por búsqueda binaria", "type": "incident_response", "order": 2, "difficulty": 2 },
+    { "slug": "rubber-duck-debugging", "title": "Depuración del pato de goma", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "isolating-the-problem", "title": "Aislando el problema", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "reading-documentation", "title": "Leyendo documentación", "type": "terminal_sim", "order": 5, "difficulty": 2 },
+    { "slug": "when-to-ask-for-help", "title": "Cuándo pedir ayuda", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

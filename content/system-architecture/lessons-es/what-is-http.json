@@ -1,0 +1,66 @@
+{
+  "slug": "what-is-http",
+  "title": "¿Qué es HTTP?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "how-the-web-works",
+  "courseSlug": "system-architecture",
+  "intro": "HTTP es el lenguaje que tu navegador habla con los servidores. Cada sitio web que has visitado usa HTTP (o su primo seguro HTTPS) detrás de escena. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "HTTP Es Como Pedir en un Restaurante",
+      "body": "Imagina que estás en un restaurante. Tú (el navegador) miras el menú y le dices al mesero (HTTP) lo que quieres. El mesero lleva tu pedido a la cocina (el servidor), luego te trae tu comida (la respuesta). **HTTP** es el mesero -- es el lenguaje acordado para hacer peticiones y obtener respuestas."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué Significa HTTP?",
+      "body": "HTTP significa **Protocolo de Transferencia de Hipertexto**. Vamos a desglosarlo:\n\n1. **Hipertexto** -- texto que puede enlazar a otro texto (eso es lo que son las páginas web)\n2. **Transferencia** -- moverlo de un lugar a otro\n3. **Protocolo** -- un conjunto de reglas con las que ambos lados están de acuerdo\n\nEntonces HTTP son simplemente las reglas de cómo los navegadores y servidores intercambian páginas web."
+    },
+    {
+      "type": "text",
+      "title": "HTTP vs HTTPS",
+      "body": "**HTTPS** es HTTP con encriptación. La 'S' significa **Seguro**. Piensa en HTTP como enviar una postal (cualquiera que la maneje puede leerla) y HTTPS como enviar una carta sellada (solo el destinatario puede abrirla). Hoy en día, casi todos los sitios web usan HTTPS porque los navegadores advierten a los usuarios cuando un sitio usa HTTP sin encriptar."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "HTTP es el conjunto de reglas que los navegadores y servidores usan para comunicarse. HTTPS agrega encriptación para mantener esa comunicación privada. Cada sitio web que visitas usa uno de estos protocolos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "HTTP es un conjunto de reglas para cómo los navegadores y servidores se comunican.",
+        "isGoodPractice": true,
+        "explanation": "HTTP (Protocolo de Transferencia de Hipertexto) define el formato de las peticiones y respuestas entre tu navegador y un servidor web. Es como un lenguaje común que ambos lados acuerdan hablar."
+      },
+      {
+        "id": "card-2",
+        "content": "Las conexiones HTTP permanecen abiertas permanentemente para que los datos fluyan continuamente.",
+        "isGoodPractice": false,
+        "explanation": "HTTP es un protocolo de petición-respuesta. Tu navegador envía una petición, el servidor envía una respuesta, y la conversación termina. Cada nueva página o recurso requiere una nueva petición. Es más como intercambiar cartas que una llamada telefónica."
+      },
+      {
+        "id": "card-3",
+        "content": "HTTPS encripta los datos para que nadie entre tú y el servidor pueda leerlos.",
+        "isGoodPractice": true,
+        "explanation": "HTTPS usa encriptación TLS para crear un túnel seguro. Incluso si alguien intercepta los datos (como en Wi-Fi público), no puede leerlos. Esto protege contraseñas, tarjetas de crédito e información personal."
+      },
+      {
+        "id": "card-4",
+        "content": "Solo los sitios web que manejan contraseñas o información de pago necesitan HTTPS.",
+        "isGoodPractice": false,
+        "explanation": "Hoy en día, TODOS los sitios web deberían usar HTTPS. Navegadores como Chrome muestran advertencias de 'No Seguro' para sitios HTTP. HTTPS protege contra la interceptación, manipulación, y es requerido para muchas funciones modernas del navegador. No hay buena razón para no usarlo."
+      },
+      {
+        "id": "card-5",
+        "content": "Cuando haces clic en un enlace en una página web, tu navegador envía una petición HTTP para obtener la nueva página.",
+        "isGoodPractice": true,
+        "explanation": "Cada vez que haces clic en un enlace, envías un formulario, o cargas una imagen, tu navegador está enviando peticiones HTTP detrás de escena. Una sola página web puede generar docenas de peticiones -- una para el HTML, otras para imágenes, hojas de estilo y scripts."
+      }
+    ],
+    "glossaryTerms": ["http", "https", "protocol", "encryption"]
+  }
+}

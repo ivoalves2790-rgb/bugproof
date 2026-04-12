@@ -1,0 +1,98 @@
+{
+  "slug": "stack-summary",
+  "title": "Presenting Your Stack",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "tech-stack",
+  "projectSlug": "task-manager",
+  "intro": "You've chosen your stack: Next.js, Supabase, and TypeScript. Now a senior engineer asks you to justify your choices. Can you explain why each piece fits?",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Know Your 'Why' for Every Tool",
+      "body": "Anyone can list technologies. What separates good engineers is being able to explain why they chose each one. For every tool in your stack, you should be able to say: what problem it solves, what alternatives you considered, and why this option won the tradeoff."
+    },
+    {
+      "type": "code_example",
+      "title": "Our Stack at a Glance",
+      "language": "text",
+      "code": "Frontend:  Next.js (React framework)\nBackend:   Supabase (PostgreSQL + Auth + APIs)\nLanguage:  TypeScript (type-safe JavaScript)\nDeploy:    Vercel (optimized for Next.js)",
+      "annotation": "Each piece was chosen because it solves a specific need for our task manager and works well with the others. That's what a good stack looks like — tools that complement each other."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A good tech stack isn't about picking the 'best' tools — it's about picking tools that work well together, match your project's needs, and let you move fast. Always be ready to explain your reasoning."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "A senior engineer reviews your project plan and says: 'Why did you pick Next.js instead of plain React with Vite? Seems like extra complexity.' How do you respond?",
+        "choices": [
+          { "id": "reasons", "text": "\"Next.js gives us file-based routing, API routes, and server-side rendering out of the box. For a full-stack task manager, that saves us from configuring a separate router, server, and build pipeline.\"", "nextNode": "good-nextjs", "score": 4 },
+          { "id": "popular", "text": "\"Everyone uses Next.js these days, so it must be the best choice.\"", "nextNode": "bad-popularity", "score": 0 },
+          { "id": "tutorial", "text": "\"The tutorial I followed used it, so I just went with that.\"", "nextNode": "weak-tutorial", "score": 1 }
+        ]
+      },
+      "good-nextjs": {
+        "narrative": "The senior nods. 'Fair points. Now tell me about your database choice. Why Supabase with PostgreSQL instead of something like Firebase or a plain REST API you build yourself?'",
+        "choices": [
+          { "id": "structured", "text": "\"Our task data is structured and relational — tasks belong to users, have statuses and dates. SQL handles that cleanly. Supabase gives us managed PostgreSQL plus built-in auth and RLS, so we skip building a whole backend.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "free", "text": "\"Supabase is free, so it saves money.\"", "nextNode": "okay-end", "score": 2 }
+        ]
+      },
+      "bad-popularity": {
+        "narrative": "The senior frowns. 'Popularity isn't a technical argument. Half the internet ran on jQuery once — that doesn't mean you should use it for a new project. Can you give me an actual reason?'",
+        "choices": [
+          { "id": "recover", "text": "\"You're right. The real reason is that Next.js handles routing, API endpoints, and SSR in one framework, which means less setup for a full-stack app like ours.\"", "nextNode": "recovered-path", "score": 3 },
+          { "id": "double-down", "text": "\"Well, it has the most GitHub stars, so it's clearly the best.\"", "nextNode": "bad-end", "score": 0 }
+        ]
+      },
+      "weak-tutorial": {
+        "narrative": "The senior looks concerned. 'Following a tutorial is fine for learning, but you should understand why those choices were made. What specific features of Next.js does your project actually use?'",
+        "choices": [
+          { "id": "think", "text": "\"Now that I think about it — the file-based routing maps perfectly to our pages, and API routes let us keep backend logic in the same project without a separate server.\"", "nextNode": "recovered-path", "score": 3 },
+          { "id": "shrug", "text": "\"I'm not sure, but it seems to work fine.\"", "nextNode": "bad-end", "score": 0 }
+        ]
+      },
+      "recovered-path": {
+        "narrative": "The senior looks relieved. 'Good, you do understand the reasoning. One more question: why TypeScript instead of plain JavaScript?'",
+        "choices": [
+          { "id": "types-help", "text": "\"TypeScript catches bugs before they happen. If a task needs a 'status' field and I forget it, the compiler tells me immediately instead of crashing at runtime.\"", "nextNode": "okay-end", "score": 3 },
+          { "id": "resume", "text": "\"It looks good on a resume.\"", "nextNode": "weak-end", "score": 1 }
+        ]
+      },
+      "great-end": {
+        "narrative": "The senior is impressed. 'You clearly thought this through. The stack makes sense for the project, and you can articulate why each piece is there. That's exactly the kind of thinking we look for. Ship it.'",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Excellent. You justified every choice with a concrete reason tied to your project's needs. This is how professionals evaluate technology — not by hype, but by fit.",
+        "choices": []
+      },
+      "okay-end": {
+        "narrative": "The senior nods. 'Decent reasoning. You understand some of the tradeoffs, but try to go deeper. Cost is a factor, but the technical fit matters more. Overall, your stack works for this project.'",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "You made reasonable choices but could explain them better. Practice articulating the technical reasons — what problem does each tool solve, and what would happen if you chose differently?",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "The senior sighs. 'Look, every tool in your stack should be there for a reason you can explain. Go back and write one sentence for each choice: what problem does it solve for this specific project.'",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Your stack is actually fine, but you couldn't justify it. Being able to explain your choices is just as important as making them. Always know the 'why' behind your tools.",
+        "choices": []
+      },
+      "bad-end": {
+        "narrative": "The senior shakes their head. 'I can't approve a project where the developer doesn't know why they picked their own tools. Go research your choices and come back when you can explain the tradeoffs.'",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Popularity and hype are never valid technical arguments. Before you pick any tool, ask: What does it do for my project? What are the alternatives? What tradeoffs am I making?",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["tech-stack", "typescript", "tradeoff"]
+  }
+}

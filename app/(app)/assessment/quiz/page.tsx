@@ -7,11 +7,13 @@ import assessmentData from "@/content/assessment.json";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import type { AssessmentAnswer } from "@/lib/types/user.types";
+import { useT } from "@/lib/i18n/use-language";
 
 const questions = assessmentData.questions;
 
 export default function AssessmentQuizPage() {
   const router = useRouter();
+  const t = useT();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<AssessmentAnswer[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -43,9 +45,9 @@ export default function AssessmentQuizPage() {
       setSelectedOption(null);
       setShowFeedback(false);
     } else {
-      // Save answers to sessionStorage for results page
+      const encoded = btoa(JSON.stringify(answers));
       sessionStorage.setItem("assessmentAnswers", JSON.stringify(answers));
-      router.push("/assessment/results");
+      window.location.href = "/assessment/results#" + encoded;
     }
   }
 
@@ -122,8 +124,8 @@ export default function AssessmentQuizPage() {
               <div className="rounded-lg bg-surface-2 p-3 text-sm">
                 <p className="font-semibold text-terminal-green">
                   {selectedOption === correctOption?.id
-                    ? "Correct!"
-                    : "Not quite!"}
+                    ? t("assessment.correct")
+                    : t("assessment.notQuite")}
                 </p>
                 <p className="mt-1 text-muted-foreground">
                   {question.explanation}
@@ -132,8 +134,8 @@ export default function AssessmentQuizPage() {
 
               <Button className="mt-4 w-full" onClick={handleNext}>
                 {currentIndex < questions.length - 1
-                  ? "Next Question"
-                  : "See Results"}
+                  ? t("assessment.next")
+                  : t("assessment.seeResults")}
               </Button>
             </motion.div>
           )}

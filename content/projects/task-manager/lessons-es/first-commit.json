@@ -1,0 +1,103 @@
+{
+  "slug": "first-commit",
+  "title": "Tu Primer Commit",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "setup",
+  "projectSlug": "task-manager",
+  "intro": "Has configurado tu proyecto de Next.js y estas listo para hacer tu primer commit. Los habitos que construyas ahora te acompanaran durante todo el proyecto. Veamos si empiezas limpio.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "El Primer Commit Establece el Estandar",
+      "body": "Tu primer commit deberia contener solo los archivos generados del proyecto con un .gitignore limpio en su lugar. Sin funcionalidades extra, sin codigo experimental, sin contenido sobrante de la plantilla. Esto te da una linea base conocida y funcional a la que siempre puedes volver si algo sale mal."
+    },
+    {
+      "type": "text",
+      "title": "Verifica Antes de Hacer Commit",
+      "body": "Siempre ejecuta `git status` antes de hacer commit para ver exactamente lo que estas a punto de guardar. Busca archivos que no deberian estar ahi — archivos .env con secretos reales, node_modules, salida de compilacion o archivos del sistema operativo como .DS_Store. Un primer commit limpio significa un historial de proyecto limpio."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Antes de tu primer commit: verifica que .gitignore sea correcto, ejecuta git status para revisar que esta preparado, y escribe un mensaje de commit claro. Este ritual de 60 segundos previene problemas que son dolorosos de arreglar despues."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Acabas de ejecutar create-next-app y tu proyecto de gestor de tareas esta generado. Quieres hacer tu primer commit de git. Que haces primero?",
+        "choices": [
+          { "id": "check-status", "text": "Ejecutar 'git status' para ver que archivos estan a punto de ser commiteados", "nextNode": "review-files", "score": 3 },
+          { "id": "add-all-commit", "text": "Ejecutar 'git add . && git commit -m initial commit' inmediatamente", "nextNode": "blind-commit", "score": 1 },
+          { "id": "start-coding", "text": "Saltarte el commit y empezar a construir funcionalidades — haras commit despues cuando haya algo que valga la pena guardar", "nextNode": "no-commit-end", "score": 0 }
+        ]
+      },
+      "review-files": {
+        "narrative": "git status muestra los archivos de tu proyecto. Notas que create-next-app ya inicializo git y creo un .gitignore. Tambien ves un archivo .env.local que creaste con tus claves de Supabase. Que haces?",
+        "choices": [
+          { "id": "check-gitignore", "text": "Abrir .gitignore para verificar que .env.local esta listado, luego verificar que no aparezcan secretos en git status", "nextNode": "verify-gitignore", "score": 3 },
+          { "id": "commit-anyway", "text": "El .gitignore probablemente esta bien — solo hacer commit de todo lo que aparece en git status", "nextNode": "leaked-secrets", "score": 0 }
+        ]
+      },
+      "blind-commit": {
+        "narrative": "Hiciste commit de todo sin verificar. El commit incluye un archivo .env.local con tu clave API de Supabase y un archivo .DS_Store de macOS. La clave API ahora esta en tu historial de git. Incluso si eliminas el archivo despues, aun es recuperable de commits anteriores.",
+        "choices": [
+          { "id": "try-to-fix", "text": "Eliminar el .env.local, agregarlo a .gitignore y hacer un nuevo commit", "nextNode": "partial-fix-end", "score": 1 },
+          { "id": "rewrite-history", "text": "Usar git para reescribir el historial y eliminar el archivo de todos los commits, luego rotar la clave API expuesta", "nextNode": "good-fix-end", "score": 3 }
+        ]
+      },
+      "verify-gitignore": {
+        "narrative": "Confirmas que .env.local esta en .gitignore. git status muestra solo los archivos generados del proyecto — sin secretos, sin node_modules, sin archivos de compilacion. Todo se ve limpio. Hora de hacer commit. Que mensaje escribes?",
+        "choices": [
+          { "id": "good-message", "text": "git commit -m 'Inicializar proyecto Next.js con TypeScript, Tailwind y ESLint'", "nextNode": "clean-commit-end", "score": 3 },
+          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "lazy-message-end", "score": 1 }
+        ]
+      },
+      "leaked-secrets": {
+        "narrative": "Tu clave API de Supabase ahora esta commiteada en el historial de git. Si alguna vez subes este repositorio a GitHub, la clave sera visible publicamente. Los bots escanean GitHub buscando claves expuestas y pueden comprometer tu base de datos en minutos.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Siempre verifica lo que estas commiteando. Un secreto commiteado es extremadamente dificil de eliminar completamente del historial de git. La respuesta mas segura es rotar la clave inmediatamente y usar git filter-branch o BFG para limpiarlo del historial.",
+        "choices": []
+      },
+      "no-commit-end": {
+        "narrative": "Construyes funcionalidades por tres horas sin hacer commit. Luego accidentalmente eliminas un archivo de componente y rompes la cadena de imports. Sin ningun commit, no hay forma de recuperar el archivo. Tienes que reescribirlo de memoria.",
+        "isEnd": true,
+        "finalScore": 0,
+        "feedback": "Los commits son puntos de guardado. Lo primero que debes hacer despues de crear un proyecto es hacer commit de la estructura inicial. Esto te da una linea base limpia a la que volver si algo sale mal.",
+        "choices": []
+      },
+      "clean-commit-end": {
+        "narrative": "Tu primer commit esta limpio: solo archivos generados, sin secretos, y un mensaje descriptivo. Ahora tienes una linea base conocida y funcional. Si alguna vez necesitas empezar de nuevo con una funcionalidad, puedes resetear a este commit con confianza.",
+        "isEnd": true,
+        "finalScore": 9,
+        "feedback": "Perfecto. Verificaste los archivos, revisaste .gitignore y escribiste un mensaje claro. Este primer commit es tu red de seguridad para todo el proyecto. Cada commit de aqui en adelante deberia seguir esta misma disciplina.",
+        "choices": []
+      },
+      "lazy-message-end": {
+        "narrative": "El commit esta limpio y seguro, pero el mensaje 'init' no te dice nada. Dos meses despues, cuando estes buscando en el historial de git cuando se configuro TypeScript, 'init' no te ayudara.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Tu higiene de commits fue buena pero el mensaje fue perezoso. Un primer mensaje de commit claro como 'Inicializar proyecto Next.js con TypeScript y Tailwind' documenta tus elecciones de stack tecnologico directamente en el historial.",
+        "choices": []
+      },
+      "partial-fix-end": {
+        "narrative": "El archivo .env.local ya no esta en el ultimo commit, pero aun existe en el historial del primer commit. Cualquiera que clone el repositorio puede revisar ese commit antiguo y ver la clave. El secreto aun esta comprometido.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Eliminar un archivo y hacer un nuevo commit no lo elimina del historial. Necesitas reescribir el historial de git (usando BFG Repo-Cleaner o git filter-branch) Y rotar la clave comprometida. La prevencion siempre es mas facil que la limpieza.",
+        "choices": []
+      },
+      "good-fix-end": {
+        "narrative": "Reescribes el historial de git para eliminar el archivo .env.local, actualizas .gitignore y rotas tu clave API de Supabase en el panel de control. La clave antigua ya no funciona, asi que incluso si alguien la encuentra en una copia en cache, es inutil.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Buena recuperacion. Hiciste las dos cosas esenciales: eliminaste el secreto del historial Y rotaste la clave. Pero toda esta crisis era evitable verificando git status y .gitignore antes del primer commit.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["git", "gitignore", "commit", "api-key"]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "slug": "switching-branches",
+  "title": "Cambiando de rama",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "branching",
+  "courseSlug": "git-version-control",
+  "intro": "Estás manejando dos funcionalidades: modo oscuro y una barra de búsqueda. Necesitas cambiar entre ramas para trabajar en cada una. Pero ten cuidado -- Git no te dejará cambiar si tienes cambios sin guardar que podrían perderse.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Cambiar de rama = Cambiar de habitación",
+      "body": "Piensa en las ramas como diferentes habitaciones en una casa, cada una preparada para un proyecto diferente. Cuando cambias de rama, Git reorganiza instantáneamente la carpeta de tu proyecto para que coincida con la versión de archivos de esa rama. Es como entrar a una habitación diferente donde todo está exactamente como lo dejaste."
+    },
+    {
+      "type": "text",
+      "title": "¡Haz commit antes de cambiar!",
+      "body": "Esta es la regla más importante: **siempre haz commit (o stash) de tus cambios antes de cambiar de rama.** Si tienes cambios sin confirmar, Git podría negarse a cambiar para proteger tu trabajo. Los cambios sin confirmar podrían mezclarse entre ramas o perderse completamente."
+    },
+    {
+      "type": "code_example",
+      "title": "El flujo de trabajo para cambiar",
+      "language": "bash",
+      "code": "git status                          # Check for uncommitted changes\ngit add .                           # Stage changes\ngit commit -m \"Save my progress\"    # Commit first!\ngit checkout main                   # Now safe to switch\ngit checkout -b feature/search-bar  # Create + switch in one step",
+      "annotation": "Siempre verifica `git status` antes de cambiar. Si muestra cambios, confírmalos primero."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Siempre confirma tus cambios antes de cambiar de rama -- usa `git checkout <rama>` o `git switch <rama>` para moverte entre ellas."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/blog-app",
+    "initialFiles": ["index.html", "style.css", "app.js"],
+    "steps": [
+      {
+        "instruction": "Estás en la rama dark-mode y acabas de terminar algunos cambios. Verifica el estado antes de cambiar.",
+        "expectedCommand": "git status",
+        "acceptAlternatives": [],
+        "output": "On branch feature/dark-mode\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n\n\tmodified:   style.css\n\nno changes added to commit (use \"git add\" to track)",
+        "hint": "Escribe 'git status' para ver si tienes cambios sin confirmar."
+      },
+      {
+        "instruction": "Tienes cambios sin confirmar en style.css. Guárdalos con un commit antes de cambiar de rama.",
+        "expectedCommand": "git add style.css",
+        "acceptAlternatives": ["git add ."],
+        "output": "",
+        "hint": "Prepara el archivo primero con 'git add style.css'."
+      },
+      {
+        "instruction": "Ahora confirma los cambios preparados.",
+        "expectedCommand": "git commit -m \"Add dark mode styles\"",
+        "acceptAlternatives": ["git commit -m \"add dark mode styles\"", "git commit -m \"Dark mode styles\""],
+        "output": "[feature/dark-mode 5f6a7b8] Add dark mode styles\n 1 file changed, 42 insertions(+), 3 deletions(-)",
+        "hint": "Usa 'git commit -m' seguido de un mensaje descriptivo entre comillas."
+      },
+      {
+        "instruction": "Ahora cámbiate de forma segura a la rama principal.",
+        "expectedCommand": "git checkout main",
+        "acceptAlternatives": ["git switch main"],
+        "output": "Switched to branch 'main'",
+        "hint": "Usa 'git checkout main' o 'git switch main'."
+      },
+      {
+        "instruction": "Crea y cámbiate a una nueva rama de búsqueda en un solo comando.",
+        "expectedCommand": "git checkout -b feature/search-bar",
+        "acceptAlternatives": ["git switch -c feature/search-bar"],
+        "output": "Switched to a new branch 'feature/search-bar'",
+        "hint": "El atajo es 'git checkout -b <nombre>' que crea y cambia en un solo paso. O usa 'git switch -c <nombre>'."
+      }
+    ],
+    "completionMessage": "¡Bien hecho! Confirmaste tu trabajo antes de cambiar (¡importante!), luego creaste una nueva rama con el comando atajo. Recuerda: siempre confirma o guarda temporalmente tus cambios antes de cambiar de rama, o Git podría negarse a cambiar para proteger tu trabajo.",
+    "glossaryTerms": ["git-checkout", "git-switch", "uncommitted-changes", "branch"]
+  }
+}

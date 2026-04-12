@@ -1,0 +1,72 @@
+{
+  "slug": "schema-design-thinking",
+  "title": "Pensando en Esquemas",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "El diseño de esquemas se trata de decidir cómo organizar tus datos ANTES de escribir cualquier código. Las buenas decisiones ahora te ahorran reescrituras dolorosas después. Desliza a la DERECHA si la práctica de diseño es BUENA, a la IZQUIERDA si es MALA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Diseño de Esquemas = Organizar un Armario",
+      "body": "Antes de llenar un armario, decides: camisas aquí, pantalones allá, zapatos abajo. Si simplemente tiras todo al azar, encontrar cualquier cosa después es una pesadilla. El **diseño de esquemas** es organizar el armario de tu base de datos -- decidir qué tablas necesitas, qué columnas tiene cada una, y cómo se relacionan entre sí, ANTES de empezar a llenarlas con datos."
+    },
+    {
+      "type": "text",
+      "title": "Preguntas para Hacer al Diseñar un Esquema",
+      "body": "Antes de crear tablas, pregunta:\n\n1. **¿Con qué cosas trabaja mi app?** (usuarios, productos, pedidos = tablas separadas)\n2. **¿Qué necesito saber sobre cada cosa?** (usuario: nombre, email, contraseña = columnas)\n3. **¿Cómo se relacionan estas cosas?** (un usuario TIENE muchos pedidos = relación)\n4. **¿Qué debe siempre tener un valor?** (nombre = NOT NULL, bio = opcional)\n5. **¿Qué debe ser único?** (email = UNIQUE, nombre = puede duplicarse)"
+    },
+    {
+      "type": "text",
+      "title": "Una Tabla Por 'Cosa'",
+      "body": "La regla más importante: **cada tipo de cosa obtiene su propia tabla**.\n\n- Usuarios van en una tabla `users`\n- Productos van en una tabla `products`\n- Pedidos van en una tabla `orders`\n\nNo mezcles todo en una tabla gigante. Si te encuentras repitiendo los mismos datos en múltiples filas (como el nombre del usuario apareciendo en cada pedido), esa es una señal de que necesitas una tabla separada."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un buen diseño de esquema significa una tabla por tipo de cosa, las columnas correctas con los tipos de datos correctos, NOT NULL en campos obligatorios, y UNIQUE en campos que no deberían duplicarse. Piensa en tu esquema antes de escribir código."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Crear tablas separadas para usuarios, productos y pedidos en una app de comercio electrónico.",
+        "isGoodPractice": true,
+        "explanation": "Cada tipo de 'cosa' (entidad) merece su propia tabla. Usuarios, productos y pedidos tienen atributos diferentes y ciclos de vida diferentes. Separarlos mantiene los datos organizados y evita la repetición."
+      },
+      {
+        "id": "card-2",
+        "content": "Almacenar la calle, ciudad, estado y código postal de un usuario todo en una columna llamada 'address'.",
+        "isGoodPractice": false,
+        "explanation": "Meter múltiples valores en una columna hace imposible consultar por ciudad o estado por separado. ¿Qué pasa si quieres encontrar todos los usuarios en California? Tendrías que hacer búsquedas de texto desordenadas. Usa columnas separadas para calle, ciudad, estado y código postal para que puedas consultar cada una independientemente."
+      },
+      {
+        "id": "card-3",
+        "content": "Agregar una columna de timestamp created_at a cada tabla.",
+        "isGoodPractice": true,
+        "explanation": "Saber cuándo se creó un registro es casi siempre útil -- para depuración, auditoría, ordenamiento y análisis. Agregar created_at (y a menudo updated_at) a cada tabla es una práctica ampliamente seguida que no cuesta casi nada pero proporciona un valor enorme."
+      },
+      {
+        "id": "card-4",
+        "content": "Crear columnas llamadas 'data1', 'data2', 'data3' para uso futuro.",
+        "isGoodPractice": false,
+        "explanation": "Los nombres genéricos de columnas hacen tu base de datos imposible de entender. ¿Qué contiene 'data2'? ¡Nadie lo sabe! Nombra las columnas descriptivamente (first_name, order_total, shipping_date). Si necesitas nuevas columnas después, puedes agregarlas con ALTER TABLE."
+      },
+      {
+        "id": "card-5",
+        "content": "Usar un entero auto-incremental como clave primaria para cada tabla.",
+        "isGoodPractice": true,
+        "explanation": "Los enteros auto-incrementales (SERIAL en PostgreSQL, AUTOINCREMENT en SQLite) son la opción más común y práctica para claves primarias. Son únicos, nunca cambian y se generan automáticamente. Algunos equipos prefieren UUIDs para sistemas distribuidos, pero los enteros auto-incrementales son el punto de partida estándar."
+      },
+      {
+        "id": "card-6",
+        "content": "Almacenar el número de pedidos que un usuario ha hecho como una columna en la tabla users.",
+        "isGoodPractice": false,
+        "explanation": "Este número puede calcularse contando filas en la tabla orders: SELECT COUNT(*) FROM orders WHERE user_id = 42. Almacenar valores calculados significa que tienes que mantenerlos sincronizados -- cada vez que un pedido se agrega o elimina, tendrías que actualizar la tabla users también. Eso es propenso a errores. Deja que la base de datos lo calcule al momento."
+      }
+    ],
+    "glossaryTerms": ["schema", "normalization", "entity", "constraint"]
+  }
+}

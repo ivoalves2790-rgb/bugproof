@@ -1,0 +1,16 @@
+{
+  "slug": "frontend-performance",
+  "title": "Rendimiento del frontend",
+  "description": "Optimización de imágenes, carga diferida, división de código y rendimiento de renderizado",
+  "order": 2,
+  "courseSlug": "performance-scaling",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "image-optimization", "title": "Optimización de imágenes", "type": "bug_hunt", "order": 1, "difficulty": 1 },
+    { "slug": "lazy-loading", "title": "Carga diferida", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "code-splitting", "title": "División de código", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "bundle-size", "title": "Tamaño del bundle", "type": "terminal_sim", "order": 4, "difficulty": 2 },
+    { "slug": "rendering-performance", "title": "Rendimiento de renderizado", "type": "bug_hunt", "order": 5, "difficulty": 3 },
+    { "slug": "dom-manipulation-costs", "title": "Costos de manipulación del DOM", "type": "swipe_to_judge", "order": 6, "difficulty": 2 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "why-performance-matters",
+  "title": "Por qué importa el rendimiento",
+  "description": "Qué hace lentas a las apps, cascadas de carga y Core Web Vitals",
+  "order": 1,
+  "courseSlug": "performance-scaling",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-makes-an-app-slow", "title": "¿Qué hace lenta a una app?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "the-loading-waterfall", "title": "La cascada de carga", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "render-blocking-resources", "title": "Recursos que bloquean el renderizado", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "core-web-vitals", "title": "Core Web Vitals explicados", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "how-slow-apps-lose-users", "title": "Cómo las apps lentas pierden usuarios", "type": "incident_response", "order": 5, "difficulty": 1 },
+    { "slug": "quick-performance-wins", "title": "Victorias rápidas de rendimiento", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

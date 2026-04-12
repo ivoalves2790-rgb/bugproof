@@ -1,0 +1,16 @@
+{
+  "slug": "secure-coding",
+  "title": "Prácticas de codificación segura",
+  "description": "Auditorías de dependencias, privilegio mínimo, cabeceras de seguridad y defensa en profundidad",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "security-fundamentals",
+  "lessons": [
+    { "slug": "dependency-audit", "title": "Auditando dependencias", "type": "terminal_sim", "order": 1, "difficulty": 2 },
+    { "slug": "least-privilege", "title": "Principio de privilegio mínimo", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "security-headers", "title": "Cabeceras de seguridad HTTP", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "supply-chain-attack", "title": "¡Ataque a la cadena de suministro!", "type": "incident_response", "order": 4, "difficulty": 3 },
+    { "slug": "owasp-top-ten", "title": "Resumen del OWASP Top 10", "type": "swipe_to_judge", "order": 5, "difficulty": 2 },
+    { "slug": "defense-in-depth", "title": "Defensa en profundidad", "type": "bug_hunt", "order": 6, "difficulty": 3 }
+  ]
+}

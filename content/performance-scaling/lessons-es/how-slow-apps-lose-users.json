@@ -1,0 +1,98 @@
+{
+  "slug": "how-slow-apps-lose-users",
+  "title": "Cómo las apps lentas pierden usuarios",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "why-performance-matters",
+  "courseSlug": "performance-scaling",
+  "intro": "La tasa de conversión de tu app de e-commerce acaba de caer un 30% de la noche a la mañana. Las ventas se desploman pero nada en el código cambió. Tu CEO está preguntando qué pasó. Es hora de investigar.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Velocidad = Confianza",
+      "body": "Imagina entrar a dos tiendas. Una tiene puertas automáticas que se abren al instante. La otra tiene una puerta pegajosa que tarda 5 segundos en abrirse. ¿Qué tienda se siente más profesional? ¿En cuál confías con tu tarjeta de crédito? **La velocidad es confianza**. Los usuarios juzgan subconscientement la calidad de tu app por qué tan rápido responde."
+    },
+    {
+      "type": "text",
+      "title": "Los números son brutales",
+      "body": "La investigación muestra consistentemente:\n\n- **53%** de los usuarios móviles abandonan un sitio que tarda más de 3 segundos en cargar\n- Cada segundo extra de tiempo de carga puede reducir las conversiones un **7%**\n- Un retraso de 100ms en el tiempo de respuesta puede reducir las tasas de conversión un **7%**\n- Los usuarios que experimentan cargas lentas tienen **menos probabilidad de regresar**, incluso después de que el problema se arregla"
+    },
+    {
+      "type": "text",
+      "title": "La espiral mortal de la tasa de rebote",
+      "body": "Las páginas lentas crean un ciclo vicioso:\n\n1. La página carga lento -> los usuarios se van\n2. Alta tasa de rebote -> Google te posiciona más abajo\n3. Posición más baja -> menos tráfico\n4. Menos tráfico -> menos ingresos para arreglar el problema\n\nEl rendimiento no es un lujo -- afecta directamente la supervivencia de tu negocio."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La velocidad equivale a confianza y dinero. Más de la mitad de los usuarios abandonan sitios lentos, y cada segundo extra de carga te cuesta conversiones. Los problemas de rendimiento se acumulan: las páginas lentas pierden usuarios, posicionamiento e ingresos."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "La tasa de conversión de tu sitio de e-commerce cayó un 30% de la noche a la mañana. Los ingresos bajaron significativamente. El equipo de desarrollo dice que no se desplegó código. ¿Por dónde empiezas a investigar?",
+        "choices": [
+          { "id": "a", "text": "Verificar si el sitio está cargando más lento de lo normal usando herramientas de monitoreo", "nextNode": "check-speed", "score": 10 },
+          { "id": "b", "text": "Revisar los logs de errores del servidor en busca de caídas", "nextNode": "check-errors", "score": 5 },
+          { "id": "c", "text": "Verificar si un competidor lanzó una oferta", "nextNode": "check-competitor", "score": 2 }
+        ]
+      },
+      "check-speed": {
+        "narrative": "Abres tu panel de monitoreo y lo ves: el tiempo promedio de carga de página saltó de 1.8 segundos a 7.2 segundos ayer. El sitio no está roto -- solo es dolorosamente lento. Los usuarios están llegando pero se van antes de que la página termine de cargar. ¿Cuál es la causa probable?",
+        "choices": [
+          { "id": "a", "text": "Verificar si un script de terceros o CDN está teniendo problemas", "nextNode": "found-cdn", "score": 10 },
+          { "id": "b", "text": "Verificar si la base de datos está lenta", "nextNode": "check-db", "score": 6 },
+          { "id": "c", "text": "Verificar si hay un ataque DDoS", "nextNode": "check-ddos", "score": 4 }
+        ]
+      },
+      "check-errors": {
+        "narrative": "Sin errores de servidor ni caídas. El sitio técnicamente funciona bien -- todas las páginas devuelven respuestas 200 OK. Pero algo está haciendo que los usuarios se vayan sin comprar. ¿Quizás el problema no son errores sino velocidad?",
+        "choices": [
+          { "id": "a", "text": "Verificar la velocidad de carga del sitio en herramientas de monitoreo", "nextNode": "check-speed", "score": 7 }
+        ]
+      },
+      "check-competitor": {
+        "narrative": "No hay actividad importante de competidores. Tus números de tráfico son en realidad los mismos de siempre -- la gente está visitando. Simplemente no están comprando. El problema está de tu lado.",
+        "choices": [
+          { "id": "a", "text": "Verificar si el sitio se está comportando diferente de lo normal", "nextNode": "check-speed", "score": 5 }
+        ]
+      },
+      "found-cdn": {
+        "narrative": "¡Lo encontraste! Tu proveedor de CDN de imágenes tuvo una interrupción parcial ayer. Todas las imágenes de productos se están cargando desde un servidor de respaldo que es 10 veces más lento. Las imágenes están ahí, pero tardan más de 5 segundos en aparecer. Los usuarios ven una página llena de marcadores de imagen vacíos y se van. ¿Qué haces?",
+        "choices": [
+          { "id": "a", "text": "Cambiar a un CDN de respaldo y agregar carga diferida para imágenes debajo del pliegue", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Esperar a que el proveedor de CDN arregle su interrupción", "nextNode": "end-wait", "score": 3 }
+        ]
+      },
+      "check-db": {
+        "narrative": "Los tiempos de respuesta de la base de datos son normales -- las consultas son rápidas. Las respuestas de la API también son rápidas. La lentitud está ocurriendo en el frontend, después de que los datos llegan. Algo sobre renderizar la página está tomando mucho más tiempo de lo normal.",
+        "choices": [
+          { "id": "a", "text": "Verificar si los recursos estáticos (imágenes, CSS, JS) están cargando lento", "nextNode": "found-cdn", "score": 8 }
+        ]
+      },
+      "check-ddos": {
+        "narrative": "Los patrones de tráfico se ven normales -- no hay picos inusuales en las solicitudes. Esto no es un ataque. El servidor está manejando las solicitudes bien, pero algo posterior es lento.",
+        "choices": [
+          { "id": "a", "text": "Verificar servicios de terceros y CDNs", "nextNode": "found-cdn", "score": 6 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Cambias a un CDN de respaldo, agregas carga diferida para que las imágenes debajo del pliegue no bloqueen la carga inicial de la página, y agregas alertas de monitoreo para tiempos de respuesta del CDN. En una hora, los tiempos de carga vuelven a 2 segundos y las conversiones comienzan a recuperarse.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente investigación! Identificaste correctamente que una dependencia de terceros (el CDN) causó la ralentización. La lección clave: tu app es tan rápida como su dependencia más lenta. Siempre ten opciones de respaldo para servicios críticos de terceros, y configura alertas para regresiones de rendimiento para detectarlas antes que tu CEO."
+      },
+      "end-wait": {
+        "narrative": "Mientras esperas, la carga lenta continúa. Cada hora te cuesta más ventas perdidas. Las interrupciones de CDN pueden durar horas o incluso días. Mientras tanto, tu tasa de conversión sigue cayendo y los usuarios frustrados publican quejas en redes sociales.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Esperar a que un tercero arregle su problema pone tu negocio a su merced. Siempre ten un plan de respaldo para dependencias críticas. Técnicas como CDNs de respaldo, service workers con recursos en caché y carga diferida pueden mantener tu sitio utilizable incluso cuando una dependencia tiene problemas."
+      }
+    },
+    "glossaryTerms": ["bounce-rate", "cdn", "conversion-rate", "lazy-loading"]
+  }
+}

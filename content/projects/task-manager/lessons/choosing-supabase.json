@@ -1,0 +1,73 @@
+{
+  "slug": "choosing-supabase",
+  "title": "Why Supabase?",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "tech-stack",
+  "projectSlug": "task-manager",
+  "intro": "We're using Supabase as our backend for the task manager. Swipe right on true Supabase advantages, left on misconceptions or things that aren't quite right.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Supabase = Instant Backend",
+      "body": "Supabase gives you a PostgreSQL database, authentication, file storage, and real-time subscriptions — all from one dashboard. Instead of stitching together five services, you get one platform that handles the backend so you can focus on the frontend."
+    },
+    {
+      "type": "analogy",
+      "title": "Supabase is a Furnished Apartment",
+      "body": "Building a backend from scratch is like moving into an empty house — you need to buy every piece of furniture. Supabase is a furnished apartment. The database, auth, and storage are already set up. You can rearrange things, but you're not starting from zero."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Supabase provides PostgreSQL, auth, storage, and real-time features with a generous free tier. For a task manager, it covers every backend need without requiring you to build or manage a server."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "built-in-auth",
+        "content": "Supabase includes built-in authentication, so you don't need to build login/signup from scratch",
+        "isGoodPractice": true,
+        "explanation": "Auth is one of the hardest things to build securely. Supabase handles email/password, OAuth, magic links, and more — so your task manager gets secure login for free."
+      },
+      {
+        "id": "no-sql-needed",
+        "content": "You never need to write or understand SQL when using Supabase",
+        "isGoodPractice": false,
+        "explanation": "Supabase has a JavaScript client that abstracts many queries, but understanding SQL is still important. You'll need it for Row Level Security policies, complex queries, and debugging."
+      },
+      {
+        "id": "free-tier",
+        "content": "Supabase has a free tier that's more than enough for building and launching a personal project like our task manager",
+        "isGoodPractice": true,
+        "explanation": "The free tier includes 500 MB of database storage, 50,000 monthly active users for auth, and 1 GB of file storage. Our task manager won't come close to those limits."
+      },
+      {
+        "id": "replaces-everything",
+        "content": "Supabase replaces every backend tool you'll ever need — you'll never have to use anything else",
+        "isGoodPractice": false,
+        "explanation": "Supabase is great for data, auth, and storage, but it doesn't handle things like email sending, payment processing, or complex background jobs. You'll still need other services for those."
+      },
+      {
+        "id": "rls-security",
+        "content": "Supabase uses Row Level Security so users can only access their own data — a critical feature for our multi-user task manager",
+        "isGoodPractice": true,
+        "explanation": "RLS policies are enforced at the database level. Even if someone bypasses your frontend, they can't read other users' tasks. This is security done right."
+      },
+      {
+        "id": "vendor-lock",
+        "content": "Using Supabase means you're permanently locked in and can never switch to another provider",
+        "isGoodPractice": false,
+        "explanation": "Supabase is open source and runs on standard PostgreSQL. Your data, schema, and even RLS policies are portable. You can export and host it yourself anytime."
+      },
+      {
+        "id": "realtime",
+        "content": "Supabase offers real-time subscriptions, so your task list can update instantly when data changes",
+        "isGoodPractice": true,
+        "explanation": "Real-time is built in. If you later add collaboration features, tasks update live without refreshing. Even for a single user, it keeps the UI in sync."
+      }
+    ],
+    "glossaryTerms": ["rls", "baas", "open-source"]
+  }
+}

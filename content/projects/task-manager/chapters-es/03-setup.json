@@ -1,0 +1,16 @@
+{
+  "slug": "setup",
+  "title": "Configuracion del Proyecto",
+  "description": "Configura tu entorno de desarrollo, crea tu proyecto y haz tu primer commit. La base de toda gran aplicacion.",
+  "order": 3,
+  "phase": "setup",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "dev-environment", "title": "Tu Entorno de Desarrollo", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "create-nextjs-app", "title": "Creando el Proyecto", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "folder-structure", "title": "Entendiendo la Estructura de Carpetas", "type": "swipe_to_judge", "order": 3, "difficulty": 2 },
+    { "slug": "version-control-basics", "title": "Fundamentos de Control de Versiones", "type": "swipe_to_judge", "order": 4, "difficulty": 1 },
+    { "slug": "first-commit", "title": "Tu Primer Commit", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["git-version-control", "deployment-devops"]
+}

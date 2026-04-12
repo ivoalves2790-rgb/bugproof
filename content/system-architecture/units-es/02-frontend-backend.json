@@ -1,0 +1,16 @@
+{
+  "slug": "frontend-backend",
+  "title": "Frontend vs Backend",
+  "description": "Aprende la diferencia entre el código que se ejecuta en tu navegador y el código que se ejecuta en un servidor -- y por qué ambos existen",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "system-architecture",
+  "lessons": [
+    { "slug": "what-is-the-frontend", "title": "¿Qué es el Frontend?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "what-is-the-backend", "title": "¿Qué es el Backend?", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "client-vs-server", "title": "Lado del Cliente vs Lado del Servidor", "type": "bug_hunt", "order": 3, "difficulty": 1 },
+    { "slug": "how-browsers-render", "title": "Cómo los Navegadores Renderizan Páginas", "type": "incident_response", "order": 4, "difficulty": 1 },
+    { "slug": "server-side-rendering", "title": "Renderizado en Servidor vs en Cliente", "type": "terminal_sim", "order": 5, "difficulty": 1 },
+    { "slug": "frontend-backend-communication", "title": "Cómo el Frontend se Comunica con el Backend", "type": "bug_hunt", "order": 6, "difficulty": 1 }
+  ]
+}

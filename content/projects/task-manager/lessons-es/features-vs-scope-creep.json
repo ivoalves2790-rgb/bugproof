@@ -1,0 +1,68 @@
+{
+  "slug": "features-vs-scope-creep",
+  "title": "Funcionalidades vs Desvio de Alcance",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "planning",
+  "projectSlug": "task-manager",
+  "intro": "El desvio de alcance mata proyectos. Juzga si cada escenario es buena disciplina de planificacion o una trampa de desvio de alcance.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "El Asesino #1 de Proyectos",
+      "body": "La mayoria de las apps nunca se lanzan. La razon no es codigo malo o bugs dificiles — es el desvio de alcance. Eso es cuando sigues agregando 'solo una funcionalidad mas' hasta que el proyecto es tan grande que lo abandonas. Los programadores con IA son especialmente vulnerables porque la IA hace que parezca facil agregar funcionalidades."
+    },
+    {
+      "type": "analogy",
+      "title": "El Problema del Menu del Restaurante",
+      "body": "Un restaurante con 200 platillos en el menu no puede ser excelente en todos. Un menu enfocado con 10 platillos bien hechos gana siempre contra uno inflado. Tu app es igual — 5 funcionalidades pulidas superan a 50 a medio construir."
+    },
+    {
+      "type": "code_example",
+      "title": "Una Conversacion de Desvio de Alcance",
+      "language": "text",
+      "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
+      "annotation": "Cada funcionalidad por si sola parece pequena, pero se acumulan. Cada funcionalidad significa mas codigo, mas bugs, mas casos especiales."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Escribe las funcionalidades de tu MVP ANTES de empezar. Si surge una nueva idea, agregala a una lista de 'ideas para v2', no a tu sprint actual. Lanza primero, mejora despues."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "v2-list",
+        "content": "Cuando piensas en una funcionalidad interesante, la escribes en un documento de 'Ideas Futuras' en lugar de construirla de inmediato",
+        "isGoodPractice": true,
+        "explanation": "Esta es la mejor manera de manejar ideas de funcionalidades sin perderlas ni descarrilar tu proyecto."
+      },
+      {
+        "id": "just-one-more",
+        "content": "Estas casi terminando pero piensas 'dejame agregar el modo oscuro rapidamente antes de lanzar'",
+        "isGoodPractice": false,
+        "explanation": "Clasico desvio de alcance. Las funcionalidades 'rapidas' nunca lo son. Lanza primero, modo oscuro despues."
+      },
+      {
+        "id": "mvp-checklist",
+        "content": "Antes de empezar, escribes exactamente 5 funcionalidades principales y te comprometes a lanzar solo esas",
+        "isGoodPractice": true,
+        "explanation": "Una lista de funcionalidades clara y limitada es tu mejor defensa contra el desvio de alcance."
+      },
+      {
+        "id": "user-requests",
+        "content": "Un amigo dice 'deberias agregar un temporizador Pomodoro' asi que inmediatamente empiezas a construirlo",
+        "isGoodPractice": false,
+        "explanation": "Las solicitudes de funcionalidades de los usuarios son valiosas — pero van en la lista de v2, no en el sprint actual."
+      },
+      {
+        "id": "cut-features",
+        "content": "Te das cuenta de que tu app tiene 12 funcionalidades planeadas y las reduces a 6 para lanzar mas rapido",
+        "isGoodPractice": true,
+        "explanation": "Reducir el alcance es una senal de madurez. Lanzar algo pequeno que funciona supera a algo grande que no."
+      }
+    ],
+    "glossaryTerms": ["scope-creep", "mvp", "sprint"]
+  }
+}

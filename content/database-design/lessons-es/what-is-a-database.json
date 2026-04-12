@@ -1,0 +1,91 @@
+{
+  "slug": "what-is-a-database",
+  "title": "¿Qué es una Base de Datos?",
+  "type": "incident_response",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Te han contratado para construir una aplicación simple de lista de tareas. El fundador pregunta '¿Dónde deberíamos almacenar las tareas?' Exploremos las opciones y entendamos qué es realmente una base de datos.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Diferentes Opciones de Almacenamiento",
+      "body": "Almacenar datos es como almacenar objetos físicos. Podrías usar una **caja de zapatos** (un archivo de texto -- simple pero desordenado), una **carpeta con hojas de cálculo** (un archivo estructurado como CSV -- organizado pero limitado), o un **almacén profesional** (una base de datos -- organizado, buscable, seguro y hecho para escalar)."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué ES Exactamente una Base de Datos?",
+      "body": "Una base de datos es un **programa de software** que se ejecuta en un servidor y gestiona datos por ti. Los más populares incluyen:\n\n1. **PostgreSQL** -- poderoso, de código abierto, excelente para la mayoría de las apps\n2. **MySQL** -- muy popular, usado por WordPress y muchas aplicaciones web\n3. **SQLite** -- ligero, almacena datos en un solo archivo (genial para apps pequeñas)\n4. **MongoDB** -- almacena datos como documentos flexibles en lugar de tablas\n\nEl código de tu app envía comandos a la base de datos, y ella se encarga del almacenamiento, recuperación y seguridad de los datos."
+    },
+    {
+      "type": "text",
+      "title": "Cómo Tu App Usa una Base de Datos",
+      "body": "Tu app no abre archivos directamente. En su lugar:\n\n1. Tu app se **conecta** a la base de datos (como marcar un número de teléfono)\n2. Tu app **envía comandos** en SQL (un lenguaje especial para bases de datos)\n3. La base de datos **ejecuta** el comando y envía resultados de vuelta\n4. Tu app **usa los resultados** (los muestra, los procesa, etc.)\n\nLa base de datos es un proceso separado de tu app -- se comunican a través de una conexión."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Una base de datos es un programa especializado que almacena y gestiona datos. Tu app se conecta a ella y envía comandos en SQL. La base de datos maneja todo lo complejo: búsquedas rápidas, escrituras seguras y múltiples usuarios."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Estás construyendo una app de lista de tareas. El fundador dice: 'Mantengámoslo simple -- solo guarda las tareas en un archivo JSON en el servidor.' Esto funciona al principio con 5 usuarios de prueba. Pero luego lanzas y obtienes 500 usuarios. Los problemas empiezan a aparecer: las tareas de algunos usuarios desaparecen aleatoriamente. ¿Qué está pasando probablemente?",
+        "choices": [
+          { "id": "a", "text": "Dos usuarios están escribiendo en el archivo al mismo tiempo, sobrescribiendo los datos del otro", "nextNode": "correct-concurrency", "score": 10 },
+          { "id": "b", "text": "El archivo JSON se está volviendo demasiado grande y ralentizándose", "nextNode": "partial-size", "score": 5 },
+          { "id": "c", "text": "El servidor se está quedando sin memoria", "nextNode": "wrong-memory", "score": 2 }
+        ]
+      },
+      "correct-concurrency": {
+        "narrative": "¡Exactamente! Cuando el Usuario A y el Usuario B leen el archivo al mismo tiempo, hacen cambios y lo escriben de vuelta, la segunda escritura sobrescribe la primera. La nueva tarea del Usuario A desaparece. Esto se llama una 'condición de carrera.' El fundador dice: 'OK, ¿qué deberíamos usar en su lugar?'",
+        "choices": [
+          { "id": "a", "text": "Una base de datos como PostgreSQL o SQLite -- manejan escrituras concurrentes de forma segura", "nextNode": "correct-database", "score": 10 },
+          { "id": "b", "text": "Solo agregar bloqueo de archivos para que solo un usuario escriba a la vez", "nextNode": "partial-locking", "score": 5 }
+        ]
+      },
+      "partial-size": {
+        "narrative": "El tamaño del archivo podría ser un factor eventualmente, pero las tareas de 500 usuarios serían solo unos pocos megabytes -- eso no es suficiente para causar problemas. El problema real es la concurrencia: múltiples usuarios escribiendo en el mismo archivo al mismo tiempo, sobrescribiendo los cambios del otro.",
+        "choices": [
+          { "id": "a", "text": "Entonces es una condición de carrera -- dos escrituras ocurriendo a la vez", "nextNode": "correct-concurrency", "score": 5 }
+        ]
+      },
+      "wrong-memory": {
+        "narrative": "La memoria generalmente no es el problema para 500 usuarios. Un archivo JSON con datos de tareas sería diminuto en memoria. El problema es más fundamental: el archivo no puede manejar múltiples usuarios escribiendo en él al mismo tiempo. Cuando dos escrituras se superponen, los datos se pierden.",
+        "choices": [
+          { "id": "a", "text": "Entendido -- las escrituras concurrentes están causando pérdida de datos", "nextNode": "correct-concurrency", "score": 5 }
+        ]
+      },
+      "correct-database": {
+        "narrative": "Migras a SQLite (simple de configurar) y el problema de las tareas que desaparecen se esfuma. La base de datos maneja escrituras concurrentes de forma segura usando transacciones. Tres meses después, la app tiene 50,000 usuarios y las búsquedas empiezan a ralentizarse. ¿Cuál es tu siguiente movimiento?",
+        "choices": [
+          { "id": "a", "text": "Actualizar a PostgreSQL y agregar índices para búsquedas más rápidas", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "SQLite debería estar bien, solo consigue un servidor más rápido", "nextNode": "end-ok", "score": 4 }
+        ]
+      },
+      "partial-locking": {
+        "narrative": "El bloqueo de archivos podría funcionar para un número pequeño de usuarios, pero significa que solo un usuario puede escribir a la vez -- todos los demás esperan. Con 500 usuarios, eso crea un rendimiento terrible. Una base de datos maneja el acceso concurrente de manera mucho más eficiente, permitiendo que muchos usuarios escriban simultáneamente sin conflictos.",
+        "choices": [
+          { "id": "a", "text": "Una base de datos real es la mejor solución", "nextNode": "correct-database", "score": 7 }
+        ]
+      },
+      "end-great": {
+        "narrative": "PostgreSQL maneja 50,000 usuarios fácilmente. Agregas índices en las columnas user_id y due_date, y las búsquedas pasan de 500ms a 2ms. La app es rápida, confiable y lista para escalar más.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Tomaste la decisión correcta en cada paso: identificaste el problema de concurrencia con archivos planos, elegiste una base de datos para acceso concurrente seguro, y actualizaste a una base de datos más poderosa a medida que la app creció. Esta progresión -- archivo a SQLite a PostgreSQL -- es en realidad cómo muchas startups reales evolucionan su almacenamiento de datos."
+      },
+      "end-ok": {
+        "narrative": "SQLite es genial para apps pequeñas a medianas, pero está diseñado para uso en un solo servidor y puede convertirse en un cuello de botella con muchos escritores concurrentes. PostgreSQL es más adecuado para aplicaciones web en producción con muchos usuarios.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "SQLite es maravilloso para comenzar, pero las aplicaciones web en producción con muchos usuarios concurrentes generalmente necesitan una base de datos cliente-servidor como PostgreSQL. Maneja mejor las escrituras concurrentes y ofrece características como agrupación de conexiones que ayudan con alto tráfico."
+      }
+    },
+    "glossaryTerms": ["database", "concurrency", "race-condition", "transaction"]
+  }
+}

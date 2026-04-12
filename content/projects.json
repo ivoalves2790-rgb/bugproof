@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "task-manager",
+    "title": "Task Manager",
+    "description": "Build a full-stack task management app from scratch — planning, coding, deploying.",
+    "icon": "clipboard-list",
+    "difficulty": "beginner",
+    "estimatedHours": 12,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#4ECDC4",
+    "isPremium": false,
+    "techStack": ["Next.js", "Supabase", "Tailwind CSS"]
+  },
+  {
+    "slug": "social-feed",
+    "title": "Social Feed",
+    "description": "Create a real-time social feed with posts, likes, and user profiles.",
+    "icon": "message-circle",
+    "difficulty": "intermediate",
+    "estimatedHours": 16,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#45B7D1",
+    "isPremium": false,
+    "techStack": ["Next.js", "Supabase", "Tailwind CSS"]
+  },
+  {
+    "slug": "ecommerce",
+    "title": "E-Commerce Store",
+    "description": "Build a production-grade store with payments, inventory, and order management.",
+    "icon": "shopping-cart",
+    "difficulty": "advanced",
+    "estimatedHours": 24,
+    "chapterCount": 9,
+    "lessonCount": 45,
+    "color": "#E17055",
+    "isPremium": true,
+    "techStack": ["Next.js", "Supabase", "Stripe", "Tailwind CSS"]
+  }
+]

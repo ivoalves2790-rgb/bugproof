@@ -1,0 +1,60 @@
+{
+  "slug": "anatomy-of-error",
+  "title": "Anatomía de un mensaje de error",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Un desarrollador está intentando mostrar el nombre de un usuario en una página de perfil, pero la aplicación se cae. El error dice: TypeError: Cannot read properties of undefined (reading 'name'). El error está en cómo acceden a los datos del usuario.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Leer un error como una dirección postal",
+      "body": "Una dirección postal tiene partes: nombre, calle, ciudad, código postal. Un mensaje de error tiene partes también: el tipo de error, la descripción, el nombre del archivo y el número de línea. Así como lees una dirección de arriba a abajo para encontrar una casa, lees un mensaje de error pieza por pieza para encontrar el error."
+    },
+    {
+      "type": "text",
+      "title": "Las tres partes de cada error",
+      "body": "Cada mensaje de error tiene tres piezas clave:\n\n1. **Tipo de error** -- la categoría (como `TypeError` o `ReferenceError`)\n2. **Descripción del error** -- qué salió mal específicamente (como \"Cannot read properties of undefined\")\n3. **Ubicación** -- el archivo y número de línea donde ocurrió el fallo\n\nLa descripción es la parte más importante. Te dice exactamente qué intentó hacer tu código que no funcionó."
+    },
+    {
+      "type": "code_example",
+      "title": "Descifrando 'Cannot read properties of undefined'",
+      "language": "javascript",
+      "code": "const user = undefined;\nconsole.log(user.name); // TypeError: Cannot read properties of undefined (reading 'name')",
+      "annotation": "Este error significa que intentaste acceder a .name en algo que es undefined. La solución es verificar si el valor existe antes de acceder a sus propiedades."
+    },
+    {
+      "type": "text",
+      "title": "Encadenamiento opcional al rescate",
+      "body": "JavaScript tiene un atajo llamado **encadenamiento opcional** (`?.`). En lugar de `data.user.name`, escribes `data.user?.name`. El `?.` dice: \"si lo que está antes de mí es undefined o null, simplemente devuelve undefined en lugar de fallar.\" Es una forma segura de acceder a propiedades anidadas."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cuando ves 'Cannot read properties of undefined,' significa que intentaste acceder a una propiedad en algo que aún no existe. Usa encadenamiento opcional (?.) o una verificación de guardia para manejar datos faltantes de forma segura."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "function displayProfile(data) {", "isBuggy": false },
+      { "line": 2, "text": "  const header = document.getElementById('header');", "isBuggy": false },
+      { "line": 3, "text": "  header.textContent = data.user.name;", "isBuggy": true },
+      { "line": 4, "text": "}", "isBuggy": false },
+      { "line": 5, "text": "", "isBuggy": false },
+      { "line": 6, "text": "// Called with API response that has no user key", "isBuggy": false },
+      { "line": 7, "text": "displayProfile({ status: 'ok' });", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "El error dice: TypeError: Cannot read properties of undefined (reading 'name'). La función se llama con datos que no tienen la clave 'user'. Toca la línea que falla.",
+    "fixes": [
+      { "id": "a", "text": "header.textContent = data.user?.name || 'Unknown';", "isCorrect": true },
+      { "id": "b", "text": "header.textContent = data.name;", "isCorrect": false },
+      { "id": "c", "text": "header.textContent = data.user.name || 'Unknown';", "isCorrect": false },
+      { "id": "d", "text": "header.textContent = data?.name;", "isCorrect": false }
+    ],
+    "explanation": "El error 'Cannot read properties of undefined (reading 'name')' te dice exactamente lo que pasó: algo es undefined y trataste de acceder a '.name' en ello. Aquí, data.user es undefined porque la respuesta de la API no tiene la clave 'user'. La solución usa encadenamiento opcional (?.) -- el signo de interrogación punto dice 'si esto es undefined, simplemente detente aquí y devuelve undefined en lugar de fallar.' El respaldo '|| Unknown' proporciona un valor predeterminado.",
+    "glossaryTerms": ["TypeError", "undefined", "optional-chaining"]
+  }
+}

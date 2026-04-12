@@ -1,0 +1,76 @@
+{
+  "slug": "implementing-login",
+  "title": "Implementing Login",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "auth-security",
+  "projectSlug": "task-manager",
+  "intro": "You're adding login to your task manager. A user reports they can't sign in, and you discover the auth implementation has some fundamental issues. How do you fix it?",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Building a Login Flow",
+      "body": "A solid login flow has three parts: a form that collects credentials, server-side validation that checks them, and session management that remembers the user. Each part has common pitfalls — weak validation, missing error handling, or insecure token storage."
+    },
+    {
+      "type": "code_example",
+      "title": "Common Login Mistakes",
+      "language": "text",
+      "code": "BAD: if (password === storedPassword)  // plain text comparison\nGOOD: if (await bcrypt.compare(password, hashedPassword))\n\nBAD: res.json({ token, password })  // leaking password in response\nGOOD: res.json({ token, user: { id, email } })",
+      "annotation": "Always hash passwords and never include sensitive data in API responses."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use an auth library or provider instead of building login from scratch. If you must build it, always hash passwords, validate on the server, and never expose sensitive data in responses."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "A user reports they can't log in to your task manager. You check the login endpoint and find the password is being compared in plain text, and the error message says 'Incorrect password for user john@example.com'. What's your first priority?",
+        "choices": [
+          { "id": "a", "text": "Just fix the error message to be less specific", "nextNode": "surface-fix", "score": 1 },
+          { "id": "b", "text": "Fix the plain-text password comparison first, then address the error message", "nextNode": "fix-hashing", "score": 4 },
+          { "id": "c", "text": "Rewrite the entire auth system from scratch", "nextNode": "overhaul", "score": 1 }
+        ]
+      },
+      "surface-fix": {
+        "narrative": "You change the error to 'Invalid credentials' — better, but passwords are still stored and compared in plain text. A database leak would expose every user's password. Two months later, your database is breached and every user's plain-text password is leaked.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Plain-text passwords are a critical security vulnerability. A vague error message doesn't protect against database breaches — hashing does. Always prioritize the security fix over cosmetic changes.",
+        "choices": []
+      },
+      "fix-hashing": {
+        "narrative": "Good call. You implement bcrypt hashing and update the error message to a generic 'Invalid email or password'. Now you need to handle existing plain-text passwords in the database. What's your approach?",
+        "choices": [
+          { "id": "b1", "text": "Write a migration that hashes all existing passwords, then update the login to use bcrypt.compare", "nextNode": "migration-done", "score": 3 },
+          { "id": "b2", "text": "Force all users to reset their passwords on next login", "nextNode": "forced-reset", "score": 2 }
+        ]
+      },
+      "overhaul": {
+        "narrative": "Rewriting from scratch is risky and slow. Users still can't log in. Your team lead asks why a login bug fix is turning into a two-week project. You scope it down to just fix the critical issues first.",
+        "choices": [
+          { "id": "c1", "text": "Fix hashing and error messages, plan the bigger rewrite for later", "nextNode": "fix-hashing", "score": 3 }
+        ]
+      },
+      "migration-done": {
+        "narrative": "You write a migration script that hashes all existing passwords with bcrypt, update the login endpoint to use bcrypt.compare, and deploy. Everything works and users can log in securely.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Excellent. You prioritized the security fix, handled legacy data with a migration, and used generic error messages. This is how production auth bugs should be handled.",
+        "choices": []
+      },
+      "forced-reset": {
+        "narrative": "Users are annoyed by the forced reset, but passwords are now properly hashed going forward. Some users abandon the app due to the inconvenience.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Forced resets work but hurt user experience. A background migration that hashes existing passwords is smoother — users never notice the change.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["bcrypt", "hashing"]
+  }
+}

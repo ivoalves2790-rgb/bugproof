@@ -1,0 +1,16 @@
+{
+  "slug": "why-test",
+  "title": "¿Por qué testear?",
+  "description": "Qué son los tests, por qué importan y cómo pensar sobre el testing",
+  "order": 1,
+  "courseSlug": "testing",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-are-tests", "title": "¿Qué son los tests?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "why-tests-matter", "title": "Por qué importan los tests", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "manual-vs-automated", "title": "Testing manual vs automatizado", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "testing-pyramid", "title": "La pirámide de testing", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "without-tests", "title": "Qué pasa sin tests", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "test-driven-thinking", "title": "Pensamiento orientado a tests", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

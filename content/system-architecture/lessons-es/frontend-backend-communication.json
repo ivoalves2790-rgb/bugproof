@@ -1,0 +1,58 @@
+{
+  "slug": "frontend-backend-communication",
+  "title": "Cómo el Frontend se Comunica con el Backend",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "frontend-backend",
+  "courseSlug": "system-architecture",
+  "intro": "Un desarrollador está intentando enviar datos desde su frontend en React a su backend en Express, pero la petición falla. El backend nunca recibe los datos. El error está en cómo configuró la petición fetch.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Comunicación Frontend-Backend = Pasar Notas",
+      "body": "El frontend y el backend son como dos personas en habitaciones diferentes pasándose notas. Necesitan ponerse de acuerdo en: **el idioma** (JSON), **el formato** (dónde poner el mensaje), y **el método de entrega** (método HTTP como GET o POST). Si cualquiera de estos está mal, el mensaje no llega."
+    },
+    {
+      "type": "text",
+      "title": "Cómo Funciona fetch()",
+      "body": "El frontend usa `fetch()` para hablar con el backend:\n\n1. **URL** -- a dónde enviar la petición (`/api/users`)\n2. **Método** -- qué tipo de petición (GET, POST, PUT, DELETE)\n3. **Encabezados** -- metadatos como `Content-Type: application/json`\n4. **Cuerpo** -- los datos que estás enviando (debe ser una cadena JSON)\n\nSi olvidas establecer el encabezado Content-Type u olvidas convertir el cuerpo a cadena, el backend no entenderá tu mensaje."
+    },
+    {
+      "type": "code_example",
+      "title": "Una Petición POST con fetch() Correcta",
+      "language": "javascript",
+      "code": "const response = await fetch('/api/users', {\n  method: 'POST',\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ name: 'Alice', email: 'alice@example.com' })\n});",
+      "annotation": "Tres cosas son esenciales: el método debe ser POST, el encabezado Content-Type le dice al servidor que espere JSON, y el cuerpo debe ser una cadena (JSON.stringify convierte un objeto en una cadena JSON)."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El frontend se comunica con el backend usando fetch() o clientes HTTP similares. Al enviar datos, siempre establece el encabezado Content-Type a 'application/json' y convierte tus datos a cadena con JSON.stringify()."
+    }
+  ],
+  "exercise": {
+    "language": "javascript",
+    "code": [
+      { "line": 1, "text": "async function createUser(name, email) {", "isBuggy": false },
+      { "line": 2, "text": "  const response = await fetch('/api/users', {", "isBuggy": false },
+      { "line": 3, "text": "    method: 'POST',", "isBuggy": false },
+      { "line": 4, "text": "    headers: {", "isBuggy": false },
+      { "line": 5, "text": "      'Content-Type': 'application/json'", "isBuggy": false },
+      { "line": 6, "text": "    },", "isBuggy": false },
+      { "line": 7, "text": "    body: { name: name, email: email }", "isBuggy": true },
+      { "line": 8, "text": "  });", "isBuggy": false },
+      { "line": 9, "text": "  return response.json();", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 7,
+    "prompt": "El backend recibe un cuerpo vacío sin datos. El desarrollador estableció el encabezado Content-Type correctamente y usó el método POST, pero los datos no llegan. El problema está en la línea que establece el cuerpo de la petición. Encuentra el error.",
+    "fixes": [
+      { "id": "a", "text": "body: JSON.stringify({ name: name, email: email })", "isCorrect": true },
+      { "id": "b", "text": "body: `name=${name}&email=${email}`", "isCorrect": false },
+      { "id": "c", "text": "data: { name: name, email: email }", "isCorrect": false },
+      { "id": "d", "text": "body: new FormData({ name, email })", "isCorrect": false }
+    ],
+    "explanation": "La API fetch() requiere que el cuerpo sea una cadena, no un objeto JavaScript. Cuando pasas un objeto simple, se convierte a '[object Object]' -- que es inútil. Debes usar JSON.stringify() para convertir el objeto en una cadena JSON correcta como '{\"name\":\"Alice\",\"email\":\"alice@example.com\"}'. Este es uno de los errores más comunes al trabajar por primera vez con fetch().",
+    "glossaryTerms": ["fetch", "json-stringify", "content-type", "http-post"]
+  }
+}

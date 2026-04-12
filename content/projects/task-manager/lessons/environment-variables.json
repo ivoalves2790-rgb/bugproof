@@ -1,0 +1,69 @@
+{
+  "slug": "environment-variables",
+  "title": "Environment Variables",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Environment variables store secrets and configuration that change between development and production. Get them wrong and your app leaks API keys or connects to the wrong database.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "What Are Environment Variables?",
+      "body": "Environment variables are key-value pairs that configure your app without hardcoding values. DATABASE_URL might point to localhost in development and your production database in production. API_KEY stays secret because it's never in your code — it's set in the deployment platform."
+    },
+    {
+      "type": "code_example",
+      "title": "Env Vars in Practice",
+      "language": "text",
+      "code": "# .env.local (development - never committed)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Production (set in Vercel dashboard)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (committed - shows what vars are needed)\nDATABASE_URL=\nAPI_KEY=",
+      "annotation": "Keep a .env.example file so new developers know which variables to set up, without exposing the actual values."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Never commit .env files with real secrets. Add .env to .gitignore, use .env.example for documentation, and set production values in your deployment platform's dashboard."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Add .env files to .gitignore so secrets never end up in your Git history",
+        "isGoodPractice": true,
+        "explanation": "Once a secret is in Git history, it's extremely hard to remove. Even if you delete the file, the secret remains in older commits. Prevent this by adding .env to .gitignore from day one."
+      },
+      {
+        "id": "c2",
+        "content": "Prefix client-side environment variables with NEXT_PUBLIC_ so they're available in the browser",
+        "isGoodPractice": true,
+        "explanation": "Next.js (and similar frameworks) only expose env vars prefixed with NEXT_PUBLIC_ to the browser. This prevents accidental leakage of server-side secrets to the client."
+      },
+      {
+        "id": "c3",
+        "content": "Store your database password directly in the code as a fallback in case the env var isn't set",
+        "isGoodPractice": false,
+        "explanation": "Hardcoded fallback credentials are a security risk and get committed to version control. If an env var is missing, the app should fail with a clear error, not fall back to hardcoded secrets."
+      },
+      {
+        "id": "c4",
+        "content": "Use different environment variable values for development, staging, and production",
+        "isGoodPractice": true,
+        "explanation": "Each environment should have its own database, API keys, and configuration. This prevents development work from accidentally affecting production data."
+      },
+      {
+        "id": "c5",
+        "content": "Share your .env file in Slack so new team members can get set up quickly",
+        "isGoodPractice": false,
+        "explanation": "Slack messages persist and can be searched. Use a secure secrets manager or have each developer generate their own credentials. Share .env.example instead to show which vars are needed."
+      },
+      {
+        "id": "c6",
+        "content": "Validate that all required environment variables are present when the app starts up",
+        "isGoodPractice": true,
+        "explanation": "Fail fast and loud. If DATABASE_URL is missing, crash immediately with a clear message rather than failing silently later when a user tries to save a task."
+      }
+    ],
+    "glossaryTerms": ["env-var", "gitignore"]
+  }
+}

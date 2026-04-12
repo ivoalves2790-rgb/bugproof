@@ -1,0 +1,68 @@
+{
+  "slug": "commit-messages",
+  "title": "Escribiendo buenos mensajes de commit",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Los mensajes de commit son notas para tu yo del futuro (y tus compañeros de equipo). Un buen mensaje explica QUÉ cambió y POR QUÉ. Desliza a la derecha para mensajes de commit BUENOS y a la izquierda para MALOS.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Mensajes de commit = Etiquetas en cajas de mudanza",
+      "body": "Imagina que te estás mudando a un nuevo departamento. Podrías simplemente cerrar las cajas con cinta y esperar lo mejor, o podrías etiquetar cada una: \"Cocina -- platos y tazones\" o \"Dormitorio -- ropa de invierno.\" Los mensajes de commit son esas etiquetas. Tu yo del futuro (o tu compañero de equipo) te lo agradecerá cuando necesite encontrar algo."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué hace un buen mensaje?",
+      "body": "Un buen mensaje de commit responde: **¿qué cambió y por qué?** Mantenlo corto (menos de 50 caracteres en la primera línea), comienza con un verbo y sé específico. La convención es usar el **modo imperativo** -- escríbelo como un comando.\n\n- **Bueno:** \"Fix login button not responding on mobile\"\n- **Malo:** \"fixed stuff\" o \"WIP\" o \"asdfjkl\""
+    },
+    {
+      "type": "code_example",
+      "title": "Ejemplos buenos vs malos",
+      "language": "bash",
+      "code": "# Good messages:\ngit commit -m \"Add email validation to signup form\"\ngit commit -m \"Fix crash when user uploads empty file\"\ngit commit -m \"Remove deprecated payment API calls\"\n\n# Bad messages:\ngit commit -m \"fix stuff\"\ngit commit -m \"WIP\"\ngit commit -m \"changes\"",
+      "annotation": "Observa que los buenos mensajes comienzan con un verbo (Add, Fix, Remove) y describen un cambio específico."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Escribe mensajes de commit como una nota para tu yo del futuro -- comienza con un verbo, sé específico y explica qué cambió en menos de 50 caracteres."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "git commit -m \"Fix login button not responding on mobile Safari\"",
+        "isGoodPractice": true,
+        "explanation": "Este es un excelente mensaje de commit. Dice exactamente qué se arregló (botón de login), cuál era el problema (no respondía) y dónde ocurría (mobile Safari). Cualquiera que lea el registro lo entenderá de inmediato."
+      },
+      {
+        "id": "card-2",
+        "content": "git commit -m \"fix stuff\"",
+        "isGoodPractice": false,
+        "explanation": "¿Qué cosas? Este mensaje es inútil tres días después. Cuando estés buscando en el historial para encontrar cuándo se introdujo un error, 'fix stuff' no te dice nada. Siempre describe qué cambiaste y por qué."
+      },
+      {
+        "id": "card-3",
+        "content": "git commit -m \"WIP\"",
+        "isGoodPractice": false,
+        "explanation": "WIP (Work In Progress / Trabajo en progreso) como mensaje permanente de commit es un problema. No le dice a nadie qué cambió. Si necesitas guardar trabajo en progreso, al menos di en qué estabas trabajando: 'WIP: Add user profile page layout'."
+      },
+      {
+        "id": "card-4",
+        "content": "git commit -m \"Add email validation to signup form\"",
+        "isGoodPractice": true,
+        "explanation": "Corto, claro y descriptivo. Comienza con un verbo (Add), dice qué se agregó (validación de email) y dónde (formulario de registro). Este es el estándar de oro para mensajes de commit."
+      },
+      {
+        "id": "card-5",
+        "content": "git commit -m \"asdfjkl\"",
+        "isGoodPractice": false,
+        "explanation": "Golpear el teclado nunca es un mensaje de commit. Cada commit es una parte permanente del historial de tu proyecto. Trátalo como una nota para tu yo del futuro que ha olvidado todo sobre el día de hoy."
+      }
+    ],
+    "glossaryTerms": ["commit", "commit-message"]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "deployment",
+  "title": "Deployment",
+  "description": "Ship your app to the world. Learn about environments, deployment pipelines, and monitoring.",
+  "order": 8,
+  "phase": "deployment",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "what-is-deployment", "title": "What Is Deployment?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "environment-variables", "title": "Environment Variables", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "deploying-to-vercel", "title": "Deploying to Vercel", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "monitoring-basics", "title": "Monitoring Basics", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "going-live-checklist", "title": "Going Live Checklist", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["deployment-devops"]
+}

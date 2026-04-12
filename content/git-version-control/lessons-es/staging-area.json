@@ -1,0 +1,52 @@
+{
+  "slug": "staging-area",
+  "title": "El área de preparación",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "basics",
+  "courseSlug": "git-version-control",
+  "intro": "Un desarrollador acaba de terminar de construir una función de inicio de sesión, pero también tiene algunos archivos de depuración no relacionados por ahí. Quiere hacer commit SOLO de los archivos de inicio de sesión, pero su comando prepara todo. Encuentra el error.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El área de preparación = Tu carrito de compras",
+      "body": "Imagina que estás en una tienda en línea. Navegas por ahí, agregando artículos a tu carrito. Pero no compras todo en la tienda -- solo pagas por los artículos que realmente quieres. El **área de preparación** de Git funciona de la misma manera. Eliges exactamente qué cambios van en tu próximo commit."
+    },
+    {
+      "type": "text",
+      "title": "¿Por qué no simplemente hacer commit de todo?",
+      "body": "A veces has cambiado 5 archivos, pero solo 3 de ellos están relacionados con la funcionalidad en la que estás trabajando. Los otros 2 son código de depuración, notas o experimentos. El área de preparación te permite **hacer commit solo de lo que tiene sentido junto** y dejar el resto para después."
+    },
+    {
+      "type": "code_example",
+      "title": "Diferentes formas de preparar archivos",
+      "language": "bash",
+      "code": "git add .                  # Stage ALL changed files\ngit add style.css          # Stage one specific file\ngit add src/login/*        # Stage all files in a folder\ngit add *.js               # Stage all JavaScript files",
+      "annotation": "`git add .` es conveniente pero peligroso cuando tienes archivos que no quieres incluir en el commit. Sé específico cuando sea importante."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El área de preparación te permite elegir exactamente qué cambios van en cada commit -- usa rutas específicas con `git add` en lugar de agregar todo a ciegas."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Stage only the login feature files", "isBuggy": false },
+      { "line": 2, "text": "git add .", "isBuggy": true },
+      { "line": 3, "text": "git commit -m \"Add user login feature\"", "isBuggy": false },
+      { "line": 4, "text": "git push origin main", "isBuggy": false }
+    ],
+    "correctBuggyLine": 2,
+    "prompt": "El desarrollador solo quiere hacer commit de los archivos de inicio de sesión, no de los archivos de depuración. Toca la línea que causa el problema.",
+    "fixes": [
+      { "id": "a", "text": "git add src/login/*", "isCorrect": true },
+      { "id": "b", "text": "git add --all", "isCorrect": false },
+      { "id": "c", "text": "git stage src/login/", "isCorrect": false },
+      { "id": "d", "text": "git add -f .", "isCorrect": false }
+    ],
+    "explanation": "El comando 'git add .' prepara TODOS los archivos modificados en el directorio actual y subdirectorios -- incluyendo esos archivos de depuración. Cuando solo quieres archivos específicos, usa una ruta como 'git add src/login/*' para preparar solo los archivos que necesitas. Piénsalo como poner solo ciertos artículos en tu carrito de compras en lugar de meter todo el estante.",
+    "glossaryTerms": ["staging-area", "git-add", "commit"]
+  }
+}

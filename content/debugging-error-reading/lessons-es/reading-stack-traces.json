@@ -1,0 +1,108 @@
+{
+  "slug": "reading-stack-traces",
+  "title": "Leyendo trazas de pila",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Tu aplicación acaba de fallar y la consola muestra un muro de texto aterrador llamado 'traza de pila.' No entres en pánico -- cada línea en esa traza es una migaja de pan que te lleva al error. Aprendamos a leerla.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Una traza de pila es como un rastro de migas de pan",
+      "body": "Imagina que caminas por cinco habitaciones y tropiezas en la última. Una traza de pila es como una lista de cada habitación por la que pasaste, en orden, con la habitación donde tropezaste listada primero. Muestra la cadena de llamadas a funciones que llevaron al fallo."
+    },
+    {
+      "type": "text",
+      "title": "Cómo leer una traza de pila",
+      "body": "Una traza de pila se lee **de arriba a abajo**:\n\n1. La **línea superior** es donde el error realmente ocurrió -- comienza aquí\n2. Cada línea debajo muestra qué función llamó a la de arriba\n3. **Salta las líneas del framework** (como react-dom o internos de node) -- enfócate en TUS archivos\n\nLa línea superior de tu propio código es casi siempre donde está el error."
+    },
+    {
+      "type": "code_example",
+      "title": "Una traza de pila real",
+      "language": "text",
+      "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- YOUR code, start here\n    at renderWithHooks (react-dom.js:14985)  <-- framework, skip\n    at App (src/App.jsx:22)               <-- YOUR code, called UserCard",
+      "annotation": "Comienza en la línea superior que menciona TUS archivos (UserCard.jsx:8). Ahí es donde ocurrió el fallo. App.jsx:22 es desde donde se llamó a UserCard."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Lee las trazas de pila desde arriba. La primera línea con el nombre de tu propio archivo es donde está el error. Salta las líneas de frameworks y librerías -- el problema casi nunca está en su código."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu aplicación React falla con este error:\n\nTypeError: Cannot read properties of null (reading 'map')\n    at ProductList (src/components/ProductList.jsx:12)\n    at renderWithHooks (react-dom.development.js:14985)\n    at mountIndeterminateComponent (react-dom.development.js:17811)\n    at App (src/App.jsx:8)\n\n¿Dónde miras primero?",
+        "choices": [
+          { "id": "a", "text": "La parte superior de la traza de pila: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 10 },
+          { "id": "b", "text": "La parte inferior de la traza de pila: App.jsx línea 8", "nextNode": "wrong-bottom", "score": 3 },
+          { "id": "c", "text": "Las líneas de react-dom -- el error probablemente está en React mismo", "nextNode": "wrong-framework", "score": 1 }
+        ]
+      },
+      "correct-top": {
+        "narrative": "¡Correcto! La primera línea de tu código en la traza de pila es generalmente donde está el problema. Abres ProductList.jsx y ves la línea 12:\n\nconst items = products.map(p => <li>{p.name}</li>);\n\nEl error dice que 'null' no tiene '.map'. ¿Qué te dice esto?",
+        "choices": [
+          { "id": "a", "text": "La variable 'products' es null cuando se ejecuta esta línea", "nextNode": "found-null", "score": 10 },
+          { "id": "b", "text": "La función .map() está rota", "nextNode": "wrong-map", "score": 2 },
+          { "id": "c", "text": "El elemento <li> está causando el fallo", "nextNode": "wrong-li", "score": 1 }
+        ]
+      },
+      "wrong-bottom": {
+        "narrative": "Las trazas de pila se leen de arriba a abajo, donde la parte superior es la llamada más reciente -- el lugar donde el error realmente ocurrió. La parte inferior es donde la cadena de llamadas a funciones comenzó. Comienza arriba y busca TUS archivos (no código del framework).",
+        "choices": [
+          { "id": "a", "text": "OK, déjame mirar arriba: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 5 }
+        ]
+      },
+      "wrong-framework": {
+        "narrative": "Las líneas de node_modules o archivos del framework como react-dom casi nunca son la fuente de tu error. Aparecen en la traza porque tu código llamó al framework, que luego encontró el error. Salta las líneas del framework y busca TUS archivos fuente.",
+        "choices": [
+          { "id": "a", "text": "OK, déjame enfocarme en mis propios archivos en la traza", "nextNode": "correct-top", "score": 5 }
+        ]
+      },
+      "found-null": {
+        "narrative": "¡Exacto! El mensaje de error 'Cannot read properties of null (reading 'map')' te está diciendo que llamaste .map() en algo que es null. La variable 'products' es null. Ahora, ¿cómo lo arreglas?",
+        "choices": [
+          { "id": "a", "text": "Agregar una verificación: si products es null, mostrar un estado de carga o lista vacía", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Inicializar products como un array vacío por defecto", "nextNode": "end-okay", "score": 7 },
+          { "id": "c", "text": "Envolverlo en un bloque try-catch", "nextNode": "end-trycatch", "score": 4 }
+        ]
+      },
+      "wrong-map": {
+        "narrative": "La función .map() funciona bien -- es un método integrado de arrays de JavaScript. El problema es EN QUÉ estás llamando .map(). El error dice que estás llamando .map() en null, lo que significa que la variable antes de .map() tiene un valor null.",
+        "choices": [
+          { "id": "a", "text": "Entonces 'products' debe ser null cuando se ejecuta esta línea", "nextNode": "found-null", "score": 5 }
+        ]
+      },
+      "wrong-li": {
+        "narrative": "Los elementos JSX dentro de .map() no son el problema. El fallo ocurre antes de que el callback de .map() siquiera se ejecute. Mira el mensaje de error de nuevo: dice que 'null' no tiene la propiedad 'map'. Lo que estás llamando .map() es null.",
+        "choices": [
+          { "id": "a", "text": "Entonces la variable products es null", "nextNode": "found-null", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Agregas una verificación de guardia:\n\nif (!products) return <p>Loading...</p>;\n\nAhora el componente muestra un mensaje de carga mientras products es null (como durante la carga inicial de la API), y renderiza la lista una vez que llegan los datos. El fallo desapareció.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Gran depuración! Leíste la traza de pila de arriba a abajo, te enfocaste en tus propios archivos (no en código del framework), descifraste el mensaje de error para entender que 'products' era null y agregaste una verificación de guardia adecuada. Este patrón -- verificar null antes de usar datos -- es algo que harás constantemente en aplicaciones reales."
+      },
+      "end-okay": {
+        "narrative": "Establecer un array vacío por defecto (const items = (products || []).map(...)) previene el fallo. Pero podría ocultar el hecho de que tus datos aún no se han cargado. Un estado de carga daría mejor retroalimentación a los usuarios.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 15,
+        "feedback": "Identificaste correctamente la variable null y previniste el fallo. El array vacío por defecto funciona, pero un estado de carga sería aún mejor para la experiencia del usuario. Aun así, buena depuración -- leíste la traza de pila, encontraste el archivo y línea correctos y entendiste el problema de null."
+      },
+      "end-trycatch": {
+        "narrative": "Un try-catch oculta el error pero no lo arregla realmente. El componente aún no mostrará ningún producto. Es mejor manejar el caso null explícitamente con un estado de carga o valor predeterminado.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "Encontraste el problema correcto, pero try-catch es generalmente una curita. Silencia el error sin realmente manejar el estado null. La próxima vez, agrega una verificación adecuada para null y muestra un respaldo significativo (como un indicador de carga) en lugar de simplemente capturar e ignorar el error."
+      }
+    },
+    "glossaryTerms": ["stack-trace", "null", "call-stack"]
+  }
+}

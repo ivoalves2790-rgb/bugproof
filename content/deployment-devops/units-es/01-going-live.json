@@ -1,0 +1,16 @@
+{
+  "slug": "going-live",
+  "title": "Salir en Vivo",
+  "description": "Qué significa el despliegue, plataformas de hosting, y tu primer despliegue",
+  "order": 1,
+  "courseSlug": "deployment-devops",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-is-deployment", "title": "¿Qué es el Despliegue?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "hosting-platforms", "title": "Plataformas de Hosting", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "the-deploy-process", "title": "El Proceso de Despliegue", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "build-vs-dev", "title": "Modo Build vs Modo Dev", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "production-builds", "title": "¿Qué es un Build de Producción?", "type": "incident_response", "order": 5, "difficulty": 2 },
+    { "slug": "first-deploy", "title": "Tu Primer Despliegue", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

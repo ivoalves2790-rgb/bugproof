@@ -1,0 +1,55 @@
+{
+  "slug": "finding-line-numbers",
+  "title": "Encontrando la línea correcta",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "Un script de Python está procesando una lista de calificaciones de estudiantes, pero se cae con: IndexError: list index out of range. El error apunta a esta función. ¿Puedes encontrar qué línea se sale de los límites?",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Los números de línea son como números de página en un libro",
+      "body": "Cuando alguien dice 'mira la página 47, párrafo 3,' puedes ir directamente allí. Los mensajes de error funcionan de la misma manera. Te dan un nombre de archivo y número de línea para que puedas saltar directamente al problema en lugar de leer todo tu código fuente."
+    },
+    {
+      "type": "text",
+      "title": "Cómo leer el número de línea",
+      "body": "Los mensajes de error muestran la ubicación así: `File \"app.py\", line 12`. Eso significa que el fallo ocurrió en la **línea 12** del archivo llamado **app.py**. Tu editor de código muestra los números de línea en el lado izquierdo. Salta a esa línea -- el error está allí o muy cerca."
+    },
+    {
+      "type": "code_example",
+      "title": "Un IndexError en acción",
+      "language": "python",
+      "code": "colors = [\"red\", \"blue\"]\nprint(colors[2])  # IndexError: list index out of range",
+      "annotation": "La lista tiene 2 elementos en el índice 0 y 1. Pedir el índice 2 falla porque no existe. Python cuenta desde 0, así que una lista con 2 elementos tiene índices 0 y 1."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Siempre mira primero el nombre del archivo y el número de línea en el mensaje de error. Te dice exactamente dónde buscar. El error está en esa línea o en los datos que se le pasan."
+    }
+  ],
+  "exercise": {
+    "language": "python",
+    "code": [
+      { "line": 1, "text": "def get_top_three(grades):", "isBuggy": false },
+      { "line": 2, "text": "    grades.sort(reverse=True)", "isBuggy": false },
+      { "line": 3, "text": "    return [grades[0], grades[1], grades[2]]", "isBuggy": true },
+      { "line": 4, "text": "", "isBuggy": false },
+      { "line": 5, "text": "scores = [95, 87]", "isBuggy": false },
+      { "line": 6, "text": "top = get_top_three(scores)", "isBuggy": false },
+      { "line": 7, "text": "print(top)", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "El error es IndexError: list index out of range. La lista 'scores' solo tiene 2 elementos pero la función intenta acceder a 3. Toca la línea con el error.",
+    "fixes": [
+      { "id": "a", "text": "return grades[:3]", "isCorrect": true },
+      { "id": "b", "text": "return [grades[1], grades[2], grades[3]]", "isCorrect": false },
+      { "id": "c", "text": "return grades[0:2]", "isCorrect": false },
+      { "id": "d", "text": "return grades.slice(0, 3)", "isCorrect": false }
+    ],
+    "explanation": "Cuando la lista solo tiene 2 elementos (índice 0 y 1), acceder a grades[2] falla con IndexError porque el índice 2 no existe. La solución 'grades[:3]' usa la sintaxis de slice de Python, que devuelve de forma segura hasta 3 elementos sin fallar si hay menos. El slicing nunca lanza un IndexError -- simplemente devuelve lo que hay disponible. La opción C (grades[0:2]) solo devolvería 2 elementos, y la opción D usa sintaxis de JavaScript que no existe en Python.",
+    "glossaryTerms": ["IndexError", "list-index", "slicing"]
+  }
+}

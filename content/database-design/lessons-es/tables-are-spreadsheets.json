@@ -1,0 +1,68 @@
+{
+  "slug": "tables-are-spreadsheets",
+  "title": "Las Tablas Son Como Hojas de Cálculo",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "Si alguna vez has usado una hoja de cálculo, ya entiendes los conceptos básicos de las tablas de base de datos. Filas, columnas, celdas -- los conceptos son los mismos. Pero las bases de datos agregan reglas importantes que las hojas de cálculo no tienen. Desliza a la DERECHA si la afirmación es verdadera, a la IZQUIERDA si es falsa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Una Tabla = Una Hoja de Cálculo Muy Estricta",
+      "body": "Una tabla de base de datos es como una hoja de cálculo con reglas estrictas. En Google Sheets, puedes poner cualquier cosa en cualquier lugar -- números en una columna de nombre, texto en una columna de edad. Una tabla de base de datos dice: 'La columna nombre SOLO acepta texto. La columna edad SOLO acepta números. Y cada fila DEBE tener un ID.' Estas reglas previenen datos desordenados e inconsistentes."
+    },
+    {
+      "type": "text",
+      "title": "Tablas, Filas y Columnas",
+      "body": "Una tabla de base de datos tiene tres partes:\n\n1. **Columnas** (también llamadas campos) -- definen qué TIPO de datos se almacena (nombre, email, edad)\n2. **Filas** (también llamadas registros) -- cada fila es un elemento (un usuario, un producto, un pedido)\n3. **Celdas** -- la intersección de una fila y una columna (el email del usuario #5)\n\nUna tabla 'users' podría tener columnas para id, name, email y created_at, con una fila por usuario."
+    },
+    {
+      "type": "code_example",
+      "title": "Una Tabla Visualizada",
+      "language": "text",
+      "code": "users table:\n+----+----------+---------------------+------------+\n| id | name     | email               | created_at |\n+----+----------+---------------------+------------+\n|  1 | Alice    | alice@example.com   | 2024-01-15 |\n|  2 | Bob      | bob@example.com     | 2024-02-20 |\n|  3 | Charlie  | charlie@example.com | 2024-03-10 |\n+----+----------+---------------------+------------+",
+      "annotation": "Cada columna tiene un nombre y un tipo de datos. Cada fila es un usuario. La columna 'id' identifica de manera única cada fila. Esto se ve igual que una hoja de cálculo, pero con reglas aplicadas sobre qué datos pueden ir en cada columna."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Una tabla de base de datos es como una hoja de cálculo estricta: las columnas definen el tipo de datos, las filas contienen registros individuales, y las reglas aseguran que los datos se mantengan limpios y consistentes."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Cada fila en una tabla de base de datos representa un registro (como un usuario o un producto).",
+        "isGoodPractice": true,
+        "explanation": "Igual que una hoja de cálculo donde cada fila es una entrada, cada fila de base de datos es un registro completo. Una tabla users tiene una fila por usuario, una tabla products tiene una fila por producto, y así sucesivamente."
+      },
+      {
+        "id": "card-2",
+        "content": "En una tabla de base de datos, puedes poner cualquier tipo de datos en cualquier columna, igual que en una hoja de cálculo.",
+        "isGoodPractice": false,
+        "explanation": "A diferencia de las hojas de cálculo, las columnas de base de datos imponen tipos de datos. Si una columna está definida como INTEGER, no puedes poner texto en ella. Si es VARCHAR (texto), no puedes poner una fecha. Esta rigurosidad previene problemas de calidad de datos que son comunes en hojas de cálculo."
+      },
+      {
+        "id": "card-3",
+        "content": "Una base de datos puede tener muchas tablas que están relacionadas entre sí.",
+        "isGoodPractice": true,
+        "explanation": "La mayoría de las bases de datos tienen múltiples tablas. Una base de datos de comercio electrónico podría tener tablas de users, products, orders y reviews. Estas tablas pueden referenciarse entre sí -- por ejemplo, una fila de pedido apunta a qué usuario lo hizo y qué productos contiene."
+      },
+      {
+        "id": "card-4",
+        "content": "Deberías poner todos los datos de tu app en una sola tabla grande para mantener las cosas simples.",
+        "isGoodPractice": false,
+        "explanation": "Poner todo en una tabla crea un desorden. Imagina una tabla con nombre de usuario, email de usuario, fecha de pedido, nombre de producto, precio de producto todo en una fila -- repetirías el nombre del usuario por cada pedido que haga. Tablas separadas para users, orders y products evitan esta repetición y mantienen los datos organizados."
+      },
+      {
+        "id": "card-5",
+        "content": "El término 'esquema' se refiere a la estructura de tu base de datos -- qué tablas existen y qué columnas tienen.",
+        "isGoodPractice": true,
+        "explanation": "Un esquema es como un plano para tu base de datos. Define todas las tablas, sus columnas, tipos de datos y reglas. Cuando alguien pregunta '¿Cuál es el esquema?' quieren conocer la estructura -- no los datos reales, solo la forma de los contenedores que almacenan los datos."
+      }
+    ],
+    "glossaryTerms": ["table", "row", "column", "schema"]
+  }
+}

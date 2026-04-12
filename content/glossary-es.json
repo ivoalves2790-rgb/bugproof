@@ -1,0 +1,394 @@
+[
+  {
+    "id": "commit",
+    "term": "Confirmacion (Commit)",
+    "definition": "Una captura de tu codigo en un momento especifico. Piensa en ello como un punto de guardado en un videojuego: siempre puedes volver a el.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["staging-area", "branch", "repository"],
+    "example": "Despues de terminar una funcionalidad, ejecuta `git commit -m \"Add login page\"` para guardar esa version."
+  },
+  {
+    "id": "staging-area",
+    "term": "Area de Preparacion (Staging Area)",
+    "definition": "Una zona intermedia donde eliges que cambios incluir en tu proximo commit. Como poner articulos en un carrito de compras antes de pagar.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "working-directory"],
+    "example": "`git add login.js` coloca solo ese archivo en el area de preparacion."
+  },
+  {
+    "id": "branch",
+    "term": "Rama (Branch)",
+    "definition": "Una linea de desarrollo separada. Como crear una copia de tu proyecto para probar algo nuevo sin afectar el original.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "commit", "main-branch"],
+    "example": "`git checkout -b feature/login` crea una nueva rama llamada 'feature/login'."
+  },
+  {
+    "id": "merge",
+    "term": "Fusion (Merge)",
+    "definition": "Combinar los cambios de una rama en otra. Como tomar tu trabajo experimental y agregarlo de vuelta al proyecto principal.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["branch", "merge-conflict", "pull-request"],
+    "example": "`git merge feature/login` trae los cambios de la rama login a tu rama actual."
+  },
+  {
+    "id": "merge-conflict",
+    "term": "Conflicto de Fusion (Merge Conflict)",
+    "definition": "Cuando dos personas modificaron las mismas lineas de codigo de forma diferente. Git no puede decidir cual version conservar, asi que te pide que elijas.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "branch"],
+    "example": "Git muestra los marcadores <<<<<<< y >>>>>>> alrededor del codigo en conflicto. Tu eliminas los marcadores y conservas la version correcta."
+  },
+  {
+    "id": "repository",
+    "term": "Repositorio (Repository/Repo)",
+    "definition": "Una carpeta que Git esta rastreando. Contiene tu codigo y todo su historial de versiones.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "branch", "remote"],
+    "example": "Tu carpeta de proyecto se convierte en un repositorio cuando ejecutas `git init` dentro de ella."
+  },
+  {
+    "id": "remote",
+    "term": "Remoto (Remote)",
+    "definition": "Una version de tu repositorio almacenada en internet (como GitHub). Te permite compartir codigo y respaldarlo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["push", "pull", "repository"],
+    "example": "`git push origin main` envia tu codigo al repositorio remoto en GitHub."
+  },
+  {
+    "id": "pull-request",
+    "term": "Solicitud de Incorporacion (Pull Request/PR)",
+    "definition": "Una solicitud para fusionar tus cambios en el codigo base principal. Otros desarrolladores pueden revisar tu codigo antes de que se fusione.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["merge", "branch", "code-review"],
+    "example": "En GitHub, creas un PR para pedir a tu equipo que revise y fusione tu rama de funcionalidad."
+  },
+  {
+    "id": "stack-trace",
+    "term": "Traza de Pila (Stack Trace)",
+    "definition": "Una lista de llamadas a funciones que llevaron a un error, mostrada de abajo hacia arriba. Te dice DONDE ocurrio el error y COMO llego el codigo ahi.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "exception", "call-stack"],
+    "example": "TypeError: Cannot read property 'name' of undefined\n    at getUser (user.js:15)\n    at handleLogin (auth.js:42)"
+  },
+  {
+    "id": "error-message",
+    "term": "Mensaje de Error (Error Message)",
+    "definition": "Texto que te dice que salio mal en tu codigo. Siempre lee esto PRIMERO antes de intentar arreglar cualquier cosa.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["stack-trace", "exception"],
+    "example": "'TypeError: x is not a function' significa que estas intentando llamar como funcion algo que no lo es."
+  },
+  {
+    "id": "console",
+    "term": "Consola (Console)",
+    "definition": "Una herramienta en tu navegador (o terminal) que muestra mensajes, errores y te permite ejecutar codigo para pruebas. Tu herramienta de depuracion numero 1.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "console-log"],
+    "example": "Presiona F12 en tu navegador, haz clic en la pestana 'Console', y veras los errores que tu codigo produjo."
+  },
+  {
+    "id": "console-log",
+    "term": "console.log()",
+    "definition": "Un comando que imprime un valor en la consola. La tecnica de depuracion mas simple: simplemente imprime cosas para ver que esta pasando.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["console", "debugging"],
+    "example": "`console.log('user:', user)` te mostrara lo que contiene la variable user."
+  },
+  {
+    "id": "xss",
+    "term": "XSS (Cross-Site Scripting)",
+    "definition": "Un ataque donde alguien inyecta codigo malicioso en un sitio web que otros usuarios luego ejecutan. Como si alguien deslizara una nota en un libro que engana al siguiente lector.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["sql-injection", "sanitization"],
+    "example": "Si un campo de comentarios no sanitiza la entrada, un atacante podria escribir `<script>steal(cookies)</script>` y se ejecutaria en los navegadores de otros usuarios."
+  },
+  {
+    "id": "sql-injection",
+    "term": "Inyeccion SQL (SQL Injection)",
+    "definition": "Un ataque donde alguien introduce comandos de base de datos en un campo de entrada para manipular tu base de datos. Como decirle a un mayordomo robot 'dame la llave Y abre la caja fuerte'.",
+    "relatedCourses": ["security-fundamentals", "database-design"],
+    "relatedTerms": ["xss", "parameterized-query"],
+    "example": "Escribir `' OR 1=1 --` en un formulario de inicio de sesion podria eludir la autenticacion si la aplicacion no usa consultas parametrizadas."
+  },
+  {
+    "id": "api-key",
+    "term": "Clave de API (API Key)",
+    "definition": "Una contrasena secreta que identifica tu aplicacion al comunicarse con un servicio externo. NUNCA pongas esto en tu codigo frontend ni lo compartas publicamente.",
+    "relatedCourses": ["security-fundamentals", "deployment-devops"],
+    "relatedTerms": ["environment-variable", "authentication"],
+    "example": "Tu clave de API de Stripe debe ir en un archivo `.env`, nunca en JavaScript que se ejecuta en el navegador."
+  },
+  {
+    "id": "api",
+    "term": "API (Interfaz de Programacion de Aplicaciones)",
+    "definition": "Una forma en que dos piezas de software se comunican entre si. Como un mesero que lleva tu pedido (solicitud) a la cocina (servidor) y trae de vuelta la comida (respuesta).",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["endpoint", "rest-api", "http-request"],
+    "example": "Cuando cargas datos del clima en tu aplicacion, estas llamando a una API del clima que devuelve datos en formato JSON."
+  },
+  {
+    "id": "endpoint",
+    "term": "Punto de Acceso (Endpoint)",
+    "definition": "Una URL especifica en la que una API escucha solicitudes. Cada endpoint hace una sola cosa.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "rest-api", "http-request"],
+    "example": "`GET /api/users` es un endpoint que devuelve una lista de usuarios. `POST /api/users` crea un nuevo usuario."
+  },
+  {
+    "id": "frontend",
+    "term": "Frontend",
+    "definition": "La parte de una aplicacion que los usuarios ven e interactuan. Se ejecuta en el navegador. Construida con HTML, CSS y JavaScript.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["backend", "client-side"],
+    "example": "El formulario de inicio de sesion que ves, los botones que presionas, las animaciones: todo eso es frontend."
+  },
+  {
+    "id": "backend",
+    "term": "Backend",
+    "definition": "La parte de una aplicacion que se ejecuta en el servidor. Maneja datos, logica de negocio y se comunica con la base de datos. Los usuarios nunca ven esto directamente.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["frontend", "server-side", "database"],
+    "example": "Cuando haces clic en 'Iniciar sesion', el backend verifica tu contrasena contra la base de datos y decide si te da acceso."
+  },
+  {
+    "id": "database",
+    "term": "Base de Datos (Database)",
+    "definition": "Una coleccion organizada de datos de la cual tu aplicacion lee y escribe. Como una hoja de calculo gigante que tu codigo puede consultar.",
+    "relatedCourses": ["database-design", "system-architecture"],
+    "relatedTerms": ["schema", "query", "table"],
+    "example": "PostgreSQL, MongoDB y SQLite son bases de datos. Tus cuentas de usuario, publicaciones y configuraciones se almacenan en una."
+  },
+  {
+    "id": "schema",
+    "term": "Esquema (Schema)",
+    "definition": "La estructura de tu base de datos: que tablas existen, que columnas tiene cada una y como se relacionan. Como un plano arquitectonico para tus datos.",
+    "relatedCourses": ["database-design"],
+    "relatedTerms": ["database", "migration", "table"],
+    "example": "Una tabla de usuarios podria tener las columnas: id, email, password_hash, created_at."
+  },
+  {
+    "id": "migration",
+    "term": "Migracion (Migration)",
+    "definition": "Un script que cambia la estructura de tu base de datos (agregar una tabla, renombrar una columna). Como un control de versiones para tu base de datos.",
+    "relatedCourses": ["database-design", "deployment-devops"],
+    "relatedTerms": ["schema", "database"],
+    "example": "Un archivo de migracion podria decir: 'CREATE TABLE posts (id, title, body, user_id, created_at)'."
+  },
+  {
+    "id": "environment-variable",
+    "term": "Variable de Entorno (Environment Variable)",
+    "definition": "Una configuracion almacenada fuera de tu codigo que cambia segun donde se ejecute (desarrollo, staging, produccion). Mantiene los secretos fuera de tu base de codigo.",
+    "relatedCourses": ["deployment-devops", "security-fundamentals"],
+    "relatedTerms": ["api-key", "dotenv"],
+    "example": "DATABASE_URL=postgres://user:pass@host:5432/mydb -- almacenada en un archivo .env, nunca se sube al repositorio git."
+  },
+  {
+    "id": "ci-cd",
+    "term": "CI/CD",
+    "definition": "Integracion Continua / Despliegue Continuo. Procesos automatizados que prueban tu codigo y lo despliegan cuando subes cambios.",
+    "relatedCourses": ["deployment-devops", "testing"],
+    "relatedTerms": ["deployment", "pipeline"],
+    "example": "Cuando subes codigo a GitHub, CI ejecuta tus pruebas automaticamente. Si pasan, CD despliega tu aplicacion a produccion."
+  },
+  {
+    "id": "deployment",
+    "term": "Despliegue (Deployment)",
+    "definition": "El proceso de poner tu aplicacion en internet para que usuarios reales puedan acceder a ella. Pasar de 'funciona en mi maquina' a 'funciona para todos'.",
+    "relatedCourses": ["deployment-devops"],
+    "relatedTerms": ["ci-cd", "hosting", "production"],
+    "example": "Ejecutar `vercel deploy` toma tu aplicacion Next.js y la pone en un servidor con una URL publica."
+  },
+  {
+    "id": "unit-test",
+    "term": "Prueba Unitaria (Unit Test)",
+    "definition": "Una prueba que verifica si una pequena pieza de codigo (una funcion, un componente) funciona correctamente de forma aislada.",
+    "relatedCourses": ["testing"],
+    "relatedTerms": ["integration-test", "e2e-test"],
+    "example": "Probar que tu funcion `calculateTotal(items)` devuelve el numero correcto para una lista dada de articulos."
+  },
+  {
+    "id": "integration-test",
+    "term": "Prueba de Integracion (Integration Test)",
+    "definition": "Una prueba que verifica si multiples piezas de tu aplicacion funcionan correctamente juntas (API + base de datos, frontend + backend).",
+    "relatedCourses": ["testing"],
+    "relatedTerms": ["unit-test", "e2e-test"],
+    "example": "Probar que crear un usuario a traves de la API realmente lo guarda en la base de datos y devuelve la respuesta correcta."
+  },
+  {
+    "id": "n-plus-one",
+    "term": "Problema de N+1 Consultas (N+1 Query Problem)",
+    "definition": "Un error de rendimiento donde tu codigo hace 1 consulta para obtener una lista, y luego N consultas mas para obtener detalles de cada elemento. Deberian ser 1-2 consultas en total.",
+    "relatedCourses": ["performance-scaling", "database-design"],
+    "relatedTerms": ["query", "database", "caching"],
+    "example": "Cargar 100 publicaciones de blog, y luego ejecutar una consulta separada para el autor de cada publicacion = 101 consultas en vez de 2."
+  },
+  {
+    "id": "caching",
+    "term": "Cache (Caching)",
+    "definition": "Almacenar una copia de datos para no tener que obtenerlos o calcularlos de nuevo. Como anotar un numero de telefono en vez de buscarlo cada vez.",
+    "relatedCourses": ["performance-scaling"],
+    "relatedTerms": ["n-plus-one", "cdn"],
+    "example": "Almacenar respuestas de API en memoria durante 5 minutos para que las solicitudes repetidas sean instantaneas en vez de consultar la base de datos."
+  },
+  {
+    "id": "separation-of-concerns",
+    "term": "Separacion de Responsabilidades (Separation of Concerns)",
+    "definition": "Organizar el codigo para que cada archivo o modulo se encargue de una sola cosa. El codigo de la interfaz no deberia contener logica de base de datos, y viceversa.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["refactoring", "architecture"],
+    "example": "Manten tus manejadores de rutas API separados de tus consultas a la base de datos, y ambos separados de tus componentes de interfaz."
+  },
+  {
+    "id": "refactoring",
+    "term": "Refactorizacion (Refactoring)",
+    "definition": "Reestructurar codigo existente sin cambiar lo que hace. Hacerlo mas limpio, rapido o facil de entender.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["separation-of-concerns", "technical-debt"],
+    "example": "Extraer una funcion de 200 lineas en 5 funciones mas pequenas que cada una hace una cosa claramente."
+  },
+  {
+    "id": "prompt-engineering",
+    "term": "Ingenieria de Prompts (Prompt Engineering)",
+    "definition": "La habilidad de escribir instrucciones claras y especificas para obtener mejores resultados de herramientas de IA para programacion. Si entra basura, sale basura.",
+    "relatedCourses": ["ai-assisted-development"],
+    "relatedTerms": ["context-window", "hallucination"],
+    "example": "En vez de 'haz un login', escribe 'Crea una pagina de inicio de sesion en Next.js con formulario de email/contrasena, autenticacion con Supabase, manejo de errores y redireccion a /dashboard al iniciar sesion exitosamente.'"
+  },
+  {
+    "id": "hallucination",
+    "term": "Alucinacion (Hallucination)",
+    "definition": "Cuando la IA genera codigo que parece correcto pero usa APIs, funciones o patrones que en realidad no existen. Siempre verifica la salida de la IA.",
+    "relatedCourses": ["ai-assisted-development"],
+    "relatedTerms": ["prompt-engineering"],
+    "example": "La IA podria sugerir `import { useAuth } from 'next-auth/hooks'` cuando esa ruta de importacion no existe en la libreria."
+  },
+  {
+    "id": "working-directory",
+    "term": "Directorio de Trabajo (Working Directory)",
+    "definition": "La carpeta en la que te encuentras actualmente en la linea de comandos. Los comandos que ejecutas afectan los archivos en este directorio.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["staging-area", "repository"],
+    "example": "`cd my-project` cambia tu directorio de trabajo a la carpeta my-project."
+  },
+  {
+    "id": "http-request",
+    "term": "Solicitud HTTP (HTTP Request)",
+    "definition": "Un mensaje enviado desde un cliente (navegador) a un servidor pidiendo algo. Tiene un metodo (GET, POST, etc.), URL, cabeceras y un cuerpo opcional.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "endpoint", "rest-api"],
+    "example": "Cuando cargas una pagina web, tu navegador envia una solicitud GET. Cuando envias un formulario, envia una solicitud POST."
+  },
+  {
+    "id": "json",
+    "term": "JSON",
+    "definition": "JavaScript Object Notation. Un formato de texto para enviar datos estructurados entre sistemas. El lenguaje universal de las APIs.",
+    "relatedCourses": ["system-architecture"],
+    "relatedTerms": ["api", "http-request"],
+    "example": "`{\"name\": \"Alice\", \"age\": 30}` es JSON. Las APIs envian y reciben datos en este formato."
+  },
+  {
+    "id": "authentication",
+    "term": "Autenticacion (Authentication/Auth)",
+    "definition": "Verificar QUIEN es alguien. 'Demuestra que eres quien dices ser.' Generalmente se hace con contrasenas, tokens o inicio de sesion social.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["authorization", "jwt", "session"],
+    "example": "Iniciar sesion con tu correo electronico y contrasena es autenticacion. El sistema verifica si tus credenciales coinciden."
+  },
+  {
+    "id": "authorization",
+    "term": "Autorizacion (Authorization)",
+    "definition": "Determinar QUE puede hacer alguien. 'Has iniciado sesion, pero puedes acceder a este recurso?'",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["authentication", "role-based-access"],
+    "example": "Un usuario regular puede editar su propio perfil, pero solo los administradores pueden eliminar las cuentas de otros usuarios."
+  },
+  {
+    "id": "git-init",
+    "term": "git init",
+    "definition": "El comando que convierte una carpeta comun en un repositorio Git. Crea una carpeta oculta .git que rastrea todos los cambios.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["repository", "commit"],
+    "example": "Ejecuta `git init` dentro de tu carpeta de proyecto para comenzar a rastrear cambios con Git."
+  },
+  {
+    "id": "git-log",
+    "term": "git log",
+    "definition": "Un comando que muestra el historial de commits en tu repositorio. Como un registro de cambios de cada punto de guardado.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "git-diff"],
+    "example": "`git log --oneline` muestra una lista compacta de commits recientes con sus mensajes."
+  },
+  {
+    "id": "git-diff",
+    "term": "git diff",
+    "definition": "Un comando que muestra que cambio entre dos estados. Las lineas agregadas se muestran en verde, las eliminadas en rojo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["git-log", "commit"],
+    "example": "`git diff` muestra los cambios no preparados. `git diff --staged` muestra lo que estas a punto de confirmar."
+  },
+  {
+    "id": "git-revert",
+    "term": "git revert",
+    "definition": "Un comando que deshace un commit especifico creando un NUEVO commit que revierte esos cambios. Forma segura de deshacer.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["commit", "git-reset"],
+    "example": "`git revert abc1234` deshace los cambios del commit abc1234 sin borrar el historial."
+  },
+  {
+    "id": "push",
+    "term": "Push (Subir)",
+    "definition": "Enviar tus commits locales a un repositorio remoto (como GitHub). Compartir tu trabajo con el equipo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["pull", "remote", "commit"],
+    "example": "`git push origin main` envia tus commits de la rama main al remoto."
+  },
+  {
+    "id": "pull",
+    "term": "Pull (Descargar)",
+    "definition": "Descargar y fusionar cambios de un repositorio remoto a tu copia local. Obtener el trabajo mas reciente de tu equipo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["push", "remote", "merge"],
+    "example": "`git pull origin main` obtiene los cambios mas recientes y los fusiona en tu rama main local."
+  },
+  {
+    "id": "sanitization",
+    "term": "Sanitizacion (Sanitization)",
+    "definition": "Limpiar la entrada del usuario para eliminar contenido potencialmente peligroso antes de usarla. Esencial para prevenir ataques XSS y de inyeccion.",
+    "relatedCourses": ["security-fundamentals"],
+    "relatedTerms": ["xss", "sql-injection"],
+    "example": "Convertir etiquetas `<script>` en los comentarios de usuarios a texto plano para que no puedan ejecutarse como codigo."
+  },
+  {
+    "id": "main-branch",
+    "term": "Rama Principal (Main Branch)",
+    "definition": "La rama primaria de tu repositorio, generalmente llamada 'main' o 'master'. Representa la version estable actual de tu codigo.",
+    "relatedCourses": ["git-version-control"],
+    "relatedTerms": ["branch", "merge"],
+    "example": "Las ramas de funcionalidades se crean desde main y se fusionan de vuelta a main cuando estan listas."
+  },
+  {
+    "id": "exception",
+    "term": "Excepcion (Exception)",
+    "definition": "Un error que interrumpe el flujo normal de tu programa. Si no se captura, hace que tu aplicacion se caiga.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["error-message", "stack-trace", "try-catch"],
+    "example": "Intentar acceder a una propiedad de `null` lanza una excepcion TypeError."
+  },
+  {
+    "id": "debugging",
+    "term": "Depuracion (Debugging)",
+    "definition": "El proceso de encontrar y corregir problemas en el codigo. Su nombre viene de literalmente remover una polilla de una computadora en los anos 1940.",
+    "relatedCourses": ["debugging-error-reading"],
+    "relatedTerms": ["console-log", "stack-trace", "breakpoint"],
+    "example": "Leer el mensaje de error, agregar sentencias console.log, verificar los valores de las variables: eso es depuracion."
+  },
+  {
+    "id": "technical-debt",
+    "term": "Deuda Tecnica (Technical Debt)",
+    "definition": "Atajos tomados en el codigo que ahorran tiempo ahora pero cuestan mas tiempo despues. Como la deuda de tarjeta de credito: los pagos pequenos se acumulan.",
+    "relatedCourses": ["code-organization"],
+    "relatedTerms": ["refactoring"],
+    "example": "Copiar y pegar la misma logica en 5 lugares en vez de crear una funcion reutilizable. Funciona ahora, pero es una pesadilla de mantener despues."
+  }
+]

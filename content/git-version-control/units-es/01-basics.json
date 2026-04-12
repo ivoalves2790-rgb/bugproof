@@ -1,0 +1,16 @@
+{
+  "slug": "basics",
+  "title": "Fundamentos de Git",
+  "description": "Qué es Git, por qué es importante y tus primeros commits",
+  "order": 1,
+  "courseSlug": "git-version-control",
+  "tier": "beginner",
+  "lessons": [
+    { "slug": "what-is-git", "title": "¿Qué es Git?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "first-commit", "title": "Tu primer commit", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "staging-area", "title": "El área de preparación", "type": "bug_hunt", "order": 3, "difficulty": 2 },
+    { "slug": "reading-git-log", "title": "Leyendo el registro de Git", "type": "incident_response", "order": 4, "difficulty": 2 },
+    { "slug": "commit-messages", "title": "Escribiendo buenos mensajes de commit", "type": "swipe_to_judge", "order": 5, "difficulty": 1 },
+    { "slug": "gitignore", "title": "Ignorando archivos con .gitignore", "type": "terminal_sim", "order": 6, "difficulty": 2 }
+  ]
+}

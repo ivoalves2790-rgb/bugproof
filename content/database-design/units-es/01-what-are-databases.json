@@ -1,0 +1,16 @@
+{
+  "slug": "what-are-databases",
+  "title": "¿Qué Son las Bases de Datos?",
+  "description": "Comprende por qué las aplicaciones necesitan bases de datos y la diferencia entre almacenar datos en archivos vs un sistema de base de datos dedicado",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "why-apps-need-databases", "title": "Por Qué las Apps Necesitan Bases de Datos", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "what-is-a-database", "title": "¿Qué es una Base de Datos?", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "sql-vs-nosql", "title": "SQL vs NoSQL", "type": "swipe_to_judge", "order": 3, "difficulty": 1 },
+    { "slug": "your-first-sql", "title": "Tu Primer Comando SQL", "type": "terminal_sim", "order": 4, "difficulty": 1 },
+    { "slug": "crud-operations", "title": "CRUD: Las Cuatro Operaciones", "type": "bug_hunt", "order": 5, "difficulty": 1 },
+    { "slug": "database-tools", "title": "Herramientas y GUIs de Bases de Datos", "type": "incident_response", "order": 6, "difficulty": 1 }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "slug": "debugging-failures",
+  "title": "Depurando Fallos en Tests",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "Tus tests estan fallando y necesitas descubrir por que. Es un bug real o un test malo? Desliza a la derecha en buenas practicas de depuracion, a la izquierda en las malas.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Cuando los Tests Fallan",
+      "body": "Un test que falla significa una de dos cosas: tu codigo tiene un bug, o tu test esta mal. Antes de asumir que es un bug en el codigo, lee el mensaje de error cuidadosamente, verifica si la configuracion del test es correcta y confirma que las expectativas del test coinciden con los requisitos actuales. Muchos 'bugs' son en realidad tests desactualizados."
+    },
+    {
+      "type": "code_example",
+      "title": "Leyendo un Fallo de Test",
+      "language": "text",
+      "code": "FAIL: 'should return tasks sorted by due date'\n  Expected: ['Task A (Jan 1)', 'Task B (Jan 5)']\n  Received: ['Task B (Jan 5)', 'Task A (Jan 1)']\n\nThis tells you: the sort order is reversed.\nCheck: Is the sort function wrong? Or did the test expect the wrong order?",
+      "annotation": "Siempre lee los valores esperados vs recibidos. A menudo te dicen exactamente que salio mal."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Lee el mensaje de error primero — no el codigo. La mayoria de los fallos de tests te dicen exactamente que salio mal si lees la salida cuidadosamente."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Cuando un test falla, leer el mensaje de error y comparar valores esperados vs reales antes de mirar el codigo",
+        "isGoodPractice": true,
+        "explanation": "La salida del error generalmente te dice exactamente que salio mal. Saltar al codigo antes de leer el error pierde tiempo y te lleva por caminos equivocados."
+      },
+      {
+        "id": "c2",
+        "content": "Si un test esta fallando, eliminarlo y reescribirlo desde cero",
+        "isGoodPractice": false,
+        "explanation": "Entiende por que esta fallando primero. El test podria ser correcto y estar revelando un bug real. Eliminarlo podria ocultar un problema legitimo."
+      },
+      {
+        "id": "c3",
+        "content": "Ejecutar el test que falla en aislamiento para descartar interferencia de otros tests",
+        "isGoodPractice": true,
+        "explanation": "Los tests a veces fallan porque un test anterior dejo estado sucio (base de datos modificada, variables globales cambiadas). Ejecutar en aislamiento confirma si el test en si esta roto o si es un problema de orden."
+      },
+      {
+        "id": "c4",
+        "content": "Marcar los tests inestables como 'skip' para que no bloqueen el pipeline de CI",
+        "isGoodPractice": false,
+        "explanation": "Omitir tests inestables es una medida temporal en el mejor de los casos. Los tests inestables a menudo ocultan bugs reales. Arregla la causa raiz — generalmente problemas de tiempo, estado compartido o selectores fragiles."
+      },
+      {
+        "id": "c5",
+        "content": "Verificar si los cambios recientes en el codigo coinciden con lo que el test espera — el test podria necesitar actualizacion por nuevos requisitos",
+        "isGoodPractice": true,
+        "explanation": "Los requisitos cambian. Si renombraste un campo de 'done' a 'completed', los tests que verifican 'done' fallaran. Eso no es un bug — el test solo necesita reflejar el nuevo contrato."
+      },
+      {
+        "id": "c6",
+        "content": "Si los tests pasan localmente pero fallan en CI, los tests probablemente estan bien — solo reintenta la ejecucion de CI",
+        "isGoodPractice": false,
+        "explanation": "Diferentes entornos revelan problemas reales: diferencias de zona horaria, variables de entorno faltantes, estado de la base de datos. Investiga la diferencia de entorno en lugar de reintentar a ciegas."
+      }
+    ],
+    "glossaryTerms": ["ci", "flaky-test"]
+  }
+}

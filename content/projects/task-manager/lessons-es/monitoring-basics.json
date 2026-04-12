@@ -1,0 +1,67 @@
+{
+  "slug": "monitoring-basics",
+  "title": "Fundamentos de Monitoreo",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Tu app esta en produccion. Pero como sabes si realmente esta funcionando? El monitoreo te ayuda a ver problemas antes que tus usuarios. Desliza a la derecha en buenas practicas de monitoreo.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Por Que Monitorear Tu App?",
+      "body": "Una vez que tu app esta desplegada, no puedes ver que esta pasando a menos que configures monitoreo. Herramientas de rastreo de errores como Sentry capturan errores de JavaScript antes de que los usuarios los reporten. Las analiticas muestran que funcionalidades usa la gente. Los monitores de uptime te alertan si el sitio se cae a las 3 AM."
+    },
+    {
+      "type": "analogy",
+      "title": "El Monitoreo Es Como el Tablero de un Auto",
+      "body": "No conduces con los ojos vendados. El tablero de tu auto muestra velocidad, nivel de combustible y alertas del motor. El monitoreo le da a tu app un tablero — tasas de error, tiempos de respuesta y cantidad de usuarios. Sin el, conduces a ciegas y no sabras que algo esta mal hasta que el motor este en llamas."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Empieza con tres cosas: rastreo de errores (Sentry o similar), monitoreo de uptime (esta el sitio activo?) y analiticas basicas (la gente lo esta usando?). Puedes agregar monitoreo mas sofisticado despues."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Configurar rastreo de errores para ser notificado cuando los usuarios encuentren errores de JavaScript",
+        "isGoodPractice": true,
+        "explanation": "Las herramientas de rastreo de errores capturan errores en produccion con contexto completo (navegador, URL, accion del usuario). Sabras sobre bugs antes de que los usuarios se molesten en reportarlos."
+      },
+      {
+        "id": "c2",
+        "content": "Revisar tu app manualmente una vez al dia para asegurarte de que sigue funcionando",
+        "isGoodPractice": false,
+        "explanation": "Las revisiones manuales no escalan y pierden problemas nocturnos. Los monitores automaticos de uptime verifican cada pocos minutos y te alertan inmediatamente cuando algo se rompe."
+      },
+      {
+        "id": "c3",
+        "content": "Registrar acciones importantes como registros de usuarios y creacion de tareas para rastrear la adopcion",
+        "isGoodPractice": true,
+        "explanation": "El registro estructurado de eventos clave te ayuda a entender como la gente usa tu app. Tambien ayuda a depurar problemas — puedes rastrear que paso antes de que ocurriera un error."
+      },
+      {
+        "id": "c4",
+        "content": "Registrar cada detalle incluyendo headers de solicitud y cuerpos completos de solicitud para detectar todos los problemas posibles",
+        "isGoodPractice": false,
+        "explanation": "El registro excesivo crea ruido, aumenta costos y puede registrar accidentalmente datos sensibles como contrasenas o tokens. Registra lo que importa: errores, eventos clave y metricas de rendimiento."
+      },
+      {
+        "id": "c5",
+        "content": "Configurar alertas para picos en la tasa de errores para saber cuando un despliegue rompe algo",
+        "isGoodPractice": true,
+        "explanation": "Un aumento repentino de errores a menudo significa un despliegue malo. Las alertas automatizadas te permiten detectar y revertir rapidamente en lugar de esperar quejas de usuarios."
+      },
+      {
+        "id": "c6",
+        "content": "El monitoreo solo es necesario para apps con miles de usuarios — las apps pequenas no lo necesitan",
+        "isGoodPractice": false,
+        "explanation": "Incluso las apps pequenas se benefician del monitoreo. Con menos usuarios, cada uno importa mas. Si tus 10 usuarios encuentran un bug y ninguno lo reporta, nunca lo sabrias sin monitoreo."
+      }
+    ],
+    "glossaryTerms": ["error-tracking", "uptime-monitoring"]
+  }
+}

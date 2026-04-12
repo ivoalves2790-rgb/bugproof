@@ -3,11 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
-import { NAV_ITEMS } from "@/lib/utils/constants";
-import { IconHome, IconBook, IconSearch, IconUser, IconSettings } from "@/components/ui/Icons";
+import { useT } from "@/lib/i18n/use-language";
+import { IconHome, IconBook, IconHammer, IconUser, IconSettings, IconSearch } from "@/components/ui/Icons";
+
+const NAV_ITEMS = [
+  { key: "nav.home", href: "/dashboard", icon: "home" },
+  { key: "nav.build", href: "/projects", icon: "hammer" },
+  { key: "nav.library", href: "/courses", icon: "book" },
+  { key: "nav.glossary", href: "/glossary", icon: "search" },
+  { key: "nav.profile", href: "/profile", icon: "user" },
+];
 
 const iconMap: Record<string, (props: { size?: number }) => React.ReactElement> = {
   home: IconHome,
+  hammer: IconHammer,
   book: IconBook,
   search: IconSearch,
   user: IconUser,
@@ -15,10 +24,10 @@ const iconMap: Record<string, (props: { size?: number }) => React.ReactElement> 
 
 export function Sidebar() {
   const pathname = usePathname();
+  const t = useT();
 
   return (
     <aside className="hidden md:flex md:w-56 md:flex-col md:fixed md:inset-y-0 border-r border-border bg-surface">
-      {/* Logo */}
       <div className="flex h-14 items-center px-4 border-b border-border">
         <Link href="/dashboard" className="flex items-center gap-1">
           <span className="text-xl font-bold text-terminal-green glow-green">{">"}</span>
@@ -27,7 +36,6 @@ export function Sidebar() {
         </Link>
       </div>
 
-      {/* Nav links */}
       <nav className="flex-1 space-y-1 px-2 py-4">
         {NAV_ITEMS.map((item) => {
           const Icon = iconMap[item.icon];
@@ -44,13 +52,12 @@ export function Sidebar() {
               )}
             >
               {Icon && <Icon size={18} />}
-              {item.label}
+              {t(item.key)}
             </Link>
           );
         })}
       </nav>
 
-      {/* Settings at bottom */}
       <div className="border-t border-border px-2 py-4">
         <Link
           href="/settings"
@@ -62,7 +69,7 @@ export function Sidebar() {
           )}
         >
           <IconSettings size={18} />
-          Settings
+          {t("nav.settings")}
         </Link>
       </div>
     </aside>

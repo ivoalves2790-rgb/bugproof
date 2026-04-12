@@ -1,0 +1,74 @@
+{
+  "slug": "error-types-js",
+  "title": "Tipos de errores en JavaScript",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "reading-errors",
+  "courseSlug": "debugging-error-reading",
+  "intro": "JavaScript tiene varios tipos de errores integrados y cada uno te dice algo diferente sobre lo que salió mal. Conocer el tipo te ayuda a corregir errores más rápido. Para cada afirmación, desliza a la DERECHA si es correcta o a la IZQUIERDA si es incorrecta.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Los tipos de error son como síntomas médicos",
+      "body": "Cuando vas al doctor, no solo dicen 'estás enfermo.' Identifican el tipo: un resfriado, un esguince, una alergia. Los errores de JavaScript funcionan de la misma manera. Cada tipo de error te dice una categoría diferente de problema, lo que te apunta hacia un tipo diferente de solución."
+    },
+    {
+      "type": "text",
+      "title": "Los cuatro tipos principales de error",
+      "body": "JavaScript tiene cuatro tipos de error que verás con más frecuencia:\n\n1. **SyntaxError** -- tu código tiene un error gramatical y ni siquiera puede ejecutarse\n2. **ReferenceError** -- usaste un nombre de variable que no existe\n3. **TypeError** -- intentaste una operación en el tipo equivocado de valor\n4. **RangeError** -- un número está fuera del rango permitido"
+    },
+    {
+      "type": "code_example",
+      "title": "Identificando la diferencia",
+      "language": "javascript",
+      "code": "// SyntaxError: missing closing bracket\nfunction greet( { console.log('hi'); }\n\n// ReferenceError: variable doesn't exist\nconsole.log(userName);\n\n// TypeError: wrong operation for this type\nconst num = 42;\nnum.toUpperCase();",
+      "annotation": "Cada tipo de error apunta a un tipo diferente de error. SyntaxError significa gramática rota, ReferenceError significa un nombre faltante, TypeError significa una operación incompatible."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El tipo de error es tu primera pista. SyntaxError significa revisa tu puntuación. ReferenceError significa revisa los nombres de tus variables. TypeError significa que estás usando un valor de una forma que no es compatible."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Un ReferenceError significa que usaste un nombre de variable que no existe.",
+        "isGoodPractice": true,
+        "explanation": "ReferenceError ocurre cuando JavaScript no puede encontrar la variable a la que te refieres. Causas comunes: errores tipográficos en nombres de variables, usar una variable antes de declararla u olvidar importar algo. Ejemplo: console.log(userName) cuando la nombraste 'username' (n minúscula)."
+      },
+      {
+        "id": "card-2",
+        "content": "Un TypeError significa que usaste el tipo equivocado de comillas alrededor de una cadena.",
+        "isGoodPractice": false,
+        "explanation": "TypeError significa que intentaste hacer algo con un valor que no soporta esa operación. Por ejemplo, llamar .map() en un número, o intentar invocar algo que no es una función. Comillas incorrectas causarían un SyntaxError, no un TypeError."
+      },
+      {
+        "id": "card-3",
+        "content": "Un SyntaxError significa que JavaScript ni siquiera pudo entender tu código lo suficiente para ejecutarlo.",
+        "isGoodPractice": true,
+        "explanation": "SyntaxError es como un error gramatical en español -- JavaScript no puede analizar lo que escribiste. Paréntesis faltantes, comas extra, olvidar cerrar una cadena -- todo esto impide que el código se ejecute. El código nunca se ejecuta; falla en la etapa de análisis."
+      },
+      {
+        "id": "card-4",
+        "content": "TypeError: x is not a function significa que la variable x no existe.",
+        "isGoodPractice": false,
+        "explanation": "Si x no existiera, obtendrías un ReferenceError. 'x is not a function' significa que x SÍ existe, pero no es una función -- quizás es una cadena, un número o undefined. Una causa común: importaste algo incorrectamente y llegó como undefined, luego intentaste llamarlo con paréntesis."
+      },
+      {
+        "id": "card-5",
+        "content": "RangeError generalmente significa que un número está fuera del rango permitido, como una longitud de array inválida.",
+        "isGoodPractice": true,
+        "explanation": "RangeError se dispara cuando un valor no está en el conjunto o rango de valores permitidos. Ejemplos comunes: crear un array con longitud negativa (new Array(-1)), recursión infinita que desborda la pila de llamadas, o pasar un radix inválido a Number.toString()."
+      },
+      {
+        "id": "card-6",
+        "content": "Todos los errores de JavaScript harán que tu programa se caiga y se detenga completamente.",
+        "isGoodPractice": false,
+        "explanation": "Los errores solo hacen fallar la ruta de ejecución actual. En un navegador, un error en un manejador de clic no tumba toda la página. En Node.js, errores no manejados en código asíncrono podrían no tumbar el proceso. Y los bloques try-catch pueden manejar errores de forma elegante sin tumbar nada."
+      }
+    ],
+    "glossaryTerms": ["ReferenceError", "TypeError", "SyntaxError", "RangeError"]
+  }
+}

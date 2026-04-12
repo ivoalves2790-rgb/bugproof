@@ -1,0 +1,103 @@
+{
+  "slug": "building-task-card",
+  "title": "Building the Task Card",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "You're building the most important UI component in your task manager: the task card. Every design decision you make here affects how users interact with their tasks. Let's see how you approach it.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "The Task Card Is the Core of Your App",
+      "body": "The task card is what users see and interact with the most. It needs to display the right information at a glance — title, status, maybe a due date — without being cluttered. Think of it like a physical sticky note: enough info to be useful, but not so much that it's overwhelming."
+    },
+    {
+      "type": "text",
+      "title": "Designing for Interaction",
+      "body": "A task card isn't just a display — users will click it, complete it, maybe drag it. Build your component with **interaction states** in mind from the start: hover effects, active states, completed styling. A card with no visual feedback when you hover feels broken, even if it technically works."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Start with the minimum viable card — title and a complete button. Add information (due date, priority, tags) only when your user stories call for it. Every piece of data on the card competes for attention, so be intentional about what you show."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're creating the TaskCard component. Your designer sent a mockup showing the task title, status, due date, priority, tags, assignee avatar, creation date, description preview, and an action menu. How do you approach building this?",
+        "choices": [
+          { "id": "build-everything", "text": "Build the full card with all 9 pieces of information from the mockup in one go", "nextNode": "overloaded", "score": 0 },
+          { "id": "start-minimal", "text": "Start with just the title and a complete checkbox, then add fields one at a time based on priority", "nextNode": "minimal-start", "score": 4 },
+          { "id": "copy-design-system", "text": "Find a task card component from a UI library and customize it to match the mockup", "nextNode": "library-card", "score": 2 }
+        ]
+      },
+      "minimal-start": {
+        "narrative": "Great choice. Your minimal TaskCard works and looks clean. Now the product requirements say you need to show the due date. The due date could be in the future, today, or overdue. How do you handle the different states?",
+        "choices": [
+          { "id": "conditional-styling", "text": "Create a <DueDateBadge> sub-component with conditional Tailwind classes: green for future, yellow for today, red for overdue", "nextNode": "excellent-end", "score": 4 },
+          { "id": "just-text", "text": "Display the date as plain text with no visual distinction between overdue and future dates", "nextNode": "plain-date-end", "score": 1 }
+        ]
+      },
+      "overloaded": {
+        "narrative": "The card is packed with information. On mobile, the text is tiny and the layout breaks. Users in testing say they can't quickly scan their task list because every card is a wall of data. What's your fix?",
+        "choices": [
+          { "id": "hide-on-mobile", "text": "Use responsive classes to hide most fields on mobile, only showing title and status", "nextNode": "responsive-recovery", "score": 3 },
+          { "id": "smaller-font", "text": "Make the font smaller so everything fits", "nextNode": "tiny-text-end", "score": 0 }
+        ]
+      },
+      "library-card": {
+        "narrative": "You installed a UI library and customized its Card component. It looks good, but the library's card doesn't support a 'completed' state with strikethrough text, and overriding the library's styles requires fighting its CSS specificity. What do you do?",
+        "choices": [
+          { "id": "build-own", "text": "Build your own TaskCard from scratch using the library card as visual reference, but with your own Tailwind styles", "nextNode": "own-card-end", "score": 3 },
+          { "id": "force-override", "text": "Use !important overrides and custom CSS to force the library's card to look right", "nextNode": "override-end", "score": 1 }
+        ]
+      },
+      "responsive-recovery": {
+        "narrative": "The responsive approach works. On mobile you show title and status; on desktop you show the full card. Users can scan the list quickly on any device. You lost time building everything upfront, but you recovered.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "You recovered well by making the card responsive. But the lesson is: start minimal and add complexity based on priority. If you'd started with the minimal card, you wouldn't have needed to hide things later.",
+        "choices": []
+      },
+      "excellent-end": {
+        "narrative": "Your TaskCard is clean and functional. The <DueDateBadge> sub-component handles date logic separately, so the main card stays simple. Users immediately spot overdue tasks thanks to the red badge. The component is easy to test because each piece is isolated.",
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Excellent approach! Starting minimal and extracting sub-components for complex logic (like date formatting with conditional styles) keeps your code clean and each piece testable. This is professional-level component design.",
+        "choices": []
+      },
+      "plain-date-end": {
+        "narrative": "The date shows up, but users keep missing overdue tasks because '2024-01-15' looks the same whether it's past due or a week away. A user complains that they missed a deadline because nothing on the card signaled urgency.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Dates need visual context. A raw date string forces users to do mental math. Color-coded badges or relative time ('2 days overdue') make the urgency immediately obvious. UI should reduce cognitive load, not add to it.",
+        "choices": []
+      },
+      "tiny-text-end": {
+        "narrative": "Now the card fits on mobile, but no one can read it. Users pinch-to-zoom constantly. Accessibility testing flags the tiny font as a failure. You've made the layout problem worse, not better.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Shrinking text is never the answer. If content doesn't fit, you have too much content — not too little space. Remove or hide low-priority information instead of making everything unreadable.",
+        "choices": []
+      },
+      "own-card-end": {
+        "narrative": "Your custom TaskCard uses Tailwind for all styling and supports all the states you need: default, hover, completed (with opacity and strikethrough), and overdue. No library conflicts, full control.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Good recovery. UI libraries are great for generic components (buttons, modals), but highly domain-specific components like a TaskCard are often better built from scratch. You get full control over states and styling without fighting the library.",
+        "choices": []
+      },
+      "override-end": {
+        "narrative": "The card looks right, but the CSS is a mess of overrides. When the library updates, half your overrides break. Another developer on the team can't figure out why styles are behaving strangely. Maintenance becomes a nightmare.",
+        "isEnd": true,
+        "finalScore": 2,
+        "feedback": "Fighting a UI library's CSS is a losing battle. If you need to override more than a few styles, you're better off building the component yourself. Library components work best when you use them as-is, not when you force them into a different shape.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["component", "responsive-design", "accessibility"]
+  }
+}

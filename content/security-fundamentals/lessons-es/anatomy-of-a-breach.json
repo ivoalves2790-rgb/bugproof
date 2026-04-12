@@ -1,0 +1,100 @@
+{
+  "slug": "anatomy-of-a-breach",
+  "title": "Anatomía de una filtración de datos",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "security-mindset",
+  "courseSlug": "security-fundamentals",
+  "intro": "Son las 2 AM y tu teléfono no para de sonar. Un usuario acaba de publicar en Twitter una captura de pantalla mostrando que puede ver los datos privados de otros usuarios en tu aplicación. Este es un incidente de seguridad real. Cada decisión que tomes en los próximos minutos importa.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Una filtración de datos es como una tubería rota",
+      "body": "Cuando una tubería se rompe en tu casa, lo primero que haces es cerrar el agua -- no trapear el piso, no llamar al plomero, no publicar en redes sociales. En una filtración de datos, tu primer movimiento es el mismo: detener la fuga antes de hacer cualquier otra cosa."
+    },
+    {
+      "type": "text",
+      "title": "Los cuatro pasos de la respuesta a incidentes",
+      "body": "Cuando ocurre una brecha de seguridad, sigue estos pasos en orden:\n\n1. **Contener** -- detener la fuga inmediatamente (deshabilitar el endpoint, revocar la clave)\n2. **Evaluar** -- revisar los logs para ver cuántos datos fueron accedidos\n3. **Notificar** -- informar a los usuarios afectados y a tu equipo\n4. **Corregir** -- parchar la vulnerabilidad y agregar protecciones para evitar que vuelva a pasar"
+    },
+    {
+      "type": "code_example",
+      "title": "Una vulnerabilidad común en APIs",
+      "language": "javascript",
+      "code": "// VULNERABLE: anyone can access any user's data\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// FIXED: check that the requester owns this data\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Forbidden' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
+      "annotation": "La versión vulnerable permite que cualquiera obtenga los datos de cualquier usuario solo cambiando el ID en la URL. La corrección agrega autenticación y verifica que solo puedas acceder a tus propios datos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "En una filtración, contén primero, luego evalúa el alcance, notifica a los usuarios y corrige la causa raíz. Cada endpoint de API necesita verificaciones de autorización -- nunca asumas que el frontend prevendrá el acceso no autorizado."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Ves el tweet: un usuario navegó a /api/users/42 y recibió el perfil completo de otro usuario incluyendo email, número de teléfono y contraseña hasheada. Tu API está filtrando datos privados. ¿Cuál es tu primer movimiento?",
+        "choices": [
+          { "id": "a", "text": "Restringir inmediatamente el endpoint vulnerable de la API", "nextNode": "restrict-endpoint", "score": 10 },
+          { "id": "b", "text": "Responder al tweet agradeciéndoles por el reporte", "nextNode": "reply-tweet", "score": 3 },
+          { "id": "c", "text": "Verificar si otros endpoints tienen el mismo problema", "nextNode": "check-others-first", "score": 5 }
+        ]
+      },
+      "restrict-endpoint": {
+        "narrative": "Bien -- detén la hemorragia primero. Agregas verificaciones de autenticación al endpoint para que solo los usuarios autenticados puedan acceder a sus propios datos. La fuga inmediata está tapada. ¿Cuál es tu siguiente paso?",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs del servidor para ver cuántos datos de usuarios fueron accedidos", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Volver a dormir -- la corrección ya está desplegada", "nextNode": "ignore-scope", "score": 0 },
+          { "id": "c", "text": "Auditar todos los demás endpoints de API para la misma vulnerabilidad", "nextNode": "audit-endpoints", "score": 7 }
+        ]
+      },
+      "reply-tweet": {
+        "narrative": "Reconocer el reporte públicamente está bien, pero el endpoint sigue filtrando datos mientras compones tweets. Cada minuto que permanece abierto, más datos de usuarios podrían ser extraídos. Contención primero, comunicación después.",
+        "choices": [
+          { "id": "a", "text": "Tienes razón -- déjame restringir el endpoint primero", "nextNode": "restrict-endpoint", "score": 5 }
+        ]
+      },
+      "check-others-first": {
+        "narrative": "Verificar el alcance es inteligente, pero el endpoint reportado está filtrando datos activamente ahora mismo. Un atacante podría estar extrayendo el perfil de cada usuario mientras tú auditas. Tapa la fuga conocida primero, luego investiga el alcance.",
+        "choices": [
+          { "id": "a", "text": "Restringir el endpoint reportado primero, luego verificar los demás", "nextNode": "restrict-endpoint", "score": 7 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "Tus logs muestran 347 solicitudes a /api/users/{id} con IDs secuenciales desde una sola dirección IP en las últimas 6 horas. Alguien estaba extrayendo perfiles de usuarios sistemáticamente. Esto significa que los datos de hasta 347 usuarios pueden estar comprometidos. ¿Qué haces?",
+        "choices": [
+          { "id": "a", "text": "Notificar a los usuarios afectados y a tu equipo, luego auditar todos los endpoints", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Bloquear la IP del atacante y dar por terminado", "nextNode": "end-mediocre", "score": 3 }
+        ]
+      },
+      "audit-endpoints": {
+        "narrative": "Encuentras 3 endpoints más con el mismo problema -- sin verificaciones de autorización. Los corriges todos. Pero aún no has determinado cuántos datos ya fueron accedidos.",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs para determinar el alcance de la filtración", "nextNode": "check-logs", "score": 8 }
+        ]
+      },
+      "ignore-scope": {
+        "narrative": "El endpoint está arreglado, pero no tienes idea de cuántos datos ya se filtraron, si otros endpoints tienen el mismo problema, o si los usuarios afectados necesitan ser notificados. En muchas jurisdicciones, no reportar una filtración de datos es ilegal. Esto no ha terminado.",
+        "choices": [
+          { "id": "a", "text": "Tienes razón -- déjame investigar el alcance completo", "nextNode": "check-logs", "score": 3 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Contuviste la fuga, determinaste el alcance, notificaste a los usuarios afectados, auditaste todos los endpoints y agregaste verificaciones de autorización en todo el sistema. También agregaste limitación de velocidad para prevenir futuros intentos de extracción. Tu equipo configura pruebas de seguridad automatizadas para detectar esta clase de error antes de que llegue a producción.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Respuesta a incidentes de manual: contener, evaluar alcance, notificar, remediar y mejorar. La idea clave es que la autorización (quién puede acceder a qué) debe verificarse en cada endpoint de API, no solo en el frontend. Esta vulnerabilidad se llama Broken Object Level Authorization (BOLA) y es el elemento #1 en el OWASP API Security Top 10."
+      },
+      "end-mediocre": {
+        "narrative": "Bloquear una IP es como cerrar una puerta mientras dejas las ventanas abiertas. El atacante puede usar una IP diferente, VPN o proxy. No has notificado a los usuarios afectados, no has verificado otros endpoints vulnerables y podrías estar violando las leyes de notificación de filtraciones de datos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "El bloqueo de IP no es una corrección de seguridad -- es un tope de velocidad. La verdadera corrección fue la verificación de autorización que agregaste al endpoint. Pero la respuesta a incidentes no termina en la contención: necesitas evaluar el alcance completo, notificar a los usuarios afectados, auditar problemas similares y poner protecciones para prevenir la recurrencia."
+      }
+    },
+    "glossaryTerms": ["data-breach", "authorization", "bola", "incident-response", "rate-limiting"]
+  }
+}

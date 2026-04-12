@@ -1,0 +1,16 @@
+{
+  "slug": "setup",
+  "title": "Project Setup",
+  "description": "Set up your development environment, create your project, and make your first commit. The foundation of every great app.",
+  "order": 3,
+  "phase": "setup",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "dev-environment", "title": "Your Dev Environment", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "create-nextjs-app", "title": "Creating the Project", "type": "incident_response", "order": 2, "difficulty": 1 },
+    { "slug": "folder-structure", "title": "Understanding Folder Structure", "type": "swipe_to_judge", "order": 3, "difficulty": 2 },
+    { "slug": "version-control-basics", "title": "Version Control Basics", "type": "swipe_to_judge", "order": 4, "difficulty": 1 },
+    { "slug": "first-commit", "title": "Your First Commit", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["git-version-control", "deployment-devops"]
+}

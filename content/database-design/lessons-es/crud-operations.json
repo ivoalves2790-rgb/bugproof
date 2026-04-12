@@ -1,0 +1,54 @@
+{
+  "slug": "crud-operations",
+  "title": "CRUD: Las Cuatro Operaciones",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "what-are-databases",
+  "courseSlug": "database-design",
+  "intro": "Un desarrollador está escribiendo SQL para actualizar la dirección de correo electrónico de un usuario, pero su consulta cambia el correo de TODOS los usuarios en vez de solo uno. Este es un error clásico (y aterrador) con el comando UPDATE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "CRUD = Las Cuatro Cosas Que Haces Con los Datos",
+      "body": "Piensa en una lista de contactos en tu teléfono. Puedes **Crear** un nuevo contacto, **Leer** contactos existentes, **Actualizar** el número de teléfono de alguien, o **Eliminar** un contacto que no necesitas. Toda app hace estas mismas cuatro cosas. En el mundo de las bases de datos, las llamamos **CRUD** -- Create, Read, Update, Delete (Crear, Leer, Actualizar, Eliminar)."
+    },
+    {
+      "type": "text",
+      "title": "Los Cuatro Comandos SQL",
+      "body": "Cada operación CRUD tiene su propio comando SQL:\n\n1. **Create** = `INSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com')`\n2. **Read** = `SELECT * FROM users WHERE id = 1`\n3. **Update** = `UPDATE users SET email = 'new@mail.com' WHERE id = 1`\n4. **Delete** = `DELETE FROM users WHERE id = 1`\n\n¡Las operaciones más peligrosas son UPDATE y DELETE -- olvidar la cláusula WHERE afecta a TODAS las filas!"
+    },
+    {
+      "type": "code_example",
+      "title": "El Peligro de Olvidar WHERE",
+      "language": "sql",
+      "code": "-- This updates ONE user's email (safe)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- This updates EVERY user's email (catastrophic!)\nUPDATE users SET email = 'new@mail.com';",
+      "annotation": "Sin WHERE, el UPDATE se aplica a TODAS las filas. Este es el desastre de bases de datos más común. Siempre verifica tu cláusula WHERE antes de ejecutar UPDATE o DELETE."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "CRUD significa Create (INSERT), Read (SELECT), Update (UPDATE) y Delete (DELETE). Siempre incluye una cláusula WHERE con UPDATE y DELETE, o afectarás a cada fila en la tabla."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "-- Update user #42's email address", "isBuggy": false },
+      { "line": 2, "text": "UPDATE users", "isBuggy": false },
+      { "line": 3, "text": "SET email = 'alice.new@example.com';", "isBuggy": true },
+      { "line": 4, "text": "", "isBuggy": false },
+      { "line": 5, "text": "-- Expected: only user 42 gets updated", "isBuggy": false },
+      { "line": 6, "text": "-- Actual: ALL 10,000 users now have the same email!", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "El desarrollador quería actualizar solo el correo del usuario #42, pero en su lugar todos los usuarios en la base de datos ahora tienen 'alice.new@example.com' como correo electrónico. ¡10,000 usuarios afectados! Encuentra la línea con la pieza faltante.",
+    "fixes": [
+      { "id": "a", "text": "SET email = 'alice.new@example.com' WHERE id = 42;", "isCorrect": true },
+      { "id": "b", "text": "SET email = 'alice.new@example.com' LIMIT 1;", "isCorrect": false },
+      { "id": "c", "text": "SET email = 'alice.new@example.com' FOR user 42;", "isCorrect": false },
+      { "id": "d", "text": "SET email = 'alice.new@example.com' ONLY id = 42;", "isCorrect": false }
+    ],
+    "explanation": "El comando UPDATE sin cláusula WHERE actualiza TODAS las filas de la tabla. Agregar 'WHERE id = 42' le dice a la base de datos 'solo cambia la fila donde la columna id sea igual a 42.' Esta es una de las reglas de seguridad más importantes en SQL: nunca ejecutes UPDATE o DELETE sin una cláusula WHERE. Muchos desarrolladores primero ejecutan un SELECT con la misma cláusula WHERE para verificar que coincide con las filas correctas antes de ejecutar el UPDATE.",
+    "glossaryTerms": ["crud", "update", "where-clause", "insert"]
+  }
+}

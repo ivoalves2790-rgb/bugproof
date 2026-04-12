@@ -1,0 +1,68 @@
+{
+  "slug": "dom-manipulation-costs",
+  "title": "Costos de manipulación del DOM",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "frontend-performance",
+  "courseSlug": "performance-scaling",
+  "intro": "El DOM (Document Object Model) es cómo JavaScript se comunica con la página. Pero tocar el DOM es costoso -- es lo más lento que tu JavaScript puede hacer. Entender por qué te ayuda a evitar trampas comunes. Desliza a la DERECHA si es verdadero, a la IZQUIERDA si es falso.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El DOM = Un plano de construcción",
+      "body": "Imagina el DOM como el plano de un edificio. Cada vez que cambias el plano (agregas una habitación, mueves una pared), el equipo de construcción tiene que parar, leer los cambios, averiguar qué se afecta y reconstruir. Si les entregas 100 cambios pequeños uno a la vez, reconstruyen 100 veces. Si agrupas los 100 cambios en un plano revisado, reconstruyen una vez. Por eso **agrupar cambios del DOM** es tan importante."
+    },
+    {
+      "type": "text",
+      "title": "Por qué el acceso al DOM es lento",
+      "body": "El DOM vive en una parte diferente del navegador que JavaScript. Cada vez que JS accede o modifica el DOM, está cruzando un puente entre dos sistemas. Este puente tiene un peaje:\n\n1. **Leer** (ej., element.offsetHeight) obliga al navegador a calcular el layout actual\n2. **Escribir** (ej., element.style.color = 'red') marca el layout como sucio, requiriendo recálculo\n3. **Leer y luego escribir en un bucle** es lo peor -- cada lectura fuerza el cálculo del layout, luego cada escritura lo invalida de nuevo"
+    },
+    {
+      "type": "code_example",
+      "title": "Layout thrashing",
+      "language": "javascript",
+      "code": "// BAD: Forces layout recalculation on every iteration\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ reads layout each time!\n}\n\n// GOOD: Read once, then write in a batch\nconst width = container.offsetWidth; // one read\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // only writes\n}",
+      "annotation": "La versión mala lee offsetWidth dentro del bucle, lo que obliga al navegador a recalcular el layout en cada iteración porque la escritura anterior (style.width) lo invalidó. Esto se llama 'layout thrashing'."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La manipulación del DOM es costosa porque JavaScript y el DOM son sistemas separados. Agrupa tus lecturas y escrituras, evita leer propiedades de layout en bucles, y deja que frameworks como React manejen las actualizaciones del DOM eficientemente."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Leer element.offsetHeight dentro de un bucle que también cambia estilos causa layout thrashing.",
+        "isGoodPractice": true,
+        "explanation": "Cada escritura (cambio de estilo) invalida el layout. Cada lectura (offsetHeight) obliga al navegador a recalcular el layout desde cero. Alternar lectura-escritura en un bucle significa que el navegador recalcula el layout en cada iteración en lugar de una vez al final. Esto se llama layout thrashing y puede congelar el navegador."
+      },
+      {
+        "id": "card-2",
+        "content": "Usar document.getElementById es siempre más rápido que querySelector.",
+        "isGoodPractice": false,
+        "explanation": "Aunque getElementById está optimizado para IDs y es técnicamente más rápido, la diferencia es insignificante en la práctica -- ambos retornan en microsegundos. El costo real de rendimiento no es encontrar elementos, es lo que haces con ellos después (cambiar estilos, agregar hijos, forzar layouts). Enfócate en agrupar escrituras al DOM, no en micro-optimizar selectores."
+      },
+      {
+        "id": "card-3",
+        "content": "Crear elementos en un document fragment y agregar una vez es más rápido que agregar elementos uno por uno.",
+        "isGoodPractice": true,
+        "explanation": "Cada vez que agregas un hijo a un nodo visible del DOM, el navegador debe recalcular el layout y repintar. Agregar 100 elementos significa 100 recálculos. Un DocumentFragment es un contenedor invisible -- construyes tus elementos en él, luego agregas todo el fragmento de una vez. Un agregado, un recálculo."
+      },
+      {
+        "id": "card-4",
+        "content": "El DOM virtual de React elimina completamente el costo de la manipulación del DOM.",
+        "isGoodPractice": false,
+        "explanation": "El DOM virtual de React reduce la manipulación innecesaria del DOM al hacer diff de lo que cambió, pero no elimina el costo. React aún tiene que actualizar el DOM real eventualmente. El DOM virtual ayuda al agrupar actualizaciones y solo cambiar lo que es diferente, pero código React mal escrito (re-renderizados excesivos, listas enormes sin virtualización) aún puede causar problemas de rendimiento."
+      },
+      {
+        "id": "card-5",
+        "content": "Usar transformaciones CSS para animaciones es más rápido que cambiar posiciones top/left.",
+        "isGoodPractice": true,
+        "explanation": "Las transformaciones CSS (translate, scale, rotate) son manejadas por la GPU y no activan recálculo de layout. Cambiar top/left obliga al navegador a recalcular la posición del elemento y todo a su alrededor. Para animaciones suaves a 60fps, siempre usa transform en lugar de propiedades de posición."
+      }
+    ],
+    "glossaryTerms": ["dom", "layout-thrashing", "virtual-dom", "document-fragment", "repaint"]
+  }
+}

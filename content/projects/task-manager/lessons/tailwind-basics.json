@@ -1,0 +1,73 @@
+{
+  "slug": "tailwind-basics",
+  "title": "Tailwind CSS Best Practices",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "Tailwind CSS lets you style components with utility classes directly in your markup. Judge whether each Tailwind practice is good or bad.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Why Tailwind?",
+      "body": "Tailwind CSS uses small, single-purpose utility classes like `p-4` (padding), `text-lg` (font size), and `bg-blue-500` (background color). Instead of writing CSS in separate files and inventing class names, you compose styles directly in your JSX. This keeps styles co-located with the markup they affect and eliminates the problem of dead CSS."
+    },
+    {
+      "type": "text",
+      "title": "Taming Long Class Lists",
+      "body": "The most common complaint about Tailwind is long class strings. The solution isn't to avoid Tailwind — it's to **extract components**. If a class list appears in multiple places, that's a sign you need a React component, not a custom CSS class. The component becomes your reusable abstraction."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tailwind works best when paired with component-driven design. Use utility classes for styling, extract React components when you see duplication, and lean on Tailwind's design system (spacing scale, color palette) to keep your UI consistent without manual effort."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "good-semantic-grouping",
+        "content": "Organizing Tailwind classes in a consistent order: layout (flex, grid) first, then spacing (p, m), then typography (text, font), then colors (bg, text), then effects (shadow, rounded)",
+        "isGoodPractice": true,
+        "explanation": "Consistent class ordering makes long class strings scannable. You always know where to look for a specific type of style. Many teams adopt a standard order and enforce it with tooling like prettier-plugin-tailwindcss."
+      },
+      {
+        "id": "bad-arbitrary-values",
+        "content": "Using arbitrary values everywhere like p-[13px], mt-[7px], and text-[15px] instead of Tailwind's built-in spacing and size scales",
+        "isGoodPractice": false,
+        "explanation": "Arbitrary values bypass Tailwind's design system, leading to inconsistent spacing and sizing across your app. Stick to the built-in scale (p-3, mt-2, text-sm) so everything aligns to a consistent rhythm."
+      },
+      {
+        "id": "good-responsive",
+        "content": "Using responsive prefixes like 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' to make the task list adapt from mobile to desktop",
+        "isGoodPractice": true,
+        "explanation": "Tailwind's responsive prefixes make mobile-first design straightforward. The base style applies to mobile, then md: and lg: add overrides for larger screens. No media queries needed."
+      },
+      {
+        "id": "bad-important-overrides",
+        "content": "Adding the ! prefix to force overrides like '!text-red-500 !font-bold' because your styles keep getting overridden by other classes",
+        "isGoodPractice": false,
+        "explanation": "If you need !important to make styles work, your component structure has a problem. Fix the root cause (conflicting styles, wrong specificity) instead of forcing overrides. Using ! makes styles fragile and hard to debug."
+      },
+      {
+        "id": "good-dark-mode",
+        "content": "Using Tailwind's dark: variant like 'bg-white dark:bg-gray-900 text-gray-900 dark:text-white' to support both light and dark themes",
+        "isGoodPractice": true,
+        "explanation": "The dark: variant is the idiomatic way to handle dark mode in Tailwind. It keeps both themes visible in one place and works with Tailwind's built-in dark mode detection."
+      },
+      {
+        "id": "bad-inline-styles",
+        "content": "Mixing Tailwind classes with inline styles like <div className='flex' style={{ marginTop: '20px', color: '#333' }}>",
+        "isGoodPractice": false,
+        "explanation": "Mixing inline styles with Tailwind defeats the purpose of a utility system. Use mt-5 and text-gray-700 instead. Inline styles can't use responsive prefixes, dark mode, or hover states."
+      },
+      {
+        "id": "good-extract-component",
+        "content": "When the same combination of 'rounded-lg shadow-md p-4 bg-white border border-gray-200' appears on 5 different cards, extracting a reusable <Card> React component",
+        "isGoodPractice": true,
+        "explanation": "This is exactly the right move. Don't use @apply to create a CSS abstraction — create a React component instead. The component is your reusable unit, and it can carry behavior (onClick, children) alongside its styles."
+      }
+    ],
+    "glossaryTerms": ["utility-css", "responsive-design", "design-system"]
+  }
+}

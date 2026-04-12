@@ -1,0 +1,9 @@
+{
+  "slug": "measuring",
+  "title": "Medición y perfilado",
+  "description": "DevTools, Lighthouse, presupuestos de rendimiento y métricas de usuarios reales",
+  "order": 5,
+  "courseSlug": "performance-scaling",
+  "tier": "advanced",
+  "lessons": []
+}

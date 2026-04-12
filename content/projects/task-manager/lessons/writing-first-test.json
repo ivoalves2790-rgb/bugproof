@@ -1,0 +1,91 @@
+{
+  "slug": "writing-first-test",
+  "title": "Writing Your First Test",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "testing",
+  "projectSlug": "task-manager",
+  "intro": "You've decided to add tests to your task manager. You open the testing framework docs and stare at the blank test file. Let's walk through writing your first real test.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Anatomy of a Test",
+      "body": "Every test has three phases: Arrange (set up the data), Act (run the function), and Assert (check the result). A test for adding a task would create input data, call the addTask function, and verify the returned task has the right properties."
+    },
+    {
+      "type": "code_example",
+      "title": "A Simple Unit Test",
+      "language": "text",
+      "code": "test('addTask creates a task with correct title and pending status', () => {\n  // Arrange\n  const input = { title: 'Buy groceries' };\n  \n  // Act\n  const task = addTask(input);\n  \n  // Assert\n  expect(task.title).toBe('Buy groceries');\n  expect(task.status).toBe('pending');\n  expect(task.id).toBeDefined();\n});",
+      "annotation": "The Arrange-Act-Assert pattern keeps tests readable and focused on one behavior."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Start with the simplest test possible — one function, one input, one expected output. Build complexity gradually. A test that exists and runs is better than a perfect test you never write."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You're writing your first test for the task manager's 'completeTask' function. It should mark a task as done and set a completedAt timestamp. Where do you start?",
+        "choices": [
+          { "id": "a", "text": "Write a test that checks the entire task lifecycle — create, complete, delete — all in one test", "nextNode": "too-much", "score": 1 },
+          { "id": "b", "text": "Write a focused test: given a pending task, completeTask should set status to 'done' and add a completedAt date", "nextNode": "focused-test", "score": 4 },
+          { "id": "c", "text": "Skip writing tests and just manually click through the app to check it works", "nextNode": "skip-tests", "score": 0 }
+        ]
+      },
+      "too-much": {
+        "narrative": "Your test is 40 lines long, creates a task, completes it, verifies it, then deletes it. When it fails, you can't tell which part broke. You split it into three separate tests, each checking one behavior.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "One test per behavior is the golden rule. Mega-tests are hard to debug and maintain. You learned firsthand why focused tests matter.",
+        "choices": []
+      },
+      "focused-test": {
+        "narrative": "Your test passes. Now you want to test what happens when completeTask is called on an already-completed task. What do you do?",
+        "choices": [
+          { "id": "b1", "text": "Write a second test: 'should throw an error if task is already completed'", "nextNode": "edge-case", "score": 3 },
+          { "id": "b2", "text": "One passing test is enough, move on to building features", "nextNode": "one-test-end", "score": 1 }
+        ]
+      },
+      "skip-tests": {
+        "narrative": "You manually test and it seems to work. Two weeks later, you refactor the task model and the completeTask function silently breaks — it no longer sets the timestamp. Users complain their completed tasks show no completion date.",
+        "choices": [
+          { "id": "c1", "text": "Fix the bug and finally write tests to prevent this from happening again", "nextNode": "late-test-end", "score": 2 },
+          { "id": "c2", "text": "Fix the bug and go back to manual testing", "nextNode": "manual-end", "score": 0 }
+        ]
+      },
+      "edge-case": {
+        "narrative": "Your second test reveals that completeTask doesn't handle this edge case — it silently overwrites the completedAt timestamp. You add a guard clause and now have two solid tests covering the happy path and an edge case.",
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "This is exactly how testing should work. Focused tests that check specific behaviors, including edge cases. The test literally found a bug before your users did.",
+        "choices": []
+      },
+      "one-test-end": {
+        "narrative": "Your single test gives some confidence, but when the completeTask behavior changes, you don't catch edge cases. Users discover bugs you could have tested for.",
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "One test is better than zero, but edge cases are where most bugs hide. Test the happy path and at least one error case for each function.",
+        "choices": []
+      },
+      "late-test-end": {
+        "narrative": "You write regression tests for the bug. Future refactors are now safer, though users already experienced the bug.",
+        "isEnd": true,
+        "finalScore": 3,
+        "feedback": "Regression tests are valuable — they prevent the same bug from recurring. But writing tests upfront would have caught this before users were affected.",
+        "choices": []
+      },
+      "manual-end": {
+        "narrative": "The same pattern repeats: you fix a bug, it comes back later after a refactor, you fix it again. Each cycle costs more time than writing a test would have.",
+        "isEnd": true,
+        "finalScore": 1,
+        "feedback": "Without automated tests, bugs keep recurring. The time spent fixing recurring bugs always exceeds the time it takes to write tests.",
+        "choices": []
+      }
+    },
+    "glossaryTerms": ["arrange-act-assert", "edge-case"]
+  }
+}

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { CodeLineSelector } from "@/components/code/CodeLineSelector";
 import { evaluateBugHunt, type BugHuntResult } from "@/lib/engine/exercise-evaluator";
 import type { BugHuntExercise } from "@/lib/types/content.types";
+import { useT } from "@/lib/i18n/use-language";
 
 type BugHuntState = "selecting_line" | "selecting_fix" | "feedback" | "complete";
 
@@ -23,6 +24,7 @@ const stageTransition = {
 };
 
 export function BugHunt({ exercise, onComplete }: BugHuntProps) {
+  const t = useT();
   const [state, setState] = useState<BugHuntState>("selecting_line");
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const [selectedFix, setSelectedFix] = useState<string | null>(null);
@@ -83,7 +85,7 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
         {state === "selecting_line" && (
           <motion.div key="selecting-line" {...stageTransition} className="flex flex-col gap-3">
             <p className="text-xs text-muted-foreground">
-              Tap the line you think contains the bug
+              {t("bugHunt.tapLine")}
             </p>
             {selectedLine !== null && (
               <motion.div
@@ -91,7 +93,7 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
                 animate={{ opacity: 1, scale: 1 }}
               >
                 <Button onClick={handleConfirmLine} size="md">
-                  Confirm line {selectedLine}
+                  {t("bugHunt.confirmLine")} {selectedLine}
                 </Button>
               </motion.div>
             )}

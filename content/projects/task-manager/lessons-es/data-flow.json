@@ -1,0 +1,73 @@
+{
+  "slug": "data-flow",
+  "title": "Flujo de Datos",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "database",
+  "projectSlug": "task-manager",
+  "intro": "Los datos fluyen a traves de tu gestor de tareas como agua por tuberias — desde la base de datos, a traves de la API, hacia la interfaz, y de vuelta. Desliza a la derecha en patrones correctos de flujo de datos, a la izquierda en incorrectos.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "El Viaje de Ida y Vuelta de una Tarea",
+      "body": "Cuando un usuario crea una tarea, los datos viajan un camino especifico: **Formulario de UI -> Llamada API -> Cliente Supabase -> Base de datos PostgreSQL**. Cuando cargan la lista de tareas, se invierte: **Base de datos -> API de Supabase -> tu app -> renderizado en la UI**. Entender este viaje de ida y vuelta te ayuda a depurar problemas — si las tareas no aparecen, puedes verificar cada paso en la cadena para encontrar donde se rompe."
+    },
+    {
+      "type": "analogy",
+      "title": "La Analogia del Restaurante",
+      "body": "Piensa en el flujo de datos como pedir en un restaurante. El usuario (cliente) llena un formulario (hace un pedido). El frontend (mesero) lo envia a la API (cocina). La base de datos (despensa) almacena los ingredientes. Cuando obtienes datos, la cocina prepara el plato de la despensa y el mesero lo trae a la mesa. Si la comida esta mal, rastrear el problema: el mesero anoto mal el pedido, la cocina lo leyo mal, o la despensa estaba mal abastecida?"
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los datos fluyen en un camino predecible: UI -> API -> Base de datos y de vuelta. Cuando algo se rompe, rastrea el flujo paso a paso. Revisa la pestana de red del navegador para errores de API, los logs de Supabase para errores de base de datos, y la interfaz para problemas de renderizado."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "optimistic-updates",
+        "content": "Actualizar la interfaz inmediatamente cuando un usuario completa una tarea, luego sincronizar con la base de datos en segundo plano",
+        "isGoodPractice": true,
+        "explanation": "Esto se llama actualizacion optimista. Hace que la app se sienta instantanea. Si la actualizacion de base de datos falla, reviertes la interfaz y muestras un error. La mayoria de las apps modernas usan este patron."
+      },
+      {
+        "id": "direct-db-from-browser",
+        "content": "Hacer que el navegador se conecte directamente a PostgreSQL usando una cadena de conexion de base de datos",
+        "isGoodPractice": false,
+        "explanation": "Nunca expongas credenciales de base de datos al navegador. El cliente de Supabase usa una capa API segura con autenticacion — nunca le da al navegador acceso directo a la base de datos."
+      },
+      {
+        "id": "loading-states",
+        "content": "Mostrar un indicador de carga mientras se obtienen tareas de la base de datos, luego renderizar la lista cuando los datos llegan",
+        "isGoodPractice": true,
+        "explanation": "Las llamadas a la base de datos toman tiempo (latencia de red). Los estados de carga previenen que la interfaz se vea rota o vacia durante la obtencion. Siempre maneja los estados de carga, exito y error."
+      },
+      {
+        "id": "no-error-handling",
+        "content": "Asumir que cada llamada a la base de datos tiene exito y no manejar errores en tu codigo de obtencion de datos",
+        "isGoodPractice": false,
+        "explanation": "Las solicitudes de red fallan. Las bases de datos se caen. Los usuarios pierden internet. Siempre envuelve las llamadas de datos en try/catch y muestra mensajes de error significativos en lugar de una pantalla en blanco o un fallo críptico."
+      },
+      {
+        "id": "rls-enforcement",
+        "content": "Usar Seguridad a Nivel de Fila de Supabase para que la base de datos filtre datos por usuario, en lugar de filtrar solo en el codigo de tu app",
+        "isGoodPractice": true,
+        "explanation": "RLS es defensa en profundidad. Incluso si tu frontend tiene un bug que olvida un filtro de usuario, la base de datos misma impone las reglas de acceso. Este es un patron de seguridad critico."
+      },
+      {
+        "id": "polling-every-second",
+        "content": "Obtener la lista completa de tareas de la base de datos cada segundo para verificar cambios",
+        "isGoodPractice": false,
+        "explanation": "Consultar cada segundo desperdicia ancho de banda y recursos de base de datos. Usa las suscripciones en tiempo real de Supabase para ser notificado de cambios, o vuelve a obtener datos solo cuando el usuario toma una accion."
+      },
+      {
+        "id": "validate-before-insert",
+        "content": "Validar la entrada del usuario tanto en el frontend como en el backend antes de insertar datos en la base de datos",
+        "isGoodPractice": true,
+        "explanation": "La validacion del frontend da retroalimentacion instantanea. La validacion del backend previene que datos maliciosos o malformados lleguen a la base de datos. Necesitas ambas — el frontend solo puede ser evadido."
+      }
+    ],
+    "glossaryTerms": ["optimistic-update", "rls", "realtime"]
+  }
+}

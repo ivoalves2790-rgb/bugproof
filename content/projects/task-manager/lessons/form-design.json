@@ -1,0 +1,73 @@
+{
+  "slug": "form-design",
+  "title": "Form Design That Doesn't Hurt",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "chapterSlug": "building-ui",
+  "projectSlug": "task-manager",
+  "intro": "Forms are how users create and edit tasks. Good form design reduces friction; bad form design makes users rage-quit. Judge whether each form practice helps or hurts the experience.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "Forms Are the Gateway to Your Data",
+      "body": "Every task in your app starts as a form submission. If the 'Add Task' form is annoying, users will avoid adding tasks — which defeats the entire purpose of a task manager. The goal is to make form interaction feel **effortless**: minimal fields, clear labels, instant feedback."
+    },
+    {
+      "type": "text",
+      "title": "Validation That Helps, Not Punishes",
+      "body": "Validation should guide users, not scold them. Show errors **inline** next to the field that has the problem, not in a generic alert at the top of the page. Validate on blur (when the user leaves a field) for format checks, and on submit for required fields. Never clear the entire form when validation fails."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The best form is the shortest form. For task creation, you might only need a title field — make everything else optional or set smart defaults. Users can always edit a task after creating it. Low friction at creation time means more tasks captured."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "good-minimal-create",
+        "content": "The 'Add Task' form has just one required field (title) with optional fields collapsed behind a 'More options' toggle",
+        "isGoodPractice": true,
+        "explanation": "Minimal friction for the most common action. Most tasks just need a title to start. Users who want to add a due date or priority can expand the options, but they're not forced to see them every time."
+      },
+      {
+        "id": "bad-clear-on-error",
+        "content": "When form validation fails, clearing all fields and showing an alert that says 'Please fix the errors and try again'",
+        "isGoodPractice": false,
+        "explanation": "Clearing the form on error is one of the most frustrating UX patterns. The user has to re-enter everything. Keep all field values, highlight the specific problem, and let the user fix just what's wrong."
+      },
+      {
+        "id": "good-inline-validation",
+        "content": "Showing a red border and 'Title is required' message directly below the title field when the user tries to submit an empty form",
+        "isGoodPractice": true,
+        "explanation": "Inline validation tells the user exactly what's wrong and where. It's immediately actionable — the user's eyes are already near the field. Much better than a generic error banner at the top."
+      },
+      {
+        "id": "bad-too-many-fields",
+        "content": "Requiring users to fill in title, description, priority, due date, category, estimated time, and tags before they can create a task",
+        "isGoodPractice": false,
+        "explanation": "Seven required fields to add a task is a wall that kills momentum. Most of these should be optional or have sensible defaults. If capturing a task feels like paperwork, users will stop using the app."
+      },
+      {
+        "id": "good-keyboard-submit",
+        "content": "Allowing users to press Enter to submit the 'Add Task' form so they can quickly add multiple tasks without reaching for the mouse",
+        "isGoodPractice": true,
+        "explanation": "Power users live on the keyboard. Enter-to-submit for simple forms (especially the quick-add flow) makes rapid task entry feel natural. It's a small detail that dramatically improves the experience for frequent users."
+      },
+      {
+        "id": "bad-no-loading-state",
+        "content": "When the user clicks 'Save Task', the button doesn't change and nothing happens for 2 seconds while the data saves, so users click it multiple times",
+        "isGoodPractice": false,
+        "explanation": "No loading state creates anxiety and causes duplicate submissions. Disable the button, show a spinner or 'Saving...' text, and re-enable it when done. Users need to know the app heard them."
+      },
+      {
+        "id": "good-autofocus",
+        "content": "When the 'Add Task' modal opens, automatically focusing the title input so the user can start typing immediately",
+        "isGoodPractice": true,
+        "explanation": "Autofocus removes one step (clicking the input) from the most common action. It signals to the user 'go ahead, start typing.' A small detail that makes the form feel responsive and thoughtful."
+      }
+    ],
+    "glossaryTerms": ["form-validation", "user-experience", "accessibility"]
+  }
+}

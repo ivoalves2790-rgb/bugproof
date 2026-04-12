@@ -1,0 +1,16 @@
+{
+  "slug": "tables-and-schemas",
+  "title": "Tablas y Esquemas",
+  "description": "Aprende cómo estructurar tus datos en tablas con columnas, tipos de datos y restricciones que mantienen tus datos limpios y consistentes",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "database-design",
+  "lessons": [
+    { "slug": "tables-are-spreadsheets", "title": "Las Tablas Son Como Hojas de Cálculo", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "columns-and-data-types", "title": "Columnas y Tipos de Datos", "type": "bug_hunt", "order": 2, "difficulty": 1 },
+    { "slug": "primary-keys", "title": "Claves Primarias: El ID de Cada Fila", "type": "incident_response", "order": 3, "difficulty": 1 },
+    { "slug": "not-null-and-defaults", "title": "NOT NULL y Valores por Defecto", "type": "bug_hunt", "order": 4, "difficulty": 1 },
+    { "slug": "creating-a-table", "title": "Creando Tu Primera Tabla", "type": "terminal_sim", "order": 5, "difficulty": 1 },
+    { "slug": "schema-design-thinking", "title": "Pensando en Esquemas", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

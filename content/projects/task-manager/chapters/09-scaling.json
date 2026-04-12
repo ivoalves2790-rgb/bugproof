@@ -1,0 +1,16 @@
+{
+  "slug": "scaling",
+  "title": "Scaling & Next Steps",
+  "description": "Your app is live! Learn how to handle growth, improve performance, and plan your next features.",
+  "order": 9,
+  "phase": "scaling",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "performance-basics", "title": "Performance Basics", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "caching-strategies", "title": "Caching Strategies", "type": "swipe_to_judge", "order": 2, "difficulty": 2 },
+    { "slug": "scaling-database", "title": "Scaling Your Database", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "adding-features", "title": "Adding Features Safely", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "whats-next", "title": "What's Next?", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["performance-scaling"]
+}

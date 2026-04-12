@@ -1,0 +1,16 @@
+{
+  "slug": "debugging-in-practice",
+  "title": "Depuración en el mundo real",
+  "description": "Aplica todo lo que has aprendido a escenarios realistas de depuración que enfrentarás en el trabajo",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "debugging-error-reading",
+  "lessons": [
+    { "slug": "api-response-errors", "title": "Errores de respuesta de API", "type": "incident_response", "order": 1, "difficulty": 2 },
+    { "slug": "debugging-css-layout", "title": "Depurando diseño CSS", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "environment-issues", "title": "Problemas de entorno", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "production-debugging", "title": "Producción vs Desarrollo", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "debugging-someone-elses-code", "title": "Depurando el código de otra persona", "type": "incident_response", "order": 5, "difficulty": 3 },
+    { "slug": "building-debugging-habits", "title": "Construyendo hábitos de depuración", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "tech-stack",
+  "title": "Choosing Your Stack",
+  "description": "Pick the right tools for the job. Learn why we're using Next.js, Supabase, and Tailwind CSS — and what alternatives exist.",
+  "order": 2,
+  "phase": "tech-stack",
+  "projectSlug": "task-manager",
+  "lessons": [
+    { "slug": "framework-landscape", "title": "The Framework Landscape", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "why-nextjs", "title": "Why Next.js?", "type": "swipe_to_judge", "order": 2, "difficulty": 1 },
+    { "slug": "database-options", "title": "Database Options", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "choosing-supabase", "title": "Choosing Supabase", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "stack-summary", "title": "Your Stack Decision", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ],
+  "relatedCourses": ["system-architecture", "ai-assisted-development"]
+}

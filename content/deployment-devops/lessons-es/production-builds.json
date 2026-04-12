@@ -1,0 +1,100 @@
+{
+  "slug": "production-builds",
+  "title": "¿Qué es un Build de Producción?",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "going-live",
+  "courseSlug": "deployment-devops",
+  "intro": "Tu equipo acaba de desplegar una nueva funcionalidad, pero la compilación falló en el servidor aunque todo funciona localmente. Necesitas averiguar qué salió mal y poner el sitio de nuevo en línea.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Compilar = Empacar para un Viaje",
+      "body": "Un build de producción es como empacar una maleta para un viaje. No llevas todo tu armario -- eliges solo lo que necesitas, doblas todo con cuidado y lo comprimes para que quepa. El **proceso de compilación** toma tu código de desarrollo desordenado y crea una versión limpia, comprimida y optimizada que carga rápido para los usuarios."
+    },
+    {
+      "type": "text",
+      "title": "Qué Pasa Durante una Compilación",
+      "body": "Cuando ejecutas `npm run build`, suceden varias cosas:\n\n1. **Empaquetado** -- Todos tus archivos separados se combinan en menos archivos\n2. **Minificación** -- Los nombres de variables se acortan, los espacios en blanco se eliminan\n3. **Tree-shaking** -- El código no usado se elimina\n4. **Compilación** -- TypeScript, JSX y sintaxis moderna se convierten a JavaScript plano\n5. **Optimización** -- Imágenes comprimidas, CSS purgado de estilos no usados"
+    },
+    {
+      "type": "code_example",
+      "title": "Antes y Después",
+      "language": "javascript",
+      "code": "// YOUR CODE (readable)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// AFTER BUILD (minified)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
+      "annotation": "La versión minificada hace exactamente lo mismo pero es mucho más pequeña. Por esto los builds de producción cargan más rápido."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un build de producción empaqueta, minifica y optimiza tu código para que cargue rápido para los usuarios. Los errores de compilación son uno de los problemas de despliegue más comunes."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Haces push a main y el despliegue comienza. Dos minutos después, recibes una alerta: 'Build failed'. El sitio todavía muestra la versión anterior. Tu PM está preguntando cuándo estará en vivo la nueva funcionalidad. ¿Qué haces primero?",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs de compilación en la plataforma de hosting", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Enviar el mismo código de nuevo -- tal vez fue un fallo temporal", "nextNode": "retry-blind", "score": 2 },
+          { "id": "c", "text": "Decirle al PM que estará listo mañana e ir a almorzar", "nextNode": "ignore", "score": 0 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "¡Buena decisión! Abres los logs de compilación y ves:\n\nError: Module not found: Can't resolve './components/Header'\n  at ./src/pages/index.js\n\nBuild failed with 1 error.\n\nEl archivo existe en tu computadora. ¿Qué podría estar mal?",
+        "choices": [
+          { "id": "a", "text": "Verificar si las mayúsculas del nombre del archivo coinciden -- Mac no distingue mayúsculas pero los servidores Linux sí", "nextNode": "found-issue", "score": 10 },
+          { "id": "b", "text": "Eliminar la carpeta node_modules y reinstalar", "nextNode": "wrong-fix", "score": 3 },
+          { "id": "c", "text": "El servidor debe estar roto -- contactar soporte de hosting", "nextNode": "blame-server", "score": 1 }
+        ]
+      },
+      "retry-blind": {
+        "narrative": "Haces push de nuevo y... el mismo error. Los fallos de compilación casi nunca son fallas temporales -- son causados por problemas reales en tu código o configuración. Necesitas realmente leer el mensaje de error.",
+        "choices": [
+          { "id": "a", "text": "Está bien, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 3 }
+        ]
+      },
+      "ignore": {
+        "narrative": "Ignorar un fallo de compilación significa que la nueva funcionalidad no está en vivo y no estás más cerca de arreglarlo. El PM preguntará de nuevo después del almuerzo. Mejor investigar ahora mientras el error está fresco.",
+        "choices": [
+          { "id": "a", "text": "Bueno, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 1 }
+        ]
+      },
+      "found-issue": {
+        "narrative": "¡Exacto! Tu archivo se llama 'header.js' pero tu import dice './components/Header'. En tu Mac, esto funciona porque macOS no distingue mayúsculas de minúsculas. Pero el servidor Linux sí -- 'Header' y 'header' son archivos diferentes. ¿Cómo lo arreglas?",
+        "choices": [
+          { "id": "a", "text": "Renombrar el archivo para que coincida con el import: Header.js", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Cambiar el import a minúsculas: ./components/header", "nextNode": "end-okay", "score": 7 }
+        ]
+      },
+      "wrong-fix": {
+        "narrative": "Reinstalar las dependencias no ayudó porque el problema no es con tus paquetes -- es con la ruta del archivo. Mira el error más cuidadosamente: dice que el módulo no se puede encontrar. El archivo existe, así que tal vez es un problema de nombres.",
+        "choices": [
+          { "id": "a", "text": "Verificar si las mayúsculas del nombre del archivo coinciden con el import", "nextNode": "found-issue", "score": 5 }
+        ]
+      },
+      "blame-server": {
+        "narrative": "El servidor está bien -- está ejecutando tu comando de compilación exactamente como se le indicó. El error está en tu código. Lee el mensaje de error de nuevo: dice que un módulo específico no se puede encontrar.",
+        "choices": [
+          { "id": "a", "text": "Está bien, déjame mirar la ruta del archivo más cuidadosamente", "nextNode": "found-issue", "score": 3 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Renombras 'header.js' a 'Header.js', haces commit y push. La compilación tiene éxito y el sitio se despliega en menos de 2 minutos. El PM está contento, y has aprendido una lección importante sobre la sensibilidad a mayúsculas entre sistemas operativos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Depuración perfecta! Revisaste los logs de compilación, identificaste el problema de sensibilidad a mayúsculas, e hiciste una corrección limpia. Las mayúsculas en archivos son uno de los errores más comunes de 'funciona en mi máquina' porque Mac y Windows no distinguen mayúsculas pero los servidores Linux sí."
+      },
+      "end-okay": {
+        "narrative": "Cambiar el import a minúsculas también funciona, pero ahora tu estilo de código es inconsistente -- algunos imports usan PascalCase y otros no. La convención para componentes React es nombres de archivo en PascalCase, así que renombrar el archivo sería más limpio.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Encontraste la causa raíz -- ¡buen trabajo! Ambas correcciones funcionan, pero renombrar el archivo a PascalCase (Header.js) es la mejor convención para componentes React. Siempre sé consistente con las mayúsculas de archivos para evitar estos errores entre plataformas."
+      }
+    },
+    "glossaryTerms": ["production-build", "build-error", "case-sensitivity"]
+  }
+}

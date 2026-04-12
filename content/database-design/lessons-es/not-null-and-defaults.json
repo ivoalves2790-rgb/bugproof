@@ -1,0 +1,55 @@
+{
+  "slug": "not-null-and-defaults",
+  "title": "NOT NULL y Valores por Defecto",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "tables-and-schemas",
+  "courseSlug": "database-design",
+  "intro": "La app de un desarrollador se cae cuando intenta mostrar el nombre de un usuario porque el nombre es NULL (vacío). La tabla permite nombres vacíos, lo cual debería haberse prevenido desde el principio. Arreglemos la definición de la tabla.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "NOT NULL = Campos Obligatorios en un Formulario",
+      "body": "Cuando llenas un formulario, algunos campos tienen un asterisco rojo (*) que significa 'obligatorio.' No puedes enviar el formulario sin llenarlos. **NOT NULL** es la versión de base de datos de ese asterisco -- significa 'esta columna debe tener un valor, no puedes dejarla vacía.' Sin NOT NULL, obtienes valores vacíos invisibles que causan fallos después."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué es NULL?",
+      "body": "**NULL** en una base de datos significa 'sin valor' o 'desconocido.' No es cero, no es una cadena vacía -- es la ausencia de cualquier valor. NULL causa problemas porque:\n\n1. `NULL + 5` = NULL (no 5)\n2. `NULL = NULL` es falso (NULL no es igual a nada, ¡ni siquiera a sí mismo!)\n3. Tu código podría fallar al intentar llamar `.length` en NULL\n\n¿La solución? Usa **NOT NULL** en columnas que siempre deberían tener un valor."
+    },
+    {
+      "type": "code_example",
+      "title": "NOT NULL y DEFAULT",
+      "language": "sql",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name is required\n  email TEXT NOT NULL UNIQUE,      -- email is required and unique\n  bio TEXT DEFAULT '',             -- optional, defaults to empty string\n  is_active BOOLEAN DEFAULT true,  -- defaults to true for new users\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-set to current time\n);",
+      "annotation": "NOT NULL significa que la columna es obligatoria. DEFAULT proporciona un valor cuando no se especifica uno. Usa NOT NULL para datos esenciales como nombre y email. Usa DEFAULT para campos que tienen un valor automático sensato."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "NOT NULL previene valores vacíos en columnas que siempre deberían tener datos. DEFAULT proporciona valores automáticos cuando no se especifica ninguno. Juntos, mantienen tus datos limpios y previenen fallos relacionados con NULL en tu app."
+    }
+  ],
+  "exercise": {
+    "language": "sql",
+    "code": [
+      { "line": 1, "text": "CREATE TABLE users (", "isBuggy": false },
+      { "line": 2, "text": "  id SERIAL PRIMARY KEY,", "isBuggy": false },
+      { "line": 3, "text": "  name TEXT,", "isBuggy": true },
+      { "line": 4, "text": "  email TEXT NOT NULL UNIQUE,", "isBuggy": false },
+      { "line": 5, "text": "  role TEXT DEFAULT 'member',", "isBuggy": false },
+      { "line": 6, "text": "  created_at TIMESTAMP DEFAULT NOW()", "isBuggy": false },
+      { "line": 7, "text": ");", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "La app falla con 'Cannot read property toUpperCase of null' al intentar mostrar el nombre de un usuario. Algunos usuarios fueron insertados sin nombre, y la columna lo permitió. Encuentra la columna que debería requerir un valor pero no lo hace.",
+    "fixes": [
+      { "id": "a", "text": "name TEXT NOT NULL,", "isCorrect": true },
+      { "id": "b", "text": "name TEXT DEFAULT 'Unknown',", "isCorrect": false },
+      { "id": "c", "text": "name VARCHAR(255),", "isCorrect": false },
+      { "id": "d", "text": "name TEXT UNIQUE,", "isCorrect": false }
+    ],
+    "explanation": "La columna name está definida como solo 'TEXT' sin restricción, así que los valores NULL están permitidos. Cuando la app intenta llamar .toUpperCase() en un nombre NULL, falla. Agregar NOT NULL asegura que cada usuario DEBE tener un nombre cuando se inserta. La base de datos rechazará cualquier INSERT que intente dejar el nombre vacío. La opción B (DEFAULT 'Unknown') prevendría NULLs pero llenaría tu base de datos con usuarios 'Unknown' en lugar de forzar a la app a recolectar un nombre real.",
+    "glossaryTerms": ["null", "not-null", "default", "constraint"]
+  }
+}

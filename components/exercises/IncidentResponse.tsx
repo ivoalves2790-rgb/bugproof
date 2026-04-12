@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/Button";
 import { evaluateIncidentResponse, type IncidentResponseResult } from "@/lib/engine/exercise-evaluator";
 import type { IncidentResponseExercise, IncidentNode } from "@/lib/types/content.types";
+import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
 
 interface IncidentResponseProps {
   exercise: IncidentResponseExercise;
@@ -120,7 +121,7 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
         {endNode && (
           <div className="rounded-lg border border-border bg-surface p-4">
             <p className="text-sm text-foreground leading-relaxed">
-              {endNode.narrative}
+              <GlossaryHighlighter text={endNode.narrative} />
             </p>
           </div>
         )}
@@ -204,7 +205,7 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
         onClick={isTyping ? skipTyping : undefined}
       >
         <p className="text-sm text-foreground leading-relaxed whitespace-pre-line">
-          {displayedText}
+          {isTyping ? displayedText : <GlossaryHighlighter text={displayedText} />}
           {isTyping && (
             <span className="cursor-blink ml-0.5 inline-block h-4 w-1.5 bg-terminal-green align-text-bottom" />
           )}

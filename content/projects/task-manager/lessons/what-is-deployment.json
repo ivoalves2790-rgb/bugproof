@@ -1,0 +1,67 @@
+{
+  "slug": "what-is-deployment",
+  "title": "What Is Deployment?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "chapterSlug": "deployment",
+  "projectSlug": "task-manager",
+  "intro": "Your task manager works on your laptop — now it's time to put it on the internet so anyone can use it. Let's explore what deployment actually means.",
+  "teach": [
+    {
+      "type": "text",
+      "title": "From Localhost to the World",
+      "body": "Deployment is the process of taking your app from 'works on my machine' to 'works for everyone on the internet.' It involves uploading your code to a server, setting up a database, configuring a domain name, and making sure everything runs reliably 24/7."
+    },
+    {
+      "type": "analogy",
+      "title": "Deployment Is Like Opening a Restaurant",
+      "body": "Cooking at home is localhost — it works, but only you eat. Deployment is opening a restaurant: you need a location (server), a sign (domain name), health inspections (security), and the ability to serve many people at once (scalability). The recipe is the same, but the logistics are completely different."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Modern platforms like Vercel and Netlify handle most deployment complexity for you. You push code, they build and serve it. Focus on what makes your app special, not server configuration."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "c1",
+        "content": "Modern deployment platforms can automatically deploy your app when you push to the main branch",
+        "isGoodPractice": true,
+        "explanation": "This is called continuous deployment. Platforms like Vercel watch your Git repo and deploy automatically on push, so shipping updates is as easy as merging a pull request."
+      },
+      {
+        "id": "c2",
+        "content": "You need to buy and manage your own physical server to deploy a web app",
+        "isGoodPractice": false,
+        "explanation": "Cloud platforms and serverless providers handle infrastructure for you. Managing physical servers is complex, expensive, and unnecessary for most apps."
+      },
+      {
+        "id": "c3",
+        "content": "Deploy to a staging environment first to test changes before they reach real users",
+        "isGoodPractice": true,
+        "explanation": "A staging environment mirrors production without affecting real users. It catches issues like broken environment variables or API misconfigurations before they reach your users."
+      },
+      {
+        "id": "c4",
+        "content": "It's fine to deploy directly from your laptop to production using FTP",
+        "isGoodPractice": false,
+        "explanation": "FTP deployments are manual, error-prone, and bypass CI/CD checks. Use Git-based deployments so changes are tracked, reviewed, and deployed consistently."
+      },
+      {
+        "id": "c5",
+        "content": "Preview deployments let you test every pull request on a real URL before merging",
+        "isGoodPractice": true,
+        "explanation": "Preview deployments are one of the most useful modern features. Each PR gets its own URL so teammates can review the actual running app, not just the code."
+      },
+      {
+        "id": "c6",
+        "content": "Once your app is deployed, you're done — no need to monitor or maintain it",
+        "isGoodPractice": false,
+        "explanation": "Deployment is the beginning, not the end. You need to monitor for errors, performance issues, and security vulnerabilities. Apps require ongoing maintenance."
+      }
+    ],
+    "glossaryTerms": ["continuous-deployment", "staging"]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "slug": "dotenv-files",
+  "title": "El Archivo .env",
+  "type": "bug_hunt",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "environment-config",
+  "courseSlug": "deployment-devops",
+  "intro": "Un archivo .env es donde almacenas las variables de entorno localmente. La app de un desarrollador no puede conectarse a la base de datos después de clonar el repositorio. Su archivo .env está mal configurado. Encuentra el error.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": ".env = Tu Archivo de Configuración Privado",
+      "body": "Piensa en un archivo .env como la página de configuración de tu teléfono. Es personal de tu dispositivo -- tu contraseña wifi, tu cuenta de correo, tus preferencias. No copiarías la configuración de tu teléfono al teléfono de otra persona. De manera similar, cada desarrollador y cada servidor tiene su propio archivo .env con configuraciones específicas de ese entorno."
+    },
+    {
+      "type": "text",
+      "title": "El Formato del Archivo .env",
+      "body": "Un archivo .env es súper simple -- solo pares clave=valor, uno por línea:\n\n- Sin espacios alrededor del signo `=`\n- No se necesitan comillas (generalmente)\n- Las líneas que empiezan con `#` son comentarios\n- El archivo vive en el directorio raíz de tu proyecto\n- El nombre del archivo es literalmente `.env` (empezando con un punto)"
+    },
+    {
+      "type": "code_example",
+      "title": "Un Archivo .env Típico",
+      "language": "bash",
+      "code": "# Database\nDATABASE_URL=postgresql://localhost:5432/myapp\n\n# API Keys\nSTRIPE_SECRET_KEY=sk_test_abc123\nNEXT_PUBLIC_API_URL=https://api.example.com\n\n# App Settings\nNODE_ENV=development\nPORT=3000",
+      "annotation": "Nota: Las variables con prefijo NEXT_PUBLIC_ se exponen al navegador en Next.js. Todas las demás permanecen solo en el servidor."
+    },
+    {
+      "type": "text",
+      "title": "La Regla de Oro: Nunca Committees .env",
+      "body": "Tu archivo .env contiene secretos. **Siempre** agrégalo a `.gitignore` para que nunca se envíe a GitHub. En su lugar, crea un archivo `.env.example` que muestre qué variables se necesitan (sin los valores reales) para que otros desarrolladores sepan qué configurar."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El archivo .env almacena variables de entorno localmente como pares CLAVE=VALOR. Nunca lo committees a Git -- siempre agrega .env a tu archivo .gitignore."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# .env file", "isBuggy": false },
+      { "line": 2, "text": "DATABASE_URL = postgresql://localhost:5432/myapp", "isBuggy": true },
+      { "line": 3, "text": "API_KEY=sk_live_abc123", "isBuggy": false },
+      { "line": 4, "text": "NODE_ENV=development", "isBuggy": false }
+    ],
+    "correctBuggyLine": 2,
+    "prompt": "El desarrollador clonó el repositorio, creó un archivo .env, pero la app dice que DATABASE_URL es undefined. Mira el archivo .env y encuentra qué está mal.",
+    "fixes": [
+      { "id": "a", "text": "DATABASE_URL=postgresql://localhost:5432/myapp", "isCorrect": true },
+      { "id": "b", "text": "export DATABASE_URL=postgresql://localhost:5432/myapp", "isCorrect": false },
+      { "id": "c", "text": "\"DATABASE_URL\": \"postgresql://localhost:5432/myapp\"", "isCorrect": false },
+      { "id": "d", "text": "DATABASE_URL: postgresql://localhost:5432/myapp", "isCorrect": false }
+    ],
+    "explanation": "¡Los espacios alrededor del signo = son el problema! En archivos .env, NO debería haber espacios alrededor del signo igual. 'DATABASE_URL = value' establece una variable llamada 'DATABASE_URL ' (con un espacio al final) al valor ' value' (con un espacio al inicio), o más comúnmente, el parser simplemente falla al leerlo. El formato correcto es 'DATABASE_URL=value' sin espacios.",
+    "glossaryTerms": ["dotenv", "gitignore", "environment-variable"]
+  }
+}
