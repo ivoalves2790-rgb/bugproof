@@ -19,6 +19,11 @@
       "body": "En las cocinas profesionales, los chefs practican el 'mise en place' — todo en su lugar antes de cocinar. Los ingredientes estan preparados, las herramientas acomodadas, las estaciones limpias. Configurar tu entorno de desarrollo es tu mise en place. Picas la cebolla (instalas Node), afilas los cuchillos (configuras VS Code) y precalientas el horno (configuras Git) ANTES de empezar a cocinar codigo."
     },
     {
+      "type": "analogy",
+      "title": "La Partitura de la Orquesta",
+      "body": "Imagina una orquesta donde cada musico toca con una version diferente de la partitura. Los violines estan en una tonalidad, los chelos en otra, y el baterista esta tocando una cancion completamente diferente. Los archivos de configuracion como `.nvmrc` y `.editorconfig` son la partitura compartida de tu equipo — aseguran que todos esten tocando la misma melodia, en la misma tonalidad, al mismo ritmo."
+    },
+    {
       "type": "text",
       "title": "La Consistencia Es Clave",
       "body": "Los equipos profesionales usan herramientas como archivos `.nvmrc` para fijar la version de Node.js, `.editorconfig` para formato consistente, y scripts en `package.json` para que cada desarrollador ejecute los mismos comandos. Estos pequenos archivos previenen el clasico problema de 'funciona en mi maquina'."

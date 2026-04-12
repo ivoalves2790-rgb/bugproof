@@ -19,6 +19,11 @@
       "body": "Usar create-next-app es como comprar un mueble de IKEA — todas las piezas estan cortadas, los tornillos incluidos, y las instrucciones ahi mismo. La configuracion manual es como ir a una madereria y cortar cada pieza tu mismo. PUEDES hacerlo, pero por que lo harias cuando el kit te da un escritorio funcional en 30 minutos?"
     },
     {
+      "type": "analogy",
+      "title": "Elegir Tu Equipo de Seguridad Antes de Escalar",
+      "body": "Elegir TypeScript, ESLint y Tailwind durante la configuracion es como elegir casco, arnes y buenos zapatos antes de escalar una roca. PODRIAS escalar sin ellos, pero un resbalon y estas en problemas. Estas herramientas te atrapan cuando caes — TypeScript detecta errores de tipo, ESLint senala patrones malos y Tailwind mantiene tus estilos organizados. Ponte el equipo antes de empezar a escalar, no a mitad de la pared."
+    },
+    {
       "type": "text",
       "title": "Por Que Estos Valores Predeterminados Importan",
       "body": "TypeScript agrega tipos a JavaScript, lo que significa que tu editor puede advertirte sobre bugs antes de que ejecutes el codigo. Tailwind CSS te permite dar estilo a componentes sin cambiar entre archivos. El App Router usa el directorio `app/` y te da layouts, estados de carga y componentes del servidor incluidos."

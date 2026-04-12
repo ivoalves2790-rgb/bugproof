@@ -19,6 +19,11 @@
       "body": "Tu primera version es una semilla en la tierra, no el arbol terminado. Hiciste el trabajo duro de plantarla — ahora necesita sol (usuarios), agua (actualizaciones) y poda (eliminar lo que no funciona). El mayor error es desenterrarla cada semana para probar con una semilla diferente."
     },
     {
+      "type": "analogy",
+      "title": "Administrar un Restaurante Despues de la Noche de Apertura",
+      "body": "Lanzar tu V1 es como la noche de apertura de un restaurante. Planificaste el menu, decoraste el espacio y entrenaste al personal. Pero ahora entran comensales reales — algunos aman la pasta pero ignoran la ensalada, otros piden platillos que nunca consideraste. No tiras todo el menu; lo ajustas segun lo que la gente realmente pide. La iteracion de producto funciona igual: conserva lo que funciona, elimina lo que no, y agrega lo que los clientes siguen pidiendo."
+    },
+    {
       "type": "text",
       "title": "Que Viene Despues de la V1?",
       "body": "Ahora que tu MVP esta en produccion, obtendras retroalimentacion real de los usuarios. Algunas funcionalidades que pensaste eran esenciales no se usaran. Algunas cosas en las que no pensaste seran solicitadas constantemente. Escucha a tus usuarios, pero filtra a traves de tu vision de producto."

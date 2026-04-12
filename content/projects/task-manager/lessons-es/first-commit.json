@@ -19,6 +19,11 @@
       "body": "Tu primer commit es como sellar una capsula del tiempo. Lo que metas ahi se preserva para siempre en el historial de tu proyecto. No echarias las llaves de tu casa en una capsula del tiempo — asi que tampoco hagas commit de tus claves API. Empacala con cuidado: solo contenido limpio e intencional."
     },
     {
+      "type": "analogy",
+      "title": "La Lista de Verificacion Pre-Vuelo",
+      "body": "Los pilotos no solo encienden el motor y despegan — revisan una lista de verificacion cada vez. Ejecutar `git status` antes de un commit es tu lista de verificacion pre-vuelo. Estas buscando cualquier cosa que no deberia estar a bordo: claves secretas, dependencias pesadas, basura del sistema. Saltarte la lista puede ahorrarte un minuto, pero un elemento pasado por alto puede convertir tu vuelo en un desastre."
+    },
+    {
       "type": "text",
       "title": "Verifica Antes de Hacer Commit",
       "body": "Siempre ejecuta `git status` antes de hacer commit para ver exactamente lo que estas a punto de guardar. Busca archivos que no deberian estar ahi — archivos .env con secretos reales, node_modules, salida de compilacion o archivos del sistema operativo como .DS_Store. Un primer commit limpio significa un historial de proyecto limpio."

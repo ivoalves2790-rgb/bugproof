@@ -19,6 +19,11 @@
       "body": "Los commits de git son como puntos de guardado en un videojuego. Antes de pelear con el jefe final (desplegar una funcionalidad), guardas tu progreso. Si el jefe te mata (la funcionalidad se rompe), recargas desde el ultimo guardado en lugar de empezar todo el juego de nuevo. Los jugadores que nunca guardan pierden todo cuando las cosas salen mal. No seas ese jugador."
     },
     {
+      "type": "analogy",
+      "title": "El Portero con la Cuerda de Terciopelo",
+      "body": "Un `.gitignore` es como el portero con la cuerda de terciopelo en un club nocturno. Tiene una lista de nombres que NO van a entrar — node_modules, archivos .env, salida de compilacion. Sin el portero, cualquier archivo random se mete en tu repositorio y causa caos. Al portero no le importa lo importantes que esos archivos se crean; si estan en la lista, se quedan afuera."
+    },
+    {
       "type": "text",
       "title": "El .gitignore No Es Negociable",
       "body": "Un archivo `.gitignore` le dice a git que archivos NO rastrear. Nunca quieres hacer commit de `node_modules/` (miles de archivos de dependencias), archivos `.env` (claves API secretas), o `.next/` (salida de compilacion). create-next-app genera un `.gitignore` por ti, pero siempre verificalo antes de tu primer commit."

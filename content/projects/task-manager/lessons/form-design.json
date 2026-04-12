@@ -14,6 +14,11 @@
       "body": "Every task in your app starts as a form submission. If the 'Add Task' form is annoying, users will avoid adding tasks — which defeats the entire purpose of a task manager. The goal is to make form interaction feel **effortless**: minimal fields, clear labels, instant feedback."
     },
     {
+      "type": "analogy",
+      "title": "A Helpful Spelling Coach",
+      "body": "Imagine writing an essay and your teacher waits until the very end, crosses out the whole thing, and says 'there were errors.' Now imagine a coach who underlines each mistake as you write, so you can fix it in the moment. Good form validation is the spelling coach: it highlights the exact field with the problem right when it happens, so the user fixes one small thing instead of starting over from scratch."
+    },
+    {
       "type": "text",
       "title": "Validation That Helps, Not Punishes",
       "body": "Validation should guide users, not scold them. Show errors **inline** next to the field that has the problem, not in a generic alert at the top of the page. Validate on blur (when the user leaves a field) for format checks, and on submit for required fields. Never clear the entire form when validation fails."

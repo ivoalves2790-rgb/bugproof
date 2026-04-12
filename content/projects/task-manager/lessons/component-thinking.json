@@ -9,6 +9,11 @@
   "intro": "React apps are built from components. Judge whether each approach to component design is a good practice or a bad one.",
   "teach": [
     {
+      "type": "analogy",
+      "title": "Components Are Like LEGO Sets",
+      "body": "Imagine building a castle out of LEGO. You don't mold the entire castle as one giant piece — you snap together small, standardized bricks. Each brick is simple and reusable. A 2x4 brick can be part of a castle wall, a spaceship hull, or a bridge. React components work the same way: small, self-contained pieces that you combine to build complex interfaces."
+    },
+    {
       "type": "text",
       "title": "What Are Components?",
       "body": "Components are the building blocks of a React UI. Each component is a self-contained piece that handles its own rendering and logic. Think of them like LEGO bricks: simple on their own, but powerful when combined. The key is deciding **where to draw the boundaries** between components."

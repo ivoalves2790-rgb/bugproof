@@ -14,6 +14,11 @@
       "body": "Cada tarea en tu app empieza como un envio de formulario. Si el formulario de 'Agregar Tarea' es molesto, los usuarios evitaran agregar tareas — lo que anula todo el proposito de un gestor de tareas. El objetivo es hacer que la interaccion con el formulario se sienta **sin esfuerzo**: campos minimos, etiquetas claras, retroalimentacion instantanea."
     },
     {
+      "type": "analogy",
+      "title": "Un Coach de Ortografia Atento",
+      "body": "Imagina escribir un ensayo y que tu profesor espere hasta el final, tache todo y diga 'habia errores.' Ahora imagina un coach que subraya cada error mientras escribes, para que lo corrijas en el momento. La buena validacion de formularios es como ese coach: resalta el campo exacto con el problema justo cuando ocurre, para que el usuario corrija algo pequeno en lugar de empezar de cero."
+    },
+    {
       "type": "text",
       "title": "Validacion que Ayuda, No Castiga",
       "body": "La validacion deberia guiar a los usuarios, no regañarlos. Muestra errores **en linea** junto al campo que tiene el problema, no en una alerta generica en la parte superior de la pagina. Valida al salir del campo (cuando el usuario deja un campo) para verificaciones de formato, y al enviar para campos requeridos. Nunca limpies el formulario completo cuando la validacion falla."

@@ -14,6 +14,11 @@
       "body": "Your app's layout is the skeleton everything hangs on. In Next.js, the root layout wraps every page and is the right place for persistent UI like navigation bars and sidebars. A well-structured layout means pages focus only on their own content, with shared chrome handled once."
     },
     {
+      "type": "analogy",
+      "title": "Tailoring a Suit vs. Letting It Out",
+      "body": "It's easy to take a well-fitted small suit and let out the seams to make it larger. But shrinking an oversized suit into a slim fit? That means cutting fabric, re-stitching everything, and hoping it doesn't look awkward. Mobile-first design works the same way — start with the small screen and expand gracefully for bigger ones, rather than trying to squeeze a desktop layout into a phone."
+    },
+    {
       "type": "text",
       "title": "Mobile-First, Desktop-Enhanced",
       "body": "Most people check their tasks on their phone. If you design for desktop first and then try to cram it onto mobile, the experience will feel broken. Start with the mobile layout — a single column, touch-friendly buttons, bottom navigation — and then **enhance** for desktop with a sidebar or wider grid."

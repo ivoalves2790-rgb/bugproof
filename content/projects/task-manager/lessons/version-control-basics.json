@@ -19,6 +19,11 @@
       "body": "Git commits are like save points in a video game. Before you fight the boss (deploy a feature), you save your progress. If the boss kills you (the feature breaks), you reload from the last save instead of starting the entire game over. Players who never save lose everything when things go wrong. Don't be that player."
     },
     {
+      "type": "analogy",
+      "title": "The Velvet Rope at the Club",
+      "body": "A `.gitignore` is like the bouncer with a velvet rope at a nightclub. It has a list of names that are NOT getting in — node_modules, .env files, build output. Without the bouncer, every random file wanders into your repository and causes chaos. The bouncer doesn't care how important those files think they are; if they're on the list, they stay outside."
+    },
+    {
       "type": "text",
       "title": "The .gitignore Is Non-Negotiable",
       "body": "A `.gitignore` file tells git which files NOT to track. You never want to commit `node_modules/` (thousands of dependency files), `.env` files (secret API keys), or `.next/` (build output). create-next-app generates a `.gitignore` for you, but always double-check it before your first commit."

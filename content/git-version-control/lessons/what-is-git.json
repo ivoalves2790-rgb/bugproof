@@ -24,6 +24,11 @@
       "body": "Even if you're building apps with AI tools, things break. Git lets you:\n\n1. Go back to a working version when something breaks\n2. Try risky experiments without fear\n3. Collaborate with others without overwriting each other's work\n4. Keep a clear history of what changed and why"
     },
     {
+      "type": "analogy",
+      "title": "Git Is the Engine, GitHub Is the Parking Garage",
+      "body": "Git is the engine in your car — it powers everything locally, lets you drive wherever you want, and works whether you're online or off. GitHub is the parking garage where you store your car so others can find it, inspect it, or take it for a spin. You need the engine to drive, but you don't need the garage. Most people use both because sharing is easier when everyone knows where the car is parked."
+    },
+    {
       "type": "text",
       "title": "Git vs GitHub -- They're Different!",
       "body": "**Git** is the tool that runs on your computer and tracks changes. **GitHub** is a website where you can store your Git projects online and collaborate with others. You can use Git without GitHub, but most teams use both together."

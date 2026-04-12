@@ -19,6 +19,11 @@
       "body": "Imagina abrir un closet donde camisas, pantalones, calcetines y zapatos estan todos mezclados en un monton. Ahora imagina uno donde las camisas estan en ganchos, los pantalones en un estante, los calcetines en un cajon. Ambos closets tienen la misma ropa, pero solo uno te deja vestirte en 2 minutos. La estructura de carpetas de tu proyecto es ese closet — organizalo bien y encontraras cualquier archivo al instante."
     },
     {
+      "type": "analogy",
+      "title": "Una Cocina Con Zonas",
+      "body": "Una cocina profesional esta dividida en zonas: estacion de preparacion, estacion de coccion, estacion de emplatado y almacenamiento. Cada zona tiene sus propias herramientas y proposito. Tu proyecto funciona igual — `components/` es la estacion de preparacion donde construyes piezas de interfaz, `lib/` es el almacen de utilidades, y `types/` es el libro de recetas con todas tus definiciones. Cuando todos saben a que zona ir, la cocina funciona sin problemas."
+    },
+    {
       "type": "text",
       "title": "Donde Va Todo lo Demas?",
       "body": "Mas alla de `app/`, querras una carpeta `components/` para interfaz reutilizable, una carpeta `lib/` para utilidades y helpers de base de datos, y una carpeta `types/` para definiciones de tipos de TypeScript. Algunos equipos ponen los componentes junto a las paginas que los usan, otros centralizan todo. Ambos enfoques funcionan — lo clave es elegir una convencion y mantenerla."

@@ -14,6 +14,11 @@
       "body": "El layout de tu app es el esqueleto del que cuelga todo. En Next.js, el layout raiz envuelve cada pagina y es el lugar correcto para interfaz persistente como barras de navegacion y barras laterales. Un layout bien estructurado significa que las paginas se enfocan solo en su propio contenido, con la interfaz compartida manejada una sola vez."
     },
     {
+      "type": "analogy",
+      "title": "Ajustar un Traje vs. Agrandarlo",
+      "body": "Es facil tomar un traje pequeno bien ajustado y soltar las costuras para hacerlo mas grande. Pero encoger un traje enorme para que quede entallado? Eso significa cortar tela, recoser todo y esperar que no se vea raro. El diseno mobile-first funciona igual — empieza con la pantalla pequena y expande con gracia para pantallas mas grandes, en lugar de intentar comprimir un layout de escritorio en un telefono."
+    },
+    {
       "type": "text",
       "title": "Movil Primero, Escritorio Mejorado",
       "body": "La mayoria de las personas revisan sus tareas en su telefono. Si disenas para escritorio primero y luego intentas comprimirlo para movil, la experiencia se sentira rota. Empieza con el layout movil — una sola columna, botones amigables al tacto, navegacion inferior — y luego **mejora** para escritorio con una barra lateral o cuadricula mas amplia."

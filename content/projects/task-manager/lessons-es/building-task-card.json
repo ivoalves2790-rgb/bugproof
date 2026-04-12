@@ -14,6 +14,11 @@
       "body": "La tarjeta de tarea es lo que los usuarios ven e interactuan mas. Necesita mostrar la informacion correcta de un vistazo — titulo, estado, tal vez una fecha limite — sin estar saturada. Piensa en ella como una nota adhesiva fisica: suficiente informacion para ser util, pero no tanta que sea abrumadora."
     },
     {
+      "type": "analogy",
+      "title": "Los Botones de un Ascensor",
+      "body": "Imagina presionar el boton de un ascensor y que no pase nada — sin luz, sin sonido, sin movimiento. Lo presionarias de nuevo, mas fuerte. Ahora imagina que el boton se ilumina en cuanto lo tocas. Te relajas porque sabes que el ascensor te escucho. La interfaz interactiva funciona igual: los efectos hover, estados activos y estilos de completado son el 'boton iluminado' que le dice al usuario que su accion fue recibida."
+    },
+    {
       "type": "text",
       "title": "Disenando para la Interaccion",
       "body": "Una tarjeta de tarea no es solo una pantalla — los usuarios van a hacer clic, completarla, tal vez arrastrarla. Construye tu componente con **estados de interaccion** en mente desde el inicio: efectos hover, estados activos, estilos de completado. Una tarjeta sin retroalimentacion visual cuando pasas el cursor se siente rota, aunque tecnicamente funcione."

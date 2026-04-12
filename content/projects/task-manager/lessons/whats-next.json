@@ -19,6 +19,11 @@
       "body": "Your first version is a seed in the ground, not the finished tree. You've done the hard work of planting it — now it needs sunlight (users), water (updates), and pruning (removing what doesn't work). The biggest mistake is digging it up every week to try a different seed."
     },
     {
+      "type": "analogy",
+      "title": "Running a Restaurant After Opening Night",
+      "body": "Launching your V1 is like a restaurant's opening night. You planned the menu, decorated the space, and trained the staff. But now real diners walk in — some love the pasta but ignore the salad, some ask for dishes you never considered. You don't throw out the whole menu; you adjust based on what people actually order. Product iteration works the same way: keep what works, cut what doesn't, and add what customers keep asking for."
+    },
+    {
       "type": "text",
       "title": "What Comes After V1?",
       "body": "Now that your MVP is live, you'll get real user feedback. Some features you thought were essential will go unused. Some things you didn't think of will be requested constantly. Listen to your users, but filter through your product vision."

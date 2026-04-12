@@ -14,6 +14,11 @@
       "body": "Tailwind CSS usa clases utilitarias pequenas y de proposito unico como `p-4` (padding), `text-lg` (tamano de fuente) y `bg-blue-500` (color de fondo). En lugar de escribir CSS en archivos separados e inventar nombres de clases, compones estilos directamente en tu JSX. Esto mantiene los estilos junto al markup que afectan y elimina el problema del CSS muerto."
     },
     {
+      "type": "analogy",
+      "title": "Marcado Rapido en Tu Telefono",
+      "body": "Escribir un numero de telefono completo cada vez que llamas a alguien seria tedioso. Por eso guardas contactos — un toque reemplaza diez digitos. Extraer un componente React de una lista larga de clases Tailwind funciona igual: en lugar de repetir `rounded-lg shadow-md p-4 bg-white` en cinco lugares, creas un componente `<Card>` y usas ese nombre unico en todas partes. La cadena larga de clases se escribe una vez y se reutiliza con un nombre corto."
+    },
+    {
       "type": "text",
       "title": "Controlando Listas de Clases Largas",
       "body": "La queja mas comun sobre Tailwind son las cadenas de clases largas. La solucion no es evitar Tailwind — es **extraer componentes**. Si una lista de clases aparece en multiples lugares, eso es una senal de que necesitas un componente React, no una clase CSS personalizada. El componente se convierte en tu abstraccion reutilizable."

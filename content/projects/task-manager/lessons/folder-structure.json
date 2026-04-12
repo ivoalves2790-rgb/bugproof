@@ -19,6 +19,11 @@
       "body": "Imagine opening a closet where shirts, pants, socks, and shoes are all mixed in one pile. Now imagine one where shirts are on hangers, pants on a shelf, socks in a drawer. Both closets hold the same clothes, but only one lets you get dressed in 2 minutes. Your project folder structure is that closet — organize it well and you'll find any file instantly."
     },
     {
+      "type": "analogy",
+      "title": "A Kitchen With Zones",
+      "body": "A professional kitchen is divided into zones: prep station, cooking station, plating station, and storage. Each zone has its own tools and purpose. Your project works the same way — `components/` is the prep station where you build UI pieces, `lib/` is the storage room for utilities, and `types/` is the recipe book with all your definitions. When everyone knows which zone to go to, the kitchen runs smoothly."
+    },
+    {
       "type": "text",
       "title": "Where Does Everything Else Go?",
       "body": "Beyond `app/`, you'll want a `components/` folder for reusable UI, a `lib/` folder for utilities and database helpers, and a `types/` folder for TypeScript type definitions. Some teams put components next to the pages that use them, others centralize everything. Either works — the key is picking a convention and sticking with it."

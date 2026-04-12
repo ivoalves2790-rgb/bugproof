@@ -19,6 +19,11 @@
       "body": "Using create-next-app is like buying an IKEA flatpack — all the pieces are cut, the screws are included, and the instructions are right there. Manual setup is like going to a lumberyard and cutting every piece yourself. You CAN do it, but why would you when the flatpack gets you a functional desk in 30 minutes?"
     },
     {
+      "type": "analogy",
+      "title": "Choosing Your Safety Gear Before the Climb",
+      "body": "Picking TypeScript, ESLint, and Tailwind during setup is like choosing a helmet, harness, and good shoes before rock climbing. You COULD climb without them, but one slip and you're in trouble. These tools catch you when you fall — TypeScript spots type errors, ESLint flags bad patterns, and Tailwind keeps your styles organized. Put the gear on before you start climbing, not halfway up the wall."
+    },
+    {
       "type": "text",
       "title": "Why These Defaults Matter",
       "body": "TypeScript adds types to JavaScript, which means your editor can warn you about bugs before you even run the code. Tailwind CSS lets you style components without switching between files. The App Router uses the `app/` directory and gives you layouts, loading states, and server components out of the box."

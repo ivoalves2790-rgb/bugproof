@@ -19,6 +19,11 @@
       "body": "In professional kitchens, chefs practice 'mise en place' — everything in its place before you cook. Ingredients are prepped, tools are laid out, stations are clean. Setting up your dev environment is your mise en place. You chop the onions (install Node), sharpen the knives (configure VS Code), and preheat the oven (set up Git) BEFORE you start cooking code."
     },
     {
+      "type": "analogy",
+      "title": "The Orchestra's Sheet Music",
+      "body": "Imagine an orchestra where every musician plays from a different version of the sheet music. The violins are in one key, the cellos in another, and the drummer is playing a completely different song. Config files like `.nvmrc` and `.editorconfig` are your team's shared sheet music — they make sure everyone is playing the same tune, in the same key, at the same tempo."
+    },
+    {
       "type": "text",
       "title": "Consistency Is Key",
       "body": "Professional teams use tools like `.nvmrc` files to lock the Node.js version, `.editorconfig` for consistent formatting, and `package.json` scripts so every developer runs the same commands. These small files prevent the classic 'works on my machine' problem."
