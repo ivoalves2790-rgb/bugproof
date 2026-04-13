@@ -1,0 +1,78 @@
+{
+  "slug": "searching-text",
+  "title": "Buscando Dentro de Archivos con grep",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Sabes que una función llamada fetchUserData existe en algún lugar de tu proyecto, pero no tienes idea en qué archivo está. El comando find busca por nombre de archivo, pero grep busca dentro de los archivos -- lee el contenido real y encuentra texto coincidente en todo tu código.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "grep = Ctrl+F para todo tu proyecto",
+      "body": "¿Conoces Ctrl+F en tu navegador o editor de texto? Resalta cada coincidencia de una palabra en la página actual. **grep es como Ctrl+F, pero para cada archivo en todo tu proyecto a la vez.** En vez de abrir cada archivo y presionar Ctrl+F, grep los abre todos, los busca todos, y reporta cada coincidencia con el nombre de archivo y número de línea."
+    },
+    {
+      "type": "analogy",
+      "title": "grep = Un detector de metales buscando metales específicos",
+      "body": "Un detector de metales no excava toda la playa -- barre sobre la arena y suena solo cuando encuentra lo que estás buscando. Lo configuras para encontrar oro y ignora las tapas de botella y los clavos. **grep barre todos tus archivos y suena (muestra un resultado) solo cuando encuentra tu término de búsqueda exacto**, saltándose todo lo demás."
+    },
+    {
+      "type": "text",
+      "title": "Usando grep para buscar contenido de archivos",
+      "body": "El patrón básico es: **`grep \"texto\" archivo`**\n\n- **`grep \"TODO\" app.js`** -- Encuentra cada línea que contenga 'TODO' en app.js\n- **`grep -r \"fetchUser\" src/`** -- Busca recursivamente en todos los archivos en src/\n- **`grep -rn \"console.log\" .`** -- Busca en todos los archivos, muestra números de línea (-n)\n- **`grep -ri \"error\" logs/`** -- Búsqueda sin distinción de mayúsculas (-i)\n\nLa bandera `-r` (recursivo) es lo que hace que grep busque a través de carpetas. Sin ella, grep solo busca en el archivo específico que nombras."
+    },
+    {
+      "type": "code_example",
+      "title": "grep en acción",
+      "language": "bash",
+      "code": "# Find all TODO comments in your project\ngrep -rn \"TODO\" src/\n# src/app.js:14: // TODO: add error handling\n# src/utils.js:7: // TODO: refactor this function\n\n# Find where a function is defined\ngrep -rn \"function fetchUserData\" src/\n# src/api/users.js:12: function fetchUserData(userId) {\n\n# Find all console.log statements (to remove before production)\ngrep -rn \"console.log\" src/\n# src/app.js:8:   console.log('debug:', data);\n# src/utils.js:22:   console.log('result:', result);",
+      "annotation": "La bandera -n agrega números de línea para que sepas exactamente dónde buscar. El formato de salida es nombreArchivo:númeroLínea: líneaCoincidente."
+    },
+    {
+      "type": "motivation",
+      "body": "grep es la herramienta que te hace parecer un mago ante los clientes. Cuando preguntan '¿dónde la app llama a la API de pagos?' tú respondes en 3 segundos en vez de 30 minutos. Esa velocidad es la base del vibecoding rentable -- resuelves problemas rápido y pasas a la siguiente tarea pagada."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "grep busca dentro de archivos texto que coincida. Usa -r para buscar recursivamente en directorios, -n para mostrar números de línea, e -i para búsquedas sin distinción de mayúsculas. Es tu herramienta principal para encontrar dónde se definen funciones, dónde se usan variables y dónde se esconden los TODOs."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["src/app.js", "src/api/users.js", "src/utils/helpers.js", "src/components/Dashboard.jsx"],
+    "steps": [
+      {
+        "instruction": "Una función llamada 'calculateTotal' se usa en algún lugar del proyecto pero no sabes en qué archivo. Búscala recursivamente con números de línea.",
+        "expectedCommand": "grep -rn \"calculateTotal\" src/",
+        "acceptAlternatives": ["grep -rn 'calculateTotal' src/", "grep -rn \"calculateTotal\" .", "grep -rn 'calculateTotal' ."],
+        "output": "src/utils/helpers.js:15: function calculateTotal(items) {\nsrc/components/Dashboard.jsx:8:   const total = calculateTotal(cartItems);",
+        "hint": "Usa grep -rn para buscar recursivamente con números de línea: grep -rn \"términoBúsqueda\" directorio/"
+      },
+      {
+        "instruction": "Encuentra todos los comentarios TODO en el código fuente para rastrear trabajo sin terminar.",
+        "expectedCommand": "grep -rn \"TODO\" src/",
+        "acceptAlternatives": ["grep -rn 'TODO' src/", "grep -rn \"TODO\" .", "grep -rni \"todo\" src/"],
+        "output": "src/app.js:23: // TODO: add error handling\nsrc/api/users.js:9: // TODO: validate input\nsrc/utils/helpers.js:31: // TODO: handle edge case",
+        "hint": "Busca 'TODO' recursivamente: grep -rn \"TODO\" src/"
+      },
+      {
+        "instruction": "Antes de hacer deploy, encuentra todas las sentencias console.log que necesitan eliminarse. Busca sin distinción de mayúsculas por si alguien escribió Console.log.",
+        "expectedCommand": "grep -rni \"console.log\" src/",
+        "acceptAlternatives": ["grep -rni 'console.log' src/", "grep -rin \"console.log\" src/"],
+        "output": "src/app.js:11:   console.log('User data:', userData);\nsrc/api/users.js:18:   console.log('API response:', response);",
+        "hint": "Usa la bandera -i para búsqueda sin distinción de mayúsculas: grep -rni \"console.log\" src/"
+      },
+      {
+        "instruction": "Encuentra cada archivo que importa de la carpeta 'api/' para entender qué componentes dependen de llamadas API.",
+        "expectedCommand": "grep -rn \"from.*api/\" src/",
+        "acceptAlternatives": ["grep -rn 'from.*api/' src/", "grep -rn \"api/\" src/", "grep -rn \"from.*api\" src/"],
+        "output": "src/app.js:2: import { getUser } from './api/users';\nsrc/components/Dashboard.jsx:3: import { fetchProducts } from '../api/products';",
+        "hint": "Busca sentencias import que referencien la carpeta api: grep -rn \"from.*api/\" src/"
+      }
+    ],
+    "completionMessage": "¡Acabas de buscar de forma avanzada en todo un código! grep encontró definiciones de funciones, comentarios TODO, sentencias de depuración e importaciones de dependencias -- todo en segundos. Esta es una de las herramientas más usadas en desarrollo profesional.",
+    "glossaryTerms": ["grep", "recursive-search", "pattern-matching", "case-insensitive"]
+  }
+}

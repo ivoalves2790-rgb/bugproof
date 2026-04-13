@@ -1,0 +1,109 @@
+{
+  "slug": "ssh-basics",
+  "title": "SSH: Conectandose a Servidores Remotos",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "Tu app esta en vivo en un servidor remoto y un bug critico acaba de aparecer en produccion. Necesitas conectarte al servidor, revisar los logs y reiniciar el servicio -- todo desde la terminal. SSH es el tunel seguro que te permite controlar una maquina remota como si estuvieras sentado frente a ella.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SSH = Una Linea Telefonica Privada y Segura",
+      "body": "Imagina que necesitas dar instrucciones a alguien en un edificio cerrado al otro lado de la ciudad. Podrias gritar desde la calle (inseguro -- cualquiera puede escuchar), o podrias usar una **linea telefonica privada y encriptada** que solo tu y la persona adentro pueden usar. **SSH es esa linea privada.** Crea un tunel encriptado entre tu computadora y un servidor remoto para que nadie pueda espiar tus comandos o datos."
+    },
+    {
+      "type": "analogy",
+      "title": "Llaves SSH = Un Escaner de Huellas Digitales",
+      "body": "La mayoria de los edificios usan llaves o codigos para entrar -- pero esos se pueden copiar o adivinar. Un **escaner de huellas digitales** es mas seguro porque tu huella es unica y no puede ser robada espiandote por encima del hombro. **Las llaves SSH funcionan como un escaner de huellas.** En vez de escribir una contraseña cada vez (que podria ser interceptada), registras tu llave unica con el servidor. Cuando te conectas, verifica tu huella -- sin contraseña necesaria, y nada que robar."
+    },
+    {
+      "type": "text",
+      "title": "Esenciales de SSH",
+      "body": "SSH (Secure Shell) te permite ejecutar comandos en una maquina remota:\n\n- **`ssh usuario@hostname`** -- Conectarse a un servidor remoto\n- **`ssh -i llave.pem usuario@hostname`** -- Conectarse usando un archivo de llave especifico\n- **`ssh-keygen`** -- Generar un nuevo par de llaves SSH (publica + privada)\n- **`scp archivo.txt usuario@host:/ruta/`** -- Copiar un archivo a un servidor remoto\n- **`exit`** -- Desconectarse del servidor remoto\n\nLa llave privada se queda en tu maquina (nunca la compartas). La llave publica va en el servidor."
+    },
+    {
+      "type": "code_example",
+      "title": "SSH en la Practica",
+      "language": "bash",
+      "code": "# Generar un par de llaves SSH\nssh-keygen -t ed25519 -C \"tu@email.com\"\n\n# Conectarse a un servidor\nssh deploy@192.168.1.100\n\n# Ejecutar un comando en el servidor sin quedarse conectado\nssh deploy@192.168.1.100 'pm2 restart all'\n\n# Copiar un archivo al servidor\nscp dist.zip deploy@192.168.1.100:/var/www/app/",
+      "annotation": "ssh-keygen crea dos archivos: una llave privada (mantenla secreta) y una llave publica (.pub -- comparte esta con los servidores). El tipo ed25519 es el algoritmo moderno recomendado."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada app en produccion vive en un servidor remoto. Cuando los clientes te pagan por construir y mantener apps, SSH es como despliegas actualizaciones, depuras problemas en produccion y administras servidores. Los vibecoders que pueden conectarse por SSH a un servidor y arreglar problemas en minutos cobran tarifas premium -- porque el tiempo de inactividad le cuesta dinero real a los negocios."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "SSH crea una conexion encriptada a servidores remotos. Usa ssh-keygen para crear pares de llaves (mas seguro que contraseñas), ssh usuario@host para conectarte, y scp para copiar archivos. Nunca compartas tu llave privada -- solo la llave publica va en el servidor."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Tu cliente te llama en panico -- su app web esta caida. Necesitas conectarte por SSH al servidor de produccion en deploy@app.example.com para investigar. Intentas conectarte pero recibes 'Permission denied (publickey)'. ¿Que haces primero?",
+        "choices": [
+          { "id": "a", "text": "Verificar si tu llave SSH esta agregada al ssh-agent con ssh-add -l", "nextNode": "check-agent", "score": 10 },
+          { "id": "b", "text": "Generar un par de llaves SSH completamente nuevo con ssh-keygen", "nextNode": "new-key", "score": 3 },
+          { "id": "c", "text": "Intentar conectarse con contraseña: ssh deploy@app.example.com -o PasswordAuthentication=yes", "nextNode": "try-password", "score": 5 }
+        ]
+      },
+      "check-agent": {
+        "narrative": "Ejecutas ssh-add -l y recibes 'The agent has no identities'. Tu llave SSH existe en disco pero no esta cargada en el agente. La agregas con ssh-add ~/.ssh/id_ed25519 e intentas conectarte de nuevo. Esta vez logras entrar. Aparece el prompt del servidor. ¿Ahora que?",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs de la aplicacion para ver que salio mal", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Reiniciar inmediatamente el servicio de la aplicacion", "nextNode": "blind-restart", "score": 5 },
+          { "id": "c", "text": "Ejecutar top para verificar si el servidor esta sobrecargado", "nextNode": "check-top", "score": 7 }
+        ]
+      },
+      "new-key": {
+        "narrative": "Generas una nueva llave, pero el servidor no la reconoce -- necesitarias agregar la nueva llave publica al archivo authorized_keys del servidor, lo cual no puedes hacer porque no puedes conectarte. Generar una nueva llave no ayuda cuando la llave existente solo necesita ser cargada. Intenta un enfoque diferente.",
+        "choices": [
+          { "id": "a", "text": "Verificar si la llave SSH existente esta cargada en el agente", "nextNode": "check-agent", "score": 5 }
+        ]
+      },
+      "try-password": {
+        "narrative": "El servidor tiene la autenticacion por contraseña deshabilitada por seguridad (lo cual es una buena practica). El SSH basado en contraseñas es vulnerable a ataques de fuerza bruta. El problema es con tu llave SSH, no con el metodo de autenticacion.",
+        "choices": [
+          { "id": "a", "text": "Verificar si mi llave SSH esta cargada en el ssh-agent", "nextNode": "check-agent", "score": 5 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "Ejecutas 'tail -100 /var/log/app/error.log' y ves que la aplicacion se cayo porque se quedo sin espacio en disco. El directorio de logs crecio a 50GB de archivos de log viejos. La solucion es clara -- limpiar los logs viejos y reiniciar. ¿Cual es tu enfoque?",
+        "choices": [
+          { "id": "a", "text": "Eliminar archivos de log viejos para liberar espacio, luego reiniciar la app", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Solo reiniciar la app y esperar que funcione", "nextNode": "end-mediocre", "score": 3 }
+        ]
+      },
+      "blind-restart": {
+        "narrative": "Reinicias la app con 'pm2 restart all' pero se cae de nuevo inmediatamente. Sin revisar los logs primero, estas adivinando el problema. Un reinicio no arregla un problema subyacente como espacio en disco, fugas de memoria o errores de configuracion.",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs de la aplicacion para encontrar la causa real", "nextNode": "check-logs", "score": 5 }
+        ]
+      },
+      "check-top": {
+        "narrative": "Ejecutas 'top' y ves que el CPU y la memoria se ven normales, pero el uso de disco esta al 100%. Eso es una pista, pero los logs de la aplicacion te diran exactamente que salio mal y cuando.",
+        "choices": [
+          { "id": "a", "text": "Revisar los logs de la aplicacion para el error especifico", "nextNode": "check-logs", "score": 8 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Ejecutas 'find /var/log/app/ -name \"*.log\" -mtime +30 -delete' para eliminar archivos de log de mas de 30 dias, liberando 45GB. Luego reinicias la app con 'pm2 restart all' y vuelve a estar en linea. Tambien configuras rotacion de logs para evitar que esto vuelva a pasar. La app del cliente esta de vuelta en menos de 10 minutos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excelente respuesta a incidentes por SSH. Diagnosticaste el problema de carga de la llave, te conectaste al servidor, revisaste los logs antes de tomar accion, identificaste la causa raiz (disco lleno), la arreglaste y agregaste prevencion (rotacion de logs). Asi es exactamente como se manejan los problemas de produccion en el mundo real."
+      },
+      "end-mediocre": {
+        "narrative": "La app se cae de nuevo inmediatamente porque el disco sigue lleno. Reiniciar sin arreglar la causa raiz solo repite el fallo. Necesitas liberar espacio en disco primero.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Siempre diagnostica antes de arreglar. Reiniciar una aplicacion que se cayo sin entender por que se cayo significa que probablemente se caera de nuevo. En este caso, el disco estaba lleno -- ninguna cantidad de reinicios ayudaria hasta que se limpiaran los archivos de log viejos. Revisa los logs, identifica la causa raiz, arreglala y luego reinicia."
+      }
+    },
+    "glossaryTerms": ["ssh", "ssh-key"]
+  }
+}

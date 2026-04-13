@@ -1,0 +1,78 @@
+{
+  "slug": "navigating-directories",
+  "title": "Navegando Directorios",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Ahora que puedes ver donde estas y que hay a tu alrededor, es hora de aprender a moverte. El comando cd es tus piernas en la terminal -- te permite caminar de carpeta en carpeta.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "cd = Caminar Entre Habitaciones",
+      "body": "Imagina que tu sistema de archivos es una casa con muchas habitaciones (carpetas). Ahora mismo estas parado en una habitacion. El comando `cd` es como **caminar a traves de una puerta** hacia otra habitacion. `cd Documents` significa \"camina hacia la habitacion Documents.\" `cd ..` significa \"regresa al pasillo.\" Solo puedes interactuar con lo que hay en la habitacion donde estas parado."
+    },
+    {
+      "type": "analogy",
+      "title": "Rutas = Direcciones del GPS",
+      "body": "Cuando le das una direccion al GPS, puedes decir:\n- **Ruta absoluta**: \"Ve a Calle Principal 123, Springfield\" (direccion completa desde la raiz)\n- **Ruta relativa**: \"Avanza dos cuadras al norte y gira a la izquierda\" (instrucciones desde donde estas ahora)\n\nLa terminal funciona igual. `/Users/tu/projects` es una ruta absoluta (empieza desde la raiz `/`). `../Documents` es una ruta relativa (sube un nivel, luego entra a Documents)."
+    },
+    {
+      "type": "text",
+      "title": "El Comando cd",
+      "body": "**cd** significa \"change directory\" (cambiar directorio) -- te mueve a una carpeta diferente.\n\n- `cd nombrecarpeta` -- muevete a una carpeta dentro de tu ubicacion actual\n- `cd ..` -- sube un nivel (regresa a la carpeta padre)\n- `cd ~` -- salta directo a home, sin importar donde estes\n- `cd /` -- salta a la raiz de tu sistema de archivos\n- `cd -` -- regresa a donde estabas antes (como un deshacer)"
+    },
+    {
+      "type": "code_example",
+      "title": "Rutas Absolutas vs Relativas",
+      "language": "bash",
+      "code": "# Absolute path -- starts from root (/)\ncd /Users/you/projects/app\n\n# Relative path -- starts from where you are\ncd projects/app\n\n# Go up one level\ncd ..\n\n# Go home\ncd ~",
+      "annotation": "Las rutas absolutas empiezan con / y funcionan desde cualquier lugar. Las rutas relativas dependen de tu ubicacion actual."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada vez que construyes un proyecto con herramientas de IA, necesitas navegar a la carpeta correcta primero. Los vibecoders que pueden saltar rapidamente entre directorios de proyectos, encontrar archivos de configuracion y moverse por su sistema de archivos ganan mas porque entregan mas rapido. Esta es la habilidad que separa el \"ya lo resuelvo\" de que te paguen."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Usa `cd` para moverte entre carpetas, `..` para subir un nivel y `~` para saltar a home. Las rutas absolutas empiezan desde `/`, las rutas relativas empiezan desde donde estas ahora."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/app/src/index.js", "~/projects/app/package.json", "~/projects/website/index.html"],
+    "steps": [
+      {
+        "instruction": "Estas en ~/projects. Muevete a la carpeta 'app'.",
+        "expectedCommand": "cd app",
+        "acceptAlternatives": ["cd ./app", "cd app/"],
+        "output": "",
+        "hint": "Usa 'cd' seguido del nombre de la carpeta a la que quieres entrar."
+      },
+      {
+        "instruction": "Ahora verifica donde estas para confirmar que te moviste a la carpeta app.",
+        "expectedCommand": "pwd",
+        "acceptAlternatives": [],
+        "output": "/Users/you/projects/app",
+        "hint": "Usa el comando que imprime tu directorio de trabajo -- tres letras."
+      },
+      {
+        "instruction": "Regresa un nivel a la carpeta projects usando el atajo para 'directorio padre'.",
+        "expectedCommand": "cd ..",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Dos puntos (..) representan el directorio padre -- la carpeta arriba de la actual."
+      },
+      {
+        "instruction": "Ahora salta directamente a tu directorio home usando el simbolo de atajo.",
+        "expectedCommand": "cd ~",
+        "acceptAlternatives": ["cd"],
+        "output": "",
+        "hint": "El simbolo tilde (~) representa tu directorio home. Usa 'cd ~' o simplemente 'cd' sin argumentos."
+      }
+    ],
+    "completionMessage": "Ahora puedes navegar a cualquier lugar de tu sistema de archivos! Recuerda: cd te mueve a carpetas, .. te sube y ~ te lleva a home. Estos tres movimientos cubren el 90% de tus necesidades de navegacion.",
+    "glossaryTerms": ["cd", "absolute-path", "relative-path", "parent-directory"]
+  }
+}

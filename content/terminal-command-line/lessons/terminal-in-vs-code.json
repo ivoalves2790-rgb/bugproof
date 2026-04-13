@@ -1,0 +1,77 @@
+{
+  "slug": "terminal-in-vs-code",
+  "title": "Terminal in VS Code",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "VS Code has a built-in terminal so you never have to leave your editor. It's like having a workbench built right into your garage -- everything you need is within arm's reach. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "VS Code Terminal = A Built-In Workbench in Your Garage",
+      "body": "Imagine a garage where the workbench is built into the wall, right next to your tools. You don't have to walk to a separate room to saw wood or drill holes -- you just look down and there it is. The **VS Code integrated terminal** is that built-in workbench. Your code is on top (the editor), your terminal is on the bottom (the workbench). You see your code and run commands without switching windows. Everything is right there."
+    },
+    {
+      "type": "analogy",
+      "title": "Integrated Terminal = A Walkie-Talkie Attached to Your Toolkit",
+      "body": "Picture a construction worker with a **walkie-talkie clipped to their belt**. They're building something with their hands while talking to the team at the same time -- no need to stop working and go find a phone. VS Code's terminal is that walkie-talkie. You're editing code (working with your hands) and running commands (talking to the system) simultaneously, without ever putting your tools down."
+    },
+    {
+      "type": "text",
+      "title": "VS Code Terminal Essentials",
+      "body": "Key features of the VS Code integrated terminal:\n\n- **Toggle terminal** -- Ctrl+` (backtick) opens/closes the terminal panel\n- **Split terminal** -- Click the split icon to run two terminals side by side (e.g., one for the server, one for commands)\n- **Multiple terminals** -- Click the + icon to open new terminal tabs\n- **Terminal tabs** -- Switch between terminals using the dropdown or tabs on the right\n- **Automatic directory** -- The terminal opens in your project's root folder automatically"
+    },
+    {
+      "type": "code_example",
+      "title": "VS Code Terminal Shortcuts",
+      "language": "text",
+      "code": "Ctrl + `           Toggle terminal panel\nCtrl + Shift + `   Create new terminal\nCtrl + Shift + 5   Split terminal\nCtrl + PageUp      Switch to previous terminal\nCtrl + PageDown    Switch to next terminal",
+      "annotation": "These shortcuts work on Windows and Linux. On Mac, replace Ctrl with Cmd. The backtick key (`) is usually above the Tab key on your keyboard."
+    },
+    {
+      "type": "motivation",
+      "body": "Professional developers keep their terminal inside VS Code because switching between windows costs time and breaks focus. When you're vibecoding for a client with a deadline, every second counts. One window with code and terminal means you ship faster, debug faster, and earn more per hour."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "VS Code's integrated terminal lets you write code and run commands in the same window. Use Ctrl+` to toggle it, split terminals for running multiple tasks, and take advantage of terminal tabs to organize your workflow."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "You can open the VS Code terminal with Ctrl+` (backtick) to toggle the terminal panel.",
+        "isGoodPractice": true,
+        "explanation": "Ctrl+` (or Cmd+` on Mac) is the default keyboard shortcut to toggle the integrated terminal panel in VS Code. It's the fastest way to show or hide the terminal."
+      },
+      {
+        "id": "card-2",
+        "content": "The VS Code terminal always opens in your home directory, regardless of what project is open.",
+        "isGoodPractice": false,
+        "explanation": "The VS Code terminal automatically opens in your project's root directory -- the folder you have open in VS Code. This is one of its biggest advantages over a separate terminal window, because you don't need to cd into your project first."
+      },
+      {
+        "id": "card-3",
+        "content": "You can split the terminal to run a dev server in one pane and type commands in another.",
+        "isGoodPractice": true,
+        "explanation": "Split terminals are incredibly useful. A common setup is running your dev server in one split pane (which stays running) and using the other pane for git commands, installing packages, or running scripts."
+      },
+      {
+        "id": "card-4",
+        "content": "VS Code's integrated terminal is slower and less capable than a standalone terminal application.",
+        "isGoodPractice": false,
+        "explanation": "VS Code's terminal runs the same shell (bash, zsh, PowerShell) as your standalone terminal. It has the same speed and capabilities. The advantage is integration with your editor -- clicking file paths in errors can open the file directly."
+      },
+      {
+        "id": "card-5",
+        "content": "You can only have one terminal open at a time in VS Code.",
+        "isGoodPractice": false,
+        "explanation": "You can have as many terminals as you need in VS Code. Use the + button to create new terminal tabs, or split existing terminals. Many developers run 3-4 terminals: one for the dev server, one for git, one for running tests, and one for general commands."
+      }
+    ],
+    "glossaryTerms": ["integrated-terminal", "vs-code", "split-terminal", "terminal-tabs"]
+  }
+}

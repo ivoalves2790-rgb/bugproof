@@ -1,0 +1,83 @@
+{
+  "slug": "installing-global-tools",
+  "title": "Installing Global Tools",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "package-managers",
+  "courseSlug": "terminal-command-line",
+  "intro": "Some tools need to be available everywhere on your computer, not just in one project. Global installs and npx give you two ways to use CLI tools -- permanently installed or run once on demand. Let's learn when to use each approach and practice both.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Global Install = Installing an App on Your Phone",
+      "body": "When you install an app on your phone, it's available everywhere -- from the home screen, from any folder, anytime. **npm install -g** works the same way. It installs a tool on your entire computer, not just one project. After `npm install -g vercel`, you can type `vercel` in any terminal window, in any folder, and it works. It's permanently on your machine, like an app on your phone."
+    },
+    {
+      "type": "analogy",
+      "title": "Local Install = Buying a Tool for a Specific Workshop",
+      "body": "Imagine you have two workshops -- one for woodworking and one for electronics. You buy a soldering iron only for the electronics workshop. It stays there; you don't carry it to the wood shop. **Local installs** (regular `npm install`) work the same way. The package only exists inside that project's node_modules folder. Other projects can't see it. This keeps projects isolated -- Project A might need version 2 of a tool while Project B needs version 3."
+    },
+    {
+      "type": "text",
+      "title": "Global vs Local: When to Use Each",
+      "body": "**Install globally (-g)** when:\n- The tool is a standalone CLI you run from anywhere (vercel, netlify, create-react-app)\n- You use it across multiple projects\n- It's a development utility, not a project dependency\n\n**Install locally** (default) when:\n- The package is code your project imports (react, express, axios)\n- Different projects might need different versions\n- You want the project to be portable (anyone who clones it gets the right version)"
+    },
+    {
+      "type": "text",
+      "title": "npx: Run Without Installing",
+      "body": "**npx** lets you run a package command without installing it permanently. It downloads the package, runs it once, and throws it away.\n\n- `npx create-next-app my-site` -- Runs create-next-app without installing it globally\n- `npx eslint .` -- Runs ESLint without adding it to your project\n\nnpx is perfect for one-time commands or tools you don't use often. No clutter, no outdated global installs."
+    },
+    {
+      "type": "code_example",
+      "title": "Global Install vs npx",
+      "language": "bash",
+      "code": "# Global install: permanently available\nnpm install -g vercel\nvercel --version          # Works from anywhere\n\n# npx: run once without installing\nnpx create-next-app my-app   # Downloads, runs, done\nnpx cowsay \"Hello World\"      # Fun one-time command",
+      "annotation": "Global installs stay on your machine until you uninstall them. npx downloads, runs the command, and cleans up. Use npx for project generators and one-off tools."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing when to install globally vs locally vs using npx is a skill that separates beginners from confident developers. When a client says 'deploy this to Vercel' or 'scaffold a new Next.js project,' you execute the right command in seconds. That speed and confidence is what vibecoding clients pay premium rates for."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use npm install -g for CLI tools you need everywhere, regular npm install for project-specific packages, and npx for one-time commands. Global tools are like phone apps (available everywhere), local installs are like workshop tools (stay in one project), and npx is like borrowing a tool for a quick job."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~",
+    "initialFiles": [],
+    "steps": [
+      {
+        "instruction": "Install the Vercel CLI globally so you can deploy projects from any folder.",
+        "expectedCommand": "npm install -g vercel",
+        "acceptAlternatives": ["npm i -g vercel"],
+        "output": "added 1 package in 4s",
+        "hint": "Use 'npm install -g' followed by the package name. The -g flag makes it available everywhere."
+      },
+      {
+        "instruction": "Verify that vercel was installed globally by checking its version.",
+        "expectedCommand": "vercel --version",
+        "acceptAlternatives": ["vercel -v"],
+        "output": "Vercel CLI 34.2.0",
+        "hint": "Run the tool name followed by '--version' to confirm it's installed and see which version."
+      },
+      {
+        "instruction": "Now use npx to create a new Next.js app called 'my-site' without installing create-next-app globally.",
+        "expectedCommand": "npx create-next-app my-site",
+        "acceptAlternatives": ["npx create-next-app@latest my-site"],
+        "output": "Creating a new Next.js app in ~/my-site.\n\nUsing npm.\n\nInstalling dependencies:\n- react\n- react-dom\n- next\n\nSuccess! Created my-site at ~/my-site",
+        "hint": "Use 'npx' followed by the package command. npx downloads and runs it without a permanent install."
+      },
+      {
+        "instruction": "Check which packages are installed globally on your system to see vercel in the list.",
+        "expectedCommand": "npm list -g --depth=0",
+        "acceptAlternatives": ["npm ls -g --depth=0", "npm list -g"],
+        "output": "/usr/local/lib\n├── npm@10.2.0\n└── vercel@34.2.0",
+        "hint": "Use 'npm list -g --depth=0' to see all globally installed packages without showing their sub-dependencies."
+      }
+    ],
+    "completionMessage": "You now know three ways to use npm packages: global installs for CLI tools you use everywhere, local installs for project dependencies, and npx for one-time commands. Notice how create-next-app doesn't appear in your global list -- npx ran it and cleaned up. Vercel is there because you installed it globally.",
+    "glossaryTerms": ["global-install", "local-install", "npx", "CLI"]
+  }
+}

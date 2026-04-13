@@ -1,0 +1,82 @@
+{
+  "slug": "what-is-the-terminal",
+  "title": "Que es la Terminal?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "La terminal es la herramienta mas poderosa de tu computadora -- pero la mayoria de las personas nunca la abren. Te permite hablar directamente con tu maquina usando comandos de texto en lugar de hacer clic en menus. Desliza a la derecha si la afirmacion es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "La Terminal = La Cocina del Restaurante",
+      "body": "Piensa en tu computadora como un restaurante. La **interfaz grafica** (GUI) es el elegante comedor -- menus bonitos, botones agradables, todo dispuesto para ti. Pero la **terminal** es la cocina. Es donde ocurre el trabajo real. Los chefs (desarrolladores) van directo a la cocina porque es mas rapida, mas poderosa y les da control total sobre cada ingrediente. El comedor es genial para los clientes, pero si quieres cocinar, necesitas la cocina."
+    },
+    {
+      "type": "analogy",
+      "title": "Terminal = Enviar Mensaje vs. Llamar",
+      "body": "Usar la GUI es como hacer una llamada telefonica -- navegas por menus de voz, esperas en linea y haces clic en opciones una por una. La terminal es como **enviar un mensaje de texto** -- escribes exactamente lo que quieres, presionas enter y listo. Sin menus, sin esperas, sin hacer clic por cinco pantallas para hacer una cosa. Directo, preciso y rapido."
+    },
+    {
+      "type": "text",
+      "title": "GUI vs CLI",
+      "body": "Tu computadora tiene dos formas de interactuar con ella:\n\n- **GUI (Interfaz Grafica de Usuario)** -- La experiencia visual de apuntar y hacer clic que ya conoces. Finder, Explorador de Archivos, arrastrar archivos.\n- **CLI (Interfaz de Linea de Comandos)** -- La terminal basada en texto donde escribes comandos. No necesitas el raton.\n\nAmbas se comunican con el mismo sistema operativo por debajo. La terminal simplemente se salta la capa visual y va directo a la fuente."
+    },
+    {
+      "type": "text",
+      "title": "Por que los Vibecoders Necesitan la Terminal",
+      "body": "Incluso si construyes apps con herramientas de IA, la terminal es inevitable:\n\n1. **Ejecutar proyectos** -- `npm start`, `npm run dev`, iniciar servidores\n2. **Instalar paquetes** -- `npm install`, `pip install`\n3. **Usar Git** -- cada comando de Git se ejecuta en la terminal\n4. **Desplegar apps** -- la mayoria de herramientas de deploy usan comandos CLI\n5. **Herramientas de IA** -- muchas herramientas de desarrollo con IA (Cursor, Copilot CLI) viven en la terminal"
+    },
+    {
+      "type": "code_example",
+      "title": "Tu Primera Vista de Comandos de Terminal",
+      "language": "bash",
+      "code": "pwd                    # Print where you are\nls                     # List files in current folder\ncd Documents           # Move into the Documents folder\nmkdir my-project       # Create a new folder",
+      "annotation": "Estos son algunos de los comandos mas comunes. Cada uno es una palabra corta en ingles o una abreviatura -- pwd significa 'print working directory' (imprimir directorio de trabajo), ls significa 'list' (listar)."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada oferta de trabajo para desarrollador -- desde puestos junior de $60K hasta posiciones senior de $200K+ -- lista habilidades de terminal como requisito. Los vibecoders que pueden usar la terminal construyen y despliegan apps 3 veces mas rapido que los que se quedan haciendo clic en GUIs. Esta es la habilidad que transforma a un aficionado de IA en alguien que puede ganar dinero real lanzando productos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "La terminal es una interfaz basada en texto para tu computadora. Hace las mismas cosas que tu interfaz grafica pero mas rapido y con mas control -- y es esencial para ejecutar proyectos, instalar paquetes y usar Git."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "La terminal y la interfaz grafica (GUI) ambas se comunican con el mismo sistema operativo por debajo.",
+        "isGoodPractice": true,
+        "explanation": "Tanto la terminal (CLI) como la interfaz grafica (GUI) son simplemente diferentes formas de comunicarte con tu sistema operativo. Pueden hacer las mismas cosas -- la terminal solo usa comandos de texto en lugar de clics del raton."
+      },
+      {
+        "id": "card-2",
+        "content": "Necesitas ser un programador experto para usar la terminal.",
+        "isGoodPractice": false,
+        "explanation": "Los comandos de terminal son mayormente palabras cortas en ingles y abreviaturas. 'ls' lista archivos, 'cd' cambia directorio, 'mkdir' crea un directorio. No necesitas saber ningun lenguaje de programacion para usar estos comandos."
+      },
+      {
+        "id": "card-3",
+        "content": "La terminal es mas rapida que la GUI para muchas tareas de desarrollo.",
+        "isGoodPractice": true,
+        "explanation": "Con un comando puedes hacer lo que podria tomar 5-10 clics en una GUI. Renombrar 100 archivos, buscar en un proyecto o instalar paquetes -- todo esto es mas rapido en la terminal una vez que conoces los comandos."
+      },
+      {
+        "id": "card-4",
+        "content": "Los desarrolladores modernos ya no necesitan la terminal gracias a las herramientas graficas.",
+        "isGoodPractice": false,
+        "explanation": "Es todo lo contrario. Git, npm, herramientas de deploy, asistentes de IA para codigo -- casi todas las herramientas modernas de desarrollo estan disenadas primero para la terminal. Incluso herramientas graficas como VS Code tienen una terminal integrada porque es esencial."
+      },
+      {
+        "id": "card-5",
+        "content": "La terminal solo puede trabajar con archivos de codigo, no con documentos regulares o imagenes.",
+        "isGoodPractice": false,
+        "explanation": "La terminal puede trabajar con cualquier archivo en tu computadora -- documentos, imagenes, videos, cualquier cosa. Puedes copiar, mover, renombrar y eliminar cualquier tipo de archivo. Es una herramienta de proposito general para interactuar con todo tu sistema de archivos."
+      }
+    ],
+    "glossaryTerms": ["terminal", "CLI", "GUI"]
+  }
+}

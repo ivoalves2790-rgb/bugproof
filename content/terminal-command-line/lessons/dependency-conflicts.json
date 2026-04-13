@@ -1,0 +1,110 @@
+{
+  "slug": "dependency-conflicts",
+  "title": "Dependency Conflicts",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "package-managers",
+  "courseSlug": "terminal-command-line",
+  "intro": "You just cloned a teammate's project and ran 'npm install' -- but instead of a clean install, you got a wall of red error text. Version conflicts, peer dependency warnings, and audit vulnerabilities. Let's navigate this real-world scenario and get the project running.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Dependency Conflicts = Recipe Ingredients That Don't Mix Well",
+      "body": "Imagine you're baking a cake that calls for baking soda, but the frosting recipe requires vinegar. Separately, both are fine. Together? A bubbly mess. **Dependency conflicts** work the same way -- Package A needs version 2 of a helper library, but Package B needs version 3. npm has to figure out how to make both happy, and sometimes it can't. The result: red error messages and a project that won't start."
+    },
+    {
+      "type": "analogy",
+      "title": "Lockfile = A Snapshot Photograph of Your Ingredients",
+      "body": "You baked a perfect cake yesterday. Today, you want the exact same result. So you take a **photograph** of every ingredient with its exact brand and expiration date. That's what package-lock.json does -- it's a snapshot of the exact versions of every package installed. Without it, `npm install` might grab newer versions that break things. With it, everyone on the team gets the identical setup you had."
+    },
+    {
+      "type": "text",
+      "title": "Why Conflicts Happen",
+      "body": "Dependency conflicts occur when:\n\n1. **Version mismatches** -- Two packages need different versions of the same dependency\n2. **Peer dependency warnings** -- A package expects you to install a specific version of another package\n3. **Outdated lockfiles** -- The lock file references packages that no longer exist or have been deprecated\n4. **Node version issues** -- Some packages require a minimum Node.js version\n\nThe good news: most conflicts have standard solutions."
+    },
+    {
+      "type": "code_example",
+      "title": "Common Error Messages and What They Mean",
+      "language": "bash",
+      "code": "# Peer dependency conflict\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! peer react@\"^17.0.0\" from package-a@1.0.0\nnpm ERR! peer react@\"^18.0.0\" from package-b@2.0.0\n\n# Quick fixes\nnpm install --legacy-peer-deps   # Ignore peer conflicts\nnpm audit                        # Check for vulnerabilities\nnpm audit fix                    # Auto-fix what it can",
+      "annotation": "ERESOLVE means two packages disagree on which version of a shared dependency to use. --legacy-peer-deps tells npm to install anyway and let you sort it out. npm audit checks for known security issues in your packages."
+    },
+    {
+      "type": "motivation",
+      "body": "Dependency conflicts stop 90% of beginners cold. They see red error text and panic. But if you can calmly read the error, identify the conflict, and apply the right fix, you become the person the team calls when things break. That troubleshooting ability is what turns vibecoding from a hobby into a career that earns real money."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Dependency conflicts happen when packages need different versions of the same library. Use the lockfile (package-lock.json) to ensure consistent installs, npm audit to find vulnerabilities, and --legacy-peer-deps as a quick workaround for peer dependency issues. Always read the error message -- it usually tells you exactly what's wrong."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "You cloned a teammate's project and ran `npm install`. The terminal shows:\n\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! While resolving: react-calendar@4.0.0\nnpm ERR! Found: react@18.2.0\nnpm ERR! peer react@\"^17.0.0\" from react-calendar@4.0.0\nnpm ERR! Fix the upstream dependency conflict\n\nThe project uses React 18, but react-calendar@4.0.0 only supports React 17. What do you do first?",
+        "choices": [
+          { "id": "a", "text": "Run npm install --legacy-peer-deps to skip the conflict for now", "nextNode": "legacy-install", "score": 7 },
+          { "id": "b", "text": "Check if there's a newer version of react-calendar that supports React 18", "nextNode": "check-version", "score": 10 },
+          { "id": "c", "text": "Downgrade React to version 17 to match what react-calendar wants", "nextNode": "downgrade-react", "score": 3 }
+        ]
+      },
+      "check-version": {
+        "narrative": "Smart move! You run `npm view react-calendar versions` and find that version 5.0.0 was released last month with React 18 support. The package.json lists \"react-calendar\": \"^4.0.0\". What's your next step?",
+        "choices": [
+          { "id": "a", "text": "Update package.json to \"react-calendar\": \"^5.0.0\" and run npm install", "nextNode": "update-package", "score": 10 },
+          { "id": "b", "text": "Run npm install react-calendar@latest to force the newest version", "nextNode": "force-latest", "score": 6 }
+        ]
+      },
+      "legacy-install": {
+        "narrative": "The install completes with --legacy-peer-deps. The project starts, but you see a warning:\n\n'Warning: react-calendar@4.0.0 may not work correctly with React 18. Some features may break.'\n\nThe calendar component renders but date selection is glitchy. The workaround got you running but didn't fix the root cause.",
+        "choices": [
+          { "id": "a", "text": "Check if a newer version of react-calendar supports React 18", "nextNode": "check-version", "score": 8 },
+          { "id": "b", "text": "Keep using --legacy-peer-deps and ignore the warning", "nextNode": "end-bad", "score": 2 }
+        ]
+      },
+      "downgrade-react": {
+        "narrative": "Downgrading React from 18 to 17 breaks three other packages that require React 18: next@14, react-query@5, and framer-motion@11. Now you have even more conflicts. Downgrading a core framework to fix one library is almost never the right approach.",
+        "choices": [
+          { "id": "a", "text": "Undo the downgrade and check for a newer react-calendar version instead", "nextNode": "check-version", "score": 6 }
+        ]
+      },
+      "update-package": {
+        "narrative": "You update package.json to use react-calendar@^5.0.0 and run npm install. Everything installs cleanly -- no errors. But before celebrating, you should make sure nothing else broke. What do you do?",
+        "choices": [
+          { "id": "a", "text": "Run npm audit to check for vulnerabilities, then start the dev server to test", "nextNode": "end-great", "score": 10 },
+          { "id": "b", "text": "Commit the changes and push immediately", "nextNode": "end-ok", "score": 4 }
+        ]
+      },
+      "force-latest": {
+        "narrative": "npm install react-calendar@latest installs v5.0.0 and the conflict is resolved. However, your package.json still says \"^4.0.0\" because you didn't update the file -- you only changed what's installed. The next person who runs npm install will hit the same error.",
+        "choices": [
+          { "id": "a", "text": "Update package.json to match: change to \"^5.0.0\" and run npm install again", "nextNode": "update-package", "score": 8 }
+        ]
+      },
+      "end-great": {
+        "narrative": "npm audit shows 0 vulnerabilities. The dev server starts clean. The calendar component works perfectly with React 18. You updated both the lockfile and package.json, so your teammate will get a clean install too.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Perfect resolution! You diagnosed the conflict (react-calendar needed React 17 but the project uses React 18), found the real fix (upgrading to v5.0.0 with React 18 support), updated package.json properly, and verified with npm audit. This is exactly how experienced developers handle dependency conflicts: check for compatible versions first, update the source of truth (package.json), and verify before committing."
+      },
+      "end-ok": {
+        "narrative": "The install worked, but you committed without running npm audit or testing the dev server. If react-calendar v5.0.0 has a breaking API change (renamed props, different import paths), your teammate will discover it in production.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "You found the right fix but skipped verification. Always run npm audit after resolving conflicts to catch security issues, and start the dev server to make sure the upgrade didn't introduce breaking changes. A major version bump (4.x to 5.x) often includes API changes that need code updates."
+      },
+      "end-bad": {
+        "narrative": "Ignoring peer dependency warnings leads to subtle bugs: components crash on edge cases, features silently fail, and debugging becomes a nightmare because the library wasn't designed for your React version.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Using --legacy-peer-deps is a quick workaround, not a solution. It tells npm to install packages even though they say they're incompatible. The right approach is to find a version of the conflicting package that actually supports your project's React version, or find an alternative library."
+      }
+    },
+    "glossaryTerms": ["dependency", "lockfile", "peer-dependency", "npm-audit"]
+  }
+}

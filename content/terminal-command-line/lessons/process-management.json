@@ -1,0 +1,78 @@
+{
+  "slug": "process-management",
+  "title": "Managing Processes",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "When you run a dev server, it's a process -- a program actively running on your machine. Sometimes processes get stuck, or you need to run multiple things at once. Like managing employees in an office, you need to know who's working, who's slacking, and how to send someone home. Let's learn to manage processes.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Processes = Employees in an Office",
+      "body": "Think of your computer as an office building. Every running program is an **employee**. Some are actively working (your dev server handling requests), some are idle at their desk waiting for tasks (background services), and some have frozen at their desk doing nothing useful (stuck processes). As the manager, you need to check who's working (`ps`), find the slacker (`grep`), and send them home (`kill`). Sometimes you need to hire someone to work in the background while you focus on other things (`&`)."
+    },
+    {
+      "type": "analogy",
+      "title": "Ctrl+C = Pulling the Emergency Brake",
+      "body": "Imagine you're driving and need to stop immediately. You don't gently coast to a halt -- you **pull the emergency brake**. That's what `Ctrl+C` does to a running process: it sends an interrupt signal that says \"stop what you're doing RIGHT NOW.\" It's not rude, it's necessary. The process gets a chance to clean up (save files, close connections), then it shuts down. If Ctrl+C doesn't work, `kill -9` is like cutting the engine entirely -- no cleanup, just stop."
+    },
+    {
+      "type": "text",
+      "title": "Process Basics",
+      "body": "Every running program is a **process** with a unique **PID** (Process ID):\n\n- **Foreground process** -- Takes over your terminal. You can't type other commands until it finishes or you stop it (Ctrl+C)\n- **Background process** -- Runs behind the scenes. You get your terminal back and can type other commands\n- **Zombie process** -- Finished but still showing up in the process list. Usually harmless\n\nCommon process commands:\n- `ps` -- List running processes\n- `kill PID` -- Stop a process by its ID\n- `kill -9 PID` -- Force-stop a stubborn process\n- `command &` -- Run a command in the background"
+    },
+    {
+      "type": "code_example",
+      "title": "Finding and Stopping Processes",
+      "language": "bash",
+      "code": "# List all your processes\n$ ps aux | grep node\nuser  12345  0.5  1.2  node server.js\nuser  12346  0.0  0.4  node watcher.js\n\n# Stop a specific process\n$ kill 12345\n\n# Force-stop if it won't quit\n$ kill -9 12345",
+      "annotation": "ps aux lists all processes. Piping to grep node filters for just Node.js processes. The second column (12345) is the PID you use with kill. Use kill -9 only as a last resort -- it doesn't let the process clean up."
+    },
+    {
+      "type": "motivation",
+      "body": "Stuck processes eat your computer's memory and CPU, slowing everything down. Vibecoding clients expect smooth demos and fast development. Knowing how to kill a zombie process that's eating 4GB of RAM is the difference between looking professional and saying \"sorry, let me restart my computer\" during a client call."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every running program is a process with a PID. Use Ctrl+C to stop foreground processes, `ps` to find running processes, `kill PID` to stop them, and `&` to run things in the background. If a process won't stop, `kill -9` forces it."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["server.js", "package.json"],
+    "steps": [
+      {
+        "instruction": "Your dev server seems to be stuck -- you ran it earlier but closed the terminal tab. Find any Node.js processes still running on your machine.",
+        "expectedCommand": "ps aux | grep node",
+        "acceptAlternatives": ["ps -ef | grep node", "pgrep -l node", "ps aux | grep -i node"],
+        "output": "user  18234  2.1  3.4  node server.js\nuser  18235  0.0  0.2  grep --color=auto node",
+        "hint": "Use 'ps aux | grep node' to list all running processes and filter for Node.js ones."
+      },
+      {
+        "instruction": "Found it! Process 18234 is your old dev server still running. Stop it gracefully.",
+        "expectedCommand": "kill 18234",
+        "acceptAlternatives": ["kill -15 18234", "kill -TERM 18234"],
+        "output": "",
+        "hint": "Use 'kill' followed by the PID (process ID) to send a stop signal to the process."
+      },
+      {
+        "instruction": "Now start a new dev server, but this time run it in the background so you can keep using the terminal.",
+        "expectedCommand": "npm run dev &",
+        "acceptAlternatives": ["node server.js &"],
+        "output": "[1] 19001\n> my-app@0.1.0 dev\n> next dev\n\n  - Local: http://localhost:3000\n  Ready in 1.6s",
+        "hint": "Add '&' at the end of a command to run it in the background. This gives you your terminal back."
+      },
+      {
+        "instruction": "Check that your background server is still running by listing your active jobs.",
+        "expectedCommand": "jobs",
+        "acceptAlternatives": ["jobs -l", "ps aux | grep node"],
+        "output": "[1]+  Running                 npm run dev &",
+        "hint": "Use 'jobs' to see all background processes started from this terminal session."
+      }
+    ],
+    "completionMessage": "You've mastered process management! You found a stuck process, killed it, started a new one in the background, and verified it was running. These skills are essential when you're juggling multiple servers, watchers, and build tools during development.",
+    "glossaryTerms": ["process", "PID", "kill", "background-process", "ctrl-c"]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "copying-and-moving",
+  "title": "Copying and Moving Files",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Your project has files scattered in the wrong places -- a config file sitting in the components folder, a README that needs to live in two directories. Let's master the cp and mv commands so you can copy and move files exactly where they belong.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "cp = Photocopying a Document",
+      "body": "Imagine you need the same report in two different filing cabinets. You walk to the copier, make a duplicate, and put the copy in the second cabinet. The original stays exactly where it was. **The `cp` command works the same way** -- it creates an identical copy of a file and puts it wherever you specify, while the original remains untouched."
+    },
+    {
+      "type": "analogy",
+      "title": "mv = Physically Relocating a Box",
+      "body": "When you move apartments, you pick up a box from the old place and carry it to the new place. The box is gone from the old spot and now lives at the new address. **The `mv` command does exactly this** -- it removes the file from its current location and places it in the new one. Bonus: if you 'move' a file to the same directory with a different name, you've just renamed it -- like relabeling a box without carrying it anywhere."
+    },
+    {
+      "type": "text",
+      "title": "cp and mv: Copy vs Move",
+      "body": "Two commands, two different outcomes:\n\n- **`cp source destination`** -- Creates a duplicate. Original stays. Now you have two copies.\n- **`mv source destination`** -- Relocates the file. Original is gone. Only one copy exists.\n- **`cp -r folder/ newFolder/`** -- Copy an entire directory (the `-r` flag means recursive -- it copies everything inside).\n- **`mv oldname.js newname.js`** -- Rename a file by 'moving' it to the same location with a new name.\n\nThe key difference: after `cp`, you have two files. After `mv`, you have one."
+    },
+    {
+      "type": "code_example",
+      "title": "Common Patterns",
+      "language": "bash",
+      "code": "# Copy a file into another directory\ncp config.json backup/config.json\n\n# Copy an entire folder\ncp -r src/ src-backup/\n\n# Move a file to a different folder\nmv todo.txt docs/todo.txt\n\n# Rename a file (move to same dir, new name)\nmv app.js index.js",
+      "annotation": "Notice how renaming is just mv with a new name in the same directory. There's no separate 'rename' command -- mv handles both moving and renaming."
+    },
+    {
+      "type": "motivation",
+      "body": "Knowing cp and mv lets you reorganize AI-generated projects in seconds instead of dragging files around in a GUI. When a client asks you to restructure their codebase, you can do it in one terminal session -- that's vibecoding efficiency that earns you more per hour."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use cp to duplicate files (original stays) and mv to relocate or rename files (original is gone). Add -r to cp when copying directories. Renaming is just mv with a new filename in the same location."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["config.json", "README.md", "src/app.js", "src/utils.js"],
+    "steps": [
+      {
+        "instruction": "The project needs a backup of config.json before we make changes. Copy it to a file called config.backup.json in the same directory.",
+        "expectedCommand": "cp config.json config.backup.json",
+        "acceptAlternatives": ["cp ./config.json ./config.backup.json"],
+        "output": "",
+        "hint": "Use 'cp source destination' to create a copy. Both files will be in the current directory."
+      },
+      {
+        "instruction": "The README.md file needs to be in the docs/ folder instead. First create the docs folder, then move the file there.",
+        "expectedCommand": "mkdir docs && mv README.md docs/README.md",
+        "acceptAlternatives": ["mkdir docs && mv README.md docs/", "mkdir -p docs && mv README.md docs/"],
+        "output": "",
+        "hint": "Create the directory with mkdir, then use mv to relocate the file. Chain them with &&."
+      },
+      {
+        "instruction": "We need a complete backup of the src/ directory. Copy it recursively to a new folder called src-backup/.",
+        "expectedCommand": "cp -r src/ src-backup/",
+        "acceptAlternatives": ["cp -r src src-backup", "cp -R src/ src-backup/"],
+        "output": "",
+        "hint": "Use 'cp -r' to copy a directory and everything inside it."
+      },
+      {
+        "instruction": "The file src/utils.js should actually be called src/helpers.js. Rename it using mv.",
+        "expectedCommand": "mv src/utils.js src/helpers.js",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Rename by using mv with the old name and new name in the same directory."
+      }
+    ],
+    "completionMessage": "You've mastered the basics of copying and moving! You backed up a config file, relocated a README, duplicated an entire directory, and renamed a file -- all without leaving the terminal. These commands are the foundation of project organization.",
+    "glossaryTerms": ["cp", "mv", "recursive-copy", "rename"]
+  }
+}

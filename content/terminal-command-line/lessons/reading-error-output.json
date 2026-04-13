@@ -1,0 +1,65 @@
+{
+  "slug": "reading-error-output",
+  "title": "Reading Error Output",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "When your terminal screams red text at you, most beginners panic and close the window. But error messages are actually helpful -- they tell you exactly what went wrong and where. The developer in this code read the error message but applied the wrong fix. Find the mistake.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Error Output = A Doctor's Diagnosis",
+      "body": "When you go to the doctor feeling sick, they don't just say \"you're sick.\" They give you a **diagnosis**: the symptoms (headache, fever), the cause (bacterial infection), and the location (sinus cavity). **Terminal error messages work the same way** -- they tell you the symptom (what failed), the cause (why it failed), and the location (which file and line number). Reading an error message is like reading a medical report: skip the jargon, focus on the diagnosis."
+    },
+    {
+      "type": "analogy",
+      "title": "stderr = A Car's Dashboard Warning Light",
+      "body": "Your car has two ways to talk to you. The speedometer shows normal info (speed, fuel) -- that's **stdout**, the standard output. But when something goes wrong, a **warning light** turns on with a specific icon telling you what's broken -- engine, battery, oil pressure. That's **stderr**, the standard error stream. Developers who ignore stderr are like drivers who put tape over their warning lights. The car still runs... until the engine explodes."
+    },
+    {
+      "type": "text",
+      "title": "stdout vs stderr",
+      "body": "Your terminal has two separate output channels:\n\n- **stdout (standard output)** -- Normal program output. Success messages, data, results.\n- **stderr (standard error)** -- Error messages, warnings, diagnostic info.\n\nBoth appear in the same terminal window, but they're separate streams. This matters because you can redirect them independently:\n\n`command > output.log 2> errors.log`\n\nThis saves normal output to one file and errors to another."
+    },
+    {
+      "type": "code_example",
+      "title": "Anatomy of an Error Message",
+      "language": "bash",
+      "code": "$ npm run build\n\nError: Cannot find module 'react'\n  Require stack:\n  - /home/user/my-app/src/App.jsx\n  at Module._resolveFilename (node:internal/modules/cjs/loader:1075:15)\n  at /home/user/my-app/src/App.jsx:1:1",
+      "annotation": "Line 1: WHAT failed (can't find module 'react'). Line 2-3: WHERE it happened (App.jsx, at the require/import). Lines 4-5: The stack trace -- the chain of function calls that led to the error. Always read from top to bottom."
+    },
+    {
+      "type": "motivation",
+      "body": "Developers who can read error messages fix bugs in minutes instead of hours. That's the difference between billing a client for 30 minutes or 4 hours. In vibecoding, your AI assistant generates code, but when something breaks, YOU need to read the error and guide the fix. This skill directly translates to money saved and earned."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Error messages have three parts: what failed, why it failed, and where it failed. stdout shows normal output, stderr shows errors. Always read the FIRST error message -- later errors are often caused by the first one. The error tells you exactly what to fix."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "$ npm run build", "isBuggy": false },
+      { "line": 2, "text": "", "isBuggy": false },
+      { "line": 3, "text": "Error: Cannot find module 'react'", "isBuggy": false },
+      { "line": 4, "text": "  Require stack:", "isBuggy": false },
+      { "line": 5, "text": "  - /home/user/my-app/src/App.jsx:1:1", "isBuggy": false },
+      { "line": 6, "text": "", "isBuggy": false },
+      { "line": 7, "text": "# Developer's attempted fix:", "isBuggy": false },
+      { "line": 8, "text": "$ npm install react-dom", "isBuggy": true }
+    ],
+    "correctBuggyLine": 8,
+    "prompt": "The error clearly says 'Cannot find module react' -- the react package is missing. But the developer installed react-dom instead of react. Which line shows the wrong fix?",
+    "fixes": [
+      { "id": "a", "text": "npm install react", "isCorrect": true },
+      { "id": "b", "text": "npm install react-router", "isCorrect": false },
+      { "id": "c", "text": "npm update", "isCorrect": false },
+      { "id": "d", "text": "rm -rf node_modules && npm install", "isCorrect": false }
+    ],
+    "explanation": "The error message says exactly what's missing: the 'react' module. The developer installed 'react-dom' instead -- a related but different package. react-dom handles rendering React to the browser DOM, but 'react' is the core library. The fix is simply `npm install react`. Option B (react-router) is a routing library, not the core. Option C (npm update) updates existing packages but won't install missing ones. Option D (deleting node_modules) is overkill -- the package was never listed in package.json, so reinstalling won't help.",
+    "glossaryTerms": ["stderr", "stdout", "stack-trace", "module"]
+  }
+}

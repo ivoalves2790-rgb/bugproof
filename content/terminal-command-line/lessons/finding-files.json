@@ -1,0 +1,78 @@
+{
+  "slug": "finding-files",
+  "title": "Finding Files",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Your project has hundreds of files and you need to find a specific config file buried somewhere in nested folders. Scrolling through the file explorer would take forever. The find command lets you search your entire project in seconds.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "find = Hiring a Detective to Search Your House",
+      "body": "Imagine you lost your car keys somewhere in your house. Instead of searching every room yourself, you hire a detective who systematically checks every drawer, shelf, and pocket in every room. You tell them what to look for -- 'silver key with a blue keychain' -- and they report back every match. **The `find` command is that detective** -- you tell it where to search, what to look for, and it checks every folder and subfolder."
+    },
+    {
+      "type": "analogy",
+      "title": "find = Using a Library Catalog Search",
+      "body": "At a library, you don't walk through every aisle reading every spine. You use the catalog: search by title, author, or subject, and it tells you exactly which shelf to visit. **The `find` command is your project's catalog** -- you search by name, type, size, or date, and it tells you exactly where matching files live."
+    },
+    {
+      "type": "text",
+      "title": "The find Command",
+      "body": "The basic pattern is: **`find WHERE -OPTIONS WHAT`**\n\n- **`find . -name \"config.json\"`** -- Find files named config.json starting from current directory\n- **`find . -name \"*.js\"`** -- Find all JavaScript files (the `*` matches anything)\n- **`find . -type d -name \"components\"`** -- Find only directories named components\n- **`find . -type f -name \"*.test.js\"`** -- Find only files matching the pattern\n\nThe `.` means 'start searching from here.' You can replace it with any path like `/home` or `~/projects`."
+    },
+    {
+      "type": "code_example",
+      "title": "Finding Things Fast",
+      "language": "bash",
+      "code": "# Find all JSON config files\nfind . -name \"*.json\"\n\n# Find directories named 'test' or 'tests'\nfind . -type d -name \"test*\"\n\n# Find all CSS files in the src folder only\nfind src/ -name \"*.css\"\n\n# Find files by partial name\nfind . -name \"*config*\"",
+      "annotation": "The -name flag is case-sensitive. Use -iname instead for case-insensitive searches (e.g., finding 'README' whether it's README.md, Readme.md, or readme.md)."
+    },
+    {
+      "type": "motivation",
+      "body": "When a client drops a 500-file codebase on you and says 'fix the API config,' find lets you locate the right file in under a second. That confidence and speed is what separates a vibecoder charging $50/hour from one charging $150/hour."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The find command searches directories recursively for files matching your criteria. Use -name for filenames (with wildcards like *), -type f for files only, and -type d for directories only. Always start with a location (. for current directory)."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["src/app.js", "src/components/Header.jsx", "src/utils/config.json", "tests/app.test.js", "package.json", "tsconfig.json"],
+    "steps": [
+      {
+        "instruction": "Find all JSON files in the current project. We need to know where all our config files are.",
+        "expectedCommand": "find . -name \"*.json\"",
+        "acceptAlternatives": ["find . -name '*.json'", "find . -type f -name \"*.json\""],
+        "output": "./src/utils/config.json\n./package.json\n./tsconfig.json",
+        "hint": "Use find with -name and a wildcard pattern: find . -name \"*.json\""
+      },
+      {
+        "instruction": "Now find all test files. They end with .test.js in this project.",
+        "expectedCommand": "find . -name \"*.test.js\"",
+        "acceptAlternatives": ["find . -name '*.test.js'", "find . -type f -name \"*.test.js\""],
+        "output": "./tests/app.test.js",
+        "hint": "Use the same pattern but with *.test.js to match test files."
+      },
+      {
+        "instruction": "Find all directories named 'components' in the project.",
+        "expectedCommand": "find . -type d -name \"components\"",
+        "acceptAlternatives": ["find . -type d -name 'components'"],
+        "output": "./src/components",
+        "hint": "Use -type d to search for directories only, combined with -name."
+      },
+      {
+        "instruction": "Find any file with 'config' anywhere in its name, regardless of extension.",
+        "expectedCommand": "find . -name \"*config*\"",
+        "acceptAlternatives": ["find . -name '*config*'", "find . -type f -name \"*config*\""],
+        "output": "./src/utils/config.json\n./tsconfig.json",
+        "hint": "Use wildcards on both sides of the word: find . -name \"*config*\""
+      }
+    ],
+    "completionMessage": "You can now locate any file in any project instantly! Whether it's a buried config file, scattered test files, or a specific directory, find has you covered. No more scrolling through folders in the file explorer.",
+    "glossaryTerms": ["find", "wildcard", "recursive-search", "file-type"]
+  }
+}

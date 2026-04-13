@@ -1,0 +1,77 @@
+{
+  "slug": "terminal-workflow",
+  "title": "Building Your Terminal Workflow",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "Knowing commands is just the start -- the real power comes from how you use them together. Tab completion, command history, search shortcuts, and terminal multiplexers turn you from someone who types commands into someone who flows through them. Swipe right if the workflow tip is a GOOD practice, or left if it's BAD.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Terminal Workflow = A Chef's Mise en Place",
+      "body": "Professional chefs don't rummage through the fridge mid-recipe. They practice **mise en place** -- everything prepared and within arm's reach before cooking starts. Ingredients chopped, tools laid out, stations organized. **A great terminal workflow is your mise en place.** Tab completion, aliases, history search, and split panes mean everything you need is instantly accessible -- no hunting, no retyping, no wasted motion."
+    },
+    {
+      "type": "analogy",
+      "title": "Command History = A Rewind Button on Your Work",
+      "body": "Imagine if everything you ever wrote in a notebook was searchable and replayable. Forgot the exact command you used to deploy last Friday? Just **rewind** and find it. **Command history is a rewind button.** The terminal remembers every command you've typed. Press the up arrow to scroll back, or use Ctrl+R to search for any command you've ever run -- like having a perfect memory for terminal work."
+    },
+    {
+      "type": "text",
+      "title": "Essential Workflow Shortcuts",
+      "body": "These shortcuts save you thousands of keystrokes:\n\n- **Tab** -- Auto-complete file names, commands, and paths. Press Tab twice to see all options.\n- **Up/Down arrows** -- Scroll through previous commands\n- **Ctrl+R** -- Search your command history by typing a keyword\n- **Ctrl+A / Ctrl+E** -- Jump to the start / end of a line\n- **Ctrl+C** -- Cancel the current command\n- **Ctrl+L** -- Clear the screen (same as `clear`)\n- **!!** -- Repeat the last command. `sudo !!` runs the last command as admin."
+    },
+    {
+      "type": "code_example",
+      "title": "tmux: Terminal Multiplexer",
+      "language": "bash",
+      "code": "# Start a new tmux session\ntmux new -s myproject\n\n# Split the screen horizontally\n# Press Ctrl+B, then \"\n\n# Split the screen vertically\n# Press Ctrl+B, then %\n\n# Switch between panes\n# Press Ctrl+B, then arrow keys\n\n# Detach (session keeps running in background)\n# Press Ctrl+B, then D\n\n# Reattach to a session\ntmux attach -t myproject",
+      "annotation": "tmux lets you split your terminal into multiple panes -- run your server in one, edit in another, and watch logs in a third. Sessions persist even if you close your terminal window."
+    },
+    {
+      "type": "motivation",
+      "body": "The difference between a 30-minute debugging session and a 5-minute one is often just workflow. Vibecoders who master Ctrl+R, tab completion, and tmux move through projects like a race car on a track instead of a bicycle on a dirt road. Clients notice when you fix things fast -- and they pay more for speed."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use Tab to auto-complete everything, Ctrl+R to search history, and tmux to split your terminal into panes. A polished workflow isn't about flashy tricks -- it's about removing every unnecessary keystroke so you can focus on solving problems instead of typing commands."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Pressing Tab to auto-complete file names and commands saves keystrokes and prevents typos.",
+        "isGoodPractice": true,
+        "explanation": "Tab completion is one of the most important terminal habits. It auto-fills file names, directory paths, and even command names -- eliminating typos and saving time. If nothing happens on the first Tab press, press Tab twice to see all available options."
+      },
+      {
+        "id": "card-2",
+        "content": "You should always retype long commands from memory instead of using the history.",
+        "isGoodPractice": false,
+        "explanation": "Retyping commands wastes time and introduces errors. Use the up arrow to scroll through recent commands, or press Ctrl+R and type a keyword to instantly find any command you've ever run. Your shell history is a powerful tool -- use it."
+      },
+      {
+        "id": "card-3",
+        "content": "Using tmux lets you keep your development server, logs, and editor all visible at the same time in one terminal window.",
+        "isGoodPractice": true,
+        "explanation": "tmux splits your terminal into multiple panes so you can monitor several things simultaneously. Run your dev server in one pane, watch logs in another, and type commands in a third -- all without switching windows. Sessions also persist if your connection drops."
+      },
+      {
+        "id": "card-4",
+        "content": "When a command fails with 'permission denied', just add sudo to the beginning without understanding why it needed elevated permissions.",
+        "isGoodPractice": false,
+        "explanation": "Blindly adding sudo is dangerous. It runs the command as the root administrator -- which could delete system files, overwrite important configs, or create files with wrong permissions. Always understand WHY a command needs sudo before using it. Often the fix is changing file ownership, not running as root."
+      },
+      {
+        "id": "card-5",
+        "content": "Ctrl+R lets you search your entire command history by typing just a few letters of a previous command.",
+        "isGoodPractice": true,
+        "explanation": "Ctrl+R activates reverse-search mode. Start typing any part of a previous command and it finds the most recent match. Press Ctrl+R again to cycle through older matches. This is much faster than pressing the up arrow 50 times to find a command from yesterday."
+      }
+    ],
+    "glossaryTerms": ["tab-completion", "history"]
+  }
+}

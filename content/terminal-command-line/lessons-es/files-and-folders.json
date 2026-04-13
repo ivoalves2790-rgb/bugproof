@@ -1,0 +1,78 @@
+{
+  "slug": "files-and-folders",
+  "title": "Archivos y Carpetas",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Antes de poder hacer cualquier cosa en la terminal, necesitas entender como estan organizados los archivos y carpetas en tu computadora. Cada archivo vive en algun lugar dentro de una estructura en forma de arbol, y la terminal te permite explorarla toda con comandos simples.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El Sistema de Archivos = Un Archivero",
+      "body": "El sistema de archivos de tu computadora es como un gigante **archivero**. El archivero en si es la raiz (`/`). Dentro hay cajones grandes (carpetas de nivel superior como `Users`, `Applications`). Dentro de cada cajon hay carpetas colgantes (subcarpetas). Dentro de esas hay documentos individuales (archivos). La terminal te permite abrir cualquier cajon y mirar adentro al instante -- sin necesidad de hacer clic."
+    },
+    {
+      "type": "analogy",
+      "title": "Rutas = Direcciones Postales",
+      "body": "Cada archivo tiene una **ruta** -- su direccion exacta en tu computadora. Igual que una direccion postal te indica Pais > Ciudad > Calle > Numero de Casa, una ruta de archivo te indica Raiz > Carpeta > Subcarpeta > Archivo. La ruta `/Users/tu/Documents/curriculum.pdf` es como decir \"ve al vecindario Users, encuentra la casa 'tu', ve a la habitacion Documents y agarra curriculum.pdf.\""
+    },
+    {
+      "type": "text",
+      "title": "El Directorio Home",
+      "body": "Cuando abres la terminal, empiezas en tu **directorio home** -- representado por el simbolo tilde `~`. Este es tu espacio personal en la computadora, como tu propio departamento en un edificio grande.\n\n- En Mac: `/Users/tunombre`\n- En Windows (WSL): `/home/tunombre`\n- En Linux: `/home/tunombre`\n\nTodos tus proyectos, documentos y descargas viven en algun lugar dentro de `~`."
+    },
+    {
+      "type": "code_example",
+      "title": "Explorando con pwd y ls",
+      "language": "bash",
+      "code": "pwd                    # Where am I right now?\nls                     # What's in this folder?\nls -la                 # Show ALL files (including hidden) with details",
+      "annotation": "'pwd' significa Print Working Directory (Imprimir Directorio de Trabajo) -- te dice tu ubicacion actual. 'ls' significa List (Listar) -- muestra lo que hay adentro."
+    },
+    {
+      "type": "motivation",
+      "body": "Entender el sistema de archivos es la base de cada proyecto de codigo que construiras. Cuando un cliente te pague $5,000 para construir una app con herramientas de IA, necesitas saber donde viven tus archivos, como organizarlos y como encontrarlos rapido. Esta leccion te ahorra horas de confusion despues."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Tu sistema de archivos es un arbol de carpetas y archivos. Usa `pwd` para ver donde estas y `ls` para ver que hay a tu alrededor. Cada archivo tiene una ruta unica -- su direccion en tu computadora."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/app/index.html", "~/projects/app/style.css", "~/projects/app/README.md", "~/projects/notes.txt"],
+    "steps": [
+      {
+        "instruction": "Primero, descubre exactamente donde estas en el sistema de archivos. Imprime tu directorio de trabajo actual.",
+        "expectedCommand": "pwd",
+        "acceptAlternatives": [],
+        "output": "/Users/you/projects",
+        "hint": "El comando significa 'print working directory' (imprimir directorio de trabajo) -- son tres letras."
+      },
+      {
+        "instruction": "Ahora veamos que archivos y carpetas hay en este directorio. Lista los contenidos.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": [],
+        "output": "app    notes.txt",
+        "hint": "El comando son solo dos letras y significa 'list' (listar)."
+      },
+      {
+        "instruction": "Hay una carpeta 'app' aqui. Veamos que hay adentro. Lista los contenidos del directorio app sin moverte a el.",
+        "expectedCommand": "ls app",
+        "acceptAlternatives": ["ls ./app", "ls app/"],
+        "output": "README.md    index.html    style.css",
+        "hint": "Puedes listar una carpeta especifica agregando su nombre despues de 'ls'. Prueba 'ls app'."
+      },
+      {
+        "instruction": "Ahora lista todo en el directorio actual con detalles completos, incluyendo archivos ocultos. Usa el formato largo con la bandera 'all'.",
+        "expectedCommand": "ls -la",
+        "acceptAlternatives": ["ls -al", "ls -l -a", "ls -a -l"],
+        "output": "total 8\ndrwxr-xr-x  4 you  staff  128 Apr 10 09:00 .\ndrwxr-xr-x  5 you  staff  160 Apr 10 08:00 ..\ndrwxr-xr-x  5 you  staff  160 Apr 10 09:00 app\n-rw-r--r--  1 you  staff   42 Apr 10 09:00 notes.txt",
+        "hint": "Usa 'ls' con las banderas '-la' -- la 'l' significa formato largo y 'a' significa todo (incluyendo archivos ocultos)."
+      }
+    ],
+    "completionMessage": "Excelente trabajo! Ahora puedes ver donde estas con pwd y explorar cualquier carpeta con ls. Nota como ls -la mostro archivos ocultos (que empiezan con un punto) y detalles extra como permisos y fechas.",
+    "glossaryTerms": ["pwd", "ls", "home-directory", "path"]
+  }
+}

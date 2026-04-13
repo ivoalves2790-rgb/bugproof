@@ -1,0 +1,67 @@
+{
+  "slug": "using-scripts",
+  "title": "Using npm Scripts",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Every project has a package.json with scripts -- shortcuts that run complex commands with a simple name. Think of them like speed dial buttons on a phone. This developer set up their scripts but made a configuration mistake. Find the bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "npm Scripts = Speed Dial Buttons on a Phone",
+      "body": "Remember when phones had **speed dial**? Instead of dialing 10 digits every time, you'd press one button and it would call Mom. npm scripts work the same way. Instead of typing `npx eslint src/ --fix --ext .js,.jsx --config .eslintrc.json` every time, you set up a script called `lint` and just run `npm run lint`. One short command, one button press -- same result. The more scripts you set up, the faster your workflow."
+    },
+    {
+      "type": "analogy",
+      "title": "Scripts = Macros in a Spreadsheet",
+      "body": "In a spreadsheet, a **macro** records a series of actions -- select these cells, apply this formula, format the result -- and replays them with one click. npm scripts are **macros for your terminal**. You define a sequence of commands once in package.json, and from then on, `npm run build` replays that exact sequence. If the sequence changes, you update the script in one place instead of remembering the new command every time."
+    },
+    {
+      "type": "text",
+      "title": "How npm Scripts Work",
+      "body": "Scripts live in the `scripts` section of package.json:\n\n```json\n\"scripts\": {\n  \"dev\": \"next dev\",\n  \"build\": \"next build\",\n  \"start\": \"next start\",\n  \"lint\": \"eslint src/\",\n  \"test\": \"jest\"\n}\n```\n\nRun them with `npm run <name>`. Special scripts `start` and `test` can skip the `run`: `npm start`, `npm test`.\n\n**Pre/post hooks** run automatically:\n- `prebuild` runs before `build`\n- `postbuild` runs after `build`\n\nThis lets you chain tasks: lint before building, deploy after building."
+    },
+    {
+      "type": "code_example",
+      "title": "Custom Scripts in Action",
+      "language": "json",
+      "code": "{\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"prebuild\": \"npm run lint\",\n    \"build\": \"next build\",\n    \"postbuild\": \"echo 'Build complete!'\",\n    \"lint\": \"eslint src/ --fix\",\n    \"deploy\": \"npm run build && vercel --prod\"\n  }\n}",
+      "annotation": "Running 'npm run build' automatically runs lint first (prebuild), then the build, then prints a message (postbuild). The deploy script chains build AND deploy together with &&."
+    },
+    {
+      "type": "motivation",
+      "body": "Professional projects have 10-20 scripts that automate everything from linting to deploying. Vibecoders who master npm scripts ship faster because they automate repetitive tasks. Instead of remembering complex commands, you run `npm run deploy` and go make coffee. That automation is what lets freelancers handle multiple projects and multiply their income."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "npm scripts are shortcuts defined in package.json that run complex commands with simple names. Use `npm run <name>` to execute them. Pre/post hooks let you chain tasks automatically. The && operator lets you run multiple commands in sequence."
+    }
+  ],
+  "exercise": {
+    "language": "json",
+    "code": [
+      { "line": 1, "text": "{", "isBuggy": false },
+      { "line": 2, "text": "  \"scripts\": {", "isBuggy": false },
+      { "line": 3, "text": "    \"dev\": \"next dev\",", "isBuggy": false },
+      { "line": 4, "text": "    \"build\": \"next build\",", "isBuggy": false },
+      { "line": 5, "text": "    \"prebuild\": \"npm run test\",", "isBuggy": false },
+      { "line": 6, "text": "    \"test\": \"jest\",", "isBuggy": false },
+      { "line": 7, "text": "    \"deploy\": \"vercel --prod\",", "isBuggy": true },
+      { "line": 8, "text": "    \"lint\": \"eslint src/\"", "isBuggy": false },
+      { "line": 9, "text": "  }", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 7,
+    "prompt": "The developer's deploy script runs 'vercel --prod' but never builds the project first. When they run 'npm run deploy', it deploys whatever old build files exist (or fails if there are none). Which line has the broken script?",
+    "fixes": [
+      { "id": "a", "text": "\"deploy\": \"npm run build && vercel --prod\"", "isCorrect": true },
+      { "id": "b", "text": "\"deploy\": \"vercel --prod && npm run build\"", "isCorrect": false },
+      { "id": "c", "text": "\"predeploy\": \"vercel --prod\"", "isCorrect": false },
+      { "id": "d", "text": "\"deploy\": \"vercel\"", "isCorrect": false }
+    ],
+    "explanation": "The deploy script on line 7 only runs `vercel --prod` without building first. This deploys stale or missing build files. The fix is to chain `npm run build && vercel --prod` so the project always builds before deploying. The && ensures deploy only runs if the build succeeds. Option B runs them in the wrong order (deploys before building). Option C creates a predeploy hook that deploys, which makes no sense. Option D removes the production flag, which doesn't fix the missing build step.",
+    "glossaryTerms": ["npm-scripts", "package-json", "pre-post-hooks", "chaining-commands"]
+  }
+}

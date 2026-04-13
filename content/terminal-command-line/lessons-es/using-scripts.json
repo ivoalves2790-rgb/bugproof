@@ -1,0 +1,67 @@
+{
+  "slug": "using-scripts",
+  "title": "Usando Scripts de npm",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Todo proyecto tiene un package.json con scripts -- atajos que ejecutan comandos complejos con un nombre simple. Piensa en ellos como botones de marcado rapido en un telefono. Este desarrollador configuro sus scripts pero cometio un error de configuracion. Encuentra el bug.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Scripts de npm = Botones de Marcado Rapido en un Telefono",
+      "body": "Recuerdas cuando los telefonos tenian **marcado rapido**? En vez de marcar 10 digitos cada vez, presionabas un boton y llamabas a mama. Los scripts de npm funcionan igual. En vez de escribir `npx eslint src/ --fix --ext .js,.jsx --config .eslintrc.json` cada vez, configuras un script llamado `lint` y simplemente ejecutas `npm run lint`. Un comando corto, una pulsacion de boton -- mismo resultado. Entre mas scripts configures, mas rapido sera tu flujo de trabajo."
+    },
+    {
+      "type": "analogy",
+      "title": "Scripts = Macros en una Hoja de Calculo",
+      "body": "En una hoja de calculo, un **macro** graba una serie de acciones -- selecciona estas celdas, aplica esta formula, formatea el resultado -- y las reproduce con un clic. Los scripts de npm son **macros para tu terminal**. Defines una secuencia de comandos una vez en package.json, y de ahi en adelante, `npm run build` reproduce esa secuencia exacta. Si la secuencia cambia, actualizas el script en un solo lugar en vez de recordar el nuevo comando cada vez."
+    },
+    {
+      "type": "text",
+      "title": "Como funcionan los scripts de npm",
+      "body": "Los scripts viven en la seccion `scripts` de package.json:\n\n```json\n\"scripts\": {\n  \"dev\": \"next dev\",\n  \"build\": \"next build\",\n  \"start\": \"next start\",\n  \"lint\": \"eslint src/\",\n  \"test\": \"jest\"\n}\n```\n\nEjecuitalos con `npm run <nombre>`. Los scripts especiales `start` y `test` pueden omitir el `run`: `npm start`, `npm test`.\n\n**Hooks pre/post** se ejecutan automaticamente:\n- `prebuild` se ejecuta antes de `build`\n- `postbuild` se ejecuta despues de `build`\n\nEsto te permite encadenar tareas: lint antes de construir, deploy despues de construir."
+    },
+    {
+      "type": "code_example",
+      "title": "Scripts personalizados en accion",
+      "language": "json",
+      "code": "{\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"prebuild\": \"npm run lint\",\n    \"build\": \"next build\",\n    \"postbuild\": \"echo 'Build complete!'\",\n    \"lint\": \"eslint src/ --fix\",\n    \"deploy\": \"npm run build && vercel --prod\"\n  }\n}",
+      "annotation": "Ejecutar 'npm run build' automaticamente ejecuta lint primero (prebuild), luego el build, luego imprime un mensaje (postbuild). El script deploy encadena build Y deploy juntos con &&."
+    },
+    {
+      "type": "motivation",
+      "body": "Los proyectos profesionales tienen 10-20 scripts que automatizan todo desde linting hasta deployment. Los vibecoders que dominan los scripts de npm entregan mas rapido porque automatizan tareas repetitivas. En vez de recordar comandos complejos, ejecutas `npm run deploy` y vas a preparar cafe. Esa automatizacion es lo que permite a los freelancers manejar multiples proyectos y multiplicar sus ingresos."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los scripts de npm son atajos definidos en package.json que ejecutan comandos complejos con nombres simples. Usa `npm run <nombre>` para ejecutarlos. Los hooks pre/post te permiten encadenar tareas automaticamente. El operador && te permite ejecutar multiples comandos en secuencia."
+    }
+  ],
+  "exercise": {
+    "language": "json",
+    "code": [
+      { "line": 1, "text": "{", "isBuggy": false },
+      { "line": 2, "text": "  \"scripts\": {", "isBuggy": false },
+      { "line": 3, "text": "    \"dev\": \"next dev\",", "isBuggy": false },
+      { "line": 4, "text": "    \"build\": \"next build\",", "isBuggy": false },
+      { "line": 5, "text": "    \"prebuild\": \"npm run test\",", "isBuggy": false },
+      { "line": 6, "text": "    \"test\": \"jest\",", "isBuggy": false },
+      { "line": 7, "text": "    \"deploy\": \"vercel --prod\",", "isBuggy": true },
+      { "line": 8, "text": "    \"lint\": \"eslint src/\"", "isBuggy": false },
+      { "line": 9, "text": "  }", "isBuggy": false },
+      { "line": 10, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 7,
+    "prompt": "El script de deploy del desarrollador ejecuta 'vercel --prod' pero nunca construye el proyecto primero. Cuando ejecutan 'npm run deploy', despliega los archivos de build viejos que existan (o falla si no hay ninguno). Cual linea tiene el script roto?",
+    "fixes": [
+      { "id": "a", "text": "\"deploy\": \"npm run build && vercel --prod\"", "isCorrect": true },
+      { "id": "b", "text": "\"deploy\": \"vercel --prod && npm run build\"", "isCorrect": false },
+      { "id": "c", "text": "\"predeploy\": \"vercel --prod\"", "isCorrect": false },
+      { "id": "d", "text": "\"deploy\": \"vercel\"", "isCorrect": false }
+    ],
+    "explanation": "El script deploy en la linea 7 solo ejecuta `vercel --prod` sin construir primero. Esto despliega archivos de build obsoletos o inexistentes. La correccion es encadenar `npm run build && vercel --prod` para que el proyecto siempre se construya antes de desplegar. El && asegura que deploy solo se ejecute si el build tiene exito. La opcion B los ejecuta en el orden incorrecto (despliega antes de construir). La opcion C crea un hook predeploy que despliega, lo cual no tiene sentido. La opcion D elimina el flag de produccion, lo cual no arregla el paso de build faltante.",
+    "glossaryTerms": ["npm-scripts", "package-json", "pre-post-hooks", "chaining-commands"]
+  }
+}

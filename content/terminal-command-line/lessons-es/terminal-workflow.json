@@ -1,0 +1,77 @@
+{
+  "slug": "terminal-workflow",
+  "title": "Construyendo tu Flujo de Trabajo en Terminal",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "Conocer los comandos es solo el comienzo -- el verdadero poder viene de como los usas juntos. La autocompletacion con Tab, el historial de comandos, los atajos de busqueda y los multiplexores de terminal te transforman de alguien que escribe comandos a alguien que fluye a traves de ellos. Desliza a la derecha si el consejo es una BUENA practica, o a la izquierda si es MALA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Flujo de Trabajo en Terminal = Mise en Place de un Chef",
+      "body": "Los chefs profesionales no buscan en el refrigerador a mitad de la receta. Practican **mise en place** -- todo preparado y al alcance de la mano antes de empezar a cocinar. Ingredientes picados, utensilios listos, estaciones organizadas. **Un gran flujo de trabajo en terminal es tu mise en place.** Autocompletacion con Tab, alias, busqueda en historial y paneles divididos significan que todo lo que necesitas esta accesible al instante -- sin buscar, sin reescribir, sin movimientos desperdiciados."
+    },
+    {
+      "type": "analogy",
+      "title": "Historial de Comandos = Un Boton de Rebobinar tu Trabajo",
+      "body": "Imagina que todo lo que escribiste en un cuaderno fuera buscable y reproducible. ¿Olvidaste el comando exacto que usaste para desplegar el viernes pasado? Solo **rebobina** y encuentralo. **El historial de comandos es un boton de rebobinar.** La terminal recuerda cada comando que has escrito. Presiona la flecha arriba para retroceder, o usa Ctrl+R para buscar cualquier comando que hayas ejecutado -- como tener una memoria perfecta para el trabajo en terminal."
+    },
+    {
+      "type": "text",
+      "title": "Atajos Esenciales de Flujo de Trabajo",
+      "body": "Estos atajos te ahorran miles de teclas:\n\n- **Tab** -- Autocompleta nombres de archivos, comandos y rutas. Presiona Tab dos veces para ver todas las opciones.\n- **Flechas arriba/abajo** -- Recorre comandos anteriores\n- **Ctrl+R** -- Busca en tu historial de comandos escribiendo una palabra clave\n- **Ctrl+A / Ctrl+E** -- Salta al inicio / final de una linea\n- **Ctrl+C** -- Cancela el comando actual\n- **Ctrl+L** -- Limpia la pantalla (igual que `clear`)\n- **!!** -- Repite el ultimo comando. `sudo !!` ejecuta el ultimo comando como administrador."
+    },
+    {
+      "type": "code_example",
+      "title": "tmux: Multiplexor de Terminal",
+      "language": "bash",
+      "code": "# Iniciar una nueva sesion de tmux\ntmux new -s miproyecto\n\n# Dividir la pantalla horizontalmente\n# Presiona Ctrl+B, luego \"\n\n# Dividir la pantalla verticalmente\n# Presiona Ctrl+B, luego %\n\n# Cambiar entre paneles\n# Presiona Ctrl+B, luego teclas de flecha\n\n# Desconectarse (la sesion sigue en segundo plano)\n# Presiona Ctrl+B, luego D\n\n# Reconectarse a una sesion\ntmux attach -t miproyecto",
+      "annotation": "tmux te permite dividir tu terminal en multiples paneles -- ejecuta tu servidor en uno, edita en otro y observa logs en un tercero. Las sesiones persisten incluso si cierras la ventana de tu terminal."
+    },
+    {
+      "type": "motivation",
+      "body": "La diferencia entre una sesion de depuracion de 30 minutos y una de 5 minutos es frecuentemente solo el flujo de trabajo. Los vibecoders que dominan Ctrl+R, autocompletacion con Tab y tmux se mueven por los proyectos como un auto de carreras en una pista en vez de una bicicleta en un camino de tierra. Los clientes notan cuando arreglas las cosas rapido -- y pagan mas por velocidad."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Usa Tab para autocompletar todo, Ctrl+R para buscar en el historial y tmux para dividir tu terminal en paneles. Un flujo de trabajo pulido no se trata de trucos llamativos -- se trata de eliminar cada tecla innecesaria para que puedas enfocarte en resolver problemas en vez de escribir comandos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "Presionar Tab para autocompletar nombres de archivos y comandos ahorra teclas y previene errores de escritura.",
+        "isGoodPractice": true,
+        "explanation": "La autocompletacion con Tab es uno de los habitos mas importantes de la terminal. Autocompleta nombres de archivos, rutas de directorios e incluso nombres de comandos -- eliminando errores de escritura y ahorrando tiempo. Si no pasa nada con el primer Tab, presiona Tab dos veces para ver todas las opciones disponibles."
+      },
+      {
+        "id": "card-2",
+        "content": "Siempre deberias reescribir los comandos largos de memoria en vez de usar el historial.",
+        "isGoodPractice": false,
+        "explanation": "Reescribir comandos desperdicia tiempo e introduce errores. Usa la flecha arriba para recorrer comandos recientes, o presiona Ctrl+R y escribe una palabra clave para encontrar instantaneamente cualquier comando que hayas ejecutado. Tu historial del shell es una herramienta poderosa -- usala."
+      },
+      {
+        "id": "card-3",
+        "content": "Usar tmux te permite mantener tu servidor de desarrollo, logs y editor todos visibles al mismo tiempo en una sola ventana de terminal.",
+        "isGoodPractice": true,
+        "explanation": "tmux divide tu terminal en multiples paneles para que puedas monitorear varias cosas simultaneamente. Ejecuta tu servidor de desarrollo en un panel, observa los logs en otro y escribe comandos en un tercero -- todo sin cambiar de ventana. Las sesiones tambien persisten si se cae tu conexion."
+      },
+      {
+        "id": "card-4",
+        "content": "Cuando un comando falla con 'permission denied', solo agrega sudo al principio sin entender por que necesitaba permisos elevados.",
+        "isGoodPractice": false,
+        "explanation": "Agregar sudo a ciegas es peligroso. Ejecuta el comando como administrador root -- lo cual podria borrar archivos del sistema, sobreescribir configuraciones importantes o crear archivos con permisos incorrectos. Siempre entiende POR QUE un comando necesita sudo antes de usarlo. Frecuentemente la solucion es cambiar la propiedad del archivo, no ejecutar como root."
+      },
+      {
+        "id": "card-5",
+        "content": "Ctrl+R te permite buscar en todo tu historial de comandos escribiendo solo unas letras de un comando anterior.",
+        "isGoodPractice": true,
+        "explanation": "Ctrl+R activa el modo de busqueda inversa. Empieza a escribir cualquier parte de un comando anterior y encuentra la coincidencia mas reciente. Presiona Ctrl+R de nuevo para recorrer coincidencias mas antiguas. Esto es mucho mas rapido que presionar la flecha arriba 50 veces para encontrar un comando de ayer."
+      }
+    ],
+    "glossaryTerms": ["tab-completion", "history"]
+  }
+}

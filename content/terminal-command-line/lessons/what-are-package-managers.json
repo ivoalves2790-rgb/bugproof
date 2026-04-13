@@ -1,0 +1,82 @@
+{
+  "slug": "what-are-package-managers",
+  "title": "What Are Package Managers?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "package-managers",
+  "courseSlug": "terminal-command-line",
+  "intro": "Every modern app is built with hundreds of pieces of code written by other people -- libraries, frameworks, and tools. Package managers let you install, update, and remove these pieces with a single command. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Package Manager = An App Store for Your Terminal",
+      "body": "Your phone has an app store where you search for apps, tap Install, and everything just works -- downloads, setup, updates. A **package manager** is exactly that, but for your coding projects. Instead of tapping a button, you type `npm install react` and the package manager downloads React, sets it up, and tracks the version. Just like the App Store handles dependencies (\"this app requires iOS 16\"), npm handles code dependencies (\"this library requires Node 18\")."
+    },
+    {
+      "type": "analogy",
+      "title": "Package Manager = A Hardware Store for Pre-Built Parts",
+      "body": "Imagine you're building a bookshelf. You could chop down a tree, mill the lumber, forge your own nails, and smelt hinges from raw iron. Or you could go to the hardware store and buy **pre-cut wood, a box of nails, and ready-made hinges**. A package manager is your hardware store -- it gives you pre-built, tested parts (libraries) so you don't have to build everything from scratch. Why write your own date formatting function when thousands of developers already perfected one?"
+    },
+    {
+      "type": "text",
+      "title": "What Package Managers Actually Do",
+      "body": "A package manager handles four key jobs:\n\n1. **Installing packages** -- Downloads code libraries from a central registry\n2. **Managing versions** -- Tracks which version of each library you're using\n3. **Resolving dependencies** -- If Library A needs Library B, it installs both\n4. **Updating and removing** -- Keeps packages current or removes ones you don't need\n\nWithout a package manager, you'd have to manually download files, put them in the right folders, track versions in a spreadsheet, and hope nothing conflicts."
+    },
+    {
+      "type": "text",
+      "title": "The Big Three: npm, yarn, and pnpm",
+      "body": "In the JavaScript world, three package managers dominate:\n\n- **npm** -- The original. Comes pre-installed with Node.js. Used by most tutorials and projects.\n- **yarn** -- Created by Facebook. Faster installs and better offline support.\n- **pnpm** -- The newest. Uses less disk space by sharing packages across projects.\n\nAll three use the same registry (npmjs.com) and read the same package.json file. Think of them as three different browsers accessing the same internet -- the content is the same, the tool is different."
+    },
+    {
+      "type": "code_example",
+      "title": "Package Managers in Action",
+      "language": "bash",
+      "code": "# Installing a package (all three do the same thing)\nnpm install axios\nyarn add axios\npnpm add axios\n\n# Installing all project dependencies\nnpm install\nyarn install\npnpm install",
+      "annotation": "All three commands download the 'axios' library (for making HTTP requests) from the npm registry. The commands are slightly different, but the result is the same: the package lands in your node_modules folder."
+    },
+    {
+      "type": "motivation",
+      "body": "Every single vibecoding project -- whether it's a Next.js app, a React dashboard, or an AI tool -- starts with package manager commands. Freelancers who can quickly set up, install dependencies, and troubleshoot package issues charge $50-150/hour because they solve problems that stump beginners for days. Understanding package managers is the gateway to building real, deployable products."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Package managers (npm, yarn, pnpm) are tools that install, update, and manage code libraries for your projects. They download packages from a central registry, handle version tracking, and resolve dependencies automatically -- saving you from manually managing hundreds of files."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "A package manager downloads code libraries from a central registry so you don't have to write everything from scratch.",
+        "isGoodPractice": true,
+        "explanation": "That's exactly what package managers do. The npm registry (npmjs.com) hosts over 2 million packages. When you run 'npm install react', it downloads React from this registry and puts it in your project's node_modules folder."
+      },
+      {
+        "id": "card-2",
+        "content": "You should only use one package manager (npm, yarn, or pnpm) per project to avoid conflicts.",
+        "isGoodPractice": true,
+        "explanation": "Mixing package managers in the same project creates conflicting lock files (package-lock.json vs yarn.lock) and can cause version mismatches. Pick one for each project and stick with it. Most beginners start with npm since it comes with Node.js."
+      },
+      {
+        "id": "card-3",
+        "content": "Package managers are only for JavaScript projects -- Python and other languages don't have them.",
+        "isGoodPractice": false,
+        "explanation": "Almost every language has its own package manager. Python has pip, Ruby has gem, PHP has Composer, Rust has cargo, Go has go modules. The concept is universal -- only the commands differ."
+      },
+      {
+        "id": "card-4",
+        "content": "You need to manually download and copy library files into your project folder.",
+        "isGoodPractice": false,
+        "explanation": "That's the old way before package managers existed. Now you just type 'npm install library-name' and the package manager handles everything: downloading, placing files in node_modules, updating package.json, and creating a lock file."
+      },
+      {
+        "id": "card-5",
+        "content": "When you install a package, the package manager also installs all the other packages it depends on.",
+        "isGoodPractice": true,
+        "explanation": "This is called dependency resolution. When you install React, npm also installs loose-envify, js-tokens, and other packages that React needs to work. A single 'npm install react' might actually install 5+ packages behind the scenes."
+      }
+    ],
+    "glossaryTerms": ["package-manager", "npm", "dependency", "registry"]
+  }
+}

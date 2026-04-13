@@ -1,0 +1,61 @@
+{
+  "slug": "chaining-commands",
+  "title": "Encadenando Comandos",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "¿Por que ejecutar comandos uno a la vez cuando puedes encadenarlos? Los operadores &&, || y ; te permiten combinar multiples comandos en una sola linea. Pero si eliges el operador equivocado, tu script de despliegue podria arruinar produccion en vez de detenerse ante un error. Encuentra el bug en este comando encadenado.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "&& = Una Receta: Haz Esto Y LUEGO Aquello",
+      "body": "Piensa en `&&` como seguir una receta: **precalienta el horno Y LUEGO mete el pastel**. Si el horno no se precalienta, no metes el pastel -- te detienes. `&&` funciona igual: solo ejecuta el siguiente comando si el anterior tuvo exito. `npm install && npm start` significa \"instala los paquetes, y SOLO SI funciona, inicia la app.\" Si install falla, start nunca se ejecuta."
+    },
+    {
+      "type": "analogy",
+      "title": "|| = Un Plan de Respaldo: Intenta el Plan A O el Plan B",
+      "body": "Piensa en `||` como tener un plan de respaldo: **intenta abrir la puerta principal O si falla, usa la puerta trasera**. La segunda opcion solo se activa si la primera falla. `node server.js || echo 'El servidor fallo al iniciar'` significa \"ejecuta el servidor, pero si se cae, muestra un mensaje de error.\" Si el servidor inicia bien, el echo nunca se ejecuta."
+    },
+    {
+      "type": "text",
+      "title": "Tres Formas de Encadenar Comandos",
+      "body": "Cada operador tiene un comportamiento diferente:\n\n- **`&&` (AND)** -- Ejecuta el siguiente comando SOLO si el anterior tuvo exito. Se detiene en el primer fallo.\n- **`||` (OR)** -- Ejecuta el siguiente comando SOLO si el anterior fallo. Es un respaldo.\n- **`;` (PUNTO Y COMA)** -- Ejecuta el siguiente comando sin importar que. No le importa si el comando anterior fallo o tuvo exito.\n\nLa diferencia clave: `&&` es cauteloso (se detiene si algo se rompe), `;` es imprudente (sigue sin importar que), y `||` es la red de seguridad."
+    },
+    {
+      "type": "code_example",
+      "title": "Encadenamiento en Accion",
+      "language": "bash",
+      "code": "# AND -- se detiene si algo falla (seguro para despliegues)\nnpm run build && npm run deploy\n\n# OR -- respaldo cuando algo falla\ncommand -v node || echo 'Node no esta instalado'\n\n# PUNTO Y COMA -- ejecuta todo sin importar que\nmkdir logs; touch logs/app.log; echo 'Listo'",
+      "annotation": "Usa && para cualquier cosa donde el orden importa y un fallo debe detener la cadena. Usa ; para comandos independientes que deben ejecutarse todos. Usa || para manejo de errores y respaldos."
+    },
+    {
+      "type": "motivation",
+      "body": "Los scripts de despliegue profesionales, pipelines de CI/CD y herramientas de automatizacion dependen del encadenamiento de comandos. Cuando un cliente necesita un despliegue de un solo comando que compile, pruebe y suba a produccion, el vibecoding con encadenamiento correcto es como lo entregas. Usar el operador equivocado puede significar desplegar codigo roto -- y perder a ese cliente."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Usa && para detener la cadena ante un fallo (seguro), ; para ejecutar todo sin importar que (riesgoso), y || para proporcionar un respaldo cuando algo falla. Para despliegues y compilaciones, siempre usa && para que un paso fallido no se convierta en un desastre en cascada."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Script de compilacion y despliegue", "isBuggy": false },
+      { "line": 2, "text": "echo 'Iniciando despliegue...'", "isBuggy": false },
+      { "line": 3, "text": "npm run build ; npm run deploy", "isBuggy": true },
+      { "line": 4, "text": "echo 'Despliegue completado!'", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "Este script de despliegue compila la app y luego la despliega. Pero si la compilacion falla con errores, el despliegue se ejecuta de todas formas -- subiendo codigo roto a produccion. ¿Cual linea tiene el operador de encadenamiento equivocado?",
+    "fixes": [
+      { "id": "a", "text": "npm run build && npm run deploy", "isCorrect": true },
+      { "id": "b", "text": "npm run build || npm run deploy", "isCorrect": false },
+      { "id": "c", "text": "npm run build | npm run deploy", "isCorrect": false },
+      { "id": "d", "text": "npm run build & npm run deploy", "isCorrect": false }
+    ],
+    "explanation": "El punto y coma (;) ejecuta el siguiente comando sin importar si el anterior tuvo exito o fallo. Eso significa que incluso si 'npm run build' falla con errores de compilacion, 'npm run deploy' aun se ejecuta y sube codigo roto a produccion. La solucion es && que solo ejecuta deploy si build tiene exito. La opcion B (||) solo desplegaria si build FALLA -- lo opuesto de lo que queremos. La opcion C (|) es un pipe, que envia la salida de un comando como entrada de otro. La opcion D (&) ejecuta ambos comandos simultaneamente en segundo plano.",
+    "glossaryTerms": ["chaining", "conditional-execution"]
+  }
+}

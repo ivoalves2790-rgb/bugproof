@@ -1,0 +1,109 @@
+{
+  "slug": "ssh-basics",
+  "title": "SSH: Connecting to Remote Servers",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "Your app is live on a remote server and a critical bug just hit production. You need to connect to the server, check the logs, and restart the service -- all through the terminal. SSH is the secure tunnel that lets you control a remote machine as if you were sitting right in front of it.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "SSH = A Secure Private Phone Line",
+      "body": "Imagine you need to give instructions to someone in a locked building across town. You could shout across the street (insecure -- anyone can hear), or you could use a **private, encrypted phone line** that only you and the person inside can use. **SSH is that private phone line.** It creates an encrypted tunnel between your computer and a remote server so nobody can eavesdrop on your commands or data."
+    },
+    {
+      "type": "analogy",
+      "title": "SSH Keys = A Fingerprint Scanner",
+      "body": "Most buildings use keys or passcodes to get in -- but those can be copied or guessed. A **fingerprint scanner** is more secure because your fingerprint is unique and can't be stolen by watching over your shoulder. **SSH keys work like a fingerprint scanner.** Instead of typing a password every time (which could be intercepted), you register your unique key with the server. When you connect, it checks your fingerprint -- no password needed, and nothing to steal."
+    },
+    {
+      "type": "text",
+      "title": "SSH Essentials",
+      "body": "SSH (Secure Shell) lets you run commands on a remote machine:\n\n- **`ssh user@hostname`** -- Connect to a remote server\n- **`ssh -i key.pem user@hostname`** -- Connect using a specific key file\n- **`ssh-keygen`** -- Generate a new SSH key pair (public + private)\n- **`scp file.txt user@host:/path/`** -- Copy a file to a remote server\n- **`exit`** -- Disconnect from the remote server\n\nThe private key stays on your machine (never share it). The public key goes on the server."
+    },
+    {
+      "type": "code_example",
+      "title": "SSH in Practice",
+      "language": "bash",
+      "code": "# Generate an SSH key pair\nssh-keygen -t ed25519 -C \"you@email.com\"\n\n# Connect to a server\nssh deploy@192.168.1.100\n\n# Run a command on the server without staying connected\nssh deploy@192.168.1.100 'pm2 restart all'\n\n# Copy a file to the server\nscp dist.zip deploy@192.168.1.100:/var/www/app/",
+      "annotation": "ssh-keygen creates two files: a private key (keep secret) and a public key (.pub -- share this with servers). The ed25519 type is the modern recommended algorithm."
+    },
+    {
+      "type": "motivation",
+      "body": "Every production app lives on a remote server. When clients pay you to build and maintain apps, SSH is how you deploy updates, debug production issues, and manage servers. Vibecoders who can SSH into a server and fix issues in minutes earn premium rates -- because downtime costs businesses real money."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "SSH creates an encrypted connection to remote servers. Use ssh-keygen to create key pairs (more secure than passwords), ssh user@host to connect, and scp to copy files. Never share your private key -- only the public key goes on the server."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Your client calls in a panic -- their web app is down. You need to SSH into the production server at deploy@app.example.com to investigate. You try to connect but get 'Permission denied (publickey)'. What do you do first?",
+        "choices": [
+          { "id": "a", "text": "Check if your SSH key is added to the ssh-agent with ssh-add -l", "nextNode": "check-agent", "score": 10 },
+          { "id": "b", "text": "Generate a brand new SSH key pair with ssh-keygen", "nextNode": "new-key", "score": 3 },
+          { "id": "c", "text": "Try connecting with a password instead: ssh deploy@app.example.com -o PasswordAuthentication=yes", "nextNode": "try-password", "score": 5 }
+        ]
+      },
+      "check-agent": {
+        "narrative": "You run ssh-add -l and get 'The agent has no identities'. Your SSH key exists on disk but isn't loaded into the agent. You add it with ssh-add ~/.ssh/id_ed25519 and try connecting again. This time you get in. The server's terminal prompt appears. Now what?",
+        "choices": [
+          { "id": "a", "text": "Check the application logs to see what went wrong", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Immediately restart the application service", "nextNode": "blind-restart", "score": 5 },
+          { "id": "c", "text": "Run top to check if the server is overloaded", "nextNode": "check-top", "score": 7 }
+        ]
+      },
+      "new-key": {
+        "narrative": "You generate a new key, but the server doesn't recognize it -- you'd need to add the new public key to the server's authorized_keys file, which you can't do because you can't connect. Generating a new key doesn't help when the existing key just needs to be loaded. Try a different approach.",
+        "choices": [
+          { "id": "a", "text": "Check if the existing SSH key is loaded in the agent", "nextNode": "check-agent", "score": 5 }
+        ]
+      },
+      "try-password": {
+        "narrative": "The server has password authentication disabled for security (which is a best practice). Password-based SSH is vulnerable to brute-force attacks. The issue is with your SSH key, not the authentication method.",
+        "choices": [
+          { "id": "a", "text": "Check if my SSH key is loaded in the ssh-agent", "nextNode": "check-agent", "score": 5 }
+        ]
+      },
+      "check-logs": {
+        "narrative": "You run 'tail -100 /var/log/app/error.log' and see the application crashed because it ran out of disk space. The log directory itself grew to 50GB of old log files. The fix is clear -- clean up old logs and restart. What's your approach?",
+        "choices": [
+          { "id": "a", "text": "Delete old log files to free space, then restart the app", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Just restart the app and hope it works", "nextNode": "end-mediocre", "score": 3 }
+        ]
+      },
+      "blind-restart": {
+        "narrative": "You restart the app with 'pm2 restart all' but it crashes again immediately. Without checking logs first, you're guessing at the problem. A restart won't fix an underlying issue like disk space, memory leaks, or config errors.",
+        "choices": [
+          { "id": "a", "text": "Check the application logs to find the actual cause", "nextNode": "check-logs", "score": 5 }
+        ]
+      },
+      "check-top": {
+        "narrative": "You run 'top' and see CPU and memory look normal, but disk usage is at 100%. That's a clue, but the application logs will tell you exactly what went wrong and when.",
+        "choices": [
+          { "id": "a", "text": "Check the application logs for the specific error", "nextNode": "check-logs", "score": 8 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You run 'find /var/log/app/ -name \"*.log\" -mtime +30 -delete' to remove log files older than 30 days, freeing 45GB. Then you restart the app with 'pm2 restart all' and it comes back online. You also set up log rotation to prevent this from happening again. The client's app is back up in under 10 minutes.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent incident response over SSH. You diagnosed the key loading issue, connected to the server, checked logs before taking action, identified the root cause (disk full), fixed it, and added prevention (log rotation). This is exactly how production issues are handled in the real world."
+      },
+      "end-mediocre": {
+        "narrative": "The app crashes again immediately because the disk is still full. Restarting without fixing the root cause just repeats the failure. You need to free disk space first.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Always diagnose before you fix. Restarting a crashed application without understanding why it crashed means it will likely crash again. In this case, the disk was full -- no amount of restarts would help until old log files were cleaned up. Check logs, identify the root cause, fix it, then restart."
+      }
+    },
+    "glossaryTerms": ["ssh", "ssh-key"]
+  }
+}

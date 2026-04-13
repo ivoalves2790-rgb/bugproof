@@ -1,0 +1,73 @@
+{
+  "slug": "package-json",
+  "title": "Understanding package.json",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "package-managers",
+  "courseSlug": "terminal-command-line",
+  "intro": "The package.json file is the heart of every JavaScript project. It lists your project's name, version, dependencies, and scripts. But one wrong field can break your entire setup. Find the bug in this package.json that will cause 'npm run dev' to fail.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "package.json = A Recipe Card Listing All Ingredients",
+      "body": "Think of package.json as a **recipe card** for your project. It lists every ingredient (dependency) you need, the exact amounts (versions), and the cooking instructions (scripts). If you hand someone the recipe card, they can recreate the dish exactly. If you forget an ingredient or write the wrong amount, the recipe fails. That's why package.json is so important -- it's the single source of truth for what your project needs to run."
+    },
+    {
+      "type": "analogy",
+      "title": "Scripts Section = Preset Buttons on a Car Dashboard",
+      "body": "Your car dashboard has buttons: AC, defrost, hazard lights. You don't manually configure each one every time -- you just press the button. The **scripts section** in package.json works the same way. Instead of typing `next dev --turbo --port 3000` every time, you save it as `\"dev\": \"next dev --turbo --port 3000\"` and just run `npm run dev`. One button press, complex action. Every project has its own dashboard of custom buttons."
+    },
+    {
+      "type": "text",
+      "title": "Anatomy of package.json",
+      "body": "Every package.json has these key sections:\n\n- **name** and **version** -- Your project's identity\n- **scripts** -- Custom commands you can run with `npm run`\n- **dependencies** -- Packages your app needs to run in production\n- **devDependencies** -- Packages only needed during development (testing tools, linters)\n\nThe difference between dependencies and devDependencies matters in production: only dependencies get installed on your live server."
+    },
+    {
+      "type": "code_example",
+      "title": "A Typical package.json",
+      "language": "json",
+      "code": "{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\"\n  },\n  \"dependencies\": {\n    \"next\": \"^14.0.0\",\n    \"react\": \"^18.2.0\",\n    \"react-dom\": \"^18.2.0\"\n  },\n  \"devDependencies\": {\n    \"eslint\": \"^8.50.0\"\n  }\n}",
+      "annotation": "The ^ symbol in versions means 'compatible updates allowed.' ^14.0.0 means any version from 14.0.0 up to (but not including) 15.0.0. This lets npm install minor patches automatically."
+    },
+    {
+      "type": "motivation",
+      "body": "When a client sends you their codebase to fix or extend, package.json is the first file you open. Understanding it instantly tells you what framework they use, what tools are available, and how to run the project. Vibecoders who can read a package.json and get a project running in minutes -- instead of hours -- are the ones who get repeat business and referrals."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "package.json is your project's recipe card: it lists all dependencies, defines runnable scripts, and provides project metadata. Dependencies are for production packages, devDependencies are for development-only tools, and scripts are shortcut commands you run with 'npm run'."
+    }
+  ],
+  "exercise": {
+    "language": "json",
+    "code": [
+      { "line": 1, "text": "{", "isBuggy": false },
+      { "line": 2, "text": "  \"name\": \"my-portfolio\",", "isBuggy": false },
+      { "line": 3, "text": "  \"version\": \"1.0.0\",", "isBuggy": false },
+      { "line": 4, "text": "  \"scripts\": {", "isBuggy": false },
+      { "line": 5, "text": "    \"dev\": \"next dev\",", "isBuggy": false },
+      { "line": 6, "text": "    \"build\": \"next build\",", "isBuggy": false },
+      { "line": 7, "text": "    \"start\": \"next start\"", "isBuggy": false },
+      { "line": 8, "text": "  },", "isBuggy": false },
+      { "line": 9, "text": "  \"dependencies\": {", "isBuggy": false },
+      { "line": 10, "text": "    \"react\": \"^18.2.0\",", "isBuggy": true },
+      { "line": 11, "text": "    \"react-dom\": \"^18.2.0\"", "isBuggy": false },
+      { "line": 12, "text": "  },", "isBuggy": false },
+      { "line": 13, "text": "  \"devDependencies\": {", "isBuggy": false },
+      { "line": 14, "text": "    \"eslint\": \"^8.50.0\"", "isBuggy": false },
+      { "line": 15, "text": "  }", "isBuggy": false },
+      { "line": 16, "text": "}", "isBuggy": false }
+    ],
+    "correctBuggyLine": 10,
+    "prompt": "The scripts reference 'next dev', 'next build', and 'next start', but look at the dependencies. Something critical is missing that will cause every script to fail. Find the line where the problem starts.",
+    "fixes": [
+      { "id": "a", "text": "    \"next\": \"^14.0.0\",\n    \"react\": \"^18.2.0\",", "isCorrect": true },
+      { "id": "b", "text": "    \"react\": \"^19.0.0\",", "isCorrect": false },
+      { "id": "c", "text": "    \"react\": \"18.2.0\",", "isCorrect": false },
+      { "id": "d", "text": "Move react to devDependencies", "isCorrect": false }
+    ],
+    "explanation": "The scripts all call 'next' commands (next dev, next build, next start), but 'next' is not listed in the dependencies. Without it, npm won't install Next.js, and every script will fail with 'next: command not found.' The fix is adding '\"next\": \"^14.0.0\"' to the dependencies before react. Option B upgrades React but still doesn't add Next.js. Option C removes the ^ but still doesn't add the missing package. Option D would remove React from production, which would break the app.",
+    "glossaryTerms": ["package-json", "npm-scripts", "dependencies"]
+  }
+}

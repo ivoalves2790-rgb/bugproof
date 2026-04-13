@@ -1,0 +1,78 @@
+{
+  "slug": "npm-basics",
+  "title": "npm Basics",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "package-managers",
+  "courseSlug": "terminal-command-line",
+  "intro": "npm (Node Package Manager) is the default package manager for JavaScript. It comes bundled with Node.js, so if you have Node installed, you already have npm. Let's walk through the essential npm commands every developer uses daily -- from creating a project to installing packages and running scripts.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "npm init = Filling Out a Birth Certificate for Your Project",
+      "body": "When a baby is born, you fill out a birth certificate: name, date, parents. **npm init** is the birth certificate for your project. It asks you questions -- what's the project name? version? description? author? -- and creates a file called package.json that officially registers your project's identity. Without it, npm doesn't know your project exists."
+    },
+    {
+      "type": "analogy",
+      "title": "node_modules = A Warehouse Full of Parts",
+      "body": "Imagine you're assembling a car. You order an engine, wheels, seats, and electronics from different suppliers. They all arrive and get stored in your **warehouse** (node_modules). Some parts come with their own sub-parts -- the engine includes spark plugs, the electronics include wiring harnesses. Your warehouse can get huge, but you need every piece for the car to run. That's why node_modules can contain thousands of files -- each package brings its own dependencies."
+    },
+    {
+      "type": "text",
+      "title": "The npm Workflow",
+      "body": "Every project follows the same pattern:\n\n1. **npm init** -- Creates package.json (your project's ID card)\n2. **npm install package-name** -- Adds a library to your project\n3. **npm install** -- Installs all packages listed in package.json (used when cloning a project)\n4. **npm run script-name** -- Runs a script defined in package.json\n\nThese four commands cover 90% of what you'll do with npm."
+    },
+    {
+      "type": "code_example",
+      "title": "npm Commands You'll Use Every Day",
+      "language": "bash",
+      "code": "npm init -y                  # Create package.json with defaults\nnpm install express          # Install Express framework\nnpm install nodemon --save-dev  # Install dev-only tool\nnpm run dev                  # Run the 'dev' script",
+      "annotation": "The -y flag in 'npm init -y' skips all the questions and uses defaults. The --save-dev flag marks a package as a development dependency (only needed during coding, not in production)."
+    },
+    {
+      "type": "motivation",
+      "body": "Every vibecoding project starts with npm commands. Whether you're spinning up a Next.js app, installing an AI SDK, or adding a payment library -- npm is the first tool you reach for. Developers who can confidently set up projects from scratch earn trust (and contracts) faster because they don't get stuck at step one."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "npm init creates your project's package.json, npm install adds packages to node_modules, and npm run executes scripts. These three commands are the foundation of every JavaScript project workflow."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": [],
+    "steps": [
+      {
+        "instruction": "Let's start a new project. Create a folder called 'my-app' and move into it.",
+        "expectedCommand": "mkdir my-app && cd my-app",
+        "acceptAlternatives": ["mkdir my-app; cd my-app"],
+        "output": "",
+        "hint": "Use 'mkdir' to create the folder and 'cd' to move into it. Chain them with '&&'."
+      },
+      {
+        "instruction": "Initialize a new npm project with default settings. This creates the package.json file.",
+        "expectedCommand": "npm init -y",
+        "acceptAlternatives": ["npm init --yes"],
+        "output": "Wrote to ~/projects/my-app/package.json:\n\n{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}",
+        "hint": "Use 'npm init -y' to skip the questions and create package.json with default values."
+      },
+      {
+        "instruction": "Install Express, a popular web framework, as a project dependency.",
+        "expectedCommand": "npm install express",
+        "acceptAlternatives": ["npm i express"],
+        "output": "added 64 packages in 3s\n\n8 packages are looking for funding\n  run `npm fund` for details",
+        "hint": "Use 'npm install' followed by the package name. 'npm i' is a shorthand that works too."
+      },
+      {
+        "instruction": "Now install nodemon as a dev dependency -- it's a tool that auto-restarts your server during development.",
+        "expectedCommand": "npm install nodemon --save-dev",
+        "acceptAlternatives": ["npm i nodemon --save-dev", "npm i nodemon -D", "npm install nodemon -D"],
+        "output": "added 29 packages in 2s",
+        "hint": "Use 'npm install nodemon --save-dev' to mark it as a development-only dependency."
+      }
+    ],
+    "completionMessage": "You just created a project from scratch! Your package.json now lists Express as a dependency and nodemon as a dev dependency. The node_modules folder contains all the downloaded code. When someone else clones your project, they just run 'npm install' and get the exact same setup.",
+    "glossaryTerms": ["npm", "package-json", "node-modules", "dependencies"]
+  }
+}

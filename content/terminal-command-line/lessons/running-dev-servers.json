@@ -1,0 +1,78 @@
+{
+  "slug": "running-dev-servers",
+  "title": "Running Dev Servers",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Every web project needs a dev server -- a local version of your app running on your machine so you can see changes instantly. Think of it as your personal rehearsal stage where you practice before the live show. Let's start one up and understand what that terminal output actually means.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Dev Server = Your Personal Rehearsal Stage",
+      "body": "Before a band plays a concert, they rehearse on a private stage. Nobody from the audience is watching -- they can mess up, try new things, and tweak the setlist. A **dev server** is your personal rehearsal stage. Your app runs locally on your machine where only you can see it. You can break things, experiment, and refresh instantly. When you're ready, you \"go live\" by deploying to a real server -- that's the concert."
+    },
+    {
+      "type": "analogy",
+      "title": "Localhost = A Test Kitchen",
+      "body": "Imagine a restaurant with a **test kitchen** in the back. Chefs cook new dishes, taste them, adjust the seasoning, and only send them to the dining room when they're perfect. **Localhost** is your test kitchen -- your app runs at `localhost:3000` where only you can taste it. The port number (3000) is like the kitchen's door number. You can have multiple kitchens running on different ports: kitchen 3000 for the main course, kitchen 5173 for dessert."
+    },
+    {
+      "type": "text",
+      "title": "What a Dev Server Does",
+      "body": "When you run `npm run dev`, several things happen:\n\n1. **Compiles your code** -- Turns your JSX, TypeScript, or modern JavaScript into something the browser understands\n2. **Starts a local web server** -- Serves your files at an address like `http://localhost:3000`\n3. **Watches for changes** -- Detects when you save a file and automatically refreshes the browser\n4. **Shows errors** -- Displays compilation errors directly in the terminal and sometimes in the browser\n\nThe server keeps running until you stop it with Ctrl+C."
+    },
+    {
+      "type": "code_example",
+      "title": "Typical Dev Server Output",
+      "language": "bash",
+      "code": "$ npm run dev\n\n> my-app@0.1.0 dev\n> next dev\n\n  - Local:        http://localhost:3000\n  - Network:      http://192.168.1.42:3000\n\n  Ready in 1.2s",
+      "annotation": "The 'Local' URL is where you open your app in the browser. 'Network' lets other devices on your WiFi see the app (like your phone). 'Ready in 1.2s' means the server compiled your code and is now serving it."
+    },
+    {
+      "type": "motivation",
+      "body": "Every single web app -- from a $500 freelance landing page to a $50M startup product -- starts with `npm run dev`. Vibecoders who understand their dev server debug faster, ship sooner, and earn more because they're not stuck waiting for someone to explain why their app isn't showing up in the browser."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "A dev server runs your app locally so you can preview it in the browser at localhost. Start it with `npm run dev`, open the URL it prints, and it will auto-refresh when you save changes. Stop it with Ctrl+C when you're done."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["package.json", "src/App.jsx", "src/index.js"],
+    "steps": [
+      {
+        "instruction": "You just cloned a project from GitHub. Before running the dev server, you need to install the project's dependencies. Install them now.",
+        "expectedCommand": "npm install",
+        "acceptAlternatives": ["npm i", "npm ci"],
+        "output": "added 247 packages in 8s\n\n38 packages are looking for funding\n  run `npm fund` for details",
+        "hint": "Use 'npm install' (or 'npm i' for short) to install all the packages listed in package.json."
+      },
+      {
+        "instruction": "Dependencies installed! Now start the development server.",
+        "expectedCommand": "npm run dev",
+        "acceptAlternatives": ["npm start", "npx next dev"],
+        "output": "> my-app@0.1.0 dev\n> next dev\n\n  - Local:        http://localhost:3000\n  - Network:      http://192.168.1.42:3000\n\n  Ready in 1.8s",
+        "hint": "Use 'npm run dev' to start the dev server. This runs the 'dev' script from package.json."
+      },
+      {
+        "instruction": "The server is running on port 3000 but you need to run a second project on a different port. Start another server on port 3001.",
+        "expectedCommand": "npm run dev -- --port 3001",
+        "acceptAlternatives": ["npx next dev --port 3001", "PORT=3001 npm run dev", "npm run dev -- -p 3001"],
+        "output": "> my-app@0.1.0 dev\n> next dev --port 3001\n\n  - Local:        http://localhost:3001\n\n  Ready in 1.4s",
+        "hint": "Pass a custom port with -- --port 3001 after npm run dev. The -- tells npm to forward the flags to the actual command."
+      },
+      {
+        "instruction": "You're done developing for now. Stop the running dev server.",
+        "expectedCommand": "Ctrl+C",
+        "acceptAlternatives": ["ctrl+c", "^C"],
+        "output": "\nGracefully shutting down...",
+        "hint": "Press Ctrl+C to send an interrupt signal and stop the running server process."
+      }
+    ],
+    "completionMessage": "You've mastered the dev server basics! You installed dependencies, started a server, ran a second server on a custom port, and cleanly shut it down. These are commands you'll use every single day as a developer. Next time you open a project, npm install then npm run dev -- and you're coding.",
+    "glossaryTerms": ["dev-server", "localhost", "port", "npm-run"]
+  }
+}

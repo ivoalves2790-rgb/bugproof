@@ -1,0 +1,102 @@
+{
+  "slug": "common-mistakes",
+  "title": "Common Terminal Mistakes",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Everyone makes terminal mistakes -- even senior developers. The key is knowing how to recognize them before they cause damage and how to recover when they do. Like learning to drive, everyone stalls the first time. A junior developer just ran a dangerous command in the wrong directory. Help them recover.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Common Mistakes = Learning to Drive",
+      "body": "Remember learning to drive? You stalled the car at a green light, forgot to check mirrors, maybe even bumped a curb. **Every driver makes these mistakes** -- the important thing is learning from them and developing habits that prevent them. Terminal mistakes are the same. You'll accidentally delete a file, run a command in the wrong folder, or forget `sudo`. The goal isn't to never make mistakes -- it's to develop the habits (checking your directory, using `ls` before `rm`) that make mistakes rare and recoverable."
+    },
+    {
+      "type": "analogy",
+      "title": "Wrong Directory = Mailing a Letter to the Wrong Address",
+      "body": "Imagine writing a perfect letter and mailing it to the **wrong address**. The letter is fine, the stamp is fine, the mailbox is fine -- but it goes to your neighbor instead of your friend. Running commands in the **wrong directory** is exactly this. `rm *.log` in your project folder cleans up log files. `rm *.log` in your home folder might delete important files. The command is the same -- the directory is everything. Always check where you are (`pwd`) before running anything destructive."
+    },
+    {
+      "type": "text",
+      "title": "The Most Common Terminal Mistakes",
+      "body": "These mistakes catch every developer at least once:\n\n1. **Wrong directory** -- Running commands in the wrong folder. Always `pwd` first.\n2. **rm without checking** -- Deleting files without listing them first. Use `ls` before `rm`.\n3. **Missing sudo** -- Permission denied errors because you forgot to run as admin.\n4. **Forgetting to stop a process** -- Old servers running on ports you need.\n5. **Typos in paths** -- Tab completion prevents most of these.\n\nThe safety habit: **always run `ls` or `pwd` before any destructive command**."
+    },
+    {
+      "type": "code_example",
+      "title": "Safe vs Dangerous Patterns",
+      "language": "bash",
+      "code": "# DANGEROUS: Delete without checking\n$ rm -rf build/\n\n# SAFE: Check first, then delete\n$ ls build/\nindex.html  bundle.js  assets/\n$ rm -rf build/\n\n# DANGEROUS: No idea where you are\n$ rm *.log\n\n# SAFE: Verify your location first\n$ pwd\n/home/user/my-app\n$ ls *.log\naccess.log  error.log\n$ rm *.log",
+      "annotation": "The safe pattern is always the same: look before you act. Use pwd to check your location and ls to preview what you're about to affect. This two-second habit can save hours of recovery."
+    },
+    {
+      "type": "motivation",
+      "body": "A vibecoder who knows how to avoid and recover from terminal mistakes is worth 10x more to a client than one who panics and says \"I accidentally deleted the build folder.\" These habits protect your reputation, your client's data, and your income. One prevented disaster pays for the time you spent learning this lesson a hundred times over."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The most common terminal mistakes are running commands in the wrong directory and deleting without checking first. Build the habit of running pwd and ls before any destructive command. When mistakes happen, stay calm -- most are recoverable with Git, backups, or the trash."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "A junior developer on your team sends a panicked message: 'I think I just deleted something important. I was trying to clean up old build files and ran rm -rf dist/ but I was in the wrong directory. I was in the project root instead of the frontend/ subfolder.'\n\nThe project structure is:\n\nmy-project/\n  frontend/\n    dist/       <- old build files (safe to delete)\n    src/\n  backend/\n    dist/       <- compiled server code (NOT safe to delete)\n  dist/         <- doesn't exist at root level\n\nWhat do you tell them first?",
+        "choices": [
+          { "id": "a", "text": "Ask them to run pwd and ls to confirm what directory they're in and what was deleted", "nextNode": "check-damage", "score": 10 },
+          { "id": "b", "text": "Tell them to immediately run rm -rf to clean up more and hide the evidence", "nextNode": "bad-cover-up", "score": 0 },
+          { "id": "c", "text": "Tell them to panic and restore from a backup immediately", "nextNode": "premature-restore", "score": 3 }
+        ]
+      },
+      "check-damage": {
+        "narrative": "They run pwd and confirm they're in /home/user/my-project/ (the root). They run ls and see:\n\nfrontend/  backend/  package.json  README.md\n\nThere's no dist/ folder at the root level, so rm -rf dist/ actually did nothing -- there was nothing to delete! But they're still worried. What's the next step?",
+        "choices": [
+          { "id": "a", "text": "Verify the important directories are intact: ls frontend/dist/ and ls backend/dist/", "nextNode": "verify-intact", "score": 10 },
+          { "id": "b", "text": "Tell them everything is fine and move on without checking", "nextNode": "skip-verification", "score": 4 }
+        ]
+      },
+      "bad-cover-up": {
+        "narrative": "Running more rm commands without understanding the situation is extremely dangerous. You could accidentally delete files that were actually fine. The first rule of incident response is: STOP and assess the damage before taking any action.",
+        "choices": [
+          { "id": "a", "text": "Stop and assess the damage first by checking the current directory and listing files", "nextNode": "check-damage", "score": 5 }
+        ]
+      },
+      "premature-restore": {
+        "narrative": "Restoring from a backup before understanding what happened wastes time and could overwrite recent changes. You need to assess the damage first -- the fix might be much simpler than a full restore.",
+        "choices": [
+          { "id": "a", "text": "First check what actually happened before deciding on a recovery strategy", "nextNode": "check-damage", "score": 5 }
+        ]
+      },
+      "verify-intact": {
+        "narrative": "You check both directories:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nEverything is intact! Since there was no dist/ folder at the project root, rm -rf dist/ simply did nothing and exited silently. No files were harmed. Now what should you teach the junior developer?",
+        "choices": [
+          { "id": "a", "text": "Teach them to always run pwd before destructive commands and use ls to preview what they're about to delete", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Tell them to be more careful next time without explaining how", "nextNode": "end-vague", "score": 4 }
+        ]
+      },
+      "skip-verification": {
+        "narrative": "Without verifying, you can't be sure nothing was damaged. Always check. In this case everything was fine, but skipping verification is a bad habit that will bite you when real damage happens.",
+        "choices": [
+          { "id": "a", "text": "Go back and verify the important directories are actually intact", "nextNode": "verify-intact", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You teach the junior developer three safety habits:\n\n1. Always run pwd before any rm command\n2. Run ls on the target before deleting it\n3. Use Git -- if files are tracked, git checkout can recover them\n\nThe developer adds these habits to their workflow and never has a scare like this again.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Perfect incident response! You stayed calm, assessed the damage before acting, verified nothing was lost, and turned the scare into a learning opportunity. The key takeaway: always run pwd and ls before destructive commands, and remember that rm -rf on a non-existent directory simply does nothing."
+      },
+      "end-vague": {
+        "narrative": "The junior developer nods but makes the same mistake two weeks later, this time accidentally deleting the backend/dist/ folder. Vague advice like 'be careful' doesn't build habits.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "You resolved the immediate issue but missed the teaching opportunity. Next time, give specific actionable habits: run pwd before rm, use ls to preview deletions, and rely on Git for recovery. Concrete habits prevent future mistakes better than vague caution."
+      }
+    },
+    "glossaryTerms": ["rm", "pwd", "ls", "destructive-command", "incident-response"]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "running-dev-servers",
+  "title": "Ejecutando Servidores de Desarrollo",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Todo proyecto web necesita un servidor de desarrollo -- una version local de tu app corriendo en tu maquina para que puedas ver los cambios al instante. Piensa en el como tu escenario personal de ensayo donde practicas antes del show en vivo. Vamos a iniciar uno y entender que significa realmente esa salida en la terminal.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Servidor de Desarrollo = Tu Escenario Personal de Ensayo",
+      "body": "Antes de que una banda toque un concierto, ensayan en un escenario privado. Nadie del publico esta mirando -- pueden equivocarse, probar cosas nuevas y ajustar la lista de canciones. Un **servidor de desarrollo** es tu escenario personal de ensayo. Tu app corre localmente en tu maquina donde solo tu puedes verla. Puedes romper cosas, experimentar y refrescar al instante. Cuando estes listo, \"sales en vivo\" desplegando a un servidor real -- ese es el concierto."
+    },
+    {
+      "type": "analogy",
+      "title": "Localhost = Una Cocina de Pruebas",
+      "body": "Imagina un restaurante con una **cocina de pruebas** en la parte trasera. Los chefs cocinan nuevos platos, los prueban, ajustan el sazon y solo los envian al comedor cuando estan perfectos. **Localhost** es tu cocina de pruebas -- tu app corre en `localhost:3000` donde solo tu puedes probarla. El numero de puerto (3000) es como el numero de puerta de la cocina. Puedes tener multiples cocinas corriendo en diferentes puertos: cocina 3000 para el plato principal, cocina 5173 para el postre."
+    },
+    {
+      "type": "text",
+      "title": "Que hace un servidor de desarrollo",
+      "body": "Cuando ejecutas `npm run dev`, varias cosas suceden:\n\n1. **Compila tu codigo** -- Convierte tu JSX, TypeScript o JavaScript moderno en algo que el navegador entiende\n2. **Inicia un servidor web local** -- Sirve tus archivos en una direccion como `http://localhost:3000`\n3. **Vigila cambios** -- Detecta cuando guardas un archivo y automaticamente refresca el navegador\n4. **Muestra errores** -- Muestra errores de compilacion directamente en la terminal y a veces en el navegador\n\nEl servidor sigue corriendo hasta que lo detienes con Ctrl+C."
+    },
+    {
+      "type": "code_example",
+      "title": "Salida tipica del servidor de desarrollo",
+      "language": "bash",
+      "code": "$ npm run dev\n\n> my-app@0.1.0 dev\n> next dev\n\n  - Local:        http://localhost:3000\n  - Network:      http://192.168.1.42:3000\n\n  Ready in 1.2s",
+      "annotation": "La URL 'Local' es donde abres tu app en el navegador. 'Network' permite que otros dispositivos en tu WiFi vean la app (como tu telefono). 'Ready in 1.2s' significa que el servidor compilo tu codigo y ahora lo esta sirviendo."
+    },
+    {
+      "type": "motivation",
+      "body": "Toda app web -- desde una landing page freelance de $500 hasta un producto startup de $50M -- comienza con `npm run dev`. Los vibecoders que entienden su servidor de desarrollo depuran mas rapido, entregan antes y ganan mas porque no estan atorados esperando que alguien les explique por que su app no aparece en el navegador."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Un servidor de desarrollo ejecuta tu app localmente para que puedas previsualizarla en el navegador en localhost. Inicialo con `npm run dev`, abre la URL que imprime, y se refrescara automaticamente cuando guardes cambios. Detenlo con Ctrl+C cuando termines."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-app",
+    "initialFiles": ["package.json", "src/App.jsx", "src/index.js"],
+    "steps": [
+      {
+        "instruction": "Acabas de clonar un proyecto de GitHub. Antes de ejecutar el servidor de desarrollo, necesitas instalar las dependencias del proyecto. Instalalas ahora.",
+        "expectedCommand": "npm install",
+        "acceptAlternatives": ["npm i", "npm ci"],
+        "output": "added 247 packages in 8s\n\n38 packages are looking for funding\n  run `npm fund` for details",
+        "hint": "Usa 'npm install' (o 'npm i' para abreviar) para instalar todos los paquetes listados en package.json."
+      },
+      {
+        "instruction": "Dependencias instaladas! Ahora inicia el servidor de desarrollo.",
+        "expectedCommand": "npm run dev",
+        "acceptAlternatives": ["npm start", "npx next dev"],
+        "output": "> my-app@0.1.0 dev\n> next dev\n\n  - Local:        http://localhost:3000\n  - Network:      http://192.168.1.42:3000\n\n  Ready in 1.8s",
+        "hint": "Usa 'npm run dev' para iniciar el servidor de desarrollo. Esto ejecuta el script 'dev' de package.json."
+      },
+      {
+        "instruction": "El servidor esta corriendo en el puerto 3000 pero necesitas ejecutar un segundo proyecto en un puerto diferente. Inicia otro servidor en el puerto 3001.",
+        "expectedCommand": "npm run dev -- --port 3001",
+        "acceptAlternatives": ["npx next dev --port 3001", "PORT=3001 npm run dev", "npm run dev -- -p 3001"],
+        "output": "> my-app@0.1.0 dev\n> next dev --port 3001\n\n  - Local:        http://localhost:3001\n\n  Ready in 1.4s",
+        "hint": "Pasa un puerto personalizado con -- --port 3001 despues de npm run dev. El -- le dice a npm que reenvie los flags al comando real."
+      },
+      {
+        "instruction": "Terminaste de desarrollar por ahora. Detiene el servidor de desarrollo en ejecucion.",
+        "expectedCommand": "Ctrl+C",
+        "acceptAlternatives": ["ctrl+c", "^C"],
+        "output": "\nGracefully shutting down...",
+        "hint": "Presiona Ctrl+C para enviar una senal de interrupcion y detener el proceso del servidor en ejecucion."
+      }
+    ],
+    "completionMessage": "Has dominado los basicos del servidor de desarrollo! Instalaste dependencias, iniciaste un servidor, ejecutaste un segundo servidor en un puerto personalizado y lo detuviste limpiamente. Estos son comandos que usaras todos los dias como desarrollador. La proxima vez que abras un proyecto, npm install y luego npm run dev -- y ya estas programando.",
+    "glossaryTerms": ["dev-server", "localhost", "port", "npm-run"]
+  }
+}

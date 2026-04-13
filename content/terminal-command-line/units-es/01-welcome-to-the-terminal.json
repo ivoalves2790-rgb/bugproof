@@ -1,0 +1,16 @@
+{
+  "slug": "welcome-to-the-terminal",
+  "title": "Bienvenido a la Terminal",
+  "description": "Piensa en la terminal como la cocina de un restaurante -- la interfaz grafica es el elegante comedor, pero la terminal es donde se hace el trabajo real. Aprende a abrirla, navegar y ejecutar tus primeros comandos",
+  "order": 1,
+  "tier": "beginner",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "what-is-the-terminal", "title": "Que es la Terminal?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "files-and-folders", "title": "Archivos y Carpetas", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "navigating-directories", "title": "Navegando Directorios", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "creating-and-deleting", "title": "Creando y Eliminando Archivos", "type": "terminal_sim", "order": 4, "difficulty": 1 },
+    { "slug": "reading-files", "title": "Leyendo Contenido de Archivos", "type": "terminal_sim", "order": 5, "difficulty": 1 },
+    { "slug": "command-anatomy", "title": "Anatomia de un Comando", "type": "swipe_to_judge", "order": 6, "difficulty": 1 }
+  ]
+}

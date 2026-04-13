@@ -1,0 +1,77 @@
+{
+  "slug": "permissions-basics",
+  "title": "File Permissions",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Ever tried to run a script and got 'Permission denied'? Every file on your system has rules about who can read it, write to it, or execute it. Understanding permissions is the difference between a secure app and one that leaks data. Swipe RIGHT for true, LEFT for false.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Permissions = Hotel Key Cards",
+      "body": "In a hotel, your key card opens your room but not the storage closet or the manager's office. The staff card opens the storage closet. The master key opens everything. **File permissions work the same way** -- each user has a 'key card' that grants specific access levels. The owner has full access, the group has limited access, and everyone else might only be able to look but not touch."
+    },
+    {
+      "type": "analogy",
+      "title": "Permissions = A Nightclub Bouncer",
+      "body": "A bouncer at a nightclub checks three things: Are you on the VIP list (owner)? Are you with someone on the list (group)? Or are you just the general public (others)? For each person, the bouncer decides: Can you enter (read)? Can you change the music (write)? Can you get behind the DJ booth (execute)? **chmod is you telling the bouncer the new rules** for who gets to do what."
+    },
+    {
+      "type": "text",
+      "title": "Read, Write, Execute",
+      "body": "Every file has three permission types:\n\n- **Read (r)** -- Can you see the contents of the file?\n- **Write (w)** -- Can you change or delete the file?\n- **Execute (x)** -- Can you run the file as a program or script?\n\nAnd three user categories:\n- **Owner (u)** -- The person who created the file\n- **Group (g)** -- A set of users who share access\n- **Others (o)** -- Everyone else on the system\n\nWhen you see `-rwxr-xr--`, it means: owner can read/write/execute, group can read/execute, others can only read."
+    },
+    {
+      "type": "code_example",
+      "title": "chmod in Practice",
+      "language": "bash",
+      "code": "# Make a script executable\nchmod +x deploy.sh\n\n# Give owner full access, group read-only, others nothing\nchmod 740 config.json\n\n# View current permissions\nls -la\n# -rwxr----- 1 user staff 2048 Mar 10 deploy.sh\n# -rwxr-x--- 1 user staff  512 Mar 10 config.json",
+      "annotation": "The number system: 7 = rwx (read+write+execute), 6 = rw- (read+write), 5 = r-x (read+execute), 4 = r-- (read only), 0 = --- (no access). Each digit represents owner, group, others."
+    },
+    {
+      "type": "motivation",
+      "body": "Permission errors are one of the top reasons deployments fail. A vibecoder who understands chmod can fix a broken deploy in 30 seconds instead of panicking for an hour. That confidence keeps clients happy and keeps your reputation strong enough to charge premium rates."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Files have read (r), write (w), and execute (x) permissions for three categories: owner, group, and others. Use chmod to change permissions. The number system (like 755) sets all three categories at once. Always make scripts executable with chmod +x before running them."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "The command 'chmod +x script.sh' makes a script executable by the owner, group, and others.",
+        "isGoodPractice": true,
+        "explanation": "When you use +x without specifying a category (u, g, or o), chmod adds execute permission for all three categories: owner, group, and others. This is the most common way to make a script runnable."
+      },
+      {
+        "id": "card-2",
+        "content": "A file with permissions set to 777 is secure because it uses the highest number.",
+        "isGoodPractice": false,
+        "explanation": "777 means everyone can read, write, AND execute the file -- that's the LEAST secure setting possible. Anyone on the system can modify or run the file. Sensitive files like .env should use 600 (only the owner can read and write) or 400 (owner read-only)."
+      },
+      {
+        "id": "card-3",
+        "content": "If you get 'Permission denied' when running a script, chmod +x is usually the fix.",
+        "isGoodPractice": true,
+        "explanation": "The most common cause of 'Permission denied' when running a script is missing execute permission. By default, new files don't have execute permission. Running chmod +x adds it so the system allows the script to run."
+      },
+      {
+        "id": "card-4",
+        "content": "Environment files (.env) should have permissions set to 644 so the whole team can read them on the server.",
+        "isGoodPractice": false,
+        "explanation": ".env files contain secrets like API keys and database passwords. Setting 644 lets everyone on the system read them. They should be set to 600 (only the owner can read and write) to prevent other users or processes from accessing your secrets."
+      },
+      {
+        "id": "card-5",
+        "content": "You should check file permissions with 'ls -la' before debugging a 'Permission denied' error.",
+        "isGoodPractice": true,
+        "explanation": "ls -la shows the full permission string (like -rwxr-xr--) for every file. This tells you exactly who can read, write, or execute each file. It's the first diagnostic step for any permission-related error."
+      }
+    ],
+    "glossaryTerms": ["chmod", "file-permissions", "read-write-execute", "owner-group-others"]
+  }
+}

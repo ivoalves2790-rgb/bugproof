@@ -1,0 +1,16 @@
+{
+  "slug": "essential-commands",
+  "title": "Comandos Esenciales",
+  "description": "Tu caja de herramientas de la terminal -- como una navaja suiza, cada comando hace una cosa bien. Aprende a copiar, mover, buscar y encadenar comandos para lograr tareas complejas en segundos",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "copying-and-moving", "title": "Copiando y Moviendo Archivos", "type": "terminal_sim", "order": 1, "difficulty": 1 },
+    { "slug": "finding-files", "title": "Encontrando Archivos", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "searching-text", "title": "Buscando Dentro de Archivos con grep", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "permissions-basics", "title": "Permisos de Archivos", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "piping-and-redirects", "title": "Pipes y Redirecciones", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "environment-variables", "title": "Variables de Entorno", "type": "incident_response", "order": 6, "difficulty": 2 }
+  ]
+}

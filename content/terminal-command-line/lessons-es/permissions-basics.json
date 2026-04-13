@@ -1,0 +1,77 @@
+{
+  "slug": "permissions-basics",
+  "title": "Permisos de Archivos",
+  "type": "swipe_to_judge",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "¿Alguna vez intentaste ejecutar un script y obtuviste 'Permission denied'? Cada archivo en tu sistema tiene reglas sobre quién puede leerlo, escribir en él o ejecutarlo. Entender los permisos es la diferencia entre una app segura y una que filtra datos. Desliza a la DERECHA para verdadero, a la IZQUIERDA para falso.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Permisos = Tarjetas llave de hotel",
+      "body": "En un hotel, tu tarjeta llave abre tu habitación pero no el armario de almacenamiento ni la oficina del gerente. La tarjeta del personal abre el armario de almacenamiento. La llave maestra abre todo. **Los permisos de archivos funcionan de la misma manera** -- cada usuario tiene una 'tarjeta llave' que otorga niveles de acceso específicos. El propietario tiene acceso completo, el grupo tiene acceso limitado, y todos los demás quizás solo pueden mirar pero no tocar."
+    },
+    {
+      "type": "analogy",
+      "title": "Permisos = Un portero de discoteca",
+      "body": "Un portero en una discoteca verifica tres cosas: ¿Estás en la lista VIP (propietario)? ¿Vienes con alguien de la lista (grupo)? ¿O eres solo público general (otros)? Para cada persona, el portero decide: ¿Puedes entrar (leer)? ¿Puedes cambiar la música (escribir)? ¿Puedes pasar detrás de la cabina del DJ (ejecutar)? **chmod es tú diciéndole al portero las nuevas reglas** de quién puede hacer qué."
+    },
+    {
+      "type": "text",
+      "title": "Leer, Escribir, Ejecutar",
+      "body": "Cada archivo tiene tres tipos de permisos:\n\n- **Lectura (r)** -- ¿Puedes ver el contenido del archivo?\n- **Escritura (w)** -- ¿Puedes cambiar o eliminar el archivo?\n- **Ejecución (x)** -- ¿Puedes ejecutar el archivo como programa o script?\n\nY tres categorías de usuarios:\n- **Propietario (u)** -- La persona que creó el archivo\n- **Grupo (g)** -- Un conjunto de usuarios que comparten acceso\n- **Otros (o)** -- Todos los demás en el sistema\n\nCuando ves `-rwxr-xr--`, significa: el propietario puede leer/escribir/ejecutar, el grupo puede leer/ejecutar, otros solo pueden leer."
+    },
+    {
+      "type": "code_example",
+      "title": "chmod en práctica",
+      "language": "bash",
+      "code": "# Make a script executable\nchmod +x deploy.sh\n\n# Give owner full access, group read-only, others nothing\nchmod 740 config.json\n\n# View current permissions\nls -la\n# -rwxr----- 1 user staff 2048 Mar 10 deploy.sh\n# -rwxr-x--- 1 user staff  512 Mar 10 config.json",
+      "annotation": "El sistema numérico: 7 = rwx (leer+escribir+ejecutar), 6 = rw- (leer+escribir), 5 = r-x (leer+ejecutar), 4 = r-- (solo lectura), 0 = --- (sin acceso). Cada dígito representa propietario, grupo, otros."
+    },
+    {
+      "type": "motivation",
+      "body": "Los errores de permisos son una de las principales razones por las que fallan los despliegues. Un vibecoder que entiende chmod puede arreglar un deploy roto en 30 segundos en vez de entrar en pánico durante una hora. Esa confianza mantiene felices a los clientes y tu reputación lo suficientemente fuerte para cobrar tarifas premium."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los archivos tienen permisos de lectura (r), escritura (w) y ejecución (x) para tres categorías: propietario, grupo y otros. Usa chmod para cambiar permisos. El sistema numérico (como 755) configura las tres categorías a la vez. Siempre haz los scripts ejecutables con chmod +x antes de ejecutarlos."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "El comando 'chmod +x script.sh' hace un script ejecutable por el propietario, grupo y otros.",
+        "isGoodPractice": true,
+        "explanation": "Cuando usas +x sin especificar una categoría (u, g, o), chmod agrega permiso de ejecución para las tres categorías: propietario, grupo y otros. Esta es la forma más común de hacer un script ejecutable."
+      },
+      {
+        "id": "card-2",
+        "content": "Un archivo con permisos configurados en 777 es seguro porque usa el número más alto.",
+        "isGoodPractice": false,
+        "explanation": "777 significa que todos pueden leer, escribir Y ejecutar el archivo -- esa es la configuración MENOS segura posible. Cualquiera en el sistema puede modificar o ejecutar el archivo. Los archivos sensibles como .env deberían usar 600 (solo el propietario puede leer y escribir) o 400 (solo lectura para el propietario)."
+      },
+      {
+        "id": "card-3",
+        "content": "Si obtienes 'Permission denied' al ejecutar un script, chmod +x es usualmente la solución.",
+        "isGoodPractice": true,
+        "explanation": "La causa más común de 'Permission denied' al ejecutar un script es la falta de permiso de ejecución. Por defecto, los archivos nuevos no tienen permiso de ejecución. Ejecutar chmod +x lo agrega para que el sistema permita que el script se ejecute."
+      },
+      {
+        "id": "card-4",
+        "content": "Los archivos de entorno (.env) deberían tener permisos configurados en 644 para que todo el equipo pueda leerlos en el servidor.",
+        "isGoodPractice": false,
+        "explanation": "Los archivos .env contienen secretos como llaves API y contraseñas de bases de datos. Configurar 644 permite que todos en el sistema los lean. Deberían configurarse en 600 (solo el propietario puede leer y escribir) para prevenir que otros usuarios o procesos accedan a tus secretos."
+      },
+      {
+        "id": "card-5",
+        "content": "Deberías verificar los permisos de archivo con 'ls -la' antes de depurar un error de 'Permission denied'.",
+        "isGoodPractice": true,
+        "explanation": "ls -la muestra la cadena completa de permisos (como -rwxr-xr--) para cada archivo. Esto te dice exactamente quién puede leer, escribir o ejecutar cada archivo. Es el primer paso de diagnóstico para cualquier error relacionado con permisos."
+      }
+    ],
+    "glossaryTerms": ["chmod", "file-permissions", "read-write-execute", "owner-group-others"]
+  }
+}

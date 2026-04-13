@@ -1,0 +1,83 @@
+{
+  "slug": "creating-and-deleting",
+  "title": "Creating and Deleting Files",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Now that you can navigate the file system, it's time to start building things. You'll learn to create folders, create files, and yes -- delete them too. But be careful: the terminal doesn't have a trash can.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "mkdir/touch = Building Rooms and Placing Furniture",
+      "body": "Think of `mkdir` as **building a new room** in your house. It creates an empty space (folder) where you can put things. `touch` is like **placing a piece of furniture** in a room -- it creates a new, empty file. First you build the room (`mkdir components`), then you place furniture inside it (`touch components/Button.js`). You can build rooms inside rooms, and put furniture anywhere."
+    },
+    {
+      "type": "analogy",
+      "title": "rm = The Paper Shredder (Permanent!)",
+      "body": "When you delete a file with the GUI, it goes to the Trash and you can recover it. But `rm` in the terminal is like a **paper shredder** -- once a file goes through, it's gone forever. There's no Trash, no undo, no \"Are you sure?\" popup. This makes `rm` powerful but dangerous. Always double-check the file name before you hit enter."
+    },
+    {
+      "type": "text",
+      "title": "The Creation Commands",
+      "body": "- `mkdir foldername` -- Create a new empty folder (\"make directory\")\n- `mkdir -p path/to/nested` -- Create nested folders all at once\n- `touch filename` -- Create a new empty file\n- `touch file1 file2 file3` -- Create multiple files at once"
+    },
+    {
+      "type": "text",
+      "title": "The Deletion Commands",
+      "body": "- `rm filename` -- Delete a file permanently\n- `rm -r foldername` -- Delete a folder and everything inside it\n- `rmdir foldername` -- Delete an empty folder only (safer)\n\n**Warning:** `rm` does NOT move files to the Trash. They are gone forever. Always use `ls` first to verify you're deleting the right thing."
+    },
+    {
+      "type": "code_example",
+      "title": "Creating a Project Structure",
+      "language": "bash",
+      "code": "mkdir my-app                    # Create project folder\ncd my-app                       # Move into it\nmkdir src                       # Create source folder\ntouch src/index.js              # Create main file\ntouch README.md                 # Create readme\nls                              # Verify: src  README.md",
+      "annotation": "This is a common pattern -- create a folder, move into it, then build out the structure inside."
+    },
+    {
+      "type": "motivation",
+      "body": "Every app you build with AI tools starts with creating a project structure. When a client needs a new feature folder, a config file, or a clean project scaffold, doing it in the terminal takes seconds instead of minutes of right-clicking. Vibecoders who set up projects fast start earning money faster."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use `mkdir` to create folders, `touch` to create files, `rm` to delete files, and `rmdir` to delete empty folders. Remember: `rm` is permanent -- there's no undo."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/old-notes.txt"],
+    "steps": [
+      {
+        "instruction": "Create a new folder called 'my-app' for your project.",
+        "expectedCommand": "mkdir my-app",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "The command to make a directory is 'mkdir' followed by the folder name."
+      },
+      {
+        "instruction": "Now create an empty file called 'index.html' inside the my-app folder. You can do this without moving into it.",
+        "expectedCommand": "touch my-app/index.html",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Use 'touch' followed by the path: foldername/filename."
+      },
+      {
+        "instruction": "The old-notes.txt file is no longer needed. Delete it permanently.",
+        "expectedCommand": "rm old-notes.txt",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Use 'rm' followed by the filename to remove it. Remember, this is permanent!"
+      },
+      {
+        "instruction": "Verify your work by listing the contents of the current directory.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": ["ls -la", "ls -l", "ls -a"],
+        "output": "my-app",
+        "hint": "Use the list command to see what's in the current folder."
+      }
+    ],
+    "completionMessage": "You just created a project folder, added a file to it, and cleaned up an old file -- all without touching the mouse. This is exactly how developers scaffold new projects every day.",
+    "glossaryTerms": ["mkdir", "touch", "rm", "rmdir"]
+  }
+}

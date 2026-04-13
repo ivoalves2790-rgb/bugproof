@@ -58,6 +58,7 @@ export const COURSE_SLUGS = [
   "performance-scaling",
   "code-organization",
   "ai-assisted-development",
+  "terminal-command-line",
 ] as const;
 
 export type CourseSlug = (typeof COURSE_SLUGS)[number];

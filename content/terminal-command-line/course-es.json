@@ -1,0 +1,17 @@
+{
+  "slug": "terminal-command-line",
+  "title": "Terminal y Linea de Comandos",
+  "description": "Navega archivos, ejecuta comandos, instala herramientas y controla tu entorno de desarrollo",
+  "longDescription": "La terminal es tu linea directa con la maquina -- sin botones, sin menus, solo poder puro. Piensa en ella como la cabina de un avion: la interfaz grafica es la cabina de pasajeros (comoda, limitada), pero la terminal es donde se sienta el piloto (control total sobre todo). Todo vibecoder eventualmente la necesita -- para instalar paquetes, ejecutar servidores de desarrollo, desplegar apps y arreglar cosas cuando las interfaces graficas fallan. Este curso te lleva desde 'que es esta pantalla negra?' hasta navegar archivos con confianza, encadenar comandos, gestionar procesos y construir flujos de trabajo que te hacen mas rapido que cualquier desarrollador de apuntar y hacer clic.",
+  "icon": "terminal",
+  "color": "#6C5CE7",
+  "prerequisites": [],
+  "units": [
+    { "slug": "welcome-to-the-terminal", "title": "Welcome to the Terminal", "order": 1 },
+    { "slug": "essential-commands", "title": "Essential Commands", "order": 2 },
+    { "slug": "package-managers", "title": "Package Managers & Installing Tools", "order": 3 },
+    { "slug": "terminal-in-real-projects", "title": "Terminal in Real Projects", "order": 4 },
+    { "slug": "power-user-techniques", "title": "Power User Techniques", "order": 5 }
+  ],
+  "levelThresholds": { "novice": 0, "apprentice": 500, "engineer": 1500, "architect": 3000 }
+}

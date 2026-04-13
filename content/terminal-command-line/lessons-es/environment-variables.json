@@ -1,0 +1,97 @@
+{
+  "slug": "environment-variables",
+  "title": "Variables de Entorno",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Tu app acaba de fallar en producción con 'command not found' aunque la herramienta está instalada. El problema no es la herramienta en sí -- es que el sistema no sabe dónde buscarla. Bienvenido al mundo de las variables de entorno y el misterioso PATH.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Variables de entorno = Notas adhesivas en tu monitor",
+      "body": "Imagina que tienes notas adhesivas alrededor de tu monitor: una dice 'Contraseña BD: abc123', otra dice 'Llave API: xyz789', y otra dice 'Desplegar en: producción'. Cada vez que necesitas esa información, solo miras la nota. **Las variables de entorno son las notas adhesivas de tu sistema** -- almacenan pares clave-valor que cualquier programa puede leer. Los programas revisan estas notas para saber dónde está la base de datos, qué llave API usar, y si están ejecutándose en desarrollo o producción."
+    },
+    {
+      "type": "analogy",
+      "title": "PATH = La lista de contactos de tu teléfono",
+      "body": "Cuando quieres llamar a alguien, no tecleas su número completo cada vez -- buscas en tus contactos por nombre y tu teléfono sabe el número. **La variable PATH es la lista de contactos de tu sistema para programas.** Cuando escribes `node` o `python`, el sistema busca en los directorios listados en PATH para encontrar ese programa. Si el directorio no está en PATH, es como tener el número de alguien pero no en tus contactos -- tendrías que escribir la ruta completa cada vez."
+    },
+    {
+      "type": "text",
+      "title": "¿Qué son las variables de entorno?",
+      "body": "Las variables de entorno son **pares clave-valor** almacenados por tu sistema operativo:\n\n- **`echo $PATH`** -- Muestra los directorios donde el sistema busca comandos\n- **`echo $HOME`** -- Muestra tu directorio de inicio\n- **`export API_KEY=\"abc123\"`** -- Establece una variable para la sesión actual\n- **`env`** -- Lista todas las variables de entorno actuales\n\nEn desarrollo web, los archivos `.env` almacenan variables específicas del proyecto como URLs de bases de datos y llaves API. Herramientas como dotenv las cargan en tu app al momento de ejecución."
+    },
+    {
+      "type": "code_example",
+      "title": "Trabajando con variables de entorno",
+      "language": "bash",
+      "code": "# View the PATH variable\necho $PATH\n# /usr/local/bin:/usr/bin:/bin:/usr/sbin\n\n# Set a variable for this session\nexport DATABASE_URL=\"postgres://localhost:5432/mydb\"\n\n# Use it in a command\necho $DATABASE_URL\n# postgres://localhost:5432/mydb\n\n# Add a directory to PATH\nexport PATH=\"$PATH:/usr/local/go/bin\"",
+      "annotation": "Las variables establecidas con export solo duran la sesión actual de terminal. Para hacerlas permanentes, agrega la línea de export a tu archivo de configuración de shell (~/.bashrc, ~/.zshrc, o similar)."
+    },
+    {
+      "type": "motivation",
+      "body": "Los problemas de variables de entorno causan algunos de los bugs más confusos en desarrollo. Cuando puedes diagnosticar 'command not found' o 'missing API key' en minutos, los clientes quedan impresionados. Esa habilidad de resolución de problemas convierte una corrección de bug de $200 en una tarea de vibecoding de 15 minutos a tarifa premium."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Las variables de entorno almacenan configuración que los programas leen al ejecutarse. PATH le dice al sistema dónde encontrar comandos. Usa export para establecer variables, echo $VAR para leerlas, y archivos .env para secretos específicos del proyecto. Si un comando no se encuentra, PATH es usualmente el culpable."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "INCIDENTE: Un desarrollador reporta que después de instalar un nuevo gestor de versiones de Node.js (nvm), su terminal muestra 'node: command not found' aunque Node funcionaba bien ayer. La app necesita desplegarse en la próxima hora.\n\nTe conectas al servidor por SSH. ¿Cuál es tu primer movimiento?",
+        "choices": [
+          { "id": "a", "text": "Ejecutar 'echo $PATH' para verificar si el directorio de Node.js está en el PATH", "nextNode": "check-path", "score": 10 },
+          { "id": "b", "text": "Reinstalar Node.js desde cero", "nextNode": "reinstall", "score": 3 },
+          { "id": "c", "text": "Ejecutar 'which node' para ver si el sistema puede encontrar el binario de node", "nextNode": "which-node", "score": 7 }
+        ]
+      },
+      "check-path": {
+        "narrative": "Ejecutas `echo $PATH` y ves:\n/usr/local/bin:/usr/bin:/bin:/usr/sbin\n\n¿Notas algo faltante? El directorio de nvm no está listado. Node fue instalado vía nvm en ~/.nvm/versions/node/v20.11.0/bin/ pero esa ruta no está en PATH. El sistema no tiene idea de dónde buscarla.\n\n¿Cómo lo arreglas?",
+        "choices": [
+          { "id": "a", "text": "Ejecutar: export PATH=\"$PATH:$HOME/.nvm/versions/node/v20.11.0/bin\"", "nextNode": "temp-fix", "score": 7 },
+          { "id": "b", "text": "Verificar si el script de inicio de nvm está en ~/.bashrc o ~/.zshrc, luego ejecutar source", "nextNode": "end-good", "score": 10 }
+        ]
+      },
+      "which-node": {
+        "narrative": "Ejecutas `which node` y no obtienes salida -- el sistema no puede encontrar el binario de node en ningún lugar del PATH actual. El binario existe en disco (nvm lo instaló) pero el PATH no incluye su ubicación. Ahora sabes que es un problema de PATH.\n\n¿Cuál es tu siguiente paso?",
+        "choices": [
+          { "id": "a", "text": "Ejecutar 'echo $PATH' para ver qué directorios se están buscando", "nextNode": "check-path", "score": 8 },
+          { "id": "b", "text": "Agregar manualmente la ubicación del binario de node al PATH", "nextNode": "temp-fix", "score": 5 }
+        ]
+      },
+      "reinstall": {
+        "narrative": "Pasas 20 minutos reinstalando Node.js, pero después de la instalación obtienes el mismo error: 'node: command not found.' Reinstalar no ayudó porque el problema nunca fue que Node faltara -- fue que el sistema no sabe dónde vive Node. La variable PATH no incluye el directorio de instalación de Node.",
+        "choices": [
+          { "id": "a", "text": "Verificar la variable PATH para entender por qué el sistema no puede encontrar node", "nextNode": "check-path", "score": 5 }
+        ]
+      },
+      "temp-fix": {
+        "narrative": "Ejecutas el comando export y ahora `node --version` funciona! Pero esta solución es temporal -- desaparecerá cuando termine la sesión de terminal. Para una solución permanente, necesitas asegurar que el script de inicialización de nvm se ejecute cada vez que se abre una nueva terminal.\n\n¿Verificas el archivo de configuración del shell?",
+        "choices": [
+          { "id": "a", "text": "Sí, verificar ~/.bashrc o ~/.zshrc para las líneas de inicio de nvm", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "No, la solución temporal es suficiente para el deploy", "nextNode": "end-partial", "score": 4 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Abres ~/.zshrc y encuentras que las líneas de inicialización de nvm faltan -- fueron eliminadas accidentalmente durante una limpieza reciente de configuración:\n\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && source \"$NVM_DIR/nvm.sh\"\n\nLas agregas de vuelta, ejecutas `source ~/.zshrc`, y confirmas que `node --version` ahora funciona. El deploy tiene éxito. ¡Crisis resuelta!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "¡Excelente diagnóstico! Identificaste correctamente esto como un problema de PATH en vez de una instalación faltante. El script de inicio de nvm en el archivo de configuración del shell es lo que agrega el directorio de Node al PATH en cada nueva sesión de terminal. Cuando esas líneas fueron eliminadas, PATH ya no incluía la ubicación de Node. Siempre verifica el archivo de configuración del shell (~/.bashrc, ~/.zshrc) cuando los comandos dejan de funcionar repentinamente después de cambios en el sistema."
+      },
+      "end-partial": {
+        "narrative": "El deploy funciona por ahora, pero la próxima vez que el servidor se reinicie o se abra una nueva sesión SSH, 'node: command not found' volverá. El equipo enfrentará el mismo incidente mañana.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Encontraste la solución inmediata pero no la hiciste permanente. Los exports temporales de PATH desaparecen cuando termina la sesión de terminal. La solución correcta es agregar el script de inicialización de nvm a ~/.bashrc o ~/.zshrc para que PATH se configure correctamente cada vez que se abre un nuevo shell. Siempre busca la causa raíz, no solo un arreglo rápido."
+      }
+    },
+    "glossaryTerms": ["env-var", "path", "export", "shell-config"]
+  }
+}

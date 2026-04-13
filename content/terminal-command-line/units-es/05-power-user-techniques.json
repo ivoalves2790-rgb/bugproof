@@ -1,0 +1,15 @@
+{
+  "slug": "power-user-techniques",
+  "title": "Tecnicas de Usuario Avanzado",
+  "description": "Sube de nivel de pasajero a piloto -- crea alias, encadena comandos, conectate a servidores remotos, escribe scripts y construye un flujo de trabajo que te haga imparable",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "aliases-and-shortcuts", "title": "Alias y Atajos", "type": "terminal_sim", "order": 1, "difficulty": 2 },
+    { "slug": "chaining-commands", "title": "Encadenando Comandos", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "ssh-basics", "title": "SSH: Conectandose a Servidores Remotos", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "shell-scripts", "title": "Escribiendo Scripts de Shell Simples", "type": "terminal_sim", "order": 4, "difficulty": 3 },
+    { "slug": "terminal-workflow", "title": "Construyendo tu Flujo de Trabajo en Terminal", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ]
+}

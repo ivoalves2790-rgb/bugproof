@@ -1,0 +1,82 @@
+{
+  "slug": "command-anatomy",
+  "title": "Anatomy of a Command",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Every terminal command follows a pattern. Once you understand the anatomy of a command -- its name, flags, and arguments -- you can read and understand any command, even ones you've never seen before. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Commands = Sentences",
+      "body": "A terminal command is structured like an English sentence. The **command name** is the verb (the action: list, move, copy). **Flags** are adverbs (how to do it: quietly, recursively, verbosely). **Arguments** are the nouns (what to act on: this file, that folder). So `ls -la Documents` reads as: \"**List** (verb) in **long-all** format (adverb) the **Documents** folder (noun).\""
+    },
+    {
+      "type": "analogy",
+      "title": "Commands = Ordering Food",
+      "body": "Ordering at a restaurant follows the same pattern as a terminal command. The **dish** is the command (`burger`). **Modifications** are the flags (`--no-onions`, `--extra-cheese`). **Size or type** is the argument (`large`). So `burger --no-onions --extra-cheese large` is just like `ls --all --long Documents`. Once you see this pattern, every command makes sense."
+    },
+    {
+      "type": "text",
+      "title": "The Three Parts of Every Command",
+      "body": "Every terminal command has up to three parts:\n\n1. **Command name** -- The action to perform (`ls`, `cd`, `mkdir`, `rm`)\n2. **Flags/Options** -- Modify behavior. Start with `-` or `--` (`-a`, `--all`, `-v`, `--verbose`)\n3. **Arguments** -- What the command acts on (file names, folder names, text)\n\nFormat: `command [flags] [arguments]`"
+    },
+    {
+      "type": "text",
+      "title": "Short Flags vs Long Flags",
+      "body": "Most flags come in two forms:\n\n- **Short flag**: Single dash + one letter: `-a`, `-l`, `-v`\n- **Long flag**: Double dash + full word: `--all`, `--long`, `--verbose`\n\nShort flags can be combined: `-la` is the same as `-l -a`.\n\nBoth forms do the same thing -- short is faster to type, long is easier to read and understand."
+    },
+    {
+      "type": "code_example",
+      "title": "Breaking Down Real Commands",
+      "language": "bash",
+      "code": "ls -la ~/Documents\n#  ^  ^^  ^^^^^^^^^^\n#  |  ||  argument (what folder to list)\n#  |  |flags (-l = long format, -a = all files)\n#  command (list)\n\nnpm install --save-dev jest\n#   ^^^^^^^ ^^^^^^^^^^ ^^^^\n#   command  flag       argument",
+      "annotation": "Every command follows this same pattern. Once you see it, you can read any command even if you've never used it before."
+    },
+    {
+      "type": "motivation",
+      "body": "When AI tools generate terminal commands for you, understanding command anatomy lets you verify what they're doing before you run them. Vibecoders who blindly paste commands break things. Those who can read commands first avoid costly mistakes -- and that confidence is what lets you take on higher-paying projects."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Every command has a name (the action), optional flags (how to do it), and optional arguments (what to act on). Short flags use one dash (-a), long flags use two dashes (--all)."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "In the command 'ls -la Documents', the '-la' part is the flags that modify how ls behaves.",
+        "isGoodPractice": true,
+        "explanation": "Correct. The '-l' flag means 'long format' (show details) and '-a' means 'all files' (including hidden ones). They're combined into '-la' for convenience. Flags always modify the command's behavior."
+      },
+      {
+        "id": "card-2",
+        "content": "Flags must always come before arguments in a terminal command.",
+        "isGoodPractice": false,
+        "explanation": "While putting flags before arguments is the most common convention and recommended practice, many commands accept flags in different positions. For example, 'ls Documents -la' works too. However, some commands are strict about order, so it's best practice to put flags first."
+      },
+      {
+        "id": "card-3",
+        "content": "The short flag '-v' and the long flag '--verbose' do the same thing.",
+        "isGoodPractice": true,
+        "explanation": "Short flags (single dash + letter) and long flags (double dash + word) are two ways to write the same option. '-v' is just a shortcut for '--verbose'. Short flags are faster to type, long flags are easier to understand when reading commands."
+      },
+      {
+        "id": "card-4",
+        "content": "Every terminal command requires at least one argument to work.",
+        "isGoodPractice": false,
+        "explanation": "Many commands work perfectly with no arguments. 'ls' lists the current directory, 'pwd' prints where you are, 'clear' clears the screen. Arguments are optional -- they just specify what the command should act on."
+      },
+      {
+        "id": "card-5",
+        "content": "You can combine multiple short flags into one, like '-la' instead of '-l -a'.",
+        "isGoodPractice": true,
+        "explanation": "This is one of the terminal's nicest shortcuts. Instead of typing '-l -a -h' separately, you can combine them into '-lah'. This only works with single-letter short flags (single dash), not with long flags (double dash)."
+      }
+    ],
+    "glossaryTerms": ["flag", "argument", "command"]
+  }
+}

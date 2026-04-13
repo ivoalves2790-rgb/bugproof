@@ -1,0 +1,102 @@
+{
+  "slug": "common-mistakes",
+  "title": "Errores Comunes en la Terminal",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "terminal-in-real-projects",
+  "courseSlug": "terminal-command-line",
+  "intro": "Todos cometen errores en la terminal -- incluso los desarrolladores senior. La clave es saber como reconocerlos antes de que causen dano y como recuperarse cuando lo hacen. Como aprender a conducir, todos se paran en seco la primera vez. Un desarrollador junior acaba de ejecutar un comando peligroso en el directorio incorrecto. Ayudalo a recuperarse.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Errores Comunes = Aprender a Conducir",
+      "body": "Recuerdas aprender a conducir? Se te paro el auto en un semaforo verde, olvidaste revisar los espejos, tal vez hasta golpeaste una banqueta. **Todo conductor comete estos errores** -- lo importante es aprender de ellos y desarrollar habitos que los prevengan. Los errores en la terminal son iguales. Accidentalmente borraras un archivo, ejecutaras un comando en la carpeta equivocada u olvidaras `sudo`. El objetivo no es nunca cometer errores -- es desarrollar los habitos (revisar tu directorio, usar `ls` antes de `rm`) que hacen los errores raros y recuperables."
+    },
+    {
+      "type": "analogy",
+      "title": "Directorio Incorrecto = Enviar una Carta a la Direccion Equivocada",
+      "body": "Imagina escribir una carta perfecta y enviarla a la **direccion equivocada**. La carta esta bien, la estampilla esta bien, el buzon esta bien -- pero llega a tu vecino en vez de a tu amigo. Ejecutar comandos en el **directorio equivocado** es exactamente esto. `rm *.log` en la carpeta de tu proyecto limpia archivos de log. `rm *.log` en tu carpeta home podria borrar archivos importantes. El comando es el mismo -- el directorio es todo. Siempre verifica donde estas (`pwd`) antes de ejecutar cualquier cosa destructiva."
+    },
+    {
+      "type": "text",
+      "title": "Los errores de terminal mas comunes",
+      "body": "Estos errores atrapan a todo desarrollador al menos una vez:\n\n1. **Directorio equivocado** -- Ejecutar comandos en la carpeta incorrecta. Siempre usa `pwd` primero.\n2. **rm sin verificar** -- Borrar archivos sin listarlos primero. Usa `ls` antes de `rm`.\n3. **Olvidar sudo** -- Errores de permiso denegado porque olvidaste ejecutar como administrador.\n4. **Olvidar detener un proceso** -- Servidores viejos corriendo en puertos que necesitas.\n5. **Errores tipograficos en rutas** -- El autocompletado con Tab previene la mayoria de estos.\n\nEl habito de seguridad: **siempre ejecuta `ls` o `pwd` antes de cualquier comando destructivo**."
+    },
+    {
+      "type": "code_example",
+      "title": "Patrones seguros vs peligrosos",
+      "language": "bash",
+      "code": "# PELIGROSO: Borrar sin verificar\n$ rm -rf build/\n\n# SEGURO: Verificar primero, luego borrar\n$ ls build/\nindex.html  bundle.js  assets/\n$ rm -rf build/\n\n# PELIGROSO: Sin idea de donde estas\n$ rm *.log\n\n# SEGURO: Verificar tu ubicacion primero\n$ pwd\n/home/user/my-app\n$ ls *.log\naccess.log  error.log\n$ rm *.log",
+      "annotation": "El patron seguro siempre es el mismo: mira antes de actuar. Usa pwd para verificar tu ubicacion y ls para previsualizar lo que estas a punto de afectar. Este habito de dos segundos puede ahorrarte horas de recuperacion."
+    },
+    {
+      "type": "motivation",
+      "body": "Un vibecoder que sabe como evitar y recuperarse de errores en la terminal vale 10 veces mas para un cliente que uno que entra en panico y dice \"accidentalmente borre la carpeta de build.\" Estos habitos protegen tu reputacion, los datos de tu cliente y tus ingresos. Un desastre prevenido paga el tiempo que invertiste aprendiendo esta leccion cien veces."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los errores de terminal mas comunes son ejecutar comandos en el directorio equivocado y borrar sin verificar primero. Construye el habito de ejecutar pwd y ls antes de cualquier comando destructivo. Cuando ocurran errores, manten la calma -- la mayoria son recuperables con Git, respaldos o la papelera."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Un desarrollador junior de tu equipo envia un mensaje en panico: 'Creo que acabo de borrar algo importante. Estaba intentando limpiar archivos de build viejos y ejecute rm -rf dist/ pero estaba en el directorio equivocado. Estaba en la raiz del proyecto en vez de la subcarpeta frontend/.'\n\nLa estructura del proyecto es:\n\nmy-project/\n  frontend/\n    dist/       <- archivos de build viejos (seguro borrar)\n    src/\n  backend/\n    dist/       <- codigo del servidor compilado (NO seguro borrar)\n  dist/         <- no existe en el nivel raiz\n\nQue le dices primero?",
+        "choices": [
+          { "id": "a", "text": "Pedirle que ejecute pwd y ls para confirmar en que directorio esta y que se borro", "nextNode": "check-damage", "score": 10 },
+          { "id": "b", "text": "Decirle que inmediatamente ejecute rm -rf para limpiar mas y ocultar la evidencia", "nextNode": "bad-cover-up", "score": 0 },
+          { "id": "c", "text": "Decirle que entre en panico y restaure desde un respaldo inmediatamente", "nextNode": "premature-restore", "score": 3 }
+        ]
+      },
+      "check-damage": {
+        "narrative": "Ejecuta pwd y confirma que esta en /home/user/my-project/ (la raiz). Ejecuta ls y ve:\n\nfrontend/  backend/  package.json  README.md\n\nNo hay carpeta dist/ en el nivel raiz, asi que rm -rf dist/ en realidad no hizo nada -- no habia nada que borrar! Pero sigue preocupado. Cual es el siguiente paso?",
+        "choices": [
+          { "id": "a", "text": "Verificar que los directorios importantes estan intactos: ls frontend/dist/ y ls backend/dist/", "nextNode": "verify-intact", "score": 10 },
+          { "id": "b", "text": "Decirle que todo esta bien y seguir adelante sin verificar", "nextNode": "skip-verification", "score": 4 }
+        ]
+      },
+      "bad-cover-up": {
+        "narrative": "Ejecutar mas comandos rm sin entender la situacion es extremadamente peligroso. Podrias accidentalmente borrar archivos que en realidad estaban bien. La primera regla de respuesta a incidentes es: DETENTE y evalua el dano antes de tomar cualquier accion.",
+        "choices": [
+          { "id": "a", "text": "Detenerse y evaluar el dano primero verificando el directorio actual y listando archivos", "nextNode": "check-damage", "score": 5 }
+        ]
+      },
+      "premature-restore": {
+        "narrative": "Restaurar desde un respaldo antes de entender que paso desperdicia tiempo y podria sobrescribir cambios recientes. Necesitas evaluar el dano primero -- la solucion podria ser mucho mas simple que una restauracion completa.",
+        "choices": [
+          { "id": "a", "text": "Primero verificar que paso realmente antes de decidir una estrategia de recuperacion", "nextNode": "check-damage", "score": 5 }
+        ]
+      },
+      "verify-intact": {
+        "narrative": "Verificas ambos directorios:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nTodo esta intacto! Como no habia carpeta dist/ en la raiz del proyecto, rm -rf dist/ simplemente no hizo nada y salio silenciosamente. Ningun archivo fue danado. Ahora que deberias ensenarle al desarrollador junior?",
+        "choices": [
+          { "id": "a", "text": "Ensenarle a siempre ejecutar pwd antes de comandos destructivos y usar ls para previsualizar lo que va a borrar", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Decirle que tenga mas cuidado la proxima vez sin explicar como", "nextNode": "end-vague", "score": 4 }
+        ]
+      },
+      "skip-verification": {
+        "narrative": "Sin verificar, no puedes estar seguro de que nada fue danado. Siempre verifica. En este caso todo estaba bien, pero saltarse la verificacion es un mal habito que te mordra cuando ocurra dano real.",
+        "choices": [
+          { "id": "a", "text": "Regresar y verificar que los directorios importantes estan realmente intactos", "nextNode": "verify-intact", "score": 5 }
+        ]
+      },
+      "end-good": {
+        "narrative": "Le ensenas al desarrollador junior tres habitos de seguridad:\n\n1. Siempre ejecutar pwd antes de cualquier comando rm\n2. Ejecutar ls sobre el objetivo antes de borrarlo\n3. Usar Git -- si los archivos estan rastreados, git checkout puede recuperarlos\n\nEl desarrollador agrega estos habitos a su flujo de trabajo y nunca vuelve a tener un susto como este.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Respuesta a incidentes perfecta! Mantuviste la calma, evaluaste el dano antes de actuar, verificaste que nada se perdio y convertiste el susto en una oportunidad de aprendizaje. La leccion clave: siempre ejecuta pwd y ls antes de comandos destructivos, y recuerda que rm -rf sobre un directorio inexistente simplemente no hace nada."
+      },
+      "end-vague": {
+        "narrative": "El desarrollador junior asiente pero comete el mismo error dos semanas despues, esta vez borrando accidentalmente la carpeta backend/dist/. Consejos vagos como 'ten cuidado' no construyen habitos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 10,
+        "feedback": "Resolviste el problema inmediato pero perdiste la oportunidad de ensenar. La proxima vez, da habitos especificos y accionables: ejecuta pwd antes de rm, usa ls para previsualizar borrados, y confia en Git para la recuperacion. Los habitos concretos previenen errores futuros mejor que la precaucion vaga."
+      }
+    },
+    "glossaryTerms": ["rm", "pwd", "ls", "destructive-command", "incident-response"]
+  }
+}

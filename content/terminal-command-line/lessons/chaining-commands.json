@@ -1,0 +1,61 @@
+{
+  "slug": "chaining-commands",
+  "title": "Chaining Commands",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "Why run commands one at a time when you can chain them together? The operators &&, ||, and ; let you combine multiple commands into a single line. But pick the wrong operator and your deploy script wipes production instead of stopping on error. Find the bug in this chained command.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "&& = A Recipe: Do This AND THEN That",
+      "body": "Think of `&&` like following a recipe: **preheat the oven AND THEN put in the cake**. If the oven fails to preheat, you don't put the cake in -- you stop. `&&` works the same way: it only runs the next command if the previous one succeeded. `npm install && npm start` means \"install packages, and ONLY IF that works, start the app.\" If install fails, start never runs."
+    },
+    {
+      "type": "analogy",
+      "title": "|| = A Backup Plan: Try Plan A OR Plan B",
+      "body": "Think of `||` like having a backup plan: **try to unlock the front door OR if that fails, use the back door**. The second option only activates if the first one fails. `node server.js || echo 'Server failed to start'` means \"run the server, but if it crashes, show an error message.\" If the server starts fine, the echo never runs."
+    },
+    {
+      "type": "text",
+      "title": "Three Ways to Chain Commands",
+      "body": "Each operator has a different behavior:\n\n- **`&&` (AND)** -- Run the next command ONLY if the previous one succeeded. Stops on first failure.\n- **`||` (OR)** -- Run the next command ONLY if the previous one failed. It's a fallback.\n- **`;` (SEMICOLON)** -- Run the next command no matter what. Doesn't care if the previous command failed or succeeded.\n\nThe key difference: `&&` is cautious (stop if something breaks), `;` is reckless (keep going regardless), and `||` is the safety net."
+    },
+    {
+      "type": "code_example",
+      "title": "Chaining in Action",
+      "language": "bash",
+      "code": "# AND -- stop if anything fails (safe for deploys)\nnpm run build && npm run deploy\n\n# OR -- fallback when something fails\ncommand -v node || echo 'Node is not installed'\n\n# SEMICOLON -- run everything regardless\nmkdir logs; touch logs/app.log; echo 'Ready'",
+      "annotation": "Use && for anything where order matters and failure should stop the chain. Use ; for independent commands that should all run. Use || for error handling and fallbacks."
+    },
+    {
+      "type": "motivation",
+      "body": "Professional deploy scripts, CI/CD pipelines, and automation tools all rely on command chaining. When a client's app needs a one-command deploy that builds, tests, and pushes to production, vibecoding with proper chaining is how you deliver it. Getting the operator wrong can mean deploying broken code -- and losing that client."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use && to stop the chain on failure (safe), ; to run everything regardless (risky), and || to provide a fallback when something fails. For deploys and builds, always use && so a failing step doesn't cascade into disaster."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Build and deploy script", "isBuggy": false },
+      { "line": 2, "text": "echo 'Starting deploy...'", "isBuggy": false },
+      { "line": 3, "text": "npm run build ; npm run deploy", "isBuggy": true },
+      { "line": 4, "text": "echo 'Deploy complete!'", "isBuggy": false }
+    ],
+    "correctBuggyLine": 3,
+    "prompt": "This deploy script builds the app and then deploys it. But if the build fails with errors, the deploy still runs -- pushing broken code to production. Which line has the wrong chaining operator?",
+    "fixes": [
+      { "id": "a", "text": "npm run build && npm run deploy", "isCorrect": true },
+      { "id": "b", "text": "npm run build || npm run deploy", "isCorrect": false },
+      { "id": "c", "text": "npm run build | npm run deploy", "isCorrect": false },
+      { "id": "d", "text": "npm run build & npm run deploy", "isCorrect": false }
+    ],
+    "explanation": "The semicolon (;) runs the next command regardless of whether the previous one succeeded or failed. That means even if 'npm run build' fails with compilation errors, 'npm run deploy' still runs and pushes broken code to production. The fix is && which only runs deploy if build succeeds. Option B (||) would only deploy if build FAILS -- the opposite of what we want. Option C (|) is a pipe, which sends output of one command as input to another. Option D (&) runs both commands simultaneously in the background.",
+    "glossaryTerms": ["chaining", "conditional-execution"]
+  }
+}

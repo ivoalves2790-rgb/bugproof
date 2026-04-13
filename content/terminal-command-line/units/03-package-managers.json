@@ -1,0 +1,15 @@
+{
+  "slug": "package-managers",
+  "title": "Package Managers & Installing Tools",
+  "description": "Package managers are like app stores for your terminal -- they let you install, update, and remove tools with a single command. Master npm and understand how dependencies work",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "what-are-package-managers", "title": "What Are Package Managers?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "npm-basics", "title": "npm Basics", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "installing-global-tools", "title": "Installing Global Tools", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "package-json", "title": "Understanding package.json", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "dependency-conflicts", "title": "Dependency Conflicts", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ]
+}

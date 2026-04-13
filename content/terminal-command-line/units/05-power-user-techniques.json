@@ -1,0 +1,15 @@
+{
+  "slug": "power-user-techniques",
+  "title": "Power User Techniques",
+  "description": "Level up from passenger to pilot -- create aliases, chain commands, connect to remote servers, write scripts, and build a workflow that makes you unstoppable",
+  "order": 5,
+  "tier": "advanced",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "aliases-and-shortcuts", "title": "Aliases and Shortcuts", "type": "terminal_sim", "order": 1, "difficulty": 2 },
+    { "slug": "chaining-commands", "title": "Chaining Commands", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "ssh-basics", "title": "SSH: Connecting to Remote Servers", "type": "incident_response", "order": 3, "difficulty": 2 },
+    { "slug": "shell-scripts", "title": "Writing Simple Shell Scripts", "type": "terminal_sim", "order": 4, "difficulty": 3 },
+    { "slug": "terminal-workflow", "title": "Building Your Terminal Workflow", "type": "swipe_to_judge", "order": 5, "difficulty": 2 }
+  ]
+}

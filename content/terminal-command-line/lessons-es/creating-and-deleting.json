@@ -1,0 +1,83 @@
+{
+  "slug": "creating-and-deleting",
+  "title": "Creando y Eliminando Archivos",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Ahora que puedes navegar el sistema de archivos, es hora de empezar a construir cosas. Aprenderas a crear carpetas, crear archivos y si -- tambien a eliminarlos. Pero ten cuidado: la terminal no tiene papelera de reciclaje.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "mkdir/touch = Construir Habitaciones y Colocar Muebles",
+      "body": "Piensa en `mkdir` como **construir una nueva habitacion** en tu casa. Crea un espacio vacio (carpeta) donde puedes poner cosas. `touch` es como **colocar un mueble** en una habitacion -- crea un archivo nuevo y vacio. Primero construyes la habitacion (`mkdir components`), luego colocas muebles adentro (`touch components/Button.js`). Puedes construir habitaciones dentro de habitaciones y poner muebles en cualquier lugar."
+    },
+    {
+      "type": "analogy",
+      "title": "rm = La Trituradora de Papel (Permanente!)",
+      "body": "Cuando eliminas un archivo con la GUI, va a la Papelera y puedes recuperarlo. Pero `rm` en la terminal es como una **trituradora de papel** -- una vez que un archivo pasa por ella, desaparece para siempre. No hay Papelera, no hay deshacer, no hay ventana emergente de \"Estas seguro?\". Esto hace que `rm` sea poderoso pero peligroso. Siempre verifica dos veces el nombre del archivo antes de presionar enter."
+    },
+    {
+      "type": "text",
+      "title": "Los Comandos de Creacion",
+      "body": "- `mkdir nombrecarpeta` -- Crea una nueva carpeta vacia (\"make directory\")\n- `mkdir -p ruta/a/anidada` -- Crea carpetas anidadas de una vez\n- `touch nombrearchivo` -- Crea un nuevo archivo vacio\n- `touch archivo1 archivo2 archivo3` -- Crea multiples archivos a la vez"
+    },
+    {
+      "type": "text",
+      "title": "Los Comandos de Eliminacion",
+      "body": "- `rm nombrearchivo` -- Elimina un archivo permanentemente\n- `rm -r nombrecarpeta` -- Elimina una carpeta y todo su contenido\n- `rmdir nombrecarpeta` -- Elimina solo una carpeta vacia (mas seguro)\n\n**Advertencia:** `rm` NO mueve archivos a la Papelera. Desaparecen para siempre. Siempre usa `ls` primero para verificar que estas eliminando lo correcto."
+    },
+    {
+      "type": "code_example",
+      "title": "Creando una Estructura de Proyecto",
+      "language": "bash",
+      "code": "mkdir my-app                    # Create project folder\ncd my-app                       # Move into it\nmkdir src                       # Create source folder\ntouch src/index.js              # Create main file\ntouch README.md                 # Create readme\nls                              # Verify: src  README.md",
+      "annotation": "Este es un patron comun -- creas una carpeta, te mueves adentro, luego construyes la estructura interna."
+    },
+    {
+      "type": "motivation",
+      "body": "Cada app que construyes con herramientas de IA empieza creando una estructura de proyecto. Cuando un cliente necesita una nueva carpeta de funcionalidades, un archivo de configuracion o un scaffold limpio de proyecto, hacerlo en la terminal toma segundos en lugar de minutos haciendo clic derecho. Los vibecoders que crean proyectos rapido empiezan a ganar dinero mas rapido."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Usa `mkdir` para crear carpetas, `touch` para crear archivos, `rm` para eliminar archivos y `rmdir` para eliminar carpetas vacias. Recuerda: `rm` es permanente -- no hay deshacer."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/old-notes.txt"],
+    "steps": [
+      {
+        "instruction": "Crea una nueva carpeta llamada 'my-app' para tu proyecto.",
+        "expectedCommand": "mkdir my-app",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "El comando para crear un directorio es 'mkdir' seguido del nombre de la carpeta."
+      },
+      {
+        "instruction": "Ahora crea un archivo vacio llamado 'index.html' dentro de la carpeta my-app. Puedes hacerlo sin moverte a ella.",
+        "expectedCommand": "touch my-app/index.html",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Usa 'touch' seguido de la ruta: nombrecarpeta/nombrearchivo."
+      },
+      {
+        "instruction": "El archivo old-notes.txt ya no se necesita. Eliminalo permanentemente.",
+        "expectedCommand": "rm old-notes.txt",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Usa 'rm' seguido del nombre del archivo para eliminarlo. Recuerda, es permanente!"
+      },
+      {
+        "instruction": "Verifica tu trabajo listando los contenidos del directorio actual.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": ["ls -la", "ls -l", "ls -a"],
+        "output": "my-app",
+        "hint": "Usa el comando de listar para ver que hay en la carpeta actual."
+      }
+    ],
+    "completionMessage": "Acabas de crear una carpeta de proyecto, agregarle un archivo y limpiar un archivo viejo -- todo sin tocar el raton. Asi es exactamente como los desarrolladores crean nuevos proyectos todos los dias.",
+    "glossaryTerms": ["mkdir", "touch", "rm", "rmdir"]
+  }
+}

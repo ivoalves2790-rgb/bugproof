@@ -1,0 +1,16 @@
+{
+  "slug": "essential-commands",
+  "title": "Essential Commands",
+  "description": "Your terminal toolbox -- like a Swiss Army knife, each command does one thing well. Learn to copy, move, search, and chain commands together to accomplish complex tasks in seconds",
+  "order": 2,
+  "tier": "beginner",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "copying-and-moving", "title": "Copying and Moving Files", "type": "terminal_sim", "order": 1, "difficulty": 1 },
+    { "slug": "finding-files", "title": "Finding Files", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "searching-text", "title": "Searching Inside Files with grep", "type": "terminal_sim", "order": 3, "difficulty": 1 },
+    { "slug": "permissions-basics", "title": "File Permissions", "type": "swipe_to_judge", "order": 4, "difficulty": 2 },
+    { "slug": "piping-and-redirects", "title": "Piping and Redirects", "type": "bug_hunt", "order": 5, "difficulty": 2 },
+    { "slug": "environment-variables", "title": "Environment Variables", "type": "incident_response", "order": 6, "difficulty": 2 }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "slug": "what-is-the-terminal",
+  "title": "What Is the Terminal?",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "The terminal is the most powerful tool on your computer -- but most people never open it. It lets you talk directly to your machine using text commands instead of clicking through menus. Swipe right if the statement is TRUE, or left if it's FALSE.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The Terminal = The Restaurant Kitchen",
+      "body": "Think of your computer like a restaurant. The **graphical interface** (GUI) is the polished dining room -- pretty menus, nice buttons, everything laid out for you. But the **terminal** is the kitchen. It's where the real work happens. Chefs (developers) go straight to the kitchen because it's faster, more powerful, and gives them full control over every ingredient. The dining room is great for customers, but if you want to cook, you need the kitchen."
+    },
+    {
+      "type": "analogy",
+      "title": "Terminal = Texting vs. Calling",
+      "body": "Using the GUI is like making a phone call -- you navigate through voice menus, wait on hold, and click through options one by one. The terminal is like **sending a text message** -- you type exactly what you want, hit enter, and it's done. No menus, no waiting, no clicking through five screens to do one thing. Direct, precise, and fast."
+    },
+    {
+      "type": "text",
+      "title": "GUI vs CLI",
+      "body": "Your computer has two ways to interact with it:\n\n- **GUI (Graphical User Interface)** -- The visual point-and-click experience you're used to. Finder, File Explorer, dragging files around.\n- **CLI (Command Line Interface)** -- The text-based terminal where you type commands. No mouse needed.\n\nBoth talk to the same operating system underneath. The terminal just skips the visual layer and goes straight to the source."
+    },
+    {
+      "type": "text",
+      "title": "Why Vibecoders Need the Terminal",
+      "body": "Even if you build apps with AI tools, the terminal is unavoidable:\n\n1. **Running projects** -- `npm start`, `npm run dev`, starting servers\n2. **Installing packages** -- `npm install`, `pip install`\n3. **Using Git** -- every Git command runs in the terminal\n4. **Deploying apps** -- most deploy tools use CLI commands\n5. **AI coding tools** -- many AI dev tools (Cursor, Copilot CLI) live in the terminal"
+    },
+    {
+      "type": "code_example",
+      "title": "Your First Look at Terminal Commands",
+      "language": "bash",
+      "code": "pwd                    # Print where you are\nls                     # List files in current folder\ncd Documents           # Move into the Documents folder\nmkdir my-project       # Create a new folder",
+      "annotation": "These are some of the most common commands. Each one is a short English word or abbreviation -- pwd means 'print working directory', ls means 'list'."
+    },
+    {
+      "type": "motivation",
+      "body": "Every developer job posting -- from $60K junior roles to $200K+ senior positions -- lists terminal skills as a requirement. Vibecoders who can use the terminal build and deploy apps 3x faster than those stuck clicking through GUIs. This is the skill that turns an AI hobbyist into someone who can earn real money shipping products."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "The terminal is a text-based interface to your computer. It does the same things as your graphical interface but faster and with more control -- and it's essential for running projects, installing packages, and using Git."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "The terminal and the graphical interface (GUI) both talk to the same operating system underneath.",
+        "isGoodPractice": true,
+        "explanation": "Both the terminal (CLI) and the graphical interface (GUI) are just different ways to communicate with your operating system. They can do the same things -- the terminal just uses text commands instead of mouse clicks."
+      },
+      {
+        "id": "card-2",
+        "content": "You need to be an expert programmer to use the terminal.",
+        "isGoodPractice": false,
+        "explanation": "Terminal commands are mostly short English words and abbreviations. 'ls' lists files, 'cd' changes directory, 'mkdir' makes a directory. You don't need to know any programming language to use these commands."
+      },
+      {
+        "id": "card-3",
+        "content": "The terminal is faster than the GUI for many development tasks.",
+        "isGoodPractice": true,
+        "explanation": "With one command you can do what might take 5-10 clicks in a GUI. Renaming 100 files, searching through a project, or installing packages -- these are all faster in the terminal once you know the commands."
+      },
+      {
+        "id": "card-4",
+        "content": "Modern developers don't need the terminal anymore because of graphical tools.",
+        "isGoodPractice": false,
+        "explanation": "The opposite is true. Git, npm, deployment tools, AI coding assistants -- almost all modern development tools are designed for the terminal first. Even graphical tools like VS Code have a built-in terminal because it's so essential."
+      },
+      {
+        "id": "card-5",
+        "content": "The terminal can only work with code files, not regular documents or images.",
+        "isGoodPractice": false,
+        "explanation": "The terminal can work with any file on your computer -- documents, images, videos, anything. You can copy, move, rename, and delete any type of file. It's a general-purpose tool for interacting with your entire file system."
+      }
+    ],
+    "glossaryTerms": ["terminal", "CLI", "GUI"]
+  }
+}

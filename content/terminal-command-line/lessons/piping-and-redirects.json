@@ -1,0 +1,61 @@
+{
+  "slug": "piping-and-redirects",
+  "title": "Piping and Redirects",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Pipes and redirects let you chain commands together and save output to files -- they're the secret behind those impressive one-liners you see power users type. But mixing up | and > can erase your files or send output to the wrong place. Let's find a bug caused by using the wrong operator.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Pipes = Assembly Line Conveyor Belts",
+      "body": "In a factory, one machine cuts metal, the conveyor belt carries the pieces to the next machine that polishes them, and another belt carries them to packaging. Each machine does one job and passes its output to the next. **The pipe operator `|` is that conveyor belt** -- it takes the output of one command and feeds it directly as input to the next command. `ls | grep .js | wc -l` is a three-machine assembly line: list files, filter for .js files, count them."
+    },
+    {
+      "type": "analogy",
+      "title": "Redirects = Diverting a River into a Reservoir",
+      "body": "Normally, a river flows downstream to the ocean (your screen). But you can build a dam and divert the water into a reservoir (a file) for storage. **The `>` redirect diverts command output into a file** instead of showing it on screen. Using `>` empties the reservoir first (overwrites the file). Using `>>` adds water to whatever's already in the reservoir (appends to the file)."
+    },
+    {
+      "type": "text",
+      "title": "Pipes vs Redirects",
+      "body": "They look similar but do very different things:\n\n- **`|` (pipe)** -- Sends output to **another command**: `cat file.txt | grep error`\n- **`>` (redirect)** -- Sends output to **a file**, overwriting it: `echo 'hello' > output.txt`\n- **`>>` (append)** -- Sends output to **a file**, adding to the end: `echo 'line 2' >> output.txt`\n\nThe critical difference: `>` **erases the file first**, then writes. If you accidentally use `>` instead of `>>`, you lose all previous content. `>>` is safe -- it always adds to the end."
+    },
+    {
+      "type": "code_example",
+      "title": "Chaining Commands Like a Pro",
+      "language": "bash",
+      "code": "# Count how many JavaScript files exist\nfind . -name \"*.js\" | wc -l\n\n# Save error logs to a file (overwrite)\ngrep \"ERROR\" server.log > errors.txt\n\n# Append today's errors to a running log\ngrep \"ERROR\" server.log >> all-errors.txt\n\n# Chain: find large files, sort by size, show top 5\ndu -sh * | sort -rh | head -5",
+      "annotation": "Pipes chain commands (output becomes input for the next command). Redirects save output to a file. You can even combine them: command | filter > file.txt"
+    },
+    {
+      "type": "motivation",
+      "body": "One-liner pipe chains are the signature move of a confident developer. When a client sees you analyze their entire log file with one command, they know they hired a pro. That reputation is what gets you referrals and keeps the vibecoding income flowing."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Pipes (|) send output to another command. Redirects (>) send output to a file, overwriting it. Append (>>) adds to a file without erasing. Never use > when you mean >> or you'll lose data. Chain pipes to build powerful one-liners."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Save server errors to a running log file", "isBuggy": false },
+      { "line": 2, "text": "grep \"ERROR\" server.log > all-errors.txt", "isBuggy": true },
+      { "line": 3, "text": "", "isBuggy": false },
+      { "line": 4, "text": "# Count how many error lines were found", "isBuggy": false },
+      { "line": 5, "text": "cat all-errors.txt | wc -l", "isBuggy": false }
+    ],
+    "correctBuggyLine": 2,
+    "prompt": "This script is supposed to append today's errors to a running log file called all-errors.txt. But every time it runs, previous errors disappear and only today's errors remain. Which line has the bug?",
+    "fixes": [
+      { "id": "a", "text": "grep \"ERROR\" server.log >> all-errors.txt", "isCorrect": true },
+      { "id": "b", "text": "grep \"ERROR\" server.log | all-errors.txt", "isCorrect": false },
+      { "id": "c", "text": "grep \"ERROR\" > server.log all-errors.txt", "isCorrect": false }
+    ],
+    "explanation": "The > operator overwrites the file every time, erasing all previous content. The >> operator appends to the file, adding new lines after the existing content. Since the script is meant to maintain a running log across multiple runs, >> is the correct operator. Option B tries to pipe into a filename (not a command) which would cause an error. Option C puts the redirect in the wrong position.",
+    "glossaryTerms": ["pipe", "redirect", "append", "overwrite"]
+  }
+}

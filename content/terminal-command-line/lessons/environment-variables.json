@@ -1,0 +1,97 @@
+{
+  "slug": "environment-variables",
+  "title": "Environment Variables",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Your app just crashed in production with 'command not found' even though the tool is installed. The problem isn't the tool itself -- it's that the system doesn't know where to look for it. Welcome to the world of environment variables and the mysterious PATH.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Environment Variables = Sticky Notes on Your Monitor",
+      "body": "Imagine you have sticky notes around your monitor: one says 'DB password: abc123', another says 'API key: xyz789', and another says 'Deploy to: production'. Any time you need that info, you just glance at the note. **Environment variables are your system's sticky notes** -- they store key-value pairs that any program can read. Programs check these notes to know where the database is, which API key to use, and whether they're running in development or production."
+    },
+    {
+      "type": "analogy",
+      "title": "PATH = Your Phone's Contact List",
+      "body": "When you want to call someone, you don't type their full number every time -- you search your contacts by name and your phone knows the number. **The PATH variable is your system's contact list for programs.** When you type `node` or `python`, the system searches the directories listed in PATH to find that program. If the directory isn't in PATH, it's like having someone's number but not in your contacts -- you'd have to type the full path every time."
+    },
+    {
+      "type": "text",
+      "title": "What Are Environment Variables?",
+      "body": "Environment variables are **key-value pairs** stored by your operating system:\n\n- **`echo $PATH`** -- Shows the directories where the system looks for commands\n- **`echo $HOME`** -- Shows your home directory\n- **`export API_KEY=\"abc123\"`** -- Sets a variable for the current session\n- **`env`** -- Lists all current environment variables\n\nIn web development, `.env` files store project-specific variables like database URLs and API keys. Tools like dotenv load these into your app at runtime."
+    },
+    {
+      "type": "code_example",
+      "title": "Working with Environment Variables",
+      "language": "bash",
+      "code": "# View the PATH variable\necho $PATH\n# /usr/local/bin:/usr/bin:/bin:/usr/sbin\n\n# Set a variable for this session\nexport DATABASE_URL=\"postgres://localhost:5432/mydb\"\n\n# Use it in a command\necho $DATABASE_URL\n# postgres://localhost:5432/mydb\n\n# Add a directory to PATH\nexport PATH=\"$PATH:/usr/local/go/bin\"",
+      "annotation": "Variables set with export only last for the current terminal session. To make them permanent, add the export line to your shell config file (~/.bashrc, ~/.zshrc, or similar)."
+    },
+    {
+      "type": "motivation",
+      "body": "Environment variable issues cause some of the most confusing bugs in development. When you can diagnose 'command not found' or 'missing API key' in minutes, clients are impressed. That troubleshooting skill turns a $200 bug fix into a 15-minute vibecoding task at premium rates."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Environment variables store configuration that programs read at runtime. PATH tells the system where to find commands. Use export to set variables, echo $VAR to read them, and .env files for project-specific secrets. If a command isn't found, PATH is usually the culprit."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "INCIDENT: A developer reports that after installing a new Node.js version manager (nvm), their terminal shows 'node: command not found' even though Node was working fine yesterday. The app needs to be deployed within the hour.\n\nYou SSH into the server. What's your first move?",
+        "choices": [
+          { "id": "a", "text": "Run 'echo $PATH' to check if the Node.js directory is in the PATH", "nextNode": "check-path", "score": 10 },
+          { "id": "b", "text": "Reinstall Node.js from scratch", "nextNode": "reinstall", "score": 3 },
+          { "id": "c", "text": "Run 'which node' to see if the system can find the node binary", "nextNode": "which-node", "score": 7 }
+        ]
+      },
+      "check-path": {
+        "narrative": "You run `echo $PATH` and see:\n/usr/local/bin:/usr/bin:/bin:/usr/sbin\n\nNotice anything missing? The nvm directory isn't listed. Node was installed via nvm to ~/.nvm/versions/node/v20.11.0/bin/ but that path isn't in PATH. The system has no idea where to look for it.\n\nHow do you fix it?",
+        "choices": [
+          { "id": "a", "text": "Run: export PATH=\"$PATH:$HOME/.nvm/versions/node/v20.11.0/bin\"", "nextNode": "temp-fix", "score": 7 },
+          { "id": "b", "text": "Check if nvm's init script is in ~/.bashrc or ~/.zshrc, then source it", "nextNode": "end-good", "score": 10 }
+        ]
+      },
+      "which-node": {
+        "narrative": "You run `which node` and get no output -- the system can't find the node binary anywhere in the current PATH. The binary exists on disk (nvm installed it) but the PATH doesn't include its location. Now you know it's a PATH issue.\n\nWhat's your next step?",
+        "choices": [
+          { "id": "a", "text": "Run 'echo $PATH' to see which directories are being searched", "nextNode": "check-path", "score": 8 },
+          { "id": "b", "text": "Manually add the node binary location to PATH", "nextNode": "temp-fix", "score": 5 }
+        ]
+      },
+      "reinstall": {
+        "narrative": "You spend 20 minutes reinstalling Node.js, but after installation you get the same error: 'node: command not found.' Reinstalling didn't help because the problem was never about Node being missing -- it was about the system not knowing where Node lives. The PATH variable doesn't include Node's install directory.",
+        "choices": [
+          { "id": "a", "text": "Check the PATH variable to understand why the system can't find node", "nextNode": "check-path", "score": 5 }
+        ]
+      },
+      "temp-fix": {
+        "narrative": "You run the export command and now `node --version` works! But this fix is temporary -- it will disappear when the terminal session ends. For a permanent fix, you need to ensure the nvm initialization script runs every time a new terminal opens.\n\nDo you check the shell config file?",
+        "choices": [
+          { "id": "a", "text": "Yes, check ~/.bashrc or ~/.zshrc for the nvm init lines", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "No, the temporary fix is enough for the deploy", "nextNode": "end-partial", "score": 4 }
+        ]
+      },
+      "end-good": {
+        "narrative": "You open ~/.zshrc and find that the nvm initialization lines are missing -- they were accidentally deleted during a recent config cleanup:\n\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && source \"$NVM_DIR/nvm.sh\"\n\nYou add them back, run `source ~/.zshrc`, and confirm `node --version` now works. The deploy succeeds. Crisis resolved!",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Excellent diagnosis! You correctly identified this as a PATH issue rather than a missing installation. The nvm init script in the shell config file is what adds Node's directory to PATH on each new terminal session. When those lines were removed, PATH no longer included Node's location. Always check the shell config file (~/.bashrc, ~/.zshrc) when commands suddenly stop working after system changes."
+      },
+      "end-partial": {
+        "narrative": "The deploy works for now, but the next time the server restarts or a new SSH session opens, 'node: command not found' will return. The team will face the same incident again tomorrow.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "You found the immediate fix but didn't make it permanent. Temporary PATH exports vanish when the terminal session ends. The proper fix is adding the nvm initialization script to ~/.bashrc or ~/.zshrc so that PATH is configured correctly every time a new shell opens. Always look for the root cause, not just a quick workaround."
+      }
+    },
+    "glossaryTerms": ["env-var", "path", "export", "shell-config"]
+  }
+}

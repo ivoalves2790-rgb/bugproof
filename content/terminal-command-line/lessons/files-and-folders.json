@@ -1,0 +1,78 @@
+{
+  "slug": "files-and-folders",
+  "title": "Files and Folders",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Before you can do anything in the terminal, you need to understand how files and folders are organized on your computer. Every file lives somewhere in a tree-like structure, and the terminal lets you explore it all with simple commands.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "The File System = A Filing Cabinet",
+      "body": "Your computer's file system is like a giant **filing cabinet**. The cabinet itself is the root (`/`). Inside are big drawers (top-level folders like `Users`, `Applications`). Inside each drawer are hanging folders (subfolders). Inside those are individual documents (files). The terminal lets you open any drawer and look inside instantly -- no clicking required."
+    },
+    {
+      "type": "analogy",
+      "title": "Paths = Street Addresses",
+      "body": "Every file has a **path** -- its exact address on your computer. Just like a street address tells you Country > City > Street > House Number, a file path tells you Root > Folder > Subfolder > File. The path `/Users/you/Documents/resume.pdf` is like saying \"go to the Users neighborhood, find house 'you', go to the Documents room, and grab resume.pdf.\""
+    },
+    {
+      "type": "text",
+      "title": "The Home Directory",
+      "body": "When you open the terminal, you start in your **home directory** -- represented by the tilde symbol `~`. This is your personal space on the computer, like your own apartment in a big building.\n\n- On Mac: `/Users/yourname`\n- On Windows (WSL): `/home/yourname`\n- On Linux: `/home/yourname`\n\nAll your projects, documents, and downloads live somewhere inside `~`."
+    },
+    {
+      "type": "code_example",
+      "title": "Exploring with pwd and ls",
+      "language": "bash",
+      "code": "pwd                    # Where am I right now?\nls                     # What's in this folder?\nls -la                 # Show ALL files (including hidden) with details",
+      "annotation": "'pwd' stands for Print Working Directory -- it tells you your current location. 'ls' stands for List -- it shows what's inside."
+    },
+    {
+      "type": "motivation",
+      "body": "Understanding the file system is the foundation of every coding project you'll ever build. When a client pays you $5,000 to build an app with AI tools, you need to know where your files live, how to organize them, and how to find them fast. This lesson saves you hours of confusion later."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Your file system is a tree of folders and files. Use `pwd` to see where you are and `ls` to see what's around you. Every file has a unique path -- its address on your computer."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/app/index.html", "~/projects/app/style.css", "~/projects/app/README.md", "~/projects/notes.txt"],
+    "steps": [
+      {
+        "instruction": "First, find out exactly where you are in the file system. Print your current working directory.",
+        "expectedCommand": "pwd",
+        "acceptAlternatives": [],
+        "output": "/Users/you/projects",
+        "hint": "The command stands for 'print working directory' -- it's three letters."
+      },
+      {
+        "instruction": "Now let's see what files and folders are in this directory. List the contents.",
+        "expectedCommand": "ls",
+        "acceptAlternatives": [],
+        "output": "app    notes.txt",
+        "hint": "The command is just two letters and means 'list'."
+      },
+      {
+        "instruction": "There's an 'app' folder here. Let's see what's inside it. List the contents of the app directory without moving into it.",
+        "expectedCommand": "ls app",
+        "acceptAlternatives": ["ls ./app", "ls app/"],
+        "output": "README.md    index.html    style.css",
+        "hint": "You can list a specific folder by adding its name after 'ls'. Try 'ls app'."
+      },
+      {
+        "instruction": "Now list everything in the current directory with full details, including hidden files. Use the long format with the 'all' flag.",
+        "expectedCommand": "ls -la",
+        "acceptAlternatives": ["ls -al", "ls -l -a", "ls -a -l"],
+        "output": "total 8\ndrwxr-xr-x  4 you  staff  128 Apr 10 09:00 .\ndrwxr-xr-x  5 you  staff  160 Apr 10 08:00 ..\ndrwxr-xr-x  5 you  staff  160 Apr 10 09:00 app\n-rw-r--r--  1 you  staff   42 Apr 10 09:00 notes.txt",
+        "hint": "Use 'ls' with the flags '-la' -- the 'l' means long format and 'a' means all (including hidden files)."
+      }
+    ],
+    "completionMessage": "Great job! You can now see where you are with pwd and explore any folder with ls. Notice how ls -la showed hidden files (starting with a dot) and extra details like permissions and dates.",
+    "glossaryTerms": ["pwd", "ls", "home-directory", "path"]
+  }
+}

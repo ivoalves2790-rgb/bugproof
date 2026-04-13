@@ -1,0 +1,15 @@
+{
+  "slug": "package-managers",
+  "title": "Gestores de Paquetes e Instalacion de Herramientas",
+  "description": "Los gestores de paquetes son como tiendas de apps para tu terminal -- te permiten instalar, actualizar y eliminar herramientas con un solo comando. Domina npm y entiende como funcionan las dependencias",
+  "order": 3,
+  "tier": "intermediate",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "what-are-package-managers", "title": "Que Son los Gestores de Paquetes?", "type": "swipe_to_judge", "order": 1, "difficulty": 1 },
+    { "slug": "npm-basics", "title": "Basicos de npm", "type": "terminal_sim", "order": 2, "difficulty": 1 },
+    { "slug": "installing-global-tools", "title": "Instalando Herramientas Globales", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "package-json", "title": "Entendiendo package.json", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "dependency-conflicts", "title": "Conflictos de Dependencias", "type": "incident_response", "order": 5, "difficulty": 2 }
+  ]
+}

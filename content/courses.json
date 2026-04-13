@@ -98,5 +98,15 @@
     "unitCount": 5,
     "lessonCount": 28,
     "color": "#E17055"
+  },
+  {
+    "slug": "terminal-command-line",
+    "title": "Terminal & Command Line",
+    "description": "Navigate files, run commands, install tools, and control your dev environment",
+    "icon": "terminal",
+    "order": 11,
+    "unitCount": 5,
+    "lessonCount": 28,
+    "color": "#6C5CE7"
   }
 ]

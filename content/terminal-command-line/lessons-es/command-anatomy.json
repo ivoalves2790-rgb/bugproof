@@ -1,0 +1,82 @@
+{
+  "slug": "command-anatomy",
+  "title": "Anatomia de un Comando",
+  "type": "swipe_to_judge",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Cada comando de terminal sigue un patron. Una vez que entiendas la anatomia de un comando -- su nombre, banderas y argumentos -- podras leer y entender cualquier comando, incluso los que nunca hayas visto. Desliza a la derecha si la afirmacion es VERDADERA, o a la izquierda si es FALSA.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Comandos = Oraciones",
+      "body": "Un comando de terminal esta estructurado como una oracion en espanol. El **nombre del comando** es el verbo (la accion: listar, mover, copiar). Las **banderas** son adverbios (como hacerlo: silenciosamente, recursivamente, verbosamente). Los **argumentos** son los sustantivos (sobre que actuar: este archivo, esa carpeta). Entonces `ls -la Documents` se lee como: \"**Lista** (verbo) en formato **largo-todo** (adverbio) la carpeta **Documents** (sustantivo).\""
+    },
+    {
+      "type": "analogy",
+      "title": "Comandos = Pedir Comida",
+      "body": "Pedir en un restaurante sigue el mismo patron que un comando de terminal. El **platillo** es el comando (`hamburguesa`). Las **modificaciones** son las banderas (`--sin-cebolla`, `--extra-queso`). El **tamano o tipo** es el argumento (`grande`). Entonces `hamburguesa --sin-cebolla --extra-queso grande` es igual que `ls --all --long Documents`. Una vez que ves este patron, cada comando tiene sentido."
+    },
+    {
+      "type": "text",
+      "title": "Las Tres Partes de Cada Comando",
+      "body": "Cada comando de terminal tiene hasta tres partes:\n\n1. **Nombre del comando** -- La accion a realizar (`ls`, `cd`, `mkdir`, `rm`)\n2. **Banderas/Opciones** -- Modifican el comportamiento. Empiezan con `-` o `--` (`-a`, `--all`, `-v`, `--verbose`)\n3. **Argumentos** -- Sobre que actua el comando (nombres de archivos, nombres de carpetas, texto)\n\nFormato: `comando [banderas] [argumentos]`"
+    },
+    {
+      "type": "text",
+      "title": "Banderas Cortas vs Banderas Largas",
+      "body": "La mayoria de las banderas vienen en dos formas:\n\n- **Bandera corta**: Un guion + una letra: `-a`, `-l`, `-v`\n- **Bandera larga**: Dos guiones + palabra completa: `--all`, `--long`, `--verbose`\n\nLas banderas cortas se pueden combinar: `-la` es lo mismo que `-l -a`.\n\nAmbas formas hacen lo mismo -- la corta es mas rapida de escribir, la larga es mas facil de leer y entender."
+    },
+    {
+      "type": "code_example",
+      "title": "Analizando Comandos Reales",
+      "language": "bash",
+      "code": "ls -la ~/Documents\n#  ^  ^^  ^^^^^^^^^^\n#  |  ||  argument (what folder to list)\n#  |  |flags (-l = long format, -a = all files)\n#  command (list)\n\nnpm install --save-dev jest\n#   ^^^^^^^ ^^^^^^^^^^ ^^^^\n#   command  flag       argument",
+      "annotation": "Cada comando sigue este mismo patron. Una vez que lo ves, puedes leer cualquier comando incluso si nunca lo has usado."
+    },
+    {
+      "type": "motivation",
+      "body": "Cuando las herramientas de IA generan comandos de terminal para ti, entender la anatomia de comandos te permite verificar que estan haciendo antes de ejecutarlos. Los vibecoders que pegan comandos a ciegas rompen cosas. Los que pueden leer comandos primero evitan errores costosos -- y esa confianza es lo que te permite tomar proyectos mejor pagados."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Cada comando tiene un nombre (la accion), banderas opcionales (como hacerlo) y argumentos opcionales (sobre que actuar). Las banderas cortas usan un guion (-a), las banderas largas usan dos guiones (--all)."
+    }
+  ],
+  "exercise": {
+    "cards": [
+      {
+        "id": "card-1",
+        "content": "En el comando 'ls -la Documents', la parte '-la' son las banderas que modifican como se comporta ls.",
+        "isGoodPractice": true,
+        "explanation": "Correcto. La bandera '-l' significa 'formato largo' (mostrar detalles) y '-a' significa 'todos los archivos' (incluyendo los ocultos). Se combinan en '-la' por conveniencia. Las banderas siempre modifican el comportamiento del comando."
+      },
+      {
+        "id": "card-2",
+        "content": "Las banderas siempre deben ir antes de los argumentos en un comando de terminal.",
+        "isGoodPractice": false,
+        "explanation": "Aunque poner banderas antes de argumentos es la convencion mas comun y la practica recomendada, muchos comandos aceptan banderas en diferentes posiciones. Por ejemplo, 'ls Documents -la' tambien funciona. Sin embargo, algunos comandos son estrictos con el orden, asi que es mejor practica poner banderas primero."
+      },
+      {
+        "id": "card-3",
+        "content": "La bandera corta '-v' y la bandera larga '--verbose' hacen lo mismo.",
+        "isGoodPractice": true,
+        "explanation": "Las banderas cortas (un guion + letra) y las banderas largas (dos guiones + palabra) son dos formas de escribir la misma opcion. '-v' es solo un atajo para '--verbose'. Las banderas cortas son mas rapidas de escribir, las largas son mas faciles de entender al leer comandos."
+      },
+      {
+        "id": "card-4",
+        "content": "Cada comando de terminal requiere al menos un argumento para funcionar.",
+        "isGoodPractice": false,
+        "explanation": "Muchos comandos funcionan perfectamente sin argumentos. 'ls' lista el directorio actual, 'pwd' imprime donde estas, 'clear' limpia la pantalla. Los argumentos son opcionales -- solo especifican sobre que debe actuar el comando."
+      },
+      {
+        "id": "card-5",
+        "content": "Puedes combinar multiples banderas cortas en una, como '-la' en lugar de '-l -a'.",
+        "isGoodPractice": true,
+        "explanation": "Este es uno de los atajos mas utiles de la terminal. En lugar de escribir '-l -a -h' por separado, puedes combinarlos en '-lah'. Esto solo funciona con banderas cortas de una letra (un guion), no con banderas largas (dos guiones)."
+      }
+    ],
+    "glossaryTerms": ["flag", "argument", "command"]
+  }
+}

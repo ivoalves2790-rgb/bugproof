@@ -1,0 +1,78 @@
+{
+  "slug": "reading-files",
+  "title": "Reading File Contents",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Sometimes you need to quickly check what's inside a file without opening an editor. The terminal has several commands that let you peek at file contents -- from reading the whole thing to just checking the first or last few lines.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "cat = Reading an Entire Letter",
+      "body": "Using `cat` is like **opening an envelope and reading the entire letter** from top to bottom. It dumps the whole file onto your screen at once. Great for short files, but if the file is 10,000 lines long, it's like unrolling a scroll that fills your entire room -- overwhelming. That's when you need other tools."
+    },
+    {
+      "type": "analogy",
+      "title": "head/tail = First and Last Pages of a Book",
+      "body": "Imagine you have a thick book and you just want a quick preview. `head` is like **reading the first page** -- it shows you the beginning of the file (first 10 lines by default). `tail` is like **flipping to the last page** -- it shows you the end. Perfect for checking log files, config files, or just getting a quick sense of what's inside without reading the whole thing."
+    },
+    {
+      "type": "text",
+      "title": "The File Reading Commands",
+      "body": "- `cat filename` -- Print the entire file to your screen\n- `head filename` -- Show the first 10 lines\n- `head -n 5 filename` -- Show the first 5 lines\n- `tail filename` -- Show the last 10 lines\n- `tail -n 5 filename` -- Show the last 5 lines\n- `less filename` -- Open an interactive viewer (press `q` to quit)"
+    },
+    {
+      "type": "code_example",
+      "title": "When to Use Each Command",
+      "language": "bash",
+      "code": "cat package.json        # Short config file -- read it all\nhead -n 3 README.md     # Just want the title and intro\ntail -n 20 error.log    # Check the latest errors\nless big-file.txt       # Browse a long file interactively",
+      "annotation": "Use cat for short files, head/tail for quick peeks, and less for long files you want to scroll through."
+    },
+    {
+      "type": "motivation",
+      "body": "When you're debugging an app built with AI tools and the error log is 500 lines long, `tail -n 20` shows you just the latest errors in a second. Vibecoders who can quickly inspect files, check configs, and read logs solve problems faster -- and clients pay premium rates for developers who debug fast."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use `cat` to read entire short files, `head` to peek at the beginning, `tail` to check the end, and `less` to browse long files interactively."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/readme.md", "~/projects/log.txt"],
+    "steps": [
+      {
+        "instruction": "Read the entire contents of readme.md to see what's inside.",
+        "expectedCommand": "cat readme.md",
+        "acceptAlternatives": ["cat ./readme.md"],
+        "output": "# My Project\n\nThis is a sample project for learning terminal commands.\n\n## Getting Started\n\nRun npm install to get started.",
+        "hint": "The command that prints an entire file is 'cat' (short for concatenate) followed by the filename."
+      },
+      {
+        "instruction": "The log file is very long. Just show the first 5 lines to see when logging started.",
+        "expectedCommand": "head -n 5 log.txt",
+        "acceptAlternatives": ["head -5 log.txt"],
+        "output": "[2024-01-15 08:00:01] Server started\n[2024-01-15 08:00:02] Database connected\n[2024-01-15 08:00:03] Loading config...\n[2024-01-15 08:00:03] Config loaded successfully\n[2024-01-15 08:00:04] Listening on port 3000",
+        "hint": "Use 'head' with the '-n 5' flag to show the first 5 lines of a file."
+      },
+      {
+        "instruction": "Now show the last 3 lines of the log file to see the most recent entries.",
+        "expectedCommand": "tail -n 3 log.txt",
+        "acceptAlternatives": ["tail -3 log.txt"],
+        "output": "[2024-01-15 14:22:17] POST /api/users 201\n[2024-01-15 14:23:45] Error: Connection timeout\n[2024-01-15 14:23:46] Retrying connection...",
+        "hint": "Use 'tail' with the '-n 3' flag to show the last 3 lines of a file."
+      },
+      {
+        "instruction": "You spotted an error in the log! Let's see the full readme again to check if there are troubleshooting instructions. Read the whole file.",
+        "expectedCommand": "cat readme.md",
+        "acceptAlternatives": ["cat ./readme.md"],
+        "output": "# My Project\n\nThis is a sample project for learning terminal commands.\n\n## Getting Started\n\nRun npm install to get started.",
+        "hint": "Use the command that shows the full file contents -- it's three letters and sounds like a feline."
+      }
+    ],
+    "completionMessage": "Excellent! You now know how to read files without opening an editor. cat for short files, head for the beginning, tail for the end. This is how developers quickly inspect files and debug issues every day.",
+    "glossaryTerms": ["cat", "head", "tail", "less"]
+  }
+}

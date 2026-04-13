@@ -1,0 +1,78 @@
+{
+  "slug": "shell-scripts",
+  "title": "Writing Simple Shell Scripts",
+  "type": "terminal_sim",
+  "difficulty": 3,
+  "xpReward": 20,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "You keep running the same 5 commands every time you start a new project -- creating folders, initializing git, installing packages. What if you could run all of them with a single command? Shell scripts let you save a sequence of commands in a file and execute them all at once.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Shell Scripts = Instruction Manuals",
+      "body": "Imagine you hire a new assistant and every morning you tell them the same 10 steps: check email, sort messages, file reports, update the calendar. Eventually you write it all down as an **instruction manual** and say \"just follow this every morning.\" **A shell script is that manual for your terminal.** You write the commands once, and the terminal follows the instructions step by step every time you run it."
+    },
+    {
+      "type": "analogy",
+      "title": "Scripts = Recorded Macros in a Video Game",
+      "body": "In video games, some players record a sequence of moves -- jump, dodge, attack, heal -- and replay that macro with a single button press. **Shell scripts are macros for your terminal.** You record the commands once (write them in a file), and replay them forever with one command. Play once, replay forever -- that's the power of automation."
+    },
+    {
+      "type": "text",
+      "title": "Anatomy of a Shell Script",
+      "body": "Every shell script has a few key parts:\n\n1. **Shebang line** (`#!/bin/bash`) -- Tells the system which interpreter to use. Always the first line.\n2. **Variables** -- Store values: `NAME=\"my-app\"` (no spaces around `=`)\n3. **Commands** -- Regular terminal commands, one per line\n4. **Conditionals** -- `if/then/fi` blocks for logic\n5. **Make it executable** -- `chmod +x script.sh` before you can run it\n\nRun the script with `./script.sh` or `bash script.sh`."
+    },
+    {
+      "type": "code_example",
+      "title": "A Project Setup Script",
+      "language": "bash",
+      "code": "#!/bin/bash\n# setup.sh -- Create a new project from scratch\n\nPROJECT_NAME=$1  # First argument passed to the script\n\nif [ -z \"$PROJECT_NAME\" ]; then\n  echo \"Usage: ./setup.sh <project-name>\"\n  exit 1\nfi\n\nmkdir -p \"$PROJECT_NAME/src\"\ncd \"$PROJECT_NAME\"\ngit init\nnpm init -y\necho \"node_modules/\" > .gitignore\necho \"Project $PROJECT_NAME created!\"",
+      "annotation": "The $1 variable captures the first argument. The if block checks if a name was provided. The -z test checks if a string is empty. This script replaces 6 manual commands with one: ./setup.sh my-app"
+    },
+    {
+      "type": "motivation",
+      "body": "Shell scripts are the gateway to automation. Vibecoders who automate their setup, build, and deploy processes can spin up new client projects in 30 seconds instead of 30 minutes. That's the difference between billing for one project or five in a week -- automation multiplies your earning power."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Shell scripts are files containing terminal commands that run in sequence. Start every script with #!/bin/bash, use variables to store values, add if/then/fi for logic, and make scripts executable with chmod +x. Automate anything you do more than twice."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/scripts",
+    "initialFiles": ["~/scripts/"],
+    "steps": [
+      {
+        "instruction": "Create a new shell script file called greet.sh using the touch command.",
+        "expectedCommand": "touch greet.sh",
+        "acceptAlternatives": ["touch ./greet.sh"],
+        "output": "",
+        "hint": "Use 'touch filename' to create an empty file. The file should be called greet.sh."
+      },
+      {
+        "instruction": "Write the script content into greet.sh. It should have a shebang line, a NAME variable set to 'World', and an echo that says Hello, $NAME! Use a heredoc to write multiple lines.",
+        "expectedCommand": "cat << 'EOF' > greet.sh\n#!/bin/bash\nNAME=\"World\"\necho \"Hello, $NAME!\"\nEOF",
+        "acceptAlternatives": ["echo '#!/bin/bash\nNAME=\"World\"\necho \"Hello, $NAME!\"' > greet.sh"],
+        "output": "",
+        "hint": "Use cat << 'EOF' > greet.sh to write multiple lines. Include #!/bin/bash on line 1, NAME=\"World\" on line 2, and echo \"Hello, $NAME!\" on line 3."
+      },
+      {
+        "instruction": "Make the script executable so you can run it directly with ./greet.sh.",
+        "expectedCommand": "chmod +x greet.sh",
+        "acceptAlternatives": ["chmod 755 greet.sh", "chmod u+x greet.sh"],
+        "output": "",
+        "hint": "Use chmod +x to add execute permission to a file."
+      },
+      {
+        "instruction": "Run your script to see the greeting!",
+        "expectedCommand": "./greet.sh",
+        "acceptAlternatives": ["bash greet.sh", "sh greet.sh"],
+        "output": "Hello, World!",
+        "hint": "Run the script with ./greet.sh (the ./ means 'in the current directory')."
+      }
+    ],
+    "completionMessage": "You just wrote and executed your first shell script! The shebang line told the system to use bash, the variable stored a value, and echo printed it. From here you can add arguments ($1, $2), conditionals (if/then), and loops to build powerful automation tools.",
+    "glossaryTerms": ["shebang", "chmod", "shell-script", "variable"]
+  }
+}

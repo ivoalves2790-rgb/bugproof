@@ -1,0 +1,78 @@
+{
+  "slug": "searching-text",
+  "title": "Searching Inside Files with grep",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "You know a function called fetchUserData exists somewhere in your project, but you have no idea which file it's in. The find command searches by filename, but grep searches inside files -- it reads the actual content and finds matching text across your entire codebase.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "grep = Ctrl+F for Your Entire Project",
+      "body": "You know Ctrl+F in your browser or text editor? It highlights every match of a word on the current page. **grep is like Ctrl+F, but for every file in your entire project at once.** Instead of opening each file and pressing Ctrl+F, grep opens them all, searches them all, and reports every match with the filename and line number."
+    },
+    {
+      "type": "analogy",
+      "title": "grep = A Metal Detector Scanning for Specific Metals",
+      "body": "A metal detector doesn't dig up the whole beach -- it sweeps across the sand and beeps only when it finds what you're looking for. You set it to find gold, and it ignores the bottle caps and nails. **grep sweeps through all your files and beeps (shows a result) only when it finds your exact search term**, skipping everything else."
+    },
+    {
+      "type": "text",
+      "title": "Using grep to Search File Contents",
+      "body": "The basic pattern is: **`grep \"text\" file`**\n\n- **`grep \"TODO\" app.js`** -- Find every line containing 'TODO' in app.js\n- **`grep -r \"fetchUser\" src/`** -- Search recursively through all files in src/\n- **`grep -rn \"console.log\" .`** -- Search all files, show line numbers (-n)\n- **`grep -ri \"error\" logs/`** -- Case-insensitive search (-i)\n\nThe `-r` flag (recursive) is what makes grep search through folders. Without it, grep only searches the specific file you name."
+    },
+    {
+      "type": "code_example",
+      "title": "grep in Action",
+      "language": "bash",
+      "code": "# Find all TODO comments in your project\ngrep -rn \"TODO\" src/\n# src/app.js:14: // TODO: add error handling\n# src/utils.js:7: // TODO: refactor this function\n\n# Find where a function is defined\ngrep -rn \"function fetchUserData\" src/\n# src/api/users.js:12: function fetchUserData(userId) {\n\n# Find all console.log statements (to remove before production)\ngrep -rn \"console.log\" src/\n# src/app.js:8:   console.log('debug:', data);\n# src/utils.js:22:   console.log('result:', result);",
+      "annotation": "The -n flag adds line numbers so you know exactly where to look. The output format is filename:lineNumber: matchingLine."
+    },
+    {
+      "type": "motivation",
+      "body": "grep is the tool that makes you look like a wizard to clients. When they ask 'where does the app call the payment API?' you answer in 3 seconds instead of 30 minutes. That speed is the foundation of profitable vibecoding -- you solve problems fast and move on to the next paid task."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "grep searches inside files for matching text. Use -r to search recursively through directories, -n to show line numbers, and -i for case-insensitive matches. It's your go-to tool for finding where functions are defined, where variables are used, and where TODOs are hiding."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["src/app.js", "src/api/users.js", "src/utils/helpers.js", "src/components/Dashboard.jsx"],
+    "steps": [
+      {
+        "instruction": "A function called 'calculateTotal' is used somewhere in the project but you don't know which file. Search for it recursively with line numbers.",
+        "expectedCommand": "grep -rn \"calculateTotal\" src/",
+        "acceptAlternatives": ["grep -rn 'calculateTotal' src/", "grep -rn \"calculateTotal\" .", "grep -rn 'calculateTotal' ."],
+        "output": "src/utils/helpers.js:15: function calculateTotal(items) {\nsrc/components/Dashboard.jsx:8:   const total = calculateTotal(cartItems);",
+        "hint": "Use grep -rn to search recursively with line numbers: grep -rn \"searchTerm\" directory/"
+      },
+      {
+        "instruction": "Find all TODO comments in the source code so we can track unfinished work.",
+        "expectedCommand": "grep -rn \"TODO\" src/",
+        "acceptAlternatives": ["grep -rn 'TODO' src/", "grep -rn \"TODO\" .", "grep -rni \"todo\" src/"],
+        "output": "src/app.js:23: // TODO: add error handling\nsrc/api/users.js:9: // TODO: validate input\nsrc/utils/helpers.js:31: // TODO: handle edge case",
+        "hint": "Search for 'TODO' recursively: grep -rn \"TODO\" src/"
+      },
+      {
+        "instruction": "Before deploying, find all console.log statements that need to be removed. Search case-insensitively in case someone wrote Console.log.",
+        "expectedCommand": "grep -rni \"console.log\" src/",
+        "acceptAlternatives": ["grep -rni 'console.log' src/", "grep -rin \"console.log\" src/"],
+        "output": "src/app.js:11:   console.log('User data:', userData);\nsrc/api/users.js:18:   console.log('API response:', response);",
+        "hint": "Use -i flag for case-insensitive search: grep -rni \"console.log\" src/"
+      },
+      {
+        "instruction": "Find every file that imports from the 'api/' folder to understand which components depend on API calls.",
+        "expectedCommand": "grep -rn \"from.*api/\" src/",
+        "acceptAlternatives": ["grep -rn 'from.*api/' src/", "grep -rn \"api/\" src/", "grep -rn \"from.*api\" src/"],
+        "output": "src/app.js:2: import { getUser } from './api/users';\nsrc/components/Dashboard.jsx:3: import { fetchProducts } from '../api/products';",
+        "hint": "Search for import statements that reference the api folder: grep -rn \"from.*api/\" src/"
+      }
+    ],
+    "completionMessage": "You've just power-searched an entire codebase! grep found function definitions, TODO comments, debug statements, and dependency imports -- all in seconds. This is one of the most-used tools in professional development.",
+    "glossaryTerms": ["grep", "recursive-search", "pattern-matching", "case-insensitive"]
+  }
+}

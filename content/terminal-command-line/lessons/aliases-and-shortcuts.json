@@ -1,0 +1,78 @@
+{
+  "slug": "aliases-and-shortcuts",
+  "title": "Aliases and Shortcuts",
+  "type": "terminal_sim",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "power-user-techniques",
+  "courseSlug": "terminal-command-line",
+  "intro": "You type the same long commands dozens of times a day -- git status, npm run dev, ssh into your server. What if you could replace any command with a short nickname? Aliases let you create custom shortcuts so a 40-character command becomes 2 letters.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Aliases = Speed Dial Buttons",
+      "body": "Remember speed dial on old phones? Instead of dialing a full 10-digit number every time, you press one button and it dials the whole number for you. **Aliases work exactly the same way.** Instead of typing `git status` every time, you create an alias `gs` that expands into the full command. One shortcut, same result -- but way faster."
+    },
+    {
+      "type": "analogy",
+      "title": "Aliases = Nicknames",
+      "body": "Your friend's name is Alexander, but everyone calls him Alex. Shorter to say, same person. **Aliases are nicknames for commands.** `ll` is a nickname for `ls -la`, `gp` is a nickname for `git push`. The command doesn't change -- you just give it a shorter name that's easier to type and remember."
+    },
+    {
+      "type": "text",
+      "title": "How Aliases Work",
+      "body": "An alias is a custom shortcut you define in your terminal:\n\n- **`alias shortname='full command'`** -- Creates a temporary alias for this session\n- **Add to `~/.bashrc` or `~/.zshrc`** -- Makes the alias permanent (loads every time you open a terminal)\n- **`unalias shortname`** -- Removes an alias\n- **`alias`** -- Lists all current aliases\n\nAliases are stored in your shell config file. When you open a new terminal, it reads that file and loads all your aliases automatically."
+    },
+    {
+      "type": "code_example",
+      "title": "Popular Aliases Developers Use",
+      "language": "bash",
+      "code": "# Git shortcuts\nalias gs='git status'\nalias ga='git add .'\nalias gc='git commit -m'\nalias gp='git push'\n\n# Navigation shortcuts\nalias ll='ls -la'\nalias ..='cd ..'\nalias ...='cd ../..'\n\n# Project shortcuts\nalias dev='npm run dev'\nalias build='npm run build'",
+      "annotation": "These aliases save you thousands of keystrokes over a project. 'gs' instead of 'git status' saves 8 characters -- multiply that by 50 times a day and you're saving serious time."
+    },
+    {
+      "type": "motivation",
+      "body": "Professional developers who vibecode for a living have 20+ aliases configured. It's not about being lazy -- it's about removing friction so you can ship faster. When you're billing clients hourly, every second saved with aliases is money earned. A developer with a polished terminal setup looks and works like a pro."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Aliases are custom shortcuts for long commands. Define them with `alias name='command'` and make them permanent by adding them to your ~/.bashrc or ~/.zshrc file. Start with git and npm aliases -- they'll save you the most time."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/my-project",
+    "initialFiles": ["~/.zshrc", "~/my-project/package.json", "~/my-project/src/app.js"],
+    "steps": [
+      {
+        "instruction": "Create a temporary alias called 'gs' that runs 'git status'. This will only last for the current session.",
+        "expectedCommand": "alias gs='git status'",
+        "acceptAlternatives": ["alias gs=\"git status\""],
+        "output": "",
+        "hint": "Use the alias command: alias shortname='full command'. The short name is gs and the full command is git status."
+      },
+      {
+        "instruction": "Test your new alias by typing 'gs' to run git status.",
+        "expectedCommand": "gs",
+        "acceptAlternatives": [],
+        "output": "On branch main\nnothing to commit, working tree clean",
+        "hint": "Just type your alias name 'gs' and press enter -- it will expand to 'git status' automatically."
+      },
+      {
+        "instruction": "Now let's make a permanent alias. Add the line alias dev='npm run dev' to the end of your ~/.zshrc file using echo and append redirect.",
+        "expectedCommand": "echo \"alias dev='npm run dev'\" >> ~/.zshrc",
+        "acceptAlternatives": ["echo 'alias dev='\\''npm run dev'\\''' >> ~/.zshrc"],
+        "output": "",
+        "hint": "Use echo with >> to append a line to a file: echo \"alias dev='npm run dev'\" >> ~/.zshrc"
+      },
+      {
+        "instruction": "Reload your shell config so the new alias takes effect without opening a new terminal.",
+        "expectedCommand": "source ~/.zshrc",
+        "acceptAlternatives": [". ~/.zshrc"],
+        "output": "",
+        "hint": "The 'source' command re-reads a file. Run 'source ~/.zshrc' to reload your config."
+      }
+    ],
+    "completionMessage": "You've created both a temporary alias and a permanent one! From now on, 'gs' runs git status and 'dev' starts your development server. Add more aliases to your ~/.zshrc as you discover commands you type often -- your future self will thank you.",
+    "glossaryTerms": ["alias", "zshrc", "bashrc", "shell-config"]
+  }
+}

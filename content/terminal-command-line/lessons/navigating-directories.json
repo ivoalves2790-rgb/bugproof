@@ -1,0 +1,78 @@
+{
+  "slug": "navigating-directories",
+  "title": "Navigating Directories",
+  "type": "terminal_sim",
+  "difficulty": 1,
+  "xpReward": 10,
+  "unitSlug": "welcome-to-the-terminal",
+  "courseSlug": "terminal-command-line",
+  "intro": "Now that you can see where you are and what's around you, it's time to learn how to move around. The cd command is your legs in the terminal -- it lets you walk from folder to folder.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "cd = Walking Between Rooms",
+      "body": "Imagine your file system is a house with many rooms (folders). Right now you're standing in one room. The `cd` command is like **walking through a door** into another room. `cd Documents` means \"walk into the Documents room.\" `cd ..` means \"walk back out to the hallway.\" You can only interact with what's in the room you're currently standing in."
+    },
+    {
+      "type": "analogy",
+      "title": "Paths = GPS Directions",
+      "body": "When you give an address to GPS, you can say either:\n- **Absolute path**: \"Go to 123 Main Street, Springfield\" (full address from the root)\n- **Relative path**: \"Go two blocks north and turn left\" (directions from where you are now)\n\nThe terminal works the same way. `/Users/you/projects` is an absolute path (starts from root `/`). `../Documents` is a relative path (go up one level, then into Documents)."
+    },
+    {
+      "type": "text",
+      "title": "The cd Command",
+      "body": "**cd** stands for \"change directory\" -- it moves you to a different folder.\n\n- `cd foldername` -- move into a folder inside your current location\n- `cd ..` -- move up one level (back to the parent folder)\n- `cd ~` -- jump straight home, no matter where you are\n- `cd /` -- jump to the root of your file system\n- `cd -` -- go back to where you just were (like an undo)"
+    },
+    {
+      "type": "code_example",
+      "title": "Absolute vs Relative Paths",
+      "language": "bash",
+      "code": "# Absolute path -- starts from root (/)\ncd /Users/you/projects/app\n\n# Relative path -- starts from where you are\ncd projects/app\n\n# Go up one level\ncd ..\n\n# Go home\ncd ~",
+      "annotation": "Absolute paths start with / and work from anywhere. Relative paths depend on your current location."
+    },
+    {
+      "type": "motivation",
+      "body": "Every time you build a project with AI tools, you need to navigate to the right folder first. Vibecoders who can quickly jump between project directories, find config files, and move around their file system earn more because they ship faster. This is the skill that separates \"I'll figure it out\" from getting paid."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Use `cd` to move between folders, `..` to go up one level, and `~` to jump home. Absolute paths start from `/`, relative paths start from where you are now."
+    }
+  ],
+  "exercise": {
+    "initialDirectory": "~/projects",
+    "initialFiles": ["~/projects/app/src/index.js", "~/projects/app/package.json", "~/projects/website/index.html"],
+    "steps": [
+      {
+        "instruction": "You're in ~/projects. Move into the 'app' folder.",
+        "expectedCommand": "cd app",
+        "acceptAlternatives": ["cd ./app", "cd app/"],
+        "output": "",
+        "hint": "Use 'cd' followed by the folder name you want to enter."
+      },
+      {
+        "instruction": "Now check where you are to confirm you moved into the app folder.",
+        "expectedCommand": "pwd",
+        "acceptAlternatives": [],
+        "output": "/Users/you/projects/app",
+        "hint": "Use the command that prints your working directory -- three letters."
+      },
+      {
+        "instruction": "Go back up one level to the projects folder using the shortcut for 'parent directory'.",
+        "expectedCommand": "cd ..",
+        "acceptAlternatives": [],
+        "output": "",
+        "hint": "Two dots (..) represent the parent directory -- the folder above your current one."
+      },
+      {
+        "instruction": "Now jump directly to your home directory using the shortcut symbol.",
+        "expectedCommand": "cd ~",
+        "acceptAlternatives": ["cd"],
+        "output": "",
+        "hint": "The tilde symbol (~) represents your home directory. Use 'cd ~' or just 'cd' with no arguments."
+      }
+    ],
+    "completionMessage": "You can now navigate anywhere in your file system! Remember: cd moves you into folders, .. takes you up, and ~ takes you home. These three moves cover 90% of your navigation needs.",
+    "glossaryTerms": ["cd", "absolute-path", "relative-path", "parent-directory"]
+  }
+}

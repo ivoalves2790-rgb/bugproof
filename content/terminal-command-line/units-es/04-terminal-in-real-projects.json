@@ -1,0 +1,16 @@
+{
+  "slug": "terminal-in-real-projects",
+  "title": "Terminal en Proyectos Reales",
+  "description": "Como aprender a conducir en calles reales en vez de un estacionamiento -- usa la terminal en flujos de desarrollo reales: ejecutando servidores, leyendo errores, gestionando procesos y automatizando tareas",
+  "order": 4,
+  "tier": "intermediate",
+  "courseSlug": "terminal-command-line",
+  "lessons": [
+    { "slug": "running-dev-servers", "title": "Ejecutando Servidores de Desarrollo", "type": "terminal_sim", "order": 1, "difficulty": 1 },
+    { "slug": "reading-error-output", "title": "Leyendo Errores de Salida", "type": "bug_hunt", "order": 2, "difficulty": 2 },
+    { "slug": "process-management", "title": "Gestionando Procesos", "type": "terminal_sim", "order": 3, "difficulty": 2 },
+    { "slug": "using-scripts", "title": "Usando Scripts de npm", "type": "bug_hunt", "order": 4, "difficulty": 2 },
+    { "slug": "terminal-in-vs-code", "title": "Terminal en VS Code", "type": "swipe_to_judge", "order": 5, "difficulty": 1 },
+    { "slug": "common-mistakes", "title": "Errores Comunes en la Terminal", "type": "incident_response", "order": 6, "difficulty": 2 }
+  ]
+}

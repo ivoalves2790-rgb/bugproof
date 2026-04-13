@@ -1,0 +1,61 @@
+{
+  "slug": "piping-and-redirects",
+  "title": "Pipes y Redirecciones",
+  "type": "bug_hunt",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "essential-commands",
+  "courseSlug": "terminal-command-line",
+  "intro": "Los pipes y redirecciones te permiten encadenar comandos y guardar la salida en archivos -- son el secreto detrás de esas impresionantes líneas de comando que ves escribir a los usuarios avanzados. Pero confundir | y > puede borrar tus archivos o enviar la salida al lugar equivocado. Encontremos un bug causado por usar el operador incorrecto.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "Pipes = Bandas transportadoras de línea de ensamblaje",
+      "body": "En una fábrica, una máquina corta metal, la banda transportadora lleva las piezas a la siguiente máquina que las pule, y otra banda las lleva al empaquetado. Cada máquina hace un trabajo y pasa su resultado a la siguiente. **El operador pipe `|` es esa banda transportadora** -- toma la salida de un comando y la alimenta directamente como entrada al siguiente comando. `ls | grep .js | wc -l` es una línea de ensamblaje de tres máquinas: lista archivos, filtra por archivos .js, cuéntalos."
+    },
+    {
+      "type": "analogy",
+      "title": "Redirecciones = Desviar un río hacia un embalse",
+      "body": "Normalmente, un río fluye río abajo hacia el océano (tu pantalla). Pero puedes construir una presa y desviar el agua hacia un embalse (un archivo) para almacenamiento. **La redirección `>` desvía la salida del comando a un archivo** en vez de mostrarla en pantalla. Usar `>` vacía el embalse primero (sobrescribe el archivo). Usar `>>` agrega agua a lo que ya está en el embalse (agrega al final del archivo)."
+    },
+    {
+      "type": "text",
+      "title": "Pipes vs Redirecciones",
+      "body": "Se ven similares pero hacen cosas muy diferentes:\n\n- **`|` (pipe)** -- Envía la salida a **otro comando**: `cat file.txt | grep error`\n- **`>` (redirección)** -- Envía la salida a **un archivo**, sobrescribiéndolo: `echo 'hola' > salida.txt`\n- **`>>` (agregar)** -- Envía la salida a **un archivo**, agregando al final: `echo 'línea 2' >> salida.txt`\n\nLa diferencia crítica: `>` **borra el archivo primero**, luego escribe. Si accidentalmente usas `>` en vez de `>>`, pierdes todo el contenido anterior. `>>` es seguro -- siempre agrega al final."
+    },
+    {
+      "type": "code_example",
+      "title": "Encadenando comandos como un profesional",
+      "language": "bash",
+      "code": "# Count how many JavaScript files exist\nfind . -name \"*.js\" | wc -l\n\n# Save error logs to a file (overwrite)\ngrep \"ERROR\" server.log > errors.txt\n\n# Append today's errors to a running log\ngrep \"ERROR\" server.log >> all-errors.txt\n\n# Chain: find large files, sort by size, show top 5\ndu -sh * | sort -rh | head -5",
+      "annotation": "Los pipes encadenan comandos (la salida se convierte en entrada para el siguiente comando). Las redirecciones guardan la salida en un archivo. Incluso puedes combinarlos: comando | filtro > archivo.txt"
+    },
+    {
+      "type": "motivation",
+      "body": "Las cadenas de pipes en una sola línea son el movimiento distintivo de un desarrollador seguro. Cuando un cliente ve que analizas todo su archivo de logs con un solo comando, sabe que contrató a un profesional. Esa reputación es lo que te consigue referencias y mantiene el ingreso del vibecoding fluyendo."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "Los pipes (|) envían la salida a otro comando. Las redirecciones (>) envían la salida a un archivo, sobrescribiéndolo. Agregar (>>) añade a un archivo sin borrarlo. Nunca uses > cuando quieres decir >> o perderás datos. Encadena pipes para construir poderosas líneas de comando."
+    }
+  ],
+  "exercise": {
+    "language": "bash",
+    "code": [
+      { "line": 1, "text": "# Save server errors to a running log file", "isBuggy": false },
+      { "line": 2, "text": "grep \"ERROR\" server.log > all-errors.txt", "isBuggy": true },
+      { "line": 3, "text": "", "isBuggy": false },
+      { "line": 4, "text": "# Count how many error lines were found", "isBuggy": false },
+      { "line": 5, "text": "cat all-errors.txt | wc -l", "isBuggy": false }
+    ],
+    "correctBuggyLine": 2,
+    "prompt": "Este script se supone que debe agregar los errores de hoy a un archivo de log continuo llamado all-errors.txt. Pero cada vez que se ejecuta, los errores anteriores desaparecen y solo quedan los errores de hoy. ¿Qué línea tiene el bug?",
+    "fixes": [
+      { "id": "a", "text": "grep \"ERROR\" server.log >> all-errors.txt", "isCorrect": true },
+      { "id": "b", "text": "grep \"ERROR\" server.log | all-errors.txt", "isCorrect": false },
+      { "id": "c", "text": "grep \"ERROR\" > server.log all-errors.txt", "isCorrect": false }
+    ],
+    "explanation": "El operador > sobrescribe el archivo cada vez, borrando todo el contenido anterior. El operador >> agrega al archivo, añadiendo nuevas líneas después del contenido existente. Como el script debe mantener un log continuo a través de múltiples ejecuciones, >> es el operador correcto. La opción B intenta hacer pipe a un nombre de archivo (no a un comando) lo cual causaría un error. La opción C pone la redirección en la posición incorrecta.",
+    "glossaryTerms": ["pipe", "redirect", "append", "overwrite"]
+  }
+}
