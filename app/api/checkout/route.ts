@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { getStripe } from "@/lib/stripe/client";
+import { getValidatedOrigin, checkRateLimit, errorResponse } from "@/lib/utils/api";
 
 const PRICE_AMOUNT = 999; // $9.99
 
@@ -10,7 +11,12 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    return errorResponse("Not authenticated", 401);
+  }
+
+  // Rate limit: 3 checkout sessions per minute
+  if (!checkRateLimit(`checkout:${user.id}`, 3, 60_000)) {
+    return errorResponse("Too many requests", 429);
   }
 
   const { data: profile } = await supabase
@@ -20,7 +26,7 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (profile?.is_premium) {
-    return NextResponse.json({ error: "Already premium" }, { status: 400 });
+    return errorResponse("Already premium", 400);
   }
 
   let customerId = profile?.stripe_customer_id;
@@ -36,7 +42,8 @@ export async function POST(req: NextRequest) {
       .eq("id", user.id);
   }
 
-  const origin = req.headers.get("origin") || "https://bugproof.vercel.app";
+  // Validate origin against allowlist to prevent redirect attacks
+  const origin = getValidatedOrigin(req);
 
   const session = await stripe.checkout.sessions.create({
     customer: customerId,

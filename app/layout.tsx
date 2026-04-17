@@ -8,7 +8,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bugproof — Learn Software Engineering",
+  title: {
+    default: "Bugproof — Learn Software Engineering",
+    template: "%s | Bugproof",
+  },
   description:
     "Interactive software engineering lessons. Learn git, debugging, security, architecture, and more.",
   manifest: "/manifest.json",
@@ -16,6 +19,24 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "Bugproof",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Bugproof",
+    title: "Bugproof — Learn Software Engineering",
+    description:
+      "You build with AI. Now learn the engineering behind it. Interactive lessons in git, debugging, security, architecture, and more.",
+    images: [{ url: "/icons/icon-512.png", width: 512, height: 512, alt: "Bugproof mascot" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Bugproof — Learn Software Engineering",
+    description: "Interactive software engineering lessons for AI-assisted developers.",
+    images: ["/icons/icon-512.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

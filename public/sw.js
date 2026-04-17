@@ -15,8 +15,21 @@ const NO_CACHE_PATTERNS = [
   "stripe.com",
 ];
 
+const MAX_CACHE_ITEMS = 200;
+
 function shouldCache(url) {
   return !NO_CACHE_PATTERNS.some((pattern) => url.includes(pattern));
+}
+
+// Trim cache to prevent unbounded growth
+async function trimCache(cacheName, maxItems) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length > maxItems) {
+    for (let i = 0; i < keys.length - maxItems; i++) {
+      await cache.delete(keys[i]);
+    }
+  }
 }
 
 self.addEventListener("install", () => {
@@ -73,7 +86,10 @@ self.addEventListener("fetch", (event) => {
         .then((response) => {
           if (response.ok) {
             const clone = response.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(event.request, clone));
+            caches.open(CACHE_VERSION).then((cache) => {
+              cache.put(event.request, clone);
+              trimCache(CACHE_VERSION, MAX_CACHE_ITEMS);
+            });
           }
           return response;
         })

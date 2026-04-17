@@ -27,7 +27,7 @@ export function BottomNav() {
   const t = useT();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface safe-bottom md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-surface safe-bottom md:hidden" aria-label="Main navigation">
       <div className="flex items-center justify-around py-2">
         {NAV_ITEMS.map((item) => {
           const Icon = iconMap[item.icon];
@@ -44,7 +44,8 @@ export function BottomNav() {
               )}
             >
               {Icon && <Icon size={20} />}
-              {t(item.key)}
+              <span>{t(item.key)}</span>
+              {isActive && <span className="sr-only">(current page)</span>}
             </Link>
           );
         })}

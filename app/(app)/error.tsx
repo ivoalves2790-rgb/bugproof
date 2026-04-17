@@ -2,7 +2,7 @@
 
 import { useT } from "@/lib/i18n/use-language";
 
-export default function AssessmentResultsError({
+export default function AppError({
   error,
   reset,
 }: {
@@ -14,7 +14,7 @@ export default function AssessmentResultsError({
     <div className="mx-auto max-w-lg p-6 text-center" role="alert">
       <h2 className="text-xl font-bold text-terminal-red">{t("common.somethingWrong")}</h2>
       <p className="mt-2 text-sm text-muted-foreground">
-        {t("assessment.resultsError")}
+        {t("common.unexpectedError")}
       </p>
       {error.digest && (
         <p className="mt-2 text-xs text-muted-foreground">Error ID: {error.digest}</p>

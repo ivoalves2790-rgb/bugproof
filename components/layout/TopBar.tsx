@@ -15,39 +15,46 @@ export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defau
   const [xp, setXP] = useState(defaultXP);
 
   useEffect(() => {
-    const savedXP = parseInt(localStorage.getItem("bugproof:totalXP") || "0", 10);
-    if (savedXP > 0) setXP(savedXP);
-
-    // Count total completed lessons for streak estimation
-    let totalCompleted = 0;
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key?.startsWith("progress:")) {
-        const completed: string[] = JSON.parse(localStorage.getItem(key) || "[]");
-        totalCompleted += completed.length;
+    // Fetch real stats from the API instead of scanning localStorage
+    async function fetchStats() {
+      try {
+        const [heartsRes] = await Promise.all([
+          fetch("/api/hearts"),
+        ]);
+        if (heartsRes.ok) {
+          const heartsData = await heartsRes.json();
+          setHearts(heartsData.hearts ?? defaultHearts);
+        }
+      } catch {
+        // Silently use defaults on failure
       }
+
+      // Read cached XP and streak from localStorage (single key, not scan)
+      const savedXP = parseInt(localStorage.getItem("bugproof:totalXP") || "0", 10);
+      if (savedXP > 0) setXP(savedXP);
+
+      const savedStreak = parseInt(localStorage.getItem("bugproof:streak") || "0", 10);
+      if (savedStreak > 0) setStreak(savedStreak);
     }
-    if (totalCompleted > 0) {
-      setStreak(Math.min(totalCompleted, 7)); // Rough streak based on activity
-    }
-  }, []);
+
+    fetchStats();
+  }, [defaultHearts]);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 md:pl-60">
+    <header className="fixed top-0 left-0 right-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 md:pl-60" role="banner">
       {/* Mobile logo - only shown on mobile */}
-      <div className="flex items-center gap-1 md:hidden">
-        <span className="text-lg font-bold text-terminal-green glow-green">{">"}</span>
-        <span className="font-bold">bug</span>
-        <span className="font-bold text-terminal-green">proof</span>
+      <div className="flex items-center gap-2 md:hidden">
+        <img src="/icons/icon-192.svg" alt="Bugproof" width={24} height={24} className="rounded" />
+        <span className="font-bold">bug<span className="text-terminal-green">proof</span></span>
       </div>
 
       {/* Spacer for desktop */}
       <div className="hidden md:block" />
 
       {/* Stats */}
-      <div className="flex items-center gap-4">
+      <nav className="flex items-center gap-4" aria-label="User stats">
         {/* Streak */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5" aria-label={`${streak} day streak`}>
           <IconFlame size={18} className={streak > 0 ? "text-streak-orange" : "text-muted"} />
           <span className="text-sm font-semibold tabular-nums">
             {streak}
@@ -55,7 +62,7 @@ export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defau
         </div>
 
         {/* Hearts */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5" aria-label={`${hearts} hearts remaining`}>
           <IconHeart size={18} className={hearts > 0 ? "text-heart-red" : "text-muted"} />
           <span className="text-sm font-semibold tabular-nums">
             {hearts}
@@ -63,13 +70,13 @@ export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defau
         </div>
 
         {/* XP */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5" aria-label={`${xp} experience points`}>
           <IconStar size={18} className="text-xp-gold" />
           <span className="text-sm font-semibold tabular-nums">
             {xp}
           </span>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 }

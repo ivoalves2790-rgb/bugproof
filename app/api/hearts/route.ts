@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { calculateHearts } from "@/lib/engine/hearts-manager";
+import { checkRateLimit, errorResponse, safeParseJSON } from "@/lib/utils/api";
 
 export async function GET() {
   const supabase = await createClient();
@@ -9,7 +10,12 @@ export async function GET() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return errorResponse("Unauthorized", 401);
+  }
+
+  // Rate limit: 60 requests per minute per user
+  if (!checkRateLimit(`hearts-get:${user.id}`, 60, 60_000)) {
+    return errorResponse("Too many requests", 429);
   }
 
   const { data: stats } = await supabase
@@ -49,32 +55,54 @@ export async function POST(request: Request) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return errorResponse("Unauthorized", 401);
   }
 
-  const { action } = await request.json();
+  // Rate limit: 10 requests per minute for heart deductions
+  if (!checkRateLimit(`hearts-post:${user.id}`, 10, 60_000)) {
+    return errorResponse("Too many requests", 429);
+  }
 
-  if (action === "deduct") {
-    const { data: stats } = await supabase
-      .from("user_stats")
-      .select("hearts")
-      .eq("user_id", user.id)
-      .single();
+  const body = await safeParseJSON(request);
+  if (!body) {
+    return errorResponse("Invalid request body", 400);
+  }
 
-    if (!stats || stats.hearts <= 0) {
-      return NextResponse.json({ error: "No hearts left" }, { status: 400 });
-    }
+  const { action } = body;
 
-    await supabase
-      .from("user_stats")
-      .update({ hearts: stats.hearts - 1 })
-      .eq("user_id", user.id);
+  if (action !== "deduct") {
+    return errorResponse("Invalid action", 400);
+  }
 
-    return NextResponse.json({
+  // Atomic deduction: only deduct if hearts > 0, using a conditional update
+  const { data: stats } = await supabase
+    .from("user_stats")
+    .select("hearts")
+    .eq("user_id", user.id)
+    .single();
+
+  if (!stats || stats.hearts <= 0) {
+    return errorResponse("No hearts left", 400);
+  }
+
+  // Use .gt() filter to prevent race condition: only update if hearts still > 0
+  const { data: updated, error } = await supabase
+    .from("user_stats")
+    .update({
       hearts: stats.hearts - 1,
-      outOfHearts: stats.hearts - 1 === 0,
-    });
+      updated_at: new Date().toISOString(),
+    })
+    .eq("user_id", user.id)
+    .gt("hearts", 0)
+    .select("hearts")
+    .single();
+
+  if (error || !updated) {
+    return errorResponse("No hearts left", 400);
   }
 
-  return NextResponse.json({ error: "Invalid action" }, { status: 400 });
+  return NextResponse.json({
+    hearts: updated.hearts,
+    outOfHearts: updated.hearts === 0,
+  });
 }

@@ -138,7 +138,7 @@ export function TerminalSimulator({ exercise, onComplete }: TerminalSimulatorPro
           {/* Initial files */}
           {exercise.initialFiles && lines.length <= 1 && (
             <div className="mb-2 text-muted-foreground">
-              <span className="text-terminal-amber">Files: </span>
+              <span className="text-terminal-amber">{t("terminal.files")} </span>
               {exercise.initialFiles.join("  ")}
             </div>
           )}
@@ -210,7 +210,7 @@ export function TerminalSimulator({ exercise, onComplete }: TerminalSimulatorPro
           className="mt-4"
         >
           <Button className="w-full" onClick={handleComplete}>
-            Continue
+            {t("common.continue")}
           </Button>
         </motion.div>
       )}

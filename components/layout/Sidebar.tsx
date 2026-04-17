@@ -27,12 +27,11 @@ export function Sidebar() {
   const t = useT();
 
   return (
-    <aside className="hidden md:flex md:w-56 md:flex-col md:fixed md:inset-y-0 border-r border-border bg-surface">
+    <aside className="hidden md:flex md:w-56 md:flex-col md:fixed md:inset-y-0 border-r border-border bg-surface" role="navigation" aria-label="Main navigation">
       <div className="flex h-14 items-center px-4 border-b border-border">
-        <Link href="/dashboard" className="flex items-center gap-1">
-          <span className="text-xl font-bold text-terminal-green glow-green">{">"}</span>
-          <span className="text-lg font-bold">bug</span>
-          <span className="text-lg font-bold text-terminal-green">proof</span>
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <img src="/icons/icon-192.svg" alt="Bugproof" width={28} height={28} className="rounded" />
+          <span className="text-lg font-bold">bug<span className="text-terminal-green">proof</span></span>
         </Link>
       </div>
 
@@ -53,6 +52,7 @@ export function Sidebar() {
             >
               {Icon && <Icon size={18} />}
               {t(item.key)}
+              {isActive && <span className="sr-only">(current page)</span>}
             </Link>
           );
         })}

@@ -141,10 +141,10 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
                         : "text-terminal-red glow-red"
                     )}
                   >
-                    {feedback.result.correct ? "CORRECT" : "WRONG"}
+                    {feedback.result.correct ? t("swipe.correct") : t("swipe.wrong")}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {feedback.swipedRight ? "(You said: good)" : "(You said: bad)"}
+                    {feedback.swipedRight ? t("swipe.youSaidGood") : t("swipe.youSaidBad")}
                   </span>
                 </div>
 
@@ -167,7 +167,7 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
               {/* Explanation */}
               <div className="rounded-lg border border-border bg-surface p-3">
                 <p className="mb-1 text-xs font-semibold text-terminal-amber">
-                  EXPLANATION
+                  {t("swipe.explanation")}
                 </p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {feedback.result.explanation}
@@ -175,7 +175,7 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
               </div>
 
               <Button onClick={handleNext} size="md" className="w-full">
-                {currentIndex + 1 >= cards.length ? "See Results" : "Next Card"}
+                {currentIndex + 1 >= cards.length ? t("swipe.seeResults") : t("swipe.nextCard")}
               </Button>
             </motion.div>
           )}
@@ -215,6 +215,7 @@ interface SwipeableCardProps {
 }
 
 function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
+  const t = useT();
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-12, 12]);
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0.5, 1, 1, 1, 0.5]);
@@ -281,13 +282,13 @@ function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
         style={{ opacity: leftIndicatorOpacity }}
         className="pointer-events-none absolute right-4 top-4 rounded-lg border border-terminal-red bg-terminal-red/10 px-3 py-1 text-sm font-bold text-terminal-red"
       >
-        BAD
+        {t("swipe.bad")}
       </motion.div>
       <motion.div
         style={{ opacity: rightIndicatorOpacity }}
         className="pointer-events-none absolute left-4 top-4 rounded-lg border border-terminal-green bg-terminal-green/10 px-3 py-1 text-sm font-bold text-terminal-green"
       >
-        GOOD
+        {t("swipe.good")}
       </motion.div>
 
       {/* Card content */}
@@ -310,7 +311,7 @@ function SwipeableCard({ card, onSwipe }: SwipeableCardProps) {
 
       {/* Swipe hint */}
       <p className="mt-4 text-center text-[10px] text-muted">
-        Swipe or use buttons below
+        {t("swipe.useButtons")}
       </p>
     </motion.div>
   );

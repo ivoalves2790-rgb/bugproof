@@ -6,8 +6,8 @@ export default function LandingPage() {
       <div className="max-w-2xl text-center">
         {/* Logo */}
         <div className="mb-8">
+          <img src="/icons/icon-192.svg" alt="Bugproof mascot" width={80} height={80} className="mx-auto mb-4 rounded-xl" />
           <h1 className="text-5xl font-bold tracking-tight">
-            <span className="text-terminal-green glow-green">{">"}</span>
             <span className="text-foreground">bug</span>
             <span className="text-terminal-green">proof</span>
           </h1>

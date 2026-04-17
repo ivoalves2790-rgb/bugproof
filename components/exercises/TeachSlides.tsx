@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { IconChevronLeft, IconChevronRight } from "@/components/ui/Icons";
 import type { TeachBlock } from "@/lib/types/content.types";
 import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
+import { useT } from "@/lib/i18n/use-language";
 
 interface TeachSlidesProps {
   blocks: TeachBlock[];
@@ -14,6 +15,7 @@ interface TeachSlidesProps {
 }
 
 export function TeachSlides({ blocks, onComplete }: TeachSlidesProps) {
+  const t = useT();
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = back
 
@@ -67,7 +69,7 @@ export function TeachSlides({ blocks, onComplete }: TeachSlidesProps) {
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="min-h-[200px]"
         >
-          <TeachBlockRenderer block={block} />
+          <TeachBlockRenderer block={block} t={t} />
         </motion.div>
       </AnimatePresence>
 
@@ -76,12 +78,12 @@ export function TeachSlides({ blocks, onComplete }: TeachSlidesProps) {
         {!isFirst && (
           <Button variant="ghost" size="sm" onClick={goBack}>
             <IconChevronLeft size={16} />
-            Back
+            {t("common.back")}
           </Button>
         )}
         <div className="flex-1" />
         <Button onClick={goNext} size="md">
-          {isLast ? "Start Exercise" : "Next"}
+          {isLast ? t("teach.startExercise") : t("common.next")}
           {!isLast && <IconChevronRight size={16} />}
         </Button>
       </div>
@@ -91,19 +93,19 @@ export function TeachSlides({ blocks, onComplete }: TeachSlidesProps) {
         onClick={onComplete}
         className="mt-4 text-center text-xs text-muted hover:text-muted-foreground"
       >
-        Skip to exercise →
+        {t("teach.skipToExercise")}
       </button>
     </div>
   );
 }
 
-function TeachBlockRenderer({ block }: { block: TeachBlock }) {
+function TeachBlockRenderer({ block, t }: { block: TeachBlock; t: (k: string, v?: Record<string, string | number>) => string }) {
   switch (block.type) {
     case "analogy":
       return (
         <div className="rounded-xl border border-terminal-amber/30 bg-terminal-amber/5 p-5">
           <div className="mb-1 text-xs font-medium uppercase tracking-wider text-terminal-amber">
-            💡 Think of it this way
+            💡 {t("teach.thinkOfIt")}
           </div>
           {block.title && (
             <h3 className="mb-2 text-lg font-bold">{block.title}</h3>
@@ -160,7 +162,7 @@ function TeachBlockRenderer({ block }: { block: TeachBlock }) {
       return (
         <div className="rounded-xl border border-terminal-green/30 bg-terminal-green/5 p-5">
           <div className="mb-1 text-xs font-medium uppercase tracking-wider text-terminal-green">
-            ✓ Key Takeaway
+            ✓ {t("teach.keyTakeaway")}
           </div>
           <p className="text-sm font-medium leading-relaxed text-terminal-green">
             <RichText text={block.body} />
@@ -172,7 +174,7 @@ function TeachBlockRenderer({ block }: { block: TeachBlock }) {
       return (
         <div className="rounded-xl border border-terminal-red/30 bg-terminal-red/10 p-5">
           <div className="mb-1 text-xs font-bold uppercase tracking-wider text-terminal-red">
-            💰 Why This Pays Off
+            💰 {t("teach.whyThisPays")}
           </div>
           <p className="text-sm font-semibold leading-relaxed text-terminal-red">
             <RichText text={block.body} />

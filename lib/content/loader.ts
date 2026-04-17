@@ -75,12 +75,10 @@ export async function getAllUnits(courseSlug: string, locale?: string): Promise<
   const course = await getFullCourse(courseSlug);
   if (!course) return [];
 
-  const units: Unit[] = [];
-  for (const unitRef of course.units) {
-    const unit = await getUnit(courseSlug, unitRef.slug, locale);
-    if (unit) units.push(unit);
-  }
-  return units;
+  const results = await Promise.all(
+    course.units.map((unitRef) => getUnit(courseSlug, unitRef.slug, locale))
+  );
+  return results.filter((u): u is Unit => u !== null);
 }
 
 export async function getLesson(
@@ -156,12 +154,10 @@ export async function getAllChapters(projectSlug: string, locale?: string): Prom
   const project = await getFullProject(projectSlug);
   if (!project) return [];
 
-  const chapters: Chapter[] = [];
-  for (const chapterRef of project.chapters) {
-    const chapter = await getChapter(projectSlug, chapterRef.slug, locale);
-    if (chapter) chapters.push(chapter);
-  }
-  return chapters;
+  const results = await Promise.all(
+    project.chapters.map((chapterRef) => getChapter(projectSlug, chapterRef.slug, locale))
+  );
+  return results.filter((c): c is Chapter => c !== null);
 }
 
 export async function getProjectLesson(

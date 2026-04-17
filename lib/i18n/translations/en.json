@@ -171,11 +171,56 @@
   "assessment.notQuite": "Not quite!",
   "assessment.next": "Next Question",
   "assessment.seeResults": "See Results",
+  "assessment.resultsError": "Could not load assessment results. Please try again.",
 
   "glossary.title": "Glossary",
   "glossary.subtitle": "terms explained in plain English. No jargon to explain jargon.",
   "glossary.search": "Search terms...",
   "glossary.example": "Example",
 
-  "courses.lessons": "lessons"
+  "courses.lessons": "lessons",
+
+  "common.skipToContent": "Skip to content",
+  "common.somethingWrong": "Something went wrong",
+  "common.unexpectedError": "An unexpected error occurred. Please try again.",
+  "common.tryAgain": "Try again",
+  "common.back": "Back",
+  "common.next": "Next",
+  "common.continue": "Continue",
+
+  "teach.startExercise": "Start Exercise",
+  "teach.skipToExercise": "Skip to exercise →",
+  "teach.thinkOfIt": "Think of it this way",
+  "teach.keyTakeaway": "Key Takeaway",
+  "teach.whyThisPays": "Why This Pays Off",
+
+  "swipe.correct": "CORRECT",
+  "swipe.wrong": "WRONG",
+  "swipe.youSaidGood": "(You said: good)",
+  "swipe.youSaidBad": "(You said: bad)",
+  "swipe.explanation": "EXPLANATION",
+  "swipe.seeResults": "See Results",
+  "swipe.nextCard": "Next Card",
+  "swipe.bad": "BAD",
+  "swipe.good": "GOOD",
+  "swipe.useButtons": "Swipe or use buttons below",
+
+  "bugHunt.howToFix": "How would you fix this?",
+  "bugHunt.correct": "CORRECT",
+  "bugHunt.incorrect": "INCORRECT",
+  "bugHunt.bugWasOnLine": "The bug was on line {correct}, not line {selected}.",
+  "bugHunt.rightLineWrongFix": "You found the right line, but the fix was wrong.",
+  "bugHunt.explanation": "EXPLANATION",
+
+  "terminal.files": "Files:",
+
+  "incident.incidentTag": "[INCIDENT]",
+  "incident.step": "Step {num}",
+  "incident.decisionsMade": "{count} decisions made",
+  "incident.decisionMade": "{count} decision made",
+  "incident.tapToSkip": "Tap to skip",
+  "incident.debrief": "DEBRIEF",
+  "incident.yourPath": "YOUR PATH",
+  "incident.points": "points",
+  "incident.nodeNotFound": "Error: Node \"{id}\" not found in exercise data."
 }

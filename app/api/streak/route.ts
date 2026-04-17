@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { updateStreak } from "@/lib/engine/streak-tracker";
+import { checkRateLimit, errorResponse } from "@/lib/utils/api";
 
 export async function POST() {
   const supabase = await createClient();
@@ -9,7 +10,12 @@ export async function POST() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return errorResponse("Unauthorized", 401);
+  }
+
+  // Rate limit: 10 requests per minute per user
+  if (!checkRateLimit(`streak:${user.id}`, 10, 60_000)) {
+    return errorResponse("Too many requests", 429);
   }
 
   const { data: stats } = await supabase
@@ -19,7 +25,7 @@ export async function POST() {
     .single();
 
   if (!stats) {
-    return NextResponse.json({ error: "Stats not found" }, { status: 404 });
+    return errorResponse("Stats not found", 404);
   }
 
   const result = updateStreak(

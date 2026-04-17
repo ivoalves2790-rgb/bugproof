@@ -171,11 +171,56 @@
   "assessment.notQuite": "No exactamente!",
   "assessment.next": "Siguiente pregunta",
   "assessment.seeResults": "Ver resultados",
+  "assessment.resultsError": "No se pudieron cargar los resultados de la evaluacion. Por favor intenta de nuevo.",
 
   "glossary.title": "Glosario",
   "glossary.subtitle": "terminos explicados de forma sencilla. Sin jerga para explicar jerga.",
   "glossary.search": "Buscar terminos...",
   "glossary.example": "Ejemplo",
 
-  "courses.lessons": "lecciones"
+  "courses.lessons": "lecciones",
+
+  "common.skipToContent": "Saltar al contenido",
+  "common.somethingWrong": "Algo salio mal",
+  "common.unexpectedError": "Ocurrio un error inesperado. Por favor intenta de nuevo.",
+  "common.tryAgain": "Intentar de nuevo",
+  "common.back": "Atras",
+  "common.next": "Siguiente",
+  "common.continue": "Continuar",
+
+  "teach.startExercise": "Comenzar ejercicio",
+  "teach.skipToExercise": "Saltar al ejercicio →",
+  "teach.thinkOfIt": "Pienselo de esta manera",
+  "teach.keyTakeaway": "Idea clave",
+  "teach.whyThisPays": "Por que vale la pena",
+
+  "swipe.correct": "CORRECTO",
+  "swipe.wrong": "INCORRECTO",
+  "swipe.youSaidGood": "(Dijiste: bueno)",
+  "swipe.youSaidBad": "(Dijiste: malo)",
+  "swipe.explanation": "EXPLICACION",
+  "swipe.seeResults": "Ver resultados",
+  "swipe.nextCard": "Siguiente tarjeta",
+  "swipe.bad": "MALO",
+  "swipe.good": "BUENO",
+  "swipe.useButtons": "Desliza o usa los botones de abajo",
+
+  "bugHunt.howToFix": "Como lo arreglarias?",
+  "bugHunt.correct": "CORRECTO",
+  "bugHunt.incorrect": "INCORRECTO",
+  "bugHunt.bugWasOnLine": "El error estaba en la linea {correct}, no en la linea {selected}.",
+  "bugHunt.rightLineWrongFix": "Encontraste la linea correcta, pero la solucion era incorrecta.",
+  "bugHunt.explanation": "EXPLICACION",
+
+  "terminal.files": "Archivos:",
+
+  "incident.incidentTag": "[INCIDENTE]",
+  "incident.step": "Paso {num}",
+  "incident.decisionsMade": "{count} decisiones tomadas",
+  "incident.decisionMade": "{count} decision tomada",
+  "incident.tapToSkip": "Toca para saltar",
+  "incident.debrief": "RESUMEN",
+  "incident.yourPath": "TU CAMINO",
+  "incident.points": "puntos",
+  "incident.nodeNotFound": "Error: Nodo \"{id}\" no encontrado en los datos del ejercicio."
 }

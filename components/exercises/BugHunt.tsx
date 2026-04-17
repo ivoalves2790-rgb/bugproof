@@ -105,7 +105,7 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
           <motion.div key="selecting-fix" {...stageTransition} className="flex flex-col gap-3">
             <p className="text-sm text-foreground">
               <span className="text-terminal-amber glow-amber">?</span>{" "}
-              How would you fix this?
+              {t("bugHunt.howToFix")}
             </p>
             <div className="flex flex-col gap-2">
               {exercise.fixes.map((fix, index) => (
@@ -151,18 +151,18 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
                     result.correct ? "text-terminal-green glow-green" : "text-terminal-red glow-red"
                   )}
                 >
-                  {result.correct ? "CORRECT" : "INCORRECT"}
+                  {result.correct ? t("bugHunt.correct") : t("bugHunt.incorrect")}
                 </span>
               </div>
 
               {!result.lineCorrect && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  The bug was on line {exercise.correctBuggyLine}, not line {selectedLine}.
+                  {t("bugHunt.bugWasOnLine", { correct: exercise.correctBuggyLine, selected: selectedLine ?? 0 })}
                 </p>
               )}
               {result.lineCorrect && !result.fixCorrect && (
                 <p className="mt-2 text-xs text-muted-foreground">
-                  You found the right line, but the fix was wrong.
+                  {t("bugHunt.rightLineWrongFix")}
                 </p>
               )}
             </div>
@@ -170,7 +170,7 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
             {/* Explanation */}
             <div className="rounded-lg border border-border bg-surface p-4">
               <p className="mb-1 text-xs font-semibold text-terminal-amber">
-                EXPLANATION
+                {t("bugHunt.explanation")}
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {result.explanation}
@@ -178,7 +178,7 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
             </div>
 
             <Button onClick={handleContinue} size="lg" className="w-full">
-              Continue
+              {t("common.continue")}
             </Button>
           </motion.div>
         )}

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { evaluateIncidentResponse, type IncidentResponseResult } from "@/lib/engine/exercise-evaluator";
 import type { IncidentResponseExercise, IncidentNode } from "@/lib/types/content.types";
 import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
+import { useT } from "@/lib/i18n/use-language";
 
 interface IncidentResponseProps {
   exercise: IncidentResponseExercise;
@@ -19,6 +20,7 @@ interface ChoiceMade {
 }
 
 export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps) {
+  const t = useT();
   const [currentNodeId, setCurrentNodeId] = useState(exercise.startNode);
   const [choicesMade, setChoicesMade] = useState<ChoiceMade[]>([]);
   const [displayedText, setDisplayedText] = useState("");
@@ -141,13 +143,13 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
             {percentage}%
           </div>
           <p className="text-sm text-muted-foreground">
-            {result.score} / {result.maxScore} points
+            {result.score} / {result.maxScore} {t("incident.points")}
           </p>
         </div>
 
         {/* Feedback */}
         <div className="rounded-lg border border-border bg-surface p-4">
-          <p className="mb-1 text-xs font-semibold text-terminal-amber">DEBRIEF</p>
+          <p className="mb-1 text-xs font-semibold text-terminal-amber">{t("incident.debrief")}</p>
           <p className="text-sm text-muted-foreground leading-relaxed">
             {result.feedback}
           </p>
@@ -156,7 +158,7 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
         {/* Path taken */}
         <div className="rounded-lg border border-border bg-surface p-4">
           <p className="mb-2 text-xs font-semibold text-terminal-green">
-            YOUR PATH
+            {t("incident.yourPath")}
           </p>
           <div className="flex flex-wrap gap-1">
             {result.path.map((nodeId, idx) => (
@@ -178,7 +180,7 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
   if (!currentNode) {
     return (
       <div className="p-4 text-sm text-terminal-red">
-        Error: Node &quot;{currentNodeId}&quot; not found in exercise data.
+        {t("incident.nodeNotFound", { id: currentNodeId })}
       </div>
     );
   }
@@ -187,11 +189,13 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
     <div className="flex flex-col gap-6">
       {/* Step indicator */}
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <span className="text-terminal-green">[INCIDENT]</span>
-        <span>Step {choicesMade.length + 1}</span>
+        <span className="text-terminal-green">{t("incident.incidentTag")}</span>
+        <span>{t("incident.step", { num: choicesMade.length + 1 })}</span>
         {choicesMade.length > 0 && (
           <span className="ml-auto text-muted">
-            {choicesMade.length} decision{choicesMade.length === 1 ? "" : "s"} made
+            {choicesMade.length === 1
+              ? t("incident.decisionMade", { count: choicesMade.length })
+              : t("incident.decisionsMade", { count: choicesMade.length })}
           </span>
         )}
       </div>
@@ -211,7 +215,7 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
           )}
         </p>
         {isTyping && (
-          <p className="mt-2 text-[10px] text-muted">Tap to skip</p>
+          <p className="mt-2 text-[10px] text-muted">{t("incident.tapToSkip")}</p>
         )}
       </motion.div>
 

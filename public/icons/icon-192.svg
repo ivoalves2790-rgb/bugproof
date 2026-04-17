@@ -1,22 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="96" fill="#0a0a0a"/>
-  <!-- Shield outline -->
-  <path d="M256 72L120 136v120c0 88 58 170 136 192 78-22 136-104 136-192V136L256 72z" fill="none" stroke="#00ff41" stroke-width="16" stroke-linejoin="round"/>
-  <!-- Bug body -->
-  <ellipse cx="256" cy="280" rx="48" ry="64" fill="none" stroke="#00ff41" stroke-width="12"/>
-  <!-- Bug head -->
-  <circle cx="256" cy="200" r="28" fill="none" stroke="#00ff41" stroke-width="12"/>
-  <!-- Bug legs left -->
-  <line x1="208" y1="252" x2="172" y2="232" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <line x1="208" y1="280" x2="168" y2="280" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <line x1="208" y1="308" x2="172" y2="328" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <!-- Bug legs right -->
-  <line x1="304" y1="252" x2="340" y2="232" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <line x1="304" y1="280" x2="344" y2="280" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <line x1="304" y1="308" x2="340" y2="328" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <!-- Bug antennae -->
-  <line x1="240" y1="176" x2="220" y2="148" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <line x1="272" y1="176" x2="292" y2="148" stroke="#00ff41" stroke-width="10" stroke-linecap="round"/>
-  <!-- Slash through bug -->
-  <line x1="200" y1="340" x2="312" y2="180" stroke="#00ff41" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- Pixel bug mascot - green shield bug inspired by pixel art style -->
+  <!-- Body: rounded shield/rectangular shape -->
+  <rect x="176" y="200" width="160" height="144" rx="16" fill="#00cc44"/>
+
+  <!-- Head: wider rectangle on top -->
+  <rect x="192" y="148" width="128" height="72" rx="12" fill="#00dd55"/>
+
+  <!-- Antennae (distinguishing from ears - these curve outward) -->
+  <rect x="208" y="112" width="12" height="44" rx="6" fill="#00dd55"/>
+  <rect x="292" y="112" width="12" height="44" rx="6" fill="#00dd55"/>
+  <!-- Antenna tips - small circles -->
+  <circle cx="214" cy="108" r="10" fill="#00ff66"/>
+  <circle cx="298" cy="108" r="10" fill="#00ff66"/>
+
+  <!-- Eyes: square pixel-art style -->
+  <rect x="216" y="168" width="24" height="24" rx="4" fill="#0a0a0a"/>
+  <rect x="272" y="168" width="24" height="24" rx="4" fill="#0a0a0a"/>
+  <!-- Eye shine -->
+  <rect x="230" y="172" width="8" height="8" rx="2" fill="#33ff77"/>
+  <rect x="286" y="172" width="8" height="8" rx="2" fill="#33ff77"/>
+
+  <!-- Mouth: small line -->
+  <rect x="240" y="202" width="32" height="6" rx="3" fill="#0a0a0a" opacity="0.5"/>
+
+  <!-- Shell/wing pattern on body (beetle-like) -->
+  <line x1="256" y1="216" x2="256" y2="336" stroke="#00aa33" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Shell segments -->
+  <rect x="184" y="248" width="64" height="4" rx="2" fill="#00aa33" opacity="0.6"/>
+  <rect x="264" y="248" width="64" height="4" rx="2" fill="#00aa33" opacity="0.6"/>
+  <rect x="184" y="296" width="64" height="4" rx="2" fill="#00aa33" opacity="0.6"/>
+  <rect x="264" y="296" width="64" height="4" rx="2" fill="#00aa33" opacity="0.6"/>
+
+  <!-- Legs: 6 stubby pixel legs (3 per side) -->
+  <!-- Left legs -->
+  <rect x="148" y="228" width="36" height="16" rx="8" fill="#00bb44"/>
+  <rect x="148" y="268" width="36" height="16" rx="8" fill="#00bb44"/>
+  <rect x="148" y="308" width="36" height="16" rx="8" fill="#00bb44"/>
+  <!-- Right legs -->
+  <rect x="328" y="228" width="36" height="16" rx="8" fill="#00bb44"/>
+  <rect x="328" y="268" width="36" height="16" rx="8" fill="#00bb44"/>
+  <rect x="328" y="308" width="36" height="16" rx="8" fill="#00bb44"/>
+
+  <!-- Feet: bottom two stubby legs -->
+  <rect x="200" y="344" width="24" height="28" rx="8" fill="#00bb44"/>
+  <rect x="288" y="344" width="24" height="28" rx="8" fill="#00bb44"/>
+
+  <!-- Small shield emblem on chest -->
+  <path d="M248 250 L256 244 L264 250 L264 264 C264 268 260 272 256 274 C252 272 248 268 248 264 Z" fill="#00ff66" opacity="0.7"/>
 </svg>
