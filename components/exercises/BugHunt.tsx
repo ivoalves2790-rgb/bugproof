@@ -8,6 +8,7 @@ import { CodeLineSelector } from "@/components/code/CodeLineSelector";
 import { evaluateBugHunt, type BugHuntResult } from "@/lib/engine/exercise-evaluator";
 import type { BugHuntExercise } from "@/lib/types/content.types";
 import { useT } from "@/lib/i18n/use-language";
+import { Typewriter } from "@/components/motion/Typewriter";
 
 type BugHuntState = "selecting_line" | "selecting_fix" | "feedback" | "complete";
 
@@ -140,18 +141,22 @@ export function BugHunt({ exercise, onComplete }: BugHuntProps) {
               className={cn(
                 "rounded-lg border p-4",
                 result.correct
-                  ? "border-terminal-green/30 bg-terminal-green/5"
-                  : "border-terminal-red/30 bg-terminal-red/5"
+                  ? "border-terminal-green/30 bg-terminal-green/5 pulse-glow-green"
+                  : "border-terminal-red/30 bg-terminal-red/5 shake-x"
               )}
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 font-mono">
                 <span
                   className={cn(
                     "text-lg font-bold",
                     result.correct ? "text-terminal-green glow-green" : "text-terminal-red glow-red"
                   )}
                 >
-                  {result.correct ? t("bugHunt.correct") : t("bugHunt.incorrect")}
+                  <Typewriter
+                    text={`> ${result.correct ? t("bugHunt.correct") : t("bugHunt.incorrect")}`}
+                    speed={24}
+                    showCursor
+                  />
                 </span>
               </div>
 

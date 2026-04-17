@@ -9,6 +9,8 @@ import type { Lesson } from "@/lib/types/content.types";
 import { TeachSlides } from "@/components/exercises/TeachSlides";
 import { useT, useLanguage } from "@/lib/i18n/use-language";
 import { getRandomMessage, COMPLETION_MESSAGES } from "@/lib/motivation/messages";
+import { NumberTicker } from "@/components/motion/NumberTicker";
+import { Typewriter } from "@/components/motion/Typewriter";
 
 interface LessonPlayerProps {
   courseSlug: string;
@@ -109,29 +111,49 @@ export function LessonPlayer({
 
   // --- Completed ---
   if (phase === "completed") {
+    const verdictGlyph = score >= 80 ? "++" : score >= 50 ? "+" : "~";
+    const verdictLabel =
+      score >= 80 ? t("lesson.excellent") : score >= 50 ? t("lesson.goodJob") : t("lesson.keepPracticing");
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 180, damping: 22 }}
         className="flex min-h-[50vh] flex-col items-center justify-center text-center"
       >
-        <div className="mb-4 text-5xl text-terminal-green glow-green">
-          {score >= 80 ? "++" : score >= 50 ? "+" : "~"}
-        </div>
+        <motion.div
+          initial={{ scale: 0.4, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
+          className="mb-4 inline-block rounded-full px-4 py-1 text-5xl text-terminal-green glow-green pulse-glow-green"
+        >
+          {verdictGlyph}
+        </motion.div>
         <h2 className="text-xl font-bold">
-          {score >= 80 ? t("lesson.excellent") : score >= 50 ? t("lesson.goodJob") : t("lesson.keepPracticing")}
+          <Typewriter text={verdictLabel} speed={28} delay={300} />
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           {t("lesson.scored", { score })}
         </p>
-        <div className="mt-6 flex items-center gap-2 text-xp-gold">
-          <span className="text-2xl font-bold xp-float">
-            +{lesson.xpReward} XP
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55, duration: 0.4 }}
+          className="mt-6 flex items-baseline gap-2 text-xp-gold"
+        >
+          <span className="text-2xl font-bold tabular-nums">
+            +<NumberTicker value={lesson.xpReward} duration={1.1} />
           </span>
-        </div>
-        <p className="mt-4 max-w-xs text-xs text-terminal-green/80 italic">
+          <span className="text-sm font-semibold tracking-wider">XP</span>
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.4 }}
+          className="mt-4 max-w-xs text-xs text-terminal-green/80 italic"
+        >
           {motivation}
-        </p>
+        </motion.p>
         <Button className="mt-6" onClick={() => onComplete(score, lesson.xpReward)}>
           {t("lesson.continue")}
         </Button>
@@ -180,10 +202,14 @@ export function LessonPlayer({
           <div className="rounded bg-terminal-amber/10 px-2 py-0.5 text-[10px] font-medium text-terminal-amber">
             {t("lesson.practice")}
           </div>
-          <div className="flex items-center gap-1">
-            <IconHeart size={16} className="text-heart-red" />
-            <span className="text-xs font-semibold">3</span>
-          </div>
+          <motion.div
+            className="flex items-center gap-1"
+            animate={{ scale: [1, 1.08, 1] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <IconHeart size={16} className="text-heart-red drop-shadow-[0_0_6px_rgba(255,71,87,0.55)]" />
+            <span className="text-xs font-semibold tabular-nums">3</span>
+          </motion.div>
         </div>
       </div>
 

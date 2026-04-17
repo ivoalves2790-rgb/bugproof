@@ -1,15 +1,17 @@
 "use client";
 
 import { cn } from "@/lib/utils/cn";
-import { forwardRef, type ButtonHTMLAttributes } from "react";
+import { motion, type HTMLMotionProps } from "framer-motion";
+import { forwardRef, type ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref" | "children"> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
+  children?: ReactNode;
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
@@ -35,11 +37,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     return (
-      <button
+      <motion.button
         ref={ref}
         disabled={disabled || loading}
+        whileHover={disabled || loading ? undefined : { scale: 1.02 }}
+        whileTap={disabled || loading ? undefined : { scale: 0.97 }}
+        transition={{ type: "spring", stiffness: 400, damping: 22 }}
         className={cn(
-          "inline-flex items-center justify-center gap-2 rounded-lg font-mono font-medium transition-all duration-150",
+          "inline-flex items-center justify-center gap-2 rounded-lg font-mono font-medium transition-colors duration-150",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-terminal-green focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           variantStyles[variant],
@@ -52,7 +57,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
         )}
         {children}
-      </button>
+      </motion.button>
     );
   }
 );

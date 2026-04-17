@@ -9,6 +9,8 @@ import { evaluateSwipeCard, type SwipeCardResult } from "@/lib/engine/exercise-e
 import type { SwipeToJudgeExercise, SwipeCard } from "@/lib/types/content.types";
 import { useT } from "@/lib/i18n/use-language";
 import { GlossaryHighlighter } from "@/components/glossary/GlossaryHighlighter";
+import { Typewriter } from "@/components/motion/Typewriter";
+import { NumberTicker } from "@/components/motion/NumberTicker";
 
 interface SwipeToJudgeProps {
   exercise: SwipeToJudgeExercise;
@@ -67,8 +69,8 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
         className="flex flex-col items-center gap-6 py-8"
       >
         <div className="text-center">
-          <p className="text-4xl font-bold text-terminal-green glow-green">
-            {score}/{cards.length}
+          <p className="text-4xl font-bold text-terminal-green glow-green tabular-nums">
+            <NumberTicker value={score} duration={1.1} />/{cards.length}
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
             {score === cards.length
@@ -90,7 +92,7 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
           {t("swipe.card")} {currentIndex + 1} {t("swipe.of")} {cards.length}
         </span>
         <span>
-          {t("swipe.score")}: <span className="text-terminal-green">{score}</span>
+          {t("swipe.score")}: <span className="text-terminal-green tabular-nums"><NumberTicker value={score} duration={0.55} /></span>
         </span>
       </div>
 
@@ -128,20 +130,24 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
                 className={cn(
                   "rounded-xl border p-4",
                   feedback.result.correct
-                    ? "border-terminal-green/30 bg-terminal-green/5"
-                    : "border-terminal-red/30 bg-terminal-red/5"
+                    ? "border-terminal-green/30 bg-terminal-green/5 pulse-glow-green"
+                    : "border-terminal-red/30 bg-terminal-red/5 shake-x"
                 )}
               >
-                <div className="mb-3 flex items-center gap-2">
+                <div className="mb-3 flex items-center gap-2 font-mono text-sm">
                   <span
                     className={cn(
-                      "text-sm font-bold",
+                      "font-bold",
                       feedback.result.correct
                         ? "text-terminal-green glow-green"
                         : "text-terminal-red glow-red"
                     )}
                   >
-                    {feedback.result.correct ? t("swipe.correct") : t("swipe.wrong")}
+                    <Typewriter
+                      text={`> ${feedback.result.correct ? t("swipe.correct") : t("swipe.wrong")}`}
+                      speed={22}
+                      showCursor
+                    />
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {feedback.swipedRight ? t("swipe.youSaidGood") : t("swipe.youSaidBad")}
