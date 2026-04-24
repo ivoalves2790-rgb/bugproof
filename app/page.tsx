@@ -30,16 +30,16 @@ export default function LandingPage() {
         </p>
 
         {/* Features */}
-        <div className="mb-10 grid grid-cols-2 gap-4 text-left text-sm md:grid-cols-4">
+        <div className="mb-10 grid grid-cols-2 items-stretch gap-4 text-left text-sm md:grid-cols-4">
           {[
             { label: `${COURSE_COUNT} Courses`, sub: "Full curriculum" },
-            { label: "4 Exercise Types", sub: "Bug hunts, swipe & more" },
+            { label: "4 Exercises", sub: "Bug hunts, swipe & more" },
             { label: "300+ Lessons", sub: "2-5 min each" },
             { label: "Works Offline", sub: "Learn anywhere" },
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-lg border border-border bg-surface p-3"
+              className="flex h-full flex-col rounded-lg border border-border bg-surface p-3"
             >
               <div className="font-semibold text-terminal-green">
                 {item.label}
