@@ -55,7 +55,7 @@ export const COMPLETION_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "Vibecoding without this knowledge? Risky. Vibecoding WITH it? Unstoppable.",
-    textEs: "Vibecoding sin este conocimiento? Arriesgado. Vibecoding CON el? Imparable.",
+    textEs: "¿Vibecoding sin este conocimiento? Arriesgado. ¿Vibecoding CON él? Imparable.",
   },
   {
     text: "Every concept you learn is another tool in your money-making toolkit.",
@@ -127,7 +127,7 @@ export const DASHBOARD_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "Tech layoffs? Companies are still paying vibecoders who can actually ship.",
-    textEs: "Despidos en tech? Las empresas siguen pagando a vibecoders que saben entregar.",
+    textEs: "¿Despidos en tech? Las empresas siguen pagando a vibecoders que saben entregar.",
   },
   {
     text: "People are launching $10K/month SaaS products with vibecoding. This is how you join them.",
@@ -139,7 +139,7 @@ export const DASHBOARD_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "The difference between a hobby vibecoder and a paid one? What you're learning right now.",
-    textEs: "La diferencia entre un vibecoder aficionado y uno pagado? Lo que estás aprendiendo ahora.",
+    textEs: "¿La diferencia entre un vibecoder aficionado y uno pagado? Lo que estás aprendiendo ahora.",
   },
 ];
 
@@ -211,7 +211,7 @@ export const UNIT_PAGE_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "The vibecoders making $5K-20K/month from apps? They all learned this.",
-    textEs: "Los vibecoders que ganan $5K-20K/mes con apps? Todos aprendieron esto.",
+    textEs: "¿Los vibecoders que ganan $5K-20K/mes con apps? Todos aprendieron esto.",
   },
   {
     text: "You're not just studying. You're building the foundation of a business.",
@@ -263,7 +263,7 @@ export const EXERCISE_START_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "The difference between a $20/hr vibecoder and a $200/hr one? Practice like this.",
-    textEs: "La diferencia entre un vibecoder de $20/hr y uno de $200/hr? Practica como esta.",
+    textEs: "¿La diferencia entre un vibecoder de $20/hr y uno de $200/hr? Práctica como esta.",
   },
   {
     text: "Nail this and you're one step closer to launching your own product.",
