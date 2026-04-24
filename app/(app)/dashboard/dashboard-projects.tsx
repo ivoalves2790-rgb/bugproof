@@ -30,7 +30,7 @@ export function DashboardProjects({ projects }: { projects: ProjectInfo[] }) {
           </Link>
         </div>
         <div className="space-y-3">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <Link key={project.slug} href={`/projects/${project.slug}`}>
               <Card variant="interactive">
                 <div className="flex items-center gap-3">
@@ -38,7 +38,7 @@ export function DashboardProjects({ projects }: { projects: ProjectInfo[] }) {
                     className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg text-sm font-bold"
                     style={{ backgroundColor: `${project.color}20`, color: project.color }}
                   >
-                    {project.difficulty === "beginner" ? "1" : "2"}
+                    {index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">

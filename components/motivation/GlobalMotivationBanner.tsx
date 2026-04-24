@@ -24,32 +24,38 @@ function pickRandom<T>(arr: T[]): T {
 export function GlobalMotivationBanner() {
   const { locale } = useLanguage();
   const pathname = usePathname();
-  const [message, setMessage] = useState(() => getRandomMessage(ALL_MESSAGES, locale));
-  const [animStyle, setAnimStyle] = useState<AnimStyle>(() => pickRandom(ANIM_STYLES));
+  const [mounted, setMounted] = useState(false);
+  const [message, setMessage] = useState("");
+  const [animStyle, setAnimStyle] = useState<AnimStyle>("typewriter");
   const [key, setKey] = useState(0);
 
   useEffect(() => {
+    setMounted(true);
     setMessage(getRandomMessage(ALL_MESSAGES, locale));
     setAnimStyle(pickRandom(ANIM_STYLES));
     setKey((k) => k + 1);
   }, [pathname, locale]);
 
+  // Reserve layout space on SSR/first paint, then fill after mount to avoid
+  // a hydration mismatch from random message/style selection.
   return (
-    <div className="mb-4 rounded-lg border border-terminal-red/40 bg-terminal-red/10 px-4 py-3 overflow-hidden relative">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={key}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-        >
-          {animStyle === "typewriter" && <TypewriterText text={message} />}
-          {animStyle === "glitch" && <GlitchText text={message} />}
-          {animStyle === "matrix" && <MatrixText text={message} />}
-          {animStyle === "scanline" && <ScanlineText text={message} />}
-        </motion.div>
-      </AnimatePresence>
+    <div className="mb-4 rounded-lg border border-terminal-red/40 bg-terminal-red/10 px-4 py-3 overflow-hidden relative min-h-[2.25rem]">
+      {mounted && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={key}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            {animStyle === "typewriter" && <TypewriterText text={message} />}
+            {animStyle === "glitch" && <GlitchText text={message} />}
+            {animStyle === "matrix" && <MatrixText text={message} />}
+            {animStyle === "scanline" && <ScanlineText text={message} />}
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 }

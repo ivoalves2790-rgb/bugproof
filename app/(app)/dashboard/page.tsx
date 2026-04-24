@@ -5,7 +5,6 @@ import { getProjects, getFullProject, getAllChapters } from "@/lib/content/loade
 import { DashboardStats } from "./dashboard-stats";
 import { ContinueCard } from "./continue-card";
 import { DashboardProjects } from "./dashboard-projects";
-import { MotivationBanner } from "./motivation-banner";
 import { useLanguage } from "@/lib/i18n/use-language";
 
 interface ChapterForCard {
@@ -55,7 +54,6 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <MotivationBanner />
       <ContinueCard
         projectSlug="task-manager"
         projectTitle="Task Manager"

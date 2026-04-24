@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
 import en from "./translations/en.json";
 import es from "./translations/es.json";
 
@@ -21,10 +21,14 @@ const LanguageContext = createContext<LanguageContextValue>({
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(() => {
-    if (typeof window === "undefined") return "en";
-    return (localStorage.getItem("bugproof:language") as Locale) || "en";
-  });
+  // Always start with "en" so server + first client render match. Hydrate the
+  // saved locale from localStorage after mount.
+  const [locale, setLocaleState] = useState<Locale>("en");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("bugproof:language") as Locale | null;
+    if (saved === "es" || saved === "en") setLocaleState(saved);
+  }, []);
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
