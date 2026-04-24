@@ -377,7 +377,7 @@
   },
   {
     "id": "debugging",
-    "term": "Depuracion (Debugging)",
+    "term": "Depuración (Debugging)",
     "definition": "El proceso de encontrar y corregir problemas en el codigo. Su nombre viene de literalmente remover una polilla de una computadora en los anos 1940.",
     "relatedCourses": ["debugging-error-reading"],
     "relatedTerms": ["console-log", "stack-trace", "breakpoint"],

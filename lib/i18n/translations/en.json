@@ -7,7 +7,7 @@
   "nav.settings": "Settings",
 
   "login.title": "Log in",
-  "login.subtitle": "Welcome back, engineer",
+  "login.subtitle": "Welcome back, vibecoder",
   "login.google": "Continue with Google",
   "login.or": "or",
   "login.email": "Email",
@@ -17,7 +17,7 @@
   "login.createAccount": "Create an account",
 
   "signup.title": "Sign up",
-  "signup.subtitle": "Start your engineering journey",
+  "signup.subtitle": "Start your vibecoding journey",
   "signup.google": "Continue with Google",
   "signup.or": "or",
   "signup.displayName": "Display Name",
@@ -36,7 +36,7 @@
   "dashboard.projects": "Projects",
   "dashboard.viewAll": "View all",
   "dashboard.referenceLibrary": "Reference Library",
-  "dashboard.referenceDesc": "10 topic-based courses for deep dives into specific subjects",
+  "dashboard.referenceDesc": "{count} topic-based courses for deep dives into specific subjects",
   "dashboard.totalXP": "Total XP",
   "dashboard.dayStreak": "Day Streak",
   "dashboard.completed": "Completed",
@@ -47,10 +47,10 @@
   "projects.lessons": "lessons",
 
   "courses.title": "All Courses",
-  "courses.subtitle": "courses covering everything an engineer needs to know.",
+  "courses.subtitle": "courses covering everything a vibecoder needs to know.",
 
   "profile.title": "Profile",
-  "profile.engineer": "Engineer",
+  "profile.vibecoder": "Vibecoder",
   "profile.totalXP": "Total XP",
   "profile.dayStreak": "Day Streak",
   "profile.lessons": "Lessons",
@@ -149,6 +149,9 @@
   "difficulty.easy": "Easy",
   "difficulty.medium": "Medium",
   "difficulty.hard": "Hard",
+  "difficulty.beginner": "beginner",
+  "difficulty.intermediate": "intermediate",
+  "difficulty.advanced": "advanced",
 
   "type.bugHunt": "Bug Hunt",
   "type.swipe": "Swipe",
@@ -162,7 +165,7 @@
   "assessment.title": "Let's see where you're at",
   "assessment.subtitle": "Answer 15 quick questions so we can customize your learning path. No wrong answers here — it's just to figure out where to start.",
   "assessment.time": "Takes about 3 minutes",
-  "assessment.topics": "Covers all 10 topics",
+  "assessment.topics": "Covers all {count} topics",
   "assessment.jargon": "Jargon explained for every question",
   "assessment.retake": "You can retake it anytime",
   "assessment.start": "Start Assessment",
@@ -179,6 +182,7 @@
   "glossary.example": "Example",
 
   "courses.lessons": "lessons",
+  "courses.units": "units",
 
   "common.skipToContent": "Skip to content",
   "common.somethingWrong": "Something went wrong",

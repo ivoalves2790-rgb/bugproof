@@ -6,7 +6,7 @@ import type { Locale } from "@/lib/i18n/use-language";
 
 const languages: { code: Locale; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "EN" },
-  { code: "es", label: "Espanol", flag: "ES" },
+  { code: "es", label: "Español", flag: "ES" },
 ];
 
 export default function LanguagePage() {

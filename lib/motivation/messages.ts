@@ -11,35 +11,35 @@ export interface MotivationMessage {
 export const COMPLETION_MESSAGES: MotivationMessage[] = [
   {
     text: "Top vibecoders earn $150K+ a year from their apps. You just got one step closer.",
-    textEs: "Los mejores vibecoders ganan $150K+ al ano con sus apps. Acabas de acercarte un paso mas.",
+    textEs: "Los mejores vibecoders ganan $150K+ al año con sus apps. Acabas de acercarte un paso más.",
   },
   {
     text: "Most people talk about learning to vibecode. You're actually doing it.",
-    textEs: "La mayoria habla de aprender vibecoding. Tu lo estas haciendo.",
+    textEs: "La mayoría habla de aprender vibecoding. Tú lo estás haciendo.",
   },
   {
     text: "Every lesson you finish is worth more than a college lecture. And it's free.",
-    textEs: "Cada leccion que terminas vale mas que una clase universitaria. Y es gratis.",
+    textEs: "Cada lección que terminas vale más que una clase universitaria. Y es gratis.",
   },
   {
     text: "The top 1% of earners didn't get there by quitting. Keep going.",
-    textEs: "El 1% que mas gana no llego ahi rindiendose. Sigue adelante.",
+    textEs: "El 1% que más gana no llegó ahí rindiéndose. Sigue adelante.",
   },
   {
     text: "Basic apps earn pocket change. Bulletproof apps earn $200K+. This is how you get there.",
-    textEs: "Las apps basicas generan centavos. Las apps solidas generan $200K+. Asi es como llegas.",
+    textEs: "Las apps básicas generan centavos. Las apps sólidas generan $200K+. Así es como llegas.",
   },
   {
     text: "While others scroll social media, you're building a $100K+ skill.",
-    textEs: "Mientras otros ven redes sociales, tu estas construyendo una habilidad de $100K+.",
+    textEs: "Mientras otros ven redes sociales, tú estás construyendo una habilidad de $100K+.",
   },
   {
     text: "Companies are desperate for reliable apps. You're learning to build what they need.",
-    textEs: "Las empresas buscan apps confiables desesperadamente. Estas aprendiendo a construir lo que necesitan.",
+    textEs: "Las empresas buscan apps confiables desesperadamente. Estás aprendiendo a construir lo que necesitan.",
   },
   {
     text: "You just learned something most CS graduates don't know. Seriously.",
-    textEs: "Acabas de aprender algo que la mayoria de graduados en informatica no sabe. En serio.",
+    textEs: "Acabas de aprender algo que la mayoría de graduados en informática no sabe. En serio.",
   },
   {
     text: "Remote work. Six figures. Your own schedule. That's the vibecoder life.",
@@ -47,11 +47,11 @@ export const COMPLETION_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "Only 3% of people finish what they start. You're in that 3%.",
-    textEs: "Solo el 3% de la gente termina lo que empieza. Tu estas en ese 3%.",
+    textEs: "Solo el 3% de la gente termina lo que empieza. Tú estás en ese 3%.",
   },
   {
     text: "That lesson just made your future app more bulletproof. Clients pay premium for that.",
-    textEs: "Esa leccion acaba de hacer tu futura app mas solida. Los clientes pagan extra por eso.",
+    textEs: "Esa lección acaba de hacer tu futura app más sólida. Los clientes pagan extra por eso.",
   },
   {
     text: "Vibecoding without this knowledge? Risky. Vibecoding WITH it? Unstoppable.",
@@ -63,11 +63,11 @@ export const COMPLETION_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "You're not just learning to vibecode. You're learning to build products people pay for.",
-    textEs: "No solo estas aprendiendo vibecoding. Estas aprendiendo a construir productos por los que la gente paga.",
+    textEs: "No solo estás aprendiendo vibecoding. Estás aprendiendo a construir productos por los que la gente paga.",
   },
   {
     text: "Freelancers who understand this charge 3x more. You're becoming one of them.",
-    textEs: "Los freelancers que entienden esto cobran 3 veces mas. Te estas convirtiendo en uno de ellos.",
+    textEs: "Los freelancers que entienden esto cobran 3 veces más. Te estás convirtiendo en uno de ellos.",
   },
 ];
 
@@ -75,23 +75,23 @@ export const COMPLETION_MESSAGES: MotivationMessage[] = [
 export const STREAK_MESSAGES: MotivationMessage[] = [
   {
     text: "Day {streak} streak! Consistency beats talent every time.",
-    textEs: "Racha de {streak} dias! La constancia le gana al talento siempre.",
+    textEs: "Racha de {streak} días! La constancia le gana al talento siempre.",
   },
   {
     text: "{streak} days in a row. Most people quit by day 2. Not you.",
-    textEs: "{streak} dias seguidos. La mayoria renuncia en el dia 2. Tu no.",
+    textEs: "{streak} días seguidos. La mayoría renuncia en el día 2. Tú no.",
   },
   {
     text: "Your streak is {streak} days. That's {streak} days closer to a six-figure career.",
-    textEs: "Tu racha es de {streak} dias. Eso es {streak} dias mas cerca de una carrera de seis cifras.",
+    textEs: "Tu racha es de {streak} días. Eso es {streak} días más cerca de una carrera de seis cifras.",
   },
   {
     text: "{streak} days building your future. Most people spend {streak} days binge-watching Netflix.",
-    textEs: "{streak} dias construyendo tu futuro. La mayoria pasa {streak} dias viendo Netflix.",
+    textEs: "{streak} días construyendo tu futuro. La mayoría pasa {streak} días viendo Netflix.",
   },
   {
     text: "Day {streak}. Every day you show up, you're beating 97% of people who gave up.",
-    textEs: "Dia {streak}. Cada dia que apareces, superas al 97% de la gente que se rindio.",
+    textEs: "Día {streak}. Cada día que apareces, superas al 97% de la gente que se rindió.",
   },
 ];
 
@@ -99,31 +99,31 @@ export const STREAK_MESSAGES: MotivationMessage[] = [
 export const DASHBOARD_MESSAGES: MotivationMessage[] = [
   {
     text: "Demand for app builders went up 12% this year. Your timing is perfect.",
-    textEs: "La demanda de creadores de apps subio 12% este ano. Tu momento es perfecto.",
+    textEs: "La demanda de creadores de apps subió 12% este año. Tu momento es perfecto.",
   },
   {
     text: "Every day you don't learn is a day your future competitors do.",
-    textEs: "Cada dia que no aprendes es un dia que tus futuros competidores si lo hacen.",
+    textEs: "Cada día que no aprendes es un dia que tus futuros competidores sí lo hacen.",
   },
   {
     text: "AI won't replace vibecoders. It will replace vibecoders who don't understand what they're building.",
-    textEs: "La IA no reemplazara a los vibecoders. Reemplazara a los vibecoders que no entienden lo que construyen.",
+    textEs: "La IA no reemplazará a los vibecoders. Reemplazará a los vibecoders que no entienden lo que construyen.",
   },
   {
     text: "You're building the most in-demand skill of the decade. Don't stop.",
-    textEs: "Estas construyendo la habilidad mas demandada de la decada. No pares.",
+    textEs: "Estás construyendo la habilidad más demandada de la década. No pares.",
   },
   {
     text: "15 minutes a day. That's all it takes to change your income forever.",
-    textEs: "15 minutos al dia. Es todo lo que necesitas para cambiar tus ingresos para siempre.",
+    textEs: "15 minutos al día. Es todo lo que necesitas para cambiar tus ingresos para siempre.",
   },
   {
     text: "Your future self will thank you for today's lesson.",
-    textEs: "Tu yo del futuro te agradecera por la leccion de hoy.",
+    textEs: "Tu yo del futuro te agradecerá por la lección de hoy.",
   },
   {
     text: "Freelance vibecoders charge $100-300/hr. You're learning to be one.",
-    textEs: "Los vibecoders freelance cobran $100-300/hr. Estas aprendiendo a ser uno.",
+    textEs: "Los vibecoders freelance cobran $100-300/hr. Estás aprendiendo a ser uno.",
   },
   {
     text: "Tech layoffs? Companies are still paying vibecoders who can actually ship.",
@@ -131,15 +131,15 @@ export const DASHBOARD_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "People are launching $10K/month SaaS products with vibecoding. This is how you join them.",
-    textEs: "La gente esta lanzando productos SaaS de $10K/mes con vibecoding. Asi es como te unes a ellos.",
+    textEs: "La gente está lanzando productos SaaS de $10K/mes con vibecoding. Así es como te unes a ellos.",
   },
   {
     text: "One app idea + the skills you're building = a business. Keep learning.",
-    textEs: "Una idea de app + las habilidades que estas construyendo = un negocio. Sigue aprendiendo.",
+    textEs: "Una idea de app + las habilidades que estás construyendo = un negocio. Sigue aprendiendo.",
   },
   {
     text: "The difference between a hobby vibecoder and a paid one? What you're learning right now.",
-    textEs: "La diferencia entre un vibecoder aficionado y uno pagado? Lo que estas aprendiendo ahora.",
+    textEs: "La diferencia entre un vibecoder aficionado y uno pagado? Lo que estás aprendiendo ahora.",
   },
 ];
 
@@ -155,11 +155,11 @@ export const RETURN_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "While you were away, thousands of new apps were launched by vibecoders. Let's get you ready.",
-    textEs: "Mientras no estabas, miles de nuevas apps fueron lanzadas por vibecoders. Preparate.",
+    textEs: "Mientras no estabas, miles de nuevas apps fueron lanzadas por vibecoders. Prepárate.",
   },
   {
     text: "Every vibecoder who paused and came back ended up stronger. Welcome back.",
-    textEs: "Cada vibecoder que pauso y volvio termino siendo mas fuerte. Bienvenido de vuelta.",
+    textEs: "Cada vibecoder que pausó y volvió terminó siendo más fuerte. Bienvenido de vuelta.",
   },
 ];
 
@@ -167,15 +167,15 @@ export const RETURN_MESSAGES: MotivationMessage[] = [
 export const COURSE_PAGE_MESSAGES: MotivationMessage[] = [
   {
     text: "This course alone could be worth thousands in freelance income. Dive in.",
-    textEs: "Solo este curso podria valer miles en ingresos freelance. Sumergete.",
+    textEs: "Solo este curso podría valer miles en ingresos freelance. Sumérgete.",
   },
   {
     text: "Vibecoders who master this topic build better apps and charge more. That's a fact.",
-    textEs: "Los vibecoders que dominan este tema construyen mejores apps y cobran mas. Es un hecho.",
+    textEs: "Los vibecoders que dominan este tema construyen mejores apps y cobran más. Es un hecho.",
   },
   {
     text: "Every unit you complete here is a line on your resume that gets interviews.",
-    textEs: "Cada unidad que completas aqui es una linea en tu CV que consigue entrevistas.",
+    textEs: "Cada unidad que completas aquí es una línea en tu CV que consigue entrevistas.",
   },
   {
     text: "This is what separates vibecoders who make money from vibecoders who don't.",
@@ -183,11 +183,11 @@ export const COURSE_PAGE_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "Companies pay $150/hr for contractors who know this. You're learning it for free.",
-    textEs: "Las empresas pagan $150/hr a contratistas que saben esto. Tu lo estas aprendiendo gratis.",
+    textEs: "Las empresas pagan $150/hr a contratistas que saben esto. Tú lo estás aprendiendo gratis.",
   },
   {
     text: "Your future clients won't know you used AI to build their app. But they'll know it works. That's this course.",
-    textEs: "Tus futuros clientes no sabran que usaste IA para construir su app. Pero sabran que funciona. Este curso es eso.",
+    textEs: "Tus futuros clientes no sabrán que usaste IA para construir su app. Pero sabrán que funciona. Este curso es eso.",
   },
 ];
 
@@ -195,19 +195,19 @@ export const COURSE_PAGE_MESSAGES: MotivationMessage[] = [
 export const UNIT_PAGE_MESSAGES: MotivationMessage[] = [
   {
     text: "Each lesson here is a building block toward your first paid project.",
-    textEs: "Cada leccion aqui es un bloque de construccion hacia tu primer proyecto pagado.",
+    textEs: "Cada lección aquí es un bloque de construcción hacia tu primer proyecto pagado.",
   },
   {
     text: "Finish this unit and you'll know more than 90% of vibecoders out there.",
-    textEs: "Termina esta unidad y sabras mas que el 90% de los vibecoders.",
+    textEs: "Termina esta unidad y sabrás más que el 90% de los vibecoders.",
   },
   {
     text: "This is real knowledge that makes real money. Not theory — practice.",
-    textEs: "Este es conocimiento real que genera dinero real. No teoria — practica.",
+    textEs: "Este es conocimiento real que genera dinero real. No teoría — práctica.",
   },
   {
     text: "Every lesson completed = one less thing that can go wrong in your paid projects.",
-    textEs: "Cada leccion completada = una cosa menos que puede salir mal en tus proyectos pagados.",
+    textEs: "Cada lección completada = una cosa menos que puede salir mal en tus proyectos pagados.",
   },
   {
     text: "The vibecoders making $5K-20K/month from apps? They all learned this.",
@@ -215,7 +215,7 @@ export const UNIT_PAGE_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "You're not just studying. You're building the foundation of a business.",
-    textEs: "No solo estas estudiando. Estas construyendo la base de un negocio.",
+    textEs: "No solo estás estudiando. Estás construyendo la base de un negocio.",
   },
 ];
 
@@ -223,7 +223,7 @@ export const UNIT_PAGE_MESSAGES: MotivationMessage[] = [
 export const TEACHING_MESSAGES: MotivationMessage[] = [
   {
     text: "Every concept you absorb here makes your AI-built apps more reliable — and more profitable.",
-    textEs: "Cada concepto que absorbes aqui hace tus apps construidas con IA mas confiables — y mas rentables.",
+    textEs: "Cada concepto que absorbes aquí hace tus apps construidas con IA más confiables — y más rentables.",
   },
   {
     text: "This is the knowledge that turns a side project into a paying product.",
@@ -231,19 +231,19 @@ export const TEACHING_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "AI writes the code. You call the shots. That's vibecoding — and that's where the money is.",
-    textEs: "La IA escribe el codigo. Tu tomas las decisiones. Eso es vibecoding — y ahi es donde esta el dinero.",
+    textEs: "La IA escribe el código. Tú tomas las decisiones. Eso es vibecoding — y ahí es donde está el dinero.",
   },
   {
     text: "Understanding this puts you ahead of every vibecoder who skipped the fundamentals.",
-    textEs: "Entender esto te pone por delante de cada vibecoder que se salto los fundamentos.",
+    textEs: "Entender esto te pone por delante de cada vibecoder que se saltó los fundamentos.",
   },
   {
     text: "Clients pay for apps that work. This lesson teaches you why they break — and how to prevent it.",
-    textEs: "Los clientes pagan por apps que funcionan. Esta leccion te ensena por que fallan — y como prevenirlo.",
+    textEs: "Los clientes pagan por apps que funcionan. Esta lección te enseña por qué fallan — y cómo prevenirlo.",
   },
   {
     text: "This isn't just education. It's an investment in your earning potential.",
-    textEs: "Esto no es solo educacion. Es una inversion en tu potencial de ingresos.",
+    textEs: "Esto no es solo educación. Es una inversión en tu potencial de ingresos.",
   },
 ];
 
@@ -255,11 +255,11 @@ export const EXERCISE_START_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "This exercise simulates what you'll face in real projects — the ones that pay.",
-    textEs: "Este ejercicio simula lo que enfrentaras en proyectos reales — los que pagan.",
+    textEs: "Este ejercicio simula lo que enfrentarás en proyectos reales — los que pagan.",
   },
   {
     text: "Practice makes profit. Every exercise makes your future apps more bulletproof.",
-    textEs: "La practica genera ganancias. Cada ejercicio hace tus futuras apps mas solidas.",
+    textEs: "La práctica genera ganancias. Cada ejercicio hace tus futuras apps más sólidas.",
   },
   {
     text: "The difference between a $20/hr vibecoder and a $200/hr one? Practice like this.",
@@ -267,11 +267,11 @@ export const EXERCISE_START_MESSAGES: MotivationMessage[] = [
   },
   {
     text: "Nail this and you're one step closer to launching your own product.",
-    textEs: "Domina esto y estaras un paso mas cerca de lanzar tu propio producto.",
+    textEs: "Domina esto y estarás un paso más cerca de lanzar tu propio producto.",
   },
   {
     text: "This is where knowledge becomes skill — and skill becomes income.",
-    textEs: "Aqui es donde el conocimiento se convierte en habilidad — y la habilidad en ingresos.",
+    textEs: "Aquí es donde el conocimiento se convierte en habilidad — y la habilidad en ingresos.",
   },
 ];
 

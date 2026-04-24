@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { useT } from "@/lib/i18n/use-language";
+import courses from "@/content/courses.json";
+
+const COURSE_COUNT = courses.length;
 
 interface ProjectInfo {
   slug: string;
@@ -46,7 +49,7 @@ export function DashboardProjects({ projects }: { projects: ProjectInfo[] }) {
                       <Badge
                         variant={project.difficulty === "beginner" ? "green" : "amber"}
                       >
-                        {project.difficulty}
+                        {t(`difficulty.${project.difficulty}`)}
                       </Badge>
                     </div>
                     <p className="text-[10px] text-muted-foreground">
@@ -67,7 +70,7 @@ export function DashboardProjects({ projects }: { projects: ProjectInfo[] }) {
         >
           <h3 className="text-sm font-semibold">{t("dashboard.referenceLibrary")}</h3>
           <p className="mt-1 text-[10px] text-muted-foreground">
-            {t("dashboard.referenceDesc")}
+            {t("dashboard.referenceDesc", { count: COURSE_COUNT })}
           </p>
         </Link>
       </div>

@@ -58,7 +58,7 @@ export default function ProfilePage() {
             BP
           </div>
           <div>
-            <h2 className="text-lg font-bold">{t("profile.engineer")}</h2>
+            <h2 className="text-lg font-bold">{t("profile.vibecoder")}</h2>
             <div className="flex items-center gap-2">
               <Badge variant="green">Level {levelProgress.level}</Badge>
               <span className="text-xs text-muted-foreground">

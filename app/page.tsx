@@ -1,4 +1,7 @@
 import Link from "next/link";
+import courses from "@/content/courses.json";
+
+const COURSE_COUNT = courses.length;
 
 export default function LandingPage() {
   return (
@@ -29,7 +32,7 @@ export default function LandingPage() {
         {/* Features */}
         <div className="mb-10 grid grid-cols-2 gap-4 text-left text-sm md:grid-cols-4">
           {[
-            { label: "10 Courses", sub: "Full curriculum" },
+            { label: `${COURSE_COUNT} Courses`, sub: "Full curriculum" },
             { label: "4 Exercise Types", sub: "Bug hunts, swipe & more" },
             { label: "300+ Lessons", sub: "2-5 min each" },
             { label: "Works Offline", sub: "Learn anywhere" },
@@ -72,7 +75,7 @@ export default function LandingPage() {
           <div className="text-muted-foreground">
             <span className="text-terminal-green">$</span> bugproof --status
             <br />
-            <span className="text-terminal-amber">courses:</span> 10 loaded
+            <span className="text-terminal-amber">courses:</span> {COURSE_COUNT} loaded
             <br />
             <span className="text-terminal-amber">lessons:</span> 300+
             available

@@ -4,6 +4,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { useT } from "@/lib/i18n/use-language";
+import courses from "@/content/courses.json";
+
+const COURSE_COUNT = courses.length;
 
 export default function AssessmentIntroPage() {
   const t = useT();
@@ -28,7 +31,7 @@ export default function AssessmentIntroPage() {
               <span className="text-terminal-green">+</span> {t("assessment.time")}
             </p>
             <p>
-              <span className="text-terminal-green">+</span> {t("assessment.topics")}
+              <span className="text-terminal-green">+</span> {t("assessment.topics", { count: COURSE_COUNT })}
             </p>
             <p>
               <span className="text-terminal-green">+</span> {t("assessment.jargon")}

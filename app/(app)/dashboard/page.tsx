@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getProjects, getFullProject, getAllChapters } from "@/lib/content/loader";
+import { getProjects, getProject, getFullProject, getAllChapters } from "@/lib/content/loader";
 import { DashboardStats } from "./dashboard-stats";
 import { ContinueCard } from "./continue-card";
 import { DashboardProjects } from "./dashboard-projects";
@@ -17,6 +17,7 @@ interface ChapterForCard {
 export default function DashboardPage() {
   const { locale } = useLanguage();
   const projects = getProjects(locale);
+  const taskManager = getProject("task-manager", locale);
 
   const [chaptersForCard, setChaptersForCard] = useState<ChapterForCard[]>([
     { slug: "planning", title: "Planning Your App", order: 1, lessonCount: 5 },
@@ -56,7 +57,7 @@ export default function DashboardPage() {
     <div>
       <ContinueCard
         projectSlug="task-manager"
-        projectTitle="Task Manager"
+        projectTitle={taskManager?.title ?? "Task Manager"}
         chapters={chaptersForCard}
       />
       <DashboardStats />

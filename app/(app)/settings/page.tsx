@@ -79,7 +79,7 @@ export default function SettingsPage() {
                     : "border-border bg-surface hover:border-terminal-green/50"
                 }`}
               >
-                {code === "en" ? "English" : "Espanol"}
+                {code === "en" ? "English" : "Español"}
               </button>
             ))}
           </div>

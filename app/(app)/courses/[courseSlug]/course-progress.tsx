@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Badge } from "@/components/ui/Badge";
+import { useT } from "@/lib/i18n/use-language";
 
 interface UnitInfo {
   slug: string;
@@ -20,6 +21,7 @@ export function CourseProgress({
   totalLessons,
   units,
 }: CourseProgressProps) {
+  const t = useT();
   const [completedCount, setCompletedCount] = useState(0);
 
   useEffect(() => {
@@ -36,17 +38,17 @@ export function CourseProgress({
 
   const progress =
     totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0;
-  const level =
-    progress >= 80 ? "Expert" : progress >= 40 ? "Intermediate" : "Novice";
+  const levelKey =
+    progress >= 80 ? "profile.level.expert" : progress >= 40 ? "profile.level.intermediate" : "profile.level.novice";
 
   return (
     <div className="mt-4">
       <ProgressBar value={progress} size="md" color="green" />
       <div className="mt-1 flex justify-between text-xs text-muted-foreground">
         <span>
-          {completedCount} / {totalLessons} lessons &middot; {units.length} units
+          {completedCount} / {totalLessons} {t("courses.lessons")} &middot; {units.length} {t("courses.units")}
         </span>
-        <Badge variant="default">{level}</Badge>
+        <Badge variant="default">{t(levelKey)}</Badge>
       </div>
     </div>
   );

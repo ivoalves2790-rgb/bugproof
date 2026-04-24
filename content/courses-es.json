@@ -2,7 +2,7 @@
   {
     "slug": "git-version-control",
     "title": "Git y Control de Versiones",
-    "description": "Commits, ramas, merge y como deshacer errores",
+    "description": "Commits, ramas, merge y cómo deshacer errores",
     "icon": "git-branch",
     "order": 1,
     "unitCount": 5,
@@ -11,8 +11,8 @@
   },
   {
     "slug": "debugging-error-reading",
-    "title": "Depuracion y Lectura de Errores",
-    "description": "Stack traces, consola y depuracion sistematica",
+    "title": "Depuración y Lectura de Errores",
+    "description": "Stack traces, consola y depuracion sistemática",
     "icon": "bug",
     "order": 2,
     "unitCount": 5,
@@ -22,7 +22,7 @@
   {
     "slug": "security-fundamentals",
     "title": "Fundamentos de Seguridad",
-    "description": "XSS, inyeccion SQL, auth, claves API, conceptos OWASP",
+    "description": "XSS, inyección SQL, auth, claves API, conceptos OWASP",
     "icon": "shield",
     "order": 3,
     "unitCount": 6,
