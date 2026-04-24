@@ -9,8 +9,11 @@ export async function GET() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Unauthenticated visitors see the default 3 hearts (read-only). The POST
+  // handler still requires auth, so no writes can happen without a session.
+  // This avoids the 401-per-route-change flood when browsing while logged out.
   if (!user) {
-    return errorResponse("Unauthorized", 401);
+    return NextResponse.json({ hearts: 3, maxHearts: 3, canPlay: true });
   }
 
   // Rate limit: 60 requests per minute per user
