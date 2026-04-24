@@ -6,35 +6,35 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Estas construyendo el componente de interfaz mas importante de tu gestor de tareas: la tarjeta de tarea. Imaginala como una nota adhesiva en un tablero — necesita mostrar justo la informacion suficiente de un vistazo sin abrumar. Cada decision de diseno que tomes aqui afecta como los usuarios interactuan con sus tareas. Veamos como lo abordas.",
+  "intro": "Estas construyendo el componente de interfaz más importante de tu gestor de tareas: la tarjeta de tarea. Imaginala como una nota adhesiva en un tablero — necesita mostrar justo la información suficiente de un vistazo sin abrumar. Cada decisión de diseño que tomes aquí afecta como los usuarios interactuan con sus tareas. Veamos como lo abordas.",
   "teach": [
     {
       "type": "text",
       "title": "La Tarjeta de Tarea Es el Nucleo de Tu App",
-      "body": "La tarjeta de tarea es lo que los usuarios ven e interactuan mas. Necesita mostrar la informacion correcta de un vistazo — titulo, estado, tal vez una fecha limite — sin estar saturada. Piensa en ella como una nota adhesiva fisica: suficiente informacion para ser util, pero no tanta que sea abrumadora."
+      "body": "La tarjeta de tarea es lo que los usuarios ven e interactuan más. Necesita mostrar la información correcta de un vistazo — titulo, estado, tal vez una fecha limite — sin estar saturada. Piensa en ella como una nota adhesiva física: suficiente información para ser útil, pero no tanta que sea abrumadora."
     },
     {
       "type": "analogy",
       "title": "Los Botones de un Ascensor",
-      "body": "Imagina presionar el boton de un ascensor y que no pase nada — sin luz, sin sonido, sin movimiento. Lo presionarias de nuevo, mas fuerte. Ahora imagina que el boton se ilumina en cuanto lo tocas. Te relajas porque sabes que el ascensor te escucho. La interfaz interactiva funciona igual: los efectos hover, estados activos y estilos de completado son el 'boton iluminado' que le dice al usuario que su accion fue recibida."
+      "body": "Imagina presionar el boton de un ascensor y que no pase nada — sin luz, sin sonido, sin movimiento. Lo presionarias de nuevo, más fuerte. Ahora imagina que el boton se ilumina en cuanto lo tocas. Te relajas porque sabes que el ascensor te escucho. La interfaz interactiva funciona igual: los efectos hover, estados activos y estilos de completado son el 'boton iluminado' que le dice al usuario que su acción fue recibida."
     },
     {
       "type": "text",
       "title": "Disenando para la Interaccion",
-      "body": "Una tarjeta de tarea no es solo una pantalla — los usuarios van a hacer clic, completarla, tal vez arrastrarla. Construye tu componente con **estados de interaccion** en mente desde el inicio: efectos hover, estados activos, estilos de completado. Una tarjeta sin retroalimentacion visual cuando pasas el cursor se siente rota, aunque tecnicamente funcione."
+      "body": "Una tarjeta de tarea no es solo una pantalla — los usuarios van a hacer clic, completarla, tal vez arrastrarla. Construye tu componente con **estados de interaccion** en mente desde el inicio: efectos hover, estados activos, estilos de completado. Una tarjeta sin retroalimentacion visual cuando pasas el cursor se siente rota, aunque técnicamente funcione."
     },
     {
       "type": "analogy",
       "title": "La Tarjeta de Tarea Es Como una Tarjeta de Presentacion",
-      "body": "Una buena tarjeta de presentacion muestra tu nombre, cargo y una forma de contactarte — no tu curriculum completo. La tarjeta de tarea funciona igual: da justo la informacion suficiente para que alguien decida que hacer despues. Sobrecargala con detalles y los ojos de la gente se pierden, igual que con una tarjeta de presentacion que tiene 15 lineas de texto."
+      "body": "Una buena tarjeta de presentacion muestra tu nombre, cargo y una forma de contactarte — no tu curriculum completo. La tarjeta de tarea funciona igual: da justo la información suficiente para que alguien decida que hacer después. Sobrecargala con detalles y los ojos de la gente se pierden, igual que con una tarjeta de presentacion que tiene 15 líneas de texto."
     },
     {
       "type": "motivation",
-      "body": "La tarjeta de tarea es el corazon de tu producto — es lo que los usuarios tocan docenas de veces al dia. Clava este componente y habras construido algo a lo que la gente quiere volver. Eso es lo que convierte un proyecto personal en una app que genera dinero."
+      "body": "La tarjeta de tarea es el corazón de tu producto — es lo que los usuarios tocan docenas de veces al día. Clava este componente y habras construido algo a lo que la gente quiere volver. Eso es lo que convierte un proyecto personal en una app que genera dinero."
     },
     {
       "type": "key_takeaway",
-      "body": "Empieza con la tarjeta minima viable — titulo y un boton de completar. Agrega informacion (fecha limite, prioridad, etiquetas) solo cuando tus historias de usuario lo requieran. Cada dato en la tarjeta compite por atencion, asi que se intencional con lo que muestras."
+      "body": "Empieza con la tarjeta mínima viable — titulo y un boton de completar. Agrega información (fecha limite, prioridad, etiquetas) solo cuando tus historias de usuario lo requieran. Cada dato en la tarjeta compite por atencion, así que se intencional con lo que muestras."
     }
   ],
   "exercise": {
@@ -43,7 +43,7 @@
       "start": {
         "narrative": "Estas creando el componente TaskCard. Tu disenador envio un mockup mostrando el titulo de la tarea, estado, fecha limite, prioridad, etiquetas, avatar del asignado, fecha de creacion, vista previa de descripcion y un menu de acciones. Como abordas la construccion?",
         "choices": [
-          { "id": "build-everything", "text": "Construir la tarjeta completa con las 9 piezas de informacion del mockup de una sola vez", "nextNode": "overloaded", "score": 0 },
+          { "id": "build-everything", "text": "Construir la tarjeta completa con las 9 piezas de información del mockup de una sola vez", "nextNode": "overloaded", "score": 0 },
           { "id": "start-minimal", "text": "Empezar solo con el titulo y una casilla de completar, luego agregar campos uno por uno segun la prioridad", "nextNode": "minimal-start", "score": 4 },
           { "id": "copy-design-system", "text": "Encontrar un componente de tarjeta de tarea de una libreria de UI y personalizarlo para que coincida con el mockup", "nextNode": "library-card", "score": 2 }
         ]
@@ -59,7 +59,7 @@
         "narrative": "La tarjeta esta saturada de informacion. En movil, el texto es diminuto y el layout se rompe. Los usuarios en pruebas dicen que no pueden escanear rapidamente su lista de tareas porque cada tarjeta es un muro de datos. Cual es tu solucion?",
         "choices": [
           { "id": "hide-on-mobile", "text": "Usar clases responsivas para ocultar la mayoria de campos en movil, mostrando solo titulo y estado", "nextNode": "responsive-recovery", "score": 3 },
-          { "id": "smaller-font", "text": "Hacer la fuente mas pequena para que todo quepa", "nextNode": "tiny-text-end", "score": 0 }
+          { "id": "smaller-font", "text": "Hacer la fuente más pequeña para que todo quepa", "nextNode": "tiny-text-end", "score": 0 }
         ]
       },
       "library-card": {
@@ -73,14 +73,14 @@
         "narrative": "El enfoque responsivo funciona. En movil muestras titulo y estado; en escritorio muestras la tarjeta completa. Los usuarios pueden escanear la lista rapidamente en cualquier dispositivo. Perdiste tiempo construyendo todo de una vez, pero te recuperaste.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Te recuperaste bien haciendo la tarjeta responsiva. Pero la leccion es: empieza minimo y agrega complejidad segun la prioridad. Si hubieras empezado con la tarjeta minima, no habrias necesitado ocultar cosas despues.",
+        "feedback": "Te recuperaste bien haciendo la tarjeta responsiva. Pero la lección es: empieza mínimo y agrega complejidad segun la prioridad. Si hubieras empezado con la tarjeta mínima, no habrías necesitado ocultar cosas después.",
         "choices": []
       },
       "excellent-end": {
         "narrative": "Tu TaskCard esta limpia y funcional. El sub-componente <DueDateBadge> maneja la logica de fechas por separado, asi que la tarjeta principal se mantiene simple. Los usuarios detectan inmediatamente las tareas vencidas gracias a la insignia roja. El componente es facil de probar porque cada pieza esta aislada.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Excelente enfoque! Empezar minimo y extraer sub-componentes para logica compleja (como formato de fechas con estilos condicionales) mantiene tu codigo limpio y cada pieza testeable. Este es diseno de componentes de nivel profesional.",
+        "feedback": "Excelente enfoque! Empezar mínimo y extraer sub-componentes para lógica compleja (como formato de fechas con estilos condicionales) mantiene tu código limpio y cada pieza testeable. Este es diseño de componentes de nivel profesional.",
         "choices": []
       },
       "plain-date-end": {
@@ -94,21 +94,21 @@
         "narrative": "Ahora la tarjeta cabe en movil, pero nadie puede leerla. Los usuarios hacen zoom constantemente. Las pruebas de accesibilidad senalan la fuente diminuta como un fallo. Hiciste el problema de layout peor, no mejor.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Encoger el texto nunca es la respuesta. Si el contenido no cabe, tienes demasiado contenido — no muy poco espacio. Elimina u oculta informacion de baja prioridad en lugar de hacer todo ilegible.",
+        "feedback": "Encoger el texto nunca es la respuesta. Si el contenido no cabe, tienes demasiado contenido — no muy poco espacio. Elimina u oculta información de baja prioridad en lugar de hacer todo ilegible.",
         "choices": []
       },
       "own-card-end": {
         "narrative": "Tu TaskCard personalizado usa Tailwind para todos los estilos y soporta todos los estados que necesitas: por defecto, hover, completado (con opacidad y tachado), y vencido. Sin conflictos de libreria, control total.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Buena recuperacion. Las librerias de UI son geniales para componentes genericos (botones, modales), pero componentes altamente especificos del dominio como un TaskCard a menudo es mejor construirlos desde cero. Obtienes control total sobre estados y estilos sin luchar contra la libreria.",
+        "feedback": "Buena recuperacion. Las librerias de UI son geniales para componentes genéricos (botones, modales), pero componentes altamente especificos del dominio como un TaskCard a menudo es mejor construirlos desde cero. Obtienes control total sobre estados y estilos sin luchar contra la libreria.",
         "choices": []
       },
       "override-end": {
         "narrative": "La tarjeta se ve bien, pero el CSS es un desorden de sobreescrituras. Cuando la libreria se actualiza, la mitad de tus sobreescrituras se rompen. Otro desarrollador del equipo no puede entender por que los estilos se comportan de forma extrana. El mantenimiento se convierte en una pesadilla.",
         "isEnd": true,
         "finalScore": 2,
-        "feedback": "Luchar contra el CSS de una libreria de UI es una batalla perdida. Si necesitas sobreescribir mas de unos pocos estilos, es mejor construir el componente tu mismo. Los componentes de libreria funcionan mejor cuando los usas tal como son, no cuando los fuerzas a tener una forma diferente.",
+        "feedback": "Luchar contra el CSS de una libreria de UI es una batalla perdida. Si necesitas sobreescribir más de unos pocos estilos, es mejor construir el componente tu mismo. Los componentes de libreria funcionan mejor cuando los usas tal como son, no cuando los fuerzas a tener una forma diferente.",
         "choices": []
       }
     },

@@ -6,24 +6,24 @@
   "xpReward": 15,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Tu esquema de base de datos esta listo y tus consultas estan escritas. Ahora es hora de conectar tu gestor de tareas de Next.js a Supabase para que tu app pueda realmente hablar con la base de datos. Piensa en ello como conectar un cable entre dos dispositivos — un ajuste incorrecto y no hay conexion.",
+  "intro": "Tu esquema de base de datos esta listo y tus consultas estan escritas. Ahora es hora de conectar tu gestor de tareas de Next.js a Supabase para que tu app pueda realmente hablar con la base de datos. Piensa en ello como conectar un cable entre dos dispositivos — un ajuste incorrecto y no hay conexión.",
   "teach": [
     {
       "type": "text",
       "title": "Supabase: Tu Backend en una Caja",
-      "body": "Supabase te da una base de datos PostgreSQL, autenticacion y una API — todo sin construir un backend desde cero. Tu app de Next.js se comunica con Supabase usando una **libreria cliente** que maneja la conexion, autenticacion y ejecucion de consultas. Inicializas el cliente con dos claves: una **URL del proyecto** y una **clave anonima** (una clave API publica que funciona con Seguridad a Nivel de Fila)."
+      "body": "Supabase te da una base de datos PostgreSQL, autenticación y una API — todo sin construir un backend desde cero. Tu app de Next.js se comunica con Supabase usando una **libreria cliente** que maneja la conexión, autenticación y ejecución de consultas. Inicializas el cliente con dos claves: una **URL del proyecto** y una **clave anonima** (una clave API publica que funciona con Seguridad a Nivel de Fila)."
     },
     {
       "type": "code_example",
       "title": "Inicializando el Cliente de Supabase",
       "language": "typescript",
       "code": "// lib/supabase.ts\nimport { createClient } from '@supabase/supabase-js';\n\nconst supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;\nconst supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;\n\nexport const supabase = createClient(supabaseUrl, supabaseAnonKey);",
-      "annotation": "Las claves vienen de variables de entorno, no de cadenas escritas en el codigo. El prefijo NEXT_PUBLIC_ las hace disponibles en el navegador. La clave anonima es segura para exponer porque las politicas RLS protegen tus datos."
+      "annotation": "Las claves vienen de variables de entorno, no de cadenas escritas en el código. El prefijo NEXT_PUBLIC_ las hace disponibles en el navegador. La clave anonima es segura para exponer porque las politicas RLS protegen tus datos."
     },
     {
       "type": "analogy",
       "title": "Conectar Supabase Es Como Enchufar un Cable USB",
-      "body": "Tu app y tu base de datos son dos dispositivos que necesitan comunicarse. La libreria cliente de Supabase es el cable, la URL del proyecto es el puerto donde lo enchufas, y la clave anonima es el handshake que dice 'si, este dispositivo tiene permiso para conectarse.' Un ajuste mal y no hay conexion — pero hazlo bien y los datos fluyen al instante."
+      "body": "Tu app y tu base de datos son dos dispositivos que necesitan comunicarse. La libreria cliente de Supabase es el cable, la URL del proyecto es el puerto donde lo enchufas, y la clave anonima es el handshake que dice 'si, este dispositivo tiene permiso para conectarse.' Un ajuste mal y no hay conexión — pero hazlo bien y los datos fluyen al instante."
     },
     {
       "type": "motivation",
@@ -31,7 +31,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Almacena las credenciales de Supabase en variables de entorno, nunca en tu codigo. La clave anonima esta disenada para ser publica — es la Seguridad a Nivel de Fila (no la clave en si) la que protege tus datos. Siempre habilita RLS en cada tabla."
+      "body": "Almacena las credenciales de Supabase en variables de entorno, nunca en tu código. La clave anonima esta diseñada para ser publica — es la Seguridad a Nivel de Fila (no la clave en si) la que protege tus datos. Siempre habilita RLS en cada tabla."
     }
   ],
   "exercise": {
@@ -40,7 +40,7 @@
       "start": {
         "narrative": "Has creado un proyecto de Supabase y tienes tu URL y claves. Necesitas conectar tu gestor de tareas de Next.js a la base de datos. Donde almacenas las credenciales?",
         "choices": [
-          { "id": "hardcode", "text": "Pegarlas directamente en tu codigo: const url = 'https://abc123.supabase.co'", "nextNode": "hardcoded", "score": 0 },
+          { "id": "hardcode", "text": "Pegarlas directamente en tu código: const url = 'https://abc123.supabase.co'", "nextNode": "hardcoded", "score": 0 },
           { "id": "env-file", "text": "Ponerlas en un archivo .env.local y referenciarlas con process.env", "nextNode": "env-setup", "score": 4 },
           { "id": "config-json", "text": "Crear un archivo config.json con las claves e importarlo", "nextNode": "config-json", "score": 1 }
         ]
@@ -63,21 +63,21 @@
         "narrative": "El config.json queda commiteado en tu repositorio. A diferencia de .env.local (que esta en .gitignore por defecto), los archivos JSON son rastreados por Git. Tus claves ahora estan en el control de versiones.",
         "choices": [
           { "id": "move-to-env", "text": "Eliminar config.json, mover las claves a .env.local y purgar el archivo del historial de Git", "nextNode": "env-setup", "score": 2 },
-          { "id": "gitignore-json", "text": "Solo agregar config.json a .gitignore de aqui en adelante", "nextNode": "gitignore-late-end", "score": 1 }
+          { "id": "gitignore-json", "text": "Solo agregar config.json a .gitignore de aquí en adelante", "nextNode": "gitignore-late-end", "score": 1 }
         ]
       },
       "server-good": {
         "narrative": "Tu enfoque del lado del servidor funciona, pero te das cuenta de que la clave de rol de servicio evade la Seguridad a Nivel de Fila completamente. Estas dependiendo de tu propio codigo para imponer reglas de acceso en lugar de la base de datos.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "La obtencion del lado del servidor con la clave de rol de servicio funciona pero es mas riesgosa. La clave de rol de servicio tiene acceso completo a la base de datos sin proteccion RLS. Para la mayoria de las operaciones en un gestor de tareas, usar la clave anonima con RLS en el cliente es mas simple y seguro — la base de datos impone quien puede ver que.",
+        "feedback": "La obtencion del lado del servidor con la clave de rol de servicio funciona pero es más riesgosa. La clave de rol de servicio tiene acceso completo a la base de datos sin proteccion RLS. Para la mayoria de las operaciones en un gestor de tareas, usar la clave anonima con RLS en el cliente es más simple y seguro — la base de datos impone quien puede ver que.",
         "choices": []
       },
       "client-good": {
         "narrative": "Tu cliente usa la clave anonima con politicas RLS que filtran tareas por el usuario autenticado. La base de datos automaticamente asegura que cada usuario solo vea sus propias tareas. Incluso si tu codigo frontend tiene un bug, la base de datos no filtrara datos.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Configuracion perfecta! La clave anonima mas RLS es el patron recomendado de Supabase. La base de datos se convierte en tu capa de seguridad — incluso un frontend con bugs no puede exponer datos de otros usuarios porque la base de datos impone las reglas. Esto es defensa en profundidad.",
+        "feedback": "Configuración perfecta! La clave anonima más RLS es el patron recomendado de Supabase. La base de datos se convierte en tu capa de seguridad — incluso un frontend con bugs no puede exponer datos de otros usuarios porque la base de datos impone las reglas. Esto es defensa en profundidad.",
         "choices": []
       },
       "recovered-end": {
@@ -91,7 +91,7 @@
         "narrative": "Eliminar un commit de GitHub no lo elimina de forks, caches o bots que ya lo escanearon. Tus claves estan comprometidas y los datos basura siguen fluyendo. Eventualmente tienes que rotar las claves de todas formas.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Una vez que un secreto se sube a un repositorio publico, consideralo comprometido permanentemente. El historial de Git preserva todo, y los bots escanean GitHub constantemente. La unica solucion es rotar las credenciales inmediatamente — eliminar el commit no es suficiente.",
+        "feedback": "Una vez que un secreto se sube a un repositorio publico, consideralo comprometido permanentemente. El historial de Git preserva todo, y los bots escanean GitHub constantemente. La única solución es rotar las credenciales inmediatamente — eliminar el commit no es suficiente.",
         "choices": []
       },
       "gitignore-late-end": {

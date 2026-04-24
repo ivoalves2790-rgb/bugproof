@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "Toda app que cobra dinero necesita una base de datos detras. Cuando entiendes por que importan las bases de datos, puedes vibecodear apps que realmente mantengan seguros los datos de usuarios y soporten picos de trafico el dia del lanzamiento -- la diferencia entre un proyecto de hobby y un negocio real."
+      "body": "Toda app que cobra dinero necesita una base de datos detrás. Cuando entiendes por qué importan las bases de datos, puedes vibecodear apps que realmente mantengan seguros los datos de usuarios y soporten picos de tráfico el día del lanzamiento -- la diferencia entre un proyecto de hobby y un negocio real."
     },
     {
       "type": "key_takeaway",
@@ -55,7 +55,7 @@
         "id": "card-3",
         "content": "Si tu aplicación solo tiene unos pocos usuarios, no necesitas una base de datos -- un archivo está bien.",
         "isGoodPractice": false,
-        "explanation": "Incluso las aplicaciones pequeñas se benefician de las bases de datos. ¿Qué pasa cuando tu archivo se corrompe? ¿Cuando dos peticiones ocurren simultáneamente? ¿Cuando necesitas encontrar registros por diferentes criterios? Las bases de datos manejan todo esto. La sobrecarga de usar una es mínima comparada con los problemas que previene."
+        "explanation": "Incluso las aplicaciones pequeñas se benefician de las bases de datos. ¿Qué pasa cuando tu archivo se corrompe? ¿Cuándo dos peticiones ocurren simultáneamente? ¿Cuándo necesitas encontrar registros por diferentes criterios? Las bases de datos manejan todo esto. La sobrecarga de usar una es mínima comparada con los problemas que previene."
       },
       {
         "id": "card-4",

@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Modo Dev = Borrador de Email, Modo Build = Email Enviado",
-      "body": "Escribir un borrador de email es como el modo dev -- puedes ajustarlo, corregir errores y reorganizar parrafos sin consecuencias. Pero una vez que das click en 'Enviar,' es modo build -- el email esta pulido, final, y ahi afuera para que personas reales lo lean. No enviarias un borrador a medio escribir a tu jefe, y no desplegarias modo dev a tus usuarios."
+      "body": "Escribir un borrador de email es como el modo dev -- puedes ajustarlo, corregir errores y reorganizar párrafos sin consecuencias. Pero una vez que das click en 'Enviar,' es modo build -- el email esta pulido, final, y ahí afuera para que personas reales lo lean. No enviarias un borrador a medio escribir a tu jefe, y no desplegarias modo dev a tus usuarios."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Los usuarios abandonan una app lenta en segundos. Entender build vs dev significa que tu app creada con IA carga rapido y se siente profesional -- que es la diferencia entre un proyecto de juguete y un producto por el que la gente paga."
+      "body": "Los usuarios abandonan una app lenta en segundos. Entender build vs dev significa que tu app creada con IA carga rápido y se siente profesional -- que es la diferencia entre un proyecto de juguete y un producto por el que la gente paga."
     },
     {
       "type": "key_takeaway",

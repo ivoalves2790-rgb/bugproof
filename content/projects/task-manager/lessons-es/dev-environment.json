@@ -6,44 +6,44 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Un buen entorno de desarrollo te ahorra horas de frustracion. Igual que un chef prepara su estacion antes de cocinar, configurar tus herramientas antes de escribir codigo hace todo mas fluido. Desliza a la derecha en practicas solidas de configuracion, a la izquierda en habitos que te van a ralentizar.",
+  "intro": "Un buen entorno de desarrollo te ahorra horas de frustracion. Igual que un chef prepara su estacion antes de cocinar, configurar tus herramientas antes de escribir código hace todo más fluido. Desliza a la derecha en practicas solidas de configuración, a la izquierda en habitos que te van a ralentizar.",
   "teach": [
     {
       "type": "text",
       "title": "Tu Espacio de Trabajo Importa",
-      "body": "Antes de escribir una sola linea de codigo, tu entorno de desarrollo necesita estar listo. Esto significa tener Node.js instalado, un buen editor de codigo (VS Code es el estandar), y una terminal con la que te sientas comodo. Saltarte este paso es como intentar cocinar en una cocina sin cuchillos."
+      "body": "Antes de escribir una sola línea de código, tu entorno de desarrollo necesita estar listo. Esto significa tener Node.js instalado, un buen editor de código (VS Code es el estandar), y una terminal con la que te sientas comodo. Saltarte este paso es como intentar cocinar en una cocina sin cuchillos."
     },
     {
       "type": "analogy",
       "title": "El Mise en Place del Chef",
-      "body": "En las cocinas profesionales, los chefs practican el 'mise en place' — todo en su lugar antes de cocinar. Los ingredientes estan preparados, las herramientas acomodadas, las estaciones limpias. Configurar tu entorno de desarrollo es tu mise en place. Picas la cebolla (instalas Node), afilas los cuchillos (configuras VS Code) y precalientas el horno (configuras Git) ANTES de empezar a cocinar codigo."
+      "body": "En las cocinas profesionales, los chefs practican el 'mise en place' — todo en su lugar antes de cocinar. Los ingredientes estan preparados, las herramientas acomodadas, las estaciones limpias. Configurar tu entorno de desarrollo es tu mise en place. Picas la cebolla (instalas Node), afilas los cuchillos (configuras VS Code) y precalientas el horno (configuras Git) ANTES de empezar a cocinar código."
     },
     {
       "type": "analogy",
       "title": "La Partitura de la Orquesta",
-      "body": "Imagina una orquesta donde cada musico toca con una version diferente de la partitura. Los violines estan en una tonalidad, los chelos en otra, y el baterista esta tocando una cancion completamente diferente. Los archivos de configuracion como `.nvmrc` y `.editorconfig` son la partitura compartida de tu equipo — aseguran que todos esten tocando la misma melodia, en la misma tonalidad, al mismo ritmo."
+      "body": "Imagina una orquesta donde cada musico toca con una versión diferente de la partitura. Los violines estan en una tonalidad, los chelos en otra, y el baterista esta tocando una canción completamente diferente. Los archivos de configuración como `.nvmrc` y `.editorconfig` son la partitura compartida de tu equipo — aseguran que todos esten tocando la misma melodia, en la misma tonalidad, al mismo ritmo."
     },
     {
       "type": "text",
       "title": "La Consistencia Es Clave",
-      "body": "Los equipos profesionales usan herramientas como archivos `.nvmrc` para fijar la version de Node.js, `.editorconfig` para formato consistente, y scripts en `package.json` para que cada desarrollador ejecute los mismos comandos. Estos pequenos archivos previenen el clasico problema de 'funciona en mi maquina'."
+      "body": "Los equipos profesionales usan herramientas como archivos `.nvmrc` para fijar la versión de Node.js, `.editorconfig` para formato consistente, y scripts en `package.json` para que cada desarrollador ejecute los mismos comandos. Estos pequeños archivos previenen el clásico problema de 'funciona en mi máquina'."
     },
     {
       "type": "motivation",
-      "body": "Un entorno de desarrollo limpio significa que puedes ir de idea a prototipo funcional en horas, no dias. Cuando detectas una oportunidad para construir algo que la gente quiere, la velocidad lo es todo — y tu configuracion es la plataforma de lanzamiento."
+      "body": "Un entorno de desarrollo limpio significa que puedes ir de idea a prototipo funcional en horas, no dias. Cuando detectas una oportunidad para construir algo que la gente quiere, la velocidad lo es todo — y tu configuración es la plataforma de lanzamiento."
     },
     {
       "type": "key_takeaway",
-      "body": "Invierte 30 minutos configurando tu entorno correctamente y ahorraras horas depurando problemas extranos despues. Usa un gestor de versiones para Node.js, elige un editor y aprendelo bien, y siempre verifica que tus herramientas esten actualizadas."
+      "body": "Invierte 30 minutos configurando tu entorno correctamente y ahorraras horas depurando problemas extranos después. Usa un gestor de versiones para Node.js, elige un editor y aprendelo bien, y siempre verifica que tus herramientas esten actualizadas."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "node-version-manager",
-        "content": "Usa nvm o fnm para gestionar tu version de Node.js para poder cambiar entre proyectos facilmente",
+        "content": "Usa nvm o fnm para gestionar tu versión de Node.js para poder cambiar entre proyectos fácilmente",
         "isGoodPractice": true,
-        "explanation": "Los gestores de versiones te permiten fijar la version exacta de Node.js por proyecto. Diferentes proyectos pueden necesitar diferentes versiones, y un gestor de versiones hace el cambio sin dolor."
+        "explanation": "Los gestores de versiones te permiten fijar la versión exacta de Node.js por proyecto. Diferentes proyectos pueden necesitar diferentes versiones, y un gestor de versiones hace el cambio sin dolor."
       },
       {
         "id": "global-install-everything",
@@ -53,33 +53,33 @@
       },
       {
         "id": "vscode-extensions",
-        "content": "Instala las extensiones de ESLint y Prettier en VS Code para formato automatico de codigo y deteccion de errores",
+        "content": "Instala las extensiones de ESLint y Prettier en VS Code para formato automático de código y deteccion de errores",
         "isGoodPractice": true,
-        "explanation": "Estas extensiones detectan errores mientras escribes y mantienen tu codigo formateado de manera consistente. Se pagan solas en minutos."
+        "explanation": "Estas extensiones detectan errores mientras escribes y mantienen tu código formateado de manera consistente. Se pagan solas en minutos."
       },
       {
         "id": "skip-git-config",
-        "content": "Omite configurar tu nombre de usuario y email de git porque siempre puedes hacerlo despues",
+        "content": "Omite configurar tu nombre de usuario y email de git porque siempre puedes hacerlo después",
         "isGoodPractice": false,
         "explanation": "Git no te dejara hacer commit sin un nombre y email. Configurar esto primero evita un mensaje de error confuso en el momento en que intentes hacer tu primer commit."
       },
       {
         "id": "check-node-version",
-        "content": "Ejecuta 'node --version' y 'npm --version' para verificar que todo esta instalado correctamente antes de empezar un proyecto",
+        "content": "Ejecuta 'node --versión' y 'npm --versión' para verificar que todo esta instalado correctamente antes de empezar un proyecto",
         "isGoodPractice": true,
-        "explanation": "Una verificacion rapida de version toma 5 segundos y puede salvarte de errores misteriosos de compilacion causados por herramientas desactualizadas o faltantes."
+        "explanation": "Una verificacion rápida de versión toma 5 segundos y puede salvarte de errores misteriosos de compilación causados por herramientas desactualizadas o faltantes."
       },
       {
         "id": "random-node-version",
-        "content": "Descarga cualquier version de Node.js que aparezca primero en Google e instalala sin verificar compatibilidad",
+        "content": "Descarga cualquier versión de Node.js que aparezca primero en Google e instalala sin verificar compatibilidad",
         "isGoodPractice": false,
-        "explanation": "Next.js requiere versiones minimas especificas de Node.js. Tomar una version al azar puede llevar a errores crípticos. Siempre revisa la documentacion para la version recomendada."
+        "explanation": "Next.js requiere versiones mínimas especificas de Node.js. Tomar una versión al azar puede llevar a errores crípticos. Siempre revisa la documentación para la versión recomendada."
       },
       {
         "id": "nvmrc-file",
-        "content": "Agrega un archivo .nvmrc a tu proyecto para que los companeros de equipo usen automaticamente la version correcta de Node.js",
+        "content": "Agrega un archivo .nvmrc a tu proyecto para que los companeros de equipo usen automáticamente la versión correcta de Node.js",
         "isGoodPractice": true,
-        "explanation": "Un archivo .nvmrc documenta la version exacta de Node.js que tu proyecto necesita. Cuando un companero ejecuta 'nvm use', selecciona la version correcta automaticamente."
+        "explanation": "Un archivo .nvmrc documenta la versión exacta de Node.js que tu proyecto necesita. Cuando un companero ejecuta 'nvm use', selecciona la versión correcta automáticamente."
       }
     ],
     "glossaryTerms": ["node-js", "npm", "dev-environment"]

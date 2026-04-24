@@ -1,21 +1,21 @@
 {
   "slug": "auth-flows",
-  "title": "Flujos de Autenticacion Explicados",
+  "title": "Flujos de Autenticación Explicados",
   "type": "swipe_to_judge",
   "difficulty": 2,
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Hay varias formas de manejar la autenticacion — JWTs, sesiones, OAuth. Piensa en ellas como diferentes maneras de demostrar tu identidad en un club: una pulsera, una verificacion de ID o un amigo que responde por ti. Cada una tiene sus ventajas y desventajas. Desliza a la derecha en las afirmaciones correctas, a la izquierda en los conceptos erroneos.",
+  "intro": "Hay varias formas de manejar la autenticación — JWTs, sesiones, OAuth. Piensa en ellas como diferentes maneras de demostrar tu identidad en un club: una pulsera, una verificacion de ID o un amigo que responde por ti. Cada una tiene sus ventajas y desventajas. Desliza a la derecha en las afirmaciones correctas, a la izquierda en los conceptos erroneos.",
   "teach": [
     {
       "type": "text",
       "title": "Los Tres Grandes Patrones de Auth",
-      "body": "La autenticacion basada en sesiones almacena un ID de sesion en una cookie y mantiene los datos del usuario en el servidor. JWT (JSON Web Tokens) codifica la informacion del usuario en un token firmado que el cliente almacena. OAuth permite a los usuarios iniciar sesion con una cuenta existente como Google o GitHub, para que nunca manejes su contrasena."
+      "body": "La autenticación basada en sesiones almacena un ID de sesión en una cookie y mantiene los datos del usuario en el servidor. JWT (JSON Web Tokens) codifica la información del usuario en un token firmado que el cliente almacena. OAuth permite a los usuarios iniciar sesión con una cuenta existente como Google o GitHub, para que nunca manejes su contrasena."
     },
     {
       "type": "code_example",
-      "title": "JWT vs Cookie de Sesion",
+      "title": "JWT vs Cookie de Sesión",
       "language": "text",
       "code": "Session: Browser sends cookie → Server looks up session in DB → Returns user data\n\nJWT: Browser sends token in header → Server decodes token (no DB lookup) → Returns user data\n\nOAuth: User clicks 'Sign in with Google' → Google verifies identity → Your app gets a token",
       "annotation": "Cada enfoque tiene diferentes ventajas y desventajas en cuanto a escalabilidad, seguridad y complejidad."
@@ -27,26 +27,26 @@
     },
     {
       "type": "motivation",
-      "body": "Entender los flujos de auth significa que puedes ofrecer login con Google y GitHub — la experiencia de registro que los usuarios esperan de productos profesionales. Menos friccion al registrarse significa mas usuarios, y mas usuarios significa mas ingresos."
+      "body": "Entender los flujos de auth significa que puedes ofrecer login con Google y GitHub — la experiencia de registro que los usuarios esperan de productos profesionales. Menos friccion al registrarse significa más usuarios, y más usuarios significa más ingresos."
     },
     {
       "type": "key_takeaway",
-      "body": "Para la mayoria de las apps, usar un proveedor de autenticacion con soporte OAuth es el camino mas facil y seguro. Obtienes login con Google/GitHub y no necesitas gestionar contrasenas tu mismo."
+      "body": "Para la mayoria de las apps, usar un proveedor de autenticación con soporte OAuth es el camino más fácil y seguro. Obtienes login con Google/GitHub y no necesitas gestionar contrasenas tu mismo."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Los JWTs no tienen estado — el servidor no necesita almacenar datos de sesion en una base de datos para verificarlos",
+        "content": "Los JWTs no tienen estado — el servidor no necesita almacenar datos de sesión en una base de datos para verificarlos",
         "isGoodPractice": true,
-        "explanation": "Correcto. Los JWTs contienen toda la informacion necesaria para verificar al usuario, codificada y firmada. El servidor solo verifica la firma sin una consulta a la base de datos."
+        "explanation": "Correcto. Los JWTs contienen toda la información necesaria para verificar al usuario, codificada y firmada. El servidor solo verifica la firma sin una consulta a la base de datos."
       },
       {
         "id": "c2",
-        "content": "Deberias almacenar los JWTs en localStorage porque es el enfoque mas simple",
+        "content": "Deberias almacenar los JWTs en localStorage porque es el enfoque más simple",
         "isGoodPractice": false,
-        "explanation": "localStorage es vulnerable a ataques XSS. Cualquier JavaScript en la pagina puede leerlo. Prefiere cookies httpOnly a las que JavaScript no puede acceder."
+        "explanation": "localStorage es vulnerable a ataques XSS. Cualquier JavaScript en la página puede leerlo. Prefiere cookies httpOnly a las que JavaScript no puede acceder."
       },
       {
         "id": "c3",
@@ -58,17 +58,17 @@
         "id": "c4",
         "content": "Una vez que un JWT es emitido, no hay forma de revocarlo antes de que expire",
         "isGoodPractice": true,
-        "explanation": "Esta es una desventaja real de los JWTs. Como no tienen estado, no puedes invalidarlos facilmente. Existen soluciones alternativas (listas de bloqueo, expiracion corta) pero agregan complejidad."
+        "explanation": "Esta es una desventaja real de los JWTs. Como no tienen estado, no puedes invalidarlos fácilmente. Existen soluciones alternativas (listas de bloqueo, expiracion corta) pero agregan complejidad."
       },
       {
         "id": "c5",
-        "content": "La autenticacion basada en sesiones esta obsoleta y nunca deberia usarse en apps modernas",
+        "content": "La autenticación basada en sesiones esta obsoleta y nunca deberia usarse en apps modernas",
         "isGoodPractice": false,
-        "explanation": "Las sesiones todavia se usan ampliamente y funcionan muy bien para apps renderizadas en el servidor. Son faciles de revocar y bien entendidas. La eleccion correcta depende de tu arquitectura."
+        "explanation": "Las sesiones todavia se usan ampliamente y funcionan muy bien para apps renderizadas en el servidor. Son fáciles de revocar y bien entendidas. La eleccion correcta depende de tu arquitectura."
       },
       {
         "id": "c6",
-        "content": "Los refresh tokens permiten mantener las sesiones activas sin hacer que el usuario inicie sesion de nuevo cada pocos minutos",
+        "content": "Los refresh tokens permiten mantener las sesiones activas sin hacer que el usuario inicie sesión de nuevo cada pocos minutos",
         "isGoodPractice": true,
         "explanation": "Los refresh tokens son tokens de larga duracion usados para obtener nuevos tokens de acceso de corta duracion. Esto equilibra la seguridad (ventanas de acceso cortas) con la experiencia del usuario (no tener que re-autenticarse constantemente)."
       }

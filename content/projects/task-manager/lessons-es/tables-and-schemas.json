@@ -6,12 +6,12 @@
   "xpReward": 10,
   "chapterSlug": "database",
   "projectSlug": "task-manager",
-  "intro": "Disenar el esquema de tu base de datos es como dibujar un plano antes de construir una casa. Desliza a la derecha en buenas practicas de diseno de esquemas, a la izquierda en malas.",
+  "intro": "Disenar el esquema de tu base de datos es como dibujar un plano antes de construir una casa. Desliza a la derecha en buenas practicas de diseño de esquemas, a la izquierda en malas.",
   "teach": [
     {
       "type": "text",
       "title": "Disenando el Esquema de Tu Gestor de Tareas",
-      "body": "Un esquema define la **estructura** de tu base de datos: que tablas existen, que columnas tiene cada tabla y que tipo de datos contiene cada columna. Para nuestro gestor de tareas, necesitamos decidir: Que informacion tiene una tarea? Como se relacionan las tareas con los usuarios? Hacer esto bien ahora ahorra horas de refactorizacion dolorosa despues."
+      "body": "Un esquema define la **estructura** de tu base de datos: que tablas existen, que columnas tiene cada tabla y que tipo de datos contiene cada columna. Para nuestro gestor de tareas, necesitamos decidir: Que información tiene una tarea? Como se relacionan las tareas con los usuarios? Hacer esto bien ahora ahorra horas de refactorizacion dolorosa después."
     },
     {
       "type": "code_example",
@@ -23,11 +23,11 @@
     {
       "type": "analogy",
       "title": "Un Esquema Es Como una Plantilla de Hoja de Calculo",
-      "body": "Imagina crear una plantilla de hoja de calculo para rastrear gastos: la columna A siempre es la fecha, la columna B es el monto, la columna C es la categoria. No dejarias que alguien ponga un nombre donde va el monto. Un esquema de base de datos funciona igual — fija los tipos de columna y las reglas para que no se cuelen datos basura. La plantilla mantiene a todos honestos."
+      "body": "Imagina crear una plantilla de hoja de calculo para rastrear gastos: la columna A siempre es la fecha, la columna B es el monto, la columna C es la categoría. No dejarias que alguien ponga un nombre donde va el monto. Un esquema de base de datos funciona igual — fija los tipos de columna y las reglas para que no se cuelen datos basura. La plantilla mantiene a todos honestos."
     },
     {
       "type": "motivation",
-      "body": "Un esquema bien disenado es la base de toda app exitosa. Haz bien tu estructura de datos, y cada funcionalidad que construyas encima sera mas facil — lo que significa que lanzas mas rapido y empiezas a ganar antes."
+      "body": "Un esquema bien diseñado es la base de toda app exitosa. Haz bien tu estructura de datos, y cada funcionalidad que construyas encima sera más fácil — lo que significa que lanzas más rápido y empiezas a ganar antes."
     },
     {
       "type": "key_takeaway",
@@ -38,9 +38,9 @@
     "cards": [
       {
         "id": "uuid-primary-key",
-        "content": "Usar un UUID como clave primaria para tareas en lugar de un numero auto-incremental simple",
+        "content": "Usar un UUID como clave primaria para tareas en lugar de un número auto-incremental simple",
         "isGoodPractice": true,
-        "explanation": "Los UUIDs son globalmente unicos y no revelan cuantos registros existen. Son el estandar para apps modernas y funcionan bien con el sistema de autenticacion de Supabase."
+        "explanation": "Los UUIDs son globalmente únicos y no revelan cuantos registros existen. Son el estandar para apps modernas y funcionan bien con el sistema de autenticación de Supabase."
       },
       {
         "id": "no-not-null",
@@ -56,15 +56,15 @@
       },
       {
         "id": "store-everything-in-one-table",
-        "content": "Poner informacion de usuarios, datos de tareas y configuracion todo en una tabla masiva para mantenerlo simple",
+        "content": "Poner información de usuarios, datos de tareas y configuración todo en una tabla masiva para mantenerlo simple",
         "isGoodPractice": false,
-        "explanation": "Esto crea un enredo. Tablas separadas para preocupaciones separadas — usuarios, tareas y configuracion cada uno obtiene su propia tabla, conectadas por claves foraneas."
+        "explanation": "Esto crea un enredo. Tablas separadas para preocupaciones separadas — usuarios, tareas y configuración cada uno obtiene su propia tabla, conectadas por claves foraneas."
       },
       {
         "id": "created-at",
         "content": "Agregar una columna de marca de tiempo created_at con un valor por defecto de now() para saber cuando se creo cada tarea",
         "isGoodPractice": true,
-        "explanation": "Las marcas de tiempo son esenciales para ordenar, depurar y auditar. Establecer un valor por defecto significa que nunca tienes que pasar manualmente el tiempo de creacion."
+        "explanation": "Las marcas de tiempo son esenciales para ordenar, depurar y auditar. Establecer un valor por defecto significa que nunca tienes que pasar manualmente el tiempo de creación."
       },
       {
         "id": "string-for-dates",

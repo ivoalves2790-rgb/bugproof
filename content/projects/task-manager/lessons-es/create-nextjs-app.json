@@ -6,35 +6,35 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Estas listo para crear el proyecto de Next.js para tu gestor de tareas. Es como elegir tu equipo de seguridad antes de escalar — las elecciones que hagas durante la configuracion determinaran lo facil que sera trabajar con el proyecto. Veamos como lo manejas.",
+  "intro": "Estas listo para crear el proyecto de Next.js para tu gestor de tareas. Es como elegir tu equipo de seguridad antes de escalar — las elecciones que hagas durante la configuración determinaran lo fácil que sera trabajar con el proyecto. Veamos como lo manejas.",
   "teach": [
     {
       "type": "text",
       "title": "create-next-app Hace el Trabajo Pesado",
-      "body": "El comando `npx create-next-app@latest` genera un proyecto completo de Next.js con valores predeterminados sensatos. Te hace una serie de preguntas sobre TypeScript, ESLint, Tailwind CSS y el App Router. Para nuestro gestor de tareas, queremos TypeScript (detecta bugs temprano), ESLint (detecta errores), Tailwind (estilos rapidos) y el App Router (la forma moderna de construir apps con Next.js)."
+      "body": "El comando `npx create-next-app@latest` genera un proyecto completo de Next.js con valores predeterminados sensatos. Te hace una serie de preguntas sobre TypeScript, ESLint, Tailwind CSS y el App Router. Para nuestro gestor de tareas, queremos TypeScript (detecta bugs temprano), ESLint (detecta errores), Tailwind (estilos rápidos) y el App Router (la forma moderna de construir apps con Next.js)."
     },
     {
       "type": "analogy",
       "title": "El Mueble de IKEA vs. Madera en Bruto",
-      "body": "Usar create-next-app es como comprar un mueble de IKEA — todas las piezas estan cortadas, los tornillos incluidos, y las instrucciones ahi mismo. La configuracion manual es como ir a una madereria y cortar cada pieza tu mismo. PUEDES hacerlo, pero por que lo harias cuando el kit te da un escritorio funcional en 30 minutos?"
+      "body": "Usar create-next-app es como comprar un mueble de IKEA — todas las piezas estan cortadas, los tornillos incluidos, y las instrucciones ahí mismo. La configuración manual es como ir a una madereria y cortar cada pieza tu mismo. PUEDES hacerlo, pero por qué lo harias cuando el kit te da un escritorio funcional en 30 minutos?"
     },
     {
       "type": "analogy",
       "title": "Elegir Tu Equipo de Seguridad Antes de Escalar",
-      "body": "Elegir TypeScript, ESLint y Tailwind durante la configuracion es como elegir casco, arnes y buenos zapatos antes de escalar una roca. PODRIAS escalar sin ellos, pero un resbalon y estas en problemas. Estas herramientas te atrapan cuando caes — TypeScript detecta errores de tipo, ESLint senala patrones malos y Tailwind mantiene tus estilos organizados. Ponte el equipo antes de empezar a escalar, no a mitad de la pared."
+      "body": "Elegir TypeScript, ESLint y Tailwind durante la configuración es como elegir casco, arnes y buenos zapatos antes de escalar una roca. PODRIAS escalar sin ellos, pero un resbalon y estas en problemas. Estas herramientas te atrapan cuando caes — TypeScript detecta errores de tipo, ESLint señala patrones malos y Tailwind mantiene tus estilos organizados. Ponte el equipo antes de empezar a escalar, no a mitad de la pared."
     },
     {
       "type": "text",
       "title": "Por Que Estos Valores Predeterminados Importan",
-      "body": "TypeScript agrega tipos a JavaScript, lo que significa que tu editor puede advertirte sobre bugs antes de que ejecutes el codigo. Tailwind CSS te permite dar estilo a componentes sin cambiar entre archivos. El App Router usa el directorio `app/` y te da layouts, estados de carga y componentes del servidor incluidos."
+      "body": "TypeScript agrega tipos a JavaScript, lo que significa que tu editor puede advertirte sobre bugs antes de que ejecutes el código. Tailwind CSS te permite dar estilo a componentes sin cambiar entre archivos. El App Router usa el directorio `app/` y te da layouts, estados de carga y componentes del servidor incluidos."
     },
     {
       "type": "motivation",
-      "body": "Acabas de aprender a crear un proyecto de nivel profesional en menos de un minuto. Los freelancers cobran a sus clientes cientos de dolares solo por la configuracion del proyecto — tu ahora puedes hacer esto dormido y empezar a construir el producto que genera ingresos."
+      "body": "Acabas de aprender a crear un proyecto de nivel profesional en menos de un minuto. Los freelancers cobran a sus clientes cientos de dolares solo por la configuración del proyecto — tu ahora puedes hacer esto dormido y empezar a construir el producto que genera ingresos."
     },
     {
       "type": "key_takeaway",
-      "body": "Siempre usa create-next-app para iniciar un proyecto de Next.js. Elige TypeScript, ESLint y Tailwind CSS. Estos no son extras opcionales — son herramientas que previenen bugs y ahorran tiempo desde el primer dia."
+      "body": "Siempre usa create-next-app para iniciar un proyecto de Next.js. Elige TypeScript, ESLint y Tailwind CSS. Estos no son extras opcionales — son herramientas que previenen bugs y ahorran tiempo desde el primer día."
     }
   ],
   "exercise": {
@@ -59,21 +59,21 @@
         "narrative": "Has instalado los paquetes manualmente, pero ahora no tienes archivos de configuracion, no tienes configuracion de TypeScript, no tienes linting ni estructura de proyecto. Necesitaras crear next.config.js, tsconfig.json y configurar ESLint manualmente. Que haces?",
         "choices": [
           { "id": "scrap-use-cli", "text": "Eliminar esta carpeta y usar create-next-app en su lugar", "nextNode": "recovery-end", "score": 3 },
-          { "id": "configure-manually", "text": "Pasar la proxima hora configurando todo a mano", "nextNode": "manual-end", "score": 1 }
+          { "id": "configure-manually", "text": "Pasar la próxima hora configurando todo a mano", "nextNode": "manual-end", "score": 1 }
         ]
       },
       "cloned-template": {
         "narrative": "Clonaste una plantilla de 2022. Usa el Pages Router (patron obsoleto), tiene 47 dependencias que no entiendes, y el README dice 'Trabajo en progreso, no usar en produccion.' El codigo no coincide con ningun tutorial actual de Next.js.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Clonar plantillas aleatorias te da la deuda tecnica de otra persona y patrones obsoletos. create-next-app siempre te da la ultima configuracion estable sin equipaje. Empieza de cero.",
+        "feedback": "Clonar plantillas aleatorias te da la deuda técnica de otra persona y patrones obsoletos. create-next-app siempre te da la última configuración estable sin equipaje. Empieza de cero.",
         "choices": []
       },
       "good-setup": {
         "narrative": "Tu proyecto esta creado con TypeScript, ESLint, Tailwind y el App Router. Ejecutas 'npm run dev' y ves la pagina de bienvenida de Next.js en localhost:3000. Limpio, moderno, listo para construir.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Excelentes elecciones. TypeScript detecta bugs en tiempo de compilacion, ESLint refuerza la calidad del codigo, Tailwind acelera el estilizado, y el App Router es el futuro de Next.js. Estas preparado para el exito.",
+        "feedback": "Excelentes elecciones. TypeScript detecta bugs en tiempo de compilación, ESLint refuerza la calidad del código, Tailwind acelera el estilizado, y el App Router es el futuro de Next.js. Estas preparado para el éxito.",
         "choices": []
       },
       "no-ts-end": {
@@ -87,14 +87,14 @@
         "narrative": "Movimiento inteligente. Eliminas la configuracion manual, ejecutas create-next-app, y en 30 segundos tienes un proyecto completamente configurado. El CLI se encargo de todos los archivos de configuracion que habrias tardado una hora en escribir.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Reconocer cuando has tomado el camino dificil y cambiar al mas facil es una habilidad valiosa. create-next-app existe para que no tengas que configurar boilerplate a mano.",
+        "feedback": "Reconocer cuando has tomado el camino difícil y cambiar al más fácil es una habilidad valiosa. create-next-app existe para que no tengas que configurar boilerplate a mano.",
         "choices": []
       },
       "manual-end": {
         "narrative": "Despues de una hora de configuracion, tienes un setup funcional. Pero a tu tsconfig.json le faltan algunas opciones del compilador que create-next-app incluye, y tu configuracion de ESLint no tiene las reglas especificas de Next.js. Bugs sutiles se colaran despues.",
         "isEnd": true,
         "finalScore": 2,
-        "feedback": "La configuracion manual es educativa pero impractica para proyectos reales. El CLI oficial es mantenido por el equipo de Next.js e incluye configuraciones ajustadas para su framework. Usalo.",
+        "feedback": "La configuración manual es educativa pero impractica para proyectos reales. El CLI oficial es mantenido por el equipo de Next.js e incluye configuraciones ajustadas para su framework. Usalo.",
         "choices": []
       }
     },

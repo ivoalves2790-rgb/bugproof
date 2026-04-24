@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Las Ranuras de la Maquina Expendedora",
-      "body": "Los tipos de datos son como las ranuras de una maquina expendedora. La **ranura de monedas** solo acepta monedas (enteros), la **ranura de billetes** solo acepta papel moneda (texto), y el **lector de tarjetas** solo acepta tarjetas de credito (decimales con precision). Si intentas meter una moneda en el lector de tarjetas, se traba. Cada ranura esta hecha para un tipo de entrada, y eso es lo que mantiene la maquina funcionando bien."
+      "body": "Los tipos de datos son como las ranuras de una máquina expendedora. La **ranura de monedas** solo acepta monedas (enteros), la **ranura de billetes** solo acepta papel moneda (texto), y el **lector de tarjetas** solo acepta tarjetas de credito (decimales con precision). Si intentas meter una moneda en el lector de tarjetas, se traba. Cada ranura esta hecha para un tipo de entrada, y eso es lo que mantiene la máquina funcionando bien."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Elegir bien los tipos de datos es lo que separa las apps que pierden dinero de las que lo ganan. Si tu columna de precio pierde los centavos, literalmente estas perdiendo ingresos en cada transaccion. Domina esto y tus apps vibecodeadas manejaran pagos correctamente desde el primer dia."
+      "body": "Elegir bien los tipos de datos es lo que separa las apps que pierden dinero de las que lo ganan. Si tu columna de precio pierde los centavos, literalmente estas perdiendo ingresos en cada transaccion. Domina esto y tus apps vibecodeadas manejaran pagos correctamente desde el primer día."
     },
     {
       "type": "key_takeaway",

@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Primer Despliegue = Abrir Tu Puesto de Limonada",
-      "body": "Recuerdas montar un puesto de limonada de nino? Hiciste la limonada (escribiste el codigo), montaste la mesa en la banqueta (elegiste una plataforma de hosting) y pusiste un letrero (obtuviste tu URL). Tu primer despliegue es exactamente asi -- no tiene que ser perfecto, pero en el momento en que abres al publico, aprendes cosas que nunca habrias aprendido solo haciendo limonada en la cocina."
+      "body": "Recuerdas montar un puesto de limonada de niño? Hiciste la limonada (escribiste el código), montaste la mesa en la banqueta (elegiste una plataforma de hosting) y pusiste un letrero (obtuviste tu URL). Tu primer despliegue es exactamente así -- no tiene que ser perfecto, pero en el momento en que abres al publico, aprendes cosas que nunca habrías aprendido solo haciendo limonada en la cocina."
     },
     {
       "type": "text",
@@ -53,7 +53,7 @@
         "expectedCommand": "npm run build",
         "acceptAlternatives": [],
         "output": "Creating an optimized production build...\nCompiled successfully.\n\nFile sizes after gzip:\n  45.2 KB  build/static/js/main.js\n  1.7 KB   build/static/css/main.css\n\nThe build folder is ready to be deployed.",
-        "hint": "Run the build command that creates an optimized production version of your app."
+        "hint": "Run the build command that creates an optimized production versión of your app."
       },
       {
         "instruction": "The build succeeded. Now install the Vercel CLI so you can deploy from the terminal.",
@@ -77,7 +77,7 @@
         "hint": "Add the --prod flag to deploy to production."
       }
     ],
-    "completionMessage": "Your app is live on the internet! Anyone can visit your URL and see your project. From now on, every time you push to main, Vercel will automatically deploy the latest version.",
+    "completionMessage": "Your app is live on the internet! Anyone can visit your URL and see your project. From now on, every time you push to main, Vercel will automatically deploy the latest versión.",
     "glossaryTerms": ["vercel", "deploy", "production"]
   }
 }

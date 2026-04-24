@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "DNS Es Como un GPS para Internet",
-      "body": "Cuando escribes una direccion en el GPS de tu auto, no sabe magicamente donde esta la 'Calle Olmo 123' -- la busca en una enorme base de datos de mapas y te da direcciones. **DNS** hace lo mismo con las direcciones web. Escribes 'youtube.com' y DNS lo busca en su directorio masivo, luego apunta tu navegador al servidor correcto. Sin DNS, tendrias que memorizar las coordenadas de cada lugar que quieras visitar."
+      "body": "Cuando escribes una dirección en el GPS de tu auto, no sabe magicamente donde esta la 'Calle Olmo 123' -- la busca en una enorme base de datos de mapas y te da direcciones. **DNS** hace lo mismo con las direcciones web. Escribes 'youtube.com' y DNS lo busca en su directorio masivo, luego apunta tu navegador al servidor correcto. Sin DNS, tendrías que memorizar las coordenadas de cada lugar que quieras visitar."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "Cuando lanzas una app y compras un dominio, DNS es lo que conecta tu marca con tu servidor real. Entender DNS significa que puedes vibecodear, desplegar y salir al aire sin entrar en panico cuando tu dominio no funciona de inmediato."
+      "body": "Cuando lanzas una app y compras un dominio, DNS es lo que conecta tu marca con tu servidor real. Entender DNS significa que puedes vibecodear, desplegar y salir al aire sin entrar en pánico cuando tu dominio no funciona de inmediato."
     },
     {
       "type": "key_takeaway",

@@ -11,17 +11,17 @@
     {
       "type": "analogy",
       "title": "Terminal de VS Code = Un Banco de Trabajo Integrado en Tu Garaje",
-      "body": "Imagina un garaje donde el banco de trabajo esta integrado en la pared, justo al lado de tus herramientas. No tienes que caminar a un cuarto separado para cortar madera o taladrar agujeros -- solo miras abajo y ahi esta. La **terminal integrada de VS Code** es ese banco de trabajo integrado. Tu codigo esta arriba (el editor), tu terminal esta abajo (el banco de trabajo). Ves tu codigo y ejecutas comandos sin cambiar de ventana. Todo esta justo ahi."
+      "body": "Imagina un garaje donde el banco de trabajo esta integrado en la pared, justo al lado de tus herramientas. No tienes que caminar a un cuarto separado para cortar madera o taladrar agujeros -- solo miras abajo y ahí esta. La **terminal integrada de VS Code** es ese banco de trabajo integrado. Tu código esta arriba (el editor), tu terminal esta abajo (el banco de trabajo). Ves tu código y ejecutas comandos sin cambiar de ventana. Todo esta justo ahí."
     },
     {
       "type": "analogy",
       "title": "Terminal Integrada = Un Walkie-Talkie Adjunto a Tu Kit de Herramientas",
-      "body": "Imagina un trabajador de construccion con un **walkie-talkie enganchado en su cinturon**. Esta construyendo algo con sus manos mientras habla con el equipo al mismo tiempo -- no necesita dejar de trabajar e ir a buscar un telefono. La terminal de VS Code es ese walkie-talkie. Estas editando codigo (trabajando con tus manos) y ejecutando comandos (hablando con el sistema) simultaneamente, sin soltar tus herramientas."
+      "body": "Imagina un trabajador de construcción con un **walkie-talkie enganchado en su cinturon**. Esta construyendo algo con sus manos mientras habla con el equipo al mismo tiempo -- no necesita dejar de trabajar e ir a buscar un teléfono. La terminal de VS Code es ese walkie-talkie. Estas editando código (trabajando con tus manos) y ejecutando comandos (hablando con el sistema) simultáneamente, sin soltar tus herramientas."
     },
     {
       "type": "text",
       "title": "Esenciales de la terminal de VS Code",
-      "body": "Caracteristicas clave de la terminal integrada de VS Code:\n\n- **Alternar terminal** -- Ctrl+` (acento grave) abre/cierra el panel de terminal\n- **Dividir terminal** -- Haz clic en el icono de dividir para ejecutar dos terminales lado a lado (ej., una para el servidor, otra para comandos)\n- **Multiples terminales** -- Haz clic en el icono + para abrir nuevas pestanas de terminal\n- **Pestanas de terminal** -- Cambia entre terminales usando el desplegable o las pestanas a la derecha\n- **Directorio automatico** -- La terminal se abre en la carpeta raiz de tu proyecto automaticamente"
+      "body": "Caracteristicas clave de la terminal integrada de VS Code:\n\n- **Alternar terminal** -- Ctrl+` (acento grave) abre/cierra el panel de terminal\n- **Dividir terminal** -- Haz clic en el icono de dividir para ejecutar dos terminales lado a lado (ej., una para el servidor, otra para comandos)\n- **Multiples terminales** -- Haz clic en el icono + para abrir nuevas pestanas de terminal\n- **Pestanas de terminal** -- Cambia entre terminales usando el desplegable o las pestanas a la derecha\n- **Directorio automático** -- La terminal se abre en la carpeta raíz de tu proyecto automáticamente"
     },
     {
       "type": "code_example",
@@ -32,11 +32,11 @@
     },
     {
       "type": "motivation",
-      "body": "Los desarrolladores profesionales mantienen su terminal dentro de VS Code porque cambiar entre ventanas cuesta tiempo y rompe la concentracion. Cuando estas vibecodeando para un cliente con una fecha limite, cada segundo cuenta. Una ventana con codigo y terminal significa que entregas mas rapido, depuras mas rapido y ganas mas por hora."
+      "body": "Los desarrolladores profesionales mantienen su terminal dentro de VS Code porque cambiar entre ventanas cuesta tiempo y rompe la concentracion. Cuando estas vibecodeando para un cliente con una fecha limite, cada segundo cuenta. Una ventana con código y terminal significa que entregas más rápido, depuras más rápido y ganas más por hora."
     },
     {
       "type": "key_takeaway",
-      "body": "La terminal integrada de VS Code te permite escribir codigo y ejecutar comandos en la misma ventana. Usa Ctrl+` para alternarla, divide terminales para ejecutar multiples tareas, y aprovecha las pestanas de terminal para organizar tu flujo de trabajo."
+      "body": "La terminal integrada de VS Code te permite escribir código y ejecutar comandos en la misma ventana. Usa Ctrl+` para alternarla, divide terminales para ejecutar multiples tareas, y aprovecha las pestanas de terminal para organizar tu flujo de trabajo."
     }
   ],
   "exercise": {
@@ -45,25 +45,25 @@
         "id": "card-1",
         "content": "Puedes abrir la terminal de VS Code con Ctrl+` (acento grave) para alternar el panel de terminal.",
         "isGoodPractice": true,
-        "explanation": "Ctrl+` (o Cmd+` en Mac) es el atajo de teclado predeterminado para alternar el panel de terminal integrada en VS Code. Es la forma mas rapida de mostrar u ocultar la terminal."
+        "explanation": "Ctrl+` (o Cmd+` en Mac) es el atajo de teclado predeterminado para alternar el panel de terminal integrada en VS Code. Es la forma más rápida de mostrar u ocultar la terminal."
       },
       {
         "id": "card-2",
         "content": "La terminal de VS Code siempre se abre en tu directorio home, sin importar que proyecto tengas abierto.",
         "isGoodPractice": false,
-        "explanation": "La terminal de VS Code automaticamente se abre en el directorio raiz de tu proyecto -- la carpeta que tienes abierta en VS Code. Esta es una de sus mayores ventajas sobre una ventana de terminal separada, porque no necesitas hacer cd a tu proyecto primero."
+        "explanation": "La terminal de VS Code automáticamente se abre en el directorio raíz de tu proyecto -- la carpeta que tienes abierta en VS Code. Esta es una de sus mayores ventajas sobre una ventana de terminal separada, porque no necesitas hacer cd a tu proyecto primero."
       },
       {
         "id": "card-3",
         "content": "Puedes dividir la terminal para ejecutar un servidor de desarrollo en un panel y escribir comandos en otro.",
         "isGoodPractice": true,
-        "explanation": "Las terminales divididas son increiblemente utiles. Una configuracion comun es ejecutar tu servidor de desarrollo en un panel dividido (que sigue corriendo) y usar el otro panel para comandos de git, instalar paquetes o ejecutar scripts."
+        "explanation": "Las terminales divididas son increiblemente útiles. Una configuración comun es ejecutar tu servidor de desarrollo en un panel dividido (que sigue corriendo) y usar el otro panel para comandos de git, instalar paquetes o ejecutar scripts."
       },
       {
         "id": "card-4",
-        "content": "La terminal integrada de VS Code es mas lenta y menos capaz que una aplicacion de terminal independiente.",
+        "content": "La terminal integrada de VS Code es más lenta y menos capaz que una aplicación de terminal independiente.",
         "isGoodPractice": false,
-        "explanation": "La terminal de VS Code ejecuta el mismo shell (bash, zsh, PowerShell) que tu terminal independiente. Tiene la misma velocidad y capacidades. La ventaja es la integracion con tu editor -- hacer clic en rutas de archivos en errores puede abrir el archivo directamente."
+        "explanation": "La terminal de VS Code ejecuta el mismo shell (bash, zsh, PowerShell) que tu terminal independiente. Tiene la misma velocidad y capacidades. La ventaja es la integración con tu editor -- hacer clic en rutas de archivos en errores puede abrir el archivo directamente."
       },
       {
         "id": "card-5",

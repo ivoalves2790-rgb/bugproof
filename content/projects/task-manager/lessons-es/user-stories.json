@@ -6,28 +6,28 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Las historias de usuario describen funcionalidades desde la perspectiva del usuario. Imagina pedir en un restaurante — mientras mas especifico sea tu pedido, mas probable es que recibas exactamente lo que quieres. Juzga si cada una esta bien escrita o necesita mejoras.",
+  "intro": "Las historias de usuario describen funcionalidades desde la perspectiva del usuario. Imagina pedir en un restaurante — mientras más especifico sea tu pedido, más probable es que recibas exactamente lo que quieres. Juzga si cada una esta bien escrita o necesita mejoras.",
   "teach": [
     {
       "type": "text",
       "title": "Que Son las Historias de Usuario?",
-      "body": "Una historia de usuario describe una funcionalidad desde la perspectiva de la persona que la usa. El formato es simple: **Como [usuario], quiero [accion], para que [beneficio]**. Esto te obliga a pensar en POR QUE existe una funcionalidad, no solo en que hace."
+      "body": "Una historia de usuario describe una funcionalidad desde la perspectiva de la persona que la usa. El formato es simple: **Como [usuario], quiero [acción], para que [beneficio]**. Esto te obliga a pensar en POR QUE existe una funcionalidad, no solo en que hace."
     },
     {
       "type": "analogy",
       "title": "Pidiendo en un Restaurante",
-      "body": "Imagina decirle al mesero 'traeme comida' vs. 'quiero el salmon a la parrilla, termino medio, con ensalada, sin cebolla.' Cuanto mas especifico tu pedido, mas probable que recibas exactamente lo que quieres. Las historias de usuario son tu forma de hacer un pedido preciso para las funcionalidades de tu app — quien tiene hambre, que quiere y por que le importa."
+      "body": "Imagina decirle al mesero 'traeme comida' vs. 'quiero el salmon a la parrilla, termino medio, con ensalada, sin cebolla.' Cuanto más especifico tu pedido, más probable que recibas exactamente lo que quieres. Las historias de usuario son tu forma de hacer un pedido preciso para las funcionalidades de tu app — quien tiene hambre, que quiere y por qué le importa."
     },
     {
       "type": "code_example",
       "title": "Ejemplos de Historias de Usuario",
       "language": "text",
       "code": "GOOD: \"As a user, I want to set a due date\n       on my tasks, so that I can prioritize\n       what needs to be done first.\"\n\nBAD:  \"Add a date picker component\"\n\nGOOD: \"As a user, I want to filter tasks by\n       status, so that I can focus on what's\n       in progress.\"\n\nBAD:  \"Implement filtering\"",
-      "annotation": "Los buenos ejemplos explican QUIEN lo quiere, QUE quiere y POR QUE. Los malos son solo tareas tecnicas sin contexto."
+      "annotation": "Los buenos ejemplos explican QUIEN lo quiere, QUE quiere y POR QUE. Los malos son solo tareas técnicas sin contexto."
     },
     {
       "type": "motivation",
-      "body": "Las apps que resuelven problemas reales consiguen clientes que pagan. Escribir historias de usuario te entrena a pensar como dueno de producto — la habilidad que separa a los aficionados de quienes lanzan apps rentables con IA."
+      "body": "Las apps que resuelven problemas reales consiguen clientes que pagan. Escribir historias de usuario te entrena a pensar como dueño de producto — la habilidad que separa a los aficionados de quienes lanzan apps rentables con IA."
     },
     {
       "type": "key_takeaway",
@@ -38,39 +38,39 @@
     "cards": [
       {
         "id": "good-create",
-        "content": "Como usuario, quiero crear tareas con un titulo y descripcion opcional, para poder capturar lo que necesito hacer",
+        "content": "Como usuario, quiero crear tareas con un titulo y descripción opcional, para poder capturar lo que necesito hacer",
         "isGoodPractice": true,
-        "explanation": "Usuario claro, accion clara, beneficio claro. Esta es una historia de usuario bien formada."
+        "explanation": "Usuario claro, acción clara, beneficio claro. Esta es una historia de usuario bien formada."
       },
       {
         "id": "bad-technical",
         "content": "Implementar un endpoint de API REST POST /api/tasks que acepte un cuerpo JSON",
         "isGoodPractice": false,
-        "explanation": "Este es un detalle de implementacion, no una historia de usuario. Describe COMO, no QUE o POR QUE."
+        "explanation": "Este es un detalle de implementación, no una historia de usuario. Describe COMO, no QUE o POR QUE."
       },
       {
         "id": "good-filter",
         "content": "Como usuario, quiero ver solo mis tareas incompletas, para poder enfocarme en lo que aun necesita hacerse",
         "isGoodPractice": true,
-        "explanation": "La clausula 'para que' explica por que importa el filtrado — se trata de enfoque, no solo de interfaz."
+        "explanation": "La clausula 'para que' explica por qué importa el filtrado — se trata de enfoque, no solo de interfaz."
       },
       {
         "id": "bad-vague",
         "content": "Los usuarios deberian poder hacer cosas con las tareas",
         "isGoodPractice": false,
-        "explanation": "Demasiado vago. Que cosas? 'Hacer cosas' podria significar cualquier cosa. Las historias de usuario necesitan acciones especificas."
+        "explanation": "Demasiado vago. Que cosas? 'Hacer cosas' podría significar cualquier cosa. Las historias de usuario necesitan acciones especificas."
       },
       {
         "id": "good-complete",
         "content": "Como usuario, quiero marcar tareas como completadas, para poder seguir mi progreso y sentirme realizado",
         "isGoodPractice": true,
-        "explanation": "Nota el beneficio emocional — 'sentirme realizado'. Entender la motivacion del usuario lleva a mejor diseno."
+        "explanation": "Nota el beneficio emocional — 'sentirme realizado'. Entender la motivacion del usuario lleva a mejor diseño."
       },
       {
         "id": "bad-no-why",
         "content": "Como usuario, quiero agregar etiquetas a las tareas",
         "isGoodPractice": false,
-        "explanation": "Falta la parte del 'para que'. Sin una razon, esto podria ser desvio de alcance. Por que necesitan etiquetas? Para organizar? Para buscar? La razon importa."
+        "explanation": "Falta la parte del 'para que'. Sin una razón, esto podría ser desvio de alcance. Por qué necesitan etiquetas? Para organizar? Para buscar? La razón importa."
       }
     ],
     "glossaryTerms": ["user-story", "requirements"]

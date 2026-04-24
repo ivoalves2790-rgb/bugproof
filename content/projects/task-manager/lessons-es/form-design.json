@@ -6,80 +6,80 @@
   "xpReward": 15,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Los formularios son como los usuarios crean y editan tareas. Piensa en un formulario como una ventanilla de autoservicio — los mejores son rapidos, claros y nunca te hacen repetir tu pedido. Un buen diseno de formularios reduce la friccion; un mal diseno hace que los usuarios abandonen con frustracion. Juzga si cada practica de formularios ayuda o perjudica la experiencia.",
+  "intro": "Los formularios son como los usuarios crean y editan tareas. Piensa en un formulario como una ventanilla de autoservicio — los mejores son rápidos, claros y nunca te hacen repetir tu pedido. Un buen diseño de formularios reduce la friccion; un mal diseño hace que los usuarios abandonen con frustracion. Juzga si cada practica de formularios ayuda o perjudica la experiencia.",
   "teach": [
     {
       "type": "text",
       "title": "Los Formularios Son la Puerta a Tus Datos",
-      "body": "Cada tarea en tu app empieza como un envio de formulario. Si el formulario de 'Agregar Tarea' es molesto, los usuarios evitaran agregar tareas — lo que anula todo el proposito de un gestor de tareas. El objetivo es hacer que la interaccion con el formulario se sienta **sin esfuerzo**: campos minimos, etiquetas claras, retroalimentacion instantanea."
+      "body": "Cada tarea en tu app empieza como un envio de formulario. Si el formulario de 'Agregar Tarea' es molesto, los usuarios evitaran agregar tareas — lo que anula todo el proposito de un gestor de tareas. El objetivo es hacer que la interaccion con el formulario se sienta **sin esfuerzo**: campos mínimos, etiquetas claras, retroalimentacion instantanea."
     },
     {
       "type": "analogy",
       "title": "Un Coach de Ortografia Atento",
-      "body": "Imagina escribir un ensayo y que tu profesor espere hasta el final, tache todo y diga 'habia errores.' Ahora imagina un coach que subraya cada error mientras escribes, para que lo corrijas en el momento. La buena validacion de formularios es como ese coach: resalta el campo exacto con el problema justo cuando ocurre, para que el usuario corrija algo pequeno en lugar de empezar de cero."
+      "body": "Imagina escribir un ensayo y que tu profesor espere hasta el final, tache todo y diga 'habia errores.' Ahora imagina un coach que subraya cada error mientras escribes, para que lo corrijas en el momento. La buena validación de formularios es como ese coach: resalta el campo exacto con el problema justo cuando ocurre, para que el usuario corrija algo pequeño en lugar de empezar de cero."
     },
     {
       "type": "text",
-      "title": "Validacion que Ayuda, No Castiga",
-      "body": "La validacion deberia guiar a los usuarios, no regañarlos. Muestra errores **en linea** junto al campo que tiene el problema, no en una alerta generica en la parte superior de la pagina. Valida al salir del campo (cuando el usuario deja un campo) para verificaciones de formato, y al enviar para campos requeridos. Nunca limpies el formulario completo cuando la validacion falla."
+      "title": "Validación que Ayuda, No Castiga",
+      "body": "La validación deberia guiar a los usuarios, no regañarlos. Muestra errores **en línea** junto al campo que tiene el problema, no en una alerta genérica en la parte superior de la página. Valida al salir del campo (cuando el usuario deja un campo) para verificaciones de formato, y al enviar para campos requeridos. Nunca limpies el formulario completo cuando la validación falla."
     },
     {
       "type": "analogy",
       "title": "Los Formularios Son Como una Ventanilla de Autoservicio",
-      "body": "Los mejores autoservicios tienen un menu corto, un altavoz claro y te repiten el pedido para confirmar. Los peores tienen 200 opciones, un altavoz roto y te hacen empezar de nuevo si cambias algo. Tus formularios deberian ser el carril rapido: pide solo lo necesario, confirma sobre la marcha y nunca castigues al usuario por un pequeno error."
+      "body": "Los mejores autoservicios tienen un menu corto, un altavoz claro y te repiten el pedido para confirmar. Los peores tienen 200 opciones, un altavoz roto y te hacen empezar de nuevo si cambias algo. Tus formularios deberian ser el carril rápido: pide solo lo necesario, confirma sobre la marcha y nunca castigues al usuario por un pequeño error."
     },
     {
       "type": "motivation",
-      "body": "Cada dolar que tu app gana empieza con un usuario llenando un formulario. Una experiencia de formulario fluida significa mas tareas creadas, mas engagement y mas razones para que los usuarios se actualicen a tu plan premium."
+      "body": "Cada dolar que tu app gana empieza con un usuario llenando un formulario. Una experiencia de formulario fluida significa más tareas creadas, más engagement y más razones para que los usuarios se actualicen a tu plan premium."
     },
     {
       "type": "key_takeaway",
-      "body": "El mejor formulario es el formulario mas corto. Para la creacion de tareas, puede que solo necesites un campo de titulo — haz todo lo demas opcional o establece valores predeterminados inteligentes. Los usuarios siempre pueden editar una tarea despues de crearla. Baja friccion al momento de crear significa mas tareas capturadas."
+      "body": "El mejor formulario es el formulario más corto. Para la creación de tareas, puede que solo necesites un campo de titulo — haz todo lo demas opcional o establece valores predeterminados inteligentes. Los usuarios siempre pueden editar una tarea después de crearla. Baja friccion al momento de crear significa más tareas capturadas."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "good-minimal-create",
-        "content": "El formulario de 'Agregar Tarea' tiene solo un campo requerido (titulo) con campos opcionales colapsados detras de un boton 'Mas opciones'",
+        "content": "El formulario de 'Agregar Tarea' tiene solo un campo requerido (titulo) con campos opcionales colapsados detrás de un boton 'Mas opciones'",
         "isGoodPractice": true,
-        "explanation": "Friccion minima para la accion mas comun. La mayoria de las tareas solo necesitan un titulo para empezar. Los usuarios que quieran agregar una fecha limite o prioridad pueden expandir las opciones, pero no estan forzados a verlas cada vez."
+        "explanation": "Friccion mínima para la acción más comun. La mayoria de las tareas solo necesitan un titulo para empezar. Los usuarios que quieran agregar una fecha limite o prioridad pueden expandir las opciones, pero no estan forzados a verlas cada vez."
       },
       {
         "id": "bad-clear-on-error",
-        "content": "Cuando la validacion del formulario falla, limpiar todos los campos y mostrar una alerta que dice 'Por favor corrige los errores e intenta de nuevo'",
+        "content": "Cuando la validación del formulario falla, limpiar todos los campos y mostrar una alerta que dice 'Por favor corrige los errores e intenta de nuevo'",
         "isGoodPractice": false,
-        "explanation": "Limpiar el formulario al tener un error es uno de los patrones de UX mas frustrantes. El usuario tiene que re-ingresar todo. Mantiene todos los valores de los campos, resalta el problema especifico y deja que el usuario arregle solo lo que esta mal."
+        "explanation": "Limpiar el formulario al tener un error es uno de los patrones de UX más frustrantes. El usuario tiene que re-ingresar todo. Mantiene todos los valores de los campos, resalta el problema especifico y deja que el usuario arregle solo lo que esta mal."
       },
       {
         "id": "good-inline-validation",
         "content": "Mostrar un borde rojo y un mensaje 'El titulo es requerido' directamente debajo del campo de titulo cuando el usuario intenta enviar un formulario vacio",
         "isGoodPractice": true,
-        "explanation": "La validacion en linea le dice al usuario exactamente que esta mal y donde. Es inmediatamente accionable — los ojos del usuario ya estan cerca del campo. Mucho mejor que un banner de error generico en la parte superior."
+        "explanation": "La validación en línea le dice al usuario exactamente que esta mal y donde. Es inmediatamente accionable — los ojos del usuario ya estan cerca del campo. Mucho mejor que un banner de error genérico en la parte superior."
       },
       {
         "id": "bad-too-many-fields",
-        "content": "Requerir que los usuarios llenen titulo, descripcion, prioridad, fecha limite, categoria, tiempo estimado y etiquetas antes de poder crear una tarea",
+        "content": "Requerir que los usuarios llenen titulo, descripción, prioridad, fecha limite, categoría, tiempo estimado y etiquetas antes de poder crear una tarea",
         "isGoodPractice": false,
         "explanation": "Siete campos requeridos para agregar una tarea es un muro que mata el impulso. La mayoria de estos deberian ser opcionales o tener valores predeterminados sensatos. Si capturar una tarea se siente como papeleo, los usuarios dejaran de usar la app."
       },
       {
         "id": "good-keyboard-submit",
-        "content": "Permitir que los usuarios presionen Enter para enviar el formulario de 'Agregar Tarea' para que puedan agregar multiples tareas rapidamente sin alcanzar el mouse",
+        "content": "Permitir que los usuarios presionen Enter para enviar el formulario de 'Agregar Tarea' para que puedan agregar multiples tareas rápidamente sin alcanzar el mouse",
         "isGoodPractice": true,
-        "explanation": "Los usuarios avanzados viven en el teclado. Enter-para-enviar en formularios simples (especialmente el flujo de agregar rapido) hace que la entrada rapida de tareas se sienta natural. Es un pequeno detalle que mejora dramaticamente la experiencia para usuarios frecuentes."
+        "explanation": "Los usuarios avanzados viven en el teclado. Enter-para-enviar en formularios simples (especialmente el flujo de agregar rápido) hace que la entrada rápida de tareas se sienta natural. Es un pequeño detalle que mejora dramaticamente la experiencia para usuarios frecuentes."
       },
       {
         "id": "bad-no-loading-state",
-        "content": "Cuando el usuario hace clic en 'Guardar Tarea', el boton no cambia y nada pasa por 2 segundos mientras los datos se guardan, asi que los usuarios hacen clic multiples veces",
+        "content": "Cuando el usuario hace clic en 'Guardar Tarea', el boton no cambia y nada pasa por 2 segundos mientras los datos se guardan, así que los usuarios hacen clic multiples veces",
         "isGoodPractice": false,
         "explanation": "Sin estado de carga crea ansiedad y causa envios duplicados. Deshabilita el boton, muestra un spinner o texto de 'Guardando...' y re-habilitalo cuando termine. Los usuarios necesitan saber que la app los escucho."
       },
       {
         "id": "good-autofocus",
-        "content": "Cuando el modal de 'Agregar Tarea' se abre, enfocar automaticamente el campo de titulo para que el usuario pueda empezar a escribir inmediatamente",
+        "content": "Cuando el modal de 'Agregar Tarea' se abre, enfocar automáticamente el campo de titulo para que el usuario pueda empezar a escribir inmediatamente",
         "isGoodPractice": true,
-        "explanation": "El autofocus elimina un paso (hacer clic en el input) de la accion mas comun. Le senala al usuario 'adelante, empieza a escribir.' Un pequeno detalle que hace que el formulario se sienta responsivo y bien pensado."
+        "explanation": "El autofocus elimina un paso (hacer clic en el input) de la acción más comun. Le señala al usuario 'adelante, empieza a escribir.' Un pequeño detalle que hace que el formulario se sienta responsivo y bien pensado."
       }
     ],
     "glossaryTerms": ["form-validation", "user-experience", "accessibility"]

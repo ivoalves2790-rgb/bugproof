@@ -10,18 +10,18 @@
   "teach": [
     {
       "type": "analogy",
-      "title": "Instalacion Global = Instalar una App en Tu Telefono",
-      "body": "Cuando instalas una app en tu telefono, esta disponible en todas partes -- desde la pantalla de inicio, desde cualquier carpeta, en cualquier momento. **npm install -g** funciona de la misma manera. Instala una herramienta en toda tu computadora, no solo en un proyecto. Despues de `npm install -g vercel`, puedes escribir `vercel` en cualquier ventana de terminal, en cualquier carpeta, y funciona. Esta permanentemente en tu maquina, como una app en tu telefono."
+      "title": "Instalación Global = Instalar una App en Tu Telefono",
+      "body": "Cuando instalas una app en tu teléfono, esta disponible en todas partes -- desde la pantalla de inicio, desde cualquier carpeta, en cualquier momento. **npm install -g** funciona de la misma manera. Instala una herramienta en toda tu computadora, no solo en un proyecto. Después de `npm install -g vercel`, puedes escribir `vercel` en cualquier ventana de terminal, en cualquier carpeta, y funciona. Esta permanentemente en tu máquina, como una app en tu teléfono."
     },
     {
       "type": "analogy",
-      "title": "Instalacion Local = Comprar una Herramienta para un Taller Especifico",
-      "body": "Imagina que tienes dos talleres -- uno de carpinteria y otro de electronica. Compras un cautin solo para el taller de electronica. Se queda ahi; no lo llevas al taller de madera. **Las instalaciones locales** (el `npm install` normal) funcionan de la misma manera. El paquete solo existe dentro de la carpeta node_modules de ese proyecto. Otros proyectos no pueden verlo. Esto mantiene los proyectos aislados -- el Proyecto A podria necesitar la version 2 de una herramienta mientras el Proyecto B necesita la version 3."
+      "title": "Instalación Local = Comprar una Herramienta para un Taller Especifico",
+      "body": "Imagina que tienes dos talleres -- uno de carpinteria y otro de electronica. Compras un cautin solo para el taller de electronica. Se queda ahí; no lo llevas al taller de madera. **Las instalaciones locales** (el `npm install` normal) funcionan de la misma manera. El paquete solo existe dentro de la carpeta node_modules de ese proyecto. Otros proyectos no pueden verlo. Esto mantiene los proyectos aislados -- el Proyecto A podría necesitar la versión 2 de una herramienta mientras el Proyecto B necesita la versión 3."
     },
     {
       "type": "text",
       "title": "Global vs Local: Cuando Usar Cada Uno",
-      "body": "**Instala globalmente (-g)** cuando:\n- La herramienta es un CLI independiente que ejecutas desde cualquier lugar (vercel, netlify, create-react-app)\n- La usas en multiples proyectos\n- Es una utilidad de desarrollo, no una dependencia del proyecto\n\n**Instala localmente** (por defecto) cuando:\n- El paquete es codigo que tu proyecto importa (react, express, axios)\n- Diferentes proyectos podrian necesitar diferentes versiones\n- Quieres que el proyecto sea portable (cualquiera que lo clone obtiene la version correcta)"
+      "body": "**Instala globalmente (-g)** cuando:\n- La herramienta es un CLI independiente que ejecutas desde cualquier lugar (vercel, netlify, create-react-app)\n- La usas en multiples proyectos\n- Es una utilidad de desarrollo, no una dependencia del proyecto\n\n**Instala localmente** (por defecto) cuando:\n- El paquete es código que tu proyecto importa (react, express, axios)\n- Diferentes proyectos podrían necesitar diferentes versiones\n- Quieres que el proyecto sea portable (cualquiera que lo clone obtiene la versión correcta)"
     },
     {
       "type": "text",
@@ -30,10 +30,10 @@
     },
     {
       "type": "code_example",
-      "title": "Instalacion Global vs npx",
+      "title": "Instalación Global vs npx",
       "language": "bash",
       "code": "# Global install: permanently available\nnpm install -g vercel\nvercel --version          # Works from anywhere\n\n# npx: run once without installing\nnpx create-next-app my-app   # Downloads, runs, done\nnpx cowsay \"Hello World\"      # Fun one-time command",
-      "annotation": "Las instalaciones globales permanecen en tu maquina hasta que las desinstales. npx descarga, ejecuta el comando y limpia. Usa npx para generadores de proyectos y herramientas de uso unico."
+      "annotation": "Las instalaciones globales permanecen en tu máquina hasta que las desinstales. npx descarga, ejecuta el comando y limpia. Usa npx para generadores de proyectos y herramientas de uso único."
     },
     {
       "type": "motivation",
@@ -41,7 +41,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Usa npm install -g para herramientas CLI que necesitas en todas partes, npm install normal para paquetes especificos del proyecto, y npx para comandos de una sola vez. Las herramientas globales son como apps del telefono (disponibles en todas partes), las instalaciones locales son como herramientas de taller (se quedan en un proyecto), y npx es como pedir prestada una herramienta para un trabajo rapido."
+      "body": "Usa npm install -g para herramientas CLI que necesitas en todas partes, npm install normal para paquetes especificos del proyecto, y npx para comandos de una sola vez. Las herramientas globales son como apps del teléfono (disponibles en todas partes), las instalaciones locales son como herramientas de taller (se quedan en un proyecto), y npx es como pedir prestada una herramienta para un trabajo rápido."
     }
   ],
   "exercise": {
@@ -56,18 +56,18 @@
         "hint": "Usa 'npm install -g' seguido del nombre del paquete. La bandera -g lo hace disponible en todas partes."
       },
       {
-        "instruction": "Verifica que vercel fue instalado globalmente comprobando su version.",
+        "instruction": "Verifica que vercel fue instalado globalmente comprobando su versión.",
         "expectedCommand": "vercel --version",
         "acceptAlternatives": ["vercel -v"],
         "output": "Vercel CLI 34.2.0",
-        "hint": "Ejecuta el nombre de la herramienta seguido de '--version' para confirmar que esta instalada y ver que version es."
+        "hint": "Ejecuta el nombre de la herramienta seguido de '--versión' para confirmar que esta instalada y ver que versión es."
       },
       {
         "instruction": "Ahora usa npx para crear una nueva app Next.js llamada 'my-site' sin instalar create-next-app globalmente.",
         "expectedCommand": "npx create-next-app my-site",
         "acceptAlternatives": ["npx create-next-app@latest my-site"],
         "output": "Creating a new Next.js app in ~/my-site.\n\nUsing npm.\n\nInstalling dependencies:\n- react\n- react-dom\n- next\n\nSuccess! Created my-site at ~/my-site",
-        "hint": "Usa 'npx' seguido del comando del paquete. npx lo descarga y ejecuta sin una instalacion permanente."
+        "hint": "Usa 'npx' seguido del comando del paquete. npx lo descarga y ejecuta sin una instalación permanente."
       },
       {
         "instruction": "Comprueba que paquetes estan instalados globalmente en tu sistema para ver vercel en la lista.",
@@ -77,7 +77,7 @@
         "hint": "Usa 'npm list -g --depth=0' para ver todos los paquetes instalados globalmente sin mostrar sus sub-dependencias."
       }
     ],
-    "completionMessage": "Ahora conoces tres formas de usar paquetes npm: instalaciones globales para herramientas CLI que usas en todas partes, instalaciones locales para dependencias del proyecto, y npx para comandos de una sola vez. Nota como create-next-app no aparece en tu lista global -- npx lo ejecuto y limpio. Vercel esta ahi porque lo instalaste globalmente.",
+    "completionMessage": "Ahora conoces tres formas de usar paquetes npm: instalaciones globales para herramientas CLI que usas en todas partes, instalaciones locales para dependencias del proyecto, y npx para comandos de una sola vez. Nota como create-next-app no aparece en tu lista global -- npx lo ejecuto y limpio. Vercel esta ahí porque lo instalaste globalmente.",
     "glossaryTerms": ["global-install", "local-install", "npx", "CLI"]
   }
 }

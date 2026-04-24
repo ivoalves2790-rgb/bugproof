@@ -11,17 +11,17 @@
     {
       "type": "text",
       "title": "Por Que Tailwind?",
-      "body": "Tailwind CSS usa clases utilitarias pequenas y de proposito unico como `p-4` (padding), `text-lg` (tamano de fuente) y `bg-blue-500` (color de fondo). En lugar de escribir CSS en archivos separados e inventar nombres de clases, compones estilos directamente en tu JSX. Esto mantiene los estilos junto al markup que afectan y elimina el problema del CSS muerto."
+      "body": "Tailwind CSS usa clases utilitarias pequeñas y de proposito único como `p-4` (padding), `text-lg` (tamano de fuente) y `bg-blue-500` (color de fondo). En lugar de escribir CSS en archivos separados e inventar nombres de clases, compones estilos directamente en tu JSX. Esto mantiene los estilos junto al markup que afectan y elimina el problema del CSS muerto."
     },
     {
       "type": "analogy",
       "title": "Marcado Rapido en Tu Telefono",
-      "body": "Escribir un numero de telefono completo cada vez que llamas a alguien seria tedioso. Por eso guardas contactos — un toque reemplaza diez digitos. Extraer un componente React de una lista larga de clases Tailwind funciona igual: en lugar de repetir `rounded-lg shadow-md p-4 bg-white` en cinco lugares, creas un componente `<Card>` y usas ese nombre unico en todas partes. La cadena larga de clases se escribe una vez y se reutiliza con un nombre corto."
+      "body": "Escribir un número de teléfono completo cada vez que llamas a alguien seria tedioso. Por eso guardas contactos — un toque reemplaza diez digitos. Extraer un componente React de una lista larga de clases Tailwind funciona igual: en lugar de repetir `rounded-lg shadow-md p-4 bg-white` en cinco lugares, creas un componente `<Card>` y usas ese nombre único en todas partes. La cadena larga de clases se escribe una vez y se reutiliza con un nombre corto."
     },
     {
       "type": "text",
       "title": "Controlando Listas de Clases Largas",
-      "body": "La queja mas comun sobre Tailwind son las cadenas de clases largas. La solucion no es evitar Tailwind — es **extraer componentes**. Si una lista de clases aparece en multiples lugares, eso es una senal de que necesitas un componente React, no una clase CSS personalizada. El componente se convierte en tu abstraccion reutilizable."
+      "body": "La queja más comun sobre Tailwind son las cadenas de clases largas. La solución no es evitar Tailwind — es **extraer componentes**. Si una lista de clases aparece en multiples lugares, eso es una señal de que necesitas un componente React, no una clase CSS personalizada. El componente se convierte en tu abstracción reutilizable."
     },
     {
       "type": "analogy",
@@ -30,11 +30,11 @@
     },
     {
       "type": "motivation",
-      "body": "Cada producto SaaS pulido que genera dinero tiene una interfaz consistente y profesional. Dominar Tailwind significa que puedes construir interfaces de calidad produccion rapido — y lanzar apps por las que los clientes realmente paguen."
+      "body": "Cada producto SaaS pulido que genera dinero tiene una interfaz consistente y profesional. Dominar Tailwind significa que puedes construir interfaces de calidad producción rápido — y lanzar apps por las que los clientes realmente paguen."
     },
     {
       "type": "key_takeaway",
-      "body": "Tailwind funciona mejor cuando se combina con diseno basado en componentes. Usa clases utilitarias para estilizar, extrae componentes React cuando veas duplicacion, y aprovecha el sistema de diseno de Tailwind (escala de espaciado, paleta de colores) para mantener tu interfaz consistente sin esfuerzo manual."
+      "body": "Tailwind funciona mejor cuando se combina con diseño basado en componentes. Usa clases utilitarias para estilizar, extrae componentes React cuando veas duplicacion, y aprovecha el sistema de diseño de Tailwind (escala de espaciado, paleta de colores) para mantener tu interfaz consistente sin esfuerzo manual."
     }
   ],
   "exercise": {
@@ -49,19 +49,19 @@
         "id": "bad-arbitrary-values",
         "content": "Usar valores arbitrarios en todas partes como p-[13px], mt-[7px] y text-[15px] en lugar de las escalas integradas de espaciado y tamano de Tailwind",
         "isGoodPractice": false,
-        "explanation": "Los valores arbitrarios evaden el sistema de diseno de Tailwind, llevando a espaciado y tamano inconsistentes en tu app. Apegate a la escala integrada (p-3, mt-2, text-sm) para que todo se alinee a un ritmo consistente."
+        "explanation": "Los valores arbitrarios evaden el sistema de diseño de Tailwind, llevando a espaciado y tamano inconsistentes en tu app. Apegate a la escala integrada (p-3, mt-2, text-sm) para que todo se alinee a un ritmo consistente."
       },
       {
         "id": "good-responsive",
         "content": "Usar prefijos responsivos como 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3' para hacer que la lista de tareas se adapte de movil a escritorio",
         "isGoodPractice": true,
-        "explanation": "Los prefijos responsivos de Tailwind hacen que el diseno mobile-first sea directo. El estilo base se aplica a movil, luego md: y lg: agregan sobreescrituras para pantallas mas grandes. Sin media queries necesarias."
+        "explanation": "Los prefijos responsivos de Tailwind hacen que el diseño mobile-first sea directo. El estilo base se aplica a movil, luego md: y lg: agregan sobreescrituras para pantallas más grandes. Sin media queries necesarias."
       },
       {
         "id": "bad-important-overrides",
         "content": "Agregar el prefijo ! para forzar sobreescrituras como '!text-red-500 !font-bold' porque tus estilos siguen siendo sobreescritos por otras clases",
         "isGoodPractice": false,
-        "explanation": "Si necesitas !important para que los estilos funcionen, la estructura de tu componente tiene un problema. Arregla la causa raiz (estilos en conflicto, especificidad incorrecta) en lugar de forzar sobreescrituras. Usar ! hace los estilos fragiles y dificiles de depurar."
+        "explanation": "Si necesitas !important para que los estilos funcionen, la estructura de tu componente tiene un problema. Arregla la causa raíz (estilos en conflicto, especificidad incorrecta) en lugar de forzar sobreescrituras. Usar ! hace los estilos fragiles y difíciles de depurar."
       },
       {
         "id": "good-dark-mode",
@@ -77,9 +77,9 @@
       },
       {
         "id": "good-extract-component",
-        "content": "Cuando la misma combinacion de 'rounded-lg shadow-md p-4 bg-white border border-gray-200' aparece en 5 tarjetas diferentes, extraer un componente React reutilizable <Card>",
+        "content": "Cuando la misma combinación de 'rounded-lg shadow-md p-4 bg-white border border-gray-200' aparece en 5 tarjetas diferentes, extraer un componente React reutilizable <Card>",
         "isGoodPractice": true,
-        "explanation": "Este es exactamente el movimiento correcto. No uses @apply para crear una abstraccion CSS — crea un componente React en su lugar. El componente es tu unidad reutilizable, y puede llevar comportamiento (onClick, children) junto con sus estilos."
+        "explanation": "Este es exactamente el movimiento correcto. No uses @apply para crear una abstracción CSS — crea un componente React en su lugar. El componente es tu unidad reutilizable, y puede llevar comportamiento (onClick, children) junto con sus estilos."
       }
     ],
     "glossaryTerms": ["utility-css", "responsive-design", "design-system"]

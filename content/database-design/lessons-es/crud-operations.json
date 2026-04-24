@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Cuaderno Con Borrador",
-      "body": "CRUD es como usar un cuaderno con lapiz y borrador. **Escribes** nuevas entradas (Create), **lees** lo que escribiste antes (Read), **borras y reescribes** una linea para corregir un error (Update), o **arrancas una pagina** que ya no necesitas (Delete). Pero imagina borrar sin fijarte en que linea estas -- podrias borrar las notas de otra persona. Eso es exactamente lo que pasa cuando olvidas la clausula WHERE en SQL."
+      "body": "CRUD es como usar un cuaderno con lapiz y borrador. **Escribes** nuevas entradas (Create), **lees** lo que escribiste antes (Read), **borras y reescribes** una línea para corregir un error (Update), o **arrancas una página** que ya no necesitas (Delete). Pero imagina borrar sin fijarte en que línea estas -- podrías borrar las notas de otra persona. Eso es exactamente lo que pasa cuando olvidas la clausula WHERE en SQL."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "CRUD es el corazon de toda app que genera dinero. Registrar un usuario es Create, mostrar una pagina de producto es Read, cambiar un plan de suscripcion es Update, y cancelar una cuenta es Delete. Domina CRUD y podras vibecodear cualquier app que maneje clientes reales y transacciones reales."
+      "body": "CRUD es el corazón de toda app que genera dinero. Registrar un usuario es Create, mostrar una página de producto es Read, cambiar un plan de suscripción es Update, y cancelar una cuenta es Delete. Domina CRUD y podras vibecodear cualquier app que maneje clientes reales y transacciones reales."
     },
     {
       "type": "key_takeaway",

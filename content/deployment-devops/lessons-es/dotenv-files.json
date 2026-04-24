@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": ".env = Una Tarjeta de Receta Secreta",
-      "body": "Imagina que tienes una tarjeta de receta secreta pegada dentro de tu gabinete de cocina. Tiene todas las medidas de ingredientes especiales que hacen tus platillos unicos. Nunca la pondrias en el refrigerador para que los invitados la vean, y cada chef de la familia tiene su propia version. Un archivo .env es la tarjeta de receta secreta de tu app -- personal, oculta, y nunca compartida publicamente."
+      "body": "Imagina que tienes una tarjeta de receta secreta pegada dentro de tu gabinete de cocina. Tiene todas las medidas de ingredientes especiales que hacen tus platillos únicos. Nunca la pondrias en el refrigerador para que los invitados la vean, y cada chef de la familia tiene su propia versión. Un archivo .env es la tarjeta de receta secreta de tu app -- personal, oculta, y nunca compartida publicamente."
     },
     {
       "type": "text",
@@ -37,7 +37,7 @@
     },
     {
       "type": "motivation",
-      "body": "El archivo .env es el eslabon perdido entre tu app creada con IA y servicios reales como Stripe y bases de datos. Domina esto, y tu app puede aceptar pagos y guardar datos de usuarios desde el primer dia."
+      "body": "El archivo .env es el eslabon perdido entre tu app creada con IA y servicios reales como Stripe y bases de datos. Domina esto, y tu app puede aceptar pagos y guardar datos de usuarios desde el primer día."
     },
     {
       "type": "key_takeaway",

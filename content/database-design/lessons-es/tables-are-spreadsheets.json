@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Estacionamiento",
-      "body": "Una tabla de base de datos es como un estacionamiento bien disenado. Cada **piso** es un tipo de columna (autos compactos, camionetas, motos), cada **lugar** es una celda, y cada **auto estacionado** es una fila de datos. No puedes estacionar un trailer en un lugar para compactos -- el estacionamiento impone reglas sobre que cabe donde. Y cada lugar tiene un numero unico para que siempre puedas encontrar tu auto. Asi es exactamente como las tablas mantienen los datos organizados y localizables."
+      "body": "Una tabla de base de datos es como un estacionamiento bien diseñado. Cada **piso** es un tipo de columna (autos compactos, camionetas, motos), cada **lugar** es una celda, y cada **auto estacionado** es una fila de datos. No puedes estacionar un trailer en un lugar para compactos -- el estacionamiento impone reglas sobre que cabe donde. Y cada lugar tiene un número único para que siempre puedas encontrar tu auto. Así es exactamente como las tablas mantienen los datos organizados y localizables."
     },
     {
       "type": "text",

@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Los Codigos de Estado Son Como Calificaciones",
-      "body": "Piensa en los codigos de estado como calificaciones en una boleta. **200** es un 10 (perfecto, aqui estan tus datos). **404** es como recibir tu tarea marcada con 'el tema no existe.' **500** es el profesor diciendo 'disculpa, perdi tu examen' -- no es tu culpa, el sistema fallo. Igual que las calificaciones te dicen que salio bien o mal, los codigos de estado le dicen a tu app exactamente que paso."
+      "body": "Piensa en los códigos de estado como calificaciones en una boleta. **200** es un 10 (perfecto, aquí estan tus datos). **404** es como recibir tu tarea marcada con 'el tema no existe.' **500** es el profesor diciendo 'disculpa, perdi tu examen' -- no es tu culpa, el sistema fallo. Igual que las calificaciones te dicen que salio bien o mal, los códigos de estado le dicen a tu app exactamente que paso."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Las apps que manejan errores bien mantienen a los usuarios contentos y pagando. Cuando vibecodeas codigos de estado correctos, tu app puede mostrar mensajes de error amigables en vez de romperse -- y esa es la diferencia entre usuarios que se van y usuarios que se quedan."
+      "body": "Las apps que manejan errores bien mantienen a los usuarios contentos y pagando. Cuando vibecodeas códigos de estado correctos, tu app puede mostrar mensajes de error amigables en vez de romperse -- y esa es la diferencia entre usuarios que se van y usuarios que se quedan."
     },
     {
       "type": "key_takeaway",

@@ -6,7 +6,7 @@
   "xpReward": 10,
   "unitSlug": "welcome-to-the-terminal",
   "courseSlug": "terminal-command-line",
-  "intro": "Ahora que puedes navegar el sistema de archivos, es hora de empezar a construir cosas. Aprenderas a crear carpetas, crear archivos y si -- tambien a eliminarlos. Pero ten cuidado: la terminal no tiene papelera de reciclaje.",
+  "intro": "Ahora que puedes navegar el sistema de archivos, es hora de empezar a construir cosas. Aprenderas a crear carpetas, crear archivos y si -- también a eliminarlos. Pero ten cuidado: la terminal no tiene papelera de reciclaje.",
   "teach": [
     {
       "type": "analogy",
@@ -20,13 +20,13 @@
     },
     {
       "type": "text",
-      "title": "Los Comandos de Creacion",
+      "title": "Los Comandos de Creación",
       "body": "- `mkdir nombrecarpeta` -- Crea una nueva carpeta vacia (\"make directory\")\n- `mkdir -p ruta/a/anidada` -- Crea carpetas anidadas de una vez\n- `touch nombrearchivo` -- Crea un nuevo archivo vacio\n- `touch archivo1 archivo2 archivo3` -- Crea multiples archivos a la vez"
     },
     {
       "type": "text",
       "title": "Los Comandos de Eliminacion",
-      "body": "- `rm nombrearchivo` -- Elimina un archivo permanentemente\n- `rm -r nombrecarpeta` -- Elimina una carpeta y todo su contenido\n- `rmdir nombrecarpeta` -- Elimina solo una carpeta vacia (mas seguro)\n\n**Advertencia:** `rm` NO mueve archivos a la Papelera. Desaparecen para siempre. Siempre usa `ls` primero para verificar que estas eliminando lo correcto."
+      "body": "- `rm nombrearchivo` -- Elimina un archivo permanentemente\n- `rm -r nombrecarpeta` -- Elimina una carpeta y todo su contenido\n- `rmdir nombrecarpeta` -- Elimina solo una carpeta vacia (más seguro)\n\n**Advertencia:** `rm` NO mueve archivos a la Papelera. Desaparecen para siempre. Siempre usa `ls` primero para verificar que estas eliminando lo correcto."
     },
     {
       "type": "code_example",
@@ -37,7 +37,7 @@
     },
     {
       "type": "motivation",
-      "body": "Cada app que construyes con herramientas de IA empieza creando una estructura de proyecto. Cuando un cliente necesita una nueva carpeta de funcionalidades, un archivo de configuracion o un scaffold limpio de proyecto, hacerlo en la terminal toma segundos en lugar de minutos haciendo clic derecho. Los vibecoders que crean proyectos rapido empiezan a ganar dinero mas rapido."
+      "body": "Cada app que construyes con herramientas de IA empieza creando una estructura de proyecto. Cuando un cliente necesita una nueva carpeta de funcionalidades, un archivo de configuración o un scaffold limpio de proyecto, hacerlo en la terminal toma segundos en lugar de minutos haciendo clic derecho. Los vibecoders que crean proyectos rápido empiezan a ganar dinero más rápido."
     },
     {
       "type": "key_takeaway",
@@ -77,7 +77,7 @@
         "hint": "Usa el comando de listar para ver que hay en la carpeta actual."
       }
     ],
-    "completionMessage": "Acabas de crear una carpeta de proyecto, agregarle un archivo y limpiar un archivo viejo -- todo sin tocar el raton. Asi es exactamente como los desarrolladores crean nuevos proyectos todos los dias.",
+    "completionMessage": "Acabas de crear una carpeta de proyecto, agregarle un archivo y limpiar un archivo viejo -- todo sin tocar el raton. Así es exactamente como los desarrolladores crean nuevos proyectos todos los dias.",
     "glossaryTerms": ["mkdir", "touch", "rm", "rmdir"]
   }
 }

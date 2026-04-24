@@ -21,7 +21,7 @@
     {
       "type": "text",
       "title": "Atajos Esenciales de Flujo de Trabajo",
-      "body": "Estos atajos te ahorran miles de teclas:\n\n- **Tab** -- Autocompleta nombres de archivos, comandos y rutas. Presiona Tab dos veces para ver todas las opciones.\n- **Flechas arriba/abajo** -- Recorre comandos anteriores\n- **Ctrl+R** -- Busca en tu historial de comandos escribiendo una palabra clave\n- **Ctrl+A / Ctrl+E** -- Salta al inicio / final de una linea\n- **Ctrl+C** -- Cancela el comando actual\n- **Ctrl+L** -- Limpia la pantalla (igual que `clear`)\n- **!!** -- Repite el ultimo comando. `sudo !!` ejecuta el ultimo comando como administrador."
+      "body": "Estos atajos te ahorran miles de teclas:\n\n- **Tab** -- Autocompleta nombres de archivos, comandos y rutas. Presiona Tab dos veces para ver todas las opciones.\n- **Flechas arriba/abajo** -- Recorre comandos anteriores\n- **Ctrl+R** -- Busca en tu historial de comandos escribiendo una palabra clave\n- **Ctrl+A / Ctrl+E** -- Salta al inicio / final de una línea\n- **Ctrl+C** -- Cancela el comando actual\n- **Ctrl+L** -- Limpia la pantalla (igual que `clear`)\n- **!!** -- Repite el último comando. `sudo !!` ejecuta el último comando como administrador."
     },
     {
       "type": "code_example",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "La diferencia entre una sesion de depuracion de 30 minutos y una de 5 minutos es frecuentemente solo el flujo de trabajo. Los vibecoders que dominan Ctrl+R, autocompletacion con Tab y tmux se mueven por los proyectos como un auto de carreras en una pista en vez de una bicicleta en un camino de tierra. Los clientes notan cuando arreglas las cosas rapido -- y pagan mas por velocidad."
+      "body": "La diferencia entre una sesión de depuración de 30 minutos y una de 5 minutos es frecuentemente solo el flujo de trabajo. Los vibecoders que dominan Ctrl+R, autocompletacion con Tab y tmux se mueven por los proyectos como un auto de carreras en una pista en vez de una bicicleta en un camino de tierra. Los clientes notan cuando arreglas las cosas rápido -- y pagan más por velocidad."
     },
     {
       "type": "key_takeaway",
@@ -45,7 +45,7 @@
         "id": "card-1",
         "content": "Presionar Tab para autocompletar nombres de archivos y comandos ahorra teclas y previene errores de escritura.",
         "isGoodPractice": true,
-        "explanation": "La autocompletacion con Tab es uno de los habitos mas importantes de la terminal. Autocompleta nombres de archivos, rutas de directorios e incluso nombres de comandos -- eliminando errores de escritura y ahorrando tiempo. Si no pasa nada con el primer Tab, presiona Tab dos veces para ver todas las opciones disponibles."
+        "explanation": "La autocompletacion con Tab es uno de los habitos más importantes de la terminal. Autocompleta nombres de archivos, rutas de directorios e incluso nombres de comandos -- eliminando errores de escritura y ahorrando tiempo. Si no pasa nada con el primer Tab, presiona Tab dos veces para ver todas las opciones disponibles."
       },
       {
         "id": "card-2",
@@ -57,19 +57,19 @@
         "id": "card-3",
         "content": "Usar tmux te permite mantener tu servidor de desarrollo, logs y editor todos visibles al mismo tiempo en una sola ventana de terminal.",
         "isGoodPractice": true,
-        "explanation": "tmux divide tu terminal en multiples paneles para que puedas monitorear varias cosas simultaneamente. Ejecuta tu servidor de desarrollo en un panel, observa los logs en otro y escribe comandos en un tercero -- todo sin cambiar de ventana. Las sesiones tambien persisten si se cae tu conexion."
+        "explanation": "tmux divide tu terminal en multiples paneles para que puedas monitorear varias cosas simultáneamente. Ejecuta tu servidor de desarrollo en un panel, observa los logs en otro y escribe comandos en un tercero -- todo sin cambiar de ventana. Las sesiones también persisten si se cae tu conexión."
       },
       {
         "id": "card-4",
-        "content": "Cuando un comando falla con 'permission denied', solo agrega sudo al principio sin entender por que necesitaba permisos elevados.",
+        "content": "Cuando un comando falla con 'permission denied', solo agrega sudo al principio sin entender por qué necesitaba permisos elevados.",
         "isGoodPractice": false,
-        "explanation": "Agregar sudo a ciegas es peligroso. Ejecuta el comando como administrador root -- lo cual podria borrar archivos del sistema, sobreescribir configuraciones importantes o crear archivos con permisos incorrectos. Siempre entiende POR QUE un comando necesita sudo antes de usarlo. Frecuentemente la solucion es cambiar la propiedad del archivo, no ejecutar como root."
+        "explanation": "Agregar sudo a ciegas es peligroso. Ejecuta el comando como administrador root -- lo cual podría borrar archivos del sistema, sobreescribir configuraciones importantes o crear archivos con permisos incorrectos. Siempre entiende POR QUE un comando necesita sudo antes de usarlo. Frecuentemente la solución es cambiar la propiedad del archivo, no ejecutar como root."
       },
       {
         "id": "card-5",
         "content": "Ctrl+R te permite buscar en todo tu historial de comandos escribiendo solo unas letras de un comando anterior.",
         "isGoodPractice": true,
-        "explanation": "Ctrl+R activa el modo de busqueda inversa. Empieza a escribir cualquier parte de un comando anterior y encuentra la coincidencia mas reciente. Presiona Ctrl+R de nuevo para recorrer coincidencias mas antiguas. Esto es mucho mas rapido que presionar la flecha arriba 50 veces para encontrar un comando de ayer."
+        "explanation": "Ctrl+R activa el modo de busqueda inversa. Empieza a escribir cualquier parte de un comando anterior y encuentra la coincidencia más reciente. Presiona Ctrl+R de nuevo para recorrer coincidencias más antiguas. Esto es mucho más rápido que presionar la flecha arriba 50 veces para encontrar un comando de ayer."
       }
     ],
     "glossaryTerms": ["tab-completion", "history"]

@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Urbanista",
-      "body": "El diseno de esquemas es como la planificacion urbana. Antes de construir una sola casa, un urbanista decide por donde van las calles, que zonas son residenciales vs. comerciales, y por donde pasan las tuberias y cables electricos. Si construyes casas primero y planeas calles despues, terminas con una ciudad caotica donde nada conecta. Disenar tu esquema primero significa que tus datos tienen barrios claros (tablas), calles bien pavimentadas (relaciones), y ninguna calle sin salida."
+      "body": "El diseño de esquemas es como la planificación urbana. Antes de construir una sola casa, un urbanista decide por donde van las calles, que zonas son residenciales vs. comerciales, y por donde pasan las tuberias y cables electricos. Si construyes casas primero y planeas calles después, terminas con una ciudad caótica donde nada conecta. Disenar tu esquema primero significa que tus datos tienen barrios claros (tablas), calles bien pavimentadas (relaciones), y ninguna calle sin salida."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "El diseno de esquemas es la habilidad con mayor impacto en vibecoding. Un esquema bien disenado te permite construir funcionalidades rapido -- cuentas de usuario, pagos, suscripciones, analiticas -- todo sobre la misma base solida. Disena el esquema bien una vez, y cada funcionalidad que agregues genera dinero sin reescrituras dolorosas."
+      "body": "El diseño de esquemas es la habilidad con mayor impacto en vibecoding. Un esquema bien diseñado te permite construir funcionalidades rápido -- cuentas de usuario, pagos, suscripciones, analiticas -- todo sobre la misma base solida. Disena el esquema bien una vez, y cada funcionalidad que agregues genera dinero sin reescrituras dolorosas."
     },
     {
       "type": "key_takeaway",

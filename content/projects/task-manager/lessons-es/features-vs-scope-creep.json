@@ -6,12 +6,12 @@
   "xpReward": 10,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "El desvio de alcance mata proyectos. Es como hacer la maleta para un fin de semana pero llevar ropa para dos semanas — de repente no puedes ni despegar. Juzga si cada escenario es buena disciplina de planificacion o una trampa de desvio de alcance.",
+  "intro": "El desvio de alcance mata proyectos. Es como hacer la maleta para un fin de semana pero llevar ropa para dos semanas — de repente no puedes ni despegar. Juzga si cada escenario es buena disciplina de planificación o una trampa de desvio de alcance.",
   "teach": [
     {
       "type": "text",
       "title": "El Asesino #1 de Proyectos",
-      "body": "La mayoria de las apps nunca se lanzan. La razon no es codigo malo o bugs dificiles — es el desvio de alcance. Eso es cuando sigues agregando 'solo una funcionalidad mas' hasta que el proyecto es tan grande que lo abandonas. Los programadores con IA son especialmente vulnerables porque la IA hace que parezca facil agregar funcionalidades."
+      "body": "La mayoria de las apps nunca se lanzan. La razón no es código malo o bugs difíciles — es el desvio de alcance. Eso es cuando sigues agregando 'solo una funcionalidad más' hasta que el proyecto es tan grande que lo abandonas. Los programadores con IA son especialmente vulnerables porque la IA hace que parezca fácil agregar funcionalidades."
     },
     {
       "type": "analogy",
@@ -21,22 +21,22 @@
     {
       "type": "analogy",
       "title": "Empacando para un Fin de Semana",
-      "body": "El desvio de alcance es como empacar una maleta para un viaje de fin de semana pero llevar ropa para dos semanas 'por si acaso.' De repente tu maleta pesa demasiado y ni puedes subir al avion. Empaca ligero, viaja rapido. Siempre puedes comprar un cepillo de dientes al llegar — igual que siempre puedes agregar funcionalidades despues de lanzar."
+      "body": "El desvio de alcance es como empacar una maleta para un viaje de fin de semana pero llevar ropa para dos semanas 'por si acaso.' De repente tu maleta pesa demasiado y ni puedes subir al avión. Empaca ligero, viaja rápido. Siempre puedes comprar un cepillo de dientes al llegar — igual que siempre puedes agregar funcionalidades después de lanzar."
     },
     {
       "type": "code_example",
       "title": "Una Conversacion de Desvio de Alcance",
       "language": "text",
       "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
-      "annotation": "Cada funcionalidad por si sola parece pequena, pero se acumulan. Cada funcionalidad significa mas codigo, mas bugs, mas casos especiales."
+      "annotation": "Cada funcionalidad por si sola parece pequeña, pero se acumulan. Cada funcionalidad significa más código, más bugs, más casos especiales."
     },
     {
       "type": "motivation",
-      "body": "Las apps que generan dinero en la tienda no son las que tienen mas funcionalidades — son las que realmente se lanzaron. Cada funcionalidad que recortas te acerca al dia de lanzamiento, y el dia de lanzamiento es cuando empiezas a facturar."
+      "body": "Las apps que generan dinero en la tienda no son las que tienen más funcionalidades — son las que realmente se lanzaron. Cada funcionalidad que recortas te acerca al día de lanzamiento, y el día de lanzamiento es cuando empiezas a facturar."
     },
     {
       "type": "key_takeaway",
-      "body": "Escribe las funcionalidades de tu MVP ANTES de empezar. Si surge una nueva idea, agregala a una lista de 'ideas para v2', no a tu sprint actual. Lanza primero, mejora despues."
+      "body": "Escribe las funcionalidades de tu MVP ANTES de empezar. Si surge una nueva idea, agregala a una lista de 'ideas para v2', no a tu sprint actual. Lanza primero, mejora después."
     }
   ],
   "exercise": {
@@ -49,9 +49,9 @@
       },
       {
         "id": "just-one-more",
-        "content": "Estas casi terminando pero piensas 'dejame agregar el modo oscuro rapidamente antes de lanzar'",
+        "content": "Estas casi terminando pero piensas 'dejame agregar el modo oscuro rápidamente antes de lanzar'",
         "isGoodPractice": false,
-        "explanation": "Clasico desvio de alcance. Las funcionalidades 'rapidas' nunca lo son. Lanza primero, modo oscuro despues."
+        "explanation": "Clasico desvio de alcance. Las funcionalidades 'rápidas' nunca lo son. Lanza primero, modo oscuro después."
       },
       {
         "id": "mvp-checklist",
@@ -61,15 +61,15 @@
       },
       {
         "id": "user-requests",
-        "content": "Un amigo dice 'deberias agregar un temporizador Pomodoro' asi que inmediatamente empiezas a construirlo",
+        "content": "Un amigo dice 'deberias agregar un temporizador Pomodoro' así que inmediatamente empiezas a construirlo",
         "isGoodPractice": false,
         "explanation": "Las solicitudes de funcionalidades de los usuarios son valiosas — pero van en la lista de v2, no en el sprint actual."
       },
       {
         "id": "cut-features",
-        "content": "Te das cuenta de que tu app tiene 12 funcionalidades planeadas y las reduces a 6 para lanzar mas rapido",
+        "content": "Te das cuenta de que tu app tiene 12 funcionalidades planeadas y las reduces a 6 para lanzar más rápido",
         "isGoodPractice": true,
-        "explanation": "Reducir el alcance es una senal de madurez. Lanzar algo pequeno que funciona supera a algo grande que no."
+        "explanation": "Reducir el alcance es una señal de madurez. Lanzar algo pequeño que funciona supera a algo grande que no."
       }
     ],
     "glossaryTerms": ["scope-creep", "mvp", "sprint"]

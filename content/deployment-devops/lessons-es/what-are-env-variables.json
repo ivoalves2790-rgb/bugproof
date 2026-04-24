@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Variables de Entorno = Marcado Rapido en Tu Telefono",
-      "body": "Los botones de marcado rapido de tu telefono siempre hacen lo mismo -- llamar a alguien -- pero el numero real detras de cada boton es diferente dependiendo de de quien sea el telefono. Las variables de entorno son como el marcado rapido para tu app: el codigo siempre llama a process.env.DATABASE_URL, pero el valor real detras cambia dependiendo de si estas en tu laptop, un servidor de pruebas o produccion."
+      "body": "Los botones de marcado rápido de tu teléfono siempre hacen lo mismo -- llamar a alguien -- pero el número real detrás de cada boton es diferente dependiendo de de quien sea el teléfono. Las variables de entorno son como el marcado rápido para tu app: el código siempre llama a process.env.DATABASE_URL, pero el valor real detrás cambia dependiendo de si estas en tu laptop, un servidor de pruebas o producción."
     },
     {
       "type": "text",

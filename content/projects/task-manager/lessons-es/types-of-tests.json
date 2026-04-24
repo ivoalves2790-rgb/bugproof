@@ -6,69 +6,69 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Tests unitarios, tests de integracion, tests de extremo a extremo — cada uno sirve un proposito diferente y detecta diferentes tipos de bugs. Piensa en ello como construir un auto: pruebas las piezas individuales, luego como se conectan, y finalmente lo sacas a dar una vuelta. Separemos cual es cual.",
+  "intro": "Tests unitarios, tests de integración, tests de extremo a extremo — cada uno sirve un proposito diferente y detecta diferentes tipos de bugs. Piensa en ello como construir un auto: pruebas las piezas individuales, luego como se conectan, y finalmente lo sacas a dar una vuelta. Separemos cual es cual.",
   "teach": [
     {
       "type": "text",
       "title": "La Piramide de Testing",
-      "body": "Los tests unitarios verifican funciones individuales en aislamiento — rapidos y baratos de ejecutar. Los tests de integracion verifican que multiples piezas funcionen juntas, como tu API comunicandose con la base de datos. Los tests de extremo a extremo (E2E) simulan a un usuario real haciendo clic en la app. Quieres muchos tests unitarios, algunos de integracion y unos pocos E2E."
+      "body": "Los tests unitarios verifican funciones individuales en aislamiento — rápidos y baratos de ejecutar. Los tests de integración verifican que multiples piezas funcionen juntas, como tu API comunicandose con la base de datos. Los tests de extremo a extremo (E2E) simulan a un usuario real haciendo clic en la app. Quieres muchos tests unitarios, algunos de integración y unos pocos E2E."
     },
     {
       "type": "analogy",
       "title": "Construir un Auto vs. Probarlo en la Carretera",
-      "body": "Los tests unitarios verifican partes individuales del auto (arranca el motor?). Los tests de integracion verifican que las partes funcionen juntas (el motor se conecta a la transmision?). Los tests E2E son la prueba de manejo completa (puedes conducir de A a B?). Necesitas los tres, pero es mas barato probar las partes individualmente primero."
+      "body": "Los tests unitarios verifican partes individuales del auto (arranca el motor?). Los tests de integración verifican que las partes funcionen juntas (el motor se conecta a la transmision?). Los tests E2E son la prueba de manejo completa (puedes conducir de A a B?). Necesitas los tres, pero es más barato probar las partes individualmente primero."
     },
     {
       "type": "analogy",
       "title": "Las Capas de Testing Son Como Verificar una Receta",
-      "body": "Los tests unitarios son probar cada ingrediente por separado — esta fresca la sal? Los tests de integracion verifican que los ingredientes combinen bien — la salsa sabe bien? Los tests E2E son servir toda la comida a un invitado. No dejarias de probar la salsa solo porque los ingredientes individuales estaban bien."
+      "body": "Los tests unitarios son probar cada ingrediente por separado — esta fresca la sal? Los tests de integración verifican que los ingredientes combinen bien — la salsa sabe bien? Los tests E2E son servir toda la comida a un invitado. No dejarias de probar la salsa solo porque los ingredientes individuales estaban bien."
     },
     {
       "type": "motivation",
-      "body": "Saber que tipo de test usar significa detectar bugs mas rapido y lanzar funcionalidades con confianza — esa velocidad es lo que separa los proyectos de hobby de los productos que generan dinero."
+      "body": "Saber que tipo de test usar significa detectar bugs más rápido y lanzar funcionalidades con confianza — esa velocidad es lo que separa los proyectos de hobby de los productos que generan dinero."
     },
     {
       "type": "key_takeaway",
-      "body": "Sigue la piramide de testing: muchos tests unitarios rapidos en la base, algunos tests de integracion en el medio y unos pocos tests E2E criticos en la cima."
+      "body": "Sigue la piramide de testing: muchos tests unitarios rápidos en la base, algunos tests de integración en el medio y unos pocos tests E2E criticos en la cima."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Los tests unitarios deben probar una funcion o componente en aislamiento, con las dependencias externas simuladas",
+        "content": "Los tests unitarios deben probar una función o componente en aislamiento, con las dependencias externas simuladas",
         "isGoodPractice": true,
-        "explanation": "El aislamiento es la caracteristica clave de los tests unitarios. Simular la base de datos, las llamadas a la API y otras dependencias mantiene los tests rapidos y enfocados en la logica que se esta probando."
+        "explanation": "El aislamiento es la caracteristica clave de los tests unitarios. Simular la base de datos, las llamadas a la API y otras dependencias mantiene los tests rápidos y enfocados en la lógica que se está probando."
       },
       {
         "id": "c2",
-        "content": "Los tests de extremo a extremo son rapidos y baratos de mantener, asi que deberias escribirlos para cada funcionalidad",
+        "content": "Los tests de extremo a extremo son rápidos y baratos de mantener, así que deberias escribirlos para cada funcionalidad",
         "isGoodPractice": false,
-        "explanation": "Los tests E2E son el tipo mas lento y fragil. Se rompen cuando la UI cambia y tardan minutos en ejecutarse. Usalos solo para flujos de usuario criticos, no para cada funcionalidad."
+        "explanation": "Los tests E2E son el tipo más lento y fragil. Se rompen cuando la UI cambia y tardan minutos en ejecutarse. Usalos solo para flujos de usuario criticos, no para cada funcionalidad."
       },
       {
         "id": "c3",
-        "content": "Los tests de integracion verifican que tu API lee y escribe correctamente en la base de datos",
+        "content": "Los tests de integración verifican que tu API lee y escribe correctamente en la base de datos",
         "isGoodPractice": true,
-        "explanation": "Este es un test de integracion clasico — verificar que dos sistemas (tu codigo y la base de datos) funcionen juntos. Los tests unitarios con bases de datos simuladas no pueden detectar bugs reales de consultas."
+        "explanation": "Este es un test de integración clásico — verificar que dos sistemas (tu código y la base de datos) funcionen juntos. Los tests unitarios con bases de datos simuladas no pueden detectar bugs reales de consultas."
       },
       {
         "id": "c4",
         "content": "Si tienes buenos tests E2E, no necesitas tests unitarios porque E2E cubre todo",
         "isGoodPractice": false,
-        "explanation": "Los tests E2E son demasiado lentos y generales para detectar cada bug. Un test E2E que falla te dice que algo esta roto pero no donde. Los tests unitarios senalan la funcion exacta que fallo."
+        "explanation": "Los tests E2E son demasiado lentos y generales para detectar cada bug. Un test E2E que falla te dice que algo esta roto pero no donde. Los tests unitarios señalan la función exacta que fallo."
       },
       {
         "id": "c5",
-        "content": "Un test unitario para un gestor de tareas podria verificar que la funcion 'addTask' devuelve una tarea con el titulo correcto y estado predeterminado",
+        "content": "Un test unitario para un gestor de tareas podría verificar que la función 'addTask' devuelve una tarea con el titulo correcto y estado predeterminado",
         "isGoodPractice": true,
-        "explanation": "Este es un buen test unitario — verifica una funcion, comprueba una salida especifica y no depende de una base de datos o UI."
+        "explanation": "Este es un buen test unitario — verifica una función, comprueba una salida especifica y no depende de una base de datos o UI."
       },
       {
         "id": "c6",
         "content": "Siempre deberias escribir los tres tipos de tests antes de comenzar cualquier funcionalidad",
         "isGoodPractice": false,
-        "explanation": "No puedes escribir tests E2E significativos antes de que la funcionalidad exista. Empieza con tests unitarios durante el desarrollo, agrega tests de integracion para los flujos de datos y agrega tests E2E una vez que la UI sea estable."
+        "explanation": "No puedes escribir tests E2E significativos antes de que la funcionalidad exista. Empieza con tests unitarios durante el desarrollo, agrega tests de integración para los flujos de datos y agrega tests E2E una vez que la UI sea estable."
       }
     ],
     "glossaryTerms": ["unit-test", "integration-test", "e2e-test"]

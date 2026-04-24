@@ -11,17 +11,17 @@
     {
       "type": "text",
       "title": "Supabase = Backend Instantaneo",
-      "body": "Supabase te da una base de datos PostgreSQL, autenticacion, almacenamiento de archivos y suscripciones en tiempo real — todo desde un panel de control. En lugar de unir cinco servicios, obtienes una plataforma que maneja el backend para que puedas enfocarte en el frontend."
+      "body": "Supabase te da una base de datos PostgreSQL, autenticación, almacenamiento de archivos y suscripciones en tiempo real — todo desde un panel de control. En lugar de unir cinco servicios, obtienes una plataforma que maneja el backend para que puedas enfocarte en el frontend."
     },
     {
       "type": "analogy",
       "title": "Supabase Es un Apartamento Amueblado",
-      "body": "Construir un backend desde cero es como mudarte a una casa vacia — necesitas comprar cada mueble. Supabase es un apartamento amueblado. La base de datos, autenticacion y almacenamiento ya estan configurados. Puedes reorganizar las cosas, pero no empiezas desde cero."
+      "body": "Construir un backend desde cero es como mudarte a una casa vacia — necesitas comprar cada mueble. Supabase es un apartamento amueblado. La base de datos, autenticación y almacenamiento ya estan configurados. Puedes reorganizar las cosas, pero no empiezas desde cero."
     },
     {
       "type": "analogy",
       "title": "El Buffet Libre de Backend",
-      "body": "Supabase es como un buffet libre de servicios backend. Base de datos? Sirvete. Autenticacion? Ya esta en la mesa. Actualizaciones en tiempo real? Toma un plato. Solo pagas mas cuando comes MUCHO — y para entonces, tu app ya es suficientemente exitosa para pagarlo."
+      "body": "Supabase es como un buffet libre de servicios backend. Base de datos? Sirvete. Autenticación? Ya esta en la mesa. Actualizaciones en tiempo real? Toma un plato. Solo pagas más cuando comes MUCHO — y para entonces, tu app ya es suficientemente exitosa para pagarlo."
     },
     {
       "type": "motivation",
@@ -29,34 +29,34 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Supabase proporciona PostgreSQL, autenticacion, almacenamiento y funcionalidades en tiempo real con un generoso nivel gratuito. Para un gestor de tareas, cubre todas las necesidades del backend sin requerir que construyas o administres un servidor."
+      "body": "Supabase proporciona PostgreSQL, autenticación, almacenamiento y funcionalidades en tiempo real con un generoso nivel gratuito. Para un gestor de tareas, cubre todas las necesidades del backend sin requerir que construyas o administres un servidor."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "built-in-auth",
-        "content": "Supabase incluye autenticacion integrada, asi que no necesitas construir inicio de sesion/registro desde cero",
+        "content": "Supabase incluye autenticación integrada, así que no necesitas construir inicio de sesión/registro desde cero",
         "isGoodPractice": true,
-        "explanation": "La autenticacion es una de las cosas mas dificiles de construir de forma segura. Supabase maneja email/contrasena, OAuth, enlaces magicos y mas — asi que tu gestor de tareas obtiene inicio de sesion seguro gratis."
+        "explanation": "La autenticación es una de las cosas más difíciles de construir de forma segura. Supabase maneja email/contrasena, OAuth, enlaces magicos y más — así que tu gestor de tareas obtiene inicio de sesión seguro gratis."
       },
       {
         "id": "no-sql-needed",
         "content": "Nunca necesitas escribir o entender SQL cuando usas Supabase",
         "isGoodPractice": false,
-        "explanation": "Supabase tiene un cliente JavaScript que abstrae muchas consultas, pero entender SQL sigue siendo importante. Lo necesitaras para politicas de Seguridad a Nivel de Fila, consultas complejas y depuracion."
+        "explanation": "Supabase tiene un cliente JavaScript que abstrae muchas consultas, pero entender SQL sigue siendo importante. Lo necesitaras para politicas de Seguridad a Nivel de Fila, consultas complejas y depuración."
       },
       {
         "id": "free-tier",
-        "content": "Supabase tiene un nivel gratuito que es mas que suficiente para construir y lanzar un proyecto personal como nuestro gestor de tareas",
+        "content": "Supabase tiene un nivel gratuito que es más que suficiente para construir y lanzar un proyecto personal como nuestro gestor de tareas",
         "isGoodPractice": true,
-        "explanation": "El nivel gratuito incluye 500 MB de almacenamiento de base de datos, 50,000 usuarios activos mensuales para autenticacion y 1 GB de almacenamiento de archivos. Nuestro gestor de tareas no se acercara a esos limites."
+        "explanation": "El nivel gratuito incluye 500 MB de almacenamiento de base de datos, 50,000 usuarios activos mensuales para autenticación y 1 GB de almacenamiento de archivos. Nuestro gestor de tareas no se acercara a esos limites."
       },
       {
         "id": "replaces-everything",
-        "content": "Supabase reemplaza toda herramienta de backend que puedas necesitar — nunca tendras que usar nada mas",
+        "content": "Supabase reemplaza toda herramienta de backend que puedas necesitar — nunca tendras que usar nada más",
         "isGoodPractice": false,
-        "explanation": "Supabase es genial para datos, autenticacion y almacenamiento, pero no maneja cosas como envio de emails, procesamiento de pagos o trabajos complejos en segundo plano. Aun necesitaras otros servicios para eso."
+        "explanation": "Supabase es genial para datos, autenticación y almacenamiento, pero no maneja cosas como envio de emails, procesamiento de pagos o trabajos complejos en segundo plano. Aun necesitaras otros servicios para eso."
       },
       {
         "id": "rls-security",
@@ -68,7 +68,7 @@
         "id": "vendor-lock",
         "content": "Usar Supabase significa que estas permanentemente atado y nunca puedes cambiar a otro proveedor",
         "isGoodPractice": false,
-        "explanation": "Supabase es de codigo abierto y funciona sobre PostgreSQL estandar. Tus datos, esquema e incluso politicas RLS son portables. Puedes exportar y alojar todo tu mismo en cualquier momento."
+        "explanation": "Supabase es de código abierto y funciona sobre PostgreSQL estandar. Tus datos, esquema e incluso politicas RLS son portables. Puedes exportar y alojar todo tu mismo en cualquier momento."
       },
       {
         "id": "realtime",

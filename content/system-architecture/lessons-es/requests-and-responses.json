@@ -37,7 +37,7 @@
     },
     {
       "type": "motivation",
-      "body": "Cada funcion en una app que genera dinero -- cargar productos, enviar pedidos, obtener perfiles de usuario -- es solo una peticion y una respuesta. Domina este patron y podras vibecodear cualquier funcion que una app necesite para generar ingresos."
+      "body": "Cada función en una app que genera dinero -- cargar productos, enviar pedidos, obtener perfiles de usuario -- es solo una peticion y una respuesta. Domina este patron y podras vibecodear cualquier función que una app necesite para generar ingresos."
     },
     {
       "type": "key_takeaway",

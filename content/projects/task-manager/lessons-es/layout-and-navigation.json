@@ -11,17 +11,17 @@
     {
       "type": "text",
       "title": "El Layout Establece el Escenario",
-      "body": "El layout de tu app es el esqueleto del que cuelga todo. En Next.js, el layout raiz envuelve cada pagina y es el lugar correcto para interfaz persistente como barras de navegacion y barras laterales. Un layout bien estructurado significa que las paginas se enfocan solo en su propio contenido, con la interfaz compartida manejada una sola vez."
+      "body": "El layout de tu app es el esqueleto del que cuelga todo. En Next.js, el layout raíz envuelve cada página y es el lugar correcto para interfaz persistente como barras de navegacion y barras laterales. Un layout bien estructurado significa que las páginas se enfocan solo en su propio contenido, con la interfaz compartida manejada una sola vez."
     },
     {
       "type": "analogy",
       "title": "Ajustar un Traje vs. Agrandarlo",
-      "body": "Es facil tomar un traje pequeno bien ajustado y soltar las costuras para hacerlo mas grande. Pero encoger un traje enorme para que quede entallado? Eso significa cortar tela, recoser todo y esperar que no se vea raro. El diseno mobile-first funciona igual — empieza con la pantalla pequena y expande con gracia para pantallas mas grandes, en lugar de intentar comprimir un layout de escritorio en un telefono."
+      "body": "Es fácil tomar un traje pequeño bien ajustado y soltar las costuras para hacerlo más grande. Pero encoger un traje enorme para que quede entallado? Eso significa cortar tela, recoser todo y esperar que no se vea raro. El diseño mobile-first funciona igual — empieza con la pantalla pequeña y expande con gracia para pantallas más grandes, en lugar de intentar comprimir un layout de escritorio en un teléfono."
     },
     {
       "type": "text",
       "title": "Movil Primero, Escritorio Mejorado",
-      "body": "La mayoria de las personas revisan sus tareas en su telefono. Si disenas para escritorio primero y luego intentas comprimirlo para movil, la experiencia se sentira rota. Empieza con el layout movil — una sola columna, botones amigables al tacto, navegacion inferior — y luego **mejora** para escritorio con una barra lateral o cuadricula mas amplia."
+      "body": "La mayoria de las personas revisan sus tareas en su teléfono. Si disenas para escritorio primero y luego intentas comprimirlo para movil, la experiencia se sentira rota. Empieza con el layout movil — una sola columna, botones amigables al tacto, navegacion inferior — y luego **mejora** para escritorio con una barra lateral o cuadricula más amplia."
     },
     {
       "type": "analogy",
@@ -34,7 +34,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Usa archivos de layout de Next.js para definir la estructura compartida, disena movil primero usando los prefijos responsivos de Tailwind, y manten la navegacion simple. Un gestor de tareas necesita como maximo 3-4 elementos de navegacion principal. Si necesitas mas, tu alcance es demasiado grande."
+      "body": "Usa archivos de layout de Next.js para definir la estructura compartida, disena movil primero usando los prefijos responsivos de Tailwind, y manten la navegacion simple. Un gestor de tareas necesita como máximo 3-4 elementos de navegacion principal. Si necesitas más, tu alcance es demasiado grande."
     }
   ],
   "exercise": {
@@ -44,16 +44,16 @@
         "narrative": "Estas configurando el layout principal para tu gestor de tareas en Next.js. La app tiene tres secciones: una lista de tareas, una pagina de configuracion y una pagina de perfil. Como estructuras la navegacion?",
         "choices": [
           { "id": "sidebar-desktop", "text": "Construir una barra lateral fija con enlaces a las tres secciones, visible todo el tiempo en todos los tamanos de pantalla", "nextNode": "fixed-sidebar", "score": 1 },
-          { "id": "mobile-first-nav", "text": "Empezar con una barra de pestanas inferior para movil con iconos para cada seccion, luego cambiar a una barra lateral en pantallas mas grandes usando clases responsivas", "nextNode": "responsive-nav", "score": 4 },
-          { "id": "hamburger-only", "text": "Usar un menu hamburguesa en todos los tamanos de pantalla para mantener la interfaz minima", "nextNode": "hamburger", "score": 1 }
+          { "id": "mobile-first-nav", "text": "Empezar con una barra de pestanas inferior para movil con iconos para cada sección, luego cambiar a una barra lateral en pantallas más grandes usando clases responsivas", "nextNode": "responsive-nav", "score": 4 },
+          { "id": "hamburger-only", "text": "Usar un menu hamburguesa en todos los tamanos de pantalla para mantener la interfaz mínima", "nextNode": "hamburger", "score": 1 }
         ]
       },
       "responsive-nav": {
         "narrative": "Tu barra de pestanas inferior funciona genial en movil. En escritorio, la barra lateral muestra nombres de secciones junto a iconos. Ahora necesitas decidir donde poner la accion 'Agregar Tarea'. Es la accion mas importante de toda la app. Donde va?",
         "choices": [
-          { "id": "fab-button", "text": "Un boton de accion flotante (FAB) en la esquina inferior derecha en movil, y un boton prominente 'Agregar Tarea' en la parte superior de la barra lateral en escritorio", "nextNode": "excellent-end", "score": 4 },
+          { "id": "fab-button", "text": "Un boton de acción flotante (FAB) en la esquina inferior derecha en movil, y un boton prominente 'Agregar Tarea' en la parte superior de la barra lateral en escritorio", "nextNode": "excellent-end", "score": 4 },
           { "id": "in-nav", "text": "Agregarlo como el elemento central en la barra de pestanas inferior en movil", "nextNode": "nav-action-end", "score": 2 },
-          { "id": "page-only", "text": "Poner el boton 'Agregar Tarea' solo en la pagina de lista de tareas, en la parte superior de la lista", "nextNode": "page-only-end", "score": 2 }
+          { "id": "page-only", "text": "Poner el boton 'Agregar Tarea' solo en la página de lista de tareas, en la parte superior de la lista", "nextNode": "page-only-end", "score": 2 }
         ]
       },
       "fixed-sidebar": {
@@ -67,49 +67,49 @@
         "narrative": "El menu hamburguesa oculta toda la navegacion detras de un toque. En movil, los usuarios tienen que tocar la hamburguesa, esperar a que el menu se anime al abrirse, encontrar su seccion y tocar de nuevo. Son 3 acciones para navegar. Los analytics muestran que los usuarios raramente visitan Configuracion o Perfil porque la navegacion esta oculta.",
         "choices": [
           { "id": "add-bottom-bar", "text": "Reemplazar la hamburguesa con una barra de pestanas inferior visible en movil para que la navegacion siempre este a un toque de distancia", "nextNode": "recovery-end", "score": 3 },
-          { "id": "keep-hamburger", "text": "Mantener la hamburguesa pero hacerla mas grande y agregar un tooltip que diga 'Menu'", "nextNode": "hidden-nav-end", "score": 0 }
+          { "id": "keep-hamburger", "text": "Mantener la hamburguesa pero hacerla más grande y agregar un tooltip que diga 'Menu'", "nextNode": "hidden-nav-end", "score": 0 }
         ]
       },
       "excellent-end": {
         "narrative": "Tu layout es responsivo e intuitivo. Los usuarios moviles tienen una barra inferior amigable al pulgar y un FAB prominente para la accion mas importante. Los usuarios de escritorio obtienen una barra lateral completa con etiquetas claras. El boton 'Agregar Tarea' siempre esta visible y accesible, sin importar el tamano de pantalla.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Ejecucion perfecta! Navegacion responsiva mobile-first con una accion primaria prominente es UX de nivel profesional. El patron FAB esta probado en apps como Google Tasks y Todoist porque pone la accion mas importante donde el pulgar del usuario descansa naturalmente.",
+        "feedback": "Ejecución perfecta! Navegacion responsiva mobile-first con una acción primaria prominente es UX de nivel profesional. El patron FAB esta probado en apps como Google Tasks y Todoist porque pone la acción más importante donde el pulgar del usuario descansa naturalmente.",
         "choices": []
       },
       "recovery-end": {
         "narrative": "Despues de arreglar la navegacion para que sea responsiva, la app se siente mucho mejor en movil. Perdiste algo de tiempo, pero el resultado es solido. La barra inferior da a los usuarios acceso de un toque a cada seccion.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Llegaste a un buen lugar, pero empezar con mobile-first te habria ahorrado el retrabajo. Recuerda: disena para la pantalla mas pequena primero, luego mejora para las mas grandes. Los prefijos responsivos de Tailwind (md:, lg:) hacen esto natural.",
+        "feedback": "Llegaste a un buen lugar, pero empezar con mobile-first te habría ahorrado el retrabajo. Recuerda: disena para la pantalla más pequeña primero, luego mejora para las más grandes. Los prefijos responsivos de Tailwind (md:, lg:) hacen esto natural.",
         "choices": []
       },
       "nav-action-end": {
         "narrative": "La pestana central funciona, pero rompe el modelo mental de las barras de pestanas. Los usuarios esperan que las pestanas naveguen entre secciones, no que disparen acciones. Algunos usuarios siguen tocando accidentalmente 'Agregar Tarea' cuando querian ir a Configuracion (la pestana de al lado).",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Mezclar navegacion y acciones en una barra de pestanas es confuso. Las barras de pestanas deberian navegar entre vistas. Las acciones primarias como 'Agregar Tarea' funcionan mejor como un boton de accion flotante (FAB) o un boton separado fuera de la barra de navegacion. Mantiene la navegacion y las acciones visualmente distintas.",
+        "feedback": "Mezclar navegacion y acciones en una barra de pestanas es confuso. Las barras de pestanas deberian navegar entre vistas. Las acciones primarias como 'Agregar Tarea' funcionan mejor como un boton de acción flotante (FAB) o un boton separado fuera de la barra de navegacion. Mantiene la navegacion y las acciones visualmente distintas.",
         "choices": []
       },
       "page-only-end": {
         "narrative": "El boton funciona en la pagina de lista de tareas, pero los usuarios en las paginas de Configuracion o Perfil tienen que navegar de regreso a la lista de tareas solo para agregar una tarea. La captura rapida — la capacidad de agregar una tarea desde cualquier lugar — se pierde.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "La accion primaria deberia ser accesible desde cualquier pantalla. Los usuarios piensan en tareas en momentos aleatorios y necesitan capturarlas instantaneamente. Un boton 'Agregar Tarea' globalmente visible (como un FAB) asegura que los usuarios siempre puedan capturar una tarea sin navegar primero.",
+        "feedback": "La acción primaria deberia ser accesible desde cualquier pantalla. Los usuarios piensan en tareas en momentos aleatorios y necesitan capturarlas instantaneamente. Un boton 'Agregar Tarea' globalmente visible (como un FAB) asegura que los usuarios siempre puedan capturar una tarea sin navegar primero.",
         "choices": []
       },
       "collapsible-end": {
         "narrative": "La barra lateral colapsable funciona, pero agrega complejidad: necesitas manejar estado abierto/cerrado, manejar la animacion y el boton de alternancia ocupa espacio. En movil, los usuarios aun tienen que tocar para abrirla, anulando el proposito de la navegacion visible.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "Las barras laterales colapsables agregan complejidad de gestion de estado para beneficio minimo en movil. En escritorio tienen sentido (como la barra lateral de VS Code), pero en movil, una barra de pestanas inferior es mas simple y mas amigable al pulgar. Usa diferentes patrones de navegacion para diferentes tamanos de pantalla.",
+        "feedback": "Las barras laterales colapsables agregan complejidad de gestion de estado para beneficio mínimo en movil. En escritorio tienen sentido (como la barra lateral de VS Code), pero en movil, una barra de pestanas inferior es más simple y más amigable al pulgar. Usa diferentes patrones de navegacion para diferentes tamanos de pantalla.",
         "choices": []
       },
       "hidden-nav-end": {
         "narrative": "Hacer la hamburguesa mas grande no resuelve el problema central: la navegacion sigue oculta. Los usuarios no exploran lo que no pueden ver. El engagement con Configuracion y Perfil sigue siendo bajo, y los nuevos usuarios luchan por descubrir funcionalidades.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "La navegacion visible gana sobre la navegacion oculta siempre. La investigacion muestra consistentemente que los menus hamburguesa reducen el descubrimiento de funcionalidades y el engagement. Para una app con solo 3-4 secciones, no hay razon para ocultarlas. Muestralas todas en una barra de pestanas inferior.",
+        "feedback": "La navegacion visible gana sobre la navegacion oculta siempre. La investigacion muestra consistentemente que los menus hamburguesa reducen el descubrimiento de funcionalidades y el engagement. Para una app con solo 3-4 secciones, no hay razón para ocultarlas. Muestralas todas en una barra de pestanas inferior.",
         "choices": []
       }
     },

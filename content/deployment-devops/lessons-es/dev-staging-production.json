@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Entornos = Probar un Nuevo Platillo del Menu",
-      "body": "Un restaurante no pone un platillo nuevo en el menu sin probarlo. Primero, el chef experimenta en la cocina (desarrollo). Luego el personal hace una prueba de sabor (staging). Solo despues de que todos estan de acuerdo en que esta listo, va al menu para los clientes que pagan (produccion). Saltar directo de los experimentos de cocina al plato del cliente es como terminas con malas resenas."
+      "body": "Un restaurante no pone un platillo nuevo en el menu sin probarlo. Primero, el chef experimenta en la cocina (desarrollo). Luego el personal hace una prueba de sabor (staging). Solo después de que todos estan de acuerdo en que esta listo, va al menu para los clientes que pagan (producción). Saltar directo de los experimentos de cocina al plato del cliente es como terminas con malas resenas."
     },
     {
       "type": "text",

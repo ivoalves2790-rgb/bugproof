@@ -6,17 +6,17 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta creciendo. Los usuarios reportan que cargar su lista de tareas toma mas de 5 segundos. Piensa en ello como una biblioteca sin catalogo — el bibliotecario tiene que revisar cada estante para encontrar tu libro. La base de datos es el cuello de botella. Como lo arreglas sin reescribir todo?",
+  "intro": "Tu gestor de tareas esta creciendo. Los usuarios reportan que cargar su lista de tareas toma más de 5 segundos. Piensa en ello como una biblioteca sin catalogo — el bibliotecario tiene que revisar cada estante para encontrar tu libro. La base de datos es el cuello de botella. Como lo arreglas sin reescribir todo?",
   "teach": [
     {
       "type": "text",
       "title": "Cuando Tu Base de Datos Se Vuelve Lenta",
-      "body": "A medida que tus datos crecen, las consultas que eran rapidas con 100 filas se vuelven lentas con 100,000 filas. Los culpables habituales: indices faltantes en columnas por las que filtras u ordenas, consultas que obtienen mas datos de los necesarios (SELECT *) y problemas de consultas N+1 donde tu codigo ejecuta una consulta separada para cada elemento en una lista."
+      "body": "A medida que tus datos crecen, las consultas que eran rápidas con 100 filas se vuelven lentas con 100,000 filas. Los culpables habituales: indices faltantes en columnas por las que filtras u ordenas, consultas que obtienen más datos de los necesarios (SELECT *) y problemas de consultas N+1 donde tu código ejecuta una consulta separada para cada elemento en una lista."
     },
     {
       "type": "analogy",
       "title": "Los Indices de Base de Datos Son Como el Indice de un Libro",
-      "body": "Imagina buscar una palabra en un libro de 500 paginas leyendo cada pagina desde el principio. Eso es lo que hace una base de datos sin indice. Ahora imagina ir al indice al final del libro — te dice exactamente que paginas revisar. Un indice de base de datos funciona igual, saltando directamente a las filas que coinciden."
+      "body": "Imagina buscar una palabra en un libro de 500 páginas leyendo cada página desde el principio. Eso es lo que hace una base de datos sin indice. Ahora imagina ir al indice al final del libro — te dice exactamente que páginas revisar. Un indice de base de datos funciona igual, saltando directamente a las filas que coinciden."
     },
     {
       "type": "code_example",
@@ -31,7 +31,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Antes de agregar infraestructura, optimiza tus consultas. Agrega indices en columnas filtradas frecuentemente, usa paginacion y selecciona solo las columnas que necesitas. Estos cambios son gratis y a menudo 10-100x mas rapidos."
+      "body": "Antes de agregar infraestructura, optimiza tus consultas. Agrega indices en columnas filtradas frecuentemente, usa paginacion y selecciona solo las columnas que necesitas. Estos cambios son gratis y a menudo 10-100x más rápidos."
     }
   ],
   "exercise": {
@@ -40,8 +40,8 @@
       "start": {
         "narrative": "Los usuarios reportan que cargar su lista de tareas toma 8 segundos. Revisas la base de datos y encuentras que la tabla de tareas tiene 500,000 filas. La consulta SELECT * FROM tasks WHERE user_id = $1 ORDER BY created_at DESC no tiene indice en user_id. Que haces primero?",
         "choices": [
-          { "id": "a", "text": "Actualizar a un servidor de base de datos mas grande con mas RAM y CPU", "nextNode": "throw-money", "score": 1 },
-          { "id": "b", "text": "Agregar un indice en la columna user_id y agregar paginacion para limitar los resultados a 20 por pagina", "nextNode": "add-index", "score": 4 },
+          { "id": "a", "text": "Actualizar a un servidor de base de datos más grande con más RAM y CPU", "nextNode": "throw-money", "score": 1 },
+          { "id": "b", "text": "Agregar un indice en la columna user_id y agregar paginacion para limitar los resultados a 20 por página", "nextNode": "add-index", "score": 4 },
           { "id": "c", "text": "Cambiar a una base de datos NoSQL como MongoDB porque SQL no puede manejar tanta cantidad de datos", "nextNode": "switch-db", "score": 0 }
         ]
       },
@@ -49,35 +49,35 @@
         "narrative": "El servidor mas grande ayuda temporalmente — los tiempos de carga bajan a 3 segundos. Pero el problema fundamental (sin indice, sin paginacion) permanece. A medida que los datos crecen, necesitaras un servidor aun mas grande y los costos siguen subiendo.",
         "isEnd": true,
         "finalScore": 2,
-        "feedback": "Tirar hardware a un problema de software es costoso e insostenible. Un indice toma una linea de SQL y resuelve el problema gratis. Siempre optimiza antes de escalar.",
+        "feedback": "Tirar hardware a un problema de software es costoso e insostenible. Un indice toma una línea de SQL y resuelve el problema gratis. Siempre optimiza antes de escalar.",
         "choices": []
       },
       "add-index": {
         "narrative": "Agregas un indice en user_id e implementas paginacion (20 tareas por pagina). El tiempo de carga baja de 8 segundos a 200ms. Pero notas que la pagina de detalle de tarea tambien es lenta — carga la tarea mas todos sus comentarios en consultas separadas. Que haces?",
         "choices": [
           { "id": "b1", "text": "Usar una consulta JOIN para obtener la tarea y sus comentarios en una sola llamada a la base de datos", "nextNode": "join-query", "score": 3 },
-          { "id": "b2", "text": "Almacenar en cache la pagina de detalles de la tarea ya que las tareas no cambian a menudo", "nextNode": "cache-approach", "score": 2 }
+          { "id": "b2", "text": "Almacenar en cache la página de detalles de la tarea ya que las tareas no cambian a menudo", "nextNode": "cache-approach", "score": 2 }
         ]
       },
       "switch-db": {
         "narrative": "Migrar a una base de datos diferente es un esfuerzo masivo — reescribir consultas, cambiar el esquema, migrar datos. Tres semanas despues, descubres que MongoDB tiene los mismos problemas de rendimiento sin indices. El tipo de base de datos nunca fue el problema.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Cambiar de base de datos rara vez resuelve problemas de rendimiento. Los mismos principios de indexacion y optimizacion de consultas se aplican en todas partes. Optimiza tu configuracion actual antes de considerar una migracion.",
+        "feedback": "Cambiar de base de datos rara vez resuelve problemas de rendimiento. Los mismos principios de indexacion y optimización de consultas se aplican en todas partes. Optimiza tu configuración actual antes de considerar una migración.",
         "choices": []
       },
       "join-query": {
         "narrative": "Una sola consulta JOIN reemplaza mas de 20 consultas separadas. La pagina de detalles de la tarea ahora carga en 150ms. Tu base de datos funciona eficientemente con indices adecuados, paginacion y consultas optimizadas.",
         "isEnd": true,
         "finalScore": 7,
-        "feedback": "Esta es optimizacion de base de datos de libro. Indices, paginacion y consultas JOIN resuelven la gran mayoria de los problemas de rendimiento de base de datos. No se necesita nueva infraestructura.",
+        "feedback": "Esta es optimización de base de datos de libro. Indices, paginacion y consultas JOIN resuelven la gran mayoria de los problemas de rendimiento de base de datos. No se necesita nueva infraestructura.",
         "choices": []
       },
       "cache-approach": {
         "narrative": "El cache ayuda, pero todavia tienes el problema de consultas N+1. Cada fallo de cache es lento. Eventualmente agregas la consulta JOIN tambien, haciendo el cache menos necesario pero aun util.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "El cache es una estrategia valida pero esta tratando el sintoma, no la causa. Arregla la consulta subyacente primero, luego agrega cache como mejora.",
+        "feedback": "El cache es una estrategia valida pero esta tratando el síntoma, no la causa. Arregla la consulta subyacente primero, luego agrega cache como mejora.",
         "choices": []
       }
     },

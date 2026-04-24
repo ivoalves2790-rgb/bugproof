@@ -11,12 +11,12 @@
     {
       "type": "text",
       "title": "Next.js = React con Superpoderes",
-      "body": "Next.js es un framework de React que maneja las cosas aburridas por ti: enrutamiento, renderizado del lado del servidor, endpoints de API y despliegue. En lugar de unir 10 librerias tu mismo, Next.js te da una configuracion con todo incluido."
+      "body": "Next.js es un framework de React que maneja las cosas aburridas por ti: enrutamiento, renderizado del lado del servidor, endpoints de API y despliegue. En lugar de unir 10 librerias tu mismo, Next.js te da una configuración con todo incluido."
     },
     {
       "type": "analogy",
       "title": "React vs Next.js = Motor vs Auto",
-      "body": "React es un gran motor, pero aun necesitas construir el auto a su alrededor — enrutamiento, logica del servidor, herramientas de compilacion. Next.js te da el auto completo, listo para conducir. Aun puedes abrir el capo y personalizar, pero empiezas con algo que funciona."
+      "body": "React es un gran motor, pero aun necesitas construir el auto a su alrededor — enrutamiento, lógica del servidor, herramientas de compilación. Next.js te da el auto completo, listo para conducir. Aun puedes abrir el capo y personalizar, pero empiezas con algo que funciona."
     },
     {
       "type": "analogy",
@@ -25,56 +25,56 @@
     },
     {
       "type": "motivation",
-      "body": "Next.js es el framework detras de algunos de los productos web mas exitosos de hoy. Aprenderlo significa que puedes construir apps de nivel produccion que se ven y funcionan como si las hubiera hecho un equipo completo — pero solo eres tu y la IA, y los ingresos son todos tuyos."
+      "body": "Next.js es el framework detrás de algunos de los productos web más exitosos de hoy. Aprenderlo significa que puedes construir apps de nivel producción que se ven y funcionan como si las hubiera hecho un equipo completo — pero solo eres tu y la IA, y los ingresos son todos tuyos."
     },
     {
       "type": "key_takeaway",
-      "body": "Next.js nos da enrutamiento basado en archivos, rutas de API integradas, renderizado del lado del servidor y despliegue facil. Eso es exactamente lo que nuestro gestor de tareas necesita para ir de cero a produccion rapidamente."
+      "body": "Next.js nos da enrutamiento basado en archivos, rutas de API integradas, renderizado del lado del servidor y despliegue fácil. Eso es exactamente lo que nuestro gestor de tareas necesita para ir de cero a producción rápidamente."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "file-routing",
-        "content": "Next.js usa enrutamiento basado en archivos, asi que creas paginas agregando archivos a una carpeta en lugar de configurar un enrutador",
+        "content": "Next.js usa enrutamiento basado en archivos, así que creas páginas agregando archivos a una carpeta en lugar de configurar un enrutador",
         "isGoodPractice": true,
-        "explanation": "El enrutamiento basado en archivos es una de las mayores ventajas de Next.js. Crea un archivo, obtiene una ruta. Sin configuracion de enrutador que mantener. Para nuestro gestor de tareas, cada pagina es solo un archivo."
+        "explanation": "El enrutamiento basado en archivos es una de las mayores ventajas de Next.js. Crea un archivo, obtiene una ruta. Sin configuración de enrutador que mantener. Para nuestro gestor de tareas, cada página es solo un archivo."
       },
       {
         "id": "only-big-apps",
         "content": "Next.js solo vale la pena para aplicaciones empresariales grandes con equipos enormes",
         "isGoodPractice": false,
-        "explanation": "Next.js escala hacia abajo tan bien como escala hacia arriba. Es perfecto para proyectos individuales y apps pequenas. La estructura que proporciona realmente ayuda a los principiantes a mantenerse organizados."
+        "explanation": "Next.js escala hacia abajo tan bien como escala hacia arriba. Es perfecto para proyectos individuales y apps pequeñas. La estructura que proporciona realmente ayuda a los principiantes a mantenerse organizados."
       },
       {
         "id": "api-routes",
-        "content": "Next.js te permite escribir endpoints de API backend en el mismo proyecto, asi que no necesitas un servidor separado",
+        "content": "Next.js te permite escribir endpoints de API backend en el mismo proyecto, así que no necesitas un servidor separado",
         "isGoodPractice": true,
-        "explanation": "Las rutas de API significan que tu frontend y backend viven en un solo codigo base. Para un gestor de tareas, esto simplifica todo — sin problemas de CORS, sin despliegue separado."
+        "explanation": "Las rutas de API significan que tu frontend y backend viven en un solo código base. Para un gestor de tareas, esto simplifica todo — sin problemas de CORS, sin despliegue separado."
       },
       {
         "id": "need-react-expert",
         "content": "Necesitas ser un experto en React antes de poder tocar Next.js",
         "isGoodPractice": false,
-        "explanation": "Necesitas conocer los basicos de React como componentes y estado, pero Next.js realmente hace muchas cosas mas faciles que React puro. Puedes aprender ambos juntos."
+        "explanation": "Necesitas conocer los básicos de React como componentes y estado, pero Next.js realmente hace muchas cosas más fáciles que React puro. Puedes aprender ambos juntos."
       },
       {
         "id": "ssr-benefit",
-        "content": "El renderizado del lado del servidor en Next.js ayuda a que tus paginas carguen mas rapido y mejora el SEO",
+        "content": "El renderizado del lado del servidor en Next.js ayuda a que tus páginas carguen más rápido y mejora el SEO",
         "isGoodPractice": true,
-        "explanation": "SSR significa que el servidor envia una pagina completamente renderizada al navegador. Los usuarios ven el contenido inmediatamente en lugar de una pantalla en blanco. Los motores de busqueda tambien pueden indexarlo."
+        "explanation": "SSR significa que el servidor envia una página completamente renderizada al navegador. Los usuarios ven el contenido inmediatamente en lugar de una pantalla en blanco. Los motores de busqueda también pueden indexarlo."
       },
       {
         "id": "always-ssr",
-        "content": "Cada pagina en una app de Next.js debe usar renderizado del lado del servidor, sin excepciones",
+        "content": "Cada página en una app de Next.js debe usar renderizado del lado del servidor, sin excepciones",
         "isGoodPractice": false,
-        "explanation": "Next.js te da opciones: generacion estatica, renderizado del lado del servidor o renderizado del lado del cliente. Tu eliges lo que se adapta a cada pagina. El dashboard puede ser renderizado en el cliente mientras la pagina de inicio es estatica."
+        "explanation": "Next.js te da opciones: generacion estática, renderizado del lado del servidor o renderizado del lado del cliente. Tu eliges lo que se adapta a cada página. El dashboard puede ser renderizado en el cliente mientras la página de inicio es estática."
       },
       {
         "id": "deployment",
-        "content": "Las apps de Next.js se pueden desplegar facilmente en plataformas como Vercel sin ninguna configuracion",
+        "content": "Las apps de Next.js se pueden desplegar fácilmente en plataformas como Vercel sin ninguna configuración",
         "isGoodPractice": true,
-        "explanation": "Vercel (la empresa detras de Next.js) hace el despliegue super simple. Haz push a Git, obtiene una URL en vivo. Para un proyecto de gestor de tareas, esto significa que puedes lanzar rapido."
+        "explanation": "Vercel (la empresa detrás de Next.js) hace el despliegue super simple. Haz push a Git, obtiene una URL en vivo. Para un proyecto de gestor de tareas, esto significa que puedes lanzar rápido."
       }
     ],
     "glossaryTerms": ["ssr", "api-routes", "file-based-routing"]

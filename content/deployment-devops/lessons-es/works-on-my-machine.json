@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "La Sorpresa del Dia de Mudanza",
-      "body": "Empacaste tu lampara y funcionaba perfecto en tu viejo departamento. Pero en el nuevo, el voltaje del enchufe es diferente y la lampara se quema. Tu laptop y el servidor de produccion son como dos departamentos diferentes -- misma lampara (codigo), diferentes sistemas electricos (sistema operativo, software instalado, configuracion). Lo que funcionaba en un lugar puede literalmente romperse en el otro."
+      "body": "Empacaste tu lampara y funcionaba perfecto en tu viejo departamento. Pero en el nuevo, el voltaje del enchufe es diferente y la lampara se quema. Tu laptop y el servidor de producción son como dos departamentos diferentes -- misma lampara (código), diferentes sistemas electricos (sistema operativo, software instalado, configuración). Lo que funcionaba en un lugar puede literalmente romperse en el otro."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Saber resolver los errores de 'funciona en mi maquina' significa que tus apps creadas con IA realmente funcionan para usuarios reales -- y los usuarios reales son los que te pagan."
+      "body": "Saber resolver los errores de 'funciona en mi máquina' significa que tus apps creadas con IA realmente funcionan para usuarios reales -- y los usuarios reales son los que te pagan."
     },
     {
       "type": "key_takeaway",

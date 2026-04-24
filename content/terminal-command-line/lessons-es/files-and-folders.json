@@ -6,22 +6,22 @@
   "xpReward": 10,
   "unitSlug": "welcome-to-the-terminal",
   "courseSlug": "terminal-command-line",
-  "intro": "Antes de poder hacer cualquier cosa en la terminal, necesitas entender como estan organizados los archivos y carpetas en tu computadora. Cada archivo vive en algun lugar dentro de una estructura en forma de arbol, y la terminal te permite explorarla toda con comandos simples.",
+  "intro": "Antes de poder hacer cualquier cosa en la terminal, necesitas entender como estan organizados los archivos y carpetas en tu computadora. Cada archivo vive en algun lugar dentro de una estructura en forma de árbol, y la terminal te permite explorarla toda con comandos simples.",
   "teach": [
     {
       "type": "analogy",
       "title": "El Sistema de Archivos = Un Archivero",
-      "body": "El sistema de archivos de tu computadora es como un gigante **archivero**. El archivero en si es la raiz (`/`). Dentro hay cajones grandes (carpetas de nivel superior como `Users`, `Applications`). Dentro de cada cajon hay carpetas colgantes (subcarpetas). Dentro de esas hay documentos individuales (archivos). La terminal te permite abrir cualquier cajon y mirar adentro al instante -- sin necesidad de hacer clic."
+      "body": "El sistema de archivos de tu computadora es como un gigante **archivero**. El archivero en si es la raíz (`/`). Dentro hay cajones grandes (carpetas de nivel superior como `Users`, `Applications`). Dentro de cada cajon hay carpetas colgantes (subcarpetas). Dentro de esas hay documentos individuales (archivos). La terminal te permite abrir cualquier cajon y mirar adentro al instante -- sin necesidad de hacer clic."
     },
     {
       "type": "analogy",
       "title": "Rutas = Direcciones Postales",
-      "body": "Cada archivo tiene una **ruta** -- su direccion exacta en tu computadora. Igual que una direccion postal te indica Pais > Ciudad > Calle > Numero de Casa, una ruta de archivo te indica Raiz > Carpeta > Subcarpeta > Archivo. La ruta `/Users/tu/Documents/curriculum.pdf` es como decir \"ve al vecindario Users, encuentra la casa 'tu', ve a la habitacion Documents y agarra curriculum.pdf.\""
+      "body": "Cada archivo tiene una **ruta** -- su dirección exacta en tu computadora. Igual que una dirección postal te indica Pais > Ciudad > Calle > Numero de Casa, una ruta de archivo te indica Raiz > Carpeta > Subcarpeta > Archivo. La ruta `/Users/tu/Documents/curriculum.pdf` es como decir \"ve al vecindario Users, encuentra la casa 'tu', ve a la habitacion Documents y agarra curriculum.pdf.\""
     },
     {
       "type": "text",
       "title": "El Directorio Home",
-      "body": "Cuando abres la terminal, empiezas en tu **directorio home** -- representado por el simbolo tilde `~`. Este es tu espacio personal en la computadora, como tu propio departamento en un edificio grande.\n\n- En Mac: `/Users/tunombre`\n- En Windows (WSL): `/home/tunombre`\n- En Linux: `/home/tunombre`\n\nTodos tus proyectos, documentos y descargas viven en algun lugar dentro de `~`."
+      "body": "Cuando abres la terminal, empiezas en tu **directorio home** -- representado por el símbolo tilde `~`. Este es tu espacio personal en la computadora, como tu propio departamento en un edificio grande.\n\n- En Mac: `/Users/tunombre`\n- En Windows (WSL): `/home/tunombre`\n- En Linux: `/home/tunombre`\n\nTodos tus proyectos, documentos y descargas viven en algun lugar dentro de `~`."
     },
     {
       "type": "code_example",
@@ -32,11 +32,11 @@
     },
     {
       "type": "motivation",
-      "body": "Entender el sistema de archivos es la base de cada proyecto de codigo que construiras. Cuando un cliente te pague $5,000 para construir una app con herramientas de IA, necesitas saber donde viven tus archivos, como organizarlos y como encontrarlos rapido. Esta leccion te ahorra horas de confusion despues."
+      "body": "Entender el sistema de archivos es la base de cada proyecto de código que construiras. Cuando un cliente te pague $5,000 para construir una app con herramientas de IA, necesitas saber donde viven tus archivos, como organizarlos y como encontrarlos rápido. Esta lección te ahorra horas de confusion después."
     },
     {
       "type": "key_takeaway",
-      "body": "Tu sistema de archivos es un arbol de carpetas y archivos. Usa `pwd` para ver donde estas y `ls` para ver que hay a tu alrededor. Cada archivo tiene una ruta unica -- su direccion en tu computadora."
+      "body": "Tu sistema de archivos es un árbol de carpetas y archivos. Usa `pwd` para ver donde estas y `ls` para ver que hay a tu alrededor. Cada archivo tiene una ruta única -- su dirección en tu computadora."
     }
   ],
   "exercise": {
@@ -58,11 +58,11 @@
         "hint": "El comando son solo dos letras y significa 'list' (listar)."
       },
       {
-        "instruction": "Hay una carpeta 'app' aqui. Veamos que hay adentro. Lista los contenidos del directorio app sin moverte a el.",
+        "instruction": "Hay una carpeta 'app' aquí. Veamos que hay adentro. Lista los contenidos del directorio app sin moverte a el.",
         "expectedCommand": "ls app",
         "acceptAlternatives": ["ls ./app", "ls app/"],
         "output": "README.md    index.html    style.css",
-        "hint": "Puedes listar una carpeta especifica agregando su nombre despues de 'ls'. Prueba 'ls app'."
+        "hint": "Puedes listar una carpeta especifica agregando su nombre después de 'ls'. Prueba 'ls app'."
       },
       {
         "instruction": "Ahora lista todo en el directorio actual con detalles completos, incluyendo archivos ocultos. Usa el formato largo con la bandera 'all'.",

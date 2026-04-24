@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "SSR vs CSR = Ver una Pelicula en Streaming vs Descargarla",
-      "body": "**SSR** es como ver una pelicula en streaming -- presionas play y empieza de inmediato porque el servidor hace el trabajo. **CSR** es como descargar la pelicula entera primero y luego verla -- hay una larga espera al inicio, pero una vez que esta en tu dispositivo, saltar entre escenas es instantaneo. Cada enfoque tiene compromisos entre que tan rapido ves el primer cuadro y que tan fluida es la experiencia despues."
+      "body": "**SSR** es como ver una pelicula en streaming -- presionas play y empieza de inmediato porque el servidor hace el trabajo. **CSR** es como descargar la pelicula entera primero y luego verla -- hay una larga espera al inicio, pero una vez que esta en tu dispositivo, saltar entre escenas es instantaneo. Cada enfoque tiene compromisos entre que tan rápido ves el primer cuadro y que tan fluida es la experiencia después."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "Elegir la estrategia de renderizado correcta es como las apps rankean en Google y convierten visitantes en clientes. Cuando vibecodeas con SSR donde importa, tus paginas aparecen en los resultados de busqueda -- y ese trafico organico gratuito es el mas rentable."
+      "body": "Elegir la estrategia de renderizado correcta es como las apps rankean en Google y convierten visitantes en clientes. Cuando vibecodeas con SSR donde importa, tus páginas aparecen en los resultados de busqueda -- y ese tráfico organico gratuito es el más rentable."
     },
     {
       "type": "key_takeaway",
@@ -49,7 +49,7 @@
         "hint": "Use 'cat' to read the file contents."
       },
       {
-        "instruction": "Notice the HTML already has all the product data filled in! The server built this complete page. Now look at the client-side rendered version.",
+        "instruction": "Notice the HTML already has all the product data filled in! The server built this complete page. Now look at the client-side rendered versión.",
         "expectedCommand": "cat csr-page.html",
         "acceptAlternatives": ["less csr-page.html", "more csr-page.html"],
         "output": "<!DOCTYPE html>\n<html>\n<head><title>MyStore</title></head>\n<body>\n  <div id=\"root\"></div>\n  <script src=\"app.js\"></script>\n</body>\n</html>",

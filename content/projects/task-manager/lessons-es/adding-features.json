@@ -6,26 +6,26 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta en produccion y los usuarios quieren nuevas funcionalidades. Pero lanzar codigo nuevo a todos los usuarios a la vez es riesgoso — es como abrir las compuertas de golpe en vez de girar un grifo. Aprendamos sobre feature flags, despliegues graduales y practicas de despliegue seguro.",
+  "intro": "Tu gestor de tareas esta en producción y los usuarios quieren nuevas funcionalidades. Pero lanzar código nuevo a todos los usuarios a la vez es riesgoso — es como abrir las compuertas de golpe en vez de girar un grifo. Aprendamos sobre feature flags, despliegues graduales y practicas de despliegue seguro.",
   "teach": [
     {
       "type": "text",
       "title": "Lanza Sin Miedo",
-      "body": "Los feature flags te permiten desplegar codigo nuevo sin activarlo para todos. Puedes habilitar una funcionalidad para el 5% de los usuarios, verificar que funcione y luego desplegarla gradualmente al 100%. Si algo sale mal, apagas el flag al instante — sin rollback, sin necesidad de redesplegar."
+      "body": "Los feature flags te permiten desplegar código nuevo sin activarlo para todos. Puedes habilitar una funcionalidad para el 5% de los usuarios, verificar que funcione y luego desplegarla gradualmente al 100%. Si algo sale mal, apagas el flag al instante — sin rollback, sin necesidad de redesplegar."
     },
     {
       "type": "analogy",
       "title": "Los Feature Flags Son Como un Interruptor de Luz",
-      "body": "Imagina que construyes una nueva habitacion en tu casa. En lugar de derribar una pared el dia de la mudanza y esperar que funcione, construyes la habitacion detras de una puerta. Abre la puerta para mostrarla a tus amigos primero. Si la plomeria tiene fugas, cierra la puerta y arreglala. Los feature flags son esa puerta — el codigo esta desplegado pero oculto hasta que estes listo."
+      "body": "Imagina que construyes una nueva habitacion en tu casa. En lugar de derribar una pared el día de la mudanza y esperar que funcione, construyes la habitacion detrás de una puerta. Abre la puerta para mostrarla a tus amigos primero. Si la plomeria tiene fugas, cierra la puerta y arreglala. Los feature flags son esa puerta — el código esta desplegado pero oculto hasta que estes listo."
     },
     {
       "type": "analogy",
       "title": "Los Despliegues Graduales Son Como la Pre-Apertura de un Restaurante",
-      "body": "Los restaurantes nuevos no abren para toda la ciudad el primer dia. Hacen una pre-apertura — invitan a amigos y familiares primero, resuelven los problemas y luego abren al publico. Los despliegues graduales de funcionalidades funcionan igual: deja que un grupo pequeno lo pruebe, arregla lo que se rompa y luego expandelo a todos. Nunca servirias a 500 comensales antes de probar la cocina con 10."
+      "body": "Los restaurantes nuevos no abren para toda la ciudad el primer día. Hacen una pre-apertura — invitan a amigos y familiares primero, resuelven los problemas y luego abren al publico. Los despliegues graduales de funcionalidades funcionan igual: deja que un grupo pequeño lo pruebe, arregla lo que se rompa y luego expandelo a todos. Nunca servirias a 500 comensales antes de probar la cocina con 10."
     },
     {
       "type": "motivation",
-      "body": "Lanzar funcionalidades de forma segura es lo que separa los proyectos de hobby de los productos reales. Cuando puedes desplegar con confianza, iteras mas rapido — y una iteracion mas rapida significa que llegas a clientes que pagan antes."
+      "body": "Lanzar funcionalidades de forma segura es lo que separa los proyectos de hobby de los productos reales. Cuando puedes desplegar con confianza, iteras más rápido — y una iteración más rápida significa que llegas a clientes que pagan antes."
     },
     {
       "type": "key_takeaway",
@@ -36,21 +36,21 @@
     "cards": [
       {
         "id": "c1",
-        "content": "Usar feature flags para desplegar nuevas funcionalidades a un pequeno porcentaje de usuarios antes de lanzar a todos",
+        "content": "Usar feature flags para desplegar nuevas funcionalidades a un pequeño porcentaje de usuarios antes de lanzar a todos",
         "isGoodPractice": true,
-        "explanation": "Los despliegues graduales limitan el radio de impacto. Si una funcionalidad tiene un bug, solo el 5% de los usuarios se ven afectados en lugar de todos. Detectas problemas temprano con impacto minimo."
+        "explanation": "Los despliegues graduales limitan el radio de impacto. Si una funcionalidad tiene un bug, solo el 5% de los usuarios se ven afectados en lugar de todos. Detectas problemas temprano con impacto mínimo."
       },
       {
         "id": "c2",
-        "content": "Lanzar todas las funcionalidades nuevas detras de feature flags de larga duracion que permanecen en el codigo indefinidamente",
+        "content": "Lanzar todas las funcionalidades nuevas detrás de feature flags de larga duracion que permanecen en el código indefinidamente",
         "isGoodPractice": false,
-        "explanation": "Los feature flags estan pensados para ser temporales. Una vez que una funcionalidad esta completamente desplegada y es estable, elimina el flag. Los flags viejos crean deuda tecnica y hacen el codigo mas dificil de entender."
+        "explanation": "Los feature flags estan pensados para ser temporales. Una vez que una funcionalidad esta completamente desplegada y es estable, elimina el flag. Los flags viejos crean deuda técnica y hacen el código más difícil de entender."
       },
       {
         "id": "c3",
-        "content": "Desplegar cambios pequenos e incrementales con frecuencia en lugar de grandes lanzamientos cada varias semanas",
+        "content": "Desplegar cambios pequeños e incrementales con frecuencia en lugar de grandes lanzamientos cada varias semanas",
         "isGoodPractice": true,
-        "explanation": "Los despliegues pequenos son mas faciles de depurar. Si despliegas un cambio y algo se rompe, sabes que lo causo. Con 50 cambios en un solo lanzamiento, encontrar el problema es mucho mas dificil."
+        "explanation": "Los despliegues pequeños son más fáciles de depurar. Si despliegas un cambio y algo se rompe, sabes que lo causo. Con 50 cambios en un solo lanzamiento, encontrar el problema es mucho más difícil."
       },
       {
         "id": "c4",
@@ -60,15 +60,15 @@
       },
       {
         "id": "c5",
-        "content": "Escribir migraciones de base de datos que sean retrocompatibles para que el codigo anterior siga funcionando si necesitas hacer rollback",
+        "content": "Escribir migraciones de base de datos que sean retrocompatibles para que el código anterior siga funcionando si necesitas hacer rollback",
         "isGoodPractice": true,
-        "explanation": "Si renombras una columna y despliegas codigo nuevo, hacer rollback significa que el codigo anterior no puede encontrar la columna. En su lugar, agrega la nueva columna primero, migra los datos y luego elimina la anterior en un despliegue posterior."
+        "explanation": "Si renombras una columna y despliegas código nuevo, hacer rollback significa que el código anterior no puede encontrar la columna. En su lugar, agrega la nueva columna primero, migra los datos y luego elimina la anterior en un despliegue posterior."
       },
       {
         "id": "c6",
-        "content": "Si un feature flag esta desactivado, el codigo detras de el no necesita ser probado",
+        "content": "Si un feature flag esta desactivado, el código detrás de el no necesita ser probado",
         "isGoodPractice": false,
-        "explanation": "El codigo no probado detras de feature flags puede romper la app cuando se activa. Prueba tanto el estado activado como el desactivado. Una funcionalidad con flag que se cae cuando se activa es peor que no tener la funcionalidad."
+        "explanation": "El código no probado detrás de feature flags puede romper la app cuando se activa. Prueba tanto el estado activado como el desactivado. Una funcionalidad con flag que se cae cuando se activa es peor que no tener la funcionalidad."
       }
     ],
     "glossaryTerms": ["feature-flag", "rollout", "backward-compatible"]

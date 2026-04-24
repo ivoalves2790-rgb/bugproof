@@ -1,56 +1,56 @@
 {
   "slug": "why-authentication",
-  "title": "Por Que Autenticacion?",
+  "title": "Por Que Autenticación?",
   "type": "swipe_to_judge",
   "difficulty": 1,
   "xpReward": 10,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas funciona genial localmente, pero una vez que esta en linea, cualquiera podria leer o eliminar las tareas de cualquier otro. Imagina un hotel sin llaves de habitacion — cualquiera podria entrar a cualquier cuarto. Exploremos por que la autenticacion importa y que protege realmente.",
+  "intro": "Tu gestor de tareas funciona genial localmente, pero una vez que esta en línea, cualquiera podría leer o eliminar las tareas de cualquier otro. Imagina un hotel sin llaves de habitacion — cualquiera podría entrar a cualquier cuarto. Exploremos por qué la autenticación importa y que protege realmente.",
   "teach": [
     {
       "type": "text",
-      "title": "Que Es la Autenticacion?",
-      "body": "La autenticacion es como tu app responde la pregunta 'Quien eres?' Cuando un usuario inicia sesion, la app verifica su identidad y luego usa esa identidad para decidir que datos puede ver y modificar. Sin auth, cada usuario ve todas las tareas — o peor, puede eliminarlas."
+      "title": "Que Es la Autenticación?",
+      "body": "La autenticación es como tu app responde la pregunta 'Quien eres?' Cuando un usuario inicia sesión, la app verifica su identidad y luego usa esa identidad para decidir que datos puede ver y modificar. Sin auth, cada usuario ve todas las tareas — o peor, puede eliminarlas."
     },
     {
       "type": "analogy",
       "title": "Auth Es Como una Tarjeta de Hotel",
-      "body": "Imagina un hotel sin llaves de habitacion. Cualquiera podria entrar a cualquier habitacion, tomar tus cosas o dormir en tu cama. La autenticacion es la tarjeta llave — demuestra cual habitacion es tuya. La autorizacion (un concepto relacionado) es lo que la tarjeta desbloquea: tu habitacion, la piscina, pero no la oficina del personal."
+      "body": "Imagina un hotel sin llaves de habitacion. Cualquiera podría entrar a cualquier habitacion, tomar tus cosas o dormir en tu cama. La autenticación es la tarjeta llave — demuestra cual habitacion es tuya. La autorizacion (un concepto relacionado) es lo que la tarjeta desbloquea: tu habitacion, la piscina, pero no la oficina del personal."
     },
     {
       "type": "analogy",
       "title": "Auth Es Como una Pulsera de Concierto",
-      "body": "En un festival de musica, tu pulsera demuestra que compraste una entrada (autenticacion). El color de tu pulsera determina si accedes al area VIP o solo a la zona general (autorizacion). Sin pulsera, los de seguridad ni te dejan pasar. Tu app funciona igual — sin login, sin acceso."
+      "body": "En un festival de música, tu pulsera demuestra que compraste una entrada (autenticación). El color de tu pulsera determina si accedes al area VIP o solo a la zona general (autorizacion). Sin pulsera, los de seguridad ni te dejan pasar. Tu app funciona igual — sin login, sin acceso."
     },
     {
       "type": "motivation",
-      "body": "La autenticacion es lo que hace tu app personal — y las apps personales son por las que la gente paga. Sin auth, no puedes tener cuentas de usuario, y sin cuentas de usuario, no puedes cobrar por funcionalidades premium."
+      "body": "La autenticación es lo que hace tu app personal — y las apps personales son por las que la gente paga. Sin auth, no puedes tener cuentas de usuario, y sin cuentas de usuario, no puedes cobrar por funcionalidades premium."
     },
     {
       "type": "key_takeaway",
-      "body": "La autenticacion verifica la identidad ('quien eres?'), la autorizacion controla el acceso ('que puedes hacer?'). Cualquier app que almacene datos especificos de usuario necesita ambas."
+      "body": "La autenticación verifica la identidad ('quien eres?'), la autorizacion controla el acceso ('que puedes hacer?'). Cualquier app que almacene datos especificos de usuario necesita ambas."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Sin autenticacion, cualquier visitante de tu app podria ver, editar o eliminar las tareas de cualquier usuario",
+        "content": "Sin autenticación, cualquier visitante de tu app podría ver, editar o eliminar las tareas de cualquier usuario",
         "isGoodPractice": true,
-        "explanation": "Correcto. Sin auth, no hay forma de distinguir entre usuarios, asi que todos los datos son esencialmente publicos para cualquiera que encuentre la URL."
+        "explanation": "Correcto. Sin auth, no hay forma de distinguir entre usuarios, así que todos los datos son esencialmente publicos para cualquiera que encuentre la URL."
       },
       {
         "id": "c2",
-        "content": "Solo necesitas autenticacion si tu app maneja pagos",
+        "content": "Solo necesitas autenticación si tu app maneja pagos",
         "isGoodPractice": false,
         "explanation": "Cualquier app con datos especificos de usuario necesita auth — no solo apps de pagos. Un gestor de tareas almacena tareas personales que no deberian ser visibles para desconocidos."
       },
       {
         "id": "c3",
-        "content": "La autenticacion deberia agregarse temprano en el desarrollo, no adjuntarse al final",
+        "content": "La autenticación deberia agregarse temprano en el desarrollo, no adjuntarse al final",
         "isGoodPractice": true,
-        "explanation": "Agregar auth despues a menudo requiere reescribir modelos de datos y rutas de API. Planificarla desde el inicio ahorra grandes dolores de cabeza de refactorizacion."
+        "explanation": "Agregar auth después a menudo requiere reescribir modelos de datos y rutas de API. Planificarla desde el inicio ahorra grandes dolores de cabeza de refactorizacion."
       },
       {
         "id": "c4",
@@ -60,7 +60,7 @@
       },
       {
         "id": "c5",
-        "content": "Usar un proveedor de auth de terceros como Supabase Auth o Auth0 es una decision inteligente para la mayoria de los proyectos",
+        "content": "Usar un proveedor de auth de terceros como Supabase Auth o Auth0 es una decisión inteligente para la mayoria de los proyectos",
         "isGoodPractice": true,
         "explanation": "Los proveedores de auth manejan el hashing de contrasenas, gestion de sesiones, flujos OAuth y actualizaciones de seguridad. Construir tu propio auth es propenso a errores y rara vez vale la pena para la mayoria de las apps."
       },

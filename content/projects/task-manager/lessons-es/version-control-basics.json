@@ -6,27 +6,27 @@
   "xpReward": 10,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Git mantiene tu codigo seguro y te permite deshacer errores. Piensa en los commits como puntos de guardado en un videojuego — si la pelea con el jefe sale mal, puedes recargar en vez de empezar de cero. Desliza a la derecha en buenos habitos de git, a la izquierda en practicas que te causaran dolor.",
+  "intro": "Git mantiene tu código seguro y te permite deshacer errores. Piensa en los commits como puntos de guardado en un videojuego — si la pelea con el jefe sale mal, puedes recargar en vez de empezar de cero. Desliza a la derecha en buenos habitos de git, a la izquierda en practicas que te causaran dolor.",
   "teach": [
     {
       "type": "text",
       "title": "Git Es Tu Red de Seguridad",
-      "body": "Git rastrea cada cambio que haces en tu codigo. Si rompes algo, puedes volver a una version funcional. Si quieres probar una funcionalidad riesgosa, puedes crear una rama para que tu codigo principal se mantenga seguro. Sin git, un mal cambio puede destruir horas de trabajo sin forma de recuperarlo."
+      "body": "Git rastrea cada cambio que haces en tu código. Si rompes algo, puedes volver a una versión funcional. Si quieres probar una funcionalidad riesgosa, puedes crear una rama para que tu código principal se mantenga seguro. Sin git, un mal cambio puede destruir horas de trabajo sin forma de recuperarlo."
     },
     {
       "type": "analogy",
       "title": "Puntos de Guardado en un Videojuego",
-      "body": "Los commits de git son como puntos de guardado en un videojuego. Antes de pelear con el jefe final (desplegar una funcionalidad), guardas tu progreso. Si el jefe te mata (la funcionalidad se rompe), recargas desde el ultimo guardado en lugar de empezar todo el juego de nuevo. Los jugadores que nunca guardan pierden todo cuando las cosas salen mal. No seas ese jugador."
+      "body": "Los commits de git son como puntos de guardado en un videojuego. Antes de pelear con el jefe final (desplegar una funcionalidad), guardas tu progreso. Si el jefe te mata (la funcionalidad se rompe), recargas desde el último guardado en lugar de empezar todo el juego de nuevo. Los jugadores que nunca guardan pierden todo cuando las cosas salen mal. No seas ese jugador."
     },
     {
       "type": "analogy",
       "title": "El Portero con la Cuerda de Terciopelo",
-      "body": "Un `.gitignore` es como el portero con la cuerda de terciopelo en un club nocturno. Tiene una lista de nombres que NO van a entrar — node_modules, archivos .env, salida de compilacion. Sin el portero, cualquier archivo random se mete en tu repositorio y causa caos. Al portero no le importa lo importantes que esos archivos se crean; si estan en la lista, se quedan afuera."
+      "body": "Un `.gitignore` es como el portero con la cuerda de terciopelo en un club nocturno. Tiene una lista de nombres que NO van a entrar — node_modules, archivos .env, salida de compilación. Sin el portero, cualquier archivo random se mete en tu repositorio y causa caos. Al portero no le importa lo importantes que esos archivos se crean; si estan en la lista, se quedan afuera."
     },
     {
       "type": "text",
       "title": "El .gitignore No Es Negociable",
-      "body": "Un archivo `.gitignore` le dice a git que archivos NO rastrear. Nunca quieres hacer commit de `node_modules/` (miles de archivos de dependencias), archivos `.env` (claves API secretas), o `.next/` (salida de compilacion). create-next-app genera un `.gitignore` por ti, pero siempre verificalo antes de tu primer commit."
+      "body": "Un archivo `.gitignore` le dice a git que archivos NO rastrear. Nunca quieres hacer commit de `node_modules/` (miles de archivos de dependencias), archivos `.env` (claves API secretas), o `.next/` (salida de compilación). create-next-app genera un `.gitignore` por ti, pero siempre verificalo antes de tu primer commit."
     },
     {
       "type": "motivation",
@@ -41,9 +41,9 @@
     "cards": [
       {
         "id": "commit-often",
-        "content": "Haz commits pequenos y frecuentes despues de completar cada pieza significativa de trabajo",
+        "content": "Haz commits pequeños y frecuentes después de completar cada pieza significativa de trabajo",
         "isGoodPractice": true,
-        "explanation": "Los commits pequenos son faciles de entender, faciles de revisar y faciles de revertir. Si algo se rompe, solo pierdes una pequena cantidad de trabajo."
+        "explanation": "Los commits pequeños son fáciles de entender, fáciles de revisar y fáciles de revertir. Si algo se rompe, solo pierdes una pequeña cantidad de trabajo."
       },
       {
         "id": "commit-node-modules",
@@ -53,9 +53,9 @@
       },
       {
         "id": "clear-messages",
-        "content": "Escribe mensajes de commit como 'Agregar formulario de creacion de tareas con campos de titulo y descripcion'",
+        "content": "Escribe mensajes de commit como 'Agregar formulario de creación de tareas con campos de titulo y descripción'",
         "isGoodPractice": true,
-        "explanation": "Los mensajes descriptivos te dicen exactamente que cambio sin abrir el codigo. Cuando necesites encontrar cuando se agrego una funcionalidad, los mensajes claros son invaluables."
+        "explanation": "Los mensajes descriptivos te dicen exactamente que cambio sin abrir el código. Cuando necesites encontrar cuando se agrego una funcionalidad, los mensajes claros son invaluables."
       },
       {
         "id": "commit-env",
@@ -65,15 +65,15 @@
       },
       {
         "id": "gitignore-first",
-        "content": "Verifica tu .gitignore antes de hacer tu primer commit para asegurarte de que los secretos y archivos de compilacion esten excluidos",
+        "content": "Verifica tu .gitignore antes de hacer tu primer commit para asegurarte de que los secretos y archivos de compilación esten excluidos",
         "isGoodPractice": true,
-        "explanation": "Es mucho mas dificil eliminar un archivo del historial de git despues de que se ha hecho commit. Verificar .gitignore primero previene commits accidentales de archivos sensibles."
+        "explanation": "Es mucho más difícil eliminar un archivo del historial de git después de que se ha hecho commit. Verificar .gitignore primero previene commits accidentales de archivos sensibles."
       },
       {
         "id": "vague-messages",
         "content": "Escribe mensajes de commit como 'arreglar cosas' o 'actualizar' o 'asdfgh'",
         "isGoodPractice": false,
-        "explanation": "Los mensajes vagos son inutiles cuando intentas entender que cambio. Tres meses despues, 'arreglar cosas' no te dice nada. Toma 10 segundos para escribir un mensaje real."
+        "explanation": "Los mensajes vagos son inutiles cuando intentas entender que cambio. Tres meses después, 'arreglar cosas' no te dice nada. Toma 10 segundos para escribir un mensaje real."
       },
       {
         "id": "env-example",

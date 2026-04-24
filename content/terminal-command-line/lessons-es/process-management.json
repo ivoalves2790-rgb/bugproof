@@ -6,37 +6,37 @@
   "xpReward": 15,
   "unitSlug": "terminal-in-real-projects",
   "courseSlug": "terminal-command-line",
-  "intro": "Cuando ejecutas un servidor de desarrollo, es un proceso -- un programa activamente corriendo en tu maquina. A veces los procesos se atascan, o necesitas ejecutar multiples cosas a la vez. Como gestionar empleados en una oficina, necesitas saber quien esta trabajando, quien esta holgazaneando y como enviar a alguien a casa. Aprendamos a gestionar procesos.",
+  "intro": "Cuando ejecutas un servidor de desarrollo, es un proceso -- un programa activamente corriendo en tu máquina. A veces los procesos se atascan, o necesitas ejecutar multiples cosas a la vez. Como gestionar empleados en una oficina, necesitas saber quien está trabajando, quien esta holgazaneando y como enviar a alguien a casa. Aprendamos a gestionar procesos.",
   "teach": [
     {
       "type": "analogy",
       "title": "Procesos = Empleados en una Oficina",
-      "body": "Piensa en tu computadora como un edificio de oficinas. Cada programa en ejecucion es un **empleado**. Algunos estan activamente trabajando (tu servidor de desarrollo manejando solicitudes), algunos estan ociosos en su escritorio esperando tareas (servicios en segundo plano), y algunos se han congelado en su escritorio sin hacer nada util (procesos atascados). Como gerente, necesitas verificar quien esta trabajando (`ps`), encontrar al holgazan (`grep`) y enviarlo a casa (`kill`). A veces necesitas contratar a alguien para que trabaje en segundo plano mientras tu te enfocas en otras cosas (`&`)."
+      "body": "Piensa en tu computadora como un edificio de oficinas. Cada programa en ejecución es un **empleado**. Algunos estan activamente trabajando (tu servidor de desarrollo manejando solicitudes), algunos estan ociosos en su escritorio esperando tareas (servicios en segundo plano), y algunos se han congelado en su escritorio sin hacer nada útil (procesos atascados). Como gerente, necesitas verificar quien está trabajando (`ps`), encontrar al holgazan (`grep`) y enviarlo a casa (`kill`). A veces necesitas contratar a alguien para que trabaje en segundo plano mientras tu te enfocas en otras cosas (`&`)."
     },
     {
       "type": "analogy",
       "title": "Ctrl+C = Jalar el Freno de Emergencia",
-      "body": "Imagina que estas conduciendo y necesitas detenerte inmediatamente. No desaceleras suavemente hasta parar -- **jalas el freno de emergencia**. Eso es lo que `Ctrl+C` le hace a un proceso en ejecucion: envia una senal de interrupcion que dice \"deja de hacer lo que estas haciendo AHORA MISMO.\" No es grosero, es necesario. El proceso tiene oportunidad de limpiar (guardar archivos, cerrar conexiones), luego se apaga. Si Ctrl+C no funciona, `kill -9` es como cortar el motor completamente -- sin limpieza, solo para."
+      "body": "Imagina que estas conduciendo y necesitas detenerte inmediatamente. No desaceleras suavemente hasta parar -- **jalas el freno de emergencia**. Eso es lo que `Ctrl+C` le hace a un proceso en ejecución: envia una señal de interrupcion que dice \"deja de hacer lo que estas haciendo AHORA MISMO.\" No es grosero, es necesario. El proceso tiene oportunidad de limpiar (guardar archivos, cerrar conexiones), luego se apaga. Si Ctrl+C no funciona, `kill -9` es como cortar el motor completamente -- sin limpieza, solo para."
     },
     {
       "type": "text",
       "title": "Basicos de procesos",
-      "body": "Cada programa en ejecucion es un **proceso** con un **PID** (Process ID) unico:\n\n- **Proceso en primer plano** -- Toma el control de tu terminal. No puedes escribir otros comandos hasta que termine o lo detengas (Ctrl+C)\n- **Proceso en segundo plano** -- Corre detras de escena. Recuperas tu terminal y puedes escribir otros comandos\n- **Proceso zombie** -- Termino pero sigue apareciendo en la lista de procesos. Usualmente inofensivo\n\nComandos comunes de procesos:\n- `ps` -- Listar procesos en ejecucion\n- `kill PID` -- Detener un proceso por su ID\n- `kill -9 PID` -- Forzar la detencion de un proceso terco\n- `command &` -- Ejecutar un comando en segundo plano"
+      "body": "Cada programa en ejecución es un **proceso** con un **PID** (Process ID) único:\n\n- **Proceso en primer plano** -- Toma el control de tu terminal. No puedes escribir otros comandos hasta que termine o lo detengas (Ctrl+C)\n- **Proceso en segundo plano** -- Corre detrás de escena. Recuperas tu terminal y puedes escribir otros comandos\n- **Proceso zombie** -- Termino pero sigue apareciendo en la lista de procesos. Usualmente inofensivo\n\nComandos comunes de procesos:\n- `ps` -- Listar procesos en ejecución\n- `kill PID` -- Detener un proceso por su ID\n- `kill -9 PID` -- Forzar la detencion de un proceso terco\n- `command &` -- Ejecutar un comando en segundo plano"
     },
     {
       "type": "code_example",
       "title": "Encontrando y deteniendo procesos",
       "language": "bash",
       "code": "# Listar todos tus procesos\n$ ps aux | grep node\nuser  12345  0.5  1.2  node server.js\nuser  12346  0.0  0.4  node watcher.js\n\n# Detener un proceso especifico\n$ kill 12345\n\n# Forzar detencion si no quiere parar\n$ kill -9 12345",
-      "annotation": "ps aux lista todos los procesos. Al filtrar con grep node obtienes solo los procesos de Node.js. La segunda columna (12345) es el PID que usas con kill. Usa kill -9 solo como ultimo recurso -- no le permite al proceso hacer limpieza."
+      "annotation": "ps aux lista todos los procesos. Al filtrar con grep node obtienes solo los procesos de Node.js. La segunda columna (12345) es el PID que usas con kill. Usa kill -9 solo como último recurso -- no le permite al proceso hacer limpieza."
     },
     {
       "type": "motivation",
-      "body": "Los procesos atascados consumen la memoria y CPU de tu computadora, ralentizando todo. Los clientes de vibecoding esperan demos fluidos y desarrollo rapido. Saber como matar un proceso zombie que esta consumiendo 4GB de RAM es la diferencia entre lucir profesional y decir \"disculpe, dejeme reiniciar mi computadora\" durante una llamada con el cliente."
+      "body": "Los procesos atascados consumen la memoria y CPU de tu computadora, ralentizando todo. Los clientes de vibecoding esperan demos fluidos y desarrollo rápido. Saber como matar un proceso zombie que esta consumiendo 4GB de RAM es la diferencia entre lucir profesional y decir \"disculpe, dejeme reiniciar mi computadora\" durante una llamada con el cliente."
     },
     {
       "type": "key_takeaway",
-      "body": "Cada programa en ejecucion es un proceso con un PID. Usa Ctrl+C para detener procesos en primer plano, `ps` para encontrar procesos en ejecucion, `kill PID` para detenerlos, y `&` para ejecutar cosas en segundo plano. Si un proceso no quiere parar, `kill -9` lo fuerza."
+      "body": "Cada programa en ejecución es un proceso con un PID. Usa Ctrl+C para detener procesos en primer plano, `ps` para encontrar procesos en ejecución, `kill PID` para detenerlos, y `&` para ejecutar cosas en segundo plano. Si un proceso no quiere parar, `kill -9` lo fuerza."
     }
   ],
   "exercise": {
@@ -44,18 +44,18 @@
     "initialFiles": ["server.js", "package.json"],
     "steps": [
       {
-        "instruction": "Tu servidor de desarrollo parece estar atascado -- lo ejecutaste antes pero cerraste la pestana de la terminal. Encuentra cualquier proceso de Node.js que siga corriendo en tu maquina.",
+        "instruction": "Tu servidor de desarrollo parece estar atascado -- lo ejecutaste antes pero cerraste la pestana de la terminal. Encuentra cualquier proceso de Node.js que siga corriendo en tu máquina.",
         "expectedCommand": "ps aux | grep node",
         "acceptAlternatives": ["ps -ef | grep node", "pgrep -l node", "ps aux | grep -i node"],
         "output": "user  18234  2.1  3.4  node server.js\nuser  18235  0.0  0.2  grep --color=auto node",
-        "hint": "Usa 'ps aux | grep node' para listar todos los procesos en ejecucion y filtrar por los de Node.js."
+        "hint": "Usa 'ps aux | grep node' para listar todos los procesos en ejecución y filtrar por los de Node.js."
       },
       {
         "instruction": "Lo encontraste! El proceso 18234 es tu viejo servidor de desarrollo que sigue corriendo. Detenlo graciosamente.",
         "expectedCommand": "kill 18234",
         "acceptAlternatives": ["kill -15 18234", "kill -TERM 18234"],
         "output": "",
-        "hint": "Usa 'kill' seguido del PID (ID de proceso) para enviar una senal de detencion al proceso."
+        "hint": "Usa 'kill' seguido del PID (ID de proceso) para enviar una señal de detencion al proceso."
       },
       {
         "instruction": "Ahora inicia un nuevo servidor de desarrollo, pero esta vez ejecutalo en segundo plano para que puedas seguir usando la terminal.",
@@ -69,7 +69,7 @@
         "expectedCommand": "jobs",
         "acceptAlternatives": ["jobs -l", "ps aux | grep node"],
         "output": "[1]+  Running                 npm run dev &",
-        "hint": "Usa 'jobs' para ver todos los procesos en segundo plano iniciados desde esta sesion de terminal."
+        "hint": "Usa 'jobs' para ver todos los procesos en segundo plano iniciados desde esta sesión de terminal."
       }
     ],
     "completionMessage": "Has dominado la gestion de procesos! Encontraste un proceso atascado, lo mataste, iniciaste uno nuevo en segundo plano y verificaste que estaba corriendo. Estas habilidades son esenciales cuando estas haciendo malabares con multiples servidores, watchers y herramientas de build durante el desarrollo.",

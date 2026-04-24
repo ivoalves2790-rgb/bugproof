@@ -6,22 +6,22 @@
   "xpReward": 10,
   "chapterSlug": "building-ui",
   "projectSlug": "task-manager",
-  "intro": "Las apps de React se construyen con componentes — igual que los sets de LEGO se construyen con pequenos ladrillos reutilizables. Juzga si cada enfoque de diseno de componentes es una buena practica o una mala.",
+  "intro": "Las apps de React se construyen con componentes — igual que los sets de LEGO se construyen con pequeños ladrillos reutilizables. Juzga si cada enfoque de diseño de componentes es una buena practica o una mala.",
   "teach": [
     {
       "type": "analogy",
       "title": "Los Componentes Son Como Sets de LEGO",
-      "body": "Imagina construir un castillo con LEGO. No moldeas el castillo entero como una pieza gigante — ensamblas pequenos ladrillos estandarizados. Cada ladrillo es simple y reutilizable. Un ladrillo de 2x4 puede ser parte de la pared de un castillo, el casco de una nave espacial o un puente. Los componentes de React funcionan igual: piezas pequenas y autocontenidas que combinas para construir interfaces complejas."
+      "body": "Imagina construir un castillo con LEGO. No moldeas el castillo entero como una pieza gigante — ensamblas pequeños ladrillos estandarizados. Cada ladrillo es simple y reutilizable. Un ladrillo de 2x4 puede ser parte de la pared de un castillo, el casco de una nave espacial o un puente. Los componentes de React funcionan igual: piezas pequeñas y autocontenidas que combinas para construir interfaces complejas."
     },
     {
       "type": "text",
       "title": "Que Son los Componentes?",
-      "body": "Los componentes son los bloques de construccion de una interfaz React. Cada componente es una pieza autocontenida que maneja su propio renderizado y logica. Piensa en ellos como piezas de LEGO: simples por si solos, pero poderosos cuando se combinan. La clave es decidir **donde trazar los limites** entre componentes."
+      "body": "Los componentes son los bloques de construcción de una interfaz React. Cada componente es una pieza autocontenida que maneja su propio renderizado y lógica. Piensa en ellos como piezas de LEGO: simples por si solos, pero poderosos cuando se combinan. La clave es decidir **donde trazar los limites** entre componentes."
     },
     {
       "type": "text",
       "title": "El Principio de Responsabilidad Unica",
-      "body": "Un componente deberia hacer **una cosa bien**. Si te encuentras describiendo un componente con la palabra 'y' — como 'obtiene datos Y renderiza una lista Y maneja el filtrado' — ese componente esta haciendo demasiado. Dividelo en piezas mas pequenas: un envoltorio de obtencion de datos, un renderizador de lista y un control de filtro."
+      "body": "Un componente deberia hacer **una cosa bien**. Si te encuentras describiendo un componente con la palabra 'y' — como 'obtiene datos Y renderiza una lista Y maneja el filtrado' — ese componente está haciendo demasiado. Dividelo en piezas más pequeñas: un envoltorio de obtencion de datos, un renderizador de lista y un control de filtro."
     },
     {
       "type": "analogy",
@@ -34,7 +34,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Los buenos componentes son pequenos, enfocados y reutilizables. Si un componente es dificil de nombrar, probablemente hace demasiado. Si copias y pegas JSX, probablemente necesitas un componente compartido. Empieza con menos componentes mas grandes y dividelos a medida que la complejidad crece."
+      "body": "Los buenos componentes son pequeños, enfocados y reutilizables. Si un componente es difícil de nombrar, probablemente hace demasiado. Si copias y pegas JSX, probablemente necesitas un componente compartido. Empieza con menos componentes más grandes y dividelos a medida que la complejidad crece."
     }
   ],
   "exercise": {
@@ -43,43 +43,43 @@
         "id": "good-small-component",
         "content": "Crear un componente separado <TaskStatusBadge> que solo muestra una insignia de color basada en el estado de la tarea",
         "isGoodPractice": true,
-        "explanation": "Este es un componente pequeno y enfocado con una sola responsabilidad. Es facil de reutilizar, probar y modificar. Exactamente como deben funcionar los componentes."
+        "explanation": "Este es un componente pequeño y enfocado con una sola responsabilidad. Es fácil de reutilizar, probar y modificar. Exactamente como deben funcionar los componentes."
       },
       {
         "id": "bad-god-component",
         "content": "Construir un componente gigante <TaskManager> que contiene la lista de tareas, el formulario de agregar, filtros, ordenamiento y la vista de detalle todo en un solo archivo",
         "isGoodPractice": false,
-        "explanation": "Este 'componente dios' hace demasiado. Tendra cientos de lineas, sera imposible de probar aisladamente y doloroso de modificar. Dividelo en componentes mas pequenos y enfocados."
+        "explanation": "Este 'componente dios' hace demasiado. Tendra cientos de líneas, sera imposible de probar aisladamente y doloroso de modificar. Dividelo en componentes más pequeños y enfocados."
       },
       {
         "id": "good-composition",
-        "content": "Usar un componente <PageLayout> que acepta children para que diferentes paginas puedan compartir la misma estructura de encabezado y barra lateral",
+        "content": "Usar un componente <PageLayout> que acepta children para que diferentes páginas puedan compartir la misma estructura de encabezado y barra lateral",
         "isGoodPractice": true,
-        "explanation": "La composicion a traves de children es un patron central de React. Esto mantiene tu layout consistente mientras permite que cada pagina controle su propio contenido."
+        "explanation": "La composición a traves de children es un patron central de React. Esto mantiene tu layout consistente mientras permite que cada página controle su propio contenido."
       },
       {
         "id": "bad-prop-drilling",
         "content": "Pasar un objeto de tarea a traves de 6 niveles de componentes solo porque el componente <DueDate> profundamente anidado necesita la fecha limite",
         "isGoodPractice": false,
-        "explanation": "El paso de props a traves de muchos niveles es una senal de mala estructura de componentes. O reestructura tus componentes para que <DueDate> este mas cerca de los datos, o usa contexto para evitar pasar props a traves de capas intermedias."
+        "explanation": "El paso de props a traves de muchos niveles es una señal de mala estructura de componentes. O reestructura tus componentes para que <DueDate> este más cerca de los datos, o usa contexto para evitar pasar props a traves de capas intermedias."
       },
       {
         "id": "good-reusable-button",
-        "content": "Crear un componente generico <Button> con props de variante (primary, secondary, danger) en lugar de componentes separados <PrimaryButton>, <SecondaryButton> y <DangerButton>",
+        "content": "Crear un componente genérico <Button> con props de variante (primary, secondary, danger) en lugar de componentes separados <PrimaryButton>, <SecondaryButton> y <DangerButton>",
         "isGoodPractice": true,
-        "explanation": "Un solo Button con variantes es mas facil de mantener que tres componentes separados. La API es consistente, y agregar una nueva variante es solo un nuevo valor de prop, no un archivo nuevo."
+        "explanation": "Un solo Button con variantes es más fácil de mantener que tres componentes separados. La API es consistente, y agregar una nueva variante es solo un nuevo valor de prop, no un archivo nuevo."
       },
       {
         "id": "bad-premature-abstraction",
-        "content": "Antes de escribir cualquier codigo de funcionalidad, crear un framework abstracto de <DataFetcher>, <FormBuilder> y <ListRenderer> que pueda manejar teoricamente cualquier tipo de datos",
+        "content": "Antes de escribir cualquier código de funcionalidad, crear un framework abstracto de <DataFetcher>, <FormBuilder> y <ListRenderer> que pueda manejar teoricamente cualquier tipo de datos",
         "isGoodPractice": false,
-        "explanation": "Esta es abstraccion prematura. Aun no sabes que patrones surgiran. Construye las funcionalidades especificas primero (tareas, formularios), luego extrae patrones compartidos una vez que veas duplicacion real."
+        "explanation": "Esta es abstracción prematura. Aun no sabes que patrones surgiran. Construye las funcionalidades especificas primero (tareas, formularios), luego extrae patrones compartidos una vez que veas duplicacion real."
       },
       {
         "id": "good-naming",
         "content": "Nombrar tu componente <TaskListItem> para que sea inmediatamente claro que renderiza un elemento dentro de una lista de tareas",
         "isGoodPractice": true,
-        "explanation": "Nombres claros y descriptivos hacen que tu codigo se documente solo. Cualquiera que lea el codigo sabe instantaneamente que hace este componente y donde esta en la jerarquia de la interfaz."
+        "explanation": "Nombres claros y descriptivos hacen que tu código se documente solo. Cualquiera que lea el código sabe instantaneamente que hace este componente y donde esta en la jerarquia de la interfaz."
       }
     ],
     "glossaryTerms": ["component", "composition", "single-responsibility"]

@@ -6,22 +6,22 @@
   "xpReward": 15,
   "unitSlug": "power-user-techniques",
   "courseSlug": "terminal-command-line",
-  "intro": "Tu app esta en vivo en un servidor remoto y un bug critico acaba de aparecer en produccion. Necesitas conectarte al servidor, revisar los logs y reiniciar el servicio -- todo desde la terminal. SSH es el tunel seguro que te permite controlar una maquina remota como si estuvieras sentado frente a ella.",
+  "intro": "Tu app esta en vivo en un servidor remoto y un bug critico acaba de aparecer en producción. Necesitas conectarte al servidor, revisar los logs y reiniciar el servicio -- todo desde la terminal. SSH es el tunel seguro que te permite controlar una máquina remota como si estuvieras sentado frente a ella.",
   "teach": [
     {
       "type": "analogy",
       "title": "SSH = Una Linea Telefonica Privada y Segura",
-      "body": "Imagina que necesitas dar instrucciones a alguien en un edificio cerrado al otro lado de la ciudad. Podrias gritar desde la calle (inseguro -- cualquiera puede escuchar), o podrias usar una **linea telefonica privada y encriptada** que solo tu y la persona adentro pueden usar. **SSH es esa linea privada.** Crea un tunel encriptado entre tu computadora y un servidor remoto para que nadie pueda espiar tus comandos o datos."
+      "body": "Imagina que necesitas dar instrucciones a alguien en un edificio cerrado al otro lado de la ciudad. Podrias gritar desde la calle (inseguro -- cualquiera puede escuchar), o podrías usar una **línea telefonica privada y encriptada** que solo tu y la persona adentro pueden usar. **SSH es esa línea privada.** Crea un tunel encriptado entre tu computadora y un servidor remoto para que nadie pueda espiar tus comandos o datos."
     },
     {
       "type": "analogy",
       "title": "Llaves SSH = Un Escaner de Huellas Digitales",
-      "body": "La mayoria de los edificios usan llaves o codigos para entrar -- pero esos se pueden copiar o adivinar. Un **escaner de huellas digitales** es mas seguro porque tu huella es unica y no puede ser robada espiandote por encima del hombro. **Las llaves SSH funcionan como un escaner de huellas.** En vez de escribir una contraseña cada vez (que podria ser interceptada), registras tu llave unica con el servidor. Cuando te conectas, verifica tu huella -- sin contraseña necesaria, y nada que robar."
+      "body": "La mayoria de los edificios usan llaves o códigos para entrar -- pero esos se pueden copiar o adivinar. Un **escaner de huellas digitales** es más seguro porque tu huella es única y no puede ser robada espiandote por encima del hombro. **Las llaves SSH funcionan como un escaner de huellas.** En vez de escribir una contraseña cada vez (que podría ser interceptada), registras tu llave única con el servidor. Cuando te conectas, verifica tu huella -- sin contraseña necesaria, y nada que robar."
     },
     {
       "type": "text",
       "title": "Esenciales de SSH",
-      "body": "SSH (Secure Shell) te permite ejecutar comandos en una maquina remota:\n\n- **`ssh usuario@hostname`** -- Conectarse a un servidor remoto\n- **`ssh -i llave.pem usuario@hostname`** -- Conectarse usando un archivo de llave especifico\n- **`ssh-keygen`** -- Generar un nuevo par de llaves SSH (publica + privada)\n- **`scp archivo.txt usuario@host:/ruta/`** -- Copiar un archivo a un servidor remoto\n- **`exit`** -- Desconectarse del servidor remoto\n\nLa llave privada se queda en tu maquina (nunca la compartas). La llave publica va en el servidor."
+      "body": "SSH (Secure Shell) te permite ejecutar comandos en una máquina remota:\n\n- **`ssh usuario@hostname`** -- Conectarse a un servidor remoto\n- **`ssh -i llave.pem usuario@hostname`** -- Conectarse usando un archivo de llave especifico\n- **`ssh-keygen`** -- Generar un nuevo par de llaves SSH (publica + privada)\n- **`scp archivo.txt usuario@host:/ruta/`** -- Copiar un archivo a un servidor remoto\n- **`exit`** -- Desconectarse del servidor remoto\n\nLa llave privada se queda en tu máquina (nunca la compartas). La llave publica va en el servidor."
     },
     {
       "type": "code_example",
@@ -32,11 +32,11 @@
     },
     {
       "type": "motivation",
-      "body": "Cada app en produccion vive en un servidor remoto. Cuando los clientes te pagan por construir y mantener apps, SSH es como despliegas actualizaciones, depuras problemas en produccion y administras servidores. Los vibecoders que pueden conectarse por SSH a un servidor y arreglar problemas en minutos cobran tarifas premium -- porque el tiempo de inactividad le cuesta dinero real a los negocios."
+      "body": "Cada app en producción vive en un servidor remoto. Cuando los clientes te pagan por construir y mantener apps, SSH es como despliegas actualizaciones, depuras problemas en producción y administras servidores. Los vibecoders que pueden conectarse por SSH a un servidor y arreglar problemas en minutos cobran tarifas premium -- porque el tiempo de inactividad le cuesta dinero real a los negocios."
     },
     {
       "type": "key_takeaway",
-      "body": "SSH crea una conexion encriptada a servidores remotos. Usa ssh-keygen para crear pares de llaves (mas seguro que contraseñas), ssh usuario@host para conectarte, y scp para copiar archivos. Nunca compartas tu llave privada -- solo la llave publica va en el servidor."
+      "body": "SSH crea una conexión encriptada a servidores remotos. Usa ssh-keygen para crear pares de llaves (más seguro que contraseñas), ssh usuario@host para conectarte, y scp para copiar archivos. Nunca compartas tu llave privada -- solo la llave publica va en el servidor."
     }
   ],
   "exercise": {
@@ -53,8 +53,8 @@
       "check-agent": {
         "narrative": "Ejecutas ssh-add -l y recibes 'The agent has no identities'. Tu llave SSH existe en disco pero no esta cargada en el agente. La agregas con ssh-add ~/.ssh/id_ed25519 e intentas conectarte de nuevo. Esta vez logras entrar. Aparece el prompt del servidor. ¿Ahora que?",
         "choices": [
-          { "id": "a", "text": "Revisar los logs de la aplicacion para ver que salio mal", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Reiniciar inmediatamente el servicio de la aplicacion", "nextNode": "blind-restart", "score": 5 },
+          { "id": "a", "text": "Revisar los logs de la aplicación para ver que salio mal", "nextNode": "check-logs", "score": 10 },
+          { "id": "b", "text": "Reiniciar inmediatamente el servicio de la aplicación", "nextNode": "blind-restart", "score": 5 },
           { "id": "c", "text": "Ejecutar top para verificar si el servidor esta sobrecargado", "nextNode": "check-top", "score": 7 }
         ]
       },
@@ -80,13 +80,13 @@
       "blind-restart": {
         "narrative": "Reinicias la app con 'pm2 restart all' pero se cae de nuevo inmediatamente. Sin revisar los logs primero, estas adivinando el problema. Un reinicio no arregla un problema subyacente como espacio en disco, fugas de memoria o errores de configuracion.",
         "choices": [
-          { "id": "a", "text": "Revisar los logs de la aplicacion para encontrar la causa real", "nextNode": "check-logs", "score": 5 }
+          { "id": "a", "text": "Revisar los logs de la aplicación para encontrar la causa real", "nextNode": "check-logs", "score": 5 }
         ]
       },
       "check-top": {
         "narrative": "Ejecutas 'top' y ves que el CPU y la memoria se ven normales, pero el uso de disco esta al 100%. Eso es una pista, pero los logs de la aplicacion te diran exactamente que salio mal y cuando.",
         "choices": [
-          { "id": "a", "text": "Revisar los logs de la aplicacion para el error especifico", "nextNode": "check-logs", "score": 8 }
+          { "id": "a", "text": "Revisar los logs de la aplicación para el error especifico", "nextNode": "check-logs", "score": 8 }
         ]
       },
       "end-good": {
@@ -94,14 +94,14 @@
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excelente respuesta a incidentes por SSH. Diagnosticaste el problema de carga de la llave, te conectaste al servidor, revisaste los logs antes de tomar accion, identificaste la causa raiz (disco lleno), la arreglaste y agregaste prevencion (rotacion de logs). Asi es exactamente como se manejan los problemas de produccion en el mundo real."
+        "feedback": "Excelente respuesta a incidentes por SSH. Diagnosticaste el problema de carga de la llave, te conectaste al servidor, revisaste los logs antes de tomar acción, identificaste la causa raíz (disco lleno), la arreglaste y agregaste prevencion (rotacion de logs). Así es exactamente como se manejan los problemas de producción en el mundo real."
       },
       "end-mediocre": {
         "narrative": "La app se cae de nuevo inmediatamente porque el disco sigue lleno. Reiniciar sin arreglar la causa raiz solo repite el fallo. Necesitas liberar espacio en disco primero.",
         "choices": [],
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Siempre diagnostica antes de arreglar. Reiniciar una aplicacion que se cayo sin entender por que se cayo significa que probablemente se caera de nuevo. En este caso, el disco estaba lleno -- ninguna cantidad de reinicios ayudaria hasta que se limpiaran los archivos de log viejos. Revisa los logs, identifica la causa raiz, arreglala y luego reinicia."
+        "feedback": "Siempre diagnostica antes de arreglar. Reiniciar una aplicación que se cayo sin entender por qué se cayo significa que probablemente se caerá de nuevo. En este caso, el disco estaba lleno -- ninguna cantidad de reinicios ayudaria hasta que se limpiaran los archivos de log viejos. Revisa los logs, identifica la causa raíz, arreglala y luego reinicia."
       }
     },
     "glossaryTerms": ["ssh", "ssh-key"]

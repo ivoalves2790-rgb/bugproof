@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Backend Es Como la Boveda de un Banco",
-      "body": "Un banco tiene un vestibulo elegante (el frontend) donde los clientes entran, pero las cosas valiosas estan bajo llave en la **boveda** subterranea. No puedes simplemente entrar y tomar dinero -- tienes que pasar por un cajero que revisa tu identificacion primero. El backend es esa boveda: guarda lo importante (datos, contrasenas, logica de negocio) y solo da acceso a traves de canales seguros y controlados."
+      "body": "Un banco tiene un vestibulo elegante (el frontend) donde los clientes entran, pero las cosas valiosas estan bajo llave en la **boveda** subterranea. No puedes simplemente entrar y tomar dinero -- tienes que pasar por un cajero que revisa tu identificacion primero. El backend es esa boveda: guarda lo importante (datos, contrasenas, lógica de negocio) y solo da acceso a traves de canales seguros y controlados."
     },
     {
       "type": "text",

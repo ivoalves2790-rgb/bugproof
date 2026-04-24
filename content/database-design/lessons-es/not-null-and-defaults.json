@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "La Red de Seguridad del Circo",
-      "body": "NOT NULL y DEFAULT son como redes de seguridad en un circo. La **red NOT NULL** atrapa a cualquier artista (dato) que intente saltar sin arnes (valor faltante) -- detiene el espectaculo inmediatamente en vez de dejar que alguien caiga. La **red DEFAULT** es mas suave -- si un artista olvida su disfraz, el circo le da uno estandar para que el show continue. Juntas, se aseguran de que nadie toque el suelo."
+      "body": "NOT NULL y DEFAULT son como redes de seguridad en un circo. La **red NOT NULL** atrapa a cualquier artista (dato) que intente saltar sin arnes (valor faltante) -- detiene el espectaculo inmediatamente en vez de dejar que alguien caiga. La **red DEFAULT** es más suave -- si un artista olvida su disfraz, el circo le da uno estandar para que el show continue. Juntas, se aseguran de que nadie toque el suelo."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Los errores por NULL son la razon numero uno por la que las apps vibecodeadas fallan en produccion. Configurar NOT NULL y DEFAULT correctamente significa que tu app no se caera cuando un usuario se salte un campo del formulario -- y las apps que no se caen son las que mantienen a sus clientes de pago."
+      "body": "Los errores por NULL son la razón número uno por la que las apps vibecodeadas fallan en producción. Configurar NOT NULL y DEFAULT correctamente significa que tu app no se caerá cuando un usuario se salte un campo del formulario -- y las apps que no se caen son las que mantienen a sus clientes de pago."
     },
     {
       "type": "key_takeaway",

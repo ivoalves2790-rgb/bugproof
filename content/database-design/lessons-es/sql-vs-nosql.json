@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Set de LEGO vs. el Bloque de Arcilla",
-      "body": "Una **base de datos SQL** es como un set de LEGO -- tienes piezas especificas que encajan de formas definidas, y puedes construir estructuras complejas siguiendo las reglas. Una **base de datos NoSQL** es como un bloque de arcilla -- puedes moldearlo en cualquier forma sin reglas. Los LEGOs son mas faciles de mantener y reorganizar; la arcilla es mas flexible pero puede volverse un desastre si no tienes cuidado."
+      "body": "Una **base de datos SQL** es como un set de LEGO -- tienes piezas especificas que encajan de formas definidas, y puedes construir estructuras complejas siguiendo las reglas. Una **base de datos NoSQL** es como un bloque de arcilla -- puedes moldearlo en cualquier forma sin reglas. Los LEGOs son más fáciles de mantener y reorganizar; la arcilla es más flexible pero puede volverse un desastre si no tienes cuidado."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "Conocer la diferencia entre SQL y NoSQL te permite elegir la herramienta correcta cuando vibecodeas tu proxima app. La mayoria de las apps que generan dinero -- e-commerce, SaaS, plataformas de reservas -- usan bases de datos SQL porque mantienen los datos financieros solidos como roca. Elige bien y tu app manejara pagos reales desde el primer dia."
+      "body": "Conocer la diferencia entre SQL y NoSQL te permite elegir la herramienta correcta cuando vibecodeas tu próxima app. La mayoria de las apps que generan dinero -- e-commerce, SaaS, plataformas de reservas -- usan bases de datos SQL porque mantienen los datos financieros solidos como roca. Elige bien y tu app manejara pagos reales desde el primer día."
     },
     {
       "type": "key_takeaway",

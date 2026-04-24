@@ -6,69 +6,69 @@
   "xpReward": 10,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Hacer tests se siente como trabajo extra — hasta que un bug llega a produccion y pasas tres horas depurando lo que un test habria detectado en tres segundos. Piensa en los tests como el corrector ortografico de tu codigo: podrias revisar todo manualmente, pero para que lo harias? Exploremos por que hacer tests importa.",
+  "intro": "Hacer tests se siente como trabajo extra — hasta que un bug llega a producción y pasas tres horas depurando lo que un test habría detectado en tres segundos. Piensa en los tests como el corrector ortografico de tu código: podrías revisar todo manualmente, pero para que lo harias? Exploremos por qué hacer tests importa.",
   "teach": [
     {
       "type": "text",
       "title": "Los Tests Son Tu Red de Seguridad",
-      "body": "Los tests son verificaciones automatizadas que comprueban que tu codigo funciona como se espera. Cuando cambias algo, los tests te dicen al instante si rompiste algo mas. Sin ellos, cada cambio de codigo es un salto de fe — no sabras que esta roto hasta que un usuario lo reporte."
+      "body": "Los tests son verificaciones automatizadas que comprueban que tu código funciona como se espera. Cuando cambias algo, los tests te dicen al instante si rompiste algo más. Sin ellos, cada cambio de código es un salto de fe — no sabras que esta roto hasta que un usuario lo reporte."
     },
     {
       "type": "analogy",
       "title": "Los Tests Son Como el Corrector Ortografico",
-      "body": "Podrias revisar cada documento manualmente, pero el corrector ortografico detecta la mayoria de los errores al instante y automaticamente. Los tests hacen lo mismo con el codigo. Aun necesitas pensar en lo que escribes, pero los tests detectan los errores obvios antes de que alguien mas los vea."
+      "body": "Podrias revisar cada documento manualmente, pero el corrector ortografico detecta la mayoria de los errores al instante y automáticamente. Los tests hacen lo mismo con el código. Aun necesitas pensar en lo que escribes, pero los tests detectan los errores obvios antes de que alguien más los vea."
     },
     {
       "type": "analogy",
       "title": "Los Tests Son Como la Lista de Verificacion de un Piloto",
-      "body": "Los pilotos no se saltan la lista de verificacion porque 'el avion volo bien ayer'. En cada vuelo revisan motores, instrumentos y controles. Los tests son tu lista de verificacion pre-vuelo — se ejecutan cada vez que cambias codigo, asegurandose de que nada critico se haya roto por accidente."
+      "body": "Los pilotos no se saltan la lista de verificacion porque 'el avión volo bien ayer'. En cada vuelo revisan motores, instrumentos y controles. Los tests son tu lista de verificacion pre-vuelo — se ejecutan cada vez que cambias código, asegurandose de que nada critico se haya roto por accidente."
     },
     {
       "type": "motivation",
-      "body": "Las apps que fallan pierden usuarios y dinero. Los tests te permiten lanzar actualizaciones con confianza, lo que significa usuarios mas contentos y un producto que crece — el tipo de producto que realmente genera dinero."
+      "body": "Las apps que fallan pierden usuarios y dinero. Los tests te permiten lanzar actualizaciones con confianza, lo que significa usuarios más contentos y un producto que crece — el tipo de producto que realmente genera dinero."
     },
     {
       "type": "key_takeaway",
-      "body": "Los tests ahorran tiempo a largo plazo. Escribir un test toma minutos; depurar un bug en produccion toma horas. La confianza para cambiar codigo sin miedo vale la inversion inicial."
+      "body": "Los tests ahorran tiempo a largo plazo. Escribir un test toma minutos; depurar un bug en producción toma horas. La confianza para cambiar código sin miedo vale la inversion inicial."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Los tests te dan confianza para refactorizar codigo sin miedo a romper funcionalidades existentes",
+        "content": "Los tests te dan confianza para refactorizar código sin miedo a romper funcionalidades existentes",
         "isGoodPractice": true,
-        "explanation": "Este es uno de los mayores beneficios. Sin tests, los desarrolladores evitan refactorizar porque no pueden estar seguros de que nada se rompera, lo que lleva a codigo desordenado con el tiempo."
+        "explanation": "Este es uno de los mayores beneficios. Sin tests, los desarrolladores evitan refactorizar porque no pueden estar seguros de que nada se rompera, lo que lleva a código desordenado con el tiempo."
       },
       {
         "id": "c2",
-        "content": "Deberias escribir tests solo despues de encontrar bugs, para prevenir que vuelvan a ocurrir",
+        "content": "Deberias escribir tests solo después de encontrar bugs, para prevenir que vuelvan a ocurrir",
         "isGoodPractice": false,
-        "explanation": "Aunque los tests de regresion son valiosos, escribir tests antes o junto con el codigo detecta bugs temprano. Esperar a los bugs significa que los usuarios los encuentran primero."
+        "explanation": "Aunque los tests de regresion son valiosos, escribir tests antes o junto con el código detecta bugs temprano. Esperar a los bugs significa que los usuarios los encuentran primero."
       },
       {
         "id": "c3",
         "content": "Un proyecto con 100% de cobertura de tests esta garantizado de estar libre de bugs",
         "isGoodPractice": false,
-        "explanation": "La cobertura mide que lineas se ejecutaron, no si los tests verifican las cosas correctas. Puedes tener 100% de cobertura con tests que nunca afirman nada. Enfocate en probar comportamiento, no en alcanzar un numero."
+        "explanation": "La cobertura mide que líneas se ejecutaron, no si los tests verifican las cosas correctas. Puedes tener 100% de cobertura con tests que nunca afirman nada. Enfocate en probar comportamiento, no en alcanzar un número."
       },
       {
         "id": "c4",
-        "content": "Los tests sirven como documentacion viva que muestra como se supone que funciona tu codigo",
+        "content": "Los tests sirven como documentación viva que muestra como se supone que funciona tu código",
         "isGoodPractice": true,
-        "explanation": "Los buenos nombres de test describen comportamiento: 'deberia marcar la tarea como completada cuando se hace clic en la casilla'. Los nuevos desarrolladores pueden leer los tests para entender que hace el codigo."
+        "explanation": "Los buenos nombres de test describen comportamiento: 'deberia marcar la tarea como completada cuando se hace clic en la casilla'. Los nuevos desarrolladores pueden leer los tests para entender que hace el código."
       },
       {
         "id": "c5",
-        "content": "Las pruebas manuales haciendo clic en la app son suficientes para un proyecto pequeno",
+        "content": "Las pruebas manuales haciendo clic en la app son suficientes para un proyecto pequeño",
         "isGoodPractice": false,
-        "explanation": "Las pruebas manuales no escalan. A medida que tu app crece, no puedes hacer clic en cada funcionalidad despues de cada cambio. Los tests automatizados se ejecutan en segundos y detectan regresiones que no encontrarias."
+        "explanation": "Las pruebas manuales no escalan. A medida que tu app crece, no puedes hacer clic en cada funcionalidad después de cada cambio. Los tests automatizados se ejecutan en segundos y detectan regresiones que no encontrarias."
       },
       {
         "id": "c6",
-        "content": "Empieza probando los caminos mas criticos en tu app — como crear y completar tareas",
+        "content": "Empieza probando los caminos más criticos en tu app — como crear y completar tareas",
         "isGoodPractice": true,
-        "explanation": "No necesitas probar todo de una vez. Empieza con las funcionalidades que serian mas daninas si se rompieran, luego expande la cobertura con el tiempo."
+        "explanation": "No necesitas probar todo de una vez. Empieza con las funcionalidades que serían más daninas si se rompieran, luego expande la cobertura con el tiempo."
       }
     ],
     "glossaryTerms": ["regression", "test-coverage"]

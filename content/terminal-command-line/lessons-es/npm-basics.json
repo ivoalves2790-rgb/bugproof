@@ -6,12 +6,12 @@
   "xpReward": 10,
   "unitSlug": "package-managers",
   "courseSlug": "terminal-command-line",
-  "intro": "npm (Node Package Manager) es el gestor de paquetes predeterminado para JavaScript. Viene incluido con Node.js, asi que si tienes Node instalado, ya tienes npm. Vamos a recorrer los comandos esenciales de npm que todo desarrollador usa diariamente -- desde crear un proyecto hasta instalar paquetes y ejecutar scripts.",
+  "intro": "npm (Node Package Manager) es el gestor de paquetes predeterminado para JavaScript. Viene incluido con Node.js, así que si tienes Node instalado, ya tienes npm. Vamos a recorrer los comandos esenciales de npm que todo desarrollador usa diariamente -- desde crear un proyecto hasta instalar paquetes y ejecutar scripts.",
   "teach": [
     {
       "type": "analogy",
       "title": "npm init = Llenar un Certificado de Nacimiento para Tu Proyecto",
-      "body": "Cuando nace un bebe, llenas un certificado de nacimiento: nombre, fecha, padres. **npm init** es el certificado de nacimiento de tu proyecto. Te hace preguntas -- cual es el nombre del proyecto? version? descripcion? autor? -- y crea un archivo llamado package.json que registra oficialmente la identidad de tu proyecto. Sin el, npm no sabe que tu proyecto existe."
+      "body": "Cuando nace un bebe, llenas un certificado de nacimiento: nombre, fecha, padres. **npm init** es el certificado de nacimiento de tu proyecto. Te hace preguntas -- cual es el nombre del proyecto? versión? descripción? autor? -- y crea un archivo llamado package.json que registra oficialmente la identidad de tu proyecto. Sin el, npm no sabe que tu proyecto existe."
     },
     {
       "type": "analogy",
@@ -28,11 +28,11 @@
       "title": "Comandos de npm Que Usaras Cada Dia",
       "language": "bash",
       "code": "npm init -y                  # Create package.json with defaults\nnpm install express          # Install Express framework\nnpm install nodemon --save-dev  # Install dev-only tool\nnpm run dev                  # Run the 'dev' script",
-      "annotation": "La bandera -y en 'npm init -y' salta todas las preguntas y usa valores predeterminados. La bandera --save-dev marca un paquete como dependencia de desarrollo (solo necesario durante la programacion, no en produccion)."
+      "annotation": "La bandera -y en 'npm init -y' salta todas las preguntas y usa valores predeterminados. La bandera --save-dev marca un paquete como dependencia de desarrollo (solo necesario durante la programacion, no en producción)."
     },
     {
       "type": "motivation",
-      "body": "Cada proyecto de vibecoding comienza con comandos de npm. Ya sea que estes creando una app Next.js, instalando un SDK de IA o agregando una libreria de pagos -- npm es la primera herramienta a la que recurres. Los desarrolladores que pueden configurar proyectos desde cero con confianza ganan confianza (y contratos) mas rapido porque no se atoran en el paso uno."
+      "body": "Cada proyecto de vibecoding comienza con comandos de npm. Ya sea que estes creando una app Next.js, instalando un SDK de IA o agregando una libreria de pagos -- npm es la primera herramienta a la que recurres. Los desarrolladores que pueden configurar proyectos desde cero con confianza ganan confianza (y contratos) más rápido porque no se atoran en el paso uno."
     },
     {
       "type": "key_takeaway",
@@ -51,7 +51,7 @@
         "hint": "Usa 'mkdir' para crear la carpeta y 'cd' para entrar. Encadenalos con '&&'."
       },
       {
-        "instruction": "Inicializa un nuevo proyecto npm con configuracion predeterminada. Esto crea el archivo package.json.",
+        "instruction": "Inicializa un nuevo proyecto npm con configuración predeterminada. Esto crea el archivo package.json.",
         "expectedCommand": "npm init -y",
         "acceptAlternatives": ["npm init --yes"],
         "output": "Wrote to ~/projects/my-app/package.json:\n\n{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\"\n}",
@@ -62,17 +62,17 @@
         "expectedCommand": "npm install express",
         "acceptAlternatives": ["npm i express"],
         "output": "added 64 packages in 3s\n\n8 packages are looking for funding\n  run `npm fund` for details",
-        "hint": "Usa 'npm install' seguido del nombre del paquete. 'npm i' es una forma abreviada que tambien funciona."
+        "hint": "Usa 'npm install' seguido del nombre del paquete. 'npm i' es una forma abreviada que también funciona."
       },
       {
-        "instruction": "Ahora instala nodemon como dependencia de desarrollo -- es una herramienta que reinicia automaticamente tu servidor durante el desarrollo.",
+        "instruction": "Ahora instala nodemon como dependencia de desarrollo -- es una herramienta que reinicia automáticamente tu servidor durante el desarrollo.",
         "expectedCommand": "npm install nodemon --save-dev",
         "acceptAlternatives": ["npm i nodemon --save-dev", "npm i nodemon -D", "npm install nodemon -D"],
         "output": "added 29 packages in 2s",
         "hint": "Usa 'npm install nodemon --save-dev' para marcarlo como dependencia solo de desarrollo."
       }
     ],
-    "completionMessage": "Acabas de crear un proyecto desde cero! Tu package.json ahora lista Express como dependencia y nodemon como dependencia de desarrollo. La carpeta node_modules contiene todo el codigo descargado. Cuando alguien mas clone tu proyecto, solo ejecuta 'npm install' y obtiene exactamente la misma configuracion.",
+    "completionMessage": "Acabas de crear un proyecto desde cero! Tu package.json ahora lista Express como dependencia y nodemon como dependencia de desarrollo. La carpeta node_modules contiene todo el código descargado. Cuando alguien más clone tu proyecto, solo ejecuta 'npm install' y obtiene exactamente la misma configuración.",
     "glossaryTerms": ["npm", "package-json", "node-modules", "dependencies"]
   }
 }

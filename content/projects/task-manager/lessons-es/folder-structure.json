@@ -6,12 +6,12 @@
   "xpReward": 15,
   "chapterSlug": "setup",
   "projectSlug": "task-manager",
-  "intro": "Una estructura de carpetas limpia hace tu proyecto navegable y mantenible. Imagina un closet donde todo esta ordenado versus una pila gigante — solo uno te permite encontrar lo que necesitas en segundos. Desliza a la derecha en practicas solidas de organizacion, a la izquierda en habitos desordenados que te perseguiran despues.",
+  "intro": "Una estructura de carpetas limpia hace tu proyecto navegable y mantenible. Imagina un closet donde todo esta ordenado versus una pila gigante — solo uno te permite encontrar lo que necesitas en segundos. Desliza a la derecha en practicas solidas de organización, a la izquierda en habitos desordenados que te perseguiran después.",
   "teach": [
     {
       "type": "text",
       "title": "La Estructura del App Router",
-      "body": "Next.js usa el directorio `app/` para definir tus rutas. Cada carpeta dentro de `app/` se convierte en una ruta URL. Un archivo `page.tsx` dentro de una carpeta la convierte en una ruta. Un archivo `layout.tsx` envuelve las paginas en interfaz compartida. Esta convencion significa que tu estructura de carpetas ES tu enrutamiento — sin configuracion necesaria."
+      "body": "Next.js usa el directorio `app/` para definir tus rutas. Cada carpeta dentro de `app/` se convierte en una ruta URL. Un archivo `page.tsx` dentro de una carpeta la convierte en una ruta. Un archivo `layout.tsx` envuelve las páginas en interfaz compartida. Esta convencion significa que tu estructura de carpetas ES tu enrutamiento — sin configuración necesaria."
     },
     {
       "type": "analogy",
@@ -26,15 +26,15 @@
     {
       "type": "text",
       "title": "Donde Va Todo lo Demas?",
-      "body": "Mas alla de `app/`, querras una carpeta `components/` para interfaz reutilizable, una carpeta `lib/` para utilidades y helpers de base de datos, y una carpeta `types/` para definiciones de tipos de TypeScript. Algunos equipos ponen los componentes junto a las paginas que los usan, otros centralizan todo. Ambos enfoques funcionan — lo clave es elegir una convencion y mantenerla."
+      "body": "Mas alla de `app/`, querras una carpeta `components/` para interfaz reutilizable, una carpeta `lib/` para utilidades y helpers de base de datos, y una carpeta `types/` para definiciones de tipos de TypeScript. Algunos equipos ponen los componentes junto a las páginas que los usan, otros centralizan todo. Ambos enfoques funcionan — lo clave es elegir una convencion y mantenerla."
     },
     {
       "type": "motivation",
-      "body": "Una estructura de proyecto limpia significa que puedes agregar nuevas funcionalidades en minutos en lugar de horas. Cuando tu app empiece a tener usuarios que pagan y pidan cambios, te moveras rapido porque sabes exactamente donde vive todo."
+      "body": "Una estructura de proyecto limpia significa que puedes agregar nuevas funcionalidades en minutos en lugar de horas. Cuando tu app empiece a tener usuarios que pagan y pidan cambios, te moveras rápido porque sabes exactamente donde vive todo."
     },
     {
       "type": "key_takeaway",
-      "body": "Tu estructura de carpetas deberia hacer obvio donde encontrar las cosas. Si otro desarrollador abre tu proyecto, deberia poder encontrar cualquier archivo en 10 segundos. Nombra las carpetas claramente, agrupa archivos relacionados y nunca pongas todo en la raiz."
+      "body": "Tu estructura de carpetas deberia hacer obvio donde encontrar las cosas. Si otro desarrollador abre tu proyecto, deberia poder encontrar cualquier archivo en 10 segundos. Nombra las carpetas claramente, agrupa archivos relacionados y nunca pongas todo en la raíz."
     }
   ],
   "exercise": {
@@ -43,31 +43,31 @@
         "id": "components-folder",
         "content": "Crear una carpeta /components con subcarpetas como /components/ui para botones e inputs, y /components/tasks para componentes especificos de tareas",
         "isGoodPractice": true,
-        "explanation": "Agrupar componentes por categoria los hace faciles de encontrar y reutilizar. Un desarrollador buscando el componente TaskCard sabe que debe revisar /components/tasks/."
+        "explanation": "Agrupar componentes por categoría los hace fáciles de encontrar y reutilizar. Un desarrollador buscando el componente TaskCard sabe que debe revisar /components/tasks/."
       },
       {
         "id": "everything-in-root",
-        "content": "Poner todos tus archivos de componentes directamente en la raiz del proyecto junto a package.json y next.config.js",
+        "content": "Poner todos tus archivos de componentes directamente en la raíz del proyecto junto a package.json y next.config.js",
         "isGoodPractice": false,
-        "explanation": "Tirar archivos en la raiz crea un desorden. Despues de 20 componentes, tendras 30+ archivos en el nivel superior y ninguna forma de encontrar nada rapidamente."
+        "explanation": "Tirar archivos en la raíz crea un desorden. Después de 20 componentes, tendras 30+ archivos en el nivel superior y ninguna forma de encontrar nada rápidamente."
       },
       {
         "id": "page-per-route",
-        "content": "Crear app/tasks/page.tsx para la lista de tareas y app/tasks/[id]/page.tsx para paginas de tareas individuales",
+        "content": "Crear app/tasks/page.tsx para la lista de tareas y app/tasks/[id]/page.tsx para páginas de tareas individuales",
         "isGoodPractice": true,
         "explanation": "Esto sigue la convencion del App Router de Next.js exactamente. La estructura de carpetas refleja tus rutas URL: /tasks y /tasks/123."
       },
       {
         "id": "single-css-file",
-        "content": "Poner todos tus estilos en un archivo masivo styles.css con 2,000 lineas de CSS",
+        "content": "Poner todos tus estilos en un archivo masivo styles.css con 2,000 líneas de CSS",
         "isGoodPractice": false,
-        "explanation": "Un archivo CSS gigante se vuelve imposible de mantener. Con Tailwind CSS, los estilos viven directamente en los componentes, asi que rara vez necesitas archivos CSS separados."
+        "explanation": "Un archivo CSS gigante se vuelve imposible de mantener. Con Tailwind CSS, los estilos viven directamente en los componentes, así que rara vez necesitas archivos CSS separados."
       },
       {
         "id": "lib-folder",
-        "content": "Crear una carpeta /lib para helpers de base de datos, funciones utilitarias y codigo del cliente API",
+        "content": "Crear una carpeta /lib para helpers de base de datos, funciones utilitarias y código del cliente API",
         "isGoodPractice": true,
-        "explanation": "Separar la logica de negocio de los componentes de interfaz mantiene ambos limpios. Cuando necesites cambiar como se obtienen las tareas, vas a /lib, no a buscar entre archivos de componentes."
+        "explanation": "Separar la lógica de negocio de los componentes de interfaz mantiene ambos limpios. Cuando necesites cambiar como se obtienen las tareas, vas a /lib, no a buscar entre archivos de componentes."
       },
       {
         "id": "random-names",
@@ -77,9 +77,9 @@
       },
       {
         "id": "layout-file",
-        "content": "Usar app/layout.tsx para interfaz compartida como la barra de navegacion y el footer que aparece en cada pagina",
+        "content": "Usar app/layout.tsx para interfaz compartida como la barra de navegacion y el footer que aparece en cada página",
         "isGoodPractice": true,
-        "explanation": "El layout raiz es el lugar perfecto para interfaz persistente. Next.js lo renderiza una vez y lo mantiene a traves de las navegaciones de pagina, lo que es codigo mas limpio y mejor rendimiento."
+        "explanation": "El layout raíz es el lugar perfecto para interfaz persistente. Next.js lo renderiza una vez y lo mantiene a traves de las navegaciones de página, lo que es código más limpio y mejor rendimiento."
       }
     ],
     "glossaryTerms": ["app-router", "component", "routing"]

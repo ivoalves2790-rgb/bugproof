@@ -6,35 +6,35 @@
   "xpReward": 15,
   "chapterSlug": "scaling",
   "projectSlug": "task-manager",
-  "intro": "Tu gestor de tareas esta en produccion, funcionando y creciendo! Piensa en tu V1 como una semilla en la tierra — necesita sol, agua y poda para convertirse en arbol. Ahora es momento de planificar lo que viene. Toma decisiones inteligentes sobre el futuro de tu app.",
+  "intro": "Tu gestor de tareas esta en producción, funcionando y creciendo! Piensa en tu V1 como una semilla en la tierra — necesita sol, agua y poda para convertirse en árbol. Ahora es momento de planificar lo que viene. Toma decisiones inteligentes sobre el futuro de tu app.",
   "teach": [
     {
       "type": "text",
       "title": "Construiste Algo Real",
-      "body": "Felicitaciones — pasaste de una pantalla en blanco a una app desplegada y funcionando. Planificaste funcionalidades, elegiste un stack, construiste una interfaz, disenaste una base de datos, agregaste auth, escribiste tests y lanzaste a produccion. Ese es el ciclo completo de desarrollo de software."
+      "body": "Felicitaciones — pasaste de una pantalla en blanco a una app desplegada y funcionando. Planificaste funcionalidades, elegiste un stack, construiste una interfaz, disenaste una base de datos, agregaste auth, escribiste tests y lanzaste a producción. Ese es el ciclo completo de desarrollo de software."
     },
     {
       "type": "analogy",
       "title": "La V1 Es Como Plantar una Semilla",
-      "body": "Tu primera version es una semilla en la tierra, no el arbol terminado. Hiciste el trabajo duro de plantarla — ahora necesita sol (usuarios), agua (actualizaciones) y poda (eliminar lo que no funciona). El mayor error es desenterrarla cada semana para probar con una semilla diferente."
+      "body": "Tu primera versión es una semilla en la tierra, no el árbol terminado. Hiciste el trabajo duro de plantarla — ahora necesita sol (usuarios), agua (actualizaciones) y poda (eliminar lo que no funciona). El mayor error es desenterrarla cada semana para probar con una semilla diferente."
     },
     {
       "type": "analogy",
-      "title": "Administrar un Restaurante Despues de la Noche de Apertura",
-      "body": "Lanzar tu V1 es como la noche de apertura de un restaurante. Planificaste el menu, decoraste el espacio y entrenaste al personal. Pero ahora entran comensales reales — algunos aman la pasta pero ignoran la ensalada, otros piden platillos que nunca consideraste. No tiras todo el menu; lo ajustas segun lo que la gente realmente pide. La iteracion de producto funciona igual: conserva lo que funciona, elimina lo que no, y agrega lo que los clientes siguen pidiendo."
+      "title": "Administrar un Restaurante Después de la Noche de Apertura",
+      "body": "Lanzar tu V1 es como la noche de apertura de un restaurante. Planificaste el menu, decoraste el espacio y entrenaste al personal. Pero ahora entran comensales reales — algunos aman la pasta pero ignoran la ensalada, otros piden platillos que nunca consideraste. No tiras todo el menu; lo ajustas segun lo que la gente realmente pide. La iteración de producto funciona igual: conserva lo que funciona, elimina lo que no, y agrega lo que los clientes siguen pidiendo."
     },
     {
       "type": "text",
-      "title": "Que Viene Despues de la V1?",
-      "body": "Ahora que tu MVP esta en produccion, obtendras retroalimentacion real de los usuarios. Algunas funcionalidades que pensaste eran esenciales no se usaran. Algunas cosas en las que no pensaste seran solicitadas constantemente. Escucha a tus usuarios, pero filtra a traves de tu vision de producto."
+      "title": "Que Viene Después de la V1?",
+      "body": "Ahora que tu MVP esta en producción, obtendras retroalimentacion real de los usuarios. Algunas funcionalidades que pensaste eran esenciales no se usaran. Algunas cosas en las que no pensaste seran solicitadas constantemente. Escucha a tus usuarios, pero filtra a traves de tu visión de producto."
     },
     {
       "type": "motivation",
-      "body": "Ahora tienes todas las habilidades necesarias para construir y lanzar un producto real con IA. El siguiente paso es iterar basandote en la retroalimentacion de usuarios y agregar un flujo de pago — estas a una integracion de Stripe de tu primer dolar."
+      "body": "Ahora tienes todas las habilidades necesarias para construir y lanzar un producto real con IA. El siguiente paso es iterar basandote en la retroalimentacion de usuarios y agregar un flujo de pago — estas a una integración de Stripe de tu primer dolar."
     },
     {
       "type": "key_takeaway",
-      "body": "La V1 es solo el comienzo. Usa datos y retroalimentacion real de los usuarios para guiar lo que construyes despues. Resiste el impulso de agregar todo — mantente enfocado en lo que mas importa."
+      "body": "La V1 es solo el comienzo. Usa datos y retroalimentacion real de los usuarios para guiar lo que construyes después. Resiste el impulso de agregar todo — mantente enfocado en lo que más importa."
     }
   ],
   "exercise": {
@@ -44,14 +44,14 @@
         "narrative": "Tu gestor de tareas lleva dos semanas en produccion. Tienes 200 usuarios activos. Has recopilado retroalimentacion y tienes tiempo de desarrollo limitado. Donde te enfocas ahora?",
         "choices": [
           { "id": "all-features", "text": "Construir todas las funcionalidades que los usuarios pidieron — compartir con equipo, resumenes con IA, sincronizacion con calendario, app movil", "nextNode": "overwhelmed", "score": 0 },
-          { "id": "top-requests", "text": "Analizar que funcionalidades fueron mas solicitadas y elegir las 2-3 principales para construir", "nextNode": "focused", "score": 4 },
+          { "id": "top-requests", "text": "Analizar que funcionalidades fueron más solicitadas y elegir las 2-3 principales para construir", "nextNode": "focused", "score": 4 },
           { "id": "rewrite", "text": "Reescribir la app desde cero con una mejor arquitectura ahora que sabes lo que quieren los usuarios", "nextNode": "rewrite-trap", "score": 1 }
         ]
       },
       "overwhelmed": {
         "narrative": "Intentas construir todo a la vez. Despues de un mes, nada esta terminado. Funcionalidades a medio construir crean bugs y los usuarios estan confundidos por una experiencia inconsistente. Que haces?",
         "choices": [
-          { "id": "stop-prioritize", "text": "Parar, eliminar funcionalidades a medio terminar y enfocarte en las 2 mas solicitadas", "nextNode": "recovery", "score": 3 },
+          { "id": "stop-prioritize", "text": "Parar, eliminar funcionalidades a medio terminar y enfocarte en las 2 más solicitadas", "nextNode": "recovery", "score": 3 },
           { "id": "keep-going", "text": "Seguir adelante e intentar terminar todo", "nextNode": "burnout-end", "score": 0 }
         ]
       },
@@ -59,7 +59,7 @@
         "narrative": "Identificas que el 80% de los usuarios quieren recordatorios de fecha limite y una mejor experiencia movil. Planificas ambas funcionalidades en sprints de 2 semanas cada una. Lanzas los recordatorios de fecha limite primero. El uso sube un 40%. Cual es tu siguiente movimiento?",
         "choices": [
           { "id": "mobile", "text": "Lanzar las mejoras moviles como estaba planeado, luego reevaluar prioridades", "nextNode": "great-end", "score": 4 },
-          { "id": "pivot", "text": "Olvidar lo movil — agregar 5 funcionalidades mas mientras tienes impulso", "nextNode": "recovery", "score": 1 }
+          { "id": "pivot", "text": "Olvidar lo movil — agregar 5 funcionalidades más mientras tienes impulso", "nextNode": "recovery", "score": 1 }
         ]
       },
       "rewrite-trap": {
@@ -72,21 +72,21 @@
         "narrative": "Vuelves al camino enfocandote en 2 funcionalidades de alto impacto. Toma un mes extra, pero la app mejora y los usuarios regresan.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Te recuperaste! La leccion clave: el enfoque supera a la amplitud. Construye 2 funcionalidades bien en lugar de 10 funcionalidades mal. Itera basandote en datos, no en intuicion.",
+        "feedback": "Te recuperaste! La lección clave: el enfoque supera a la amplitud. Construye 2 funcionalidades bien en lugar de 10 funcionalidades mal. Itera basandote en datos, no en intuicion.",
         "choices": []
       },
       "great-end": {
         "narrative": "Tu gestor de tareas crece de manera constante. Cada mes lanzas 2-3 mejoras enfocadas basadas en datos de usuarios. Despues de 3 meses, tienes 1,000 usuarios activos y un roadmap de producto claro. Has construido un producto real.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Asi se construyen productos exitosos — lanza, mide, aprende, repite. Te mantuviste enfocado, escuchaste a los usuarios y tomaste decisiones basadas en datos. Felicitaciones por completar el proyecto del Gestor de Tareas!",
+        "feedback": "Así se construyen productos exitosos — lanza, mide, aprende, repite. Te mantuviste enfocado, escuchaste a los usuarios y tomaste decisiones basadas en datos. Felicitaciones por completar el proyecto del Gestor de Tareas!",
         "choices": []
       },
       "burnout-end": {
         "narrative": "Despues de 2 meses de esfuerzo intenso, estas agotado y la app tiene bugs. Los usuarios se van por problemas de confiabilidad. Intentar construir todo a la vez no construyo nada bien.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "El scope creep es el asesino numero 1 de proyectos personales. Siempre prioriza de forma despiadada. Es mejor lanzar 2 funcionalidades pulidas que 10 rotas.",
+        "feedback": "El scope creep es el asesino número 1 de proyectos personales. Siempre prioriza de forma despiadada. Es mejor lanzar 2 funcionalidades pulidas que 10 rotas.",
         "choices": []
       }
     },

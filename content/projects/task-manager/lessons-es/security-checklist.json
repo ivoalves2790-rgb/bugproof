@@ -11,17 +11,17 @@
     {
       "type": "text",
       "title": "La Seguridad No Es Opcional",
-      "body": "La seguridad no es una funcionalidad que agregas al final — es una mentalidad a lo largo del desarrollo. Vulnerabilidades comunes como inyeccion SQL, XSS (cross-site scripting) y CSRF (cross-site request forgery) son bien entendidas, y prevenirlas es sencillo si sigues las mejores practicas."
+      "body": "La seguridad no es una funcionalidad que agregas al final — es una mentalidad a lo largo del desarrollo. Vulnerabilidades comunes como inyección SQL, XSS (cross-site scripting) y CSRF (cross-site request forgery) son bien entendidas, y prevenirlas es sencillo si sigues las mejores practicas."
     },
     {
       "type": "analogy",
       "title": "La Seguridad Es Como Cerrar Tus Puertas con Llave",
-      "body": "No esperas hasta que alguien entre a robar para instalar cerraduras. Cierras con llave cada noche como habito. De manera similar, sanitizar entradas, usar HTTPS y validar en el servidor deberian ser habitos — no cosas que agregas despues cuando algo sale mal."
+      "body": "No esperas hasta que alguien entre a robar para instalar cerraduras. Cierras con llave cada noche como habito. De manera similar, sanitizar entradas, usar HTTPS y validar en el servidor deberian ser habitos — no cosas que agregas después cuando algo sale mal."
     },
     {
       "type": "analogy",
       "title": "La Seguridad Es Como Tu Sistema Inmunologico",
-      "body": "Tu cuerpo no espera a enfermarse para combatir germenes — los globulos blancos siempre estan patrullando. Una app segura funciona igual: la validacion de entradas, la limitacion de solicitudes y el cifrado corren constantemente en segundo plano, bloqueando amenazas silenciosamente antes de que causen dano."
+      "body": "Tu cuerpo no espera a enfermarse para combatir germenes — los globulos blancos siempre estan patrullando. Una app segura funciona igual: la validación de entradas, la limitacion de solicitudes y el cifrado corren constantemente en segundo plano, bloqueando amenazas silenciosamente antes de que causen dano."
     },
     {
       "type": "motivation",
@@ -29,7 +29,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Los tres habitos de seguridad principales: valida toda la entrada en el servidor, usa consultas parametrizadas (nunca concatenes SQL) y siempre usa HTTPS en produccion."
+      "body": "Los tres habitos de seguridad principales: valida toda la entrada en el servidor, usa consultas parametrizadas (nunca concatenes SQL) y siempre usa HTTPS en producción."
     }
   ],
   "exercise": {
@@ -38,23 +38,23 @@
         "id": "c1",
         "content": "Usar consultas parametrizadas o un ORM en lugar de concatenar entrada del usuario en cadenas SQL",
         "isGoodPractice": true,
-        "explanation": "Las consultas parametrizadas previenen la inyeccion SQL al tratar la entrada del usuario como datos, nunca como codigo SQL. Esta es una de las practicas de seguridad mas importantes."
+        "explanation": "Las consultas parametrizadas previenen la inyección SQL al tratar la entrada del usuario como datos, nunca como código SQL. Esta es una de las practicas de seguridad más importantes."
       },
       {
         "id": "c2",
-        "content": "Almacenar claves de API y credenciales de base de datos directamente en tu codigo fuente para facil acceso",
+        "content": "Almacenar claves de API y credenciales de base de datos directamente en tu código fuente para fácil acceso",
         "isGoodPractice": false,
-        "explanation": "Las credenciales en el codigo fuente terminan en el historial de git y pueden filtrarse a traves de repositorios publicos. Usa variables de entorno y nunca hagas commit de secretos al control de versiones."
+        "explanation": "Las credenciales en el código fuente terminan en el historial de git y pueden filtrarse a traves de repositorios publicos. Usa variables de entorno y nunca hagas commit de secretos al control de versiones."
       },
       {
         "id": "c3",
         "content": "Configurar headers de seguridad HTTP como Content-Security-Policy y X-Frame-Options en tu servidor",
         "isGoodPractice": true,
-        "explanation": "Los headers de seguridad protegen contra XSS, clickjacking y otros ataques basados en el navegador. La mayoria de los frameworks tienen middleware que los configura automaticamente."
+        "explanation": "Los headers de seguridad protegen contra XSS, clickjacking y otros ataques basados en el navegador. La mayoria de los frameworks tienen middleware que los configura automáticamente."
       },
       {
         "id": "c4",
-        "content": "Deshabilitar CORS por completo para que cualquier sitio web pueda llamar a tu API — hace el desarrollo mas facil",
+        "content": "Deshabilitar CORS por completo para que cualquier sitio web pueda llamar a tu API — hace el desarrollo más fácil",
         "isGoodPractice": false,
         "explanation": "CORS completamente abierto significa que cualquier sitio web puede hacer solicitudes a tu API en nombre de tus usuarios. Configura CORS para permitir solo tu propio dominio de frontend."
       },
@@ -66,9 +66,9 @@
       },
       {
         "id": "c6",
-        "content": "Mostrar mensajes de error detallados con stack traces a los usuarios para que puedan reportar bugs mas facilmente",
+        "content": "Mostrar mensajes de error detallados con stack traces a los usuarios para que puedan reportar bugs más fácilmente",
         "isGoodPractice": false,
-        "explanation": "Los stack traces revelan tu stack tecnologico, estructura de archivos y vulnerabilidades potenciales. Muestra errores genericos a los usuarios y registra errores detallados en el servidor."
+        "explanation": "Los stack traces revelan tu stack tecnologico, estructura de archivos y vulnerabilidades potenciales. Muestra errores genéricos a los usuarios y registra errores detallados en el servidor."
       }
     ],
     "glossaryTerms": ["sql-injection", "xss", "cors"]

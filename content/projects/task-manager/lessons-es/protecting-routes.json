@@ -11,7 +11,7 @@
     {
       "type": "text",
       "title": "Proteccion de Rutas 101",
-      "body": "Las rutas protegidas son paginas o endpoints de API que requieren autenticacion. En el frontend, rediriges a los usuarios no autenticados al login. En el backend, un middleware verifica un token o sesion valida antes de procesar cualquier solicitud. Ambas capas son necesarias — las protecciones del frontend mejoran la experiencia del usuario, pero las verificaciones del backend imponen la seguridad real."
+      "body": "Las rutas protegidas son páginas o endpoints de API que requieren autenticación. En el frontend, rediriges a los usuarios no autenticados al login. En el backend, un middleware verifica un token o sesión valida antes de procesar cualquier solicitud. Ambas capas son necesarias — las protecciones del frontend mejoran la experiencia del usuario, pero las verificaciones del backend imponen la seguridad real."
     },
     {
       "type": "code_example",
@@ -23,7 +23,7 @@
     {
       "type": "analogy",
       "title": "La Proteccion de Rutas Es Como la Seguridad del Aeropuerto",
-      "body": "El letrero en el aeropuerto que dice 'Solo Personal Autorizado' es como la proteccion de rutas del frontend — detiene a la gente honesta de entrar por error. Pero la puerta cerrada con lector de credenciales detras es la proteccion del backend — fisicamente impide el acceso. Si solo tienes el letrero pero no el candado, cualquiera que ignore el letrero pasa directamente."
+      "body": "El letrero en el aeropuerto que dice 'Solo Personal Autorizado' es como la proteccion de rutas del frontend — detiene a la gente honesta de entrar por error. Pero la puerta cerrada con lector de credenciales detrás es la proteccion del backend — fisicamente impide el acceso. Si solo tienes el letrero pero no el candado, cualquiera que ignore el letrero pasa directamente."
     },
     {
       "type": "motivation",
@@ -31,7 +31,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Siempre aplica la autorizacion en el servidor. Las protecciones de rutas del frontend son una conveniencia para los usuarios, no una medida de seguridad. Cada endpoint de API debe verificar quien esta haciendo la solicitud."
+      "body": "Siempre aplica la autorizacion en el servidor. Las protecciones de rutas del frontend son una conveniencia para los usuarios, no una medida de seguridad. Cada endpoint de API debe verificar quien está haciendo la solicitud."
     }
   ],
   "exercise": {
@@ -42,7 +42,7 @@
         "choices": [
           { "id": "a", "text": "Ocultar el parametro userId de la URL del frontend para que los usuarios no puedan verlo", "nextNode": "hide-param", "score": 0 },
           { "id": "b", "text": "Agregar middleware que extraiga el ID de usuario del token de auth en lugar del parametro de query", "nextNode": "fix-middleware", "score": 4 },
-          { "id": "c", "text": "Agregar una verificacion en el frontend que prevenga navegar a las paginas de otros usuarios", "nextNode": "frontend-only", "score": 1 }
+          { "id": "c", "text": "Agregar una verificacion en el frontend que prevenga navegar a las páginas de otros usuarios", "nextNode": "frontend-only", "score": 1 }
         ]
       },
       "hide-param": {
@@ -70,14 +70,14 @@
         "narrative": "Auditas los 12 endpoints de API, agregas verificaciones de propiedad a cada uno y escribes tests para verificar que el acceso no autorizado devuelve 403. La vulnerabilidad esta completamente parcheada.",
         "isEnd": true,
         "finalScore": 7,
-        "feedback": "Este es el enfoque correcto. Un endpoint vulnerable generalmente significa que otros tambien lo son. Una auditoria completa con tests asegura que detectes todo y previene regresiones.",
+        "feedback": "Este es el enfoque correcto. Un endpoint vulnerable generalmente significa que otros también lo son. Una auditoria completa con tests asegura que detectes todo y previene regresiones.",
         "choices": []
       },
       "partial-fix-end": {
         "narrative": "El endpoint PUT esta arreglado, pero el endpoint DELETE todavia permite a los usuarios eliminar las tareas de otros. Una semana despues, alguien lo explota y los usuarios pierden datos.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "Arreglar un endpoint a la vez es como jugar whack-a-mole. Cuando encuentres un bug de autorizacion, audita todos los endpoints sistematicamente — el mismo patron probablemente se repite.",
+        "feedback": "Arreglar un endpoint a la vez es como jugar whack-a-mole. Cuando encuentres un bug de autorizacion, audita todos los endpoints sistemáticamente — el mismo patron probablemente se repite.",
         "choices": []
       },
       "band-aid-end": {

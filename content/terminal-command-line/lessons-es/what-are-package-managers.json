@@ -6,57 +6,57 @@
   "xpReward": 10,
   "unitSlug": "package-managers",
   "courseSlug": "terminal-command-line",
-  "intro": "Toda app moderna esta construida con cientos de piezas de codigo escritas por otras personas -- librerias, frameworks y herramientas. Los gestores de paquetes te permiten instalar, actualizar y eliminar estas piezas con un solo comando. Desliza a la DERECHA si la afirmacion es VERDADERA, o a la IZQUIERDA si es FALSA.",
+  "intro": "Toda app moderna esta construida con cientos de piezas de código escritas por otras personas -- librerias, frameworks y herramientas. Los gestores de paquetes te permiten instalar, actualizar y eliminar estas piezas con un solo comando. Desliza a la DERECHA si la afirmacion es VERDADERA, o a la IZQUIERDA si es FALSA.",
   "teach": [
     {
       "type": "analogy",
       "title": "Gestor de Paquetes = Una Tienda de Apps para Tu Terminal",
-      "body": "Tu telefono tiene una tienda de apps donde buscas apps, tocas Instalar y todo funciona -- descargas, configuracion, actualizaciones. Un **gestor de paquetes** es exactamente eso, pero para tus proyectos de codigo. En lugar de tocar un boton, escribes `npm install react` y el gestor de paquetes descarga React, lo configura y rastrea la version. Igual que la App Store maneja dependencias (\"esta app requiere iOS 16\"), npm maneja dependencias de codigo (\"esta libreria requiere Node 18\")."
+      "body": "Tu teléfono tiene una tienda de apps donde buscas apps, tocas Instalar y todo funciona -- descargas, configuración, actualizaciones. Un **gestor de paquetes** es exactamente eso, pero para tus proyectos de código. En lugar de tocar un boton, escribes `npm install react` y el gestor de paquetes descarga React, lo configura y rastrea la versión. Igual que la App Store maneja dependencias (\"esta app requiere iOS 16\"), npm maneja dependencias de código (\"esta libreria requiere Node 18\")."
     },
     {
       "type": "analogy",
       "title": "Gestor de Paquetes = Una Ferreteria de Piezas Pre-Construidas",
-      "body": "Imagina que estas construyendo una estanteria. Podrias talar un arbol, cortar la madera, forjar tus propios clavos y fundir bisagras de hierro crudo. O podrias ir a la ferreteria y comprar **madera pre-cortada, una caja de clavos y bisagras listas**. Un gestor de paquetes es tu ferreteria -- te da piezas pre-construidas y probadas (librerias) para que no tengas que construir todo desde cero. Para que escribir tu propia funcion de formato de fechas cuando miles de desarrolladores ya perfeccionaron una?"
+      "body": "Imagina que estas construyendo una estanteria. Podrias talar un árbol, cortar la madera, forjar tus propios clavos y fundir bisagras de hierro crudo. O podrías ir a la ferreteria y comprar **madera pre-cortada, una caja de clavos y bisagras listas**. Un gestor de paquetes es tu ferreteria -- te da piezas pre-construidas y probadas (librerias) para que no tengas que construir todo desde cero. Para que escribir tu propia función de formato de fechas cuando miles de desarrolladores ya perfeccionaron una?"
     },
     {
       "type": "text",
       "title": "Que Hacen los Gestores de Paquetes Realmente",
-      "body": "Un gestor de paquetes se encarga de cuatro tareas clave:\n\n1. **Instalar paquetes** -- Descarga librerias de codigo desde un registro central\n2. **Gestionar versiones** -- Rastrea que version de cada libreria estas usando\n3. **Resolver dependencias** -- Si la Libreria A necesita la Libreria B, instala ambas\n4. **Actualizar y eliminar** -- Mantiene los paquetes al dia o elimina los que no necesitas\n\nSin un gestor de paquetes, tendrias que descargar archivos manualmente, ponerlos en las carpetas correctas, rastrear versiones en una hoja de calculo y esperar que nada entre en conflicto."
+      "body": "Un gestor de paquetes se encarga de cuatro tareas clave:\n\n1. **Instalar paquetes** -- Descarga librerias de código desde un registro central\n2. **Gestionar versiones** -- Rastrea que versión de cada libreria estas usando\n3. **Resolver dependencias** -- Si la Libreria A necesita la Libreria B, instala ambas\n4. **Actualizar y eliminar** -- Mantiene los paquetes al día o elimina los que no necesitas\n\nSin un gestor de paquetes, tendrías que descargar archivos manualmente, ponerlos en las carpetas correctas, rastrear versiones en una hoja de calculo y esperar que nada entre en conflicto."
     },
     {
       "type": "text",
       "title": "Los Tres Grandes: npm, yarn y pnpm",
-      "body": "En el mundo de JavaScript, tres gestores de paquetes dominan:\n\n- **npm** -- El original. Viene pre-instalado con Node.js. Usado por la mayoria de tutoriales y proyectos.\n- **yarn** -- Creado por Facebook. Instalaciones mas rapidas y mejor soporte sin conexion.\n- **pnpm** -- El mas nuevo. Usa menos espacio en disco compartiendo paquetes entre proyectos.\n\nLos tres usan el mismo registro (npmjs.com) y leen el mismo archivo package.json. Piensa en ellos como tres navegadores diferentes accediendo al mismo internet -- el contenido es el mismo, la herramienta es diferente."
+      "body": "En el mundo de JavaScript, tres gestores de paquetes dominan:\n\n- **npm** -- El original. Viene pre-instalado con Node.js. Usado por la mayoria de tutoriales y proyectos.\n- **yarn** -- Creado por Facebook. Instalaciones más rápidas y mejor soporte sin conexión.\n- **pnpm** -- El más nuevo. Usa menos espacio en disco compartiendo paquetes entre proyectos.\n\nLos tres usan el mismo registro (npmjs.com) y leen el mismo archivo package.json. Piensa en ellos como tres navegadores diferentes accediendo al mismo internet -- el contenido es el mismo, la herramienta es diferente."
     },
     {
       "type": "code_example",
-      "title": "Gestores de Paquetes en Accion",
+      "title": "Gestores de Paquetes en Acción",
       "language": "bash",
       "code": "# Installing a package (all three do the same thing)\nnpm install axios\nyarn add axios\npnpm add axios\n\n# Installing all project dependencies\nnpm install\nyarn install\npnpm install",
       "annotation": "Los tres comandos descargan la libreria 'axios' (para hacer peticiones HTTP) del registro de npm. Los comandos son ligeramente diferentes, pero el resultado es el mismo: el paquete aparece en tu carpeta node_modules."
     },
     {
       "type": "motivation",
-      "body": "Cada proyecto de vibecoding -- ya sea una app Next.js, un dashboard React o una herramienta de IA -- comienza con comandos del gestor de paquetes. Los freelancers que pueden configurar rapidamente, instalar dependencias y solucionar problemas de paquetes cobran $50-150/hora porque resuelven problemas que atoran a los principiantes por dias. Entender los gestores de paquetes es la puerta de entrada para construir productos reales y desplegables."
+      "body": "Cada proyecto de vibecoding -- ya sea una app Next.js, un dashboard React o una herramienta de IA -- comienza con comandos del gestor de paquetes. Los freelancers que pueden configurar rápidamente, instalar dependencias y solucionar problemas de paquetes cobran $50-150/hora porque resuelven problemas que atoran a los principiantes por dias. Entender los gestores de paquetes es la puerta de entrada para construir productos reales y desplegables."
     },
     {
       "type": "key_takeaway",
-      "body": "Los gestores de paquetes (npm, yarn, pnpm) son herramientas que instalan, actualizan y gestionan librerias de codigo para tus proyectos. Descargan paquetes de un registro central, manejan el rastreo de versiones y resuelven dependencias automaticamente -- ahorrándote de gestionar manualmente cientos de archivos."
+      "body": "Los gestores de paquetes (npm, yarn, pnpm) son herramientas que instalan, actualizan y gestionan librerias de código para tus proyectos. Descargan paquetes de un registro central, manejan el rastreo de versiones y resuelven dependencias automáticamente -- ahorrándote de gestionar manualmente cientos de archivos."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "card-1",
-        "content": "Un gestor de paquetes descarga librerias de codigo desde un registro central para que no tengas que escribir todo desde cero.",
+        "content": "Un gestor de paquetes descarga librerias de código desde un registro central para que no tengas que escribir todo desde cero.",
         "isGoodPractice": true,
-        "explanation": "Eso es exactamente lo que hacen los gestores de paquetes. El registro de npm (npmjs.com) aloja mas de 2 millones de paquetes. Cuando ejecutas 'npm install react', descarga React de este registro y lo pone en la carpeta node_modules de tu proyecto."
+        "explanation": "Eso es exactamente lo que hacen los gestores de paquetes. El registro de npm (npmjs.com) aloja más de 2 millones de paquetes. Cuando ejecutas 'npm install react', descarga React de este registro y lo pone en la carpeta node_modules de tu proyecto."
       },
       {
         "id": "card-2",
         "content": "Deberias usar solo un gestor de paquetes (npm, yarn o pnpm) por proyecto para evitar conflictos.",
         "isGoodPractice": true,
-        "explanation": "Mezclar gestores de paquetes en el mismo proyecto crea archivos de bloqueo conflictivos (package-lock.json vs yarn.lock) y puede causar desajustes de version. Elige uno para cada proyecto y mantente con el. La mayoria de principiantes comienzan con npm ya que viene con Node.js."
+        "explanation": "Mezclar gestores de paquetes en el mismo proyecto crea archivos de bloqueo conflictivos (package-lock.json vs yarn.lock) y puede causar desajustes de versión. Elige uno para cada proyecto y mantente con el. La mayoria de principiantes comienzan con npm ya que viene con Node.js."
       },
       {
         "id": "card-3",
@@ -72,9 +72,9 @@
       },
       {
         "id": "card-5",
-        "content": "Cuando instalas un paquete, el gestor de paquetes tambien instala todos los otros paquetes de los que depende.",
+        "content": "Cuando instalas un paquete, el gestor de paquetes también instala todos los otros paquetes de los que depende.",
         "isGoodPractice": true,
-        "explanation": "Esto se llama resolucion de dependencias. Cuando instalas React, npm tambien instala loose-envify, js-tokens y otros paquetes que React necesita para funcionar. Un solo 'npm install react' podria instalar mas de 5 paquetes en segundo plano."
+        "explanation": "Esto se llama resolucion de dependencias. Cuando instalas React, npm también instala loose-envify, js-tokens y otros paquetes que React necesita para funcionar. Un solo 'npm install react' podría instalar más de 5 paquetes en segundo plano."
       }
     ],
     "glossaryTerms": ["package-manager", "npm", "dependency", "registry"]

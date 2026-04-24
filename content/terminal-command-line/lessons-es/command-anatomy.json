@@ -11,7 +11,7 @@
     {
       "type": "analogy",
       "title": "Comandos = Oraciones",
-      "body": "Un comando de terminal esta estructurado como una oracion en espanol. El **nombre del comando** es el verbo (la accion: listar, mover, copiar). Las **banderas** son adverbios (como hacerlo: silenciosamente, recursivamente, verbosamente). Los **argumentos** son los sustantivos (sobre que actuar: este archivo, esa carpeta). Entonces `ls -la Documents` se lee como: \"**Lista** (verbo) en formato **largo-todo** (adverbio) la carpeta **Documents** (sustantivo).\""
+      "body": "Un comando de terminal esta estructurado como una oracion en español. El **nombre del comando** es el verbo (la acción: listar, mover, copiar). Las **banderas** son adverbios (como hacerlo: silenciosamente, recursivamente, verbosamente). Los **argumentos** son los sustantivos (sobre que actuar: este archivo, esa carpeta). Entonces `ls -la Documents` se lee como: \"**Lista** (verbo) en formato **largo-todo** (adverbio) la carpeta **Documents** (sustantivo).\""
     },
     {
       "type": "analogy",
@@ -21,12 +21,12 @@
     {
       "type": "text",
       "title": "Las Tres Partes de Cada Comando",
-      "body": "Cada comando de terminal tiene hasta tres partes:\n\n1. **Nombre del comando** -- La accion a realizar (`ls`, `cd`, `mkdir`, `rm`)\n2. **Banderas/Opciones** -- Modifican el comportamiento. Empiezan con `-` o `--` (`-a`, `--all`, `-v`, `--verbose`)\n3. **Argumentos** -- Sobre que actua el comando (nombres de archivos, nombres de carpetas, texto)\n\nFormato: `comando [banderas] [argumentos]`"
+      "body": "Cada comando de terminal tiene hasta tres partes:\n\n1. **Nombre del comando** -- La acción a realizar (`ls`, `cd`, `mkdir`, `rm`)\n2. **Banderas/Opciones** -- Modifican el comportamiento. Empiezan con `-` o `--` (`-a`, `--all`, `-v`, `--verbose`)\n3. **Argumentos** -- Sobre que actua el comando (nombres de archivos, nombres de carpetas, texto)\n\nFormato: `comando [banderas] [argumentos]`"
     },
     {
       "type": "text",
       "title": "Banderas Cortas vs Banderas Largas",
-      "body": "La mayoria de las banderas vienen en dos formas:\n\n- **Bandera corta**: Un guion + una letra: `-a`, `-l`, `-v`\n- **Bandera larga**: Dos guiones + palabra completa: `--all`, `--long`, `--verbose`\n\nLas banderas cortas se pueden combinar: `-la` es lo mismo que `-l -a`.\n\nAmbas formas hacen lo mismo -- la corta es mas rapida de escribir, la larga es mas facil de leer y entender."
+      "body": "La mayoria de las banderas vienen en dos formas:\n\n- **Bandera corta**: Un guion + una letra: `-a`, `-l`, `-v`\n- **Bandera larga**: Dos guiones + palabra completa: `--all`, `--long`, `--verbose`\n\nLas banderas cortas se pueden combinar: `-la` es lo mismo que `-l -a`.\n\nAmbas formas hacen lo mismo -- la corta es más rápida de escribir, la larga es más fácil de leer y entender."
     },
     {
       "type": "code_example",
@@ -41,7 +41,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Cada comando tiene un nombre (la accion), banderas opcionales (como hacerlo) y argumentos opcionales (sobre que actuar). Las banderas cortas usan un guion (-a), las banderas largas usan dos guiones (--all)."
+      "body": "Cada comando tiene un nombre (la acción), banderas opcionales (como hacerlo) y argumentos opcionales (sobre que actuar). Las banderas cortas usan un guion (-a), las banderas largas usan dos guiones (--all)."
     }
   ],
   "exercise": {
@@ -56,13 +56,13 @@
         "id": "card-2",
         "content": "Las banderas siempre deben ir antes de los argumentos en un comando de terminal.",
         "isGoodPractice": false,
-        "explanation": "Aunque poner banderas antes de argumentos es la convencion mas comun y la practica recomendada, muchos comandos aceptan banderas en diferentes posiciones. Por ejemplo, 'ls Documents -la' tambien funciona. Sin embargo, algunos comandos son estrictos con el orden, asi que es mejor practica poner banderas primero."
+        "explanation": "Aunque poner banderas antes de argumentos es la convencion más comun y la practica recomendada, muchos comandos aceptan banderas en diferentes posiciones. Por ejemplo, 'ls Documents -la' también funciona. Sin embargo, algunos comandos son estrictos con el orden, así que es mejor practica poner banderas primero."
       },
       {
         "id": "card-3",
         "content": "La bandera corta '-v' y la bandera larga '--verbose' hacen lo mismo.",
         "isGoodPractice": true,
-        "explanation": "Las banderas cortas (un guion + letra) y las banderas largas (dos guiones + palabra) son dos formas de escribir la misma opcion. '-v' es solo un atajo para '--verbose'. Las banderas cortas son mas rapidas de escribir, las largas son mas faciles de entender al leer comandos."
+        "explanation": "Las banderas cortas (un guion + letra) y las banderas largas (dos guiones + palabra) son dos formas de escribir la misma opción. '-v' es solo un atajo para '--verbose'. Las banderas cortas son más rápidas de escribir, las largas son más fáciles de entender al leer comandos."
       },
       {
         "id": "card-4",
@@ -74,7 +74,7 @@
         "id": "card-5",
         "content": "Puedes combinar multiples banderas cortas en una, como '-la' en lugar de '-l -a'.",
         "isGoodPractice": true,
-        "explanation": "Este es uno de los atajos mas utiles de la terminal. En lugar de escribir '-l -a -h' por separado, puedes combinarlos en '-lah'. Esto solo funciona con banderas cortas de una letra (un guion), no con banderas largas (dos guiones)."
+        "explanation": "Este es uno de los atajos más útiles de la terminal. En lugar de escribir '-l -a -h' por separado, puedes combinarlos en '-lah'. Esto solo funciona con banderas cortas de una letra (un guion), no con banderas largas (dos guiones)."
       }
     ],
     "glossaryTerms": ["flag", "argument", "command"]

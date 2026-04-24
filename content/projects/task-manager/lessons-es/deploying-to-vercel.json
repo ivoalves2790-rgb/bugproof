@@ -6,32 +6,32 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Es dia de despliegue. Es como mudarte a un departamento nuevo — todo funcionaba en el anterior, pero el nuevo entorno tiene sus propias particularidades. Conectas tu repositorio a Vercel, presionas deploy y... la compilacion falla. Bienvenido al mundo real de la depuracion de despliegues.",
+  "intro": "Es día de despliegue. Es como mudarte a un departamento nuevo — todo funcionaba en el anterior, pero el nuevo entorno tiene sus propias particularidades. Conectas tu repositorio a Vercel, presionas deploy y... la compilación falla. Bienvenido al mundo real de la depuración de despliegues.",
   "teach": [
     {
       "type": "text",
       "title": "Desplegando una App Next.js",
-      "body": "Vercel fue creado por los creadores de Next.js, lo que lo convierte en la opcion de despliegue mas fluida. Conectas tu repositorio de GitHub, Vercel detecta que es una app Next.js y la compila automaticamente. Pero 'automatico' no significa 'sin problemas' — variables de entorno faltantes, errores de compilacion y errores de tipos son problemas comunes en el primer despliegue."
+      "body": "Vercel fue creado por los creadores de Next.js, lo que lo convierte en la opción de despliegue más fluida. Conectas tu repositorio de GitHub, Vercel detecta que es una app Next.js y la compila automáticamente. Pero 'automático' no significa 'sin problemas' — variables de entorno faltantes, errores de compilación y errores de tipos son problemas comunes en el primer despliegue."
     },
     {
       "type": "analogy",
       "title": "Desplegar Es Como Mudarte a un Departamento Nuevo",
-      "body": "Todo funcionaba en tu lugar anterior, pero en el departamento nuevo los enchufes estan en lugares diferentes y la presion del agua es distinta. Desplegar en Vercel es similar — tu codigo es el mismo, pero el entorno es nuevo, y pequenas diferencias (variables de entorno faltantes, sistemas de archivos sensibles a mayusculas) pueden causarte problemas."
+      "body": "Todo funcionaba en tu lugar anterior, pero en el departamento nuevo los enchufes estan en lugares diferentes y la presion del agua es distinta. Desplegar en Vercel es similar — tu código es el mismo, pero el entorno es nuevo, y pequeñas diferencias (variables de entorno faltantes, sistemas de archivos sensibles a mayusculas) pueden causarte problemas."
     },
     {
       "type": "code_example",
       "title": "Errores Comunes del Primer Despliegue",
       "language": "text",
       "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ You forgot to add env vars in Vercel dashboard\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript is stricter in production builds\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Case sensitivity: taskList.tsx vs TaskList.tsx (Linux is case-sensitive)",
-      "annotation": "La mayoria de los fallos del primer despliegue son problemas de entorno o configuracion de compilacion, no bugs de codigo."
+      "annotation": "La mayoria de los fallos del primer despliegue son problemas de entorno o configuración de compilación, no bugs de código."
     },
     {
       "type": "motivation",
-      "body": "Cada despliegue exitoso pone tu producto frente a usuarios reales. Dominar los despliegues en Vercel significa que puedes pasar de idea a app en produccion en horas, no semanas — y la velocidad al mercado es como los creadores independientes generan dinero."
+      "body": "Cada despliegue exitoso pone tu producto frente a usuarios reales. Dominar los despliegues en Vercel significa que puedes pasar de idea a app en producción en horas, no semanas — y la velocidad al mercado es como los creadores independientes generan dinero."
     },
     {
       "type": "key_takeaway",
-      "body": "Siempre ejecuta la compilacion de produccion localmente (npm run build) antes de desplegar. Detecta la mayoria de los errores de compilacion que no aparecen en modo desarrollo."
+      "body": "Siempre ejecuta la compilación de producción localmente (npm run build) antes de desplegar. Detecta la mayoria de los errores de compilación que no aparecen en modo desarrollo."
     }
   ],
   "exercise": {
@@ -40,8 +40,8 @@
       "start": {
         "narrative": "Subes tu gestor de tareas a GitHub y conectas el repositorio a Vercel. La compilacion comienza e inmediatamente falla con: 'Error: NEXT_PUBLIC_SUPABASE_URL is not defined.' Que haces?",
         "choices": [
-          { "id": "a", "text": "Escribir la URL de Supabase directamente en el codigo para que la compilacion no necesite variables de entorno", "nextNode": "hardcode", "score": 0 },
-          { "id": "b", "text": "Agregar las variables de entorno en la configuracion del proyecto en el panel de Vercel, luego redesplegar", "nextNode": "add-env-vars", "score": 4 },
+          { "id": "a", "text": "Escribir la URL de Supabase directamente en el código para que la compilación no necesite variables de entorno", "nextNode": "hardcode", "score": 0 },
+          { "id": "b", "text": "Agregar las variables de entorno en la configuración del proyecto en el panel de Vercel, luego redesplegar", "nextNode": "add-env-vars", "score": 4 },
           { "id": "c", "text": "Subir tu archivo .env al repositorio para que Vercel pueda leerlo", "nextNode": "push-env", "score": 0 }
         ]
       },
@@ -49,35 +49,35 @@
         "narrative": "La compilacion pasa, pero ahora tu URL de Supabase es visible en el codigo fuente publico. Cualquiera puede encontrar tu endpoint de base de datos. Un colega consciente de la seguridad senala el problema.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Incluso las URLs deben tratarse como configuracion, no como valores escritos directamente en el codigo. Las variables de entorno existen precisamente para valores que cambian entre entornos y no deberian ser publicos.",
+        "feedback": "Incluso las URLs deben tratarse como configuración, no como valores escritos directamente en el código. Las variables de entorno existen precisamente para valores que cambian entre entornos y no deberian ser publicos.",
         "choices": []
       },
       "add-env-vars": {
         "narrative": "Agregas las variables de entorno en la configuracion de Vercel. La compilacion pasa. Pero la app muestra una pagina en blanco. La consola del navegador revela: 'TypeError: Cannot read properties of undefined.' Cual es tu siguiente paso?",
         "choices": [
           { "id": "b1", "text": "Revisar los logs de despliegue de Vercel y la consola del navegador para encontrar el componente exacto que falla", "nextNode": "debug-logs", "score": 3 },
-          { "id": "b2", "text": "Ejecutar npm run build localmente para reproducir el problema en una compilacion de produccion local", "nextNode": "local-build", "score": 4 }
+          { "id": "b2", "text": "Ejecutar npm run build localmente para reproducir el problema en una compilación de producción local", "nextNode": "local-build", "score": 4 }
         ]
       },
       "push-env": {
         "narrative": "Accidentalmente subes tu archivo .env con tu clave real de service role de Supabase. En minutos, un bot que rastrea GitHub la encuentra. Recibes un email de Supabase advirtiendo sobre credenciales expuestas. Inmediatamente rotas las claves y agregas .env a .gitignore.",
         "isEnd": true,
         "finalScore": 2,
-        "feedback": "Nunca subas archivos .env a Git. Incluso despues de eliminarlos, los secretos permanecen en el historial de Git. Siempre agrega .env a .gitignore antes de tu primer commit, y rota cualquier credencial filtrada inmediatamente.",
+        "feedback": "Nunca subas archivos .env a Git. Incluso después de eliminarlos, los secretos permanecen en el historial de Git. Siempre agrega .env a .gitignore antes de tu primer commit, y rota cualquier credencial filtrada inmediatamente.",
         "choices": []
       },
       "debug-logs": {
         "narrative": "Los logs muestran que un componente esta intentando leer una propiedad de datos que aun no se han cargado. Agregas una verificacion de estado de carga y la app funciona perfectamente en el siguiente despliegue.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Buen proceso de depuracion. Los logs de despliegue y la consola del navegador son tus mejores aliados. El problema del estado de carga es comun — la obtencion de datos se comporta diferente en produccion vs desarrollo.",
+        "feedback": "Buen proceso de depuración. Los logs de despliegue y la consola del navegador son tus mejores aliados. El problema del estado de carga es comun — la obtencion de datos se comporta diferente en producción vs desarrollo.",
         "choices": []
       },
       "local-build": {
         "narrative": "Ejecutar 'npm run build' localmente revela exactamente el mismo error con un stack trace completo apuntando a un componente que no maneja el estado de carga. Lo arreglas localmente, subes los cambios y Vercel auto-despliega exitosamente.",
         "isEnd": true,
         "finalScore": 7,
-        "feedback": "Ejecutar la compilacion de produccion localmente es la mejor practica. Reproduce la mayoria de los problemas de despliegue con un ciclo de retroalimentacion mas rapido que subir y esperar a que Vercel compile.",
+        "feedback": "Ejecutar la compilación de producción localmente es la mejor practica. Reproduce la mayoria de los problemas de despliegue con un ciclo de retroalimentacion más rápido que subir y esperar a que Vercel compile.",
         "choices": []
       }
     },

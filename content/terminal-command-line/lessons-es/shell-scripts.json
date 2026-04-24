@@ -16,27 +16,27 @@
     {
       "type": "analogy",
       "title": "Scripts = Macros Grabados en un Videojuego",
-      "body": "En los videojuegos, algunos jugadores graban una secuencia de movimientos -- saltar, esquivar, atacar, curar -- y repiten ese macro con un solo boton. **Los scripts de shell son macros para tu terminal.** Grabas los comandos una vez (los escribes en un archivo) y los repites para siempre con un solo comando. Juega una vez, repite para siempre -- ese es el poder de la automatizacion."
+      "body": "En los videojuegos, algunos jugadores graban una secuencia de movimientos -- saltar, esquivar, atacar, curar -- y repiten ese macro con un solo boton. **Los scripts de shell son macros para tu terminal.** Grabas los comandos una vez (los escribes en un archivo) y los repites para siempre con un solo comando. Juega una vez, repite para siempre -- ese es el poder de la automatización."
     },
     {
       "type": "text",
       "title": "Anatomia de un Script de Shell",
-      "body": "Cada script de shell tiene algunas partes clave:\n\n1. **Linea shebang** (`#!/bin/bash`) -- Le dice al sistema que interprete usar. Siempre la primera linea.\n2. **Variables** -- Almacenan valores: `NOMBRE=\"mi-app\"` (sin espacios alrededor del `=`)\n3. **Comandos** -- Comandos regulares de terminal, uno por linea\n4. **Condicionales** -- Bloques `if/then/fi` para logica\n5. **Hacerlo ejecutable** -- `chmod +x script.sh` antes de poder ejecutarlo\n\nEjecuta el script con `./script.sh` o `bash script.sh`."
+      "body": "Cada script de shell tiene algunas partes clave:\n\n1. **Linea shebang** (`#!/bin/bash`) -- Le dice al sistema que interprete usar. Siempre la primera línea.\n2. **Variables** -- Almacenan valores: `NOMBRE=\"mi-app\"` (sin espacios alrededor del `=`)\n3. **Comandos** -- Comandos regulares de terminal, uno por línea\n4. **Condicionales** -- Bloques `if/then/fi` para lógica\n5. **Hacerlo ejecutable** -- `chmod +x script.sh` antes de poder ejecutarlo\n\nEjecuta el script con `./script.sh` o `bash script.sh`."
     },
     {
       "type": "code_example",
-      "title": "Un Script de Configuracion de Proyecto",
+      "title": "Un Script de Configuración de Proyecto",
       "language": "bash",
       "code": "#!/bin/bash\n# setup.sh -- Crear un proyecto nuevo desde cero\n\nPROJECT_NAME=$1  # Primer argumento pasado al script\n\nif [ -z \"$PROJECT_NAME\" ]; then\n  echo \"Uso: ./setup.sh <nombre-proyecto>\"\n  exit 1\nfi\n\nmkdir -p \"$PROJECT_NAME/src\"\ncd \"$PROJECT_NAME\"\ngit init\nnpm init -y\necho \"node_modules/\" > .gitignore\necho \"Proyecto $PROJECT_NAME creado!\"",
       "annotation": "La variable $1 captura el primer argumento. El bloque if verifica si se proporciono un nombre. La prueba -z verifica si una cadena esta vacia. Este script reemplaza 6 comandos manuales con uno: ./setup.sh mi-app"
     },
     {
       "type": "motivation",
-      "body": "Los scripts de shell son la puerta de entrada a la automatizacion. Los vibecoders que automatizan sus procesos de configuracion, compilacion y despliegue pueden crear nuevos proyectos para clientes en 30 segundos en vez de 30 minutos. Esa es la diferencia entre facturar por un proyecto o cinco en una semana -- la automatizacion multiplica tu capacidad de ganar dinero."
+      "body": "Los scripts de shell son la puerta de entrada a la automatización. Los vibecoders que automatizan sus procesos de configuración, compilación y despliegue pueden crear nuevos proyectos para clientes en 30 segundos en vez de 30 minutos. Esa es la diferencia entre facturar por un proyecto o cinco en una semana -- la automatización multiplica tu capacidad de ganar dinero."
     },
     {
       "type": "key_takeaway",
-      "body": "Los scripts de shell son archivos que contienen comandos de terminal que se ejecutan en secuencia. Empieza cada script con #!/bin/bash, usa variables para almacenar valores, agrega if/then/fi para logica, y haz los scripts ejecutables con chmod +x. Automatiza cualquier cosa que hagas mas de dos veces."
+      "body": "Los scripts de shell son archivos que contienen comandos de terminal que se ejecutan en secuencia. Empieza cada script con #!/bin/bash, usa variables para almacenar valores, agrega if/then/fi para lógica, y haz los scripts ejecutables con chmod +x. Automatiza cualquier cosa que hagas más de dos veces."
     }
   ],
   "exercise": {
@@ -51,18 +51,18 @@
         "hint": "Usa 'touch nombre_archivo' para crear un archivo vacio. El archivo debe llamarse greet.sh."
       },
       {
-        "instruction": "Escribe el contenido del script en greet.sh. Debe tener una linea shebang, una variable NAME con el valor 'World', y un echo que diga Hello, $NAME! Usa un heredoc para escribir multiples lineas.",
+        "instruction": "Escribe el contenido del script en greet.sh. Debe tener una línea shebang, una variable NAME con el valor 'World', y un echo que diga Hello, $NAME! Usa un heredoc para escribir multiples líneas.",
         "expectedCommand": "cat << 'EOF' > greet.sh\n#!/bin/bash\nNAME=\"World\"\necho \"Hello, $NAME!\"\nEOF",
         "acceptAlternatives": ["echo '#!/bin/bash\nNAME=\"World\"\necho \"Hello, $NAME!\"' > greet.sh"],
         "output": "",
-        "hint": "Usa cat << 'EOF' > greet.sh para escribir multiples lineas. Incluye #!/bin/bash en la linea 1, NAME=\"World\" en la linea 2, y echo \"Hello, $NAME!\" en la linea 3."
+        "hint": "Usa cat << 'EOF' > greet.sh para escribir multiples líneas. Incluye #!/bin/bash en la línea 1, NAME=\"World\" en la línea 2, y echo \"Hello, $NAME!\" en la línea 3."
       },
       {
         "instruction": "Haz el script ejecutable para que puedas ejecutarlo directamente con ./greet.sh.",
         "expectedCommand": "chmod +x greet.sh",
         "acceptAlternatives": ["chmod 755 greet.sh", "chmod u+x greet.sh"],
         "output": "",
-        "hint": "Usa chmod +x para agregar permisos de ejecucion a un archivo."
+        "hint": "Usa chmod +x para agregar permisos de ejecución a un archivo."
       },
       {
         "instruction": "¡Ejecuta tu script para ver el saludo!",
@@ -72,7 +72,7 @@
         "hint": "Ejecuta el script con ./greet.sh (el ./ significa 'en el directorio actual')."
       }
     ],
-    "completionMessage": "¡Acabas de escribir y ejecutar tu primer script de shell! La linea shebang le dijo al sistema que use bash, la variable almaceno un valor, y echo lo imprimio. Desde aqui puedes agregar argumentos ($1, $2), condicionales (if/then) y bucles para construir herramientas de automatizacion poderosas.",
+    "completionMessage": "¡Acabas de escribir y ejecutar tu primer script de shell! La línea shebang le dijo al sistema que use bash, la variable almaceno un valor, y echo lo imprimio. Desde aquí puedes agregar argumentos ($1, $2), condicionales (if/then) y bucles para construir herramientas de automatización poderosas.",
     "glossaryTerms": ["shebang", "chmod", "shell-script", "variable"]
   }
 }

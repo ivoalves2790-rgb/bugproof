@@ -6,17 +6,17 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Las variables de entorno almacenan secretos y configuracion que cambian entre desarrollo y produccion. Piensa en ellas como la lista de contactos de tu telefono — tu codigo marca 'la base de datos' y el entorno completa el numero real. Si las configuras mal, tu app filtra claves de API o se conecta a la base de datos equivocada.",
+  "intro": "Las variables de entorno almacenan secretos y configuración que cambian entre desarrollo y producción. Piensa en ellas como la lista de contactos de tu teléfono — tu código marca 'la base de datos' y el entorno completa el número real. Si las configuras mal, tu app filtra claves de API o se conecta a la base de datos equivocada.",
   "teach": [
     {
       "type": "text",
       "title": "Que Son las Variables de Entorno?",
-      "body": "Las variables de entorno son pares clave-valor que configuran tu app sin escribir valores directamente en el codigo. DATABASE_URL podria apuntar a localhost en desarrollo y a tu base de datos de produccion en produccion. API_KEY se mantiene secreta porque nunca esta en tu codigo — se configura en la plataforma de despliegue."
+      "body": "Las variables de entorno son pares clave-valor que configuran tu app sin escribir valores directamente en el código. DATABASE_URL podría apuntar a localhost en desarrollo y a tu base de datos de producción en producción. API_KEY se mantiene secreta porque nunca esta en tu código — se configura en la plataforma de despliegue."
     },
     {
       "type": "analogy",
       "title": "Las Variables de Entorno Son Como la Agenda de Tu Telefono",
-      "body": "No te tatuas numeros de telefono en el brazo — los guardas en tu telefono y cambian cuando la gente obtiene nuevos numeros. Las variables de entorno funcionan igual: tu codigo dice 'llama a la base de datos' y el entorno completa la direccion real, que puede ser diferente en cada dispositivo."
+      "body": "No te tatuas números de teléfono en el brazo — los guardas en tu teléfono y cambian cuando la gente obtiene nuevos números. Las variables de entorno funcionan igual: tu código dice 'llama a la base de datos' y el entorno completa la dirección real, que puede ser diferente en cada dispositivo."
     },
     {
       "type": "code_example",
@@ -27,11 +27,11 @@
     },
     {
       "type": "motivation",
-      "body": "Saber manejar variables de entorno te permite conectar de forma segura APIs de pago, analiticas y servicios externos — los componentes basicos de apps que generan ingresos reales."
+      "body": "Saber manejar variables de entorno te permite conectar de forma segura APIs de pago, analiticas y servicios externos — los componentes básicos de apps que generan ingresos reales."
     },
     {
       "type": "key_takeaway",
-      "body": "Nunca hagas commit de archivos .env con secretos reales. Agrega .env a .gitignore, usa .env.example para documentacion y configura los valores de produccion en el panel de tu plataforma de despliegue."
+      "body": "Nunca hagas commit de archivos .env con secretos reales. Agrega .env a .gitignore, usa .env.example para documentación y configura los valores de producción en el panel de tu plataforma de despliegue."
     }
   ],
   "exercise": {
@@ -40,7 +40,7 @@
         "id": "c1",
         "content": "Agregar archivos .env a .gitignore para que los secretos nunca terminen en tu historial de Git",
         "isGoodPractice": true,
-        "explanation": "Una vez que un secreto esta en el historial de Git, es extremadamente dificil eliminarlo. Incluso si borras el archivo, el secreto permanece en commits anteriores. Previene esto agregando .env a .gitignore desde el primer dia."
+        "explanation": "Una vez que un secreto esta en el historial de Git, es extremadamente difícil eliminarlo. Incluso si borras el archivo, el secreto permanece en commits anteriores. Previene esto agregando .env a .gitignore desde el primer día."
       },
       {
         "id": "c2",
@@ -50,19 +50,19 @@
       },
       {
         "id": "c3",
-        "content": "Almacenar la contrasena de tu base de datos directamente en el codigo como respaldo en caso de que la variable de entorno no este configurada",
+        "content": "Almacenar la contrasena de tu base de datos directamente en el código como respaldo en caso de que la variable de entorno no este configurada",
         "isGoodPractice": false,
-        "explanation": "Las credenciales de respaldo escritas en el codigo son un riesgo de seguridad y se incluyen en el control de versiones. Si falta una variable de entorno, la app deberia fallar con un error claro, no recurrir a secretos escritos en el codigo."
+        "explanation": "Las credenciales de respaldo escritas en el código son un riesgo de seguridad y se incluyen en el control de versiones. Si falta una variable de entorno, la app deberia fallar con un error claro, no recurrir a secretos escritos en el código."
       },
       {
         "id": "c4",
-        "content": "Usar diferentes valores de variables de entorno para desarrollo, staging y produccion",
+        "content": "Usar diferentes valores de variables de entorno para desarrollo, staging y producción",
         "isGoodPractice": true,
-        "explanation": "Cada entorno deberia tener su propia base de datos, claves de API y configuracion. Esto previene que el trabajo de desarrollo afecte accidentalmente los datos de produccion."
+        "explanation": "Cada entorno deberia tener su propia base de datos, claves de API y configuración. Esto previene que el trabajo de desarrollo afecte accidentalmente los datos de producción."
       },
       {
         "id": "c5",
-        "content": "Compartir tu archivo .env en Slack para que los nuevos miembros del equipo puedan configurarse rapidamente",
+        "content": "Compartir tu archivo .env en Slack para que los nuevos miembros del equipo puedan configurarse rápidamente",
         "isGoodPractice": false,
         "explanation": "Los mensajes de Slack persisten y pueden ser buscados. Usa un gestor de secretos seguro o haz que cada desarrollador genere sus propias credenciales. Comparte .env.example en su lugar para mostrar que variables se necesitan."
       },
@@ -70,7 +70,7 @@
         "id": "c6",
         "content": "Validar que todas las variables de entorno requeridas estan presentes cuando la app se inicia",
         "isGoodPractice": true,
-        "explanation": "Falla rapido y ruidosamente. Si DATABASE_URL falta, falla inmediatamente con un mensaje claro en lugar de fallar silenciosamente despues cuando un usuario intenta guardar una tarea."
+        "explanation": "Falla rápido y ruidosamente. Si DATABASE_URL falta, falla inmediatamente con un mensaje claro en lugar de fallar silenciosamente después cuando un usuario intenta guardar una tarea."
       }
     ],
     "glossaryTerms": ["env-var", "gitignore"]

@@ -6,12 +6,12 @@
   "xpReward": 15,
   "chapterSlug": "planning",
   "projectSlug": "task-manager",
-  "intro": "Necesitas describir tu gestor de tareas a un asistente de IA. Es como darle indicaciones a un taxista — di 'a un lugar bonito' y podrias terminar en un estacionamiento, pero dale coordenadas GPS exactas y llegaras exactamente donde quieres. La calidad de tu descripcion determina la calidad de lo que se construye. Toma buenas decisiones.",
+  "intro": "Necesitas describir tu gestor de tareas a un asistente de IA. Es como darle indicaciones a un taxista — di 'a un lugar bonito' y podrías terminar en un estacionamiento, pero dale coordenadas GPS exactas y llegaras exactamente donde quieres. La calidad de tu descripción determina la calidad de lo que se construye. Toma buenas decisiones.",
   "teach": [
     {
       "type": "text",
       "title": "Requisitos = El Plano de Tu App",
-      "body": "Los requisitos son una lista clara de lo que tu app debe hacer. Sin ellos, vagaras, olvidaras funcionalidades y construiras algo equivocado. Cuando usas IA para ayudarte a programar, los requisitos se vuelven aun mas criticos — la IA construye exactamente lo que describes, nada mas."
+      "body": "Los requisitos son una lista clara de lo que tu app debe hacer. Sin ellos, vagaras, olvidaras funcionalidades y construiras algo equivocado. Cuando usas IA para ayudarte a programar, los requisitos se vuelven aun más criticos — la IA construye exactamente lo que describes, nada más."
     },
     {
       "type": "analogy",
@@ -27,7 +27,7 @@
     },
     {
       "type": "motivation",
-      "body": "Requisitos claros son tu superpoder como vibecoder. Mientras otros pierden horas yendo y viniendo con la IA, tu lo logras en un solo prompt y lanzas tu producto mas rapido — tiempo ahorrado es dinero ganado."
+      "body": "Requisitos claros son tu superpoder como vibecoder. Mientras otros pierden horas yendo y viniendo con la IA, tu lo logras en un solo prompt y lanzas tu producto más rápido — tiempo ahorrado es dinero ganado."
     },
     {
       "type": "key_takeaway",
@@ -55,7 +55,7 @@
       "features-result": {
         "narrative": "Buen comienzo! La IA hace una pregunta de seguimiento: 'Las tareas deberian tener fechas limite? Como deberian ordenarse?' Como respondes?",
         "choices": [
-          { "id": "specify", "text": "\"Si, las tareas tienen: titulo (requerido), descripcion (opcional), fecha limite (opcional), prioridad (baja/media/alta), estado (por hacer/en progreso/hecho). Ordenar por defecto por prioridad y luego fecha limite.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "specify", "text": "\"Si, las tareas tienen: titulo (requerido), descripción (opcional), fecha limite (opcional), prioridad (baja/media/alta), estado (por hacer/en progreso/hecho). Ordenar por defecto por prioridad y luego fecha limite.\"", "nextNode": "great-end", "score": 4 },
           { "id": "delegate", "text": "\"Solo haz lo que tenga sentido\"", "nextNode": "mediocre-end", "score": 1 }
         ]
       },
@@ -70,21 +70,21 @@
         "narrative": "Reescribes tu prompt con funcionalidades especificas, campos de datos y flujos de usuario. La IA genera un resultado mucho mejor. Toma una ronda de ida y vuelta para afinar, y terminas con una base solida.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Te recuperaste bien! Empezar con requisitos detallados habria ahorrado un viaje de ida y vuelta, pero reconociste el problema y lo corregiste. Recuerda: especifica funcionalidades, campos de datos y reglas desde el inicio.",
+        "feedback": "Te recuperaste bien! Empezar con requisitos detallados habría ahorrado un viaje de ida y vuelta, pero reconociste el problema y lo corregiste. Recuerda: especifica funcionalidades, campos de datos y reglas desde el inicio.",
         "choices": []
       },
       "great-end": {
         "narrative": "La IA genera un gestor de tareas completo con exactamente los campos y el ordenamiento que especificaste. El modelo de datos es limpio, la interfaz coincide con tus requisitos y puedes empezar a construir inmediatamente.",
         "isEnd": true,
         "finalScore": 7,
-        "feedback": "Excelente! Especificaste funcionalidades, campos de datos, restricciones y valores por defecto. Asi es exactamente como comunicarse con la IA — se especifico sobre lo que quieres y lo entregara.",
+        "feedback": "Excelente! Especificaste funcionalidades, campos de datos, restricciones y valores por defecto. Así es exactamente como comunicarse con la IA — se especifico sobre lo que quieres y lo entregara.",
         "choices": []
       },
       "mediocre-end": {
         "narrative": "La IA construye algo que mas o menos funciona, pero necesitaras varias rondas mas de prompts para hacerlo bien. Cada ronda arriesga introducir inconsistencias.",
         "isEnd": true,
         "finalScore": 3,
-        "feedback": "La app funciona, pero el enfoque iterativo llevo a un resultado desordenado. La proxima vez, invierte tiempo al inicio escribiendo requisitos claros y especificos. Ahorra tiempo en general.",
+        "feedback": "La app funciona, pero el enfoque iterativo llevo a un resultado desordenado. La próxima vez, invierte tiempo al inicio escribiendo requisitos claros y especificos. Ahorra tiempo en general.",
         "choices": []
       },
       "bad-end": {

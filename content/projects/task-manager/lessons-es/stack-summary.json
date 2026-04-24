@@ -6,17 +6,17 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Has elegido tu stack: Next.js, Supabase y TypeScript. Piensa en tu stack como una banda — cada instrumento cumple un rol diferente, y juntos hacen musica. Ahora un ingeniero senior te pide que justifiques tus elecciones. Puedes explicar por que cada pieza encaja?",
+  "intro": "Has elegido tu stack: Next.js, Supabase y TypeScript. Piensa en tu stack como una banda — cada instrumento cumple un rol diferente, y juntos hacen música. Ahora un ingeniero senior te pide que justifiques tus elecciones. Puedes explicar por qué cada pieza encaja?",
   "teach": [
     {
       "type": "text",
       "title": "Conoce Tu 'Por Que' para Cada Herramienta",
-      "body": "Cualquiera puede listar tecnologias. Lo que separa a los buenos ingenieros es poder explicar por que eligieron cada una. Para cada herramienta en tu stack, deberias poder decir: que problema resuelve, que alternativas consideraste y por que esta opcion gano en la comparacion."
+      "body": "Cualquiera puede listar tecnologías. Lo que separa a los buenos ingenieros es poder explicar por qué eligieron cada una. Para cada herramienta en tu stack, deberias poder decir: que problema resuelve, que alternativas consideraste y por qué esta opción gano en la comparacion."
     },
     {
       "type": "analogy",
       "title": "Una Banda, No un Solista",
-      "body": "Tu stack tecnologico es como una banda. Next.js es el vocalista — maneja las partes que el publico ve. Supabase es el baterista — manteniendo el ritmo de tus datos estable en el fondo. TypeScript es el ingeniero de sonido — asegurandose de que nada suene desafinado. Vercel es el equipo de escenario — preparando todo para que el show salga al aire sin problemas. Cada miembro tiene un rol, y juntos hacen musica."
+      "body": "Tu stack tecnologico es como una banda. Next.js es el vocalista — maneja las partes que el publico ve. Supabase es el baterista — manteniendo el ritmo de tus datos estable en el fondo. TypeScript es el ingeniero de sonido — asegurandose de que nada suene desafinado. Vercel es el equipo de escenario — preparando todo para que el show salga al aire sin problemas. Cada miembro tiene un rol, y juntos hacen música."
     },
     {
       "type": "code_example",
@@ -31,7 +31,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Un buen stack tecnologico no se trata de elegir las 'mejores' herramientas — se trata de elegir herramientas que funcionen bien juntas, se adapten a las necesidades de tu proyecto y te permitan moverte rapido. Siempre estate listo para explicar tu razonamiento."
+      "body": "Un buen stack tecnologico no se trata de elegir las 'mejores' herramientas — se trata de elegir herramientas que funcionen bien juntas, se adapten a las necesidades de tu proyecto y te permitan moverte rápido. Siempre estate listo para explicar tu razonamiento."
     }
   ],
   "exercise": {
@@ -40,36 +40,36 @@
       "start": {
         "narrative": "Un ingeniero senior revisa tu plan de proyecto y dice: 'Por que elegiste Next.js en lugar de React puro con Vite? Parece complejidad extra.' Como respondes?",
         "choices": [
-          { "id": "reasons", "text": "\"Next.js nos da enrutamiento basado en archivos, rutas de API y renderizado del lado del servidor listo para usar. Para un gestor de tareas full-stack, eso nos ahorra configurar un enrutador, servidor y pipeline de compilacion separados.\"", "nextNode": "good-nextjs", "score": 4 },
-          { "id": "popular", "text": "\"Todos usan Next.js hoy en dia, asi que debe ser la mejor opcion.\"", "nextNode": "bad-popularity", "score": 0 },
-          { "id": "tutorial", "text": "\"El tutorial que segui lo usaba, asi que simplemente lo segui.\"", "nextNode": "weak-tutorial", "score": 1 }
+          { "id": "reasons", "text": "\"Next.js nos da enrutamiento basado en archivos, rutas de API y renderizado del lado del servidor listo para usar. Para un gestor de tareas full-stack, eso nos ahorra configurar un enrutador, servidor y pipeline de compilación separados.\"", "nextNode": "good-nextjs", "score": 4 },
+          { "id": "popular", "text": "\"Todos usan Next.js hoy en día, así que debe ser la mejor opción.\"", "nextNode": "bad-popularity", "score": 0 },
+          { "id": "tutorial", "text": "\"El tutorial que segui lo usaba, así que simplemente lo segui.\"", "nextNode": "weak-tutorial", "score": 1 }
         ]
       },
       "good-nextjs": {
         "narrative": "El senior asiente. 'Buenos puntos. Ahora cuentame sobre tu eleccion de base de datos. Por que Supabase con PostgreSQL en lugar de algo como Firebase o una API REST simple que construyas tu mismo?'",
         "choices": [
-          { "id": "structured", "text": "\"Nuestros datos de tareas son estructurados y relacionales — las tareas pertenecen a usuarios, tienen estados y fechas. SQL maneja eso limpiamente. Supabase nos da PostgreSQL administrado mas autenticacion integrada y RLS, asi que nos saltamos construir todo un backend.\"", "nextNode": "great-end", "score": 4 },
-          { "id": "free", "text": "\"Supabase es gratis, asi que ahorra dinero.\"", "nextNode": "okay-end", "score": 2 }
+          { "id": "structured", "text": "\"Nuestros datos de tareas son estructurados y relacionales — las tareas pertenecen a usuarios, tienen estados y fechas. SQL maneja eso limpiamente. Supabase nos da PostgreSQL administrado más autenticación integrada y RLS, así que nos saltamos construir todo un backend.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "free", "text": "\"Supabase es gratis, así que ahorra dinero.\"", "nextNode": "okay-end", "score": 2 }
         ]
       },
       "bad-popularity": {
         "narrative": "El senior frunce el ceno. 'La popularidad no es un argumento tecnico. La mitad del internet corria con jQuery antes — eso no significa que debas usarlo para un proyecto nuevo. Puedes darme una razon real?'",
         "choices": [
-          { "id": "recover", "text": "\"Tienes razon. La razon real es que Next.js maneja enrutamiento, endpoints de API y SSR en un solo framework, lo que significa menos configuracion para una app full-stack como la nuestra.\"", "nextNode": "recovered-path", "score": 3 },
-          { "id": "double-down", "text": "\"Bueno, tiene mas estrellas en GitHub, asi que claramente es el mejor.\"", "nextNode": "bad-end", "score": 0 }
+          { "id": "recover", "text": "\"Tienes razón. La razón real es que Next.js maneja enrutamiento, endpoints de API y SSR en un solo framework, lo que significa menos configuración para una app full-stack como la nuestra.\"", "nextNode": "recovered-path", "score": 3 },
+          { "id": "double-down", "text": "\"Bueno, tiene más estrellas en GitHub, así que claramente es el mejor.\"", "nextNode": "bad-end", "score": 0 }
         ]
       },
       "weak-tutorial": {
         "narrative": "El senior se ve preocupado. 'Seguir un tutorial esta bien para aprender, pero deberias entender por que se hicieron esas elecciones. Que funcionalidades especificas de Next.js usa realmente tu proyecto?'",
         "choices": [
-          { "id": "think", "text": "\"Ahora que lo pienso — el enrutamiento basado en archivos se mapea perfectamente a nuestras paginas, y las rutas de API nos permiten mantener la logica backend en el mismo proyecto sin un servidor separado.\"", "nextNode": "recovered-path", "score": 3 },
+          { "id": "think", "text": "\"Ahora que lo pienso — el enrutamiento basado en archivos se mapea perfectamente a nuestras páginas, y las rutas de API nos permiten mantener la lógica backend en el mismo proyecto sin un servidor separado.\"", "nextNode": "recovered-path", "score": 3 },
           { "id": "shrug", "text": "\"No estoy seguro, pero parece funcionar bien.\"", "nextNode": "bad-end", "score": 0 }
         ]
       },
       "recovered-path": {
         "narrative": "El senior se ve aliviado. 'Bien, si entiendes el razonamiento. Una pregunta mas: por que TypeScript en lugar de JavaScript puro?'",
         "choices": [
-          { "id": "types-help", "text": "\"TypeScript atrapa bugs antes de que sucedan. Si una tarea necesita un campo 'status' y lo olvido, el compilador me avisa inmediatamente en lugar de fallar en tiempo de ejecucion.\"", "nextNode": "okay-end", "score": 3 },
+          { "id": "types-help", "text": "\"TypeScript atrapa bugs antes de que sucedan. Si una tarea necesita un campo 'status' y lo olvido, el compilador me avisa inmediatamente en lugar de fallar en tiempo de ejecución.\"", "nextNode": "okay-end", "score": 3 },
           { "id": "resume", "text": "\"Se ve bien en el curriculum.\"", "nextNode": "weak-end", "score": 1 }
         ]
       },
@@ -77,28 +77,28 @@
         "narrative": "El senior esta impresionado. 'Claramente pensaste esto bien. El stack tiene sentido para el proyecto, y puedes articular por que cada pieza esta ahi. Ese es exactamente el tipo de pensamiento que buscamos. Lanzalo.'",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Excelente. Justificaste cada eleccion con una razon concreta ligada a las necesidades de tu proyecto. Asi es como los profesionales evaluan la tecnologia — no por el hype, sino por la adecuacion.",
+        "feedback": "Excelente. Justificaste cada eleccion con una razón concreta ligada a las necesidades de tu proyecto. Así es como los profesionales evaluan la tecnología — no por el hype, sino por la adecuacion.",
         "choices": []
       },
       "okay-end": {
         "narrative": "El senior asiente. 'Razonamiento decente. Entiendes algunos de los compromisos, pero intenta ir mas profundo. El costo es un factor, pero la adecuacion tecnica importa mas. En general, tu stack funciona para este proyecto.'",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Hiciste elecciones razonables pero podrias explicarlas mejor. Practica articular las razones tecnicas — que problema resuelve cada herramienta, y que pasaria si eligieras diferente?",
+        "feedback": "Hiciste elecciones razonables pero podrías explicarlas mejor. Practica articular las razones técnicas — que problema resuelve cada herramienta, y que pasaria si eligieras diferente?",
         "choices": []
       },
       "weak-end": {
         "narrative": "El senior suspira. 'Mira, cada herramienta en tu stack deberia estar ahi por una razon que puedas explicar. Regresa y escribe una oracion para cada eleccion: que problema resuelve para este proyecto especifico.'",
         "isEnd": true,
         "finalScore": 3,
-        "feedback": "Tu stack en realidad esta bien, pero no pudiste justificarlo. Poder explicar tus elecciones es tan importante como hacerlas. Siempre conoce el 'por que' detras de tus herramientas.",
+        "feedback": "Tu stack en realidad esta bien, pero no pudiste justificarlo. Poder explicar tus elecciones es tan importante como hacerlas. Siempre conoce el 'por qué' detrás de tus herramientas.",
         "choices": []
       },
       "bad-end": {
         "narrative": "El senior niega con la cabeza. 'No puedo aprobar un proyecto donde el desarrollador no sabe por que eligio sus propias herramientas. Ve a investigar tus elecciones y regresa cuando puedas explicar los compromisos.'",
         "isEnd": true,
         "finalScore": 0,
-        "feedback": "La popularidad y el hype nunca son argumentos tecnicos validos. Antes de elegir cualquier herramienta, pregunta: Que hace por mi proyecto? Cuales son las alternativas? Que compromisos estoy haciendo?",
+        "feedback": "La popularidad y el hype nunca son argumentos técnicos validos. Antes de elegir cualquier herramienta, pregunta: Que hace por mi proyecto? Cuales son las alternativas? Que compromisos estoy haciendo?",
         "choices": []
       }
     },

@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Tablero del Auto",
-      "body": "Las herramientas de base de datos son como el tablero de tu auto. Podrias abrir el capo y revisar el motor directamente (linea de comandos), usar los indicadores y luces de advertencia del tablero (herramienta GUI), o dejar que la computadora del auto maneje todo automaticamente (ORM en codigo). La mayoria de los conductores miran el tablero a diario pero solo abren el capo cuando algo necesita inspeccion mas profunda. Los desarrolladores hacen lo mismo -- GUI para revisiones rapidas, linea de comandos para trabajo de precision."
+      "body": "Las herramientas de base de datos son como el tablero de tu auto. Podrias abrir el capo y revisar el motor directamente (línea de comandos), usar los indicadores y luces de advertencia del tablero (herramienta GUI), o dejar que la computadora del auto maneje todo automáticamente (ORM en código). La mayoria de los conductores miran el tablero a diario pero solo abren el capo cuando algo necesita inspeccion más profunda. Los desarrolladores hacen lo mismo -- GUI para revisiones rápidas, línea de comandos para trabajo de precision."
     },
     {
       "type": "text",

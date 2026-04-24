@@ -6,12 +6,12 @@
   "xpReward": 15,
   "chapterSlug": "deployment",
   "projectSlug": "task-manager",
-  "intro": "Tu app esta en produccion. Pero como sabes si realmente esta funcionando? Imagina conducir un auto sin tablero — sin velocimetro, sin indicador de combustible, sin luces de advertencia. El monitoreo le da a tu app ese tablero para que puedas ver problemas antes que tus usuarios. Desliza a la derecha en buenas practicas de monitoreo.",
+  "intro": "Tu app esta en producción. Pero como sabes si realmente esta funcionando? Imagina conducir un auto sin tablero — sin velocimetro, sin indicador de combustible, sin luces de advertencia. El monitoreo le da a tu app ese tablero para que puedas ver problemas antes que tus usuarios. Desliza a la derecha en buenas practicas de monitoreo.",
   "teach": [
     {
       "type": "text",
       "title": "Por Que Monitorear Tu App?",
-      "body": "Una vez que tu app esta desplegada, no puedes ver que esta pasando a menos que configures monitoreo. Herramientas de rastreo de errores como Sentry capturan errores de JavaScript antes de que los usuarios los reporten. Las analiticas muestran que funcionalidades usa la gente. Los monitores de uptime te alertan si el sitio se cae a las 3 AM."
+      "body": "Una vez que tu app esta desplegada, no puedes ver que está pasando a menos que configures monitoreo. Herramientas de rastreo de errores como Sentry capturan errores de JavaScript antes de que los usuarios los reporten. Las analiticas muestran que funcionalidades usa la gente. Los monitores de uptime te alertan si el sitio se cae a las 3 AM."
     },
     {
       "type": "analogy",
@@ -29,7 +29,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Empieza con tres cosas: rastreo de errores (Sentry o similar), monitoreo de uptime (esta el sitio activo?) y analiticas basicas (la gente lo esta usando?). Puedes agregar monitoreo mas sofisticado despues."
+      "body": "Empieza con tres cosas: rastreo de errores (Sentry o similar), monitoreo de uptime (esta el sitio activo?) y analiticas básicas (la gente lo está usando?). Puedes agregar monitoreo más sofisticado después."
     }
   ],
   "exercise": {
@@ -38,19 +38,19 @@
         "id": "c1",
         "content": "Configurar rastreo de errores para ser notificado cuando los usuarios encuentren errores de JavaScript",
         "isGoodPractice": true,
-        "explanation": "Las herramientas de rastreo de errores capturan errores en produccion con contexto completo (navegador, URL, accion del usuario). Sabras sobre bugs antes de que los usuarios se molesten en reportarlos."
+        "explanation": "Las herramientas de rastreo de errores capturan errores en producción con contexto completo (navegador, URL, acción del usuario). Sabras sobre bugs antes de que los usuarios se molesten en reportarlos."
       },
       {
         "id": "c2",
-        "content": "Revisar tu app manualmente una vez al dia para asegurarte de que sigue funcionando",
+        "content": "Revisar tu app manualmente una vez al día para asegurarte de que sigue funcionando",
         "isGoodPractice": false,
-        "explanation": "Las revisiones manuales no escalan y pierden problemas nocturnos. Los monitores automaticos de uptime verifican cada pocos minutos y te alertan inmediatamente cuando algo se rompe."
+        "explanation": "Las revisiones manuales no escalan y pierden problemas nocturnos. Los monitores automáticos de uptime verifican cada pocos minutos y te alertan inmediatamente cuando algo se rompe."
       },
       {
         "id": "c3",
-        "content": "Registrar acciones importantes como registros de usuarios y creacion de tareas para rastrear la adopcion",
+        "content": "Registrar acciones importantes como registros de usuarios y creación de tareas para rastrear la adopcion",
         "isGoodPractice": true,
-        "explanation": "El registro estructurado de eventos clave te ayuda a entender como la gente usa tu app. Tambien ayuda a depurar problemas — puedes rastrear que paso antes de que ocurriera un error."
+        "explanation": "El registro estructurado de eventos clave te ayuda a entender como la gente usa tu app. También ayuda a depurar problemas — puedes rastrear que paso antes de que ocurriera un error."
       },
       {
         "id": "c4",
@@ -62,13 +62,13 @@
         "id": "c5",
         "content": "Configurar alertas para picos en la tasa de errores para saber cuando un despliegue rompe algo",
         "isGoodPractice": true,
-        "explanation": "Un aumento repentino de errores a menudo significa un despliegue malo. Las alertas automatizadas te permiten detectar y revertir rapidamente en lugar de esperar quejas de usuarios."
+        "explanation": "Un aumento repentino de errores a menudo significa un despliegue malo. Las alertas automatizadas te permiten detectar y revertir rápidamente en lugar de esperar quejas de usuarios."
       },
       {
         "id": "c6",
-        "content": "El monitoreo solo es necesario para apps con miles de usuarios — las apps pequenas no lo necesitan",
+        "content": "El monitoreo solo es necesario para apps con miles de usuarios — las apps pequeñas no lo necesitan",
         "isGoodPractice": false,
-        "explanation": "Incluso las apps pequenas se benefician del monitoreo. Con menos usuarios, cada uno importa mas. Si tus 10 usuarios encuentran un bug y ninguno lo reporta, nunca lo sabrias sin monitoreo."
+        "explanation": "Incluso las apps pequeñas se benefician del monitoreo. Con menos usuarios, cada uno importa más. Si tus 10 usuarios encuentran un bug y ninguno lo reporta, nunca lo sabrias sin monitoreo."
       }
     ],
     "glossaryTerms": ["error-tracking", "uptime-monitoring"]

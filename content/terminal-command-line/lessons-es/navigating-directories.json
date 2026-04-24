@@ -16,12 +16,12 @@
     {
       "type": "analogy",
       "title": "Rutas = Direcciones del GPS",
-      "body": "Cuando le das una direccion al GPS, puedes decir:\n- **Ruta absoluta**: \"Ve a Calle Principal 123, Springfield\" (direccion completa desde la raiz)\n- **Ruta relativa**: \"Avanza dos cuadras al norte y gira a la izquierda\" (instrucciones desde donde estas ahora)\n\nLa terminal funciona igual. `/Users/tu/projects` es una ruta absoluta (empieza desde la raiz `/`). `../Documents` es una ruta relativa (sube un nivel, luego entra a Documents)."
+      "body": "Cuando le das una dirección al GPS, puedes decir:\n- **Ruta absoluta**: \"Ve a Calle Principal 123, Springfield\" (dirección completa desde la raíz)\n- **Ruta relativa**: \"Avanza dos cuadras al norte y gira a la izquierda\" (instrucciones desde donde estas ahora)\n\nLa terminal funciona igual. `/Users/tu/projects` es una ruta absoluta (empieza desde la raíz `/`). `../Documents` es una ruta relativa (sube un nivel, luego entra a Documents)."
     },
     {
       "type": "text",
       "title": "El Comando cd",
-      "body": "**cd** significa \"change directory\" (cambiar directorio) -- te mueve a una carpeta diferente.\n\n- `cd nombrecarpeta` -- muevete a una carpeta dentro de tu ubicacion actual\n- `cd ..` -- sube un nivel (regresa a la carpeta padre)\n- `cd ~` -- salta directo a home, sin importar donde estes\n- `cd /` -- salta a la raiz de tu sistema de archivos\n- `cd -` -- regresa a donde estabas antes (como un deshacer)"
+      "body": "**cd** significa \"change directory\" (cambiar directorio) -- te mueve a una carpeta diferente.\n\n- `cd nombrecarpeta` -- muevete a una carpeta dentro de tu ubicacion actual\n- `cd ..` -- sube un nivel (regresa a la carpeta padre)\n- `cd ~` -- salta directo a home, sin importar donde estes\n- `cd /` -- salta a la raíz de tu sistema de archivos\n- `cd -` -- regresa a donde estabas antes (como un deshacer)"
     },
     {
       "type": "code_example",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Cada vez que construyes un proyecto con herramientas de IA, necesitas navegar a la carpeta correcta primero. Los vibecoders que pueden saltar rapidamente entre directorios de proyectos, encontrar archivos de configuracion y moverse por su sistema de archivos ganan mas porque entregan mas rapido. Esta es la habilidad que separa el \"ya lo resuelvo\" de que te paguen."
+      "body": "Cada vez que construyes un proyecto con herramientas de IA, necesitas navegar a la carpeta correcta primero. Los vibecoders que pueden saltar rápidamente entre directorios de proyectos, encontrar archivos de configuración y moverse por su sistema de archivos ganan más porque entregan más rápido. Esta es la habilidad que separa el \"ya lo resuelvo\" de que te paguen."
     },
     {
       "type": "key_takeaway",
@@ -65,11 +65,11 @@
         "hint": "Dos puntos (..) representan el directorio padre -- la carpeta arriba de la actual."
       },
       {
-        "instruction": "Ahora salta directamente a tu directorio home usando el simbolo de atajo.",
+        "instruction": "Ahora salta directamente a tu directorio home usando el símbolo de atajo.",
         "expectedCommand": "cd ~",
         "acceptAlternatives": ["cd"],
         "output": "",
-        "hint": "El simbolo tilde (~) representa tu directorio home. Usa 'cd ~' o simplemente 'cd' sin argumentos."
+        "hint": "El símbolo tilde (~) representa tu directorio home. Usa 'cd ~' o simplemente 'cd' sin argumentos."
       }
     ],
     "completionMessage": "Ahora puedes navegar a cualquier lugar de tu sistema de archivos! Recuerda: cd te mueve a carpetas, .. te sube y ~ te lleva a home. Estos tres movimientos cubren el 90% de tus necesidades de navegacion.",

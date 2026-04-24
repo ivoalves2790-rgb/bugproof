@@ -6,12 +6,12 @@
   "xpReward": 15,
   "chapterSlug": "testing",
   "projectSlug": "task-manager",
-  "intro": "Tus tests estan fallando y necesitas descubrir por que. Imagina que eres un detective examinando la escena del crimen — el mensaje de error es tu primera pista. Es un bug real o un test malo? Desliza a la derecha en buenas practicas de depuracion, a la izquierda en las malas.",
+  "intro": "Tus tests estan fallando y necesitas descubrir por qué. Imagina que eres un detective examinando la escena del crimen — el mensaje de error es tu primera pista. Es un bug real o un test malo? Desliza a la derecha en buenas practicas de depuración, a la izquierda en las malas.",
   "teach": [
     {
       "type": "text",
       "title": "Cuando los Tests Fallan",
-      "body": "Un test que falla significa una de dos cosas: tu codigo tiene un bug, o tu test esta mal. Antes de asumir que es un bug en el codigo, lee el mensaje de error cuidadosamente, verifica si la configuracion del test es correcta y confirma que las expectativas del test coinciden con los requisitos actuales. Muchos 'bugs' son en realidad tests desactualizados."
+      "body": "Un test que falla significa una de dos cosas: tu código tiene un bug, o tu test esta mal. Antes de asumir que es un bug en el código, lee el mensaje de error cuidadosamente, verifica si la configuración del test es correcta y confirma que las expectativas del test coinciden con los requisitos actuales. Muchos 'bugs' son en realidad tests desactualizados."
     },
     {
       "type": "analogy",
@@ -27,26 +27,26 @@
     },
     {
       "type": "motivation",
-      "body": "Depurar rapidamente es un superpoder. Mientras mas rapido arreglas problemas, mas rapido lanzas funcionalidades que mantienen a los usuarios enganchados y pagando — y eso es lo que separa una app que genera dinero de una que no."
+      "body": "Depurar rápidamente es un superpoder. Mientras más rápido arreglas problemas, más rápido lanzas funcionalidades que mantienen a los usuarios enganchados y pagando — y eso es lo que separa una app que genera dinero de una que no."
     },
     {
       "type": "key_takeaway",
-      "body": "Lee el mensaje de error primero — no el codigo. La mayoria de los fallos de tests te dicen exactamente que salio mal si lees la salida cuidadosamente."
+      "body": "Lee el mensaje de error primero — no el código. La mayoria de los fallos de tests te dicen exactamente que salio mal si lees la salida cuidadosamente."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Cuando un test falla, leer el mensaje de error y comparar valores esperados vs reales antes de mirar el codigo",
+        "content": "Cuando un test falla, leer el mensaje de error y comparar valores esperados vs reales antes de mirar el código",
         "isGoodPractice": true,
-        "explanation": "La salida del error generalmente te dice exactamente que salio mal. Saltar al codigo antes de leer el error pierde tiempo y te lleva por caminos equivocados."
+        "explanation": "La salida del error generalmente te dice exactamente que salio mal. Saltar al código antes de leer el error pierde tiempo y te lleva por caminos equivocados."
       },
       {
         "id": "c2",
-        "content": "Si un test esta fallando, eliminarlo y reescribirlo desde cero",
+        "content": "Si un test está fallando, eliminarlo y reescribirlo desde cero",
         "isGoodPractice": false,
-        "explanation": "Entiende por que esta fallando primero. El test podria ser correcto y estar revelando un bug real. Eliminarlo podria ocultar un problema legitimo."
+        "explanation": "Entiende por qué está fallando primero. El test podría ser correcto y estar revelando un bug real. Eliminarlo podría ocultar un problema legitimo."
       },
       {
         "id": "c3",
@@ -58,17 +58,17 @@
         "id": "c4",
         "content": "Marcar los tests inestables como 'skip' para que no bloqueen el pipeline de CI",
         "isGoodPractice": false,
-        "explanation": "Omitir tests inestables es una medida temporal en el mejor de los casos. Los tests inestables a menudo ocultan bugs reales. Arregla la causa raiz — generalmente problemas de tiempo, estado compartido o selectores fragiles."
+        "explanation": "Omitir tests inestables es una medida temporal en el mejor de los casos. Los tests inestables a menudo ocultan bugs reales. Arregla la causa raíz — generalmente problemas de tiempo, estado compartido o selectores fragiles."
       },
       {
         "id": "c5",
-        "content": "Verificar si los cambios recientes en el codigo coinciden con lo que el test espera — el test podria necesitar actualizacion por nuevos requisitos",
+        "content": "Verificar si los cambios recientes en el código coinciden con lo que el test espera — el test podría necesitar actualización por nuevos requisitos",
         "isGoodPractice": true,
         "explanation": "Los requisitos cambian. Si renombraste un campo de 'done' a 'completed', los tests que verifican 'done' fallaran. Eso no es un bug — el test solo necesita reflejar el nuevo contrato."
       },
       {
         "id": "c6",
-        "content": "Si los tests pasan localmente pero fallan en CI, los tests probablemente estan bien — solo reintenta la ejecucion de CI",
+        "content": "Si los tests pasan localmente pero fallan en CI, los tests probablemente estan bien — solo reintenta la ejecución de CI",
         "isGoodPractice": false,
         "explanation": "Diferentes entornos revelan problemas reales: diferencias de zona horaria, variables de entorno faltantes, estado de la base de datos. Investiga la diferencia de entorno en lugar de reintentar a ciegas."
       }

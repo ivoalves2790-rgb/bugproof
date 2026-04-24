@@ -6,26 +6,26 @@
   "xpReward": 10,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Hay docenas de frameworks de JavaScript por ahi. Elegir uno es como elegir un vehiculo — quieres algo del tamano adecuado para el trabajo, no un camion para ir al supermercado. Desliza a la derecha en estrategias inteligentes para elegir frameworks, a la izquierda en errores comunes que cometen los principiantes al elegir uno.",
+  "intro": "Hay docenas de frameworks de JavaScript por ahí. Elegir uno es como elegir un vehiculo — quieres algo del tamano adecuado para el trabajo, no un camión para ir al supermercado. Desliza a la derecha en estrategias inteligentes para elegir frameworks, a la izquierda en errores comunes que cometen los principiantes al elegir uno.",
   "teach": [
     {
       "type": "text",
       "title": "Los Frameworks Son Herramientas, No Tribus",
-      "body": "React, Vue, Svelte, Angular — todos construyen interfaces. El mejor framework es el que se adapta a las necesidades de tu proyecto, tiene buena documentacion y tiene una comunidad en la que puedes apoyarte cuando te atascas. No elijas un framework por el hype de Twitter."
+      "body": "React, Vue, Svelte, Angular — todos construyen interfaces. El mejor framework es el que se adapta a las necesidades de tu proyecto, tiene buena documentación y tiene una comunidad en la que puedes apoyarte cuando te atascas. No elijas un framework por el hype de Twitter."
     },
     {
       "type": "analogy",
       "title": "Elegir un Framework = Elegir un Vehiculo",
-      "body": "Construir un gestor de tareas con Angular es como conducir un camion al supermercado. Funciona, pero es excesivo. Quieres algo del tamano adecuado para el trabajo — lo suficientemente potente para manejar tus necesidades, lo suficientemente simple para que no te pierdas."
+      "body": "Construir un gestor de tareas con Angular es como conducir un camión al supermercado. Funciona, pero es excesivo. Quieres algo del tamano adecuado para el trabajo — lo suficientemente potente para manejar tus necesidades, lo suficientemente simple para que no te pierdas."
     },
     {
       "type": "analogy",
       "title": "El Pasillo de Herramientas Electricas",
-      "body": "Entrar a una ferreteria y comprar el taladro mas caro no te hace mejor constructor. Lo que importa es: el taladro se ajusta a los tornillos que usas? Viene con las brocas que necesitas? Puedes encontrar repuestos facilmente? Los frameworks son iguales — el 'mejor' es el que se ajusta a TU proyecto y tiene el soporte que TU necesitas."
+      "body": "Entrar a una ferreteria y comprar el taladro más caro no te hace mejor constructor. Lo que importa es: el taladro se ajusta a los tornillos que usas? Viene con las brocas que necesitas? Puedes encontrar repuestos fácilmente? Los frameworks son iguales — el 'mejor' es el que se ajusta a TU proyecto y tiene el soporte que TU necesitas."
     },
     {
       "type": "motivation",
-      "body": "Elegir el framework correcto desde el primer dia significa que puedes construir e iterar mas rapido. Iteracion mas rapida significa encontrar tu mercado antes, y asi es como los constructores independientes convierten proyectos secundarios en fuentes de ingreso."
+      "body": "Elegir el framework correcto desde el primer día significa que puedes construir e iterar más rápido. Iteración más rápida significa encontrar tu mercado antes, y así es como los constructores independientes convierten proyectos secundarios en fuentes de ingreso."
     },
     {
       "type": "key_takeaway",
@@ -38,31 +38,31 @@
         "id": "community-size",
         "content": "Elige un framework con una comunidad grande para que puedas encontrar respuestas cuando te atasques",
         "isGoodPractice": true,
-        "explanation": "Una comunidad grande significa mas tutoriales, respuestas en Stack Overflow y librerias de terceros. Cuando te topes con una pared, alguien ya habra resuelto tu problema."
+        "explanation": "Una comunidad grande significa más tutoriales, respuestas en Stack Overflow y librerias de terceros. Cuando te topes con una pared, alguien ya habra resuelto tu problema."
       },
       {
         "id": "newest-framework",
-        "content": "Siempre elige el framework mas nuevo porque debe ser el mejor",
+        "content": "Siempre elige el framework más nuevo porque debe ser el mejor",
         "isGoodPractice": false,
-        "explanation": "Los frameworks nuevos a menudo tienen documentacion incompleta, menos tutoriales y cambios que rompen cosas. La madurez importa — especialmente cuando estas aprendiendo."
+        "explanation": "Los frameworks nuevos a menudo tienen documentación incompleta, menos tutoriales y cambios que rompen cosas. La madurez importa — especialmente cuando estas aprendiendo."
       },
       {
         "id": "match-project",
-        "content": "Considera lo que tu proyecto necesita antes de elegir un framework — un blog estatico tiene necesidades diferentes que una app en tiempo real",
+        "content": "Considera lo que tu proyecto necesita antes de elegir un framework — un blog estático tiene necesidades diferentes que una app en tiempo real",
         "isGoodPractice": true,
-        "explanation": "Diferentes frameworks sobresalen en diferentes cosas. Emparejar la herramienta con el trabajo te ahorra luchar contra el framework despues."
+        "explanation": "Diferentes frameworks sobresalen en diferentes cosas. Emparejar la herramienta con el trabajo te ahorra luchar contra el framework después."
       },
       {
         "id": "twitter-hype",
-        "content": "Un framework recibio 10,000 likes en Twitter esta semana, asi que cambia tu proyecto a el inmediatamente",
+        "content": "Un framework recibió 10,000 likes en Twitter esta semana, así que cambia tu proyecto a el inmediatamente",
         "isGoodPractice": false,
-        "explanation": "El hype en redes sociales no es una evaluacion tecnica. Un tweet trending no te dice nada sobre si un framework es adecuado para tu gestor de tareas."
+        "explanation": "El hype en redes sociales no es una evaluación técnica. Un tweet trending no te dice nada sobre si un framework es adecuado para tu gestor de tareas."
       },
       {
         "id": "check-docs",
-        "content": "Lee la documentacion oficial del framework y prueba el tutorial de inicio antes de comprometerte",
+        "content": "Lee la documentación oficial del framework y prueba el tutorial de inicio antes de comprometerte",
         "isGoodPractice": true,
-        "explanation": "La calidad de la documentacion impacta directamente tu velocidad. Si la documentacion es confusa antes de empezar, sera peor cuando estes depurando a las 2 AM."
+        "explanation": "La calidad de la documentación impacta directamente tu velocidad. Si la documentación es confusa antes de empezar, sera peor cuando estes depurando a las 2 AM."
       },
       {
         "id": "resume-driven",
@@ -72,9 +72,9 @@
       },
       {
         "id": "ecosystem-check",
-        "content": "Verifica si el framework tiene buen soporte para cosas que necesitaras, como enrutamiento, autenticacion e integracion de base de datos",
+        "content": "Verifica si el framework tiene buen soporte para cosas que necesitaras, como enrutamiento, autenticación e integración de base de datos",
         "isGoodPractice": true,
-        "explanation": "Un gestor de tareas necesita enrutamiento, formularios y obtencion de datos como minimo. Verificar el ecosistema de antemano previene soluciones dolorosas despues."
+        "explanation": "Un gestor de tareas necesita enrutamiento, formularios y obtencion de datos como mínimo. Verificar el ecosistema de antemano previene soluciones dolorosas después."
       }
     ],
     "glossaryTerms": ["framework", "ecosystem"]

@@ -15,8 +15,8 @@
     },
     {
       "type": "analogy",
-      "title": "Configuracion = Botones del Control Remoto",
-      "body": "Un control remoto tiene botones para volumen, canal y entrada -- puedes cambiar cualquiera sin abrir la tele y recablearla. Los buenos patrones de configuracion funcionan igual: deberias poder cambiar tu base de datos, una clave API o activar una funcionalidad sin tocar una sola linea de codigo. Escribir valores directamente es como soldar el dial del canal al canal 5 -- funciona en tu casa pero nadie mas puede usarlo."
+      "title": "Configuración = Botones del Control Remoto",
+      "body": "Un control remoto tiene botones para volumen, canal y entrada -- puedes cambiar cualquiera sin abrir la tele y recablearla. Los buenos patrones de configuración funcionan igual: deberias poder cambiar tu base de datos, una clave API o activar una funcionalidad sin tocar una sola línea de código. Escribir valores directamente es como soldar el dial del canal al canal 5 -- funciona en tu casa pero nadie más puede usarlo."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Patrones de configuracion limpios significan que puedes lanzar la misma app creada con IA para diferentes clientes solo cambiando variables de entorno. Un solo codigo, multiples fuentes de ingreso."
+      "body": "Patrones de configuración limpios significan que puedes lanzar la misma app creada con IA para diferentes clientes solo cambiando variables de entorno. Un solo código, multiples fuentes de ingreso."
     },
     {
       "type": "key_takeaway",

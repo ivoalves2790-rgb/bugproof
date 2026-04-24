@@ -11,40 +11,40 @@
     {
       "type": "text",
       "title": "Que Es el Cache?",
-      "body": "El cache almacena una copia de los datos mas cerca de donde se necesitan. En lugar de consultar la base de datos cada vez que alguien carga su lista de tareas, almacenas el resultado en cache y sirves la version almacenada hasta que algo cambie. La parte dificil es saber cuando invalidar el cache — mostrar datos obsoletos es peor que no tener cache."
+      "body": "El cache almacena una copia de los datos más cerca de donde se necesitan. En lugar de consultar la base de datos cada vez que alguien carga su lista de tareas, almacenas el resultado en cache y sirves la versión almacenada hasta que algo cambie. La parte difícil es saber cuando invalidar el cache — mostrar datos obsoletos es peor que no tener cache."
     },
     {
       "type": "analogy",
       "title": "El Cache Es Como una Nota Adhesiva en Tu Refrigerador",
-      "body": "No llamas a la tienda cada vez que quieres saber si tienes leche. Revisas el refrigerador (cache). Pero si alguien se tomo la leche y no actualizo la nota, pensaras que tienes leche cuando no es asi. Eso es un cache obsoleto — y es el problema mas dificil del cache."
+      "body": "No llamas a la tienda cada vez que quieres saber si tienes leche. Revisas el refrigerador (cache). Pero si alguien se tomo la leche y no actualizo la nota, pensaras que tienes leche cuando no es así. Eso es un cache obsoleto — y es el problema más difícil del cache."
     },
     {
       "type": "analogy",
       "title": "El Cache Es Como Tener Favoritos en Marcado Rapido",
-      "body": "Podrias buscar el numero de tu mejor amigo en la guia telefonica cada vez que llamas, pero es mas rapido guardarlo como contacto. El cache guarda el resultado de busquedas costosas para no repetir el trabajo. Solo asegurate de actualizar el contacto si cambian de numero."
+      "body": "Podrias buscar el número de tu mejor amigo en la guia telefonica cada vez que llamas, pero es más rápido guardarlo como contacto. El cache guarda el resultado de busquedas costosas para no repetir el trabajo. Solo asegurate de actualizar el contacto si cambian de número."
     },
     {
       "type": "motivation",
-      "body": "El cache hace que tu app se sienta instantanea, y las apps que se sienten instantaneas les ganan usuarios a los competidores lentos. La ventaja de velocidad que obtienes con cache inteligente se traduce directamente en mejor retencion y mas ingresos."
+      "body": "El cache hace que tu app se sienta instantanea, y las apps que se sienten instantaneas les ganan usuarios a los competidores lentos. La ventaja de velocidad que obtienes con cache inteligente se traduce directamente en mejor retencion y más ingresos."
     },
     {
       "type": "key_takeaway",
-      "body": "Almacena en cache agresivamente los datos que cambian con poca frecuencia (configuracion del usuario, listas de categorias). Almacena con cuidado los datos que cambian a menudo (listas de tareas, notificaciones) con tiempos de expiracion cortos o invalidacion en tiempo real."
+      "body": "Almacena en cache agresivamente los datos que cambian con poca frecuencia (configuración del usuario, listas de categorías). Almacena con cuidado los datos que cambian a menudo (listas de tareas, notificaciones) con tiempos de expiracion cortos o invalidacion en tiempo real."
     }
   ],
   "exercise": {
     "cards": [
       {
         "id": "c1",
-        "content": "Almacenar en cache la lista de categorias de tareas ya que rara vez cambian, pero invalidar cuando un usuario agrega una nueva categoria",
+        "content": "Almacenar en cache la lista de categorías de tareas ya que rara vez cambian, pero invalidar cuando un usuario agrega una nueva categoría",
         "isGoodPractice": true,
-        "explanation": "Las categorias cambian con poca frecuencia, lo que las hace ideales para el cache. Invalidar al mutar (agregar/editar/eliminar) asegura frescura sin re-obtener constantemente."
+        "explanation": "Las categorías cambian con poca frecuencia, lo que las hace ideales para el cache. Invalidar al mutar (agregar/editar/eliminar) asegura frescura sin re-obtener constantemente."
       },
       {
         "id": "c2",
         "content": "Almacenar todo en cache sin tiempo de expiracion para maximizar el rendimiento",
         "isGoodPractice": false,
-        "explanation": "Sin expiracion, los caches crecen indefinidamente y sirven datos cada vez mas obsoletos. Siempre establece un TTL (tiempo de vida) o implementa invalidacion basada en eventos."
+        "explanation": "Sin expiracion, los caches crecen indefinidamente y sirven datos cada vez más obsoletos. Siempre establece un TTL (tiempo de vida) o implementa invalidacion basada en eventos."
       },
       {
         "id": "c3",
@@ -54,19 +54,19 @@
       },
       {
         "id": "c4",
-        "content": "Almacenar en cache datos especificos del usuario en un cache compartido donde cualquier usuario podria recibir las tareas de otro",
+        "content": "Almacenar en cache datos especificos del usuario en un cache compartido donde cualquier usuario podría recibir las tareas de otro",
         "isGoodPractice": false,
-        "explanation": "Esto es una fuga de datos grave. Los caches compartidos deben tener claves por ID de usuario. Sin claves de cache adecuadas, el Usuario A podria ver las tareas privadas del Usuario B. Siempre incluye el identificador del usuario en las claves de cache."
+        "explanation": "Esto es una fuga de datos grave. Los caches compartidos deben tener claves por ID de usuario. Sin claves de cache adecuadas, el Usuario A podría ver las tareas privadas del Usuario B. Siempre incluye el identificador del usuario en las claves de cache."
       },
       {
         "id": "c5",
-        "content": "Despues de que un usuario crea una nueva tarea, actualizar inmediatamente el cache local antes de que el servidor confirme el guardado",
+        "content": "Después de que un usuario crea una nueva tarea, actualizar inmediatamente el cache local antes de que el servidor confirme el guardado",
         "isGoodPractice": true,
-        "explanation": "Esto se llama actualizacion optimista. La interfaz se siente instantanea porque actualizas el estado local inmediatamente. Si el guardado en el servidor falla, reviertes. Mejora dramaticamente el rendimiento percibido."
+        "explanation": "Esto se llama actualización optimista. La interfaz se siente instantanea porque actualizas el estado local inmediatamente. Si el guardado en el servidor falla, reviertes. Mejora dramaticamente el rendimiento percibido."
       },
       {
         "id": "c6",
-        "content": "Implementar un cache complejo de multiples capas desde el primer dia, incluso antes de tener problemas de rendimiento",
+        "content": "Implementar un cache complejo de multiples capas desde el primer día, incluso antes de tener problemas de rendimiento",
         "isGoodPractice": false,
         "explanation": "El cache agrega complejidad e introduce bugs de datos obsoletos. Empieza sin cache, mide el rendimiento y agrega cache solo donde sea necesario. No resuelvas problemas que aun no tienes."
       }

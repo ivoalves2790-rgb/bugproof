@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "El Viaje Completo = Enviar un Paquete al Otro Lado del Pais",
-      "body": "Enviar un paquete tiene muchos pasos: escribes la direccion (URL), la oficina de correos busca la ruta del codigo postal (DNS), el camion va al centro de distribucion (TCP), tu paquete se carga (peticion HTTP), el almacen encuentra tu articulo (procesamiento del servidor), y el camion lo entrega en tu puerta (respuesta HTTP). Si cualquier paso falla -- direccion equivocada, camino cerrado, incendio en el almacen -- el paquete no llega. Cargar una pagina web funciona de la misma manera."
+      "body": "Enviar un paquete tiene muchos pasos: escribes la dirección (URL), la oficina de correos busca la ruta del código postal (DNS), el camión va al centro de distribucion (TCP), tu paquete se carga (peticion HTTP), el almacen encuentra tu articulo (procesamiento del servidor), y el camión lo entrega en tu puerta (respuesta HTTP). Si cualquier paso falla -- dirección equivocada, camino cerrado, incendio en el almacen -- el paquete no llega. Cargar una página web funciona de la misma manera."
     },
     {
       "type": "text",
@@ -30,7 +30,7 @@
     },
     {
       "type": "motivation",
-      "body": "Ahora ves el panorama completo de como funciona la web. Esta vision general es tu superpoder al vibecodear -- puedes construir apps que escalen, depurar problemas rapido y lanzar productos que realmente generen dinero porque entiendes cada capa del stack."
+      "body": "Ahora ves el panorama completo de como funciona la web. Esta visión general es tu superpoder al vibecodear -- puedes construir apps que escalen, depurar problemas rápido y lanzar productos que realmente generen dinero porque entiendes cada capa del stack."
     },
     {
       "type": "key_takeaway",

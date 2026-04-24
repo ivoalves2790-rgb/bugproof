@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "La Placa del Auto",
-      "body": "Dos personas pueden tener Toyotas Camry rojos identicos, pero cada auto tiene una **placa** unica. Esa placa nunca cambia aunque el auto se pinte de otro color o cambie de dueno. La policia, las aseguradoras y los estacionamientos usan la placa para identificar exactamente a cual auto se refieren. Una clave primaria es la placa de tus datos -- una etiqueta permanente y unica que elimina toda ambiguedad."
+      "body": "Dos personas pueden tener Toyotas Camry rojos identicos, pero cada auto tiene una **placa** única. Esa placa nunca cambia aunque el auto se pinte de otro color o cambie de dueño. La policia, las aseguradoras y los estacionamientos usan la placa para identificar exactamente a cual auto se refieren. Una clave primaria es la placa de tus datos -- una etiqueta permanente y única que elimina toda ambiguedad."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Las claves primarias son como tu app sabe cual cliente pago, cual pedido se envio y cual suscripcion renovar. Sin ellas, tu app vibecodeada confundiria usuarios y pagos -- y asi es como pierdes clientes y dinero rapidamente."
+      "body": "Las claves primarias son como tu app sabe cual cliente pago, cual pedido se envio y cual suscripción renovar. Sin ellas, tu app vibecodeada confundiria usuarios y pagos -- y así es como pierdes clientes y dinero rápidamente."
     },
     {
       "type": "key_takeaway",

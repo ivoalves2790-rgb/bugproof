@@ -6,37 +6,37 @@
   "xpReward": 15,
   "unitSlug": "package-managers",
   "courseSlug": "terminal-command-line",
-  "intro": "Acabas de clonar el proyecto de un companero y ejecutaste 'npm install' -- pero en lugar de una instalacion limpia, obtuviste un muro de texto de error rojo. Conflictos de version, advertencias de dependencias pares y vulnerabilidades de auditoria. Naveguemos este escenario del mundo real y pongamos el proyecto a funcionar.",
+  "intro": "Acabas de clonar el proyecto de un companero y ejecutaste 'npm install' -- pero en lugar de una instalación limpia, obtuviste un muro de texto de error rojo. Conflictos de versión, advertencias de dependencias pares y vulnerabilidades de auditoria. Naveguemos este escenario del mundo real y pongamos el proyecto a funcionar.",
   "teach": [
     {
       "type": "analogy",
       "title": "Conflictos de Dependencias = Ingredientes de Receta Que No Se Mezclan Bien",
-      "body": "Imagina que estas horneando un pastel que pide bicarbonato de sodio, pero la receta del glaseado requiere vinagre. Por separado, ambos estan bien. Juntos? Un desastre burbujeante. **Los conflictos de dependencias** funcionan de la misma manera -- el Paquete A necesita la version 2 de una libreria auxiliar, pero el Paquete B necesita la version 3. npm tiene que descubrir como hacer felices a ambos, y a veces no puede. El resultado: mensajes de error rojos y un proyecto que no arranca."
+      "body": "Imagina que estas horneando un pastel que pide bicarbonato de sodio, pero la receta del glaseado requiere vinagre. Por separado, ambos estan bien. Juntos? Un desastre burbujeante. **Los conflictos de dependencias** funcionan de la misma manera -- el Paquete A necesita la versión 2 de una libreria auxiliar, pero el Paquete B necesita la versión 3. npm tiene que descubrir como hacer felices a ambos, y a veces no puede. El resultado: mensajes de error rojos y un proyecto que no arranca."
     },
     {
       "type": "analogy",
       "title": "Lockfile = Una Fotografia Instantanea de Tus Ingredientes",
-      "body": "Horneaste un pastel perfecto ayer. Hoy, quieres exactamente el mismo resultado. Asi que tomas una **fotografia** de cada ingrediente con su marca exacta y fecha de vencimiento. Eso es lo que hace package-lock.json -- es una instantanea de las versiones exactas de cada paquete instalado. Sin el, `npm install` podria obtener versiones mas nuevas que rompan cosas. Con el, todos en el equipo obtienen la configuracion identica que tu tenias."
+      "body": "Horneaste un pastel perfecto ayer. Hoy, quieres exactamente el mismo resultado. Así que tomas una **fotografia** de cada ingrediente con su marca exacta y fecha de vencimiento. Eso es lo que hace package-lock.json -- es una instantanea de las versiones exactas de cada paquete instalado. Sin el, `npm install` podría obtener versiones más nuevas que rompan cosas. Con el, todos en el equipo obtienen la configuración identica que tu tenias."
     },
     {
       "type": "text",
       "title": "Por Que Ocurren los Conflictos",
-      "body": "Los conflictos de dependencias ocurren cuando:\n\n1. **Desajustes de version** -- Dos paquetes necesitan diferentes versiones de la misma dependencia\n2. **Advertencias de dependencias pares** -- Un paquete espera que instales una version especifica de otro paquete\n3. **Lockfiles desactualizados** -- El archivo de bloqueo hace referencia a paquetes que ya no existen o han sido descontinuados\n4. **Problemas de version de Node** -- Algunos paquetes requieren una version minima de Node.js\n\nLa buena noticia: la mayoria de los conflictos tienen soluciones estandar."
+      "body": "Los conflictos de dependencias ocurren cuando:\n\n1. **Desajustes de versión** -- Dos paquetes necesitan diferentes versiones de la misma dependencia\n2. **Advertencias de dependencias pares** -- Un paquete espera que instales una versión especifica de otro paquete\n3. **Lockfiles desactualizados** -- El archivo de bloqueo hace referencia a paquetes que ya no existen o han sido descontinuados\n4. **Problemas de versión de Node** -- Algunos paquetes requieren una versión mínima de Node.js\n\nLa buena noticia: la mayoria de los conflictos tienen soluciones estandar."
     },
     {
       "type": "code_example",
       "title": "Mensajes de Error Comunes y Su Significado",
       "language": "bash",
       "code": "# Peer dependency conflict\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! peer react@\"^17.0.0\" from package-a@1.0.0\nnpm ERR! peer react@\"^18.0.0\" from package-b@2.0.0\n\n# Quick fixes\nnpm install --legacy-peer-deps   # Ignore peer conflicts\nnpm audit                        # Check for vulnerabilities\nnpm audit fix                    # Auto-fix what it can",
-      "annotation": "ERESOLVE significa que dos paquetes no se ponen de acuerdo sobre que version de una dependencia compartida usar. --legacy-peer-deps le dice a npm que instale de todos modos y te deja resolverlo. npm audit verifica problemas de seguridad conocidos en tus paquetes."
+      "annotation": "ERESOLVE significa que dos paquetes no se ponen de acuerdo sobre que versión de una dependencia compartida usar. --legacy-peer-deps le dice a npm que instale de todos modos y te deja resolverlo. npm audit verifica problemas de seguridad conocidos en tus paquetes."
     },
     {
       "type": "motivation",
-      "body": "Los conflictos de dependencias detienen al 90% de los principiantes. Ven texto de error rojo y entran en panico. Pero si puedes leer el error con calma, identificar el conflicto y aplicar la solucion correcta, te conviertes en la persona a la que el equipo llama cuando las cosas se rompen. Esa capacidad de resolver problemas es lo que convierte el vibecoding de un hobby en una carrera que genera dinero real."
+      "body": "Los conflictos de dependencias detienen al 90% de los principiantes. Ven texto de error rojo y entran en pánico. Pero si puedes leer el error con calma, identificar el conflicto y aplicar la solución correcta, te conviertes en la persona a la que el equipo llama cuando las cosas se rompen. Esa capacidad de resolver problemas es lo que convierte el vibecoding de un hobby en una carrera que genera dinero real."
     },
     {
       "type": "key_takeaway",
-      "body": "Los conflictos de dependencias ocurren cuando los paquetes necesitan diferentes versiones de la misma libreria. Usa el lockfile (package-lock.json) para asegurar instalaciones consistentes, npm audit para encontrar vulnerabilidades, y --legacy-peer-deps como solucion rapida temporal para problemas de dependencias pares. Siempre lee el mensaje de error -- generalmente te dice exactamente que esta mal."
+      "body": "Los conflictos de dependencias ocurren cuando los paquetes necesitan diferentes versiones de la misma libreria. Usa el lockfile (package-lock.json) para asegurar instalaciones consistentes, npm audit para encontrar vulnerabilidades, y --legacy-peer-deps como solución rápida temporal para problemas de dependencias pares. Siempre lee el mensaje de error -- generalmente te dice exactamente que esta mal."
     }
   ],
   "exercise": {
@@ -46,28 +46,28 @@
         "narrative": "Clonaste el proyecto de un companero y ejecutaste `npm install`. La terminal muestra:\n\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! While resolving: react-calendar@4.0.0\nnpm ERR! Found: react@18.2.0\nnpm ERR! peer react@\"^17.0.0\" from react-calendar@4.0.0\nnpm ERR! Fix the upstream dependency conflict\n\nEl proyecto usa React 18, pero react-calendar@4.0.0 solo soporta React 17. Que haces primero?",
         "choices": [
           { "id": "a", "text": "Ejecutar npm install --legacy-peer-deps para saltar el conflicto por ahora", "nextNode": "legacy-install", "score": 7 },
-          { "id": "b", "text": "Verificar si hay una version mas nueva de react-calendar que soporte React 18", "nextNode": "check-version", "score": 10 },
-          { "id": "c", "text": "Bajar React a la version 17 para coincidir con lo que react-calendar quiere", "nextNode": "downgrade-react", "score": 3 }
+          { "id": "b", "text": "Verificar si hay una versión más nueva de react-calendar que soporte React 18", "nextNode": "check-version", "score": 10 },
+          { "id": "c", "text": "Bajar React a la versión 17 para coincidir con lo que react-calendar quiere", "nextNode": "downgrade-react", "score": 3 }
         ]
       },
       "check-version": {
         "narrative": "Movimiento inteligente! Ejecutas `npm view react-calendar versions` y encuentras que la version 5.0.0 fue lanzada el mes pasado con soporte para React 18. El package.json lista \"react-calendar\": \"^4.0.0\". Cual es tu siguiente paso?",
         "choices": [
           { "id": "a", "text": "Actualizar package.json a \"react-calendar\": \"^5.0.0\" y ejecutar npm install", "nextNode": "update-package", "score": 10 },
-          { "id": "b", "text": "Ejecutar npm install react-calendar@latest para forzar la version mas nueva", "nextNode": "force-latest", "score": 6 }
+          { "id": "b", "text": "Ejecutar npm install react-calendar@latest para forzar la versión más nueva", "nextNode": "force-latest", "score": 6 }
         ]
       },
       "legacy-install": {
         "narrative": "La instalacion se completa con --legacy-peer-deps. El proyecto inicia, pero ves una advertencia:\n\n'Warning: react-calendar@4.0.0 may not work correctly with React 18. Some features may break.'\n\nEl componente de calendario se renderiza pero la seleccion de fechas tiene errores. La solucion temporal te puso en marcha pero no arreglo la causa raiz.",
         "choices": [
-          { "id": "a", "text": "Verificar si una version mas nueva de react-calendar soporta React 18", "nextNode": "check-version", "score": 8 },
+          { "id": "a", "text": "Verificar si una versión más nueva de react-calendar soporta React 18", "nextNode": "check-version", "score": 8 },
           { "id": "b", "text": "Seguir usando --legacy-peer-deps e ignorar la advertencia", "nextNode": "end-bad", "score": 2 }
         ]
       },
       "downgrade-react": {
         "narrative": "Bajar React de 18 a 17 rompe tres otros paquetes que requieren React 18: next@14, react-query@5 y framer-motion@11. Ahora tienes aun mas conflictos. Bajar la version de un framework central para arreglar una libreria casi nunca es el enfoque correcto.",
         "choices": [
-          { "id": "a", "text": "Deshacer el downgrade y verificar si hay una version mas nueva de react-calendar", "nextNode": "check-version", "score": 6 }
+          { "id": "a", "text": "Deshacer el downgrade y verificar si hay una versión más nueva de react-calendar", "nextNode": "check-version", "score": 6 }
         ]
       },
       "update-package": {
@@ -88,21 +88,21 @@
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Resolucion perfecta! Diagnosticaste el conflicto (react-calendar necesitaba React 17 pero el proyecto usa React 18), encontraste la solucion real (actualizar a la v5.0.0 con soporte para React 18), actualizaste package.json correctamente y verificaste con npm audit. Asi es exactamente como los desarrolladores experimentados manejan conflictos de dependencias: verificar versiones compatibles primero, actualizar la fuente de verdad (package.json) y verificar antes de hacer commit."
+        "feedback": "Resolucion perfecta! Diagnosticaste el conflicto (react-calendar necesitaba React 17 pero el proyecto usa React 18), encontraste la solución real (actualizar a la v5.0.0 con soporte para React 18), actualizaste package.json correctamente y verificaste con npm audit. Así es exactamente como los desarrolladores experimentados manejan conflictos de dependencias: verificar versiones compatibles primero, actualizar la fuente de verdad (package.json) y verificar antes de hacer commit."
       },
       "end-ok": {
         "narrative": "La instalacion funciono, pero hiciste commit sin ejecutar npm audit ni probar el servidor de desarrollo. Si react-calendar v5.0.0 tiene un cambio de API que rompe cosas (props renombrados, rutas de importacion diferentes), tu companero lo descubrira en produccion.",
         "choices": [],
         "isEnd": true,
         "finalScore": 12,
-        "feedback": "Encontraste la solucion correcta pero te saltaste la verificacion. Siempre ejecuta npm audit despues de resolver conflictos para detectar problemas de seguridad, e inicia el servidor de desarrollo para asegurarte de que la actualizacion no introdujo cambios que rompan cosas. Un salto de version mayor (4.x a 5.x) a menudo incluye cambios de API que necesitan actualizaciones de codigo."
+        "feedback": "Encontraste la solución correcta pero te saltaste la verificacion. Siempre ejecuta npm audit después de resolver conflictos para detectar problemas de seguridad, e inicia el servidor de desarrollo para asegurarte de que la actualización no introdujo cambios que rompan cosas. Un salto de versión mayor (4.x a 5.x) a menudo incluye cambios de API que necesitan actualizaciones de código."
       },
       "end-bad": {
         "narrative": "Ignorar las advertencias de dependencias pares lleva a errores sutiles: componentes que crashean en casos extremos, funciones que fallan silenciosamente, y depuracion que se vuelve una pesadilla porque la libreria no fue disenada para tu version de React.",
         "choices": [],
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Usar --legacy-peer-deps es una solucion temporal rapida, no una solucion. Le dice a npm que instale paquetes aunque digan que son incompatibles. El enfoque correcto es encontrar una version del paquete en conflicto que realmente soporte la version de React de tu proyecto, o encontrar una libreria alternativa."
+        "feedback": "Usar --legacy-peer-deps es una solución temporal rápida, no una solución. Le dice a npm que instale paquetes aunque digan que son incompatibles. El enfoque correcto es encontrar una versión del paquete en conflicto que realmente soporte la versión de React de tu proyecto, o encontrar una libreria alternativa."
       }
     },
     "glossaryTerms": ["dependency", "lockfile", "peer-dependency", "npm-audit"]

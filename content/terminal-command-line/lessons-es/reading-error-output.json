@@ -6,22 +6,22 @@
   "xpReward": 15,
   "unitSlug": "terminal-in-real-projects",
   "courseSlug": "terminal-command-line",
-  "intro": "Cuando tu terminal te grita texto rojo, la mayoria de los principiantes entran en panico y cierran la ventana. Pero los mensajes de error en realidad son utiles -- te dicen exactamente que salio mal y donde. El desarrollador en este codigo leyo el mensaje de error pero aplico la correccion incorrecta. Encuentra el error.",
+  "intro": "Cuando tu terminal te grita texto rojo, la mayoria de los principiantes entran en pánico y cierran la ventana. Pero los mensajes de error en realidad son útiles -- te dicen exactamente que salio mal y donde. El desarrollador en este código leyo el mensaje de error pero aplico la corrección incorrecta. Encuentra el error.",
   "teach": [
     {
       "type": "analogy",
       "title": "Errores de Salida = El Diagnostico de un Doctor",
-      "body": "Cuando vas al doctor sintiendote mal, no solo te dice \"estas enfermo.\" Te da un **diagnostico**: los sintomas (dolor de cabeza, fiebre), la causa (infeccion bacteriana) y la ubicacion (cavidad sinusal). **Los mensajes de error de la terminal funcionan de la misma manera** -- te dicen el sintoma (que fallo), la causa (por que fallo) y la ubicacion (que archivo y numero de linea). Leer un mensaje de error es como leer un reporte medico: salta la jerga, enfocate en el diagnostico."
+      "body": "Cuando vas al doctor sintiendote mal, no solo te dice \"estas enfermo.\" Te da un **diagnóstico**: los síntomas (dolor de cabeza, fiebre), la causa (infeccion bacteriana) y la ubicacion (cavidad sinusal). **Los mensajes de error de la terminal funcionan de la misma manera** -- te dicen el síntoma (que fallo), la causa (por qué fallo) y la ubicacion (que archivo y número de línea). Leer un mensaje de error es como leer un reporte medico: salta la jerga, enfocate en el diagnóstico."
     },
     {
       "type": "analogy",
       "title": "stderr = La Luz de Advertencia del Tablero del Auto",
-      "body": "Tu auto tiene dos formas de hablarte. El velocimetro muestra informacion normal (velocidad, combustible) -- eso es **stdout**, la salida estandar. Pero cuando algo sale mal, una **luz de advertencia** se enciende con un icono especifico diciendote que esta roto -- motor, bateria, presion de aceite. Eso es **stderr**, el flujo de error estandar. Los desarrolladores que ignoran stderr son como conductores que ponen cinta sobre sus luces de advertencia. El auto sigue funcionando... hasta que el motor explota."
+      "body": "Tu auto tiene dos formas de hablarte. El velocimetro muestra información normal (velocidad, combustible) -- eso es **stdout**, la salida estandar. Pero cuando algo sale mal, una **luz de advertencia** se enciende con un icono especifico diciendote que esta roto -- motor, bateria, presion de aceite. Eso es **stderr**, el flujo de error estandar. Los desarrolladores que ignoran stderr son como conductores que ponen cinta sobre sus luces de advertencia. El auto sigue funcionando... hasta que el motor explota."
     },
     {
       "type": "text",
       "title": "stdout vs stderr",
-      "body": "Tu terminal tiene dos canales de salida separados:\n\n- **stdout (salida estandar)** -- Salida normal del programa. Mensajes de exito, datos, resultados.\n- **stderr (error estandar)** -- Mensajes de error, advertencias, informacion de diagnostico.\n\nAmbos aparecen en la misma ventana de terminal, pero son flujos separados. Esto importa porque puedes redirigirlos independientemente:\n\n`command > output.log 2> errors.log`\n\nEsto guarda la salida normal en un archivo y los errores en otro."
+      "body": "Tu terminal tiene dos canales de salida separados:\n\n- **stdout (salida estandar)** -- Salida normal del programa. Mensajes de éxito, datos, resultados.\n- **stderr (error estandar)** -- Mensajes de error, advertencias, información de diagnóstico.\n\nAmbos aparecen en la misma ventana de terminal, pero son flujos separados. Esto importa porque puedes redirigirlos independientemente:\n\n`command > output.log 2> errors.log`\n\nEsto guarda la salida normal en un archivo y los errores en otro."
     },
     {
       "type": "code_example",
@@ -32,11 +32,11 @@
     },
     {
       "type": "motivation",
-      "body": "Los desarrolladores que saben leer mensajes de error arreglan bugs en minutos en vez de horas. Esa es la diferencia entre facturar a un cliente por 30 minutos o 4 horas. En vibecoding, tu asistente de IA genera codigo, pero cuando algo se rompe, TU necesitas leer el error y guiar la correccion. Esta habilidad se traduce directamente en dinero ahorrado y ganado."
+      "body": "Los desarrolladores que saben leer mensajes de error arreglan bugs en minutos en vez de horas. Esa es la diferencia entre facturar a un cliente por 30 minutos o 4 horas. En vibecoding, tu asistente de IA genera código, pero cuando algo se rompe, TU necesitas leer el error y guiar la corrección. Esta habilidad se traduce directamente en dinero ahorrado y ganado."
     },
     {
       "type": "key_takeaway",
-      "body": "Los mensajes de error tienen tres partes: que fallo, por que fallo y donde fallo. stdout muestra la salida normal, stderr muestra los errores. Siempre lee el PRIMER mensaje de error -- los errores posteriores frecuentemente son causados por el primero. El error te dice exactamente que arreglar."
+      "body": "Los mensajes de error tienen tres partes: que fallo, por qué fallo y donde fallo. stdout muestra la salida normal, stderr muestra los errores. Siempre lee el PRIMER mensaje de error -- los errores posteriores frecuentemente son causados por el primero. El error te dice exactamente que arreglar."
     }
   ],
   "exercise": {
@@ -48,18 +48,18 @@
       { "line": 4, "text": "  Require stack:", "isBuggy": false },
       { "line": 5, "text": "  - /home/user/my-app/src/App.jsx:1:1", "isBuggy": false },
       { "line": 6, "text": "", "isBuggy": false },
-      { "line": 7, "text": "# Intento de correccion del desarrollador:", "isBuggy": false },
+      { "line": 7, "text": "# Intento de corrección del desarrollador:", "isBuggy": false },
       { "line": 8, "text": "$ npm install react-dom", "isBuggy": true }
     ],
     "correctBuggyLine": 8,
-    "prompt": "El error dice claramente 'Cannot find module react' -- el paquete react esta ausente. Pero el desarrollador instalo react-dom en vez de react. Cual linea muestra la correccion incorrecta?",
+    "prompt": "El error dice claramente 'Cannot find module react' -- el paquete react esta ausente. Pero el desarrollador instalo react-dom en vez de react. Cual línea muestra la corrección incorrecta?",
     "fixes": [
       { "id": "a", "text": "npm install react", "isCorrect": true },
       { "id": "b", "text": "npm install react-router", "isCorrect": false },
       { "id": "c", "text": "npm update", "isCorrect": false },
       { "id": "d", "text": "rm -rf node_modules && npm install", "isCorrect": false }
     ],
-    "explanation": "El mensaje de error dice exactamente que falta: el modulo 'react'. El desarrollador instalo 'react-dom' en su lugar -- un paquete relacionado pero diferente. react-dom maneja la renderizacion de React al DOM del navegador, pero 'react' es la libreria principal. La correccion es simplemente `npm install react`. La opcion B (react-router) es una libreria de enrutamiento, no el nucleo. La opcion C (npm update) actualiza paquetes existentes pero no instalara los que faltan. La opcion D (borrar node_modules) es excesivo -- el paquete nunca fue listado en package.json, asi que reinstalar no ayudara.",
+    "explanation": "El mensaje de error dice exactamente que falta: el modulo 'react'. El desarrollador instalo 'react-dom' en su lugar -- un paquete relacionado pero diferente. react-dom maneja la renderizacion de React al DOM del navegador, pero 'react' es la libreria principal. La corrección es simplemente `npm install react`. La opción B (react-router) es una libreria de enrutamiento, no el nucleo. La opción C (npm update) actualiza paquetes existentes pero no instalara los que faltan. La opción D (borrar node_modules) es excesivo -- el paquete nunca fue listado en package.json, así que reinstalar no ayudara.",
     "glossaryTerms": ["stderr", "stdout", "stack-trace", "module"]
   }
 }

@@ -15,8 +15,8 @@
     },
     {
       "type": "analogy",
-      "title": "Comunicacion Frontend-Backend = Pedir con un Walkie-Talkie",
-      "body": "Imagina una obra de construccion donde el operador de la grua (frontend) necesita suministros del almacen (backend). Se comunican por **walkie-talkie** (fetch/HTTP). El operador debe decir las palabras clave correctas: 'Solicito 50 ladrillos, seccion B' (el metodo, URL y cuerpo correctos). Si dice 'ladrillos por favor' sin especificar seccion, el almacen no sabra donde entregarlos. La comunicacion precisa lo es todo."
+      "title": "Comunicación Frontend-Backend = Pedir con un Walkie-Talkie",
+      "body": "Imagina una obra de construcción donde el operador de la grua (frontend) necesita suministros del almacen (backend). Se comunican por **walkie-talkie** (fetch/HTTP). El operador debe decir las palabras clave correctas: 'Solicito 50 ladrillos, sección B' (el método, URL y cuerpo correctos). Si dice 'ladrillos por favor' sin especificar sección, el almacen no sabra donde entregarlos. La comunicación precisa lo es todo."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "La conexion entre frontend y backend es la fontaneria de todo SaaS, marketplace y tienda online. Si haces esto bien al vibecodear, puedes conectar cualquier funcion -- pagos, dashboards, notificaciones -- que convierte tu app en un negocio."
+      "body": "La conexión entre frontend y backend es la fontaneria de todo SaaS, marketplace y tienda online. Si haces esto bien al vibecodear, puedes conectar cualquier función -- pagos, dashboards, notificaciones -- que convierte tu app en un negocio."
     },
     {
       "type": "key_takeaway",

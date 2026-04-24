@@ -6,29 +6,29 @@
   "xpReward": 15,
   "unitSlug": "package-managers",
   "courseSlug": "terminal-command-line",
-  "intro": "El archivo package.json es el corazon de cada proyecto JavaScript. Lista el nombre de tu proyecto, version, dependencias y scripts. Pero un campo incorrecto puede romper toda tu configuracion. Encuentra el error en este package.json que causara que 'npm run dev' falle.",
+  "intro": "El archivo package.json es el corazón de cada proyecto JavaScript. Lista el nombre de tu proyecto, versión, dependencias y scripts. Pero un campo incorrecto puede romper toda tu configuración. Encuentra el error en este package.json que causara que 'npm run dev' falle.",
   "teach": [
     {
       "type": "analogy",
       "title": "package.json = Una Tarjeta de Receta Listando Todos los Ingredientes",
-      "body": "Piensa en package.json como una **tarjeta de receta** para tu proyecto. Lista cada ingrediente (dependencia) que necesitas, las cantidades exactas (versiones) y las instrucciones de coccion (scripts). Si le das a alguien la tarjeta de receta, puede recrear el plato exactamente. Si olvidas un ingrediente o escribes la cantidad incorrecta, la receta falla. Por eso package.json es tan importante -- es la unica fuente de verdad sobre lo que tu proyecto necesita para funcionar."
+      "body": "Piensa en package.json como una **tarjeta de receta** para tu proyecto. Lista cada ingrediente (dependencia) que necesitas, las cantidades exactas (versiones) y las instrucciones de coccion (scripts). Si le das a alguien la tarjeta de receta, puede recrear el plato exactamente. Si olvidas un ingrediente o escribes la cantidad incorrecta, la receta falla. Por eso package.json es tan importante -- es la única fuente de verdad sobre lo que tu proyecto necesita para funcionar."
     },
     {
       "type": "analogy",
-      "title": "Seccion Scripts = Botones Preconfigurados en un Tablero de Auto",
-      "body": "El tablero de tu auto tiene botones: aire acondicionado, desempañador, luces de emergencia. No configuras manualmente cada uno cada vez -- solo presionas el boton. La **seccion scripts** en package.json funciona igual. En lugar de escribir `next dev --turbo --port 3000` cada vez, lo guardas como `\"dev\": \"next dev --turbo --port 3000\"` y solo ejecutas `npm run dev`. Un boton, accion compleja. Cada proyecto tiene su propio tablero de botones personalizados."
+      "title": "Sección Scripts = Botones Preconfigurados en un Tablero de Auto",
+      "body": "El tablero de tu auto tiene botones: aire acondicionado, desempañador, luces de emergencia. No configuras manualmente cada uno cada vez -- solo presionas el boton. La **sección scripts** en package.json funciona igual. En lugar de escribir `next dev --turbo --port 3000` cada vez, lo guardas como `\"dev\": \"next dev --turbo --port 3000\"` y solo ejecutas `npm run dev`. Un boton, acción compleja. Cada proyecto tiene su propio tablero de botones personalizados."
     },
     {
       "type": "text",
       "title": "Anatomia de package.json",
-      "body": "Cada package.json tiene estas secciones clave:\n\n- **name** y **version** -- La identidad de tu proyecto\n- **scripts** -- Comandos personalizados que puedes ejecutar con `npm run`\n- **dependencies** -- Paquetes que tu app necesita para funcionar en produccion\n- **devDependencies** -- Paquetes solo necesarios durante el desarrollo (herramientas de testing, linters)\n\nLa diferencia entre dependencies y devDependencies importa en produccion: solo las dependencies se instalan en tu servidor en vivo."
+      "body": "Cada package.json tiene estas secciones clave:\n\n- **name** y **versión** -- La identidad de tu proyecto\n- **scripts** -- Comandos personalizados que puedes ejecutar con `npm run`\n- **dependencies** -- Paquetes que tu app necesita para funcionar en producción\n- **devDependencies** -- Paquetes solo necesarios durante el desarrollo (herramientas de testing, linters)\n\nLa diferencia entre dependencies y devDependencies importa en producción: solo las dependencies se instalan en tu servidor en vivo."
     },
     {
       "type": "code_example",
       "title": "Un package.json Tipico",
       "language": "json",
       "code": "{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\",\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\"\n  },\n  \"dependencies\": {\n    \"next\": \"^14.0.0\",\n    \"react\": \"^18.2.0\",\n    \"react-dom\": \"^18.2.0\"\n  },\n  \"devDependencies\": {\n    \"eslint\": \"^8.50.0\"\n  }\n}",
-      "annotation": "El simbolo ^ en las versiones significa 'actualizaciones compatibles permitidas.' ^14.0.0 significa cualquier version desde 14.0.0 hasta (pero sin incluir) 15.0.0. Esto permite que npm instale parches menores automaticamente."
+      "annotation": "El símbolo ^ en las versiones significa 'actualizaciones compatibles permitidas.' ^14.0.0 significa cualquier versión desde 14.0.0 hasta (pero sin incluir) 15.0.0. Esto permite que npm instale parches menores automáticamente."
     },
     {
       "type": "motivation",
@@ -36,7 +36,7 @@
     },
     {
       "type": "key_takeaway",
-      "body": "package.json es la tarjeta de receta de tu proyecto: lista todas las dependencias, define scripts ejecutables y proporciona metadatos del proyecto. Dependencies son para paquetes de produccion, devDependencies son para herramientas solo de desarrollo, y scripts son comandos atajo que ejecutas con 'npm run'."
+      "body": "package.json es la tarjeta de receta de tu proyecto: lista todas las dependencias, define scripts ejecutables y proporciona metadatos del proyecto. Dependencies son para paquetes de producción, devDependencies son para herramientas solo de desarrollo, y scripts son comandos atajo que ejecutas con 'npm run'."
     }
   ],
   "exercise": {
@@ -44,7 +44,7 @@
     "code": [
       { "line": 1, "text": "{", "isBuggy": false },
       { "line": 2, "text": "  \"name\": \"my-portfolio\",", "isBuggy": false },
-      { "line": 3, "text": "  \"version\": \"1.0.0\",", "isBuggy": false },
+      { "line": 3, "text": "  \"versión\": \"1.0.0\",", "isBuggy": false },
       { "line": 4, "text": "  \"scripts\": {", "isBuggy": false },
       { "line": 5, "text": "    \"dev\": \"next dev\",", "isBuggy": false },
       { "line": 6, "text": "    \"build\": \"next build\",", "isBuggy": false },
@@ -60,14 +60,14 @@
       { "line": 16, "text": "}", "isBuggy": false }
     ],
     "correctBuggyLine": 10,
-    "prompt": "Los scripts hacen referencia a 'next dev', 'next build' y 'next start', pero mira las dependencias. Falta algo critico que causara que cada script falle. Encuentra la linea donde comienza el problema.",
+    "prompt": "Los scripts hacen referencia a 'next dev', 'next build' y 'next start', pero mira las dependencias. Falta algo critico que causara que cada script falle. Encuentra la línea donde comienza el problema.",
     "fixes": [
       { "id": "a", "text": "    \"next\": \"^14.0.0\",\n    \"react\": \"^18.2.0\",", "isCorrect": true },
       { "id": "b", "text": "    \"react\": \"^19.0.0\",", "isCorrect": false },
       { "id": "c", "text": "    \"react\": \"18.2.0\",", "isCorrect": false },
       { "id": "d", "text": "Mover react a devDependencies", "isCorrect": false }
     ],
-    "explanation": "Los scripts llaman comandos 'next' (next dev, next build, next start), pero 'next' no esta listado en las dependencias. Sin el, npm no instalara Next.js, y cada script fallara con 'next: command not found.' La solucion es agregar '\"next\": \"^14.0.0\"' a las dependencias antes de react. La opcion B actualiza React pero sigue sin agregar Next.js. La opcion C elimina el ^ pero sigue sin agregar el paquete faltante. La opcion D quitaria React de produccion, lo que romperia la app.",
+    "explanation": "Los scripts llaman comandos 'next' (next dev, next build, next start), pero 'next' no esta listado en las dependencias. Sin el, npm no instalara Next.js, y cada script fallara con 'next: command not found.' La solución es agregar '\"next\": \"^14.0.0\"' a las dependencias antes de react. La opción B actualiza React pero sigue sin agregar Next.js. La opción C elimina el ^ pero sigue sin agregar el paquete faltante. La opción D quitaria React de producción, lo que romperia la app.",
     "glossaryTerms": ["package-json", "npm-scripts", "dependencies"]
   }
 }

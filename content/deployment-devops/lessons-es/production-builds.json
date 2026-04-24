@@ -16,7 +16,7 @@
     {
       "type": "analogy",
       "title": "Build = Comprimir una Foto Antes de Enviarla",
-      "body": "Cuando tomas una foto, el archivo en bruto es enorme -- genial para editar pero terrible para enviar. Antes de enviarla por mensaje, tu telefono automaticamente la comprime para que se envie rapido sin perder calidad visible. Un build de produccion hace lo mismo con tu codigo: exprime todo lo extra (comentarios, espacios en blanco, codigo no usado) para que tu app cargue ultra rapido para los usuarios."
+      "body": "Cuando tomas una foto, el archivo en bruto es enorme -- genial para editar pero terrible para enviar. Antes de enviarla por mensaje, tu teléfono automáticamente la comprime para que se envie rápido sin perder calidad visible. Un build de producción hace lo mismo con tu código: exprime todo lo extra (comentarios, espacios en blanco, código no usado) para que tu app cargue ultra rápido para los usuarios."
     },
     {
       "type": "text",
@@ -32,7 +32,7 @@
     },
     {
       "type": "motivation",
-      "body": "Una app que carga rapido mantiene a los usuarios el tiempo suficiente para convertirse en clientes que pagan. Dominar los builds de produccion significa que tu app creada con IA se siente rapida y profesional desde la primera visita."
+      "body": "Una app que carga rápido mantiene a los usuarios el tiempo suficiente para convertirse en clientes que pagan. Dominar los builds de producción significa que tu app creada con IA se siente rápida y profesional desde la primera visita."
     },
     {
       "type": "key_takeaway",

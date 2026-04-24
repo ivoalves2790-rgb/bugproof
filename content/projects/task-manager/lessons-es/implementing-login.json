@@ -6,12 +6,12 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Estas agregando login a tu gestor de tareas. Piensa en ello como construir la puerta principal — necesita mantener a los intrusos afuera mientras deja entrar a los residentes sin problema. Un usuario reporta que no puede iniciar sesion y descubres que la implementacion de auth tiene algunos problemas fundamentales. Como lo arreglas?",
+  "intro": "Estas agregando login a tu gestor de tareas. Piensa en ello como construir la puerta principal — necesita mantener a los intrusos afuera mientras deja entrar a los residentes sin problema. Un usuario reporta que no puede iniciar sesión y descubres que la implementación de auth tiene algunos problemas fundamentales. Como lo arreglas?",
   "teach": [
     {
       "type": "text",
       "title": "Construyendo un Flujo de Login",
-      "body": "Un flujo de login solido tiene tres partes: un formulario que recopila credenciales, validacion del lado del servidor que las verifica y gestion de sesiones que recuerda al usuario. Cada parte tiene errores comunes — validacion debil, manejo de errores faltante o almacenamiento inseguro de tokens."
+      "body": "Un flujo de login solido tiene tres partes: un formulario que recopila credenciales, validación del lado del servidor que las verifica y gestion de sesiones que recuerda al usuario. Cada parte tiene errores comunes — validación debil, manejo de errores faltante o almacenamiento inseguro de tokens."
     },
     {
       "type": "code_example",
@@ -23,11 +23,11 @@
     {
       "type": "analogy",
       "title": "El Hashing de Contrasenas Es Como una Trituradora",
-      "body": "Imagina que en vez de guardar una llave maestra de tu casa, guardas una version triturada. Si alguien entra a tu almacen de llaves, lo unico que encuentra es confeti — inutil. Pero cuando traes tu llave real, el sistema la tritura de la misma forma y compara los patrones de confeti. Eso es el hashing: la contrasena original nunca se almacena, solo su huella irreversible."
+      "body": "Imagina que en vez de guardar una llave maestra de tu casa, guardas una versión triturada. Si alguien entra a tu almacen de llaves, lo único que encuentra es confeti — inutil. Pero cuando traes tu llave real, el sistema la tritura de la misma forma y compara los patrones de confeti. Eso es el hashing: la contrasena original nunca se almacena, solo su huella irreversible."
     },
     {
       "type": "motivation",
-      "body": "Un flujo de login seguro es innegociable para cualquier app que maneje usuarios reales. Haz esto bien y habras superado la barrera de confianza mas grande — la gente ingresara su email, creara cuentas y eventualmente abrira sus billeteras."
+      "body": "Un flujo de login seguro es innegociable para cualquier app que maneje usuarios reales. Haz esto bien y habras superado la barrera de confianza más grande — la gente ingresara su email, creara cuentas y eventualmente abrira sus billeteras."
     },
     {
       "type": "key_takeaway",
@@ -49,34 +49,34 @@
         "narrative": "Cambias el error a 'Credenciales invalidas' — mejor, pero las contrasenas aun se almacenan y comparan en texto plano. Una filtracion de la base de datos expondria la contrasena de cada usuario. Dos meses despues, tu base de datos es vulnerada y cada contrasena en texto plano de los usuarios se filtra.",
         "isEnd": true,
         "finalScore": 1,
-        "feedback": "Las contrasenas en texto plano son una vulnerabilidad de seguridad critica. Un mensaje de error vago no protege contra filtraciones de base de datos — el hashing si. Siempre prioriza la solucion de seguridad sobre los cambios cosmeticos.",
+        "feedback": "Las contrasenas en texto plano son una vulnerabilidad de seguridad critica. Un mensaje de error vago no protege contra filtraciones de base de datos — el hashing si. Siempre prioriza la solución de seguridad sobre los cambios cosmeticos.",
         "choices": []
       },
       "fix-hashing": {
         "narrative": "Buena decision. Implementas hashing con bcrypt y actualizas el mensaje de error a un generico 'Email o contrasena invalidos'. Ahora necesitas manejar las contrasenas existentes en texto plano en la base de datos. Cual es tu enfoque?",
         "choices": [
-          { "id": "b1", "text": "Escribir una migracion que hashee todas las contrasenas existentes, luego actualizar el login para usar bcrypt.compare", "nextNode": "migration-done", "score": 3 },
-          { "id": "b2", "text": "Forzar a todos los usuarios a restablecer sus contrasenas en el proximo inicio de sesion", "nextNode": "forced-reset", "score": 2 }
+          { "id": "b1", "text": "Escribir una migración que hashee todas las contrasenas existentes, luego actualizar el login para usar bcrypt.compare", "nextNode": "migration-done", "score": 3 },
+          { "id": "b2", "text": "Forzar a todos los usuarios a restablecer sus contrasenas en el próximo inicio de sesión", "nextNode": "forced-reset", "score": 2 }
         ]
       },
       "overhaul": {
         "narrative": "Reescribir desde cero es arriesgado y lento. Los usuarios aun no pueden iniciar sesion. Tu lider de equipo pregunta por que la correccion de un bug de login se esta convirtiendo en un proyecto de dos semanas. Reduces el alcance para solo arreglar los problemas criticos primero.",
         "choices": [
-          { "id": "c1", "text": "Arreglar el hashing y los mensajes de error, planificar la reescritura mayor para despues", "nextNode": "fix-hashing", "score": 3 }
+          { "id": "c1", "text": "Arreglar el hashing y los mensajes de error, planificar la reescritura mayor para después", "nextNode": "fix-hashing", "score": 3 }
         ]
       },
       "migration-done": {
         "narrative": "Escribes un script de migracion que hashea todas las contrasenas existentes con bcrypt, actualizas el endpoint de login para usar bcrypt.compare y despliegas. Todo funciona y los usuarios pueden iniciar sesion de forma segura.",
         "isEnd": true,
         "finalScore": 7,
-        "feedback": "Excelente. Priorizaste la correccion de seguridad, manejaste los datos legados con una migracion y usaste mensajes de error genericos. Asi es como se deben manejar los bugs de auth en produccion.",
+        "feedback": "Excelente. Priorizaste la corrección de seguridad, manejaste los datos legados con una migración y usaste mensajes de error genéricos. Así es como se deben manejar los bugs de auth en producción.",
         "choices": []
       },
       "forced-reset": {
         "narrative": "Los usuarios estan molestos por el restablecimiento forzado, pero las contrasenas ahora estan correctamente hasheadas de aqui en adelante. Algunos usuarios abandonan la app debido a la inconveniencia.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Los restablecimientos forzados funcionan pero afectan la experiencia del usuario. Una migracion en segundo plano que hashea las contrasenas existentes es mas fluida — los usuarios nunca notan el cambio.",
+        "feedback": "Los restablecimientos forzados funcionan pero afectan la experiencia del usuario. Una migración en segundo plano que hashea las contrasenas existentes es más fluida — los usuarios nunca notan el cambio.",
         "choices": []
       }
     },
