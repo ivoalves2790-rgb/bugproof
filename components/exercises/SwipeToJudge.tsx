@@ -190,16 +190,18 @@ export function SwipeToJudge({ exercise, onComplete }: SwipeToJudgeProps) {
             size="lg"
             className="flex-1"
             onClick={() => handleJudge(false)}
+            aria-label={t("swipe.bad")}
           >
-            &#x1F44E;
+            <span aria-hidden="true">&#x1F44E;</span>
           </Button>
           <Button
             variant="primary"
             size="lg"
             className="flex-1"
             onClick={() => handleJudge(true)}
+            aria-label={t("swipe.good")}
           >
-            &#x1F44D;
+            <span aria-hidden="true">&#x1F44D;</span>
           </Button>
         </div>
       )}

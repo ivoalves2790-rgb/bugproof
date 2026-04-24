@@ -146,7 +146,7 @@ export default function CoursePage() {
                             : "red"
                       }
                     >
-                      {unit.tier}
+                      {t(`difficulty.${unit.tier}`)}
                     </Badge>
                   )}
                   {unit.lessonCount > 0 && (

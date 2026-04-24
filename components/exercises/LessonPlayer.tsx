@@ -145,8 +145,12 @@ export function LessonPlayer({
       <div>
         {/* Lesson header */}
         <div className="mb-6 flex items-center gap-3">
-          <button onClick={onExit} className="text-muted-foreground hover:text-foreground">
-            <IconX size={20} />
+          <button
+            onClick={onExit}
+            className="text-muted-foreground hover:text-foreground"
+            aria-label={t("lesson.exit")}
+          >
+            <IconX size={20} aria-hidden="true" />
           </button>
           <div className="flex-1">
             <ProgressBar value={25} size="sm" color="green" />

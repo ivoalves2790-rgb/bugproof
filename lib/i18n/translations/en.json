@@ -84,6 +84,7 @@
   "settings.languageDesc": "Choose your preferred language.",
 
   "lesson.loading": "Loading lesson...",
+  "lesson.exit": "Exit lesson",
   "lesson.comingSoon": "Content Coming Soon",
   "lesson.notWritten": "This lesson is still being written.",
   "lesson.goBack": "Go Back",
