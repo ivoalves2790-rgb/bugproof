@@ -1,21 +1,4 @@
 import type { NextConfig } from "next";
-import { execSync } from "node:child_process";
-import { readFileSync } from "node:fs";
-
-function computeAppVersion(): string {
-  try {
-    const pkg = JSON.parse(readFileSync("./package.json", "utf-8")) as { version: string };
-    const [major, minor] = pkg.version.split(".");
-    const count = execSync("git rev-list --count HEAD", {
-      stdio: ["ignore", "pipe", "ignore"],
-    })
-      .toString()
-      .trim();
-    return `v${major}.${minor}.${count}`;
-  } catch {
-    return "vdev";
-  }
-}
 
 const securityHeaders = [
   {
@@ -62,9 +45,6 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   turbopack: {},
-  env: {
-    NEXT_PUBLIC_APP_VERSION: computeAppVersion(),
-  },
   headers: async () => [
     {
       source: "/(.*)",

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "version:stamp": "node scripts/stamp-version.mjs",
     "prebuild": "sed -i.bak \"s/__BUILD_TIME__/$(date +%s)/\" public/sw.js && rm -f public/sw.js.bak",
     "postbuild": "sed -i.bak \"s/bugproof-[0-9]*/bugproof-__BUILD_TIME__/\" public/sw.js && rm -f public/sw.js.bak",
     "build": "next build",

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
 import { useT } from "@/lib/i18n/use-language";
 import { IconHome, IconBook, IconHammer, IconUser, IconSettings, IconSearch } from "@/components/ui/Icons";
+import { APP_VERSION } from "@/lib/version";
 
 const NAV_ITEMS = [
   { key: "nav.home", href: "/dashboard", icon: "home" },
@@ -33,7 +34,7 @@ export function Sidebar() {
           <img src="/icons/icon-192.svg" alt="Bugproof" width={28} height={28} className="rounded self-center" />
           <span className="text-lg font-bold">bug<span className="text-terminal-green">proof</span></span>
           <span className="text-[10px] font-mono text-muted-foreground tabular-nums" aria-label="App version">
-            {process.env.NEXT_PUBLIC_APP_VERSION}
+            {APP_VERSION}
           </span>
         </Link>
       </div>

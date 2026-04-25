@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { IconHeart, IconFlame, IconStar } from "@/components/ui/Icons";
+import { APP_VERSION } from "@/lib/version";
 
 interface TopBarProps {
   hearts: number;
@@ -47,7 +48,7 @@ export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defau
         <img src="/icons/icon-192.svg" alt="Bugproof" width={24} height={24} className="rounded self-center" />
         <span className="font-bold">bug<span className="text-terminal-green">proof</span></span>
         <span className="text-[10px] font-mono text-muted-foreground tabular-nums" aria-label="App version">
-          {process.env.NEXT_PUBLIC_APP_VERSION}
+          {APP_VERSION}
         </span>
       </div>
 
