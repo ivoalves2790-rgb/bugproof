@@ -45,56 +45,74 @@
       "start": {
         "narrative": "A junior developer on your team sends a panicked message: 'I think I just deleted something important. I was trying to clean up old build files and ran rm -rf dist/ but I was in the wrong directory. I was in the project root instead of the frontend/ subfolder.'\n\nThe project structure is:\n\nmy-project/\n  frontend/\n    dist/       <- old build files (safe to delete)\n    src/\n  backend/\n    dist/       <- compiled server code (NOT safe to delete)\n  dist/         <- doesn't exist at root level\n\nWhat do you tell them first?",
         "choices": [
-          { "id": "a", "text": "Ask them to run pwd and ls to confirm what directory they're in and what was deleted", "nextNode": "check-damage", "score": 10 },
+          { "id": "a", "text": "Ask them to run pwd and ls to confirm what directory they're in and what was deleted", "nextNode": "check-damage", "score": 4 },
           { "id": "b", "text": "Tell them to immediately run rm -rf to clean up more and hide the evidence", "nextNode": "bad-cover-up", "score": 0 },
-          { "id": "c", "text": "Tell them to panic and restore from a backup immediately", "nextNode": "premature-restore", "score": 3 }
+          { "id": "c", "text": "Tell them to panic and restore from a backup immediately", "nextNode": "premature-restore", "score": 1 }
         ]
       },
       "check-damage": {
-        "narrative": "They run pwd and confirm they're in /home/user/my-project/ (the root). They run ls and see:\n\nfrontend/  backend/  package.json  README.md\n\nThere's no dist/ folder at the root level, so rm -rf dist/ actually did nothing -- there was nothing to delete! But they're still worried. What's the next step?",
+        "narrative": "They run pwd and confirm they're in /home/user/my-project/ (the root). They run ls and see:\n\nfrontend/  backend/  package.json  README.md\n\nThere's no dist/ folder at the root level, so rm -rf dist/ actually did nothing -- there was nothing to delete. But they're still worried. What's the next step?",
         "choices": [
-          { "id": "a", "text": "Verify the important directories are intact: ls frontend/dist/ and ls backend/dist/", "nextNode": "verify-intact", "score": 10 },
-          { "id": "b", "text": "Tell them everything is fine and move on without checking", "nextNode": "skip-verification", "score": 4 }
+          { "id": "a", "text": "Verify the important directories are intact: ls frontend/dist/ and ls backend/dist/", "nextNode": "verify-intact", "score": 4 },
+          { "id": "b", "text": "Tell them everything is fine and move on without checking", "nextNode": "verify-intact", "score": 1 }
         ]
       },
       "bad-cover-up": {
         "narrative": "Running more rm commands without understanding the situation is extremely dangerous. You could accidentally delete files that were actually fine. The first rule of incident response is: STOP and assess the damage before taking any action.",
         "choices": [
-          { "id": "a", "text": "Stop and assess the damage first by checking the current directory and listing files", "nextNode": "check-damage", "score": 5 }
+          { "id": "a", "text": "Stop and assess the damage first by checking the current directory and listing files", "nextNode": "check-damage", "score": 2 }
         ]
       },
       "premature-restore": {
-        "narrative": "Restoring from a backup before understanding what happened wastes time and could overwrite recent changes. You need to assess the damage first -- the fix might be much simpler than a full restore.",
+        "narrative": "Restoring from a backup before understanding what happened wastes time and could overwrite recent uncommitted work. You need to assess the damage first -- the fix might be much simpler than a full restore.",
         "choices": [
-          { "id": "a", "text": "First check what actually happened before deciding on a recovery strategy", "nextNode": "check-damage", "score": 5 }
+          { "id": "a", "text": "First check what actually happened before deciding on a recovery strategy", "nextNode": "check-damage", "score": 2 }
         ]
       },
       "verify-intact": {
-        "narrative": "You check both directories:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nEverything is intact! Since there was no dist/ folder at the project root, rm -rf dist/ simply did nothing and exited silently. No files were harmed. Now what should you teach the junior developer?",
+        "narrative": "You check both directories:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nEverything is intact. The dist/ folder didn't exist at the root, so rm -rf dist/ exited silently. Nothing was lost. But the junior wasn't lucky -- they were one cd away from wiping backend/dist/. How do you tighten the recovery story before moving on?",
         "choices": [
-          { "id": "a", "text": "Teach them to always run pwd before destructive commands and use ls to preview what they're about to delete", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Tell them to be more careful next time without explaining how", "nextNode": "end-vague", "score": 4 }
+          { "id": "a", "text": "Confirm the working tree against git: `git status` to ensure nothing tracked was modified or removed", "nextNode": "recovery-action", "score": 4 },
+          { "id": "b", "text": "Spot-check by trying to start the dev server and the backend service to ensure both still build", "nextNode": "recovery-action", "score": 3 },
+          { "id": "c", "text": "Skip verification -- ls already showed the directories are still there", "nextNode": "recovery-action", "score": 1 }
         ]
       },
-      "skip-verification": {
-        "narrative": "Without verifying, you can't be sure nothing was damaged. Always check. In this case everything was fine, but skipping verification is a bad habit that will bite you when real damage happens.",
+      "recovery-action": {
+        "narrative": "You've confirmed nothing actually broke. But the junior is still rattled and worried they'll repeat the mistake on a different command tomorrow. What recovery rehearsal do you walk them through right now, while the scare is fresh?",
         "choices": [
-          { "id": "a", "text": "Go back and verify the important directories are actually intact", "nextNode": "verify-intact", "score": 5 }
+          { "id": "a", "text": "Walk them through `git restore`, `git reflog`, and where their OS trash lives -- so they know recovery options exist before the next mistake", "nextNode": "teach-habits", "score": 4 },
+          { "id": "b", "text": "Show them how to alias `rm` to `rm -i` (interactive prompt) on their machine for the next month", "nextNode": "teach-habits", "score": 3 },
+          { "id": "c", "text": "Tell them to just be more careful and skip the rehearsal", "nextNode": "teach-habits", "score": 0 }
+        ]
+      },
+      "teach-habits": {
+        "narrative": "Recovery options are clear in their head. Now what habit do you set up so the next destructive command doesn't depend on luck? You want something they'll actually do, not a rule they'll forget by Friday.",
+        "choices": [
+          { "id": "a", "text": "Teach the pwd-then-ls reflex before any rm, and add a shell prompt that always shows the current directory in red text", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Tell them to be more careful next time without giving a concrete habit", "nextNode": "end-vague", "score": 1 },
+          { "id": "c", "text": "Have them disable rm -rf entirely on their machine", "nextNode": "end-overkill", "score": 2 }
         ]
       },
       "end-good": {
-        "narrative": "You teach the junior developer three safety habits:\n\n1. Always run pwd before any rm command\n2. Run ls on the target before deleting it\n3. Use Git -- if files are tracked, git checkout can recover them\n\nThe developer adds these habits to their workflow and never has a scare like this again.",
+        "narrative": "The junior leaves the conversation with three concrete things: a pwd-then-ls reflex before any destructive command, a prompt that always shows the current directory in their peripheral vision, and a recovery checklist (git status, git restore, git reflog, OS trash) for when something does go wrong. They never have a scare like this again.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Perfect incident response! You stayed calm, assessed the damage before acting, verified nothing was lost, and turned the scare into a learning opportunity. The key takeaway: always run pwd and ls before destructive commands, and remember that rm -rf on a non-existent directory simply does nothing."
+        "feedback": "Textbook incident response. You stayed calm, assessed before acting, verified with git (not just ls), rehearsed recovery while the lesson was fresh, and replaced 'be careful' with a habit and an environmental nudge. The right framing: the goal isn't to never make mistakes, it's to make mistakes recoverable and rare."
       },
       "end-vague": {
-        "narrative": "The junior developer nods but makes the same mistake two weeks later, this time accidentally deleting the backend/dist/ folder. Vague advice like 'be careful' doesn't build habits.",
+        "narrative": "The junior nods but makes a similar mistake two weeks later, this time on a different command. Vague advice like 'be careful' doesn't build habits.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 10,
-        "feedback": "You resolved the immediate issue but missed the teaching opportunity. Next time, give specific actionable habits: run pwd before rm, use ls to preview deletions, and rely on Git for recovery. Concrete habits prevent future mistakes better than vague caution."
+        "finalScore": 11,
+        "feedback": "You handled the immediate scare but skipped the habit work. Concrete behaviors -- pwd before rm, ls to preview, git restore for recovery -- prevent the next mistake far better than abstract caution. Always close out with one specific habit and one environmental cue."
+      },
+      "end-overkill": {
+        "narrative": "Disabling rm -rf at the alias level fixes nothing -- the junior just types `\\rm -rf` to bypass the alias and now also can't clean up large directories at all. Banning a tool is not the same as building the habit to use it safely.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Hard-blocking destructive commands sounds safe but is brittle: aliases get bypassed, the rule doesn't transfer to new machines, and the underlying habit never forms. Replace bans with reflexes -- pwd before rm, ls to preview, version control as the safety net."
       }
     },
     "glossaryTerms": ["rm", "pwd", "ls", "destructive-command", "incident-response"]

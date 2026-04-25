@@ -41,58 +41,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "You've added a discount code feature to the checkout. It works great in your local testing. You deploy to production on Thursday afternoon. Friday morning, you get a panicked message: 'Customers are getting 100% discounts on all orders!' What happened?",
+        "narrative": "You added a discount code feature to checkout. It worked locally. You deployed Thursday afternoon. Friday morning, a panicked message: 'Customers are getting 100% discounts on all orders!' What's your first move?",
         "choices": [
-          { "id": "a", "text": "Check the discount calculation code for bugs", "nextNode": "check-code", "score": 10 },
-          { "id": "b", "text": "Immediately disable the discount feature", "nextNode": "disable-feature", "score": 7 },
+          { "id": "a", "text": "Open the discount calculation code and look for the bug", "nextNode": "check-code", "score": 10 },
+          { "id": "b", "text": "Immediately disable the discount feature in production", "nextNode": "disable-feature", "score": 7 },
           { "id": "c", "text": "Check if someone entered a fraudulent discount code", "nextNode": "check-fraud", "score": 3 }
         ]
       },
       "check-code": {
-        "narrative": "You look at the discount function and find the bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nWhen someone enters 20 for a 20% discount, the function calculates price - (price * 20), which makes the total massively negative. It should divide by 100 first. How would tests have helped?",
+        "narrative": "You find the bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nWhen someone enters 20 for 20%, this returns price - (price * 20) = a massive negative number. It should divide by 100. What does this teach you about tests?",
         "choices": [
-          { "id": "a", "text": "A test checking applyDiscount(100, 20) === 80 would have caught this instantly", "nextNode": "test-would-help", "score": 10 },
-          { "id": "b", "text": "Tests wouldn't have helped -- this is a logic error you'd need to think through", "nextNode": "tests-do-help", "score": 3 }
+          { "id": "a", "text": "A test asserting applyDiscount(100, 20) === 80 would have caught this in 2 seconds", "nextNode": "write-the-tests", "score": 10 },
+          { "id": "b", "text": "Tests wouldn't have helped -- this is a logic error", "nextNode": "write-the-tests", "score": 3 }
         ]
       },
       "disable-feature": {
-        "narrative": "Smart move to stop the bleeding. You disable the discount feature. But now you need to figure out what went wrong and fix it. Looking at the discount calculation...\n\napplyDiscount(100, 20) should return 80 but returns -1900.\n\nThe function is treating the percentage as a multiplier (20x) instead of dividing by 100 first (0.20x).",
+        "narrative": "Smart -- you stopped the bleeding. Now you trace the bug: applyDiscount(100, 20) returns -1900 instead of 80. The function multiplies by 20 instead of 0.20. What's the lesson here?",
         "choices": [
-          { "id": "a", "text": "Fix the bug and add a test so this never happens again", "nextNode": "test-would-help", "score": 7 }
+          { "id": "a", "text": "Even one test for this function would have caught it before deploy", "nextNode": "write-the-tests", "score": 8 },
+          { "id": "b", "text": "Just ship the fix -- tests are nice but slow you down", "nextNode": "write-the-tests", "score": 3 }
         ]
       },
       "check-fraud": {
-        "narrative": "It's not fraud -- the discount codes are legitimate. The problem is that the calculation is wrong. Even a valid 20% discount code is resulting in orders with negative totals because the function multiplies by 20 instead of 0.20.",
+        "narrative": "It's not fraud -- the codes are legitimate. The math is wrong. Even valid 20% codes produce negative totals because the function multiplies by 20 instead of 0.20.",
         "choices": [
-          { "id": "a", "text": "Look at the discount calculation code", "nextNode": "check-code", "score": 5 }
+          { "id": "a", "text": "Open the discount calculation code", "nextNode": "check-code", "score": 5 }
         ]
       },
-      "test-would-help": {
-        "narrative": "Exactly! A simple test like:\n\ntest('20% discount on $100 = $80', () => {\n  expect(applyDiscount(100, 20)).toBe(80);\n});\n\nThis would have failed immediately when you wrote the buggy code, before it ever reached production. What's your takeaway?",
+      "write-the-tests": {
+        "narrative": "You sit down to write tests for the fixed discount function. What cases should you cover beyond the obvious 20% case?",
         "choices": [
-          { "id": "a", "text": "I should write tests for any code that involves calculations or money", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "I should test everything before every deploy", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "Boundary values: 0%, 100%, negative percent, and very large prices", "nextNode": "test-related-code", "score": 10 },
+          { "id": "b", "text": "Just the cases that match what the buggy code produced", "nextNode": "test-related-code", "score": 4 },
+          { "id": "c", "text": "One happy-path test -- tests for edge cases are overkill", "nextNode": "test-related-code", "score": 2 }
         ]
       },
-      "tests-do-help": {
-        "narrative": "Actually, tests are PERFECT for catching logic errors! That's their main job. A test that says 'a 20% discount on $100 should equal $80' would fail immediately with the buggy code, making the error obvious before you ever deployed.",
+      "test-related-code": {
+        "narrative": "The discount function is now safe. But discount codes touch tax calculation, totals, and the receipt rendering. None of those have tests either. How do you decide what to cover next?",
         "choices": [
-          { "id": "a", "text": "Got it -- tests catch exactly these kinds of calculation errors", "nextNode": "end-good", "score": 5 }
+          { "id": "a", "text": "Cover everything that touches money: tax, totals, receipts, refund flow", "nextNode": "prevent-recurrence", "score": 10 },
+          { "id": "b", "text": "Add tests one-by-one whenever a related bug is reported", "nextNode": "prevent-recurrence", "score": 5 },
+          { "id": "c", "text": "Stop here -- you've fixed the immediate problem", "nextNode": "prevent-recurrence", "score": 2 }
+        ]
+      },
+      "prevent-recurrence": {
+        "narrative": "You've shipped the fix and added tests. Final question: how do you make sure no future change reintroduces this exact bug?",
+        "choices": [
+          { "id": "a", "text": "Block merges in CI when discount tests fail and require a test for any new pricing code", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Add a comment in the code saying 'remember to divide by 100'", "nextNode": "end-okay", "score": 4 },
+          { "id": "c", "text": "Trust the team to remember this incident", "nextNode": "end-poor", "score": 1 }
         ]
       },
       "end-good": {
-        "narrative": "You fix the discount function (dividing by 100), write five tests covering different discount amounts including edge cases like 0% and 100%, and deploy the fix. The tests will prevent this bug from ever coming back, even if someone refactors the code later.",
+        "narrative": "You shipped the fix, wrote boundary-aware tests for discount, extended coverage to every money-touching path, and locked it in with a CI rule. The same bug class can never silently ship again, and the next contributor inherits the constraint without needing to know your story.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Great thinking! Code that handles money, calculations, or critical business logic should always have tests. A 30-second test would have prevented this bug from reaching production and saved real money."
+        "finalScore": 50,
+        "feedback": "This is the full arc: investigate, fix, harden the local code with strong tests, expand coverage to neighbors, and enforce it in CI. One incident becomes a permanent guarantee."
       },
       "end-okay": {
-        "narrative": "Testing everything is admirable but impractical. The key is to test the most important parts -- especially anything involving money, user data, or core business logic. A few targeted tests are worth more than trying to test every single line.",
+        "narrative": "The fix shipped. The discount function is tested. But pricing-related code outside the discount file has no enforcement, and a comment is the weakest possible safeguard -- the next refactor will delete it.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Good instinct, but be strategic about testing. Focus on code that handles money, user data, authentication, and core business logic. You don't need 100% test coverage -- you need the right tests in the right places."
+        "finalScore": 27,
+        "feedback": "You handled the immediate fire well. The miss is enforcement: comments aren't tests, and tests that don't run in CI are barely tests. Lock the fix in with automation."
+      },
+      "end-poor": {
+        "narrative": "You fixed the function, but didn't add tests, didn't expand coverage, and rely on the team's memory. In six months a new hire will refactor the discount logic and the same bug will return -- because nothing on disk prevents it.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 16,
+        "feedback": "Memory is not a safety net. Without tests, the bug exists in latent form, waiting for the next change. The 30 seconds it takes to write the assertion is what stops the cycle."
       }
     },
     "glossaryTerms": ["regression", "safety-net", "test-coverage"]

@@ -46,45 +46,69 @@
         ]
       },
       "one-big-test": {
-        "narrative": "Your E2E test works but takes 30 seconds to run and breaks whenever the UI changes. When it fails, the error says 'element not found' but you don't know which step failed. You add descriptive labels and split into smaller tests.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Good recovery. Focused tests are easier to maintain and debug. You learned firsthand why one giant test is hard to work with.",
-        "choices": []
+        "narrative": "Your E2E test works but takes 30 seconds to run and breaks whenever the UI changes. When it fails, the error says 'element not found' but you don't know which step failed. You add descriptive labels and split into smaller tests. Now you need to pick a test runner before going further.",
+        "choices": [
+          { "id": "a1", "text": "Use Playwright with traces — every failure ships with a screenshot, DOM snapshot, and timeline", "nextNode": "pick-selectors", "score": 4 },
+          { "id": "a2", "text": "Stick with bare Node assertions and parse failures from console logs", "nextNode": "pick-selectors", "score": 1 }
+        ]
       },
       "balanced-approach": {
         "narrative": "Your tests are clean: login is tested separately, task creation uses a pre-authenticated state, and completion builds on a pre-created task. But the PM asks: 'How do I know the full flow works if it's split up?' What do you say?",
         "choices": [
-          { "id": "b1", "text": "Add one smoke test that runs the full flow end-to-end, while keeping the detailed tests separate", "nextNode": "smoke-test", "score": 3 },
-          { "id": "b2", "text": "The integration tests cover each piece — if all pieces work, the flow works", "nextNode": "good-enough-end", "score": 2 }
+          { "id": "b1", "text": "Add one smoke test that runs the full flow end-to-end, while keeping the detailed tests separate", "nextNode": "pick-selectors", "score": 4 },
+          { "id": "b2", "text": "The integration tests cover each piece — if all pieces work, the flow works", "nextNode": "pick-selectors", "score": 2 }
         ]
       },
       "unit-only": {
-        "narrative": "All unit tests pass. But when a user tries to create a task, the form submits successfully yet no task appears in the list. The API and frontend are both correct in isolation — the bug is in how they communicate.",
+        "narrative": "All unit tests pass. But when a user tries to create a task, the form submits successfully yet no task appears in the list. The API and frontend are both correct in isolation — the bug is in how they communicate. You agree to add real flow tests now.",
         "choices": [
-          { "id": "c1", "text": "Add integration tests that check the API and frontend work together", "nextNode": "balanced-approach", "score": 3 },
-          { "id": "c2", "text": "Debug the specific issue and add a unit test for it", "nextNode": "miss-end", "score": 1 }
+          { "id": "c1", "text": "Add integration tests that drive the UI and check the database — same path the bug took", "nextNode": "pick-selectors", "score": 3 },
+          { "id": "c2", "text": "Mock the API in the integration tests so they stay fast", "nextNode": "pick-selectors", "score": 1 }
         ]
       },
-      "smoke-test": {
-        "narrative": "You have detailed integration tests for each piece, plus one smoke test that runs the full flow. The smoke test catches integration issues, while the focused tests pinpoint exactly where bugs are. Best of both worlds.",
+      "pick-selectors": {
+        "narrative": "Now you start writing the actual flow. The first step needs to click the 'New Task' button. How do you locate it in the test?",
+        "choices": [
+          { "id": "sel-role", "text": "Use a role-based selector: getByRole('button', { name: 'New Task' }) — survives styling and class changes", "nextNode": "wait-strategy", "score": 4 },
+          { "id": "sel-testid", "text": "Add data-testid='new-task-btn' to the component and target that — explicit contract for tests", "nextNode": "wait-strategy", "score": 2 },
+          { "id": "sel-css", "text": "Use a brittle CSS selector like .header > div:nth-child(3) > button.primary", "nextNode": "wait-strategy", "score": 0 }
+        ]
+      },
+      "wait-strategy": {
+        "narrative": "Your test fills the form and clicks Save, then immediately checks the task list. It passes locally but fails in CI 1 in 5 runs — sometimes the new task isn't in the DOM yet. How do you handle the timing?",
+        "choices": [
+          { "id": "wait-auto", "text": "Use the framework's auto-waiting assertions: expect(taskList).toContainText('Buy milk') retries until it appears or times out", "nextNode": "ci-integration", "score": 4 },
+          { "id": "wait-sleep", "text": "Add await sleep(1000) before the assertion — fast enough, problem solved", "nextNode": "ci-integration", "score": 1 },
+          { "id": "wait-poll", "text": "Write a custom polling loop with setInterval", "nextNode": "ci-integration", "score": 2 }
+        ]
+      },
+      "ci-integration": {
+        "narrative": "Your flow test is solid locally. Now you need it running on every pull request so a regression can never sneak in. How do you wire it into CI?",
+        "choices": [
+          { "id": "ci-block", "text": "Run the flow test on every PR and block merges on failure — with traces uploaded as artifacts so failures are debuggable", "nextNode": "excellent-end", "score": 4 },
+          { "id": "ci-nightly", "text": "Run it nightly on main only — keeps PRs fast", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ci-local", "text": "Leave it as a local-only test — devs can run it before merging if they want", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your task manager has a focused flow test stack: role-based selectors, auto-waiting assertions, and a smoke test that runs on every PR. When a regression slips into a styling refactor next quarter, the failed PR check catches it before any user ever sees the broken flow.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Perfect strategy. Detailed tests for debugging plus a smoke test for confidence. This is how professional teams test critical user flows.",
+        "finalScore": 16,
+        "feedback": "This is the full picture of user flow testing. Stable selectors, auto-waiting assertions, and CI gating turn flow tests into a true safety net — not just a thing devs run when they remember to.",
         "choices": []
       },
-      "good-enough-end": {
-        "narrative": "Your integration tests catch most issues. Occasionally a full-flow bug slips through, but you catch it in QA. A reasonable trade-off for faster test execution.",
+      "mediocre-end": {
+        "narrative": "Your flow tests catch issues, but only the morning after a regression merges. By the time the nightly fails, three more PRs have stacked on top and you have to bisect.",
+        "isEnd": true,
+        "finalScore": 11,
+        "feedback": "Nightly runs are better than nothing, but flow tests pay off most when they block bad code from merging. Move them to PR-blocking once they're stable.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "The flow test exists but nobody runs it. Three weeks in, it stops passing because nobody noticed an API endpoint moved. The test rots and a real user reports the broken signup flow.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "This works but isn't ideal. A single end-to-end smoke test adds minimal overhead and catches the integration gaps. Consider adding one for the most critical flow.",
-        "choices": []
-      },
-      "miss-end": {
-        "narrative": "You fix this specific bug, but the pattern repeats. Unit tests keep passing while integration bugs keep slipping through to production.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Unit tests verify parts in isolation. Integration tests verify the parts work together. You need both — especially for data flows between frontend and backend.",
+        "feedback": "An untested test is worse than no test — it gives false confidence that 'we have flow coverage.' If you can't put it in CI, delete it; if it's worth keeping, make it block merges.",
         "choices": []
       }
     },

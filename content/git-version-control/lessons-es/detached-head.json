@@ -50,70 +50,77 @@
       "start": {
         "narrative": "Querías revisar una versión antigua de tu proyecto para ver cómo funcionaba algo antes. Ejecutaste 'git checkout a1b2c3d' (un hash de commit específico). Ahora Git muestra esta advertencia intimidante:\n\n'You are in detached HEAD state. You can look around, make experimental changes and commit them, and you can discard any commits you make in this state without impacting any branches.'\n\n¿Qué significa esto?",
         "choices": [
-          { "id": "a", "text": "Estoy viendo un commit antiguo pero no estoy en ninguna rama -- cualquier commit nuevo podría perderse", "nextNode": "understand-detached", "score": 10 },
-          { "id": "b", "text": "Algo está roto y necesito reparar mi instalación de Git", "nextNode": "not-broken", "score": 2 },
-          { "id": "c", "text": "Mi puntero HEAD fue literalmente desconectado y he perdido datos", "nextNode": "no-data-loss", "score": 3 }
+          { "id": "a", "text": "Estoy viendo un commit antiguo pero no estoy en ninguna rama -- cualquier commit nuevo podría perderse", "nextNode": "understand-detached", "score": 4 },
+          { "id": "b", "text": "Algo está roto y necesito reparar mi instalación de Git", "nextNode": "not-broken", "score": 0 },
+          { "id": "c", "text": "Mi puntero HEAD fue literalmente desconectado y he perdido datos", "nextNode": "no-data-loss", "score": 1 }
         ]
       },
       "understand-detached": {
-        "narrative": "¡Correcto! HEAD normalmente apunta a una rama (como main), que avanza con cada commit. En estado detached HEAD, HEAD apunta directamente a un commit en su lugar. Es como estar parado en medio de una línea de tiempo sin estar en una rama con nombre.\n\nAhora, mientras veías este código antiguo, accidentalmente hiciste algunos cambios y los confirmaste. ¡Tienes trabajo que quieres conservar! ¿Qué haces?",
+        "narrative": "¡Correcto! HEAD normalmente apunta a una rama (como main), que avanza con cada commit. En estado detached HEAD, HEAD apunta directamente a un commit. Es como estar parado en medio de una línea de tiempo sin estar en una rama con nombre.\n\nMientras veías este código antiguo, accidentalmente hiciste dos commits con un arreglo de bug que sí quieres conservar. ¿Cuál es el primer movimiento más seguro?",
         "choices": [
-          { "id": "a", "text": "Crear una nueva rama desde donde estoy ahora para guardar mi trabajo", "nextNode": "save-branch", "score": 10 },
-          { "id": "b", "text": "Ejecutar 'git checkout main' y esperar que los commits vengan conmigo", "nextNode": "lost-work", "score": 2 },
-          { "id": "c", "text": "Copiar los archivos cambiados manualmente al escritorio como respaldo", "nextNode": "manual-copy", "score": 4 }
+          { "id": "a", "text": "Ejecutar 'git checkout -b rescue-branch' aquí mismo, mientras HEAD aún apunta a tu trabajo", "nextNode": "save-branch", "score": 4 },
+          { "id": "b", "text": "Ejecutar primero 'git checkout main' y después intentar recuperar los commits", "nextNode": "save-branch", "score": 1 },
+          { "id": "c", "text": "Copiar los archivos cambiados manualmente al escritorio como respaldo", "nextNode": "save-branch", "score": 2 }
         ]
       },
       "not-broken": {
-        "narrative": "¡Nada está roto! Detached HEAD es un estado normal de Git. Solo significa que estás viendo un commit específico en lugar de la punta de una rama. Puedes mirar alrededor de forma segura, o incluso hacer cambios -- solo necesitas tener cuidado al guardarlos correctamente.",
+        "narrative": "¡Nada está roto! Detached HEAD es un estado normal de Git. Solo significa que estás viendo un commit específico en lugar de la punta de una rama. Mientras explorabas accidentalmente hiciste dos commits con un arreglo de bug que sí quieres conservar. ¿Cuál es el primer movimiento más seguro?",
         "choices": [
-          { "id": "a", "text": "De acuerdo, entonces aún puedo trabajar -- solo necesito manejarlo con cuidado", "nextNode": "understand-detached", "score": 5 }
+          { "id": "a", "text": "Crear una rama de rescate inmediatamente para que los commits queden anclados", "nextNode": "save-branch", "score": 4 },
+          { "id": "b", "text": "Volver primero a main y confiar en 'git reflog' para recuperar los commits", "nextNode": "save-branch", "score": 1 }
         ]
       },
       "no-data-loss": {
-        "narrative": "¡No se han perdido datos! 'Detached HEAD' suena dramático, pero es solo la forma de Git de decir que tu puntero HEAD está mirando un commit específico en lugar de seguir una rama. Todas tus ramas y sus commits están perfectamente seguros.",
+        "narrative": "¡No se han perdido datos! 'Detached HEAD' suena dramático, pero solo significa que HEAD apunta a un commit específico en vez de seguir una rama. Mientras explorabas accidentalmente hiciste dos commits con un arreglo de bug que sí quieres conservar. ¿Cuál es el primer movimiento más seguro?",
         "choices": [
-          { "id": "a", "text": "Qué bueno, entonces ¿qué debería hacer realmente aquí?", "nextNode": "understand-detached", "score": 5 }
+          { "id": "a", "text": "Crear una rama desde donde estoy ahora para anclar esos commits", "nextNode": "save-branch", "score": 4 },
+          { "id": "b", "text": "Hacer stash de los cambios y volver a main", "nextNode": "save-branch", "score": 1 }
         ]
       },
       "save-branch": {
-        "narrative": "Ejecutas 'git checkout -b rescue-branch'. Git crea una nueva rama apuntando a tu commit actual, y tu trabajo ahora está seguro en una rama con nombre. ¿Qué haces a continuación?",
+        "narrative": "Ejecutas 'git checkout -b rescue-branch'. Git crea una nueva rama apuntando a tus commits desconectados, y tu trabajo queda anclado. La rama es solo local -- todavía no has hecho push de nada. ¿Cómo te aseguras de que este trabajo sobreviva si tu laptop muere esta noche?",
         "choices": [
-          { "id": "a", "text": "Cambiar a main y fusionar rescue-branch si quiero conservar los cambios", "nextNode": "end-perfect", "score": 10 },
-          { "id": "b", "text": "Quedarme en rescue-branch y seguir trabajando", "nextNode": "end-good", "score": 7 }
+          { "id": "a", "text": "Ejecutar 'git push -u origin rescue-branch' para que la rama también viva en el remoto", "nextNode": "integrate-branch", "score": 4 },
+          { "id": "b", "text": "Etiquetar la punta con 'git tag rescue-tag' y subir la etiqueta en lugar de la rama", "nextNode": "integrate-branch", "score": 2 },
+          { "id": "c", "text": "Saltarme el push -- la rama es local y por ahora es suficiente", "nextNode": "integrate-branch", "score": 0 }
         ]
       },
-      "lost-work": {
-        "narrative": "Te cambias a main y... tus commits del estado detached HEAD ahora están huérfanos. Todavía existen temporalmente, pero Git eventualmente los eliminará ya que ninguna rama apunta a ellos. Aún puedes recuperarlos con 'git reflog', pero eso es una operación avanzada.",
+      "integrate-branch": {
+        "narrative": "Tu trabajo de rescate ya está en el remoto. Los commits del arreglo de bug se hicieron sobre un commit ANTIGUO (a1b2c3d), así que la rama de rescate está muy atrasada respecto al main de hoy. ¿Cómo llevas solo el arreglo de bug a main sin arrastrar la base antigua?",
         "choices": [
-          { "id": "a", "text": "Rápido, usar 'git reflog' para encontrar el hash del commit perdido y crear una rama ahí", "nextNode": "reflog-rescue", "score": 7 }
+          { "id": "a", "text": "Usar 'git cherry-pick' para aplicar solo los commits del arreglo sobre un main actualizado", "nextNode": "prevent-recurrence", "score": 4 },
+          { "id": "b", "text": "Abrir un PR para fusionar rescue-branch en main tal cual y dejar que los revisores lo resuelvan", "nextNode": "prevent-recurrence", "score": 1 },
+          { "id": "c", "text": "Hacer hard-reset de main a la rama de rescate para que los nuevos commits queden en la punta", "nextNode": "prevent-recurrence", "score": 0 }
         ]
       },
-      "manual-copy": {
-        "narrative": "Copiar archivos funciona en una emergencia, pero Git tiene una forma mucho mejor: simplemente crea una rama donde estás. Esto preserva el historial completo de commits, no solo el estado actual de los archivos.",
+      "prevent-recurrence": {
+        "narrative": "El arreglo de bug ya está en main. Ahora quieres asegurarte de que tu yo del futuro no haga commits accidentales en detached HEAD otra vez. ¿Cuál es la salvaguarda más útil?",
         "choices": [
-          { "id": "a", "text": "Déjame crear una rama en su lugar", "nextNode": "save-branch", "score": 5 }
+          { "id": "a", "text": "Configurar 'git config --global advice.detachedHead true' y añadir un prompt de shell que muestre 'DETACHED' en rojo cuando HEAD esté desconectado", "nextNode": "end-perfect", "score": 4 },
+          { "id": "b", "text": "Escribir una nota de una página en la wiki del equipo que diga 'no hagan checkout de hashes de commit'", "nextNode": "end-good", "score": 2 },
+          { "id": "c", "text": "Solo recordar tener más cuidado la próxima vez", "nextNode": "end-weak", "score": 0 }
         ]
-      },
-      "reflog-rescue": {
-        "narrative": "Ejecutas 'git reflog', encuentras el hash del commit de tu trabajo perdido y ejecutas 'git checkout -b rescue-branch <hash>'. ¡Tu trabajo está guardado! Pero fue un susto.",
-        "choices": [],
-        "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Recuperaste tu trabajo usando git reflog, que es una herramienta de recuperación avanzada. Pero el camino más fácil habría sido crear una rama ANTES de salir del estado detached HEAD. Recuerda: si alguna vez haces commits en estado detached HEAD, crea una rama inmediatamente para mantenerlos seguros."
       },
       "end-perfect": {
-        "narrative": "Creaste una rama de rescate para guardar tus commits del detached HEAD, luego los fusionaste en main. Nada se perdió y el flujo de trabajo fue limpio. ¡Bien manejado!",
+        "narrative": "Contuviste el detached HEAD, anclaste tus commits en una rama de rescate, la subiste al remoto, hiciste cherry-pick del arreglo sobre un main actualizado, y añadiste un indicador en el prompt que te avisa cada vez que HEAD se desconecta. Esto no te volverá a tomar por sorpresa.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Respuesta perfecta! Entendiste que detached HEAD significa que no estás en una rama, creaste una nueva rama para guardar tus commits y luego fusionaste correctamente. La lección clave: si alguna vez te encuentras en detached HEAD con trabajo que quieres conservar, ejecuta inmediatamente 'git checkout -b <nombre-nueva-rama>' para anclar tus commits a una rama."
+        "feedback": "Recuperación de manual. El orden de operaciones -- primero rama, luego push, después cherry-pick, y por último una salvaguarda visible -- es exactamente lo que hacen los usuarios experimentados de Git. El indicador en el prompt convierte un estado confuso en uno obvio, que es la diferencia entre un usuario junior y uno senior."
       },
       "end-good": {
-        "narrative": "Tus commits están guardados en rescue-branch. Puedes fusionarlos en main cuando estés listo. ¡Buen pensamiento!",
+        "narrative": "Salvaste el trabajo, lo subiste e hiciste cherry-pick del arreglo de bug en main. La nota en la wiki ayudará si alguien la lee, pero la mayoría de tus compañeros toparán con el mismo problema antes de abrir la wiki.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 17,
-        "feedback": "¡Buen trabajo guardando tu trabajo creando una rama! La idea clave es que los commits en detached HEAD necesitan una rama para sobrevivir. Puedes fusionar rescue-branch en main cuando estés listo. La próxima vez, considera crear una rama antes de hacer commits en estado detached HEAD."
+        "finalScore": 13,
+        "feedback": "Manejaste bien la recuperación. La documentación está bien, pero es una salvaguarda pasiva -- la gente no lee la wiki hasta que ya rompió algo. Un indicador en el prompt o un alias de Git es activo: te avisa en el momento. Mejora pequeña, gran diferencia."
+      },
+      "end-weak": {
+        "narrative": "El incendio inmediato está apagado, pero nada cambió en tu flujo de trabajo. La próxima vez que hagas checkout de un hash de commit para mirar el historial, volverás a hacer commits encima, y solo el descubrimiento por suerte de 'git reflog' te salvará.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "La recuperación funcionó, pero te saltaste el paso más importante: asegurarte de no repetir el error. 'Tendré más cuidado' no es una salvaguarda -- es un deseo. Añade un indicador en el prompt, un alias para checkouts más seguros o un hook pre-commit que rechace commits en detached HEAD."
       }
     },
     "glossaryTerms": ["detached-head", "head", "branch", "git-reflog"]

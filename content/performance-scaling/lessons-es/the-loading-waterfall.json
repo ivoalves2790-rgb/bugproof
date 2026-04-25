@@ -51,45 +51,70 @@
         ]
       },
       "found-blocking": {
-        "narrative": "¡Exacto! analytics.js está bloqueando el renderizado y obliga a app.js a esperar. El script app.js luego bloquea la llamada API para contenido. Esto crea una cadena: analytics (500ms) -> app.js (800ms) -> llamada API (1.8s) = 3.1 segundos de espera encadenada. ¿Cómo lo arreglas?",
+        "narrative": "Exacto. analytics.js bloquea el renderizado, app.js espera por él, luego la llamada API espera por app.js: una cadena secuencial de 3.1 segundos. ¿Cómo desbloqueas a app.js?",
         "choices": [
-          { "id": "a", "text": "Agregar 'async' a analytics.js para que cargue sin bloquear otros scripts", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Eliminar analytics.js por completo", "nextNode": "end-remove", "score": 5 },
-          { "id": "c", "text": "Combinar todo el JavaScript en un solo archivo", "nextNode": "end-combine", "score": 4 }
+          { "id": "a", "text": "Agregar 'async' a analytics.js para que cargue sin bloquear otros scripts", "nextNode": "fix-resources", "score": 10 },
+          { "id": "b", "text": "Eliminar analytics.js por completo", "nextNode": "fix-resources", "score": 5 },
+          { "id": "c", "text": "Combinar todo el JavaScript en un solo bundle gigante", "nextNode": "fix-resources", "score": 4 }
         ]
       },
       "image-issue": {
-        "narrative": "La imagen principal es grande, pero carga en paralelo con los archivos de fuentes así que no está bloqueando otros recursos. La cadena real está en el JavaScript: analytics.js bloquea app.js, que bloquea la llamada API. Esa cadena suma más de 3 segundos de espera secuencial que podría ocurrir en paralelo.",
+        "narrative": "La imagen es pesada pero carga en paralelo con las fuentes -- no está bloqueando otros recursos. El costo real es la cadena JS: analytics → app.js → API. Tres segundos de espera secuencial que podrían ser paralelos.",
         "choices": [
           { "id": "a", "text": "Enfocarme en la cadena de bloqueo de JavaScript en su lugar", "nextNode": "found-blocking", "score": 7 }
         ]
       },
       "too-many-files": {
-        "narrative": "7 archivos no es inusual para una página web. El problema no es el número de archivos -- es que se están cargando secuencialmente en lugar de en paralelo. Los navegadores modernos pueden descargar 6+ archivos a la vez, pero solo si nada los está bloqueando.",
+        "narrative": "7 archivos no es inusual. El problema no es la cantidad -- son las dependencias. Los navegadores pueden descargar 6+ archivos en paralelo cuando nada los bloquea.",
         "choices": [
           { "id": "a", "text": "Buscar qué está bloqueando las descargas paralelas", "nextNode": "found-blocking", "score": 5 }
         ]
       },
+      "fix-resources": {
+        "narrative": "Los scripts están desbloqueados. Pero la imagen principal y las fuentes esperan a que styles.css termine antes de poder siquiera empezar a descargarse. Los usuarios ven una página en blanco hasta que llega el CSS. ¿Cómo haces que los recursos críticos empiecen antes?",
+        "choices": [
+          { "id": "a", "text": "Agregar <link rel=\"preload\"> para la imagen principal y las fuentes en el <head> del HTML", "nextNode": "fix-api-chain", "score": 10 },
+          { "id": "b", "text": "Inlinear las reglas @font-face en el <head> del HTML para que se descubran antes", "nextNode": "fix-api-chain", "score": 8 },
+          { "id": "c", "text": "Mover el <link rel=\"stylesheet\"> al final del body", "nextNode": "fix-api-chain", "score": 2 }
+        ]
+      },
+      "fix-api-chain": {
+        "narrative": "Los recursos críticos ya empiezan a descargarse en el primer round-trip. Pero la llamada API para el contenido sigue esperando a que app.js descargue Y se parsee antes de poder dispararse -- y la API en sí toma 1.8s. ¿Cómo cortas esa cadena?",
+        "choices": [
+          { "id": "a", "text": "Renderizar el contenido inicial en el servidor para que la página sea significativa antes de que corra cualquier JS", "nextNode": "measure-and-monitor", "score": 10 },
+          { "id": "b", "text": "Agregar un hint <link rel=\"preload\"> para el endpoint de la API para que el navegador empiece el fetch en paralelo", "nextNode": "measure-and-monitor", "score": 8 },
+          { "id": "c", "text": "Disparar la llamada API desde un pequeño <script> inline en el head, antes de que app.js cargue", "nextNode": "measure-and-monitor", "score": 7 },
+          { "id": "d", "text": "Dejarlo -- 1.8s no está tan mal", "nextNode": "measure-and-monitor", "score": 1 }
+        ]
+      },
+      "measure-and-monitor": {
+        "narrative": "DevTools local dice que la página ya es rápida. Pero tu usuario está en un teléfono con 4G en otro país. ¿Cómo confirmas que la corrección realmente ayuda a usuarios reales -- y cómo detectas una regresión la próxima vez que alguien agregue un script?",
+        "choices": [
+          { "id": "a", "text": "Correr Lighthouse + WebPageTest desde un perfil de dispositivo real, luego habilitar Real User Monitoring (RUM) en producción", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Correr Lighthouse una vez en tu laptop y darlo por hecho", "nextNode": "end-okay", "score": 5 },
+          { "id": "c", "text": "Saltarse la medición -- la cascada se ve bien en DevTools", "nextNode": "end-poor", "score": 1 }
+        ]
+      },
       "end-good": {
-        "narrative": "Agregas 'async' al script de analytics:\n\n<script async src=\"/analytics.js\"></script>\n\nAhora analytics carga en segundo plano sin bloquear app.js. El app.js comienza a cargar inmediatamente después del HTML, y la llamada API se dispara antes. El tiempo total de carga baja de 8 segundos a aproximadamente 4.5 segundos.",
+        "narrative": "Desbloqueaste la cadena JS con async, precargaste la imagen y las fuentes para que no esperaran al CSS, mataste la cadena API-tras-JS con renderizado en servidor y validaste el resultado con Lighthouse, WebPageTest y RUM continuo. La carga total baja de 8s a menos de 2s para usuarios reales, y tu monitoreo te alertará la próxima vez que alguien agregue un script que bloquee el render.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Gran trabajo! El atributo 'async' le dice al navegador que descargue y ejecute el script sin bloquear nada más. La idea clave es que la cascada mostró una cadena de dependencias que no necesitaba existir. Analytics no necesita terminar antes de que tu código de app empiece a cargar."
+        "finalScore": 50,
+        "feedback": "Ciclo completo de performance: identificar el cuello de botella, desbloquear JS, priorizar recursos críticos, eliminar la cadena de la API y luego medir en condiciones reales y monitorear en producción. Cada paso eliminó un tipo distinto de dependencia en cascada."
       },
-      "end-remove": {
-        "narrative": "Eliminar analytics funciona pero tu equipo necesita esos datos. Un mejor enfoque es cargar analytics con el atributo 'async' para que no bloquee otros scripts. Esto te da los datos sin el costo de rendimiento.",
+      "end-okay": {
+        "narrative": "La mayoría de las cadenas están corregidas y la cascada se ve mucho mejor. Pero una sola corrida de Lighthouse en una laptop rápida no captura lo que los usuarios móviles realmente experimentan, y no hay monitoreo -- el próximo script bloqueante va a re-introducir silenciosamente la carga de 8 segundos.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "Eliminar recursos que bloquean es efectivo pero drástico. Los atributos 'async' y 'defer' te permiten mantener scripts sin bloquear la carga de la página. Usa 'async' para scripts independientes como analytics, y 'defer' para scripts que necesitan que el DOM esté listo."
+        "finalScore": 32,
+        "feedback": "Correcciones técnicas sólidas; ciclo de verificación débil. Las regresiones de performance son constantes. Sin RUM y un presupuesto en CI, las ganancias se erosionan en meses."
       },
-      "end-combine": {
-        "narrative": "Combinar scripts en un archivo reduce las solicitudes HTTP, pero no arregla el problema de bloqueo -- un script gigante sigue bloqueando el renderizado. Y significa que los usuarios descargan todo el código de entrada, incluso código que quizás no necesiten todavía.",
+      "end-poor": {
+        "narrative": "Las correcciones técnicas se desplegaron, pero nunca confirmaste el resultado en condiciones reales. Estás corriendo en una laptop rápida con red rápida. Los usuarios móviles en 4G podrían seguir mirando una pantalla en blanco por 5 segundos.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Empaquetar puede ayudar con la sobrecarga HTTP, pero la verdadera solución es eliminar la cadena de bloqueo. Usa atributos 'async' o 'defer' para dejar que los scripts carguen sin bloquearse entre sí, y usa división de código para cargar solo lo necesario."
+        "finalScore": 17,
+        "feedback": "Los tiempos de DevTools en tu máquina son el caso más fácil del mundo. Siempre valida contra una red limitada y un perfil de dispositivo real, luego configura RUM para que la próxima regresión no se te escape."
       }
     },
     "glossaryTerms": ["waterfall", "render-blocking", "async-script", "defer"]

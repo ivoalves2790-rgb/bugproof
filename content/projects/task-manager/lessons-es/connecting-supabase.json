@@ -38,67 +38,84 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Has creado un proyecto de Supabase y tienes tu URL y claves. Necesitas conectar tu gestor de tareas de Next.js a la base de datos. Donde almacenas las credenciales?",
+        "narrative": "Has creado un proyecto de Supabase y tienes tu URL y claves. Necesitas conectar tu gestor de tareas de Next.js a la base de datos. ¿Donde almacenas las credenciales?",
         "choices": [
           { "id": "hardcode", "text": "Pegarlas directamente en tu código: const url = 'https://abc123.supabase.co'", "nextNode": "hardcoded", "score": 0 },
-          { "id": "env-file", "text": "Ponerlas en un archivo .env.local y referenciarlas con process.env", "nextNode": "env-setup", "score": 4 },
+          { "id": "env-file", "text": "Ponerlas en un archivo .env.local y referenciarlas con process.env", "nextNode": "env-good", "score": 4 },
           { "id": "config-json", "text": "Crear un archivo config.json con las claves e importarlo", "nextNode": "config-json", "score": 1 }
         ]
       },
       "hardcoded": {
-        "narrative": "Subes tu codigo a GitHub. Tu URL de Supabase y las claves ahora son visibles en tu repositorio publico. Un bot escanea GitHub buscando claves expuestas y empieza a llenar tu base de datos con datos basura en minutos. Y ahora?",
+        "narrative": "Subes tu codigo a GitHub. Tu URL de Supabase y las claves ahora son visibles en tu repositorio publico. Un bot escanea GitHub buscando claves expuestas y empieza a llenar tu base de datos con datos basura en minutos. ¿Y ahora?",
         "choices": [
-          { "id": "rotate-keys", "text": "Rotar inmediatamente las claves en el panel de Supabase, moverlas a .env.local y agregar .env.local a .gitignore", "nextNode": "recovered-end", "score": 3 },
-          { "id": "delete-commit", "text": "Eliminar el commit de GitHub y esperar que nadie lo haya visto", "nextNode": "delete-commit-end", "score": 1 }
+          { "id": "rotate-keys", "text": "Rotar inmediatamente las claves en Supabase, moverlas a .env.local y agregar .env.local a .gitignore", "nextNode": "init-client", "score": 4 },
+          { "id": "delete-commit", "text": "Eliminar el commit de GitHub y esperar que nadie lo haya visto", "nextNode": "init-client", "score": 1 }
         ]
       },
-      "env-setup": {
-        "narrative": "Tu .env.local esta configurado correctamente. Ahora estas escribiendo el codigo para obtener tareas de Supabase. Donde haces la llamada a la base de datos?",
+      "env-good": {
+        "narrative": "Tu .env.local esta configurado correctamente con NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY. Es momento de conectar el cliente.",
         "choices": [
-          { "id": "server-side", "text": "En un componente del servidor o ruta de API, usando la clave de rol de servicio de Supabase para operaciones del lado del servidor", "nextNode": "server-good", "score": 3 },
-          { "id": "client-direct", "text": "Directamente en tu componente React usando la clave anonima con RLS habilitado", "nextNode": "client-good", "score": 4 }
+          { "id": "continue-env", "text": "Pasar a inicializar el cliente de Supabase", "nextNode": "init-client", "score": 3 }
         ]
       },
       "config-json": {
         "narrative": "El config.json queda commiteado en tu repositorio. A diferencia de .env.local (que esta en .gitignore por defecto), los archivos JSON son rastreados por Git. Tus claves ahora estan en el control de versiones.",
         "choices": [
-          { "id": "move-to-env", "text": "Eliminar config.json, mover las claves a .env.local y purgar el archivo del historial de Git", "nextNode": "env-setup", "score": 2 },
-          { "id": "gitignore-json", "text": "Solo agregar config.json a .gitignore de aquí en adelante", "nextNode": "gitignore-late-end", "score": 1 }
+          { "id": "move-to-env", "text": "Eliminar config.json, mover las claves a .env.local y purgar el archivo del historial de Git", "nextNode": "init-client", "score": 3 },
+          { "id": "gitignore-json", "text": "Solo agregar config.json a .gitignore de aquí en adelante", "nextNode": "init-client", "score": 1 }
         ]
       },
-      "server-good": {
-        "narrative": "Tu enfoque del lado del servidor funciona, pero te das cuenta de que la clave de rol de servicio evade la Seguridad a Nivel de Fila completamente. Estas dependiendo de tu propio codigo para imponer reglas de acceso en lugar de la base de datos.",
+      "init-client": {
+        "narrative": "Las credenciales estan resueltas. Ahora necesitas crear el cliente de Supabase que tus componentes van a importar. ¿Donde vive esto?",
+        "choices": [
+          { "id": "single-module", "text": "Un solo archivo lib/supabase.ts que exporta una instancia createClient(...), importada donde sea que se necesite", "nextNode": "fetch-pattern", "score": 4 },
+          { "id": "per-component", "text": "Llamar createClient(url, key) al inicio de cada componente que lo necesite", "nextNode": "fetch-pattern", "score": 1 },
+          { "id": "global-window", "text": "Pegar el cliente a window.supabase para que cualquier codigo lo pueda agarrar sin importar", "nextNode": "fetch-pattern", "score": 0 }
+        ]
+      },
+      "fetch-pattern": {
+        "narrative": "El cliente esta inicializado. Ahora necesitas realmente obtener tareas. ¿Donde haces la llamada a la base de datos?",
+        "choices": [
+          { "id": "client-with-rls", "text": "Directamente en tu componente React usando la clave anonima — las politicas RLS en la base de datos acotan cada consulta al usuario conectado", "nextNode": "errors", "score": 4 },
+          { "id": "service-role", "text": "Desde una ruta de API usando la clave de rol de servicio, filtrando manualmente por user_id en tu codigo", "nextNode": "errors", "score": 2 },
+          { "id": "service-role-no-filter", "text": "Desde una ruta de API usando la clave de rol de servicio, devolviendo lo que sea que la consulta retorne", "nextNode": "errors", "score": 0 }
+        ]
+      },
+      "errors": {
+        "narrative": "Las consultas estan fluyendo. Pero a veces la red se cae o Supabase devuelve un error. Ahora mismo, cuando algo falla, la interfaz solo muestra una lista vacia. ¿Como manejas los errores correctamente?",
+        "choices": [
+          { "id": "destructure-error", "text": "Desestructurar { data, error } de cada llamada de Supabase. Si error esta seteado, loguearlo, mostrar un toast y mantener visibles los datos previos.", "nextNode": "rls-policies", "score": 4 },
+          { "id": "try-catch-only", "text": "Envolver la llamada en try/catch — Supabase lanzara una excepcion si falla, ¿no?", "nextNode": "rls-policies", "score": 1 },
+          { "id": "ignore-errors", "text": "Ignorar errores — son raros y una lista vacia es suficientemente buena", "nextNode": "rls-policies", "score": 0 }
+        ]
+      },
+      "rls-policies": {
+        "narrative": "Los errores estan manejados. Es el momento de la capa de seguridad. La clave anonima es publica, asi que cualquiera con herramientas de desarrollo del navegador puede llamar a tus tablas directamente. ¿Que protege tus datos?",
+        "choices": [
+          { "id": "rls-enabled", "text": "Habilitar Seguridad a Nivel de Fila en cada tabla y escribir politicas como: USING (auth.uid() = user_id). La base de datos rechaza cualquier consulta que no este acotada al usuario que la pide.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "rls-permissive", "text": "Habilitar RLS pero escribir una politica permisiva: USING (true). Cuenta como 'habilitado' en el panel.", "nextNode": "mediocre-end", "score": 1 },
+          { "id": "no-rls", "text": "Saltar RLS por completo — tus consultas ya incluyen user_id, eso basta", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu conexion con Supabase es de calidad produccion: secretos en variables de entorno, un solo modulo de cliente, clave anonima con RLS para consultas acotadas al usuario, manejo apropiado de errores y politicas estrictas en cada tabla. Un bug en el frontend no puede filtrar datos — la base de datos se niega.",
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "La obtencion del lado del servidor con la clave de rol de servicio funciona pero es más riesgosa. La clave de rol de servicio tiene acceso completo a la base de datos sin proteccion RLS. Para la mayoria de las operaciones en un gestor de tareas, usar la clave anonima con RLS en el cliente es más simple y seguro — la base de datos impone quien puede ver que.",
+        "finalScore": 20,
+        "feedback": "Este es el patron recomendado de Supabase: secretos basados en env, un cliente compartido, clave anonima + RLS como tu capa de seguridad y manejo disciplinado de errores en cada llamada. El resultado es una app que es segura por defecto y agradable de depurar.",
         "choices": []
       },
-      "client-good": {
-        "narrative": "Tu cliente usa la clave anonima con politicas RLS que filtran tareas por el usuario autenticado. La base de datos automaticamente asegura que cada usuario solo vea sus propias tareas. Incluso si tu codigo frontend tiene un bug, la base de datos no filtrara datos.",
+      "mediocre-end": {
+        "narrative": "El RLS permisivo tecnicamente pasa el chequeo de 'RLS habilitado' del panel, pero USING (true) significa que cada usuario autenticado puede leer cada fila. Lanzaste un agujero de seguridad disfrazado de funcionalidad de seguridad.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Configuración perfecta! La clave anonima más RLS es el patron recomendado de Supabase. La base de datos se convierte en tu capa de seguridad — incluso un frontend con bugs no puede exponer datos de otros usuarios porque la base de datos impone las reglas. Esto es defensa en profundidad.",
+        "finalScore": 11,
+        "feedback": "RLS sin una politica real es peor que no tener RLS — da una falsa sensacion de seguridad. Tus politicas deben referenciar explicitamente auth.uid() (u otra identidad) para que la base de datos realmente acote los datos al usuario correcto.",
         "choices": []
       },
-      "recovered-end": {
-        "narrative": "Rotas las claves, aseguras tus variables de entorno y agregas politicas RLS. El dano fue limitado porque actuaste rapido. Tambien agregas un hook de pre-commit para escanear secretos expuestos.",
+      "weak-end": {
+        "narrative": "Tu app funciona en pruebas porque todas tus consultas incluyen user_id. Despues lanzas una nueva funcionalidad, olvidas el filtro y la clave anonima alegremente devuelve las tareas de todos al navegador. No hay guarda del lado de la base de datos para atraparte.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "Buena recuperacion, pero las claves expuestas pueden ser encontradas por bots en segundos. Siempre usa .env.local desde el inicio, y considera herramientas como git-secrets o el escaneo de secretos integrado de GitHub para detectar exposicion accidental antes de que suceda.",
-        "choices": []
-      },
-      "delete-commit-end": {
-        "narrative": "Eliminar un commit de GitHub no lo elimina de forks, caches o bots que ya lo escanearon. Tus claves estan comprometidas y los datos basura siguen fluyendo. Eventualmente tienes que rotar las claves de todas formas.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Una vez que un secreto se sube a un repositorio publico, consideralo comprometido permanentemente. El historial de Git preserva todo, y los bots escanean GitHub constantemente. La única solución es rotar las credenciales inmediatamente — eliminar el commit no es suficiente.",
-        "choices": []
-      },
-      "gitignore-late-end": {
-        "narrative": "Agregarlo a .gitignore previene commits futuros, pero las claves ya estan en tu historial de Git. Cualquiera que clone el repositorio puede verlas navegando commits antiguos.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Agregar un archivo a .gitignore solo afecta commits futuros. Los commits pasados aun contienen el archivo. Necesitas purgar el archivo del historial de Git Y rotar las claves comprometidas. Siempre usa .env.local para secretos — Next.js ya lo incluye en .gitignore por defecto.",
+        "feedback": "Cuando tu base de datos es alcanzable desde el navegador con una clave publica, RLS no es opcional — es todo el modelo de seguridad. El filtrado del lado de la app esta a un bug de una fuga. Siempre empareja la clave anonima con politicas estrictas.",
         "choices": []
       }
     },

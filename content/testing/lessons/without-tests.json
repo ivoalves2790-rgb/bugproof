@@ -43,58 +43,76 @@
       "start": {
         "narrative": "Your e-commerce app has 50 pages and zero tests. You need to update the currency formatting function to support euros. It's used in dozens of places: product pages, cart, checkout, receipts, and admin reports. How do you approach this?",
         "choices": [
-          { "id": "a", "text": "Change the function and manually check every page it's used on", "nextNode": "manual-check", "score": 5 },
-          { "id": "b", "text": "Write tests for the formatting function first, then change it", "nextNode": "write-tests-first", "score": 10 },
-          { "id": "c", "text": "Create a new function instead of modifying the existing one", "nextNode": "duplicate", "score": 3 }
+          { "id": "a", "text": "Change the function and manually click every page that uses it", "nextNode": "manual-check", "score": 5 },
+          { "id": "b", "text": "Write tests for the formatter first, then change it (test-first)", "nextNode": "write-tests-first", "score": 10 },
+          { "id": "c", "text": "Create a new euro-only function alongside the old dollar one", "nextNode": "duplicate", "score": 3 }
         ]
       },
       "manual-check": {
-        "narrative": "You spend 2 hours manually clicking through the app. Product pages look fine. Cart looks fine. You deploy. Monday morning, you discover that the admin report page (which you forgot to check) is showing prices as NaN. The finance team has been exporting broken reports all weekend.",
+        "narrative": "You spend 2 hours clicking through the app. Product pages look fine. Cart looks fine. You deploy. Monday morning, the admin report (which you forgot to check) is showing prices as NaN. Finance has been exporting broken reports all weekend.",
         "choices": [
-          { "id": "a", "text": "Fix the admin report and add tests so this doesn't happen again", "nextNode": "end-learned", "score": 7 },
-          { "id": "b", "text": "Fix the admin report and move on", "nextNode": "end-poor", "score": 3 }
+          { "id": "a", "text": "Fix the admin report and pin a regression test for the formatter", "nextNode": "audit-coverage", "score": 8 },
+          { "id": "b", "text": "Fix the admin report and move on -- you spotted it now", "nextNode": "audit-coverage", "score": 3 }
         ]
       },
       "write-tests-first": {
-        "narrative": "You write 8 tests for the currency formatter: dollars, euros, zero amounts, negative amounts, large numbers, missing currency, null values, and the admin report format. Then you update the function. 6 tests pass, 2 fail -- the admin report format and null handling broke. You fix them in 5 minutes. What do you do next?",
+        "narrative": "You write 8 tests for the formatter: dollars, euros, zero, negative, large numbers, missing currency, null, and the admin report format. Then you change the function. 6 tests pass, 2 fail -- admin report format and null handling broke. You fix them in 5 minutes.",
         "choices": [
-          { "id": "a", "text": "Run all tests one more time, then deploy with confidence", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Also manually spot-check a few pages just to be safe", "nextNode": "end-great", "score": 10 }
+          { "id": "a", "text": "All tests green -- now plan how to keep coverage up across the codebase", "nextNode": "audit-coverage", "score": 10 },
+          { "id": "b", "text": "Tests pass -- ship it, deal with the rest of the codebase later", "nextNode": "audit-coverage", "score": 5 }
         ]
       },
       "duplicate": {
-        "narrative": "Now you have two formatting functions doing almost the same thing. Some pages use the old one, some use the new one. In 3 months, someone will change one and forget about the other. This is how untested codebases get worse over time -- people are afraid to modify existing code, so they duplicate it instead.",
+        "narrative": "Now you have two formatting functions doing almost the same thing. Some pages use the old one, some the new one. In 3 months, someone changes one and forgets the other. This is exactly how untested codebases decay -- duplication grows because no one trusts the original.",
         "choices": [
-          { "id": "a", "text": "Actually, let me write tests for the original function and modify it properly", "nextNode": "write-tests-first", "score": 5 }
+          { "id": "a", "text": "Delete the duplicate, write tests for the original, and modify it properly", "nextNode": "audit-coverage", "score": 6 },
+          { "id": "b", "text": "Leave both for now -- it's not actively breaking anything", "nextNode": "audit-coverage", "score": 1 }
         ]
       },
-      "end-learned": {
-        "narrative": "You fix the report and write tests. This one bug cost the finance team a weekend of bad data. If you'd had tests, those 2 seconds of test runtime would have caught this before it ever reached production.",
-        "choices": [],
-        "isEnd": true,
-        "finalScore": 12,
-        "feedback": "At least you learned the lesson! Manual testing missed the admin report because it's easy to forget pages you don't use often. Tests check everything automatically, every time. Write the tests now and you'll never have this problem again."
+      "audit-coverage": {
+        "narrative": "The formatter is fixed. But the codebase still has zero tests anywhere else. The next breakage is just waiting for the next change. You have one afternoon to invest in coverage. Where do you spend it?",
+        "choices": [
+          { "id": "a", "text": "Cover the highest-risk modules first: checkout, payments, currency, auth", "nextNode": "wire-ci", "score": 10 },
+          { "id": "b", "text": "Aim for 100% coverage of the smallest, easiest utility files", "nextNode": "wire-ci", "score": 4 },
+          { "id": "c", "text": "Add a single end-to-end test that clicks through every page", "nextNode": "wire-ci", "score": 6 }
+        ]
       },
-      "end-poor": {
-        "narrative": "You fix the immediate problem but don't add tests. The next time someone changes the formatting function, the same thing will likely happen again -- maybe in a different page you forgot to check. Without tests, you're just playing whack-a-mole with bugs.",
-        "choices": [],
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Fixing the bug without adding tests means you'll keep hitting the same kind of problem. The 15 minutes it takes to write tests for this function would prevent hours of debugging in the future."
+      "wire-ci": {
+        "narrative": "You've got tests for the riskiest paths. They're useless if no one runs them. How do you make sure they actually catch regressions before users do?",
+        "choices": [
+          { "id": "a", "text": "Run tests in CI on every pull request and block merges on failures", "nextNode": "decide-ship", "score": 10 },
+          { "id": "b", "text": "Tell the team to run tests locally before pushing -- trust the process", "nextNode": "decide-ship", "score": 4 },
+          { "id": "c", "text": "Run tests nightly and email failures to the team channel", "nextNode": "decide-ship", "score": 6 }
+        ]
+      },
+      "decide-ship": {
+        "narrative": "CI is wired up. Tests pass. The team is asking when you'll deploy the currency change. What's the responsible final move?",
+        "choices": [
+          { "id": "a", "text": "Deploy behind a feature flag, watch error rates, then roll out widely", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Deploy straight to production -- the tests are green", "nextNode": "end-okay", "score": 6 },
+          { "id": "c", "text": "Wait two weeks for more manual QA before any deploy", "nextNode": "end-poor", "score": 2 }
+        ]
       },
       "end-good": {
-        "narrative": "All 8 tests pass. You deploy with confidence, knowing that every format -- dollars, euros, edge cases -- has been verified. If anyone modifies this function in the future, the tests will immediately catch any problems.",
+        "narrative": "You ship behind a flag. A small percentage of users hit the new formatter while you watch error logs. Zero anomalies, so you ramp to 100% the next day. CI now blocks any future change that breaks currency formatting -- and the rest of the high-risk modules are covered too.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "This is the right approach! Writing tests before modifying shared code is called 'test-first' and it's incredibly effective. The tests caught 2 bugs in 2 seconds that would have taken hours to discover manually."
+        "finalScore": 50,
+        "feedback": "Textbook turnaround: write tests first, prioritize risky modules, wire CI, and ship behind a flag. The codebase is no longer one CSS change away from disaster. Every future contributor inherits a safety net you built in a single afternoon."
       },
-      "end-great": {
-        "narrative": "Tests + a quick manual check is the gold standard. Tests verify the logic, and your manual check catches visual issues the tests might miss (like formatting looking weird on the page). You deploy confidently.",
+      "end-okay": {
+        "narrative": "The change ships. Tests pass, no immediate fires. But you skipped the gradual rollout, so if something subtle were wrong, every user would have hit it at once. You got lucky this time.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Best of both worlds! Automated tests caught the logic bugs, and your manual spot-check verified the visual presentation. This combination is what professional teams use for critical changes."
+        "finalScore": 32,
+        "feedback": "You did the hard work -- tests, CI, prioritization. Skipping the feature-flag rollout was the only weak link. Tests catch known failure modes; staged rollouts catch the unknowns. Use both."
+      },
+      "end-poor": {
+        "narrative": "Two weeks of manual QA later, you finally deploy. The team is frustrated by the delay, and the manual QA still missed an edge case in the admin report. Your hard-won tests are sitting unused while you re-click pages by hand.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 18,
+        "feedback": "Tests exist to replace manual checking, not supplement it indefinitely. If you trust your test suite enough to write it, trust it enough to ship behind it. Otherwise the tests become decoration."
       }
     },
     "glossaryTerms": ["regression", "test-first", "codebase-decay"]

@@ -45,63 +45,75 @@
       "start": {
         "narrative": "Los usuarios reportan un error extraño: cuando actualizan su perfil, a veces el perfil de otro usuario cambia. Miras la tabla users y descubres que no tiene clave primaria -- la app identifica usuarios por su columna de nombre. Dos usuarios se llaman 'Alex Johnson.' Cuando la app ejecuta UPDATE users SET bio = 'new bio' WHERE name = 'Alex Johnson', ¿qué pasa?",
         "choices": [
-          { "id": "a", "text": "Ambos Alex Johnson obtienen la misma bio -- la cláusula WHERE coincide con dos filas", "nextNode": "correct-both", "score": 10 },
-          { "id": "b", "text": "Solo el primer Alex Johnson se actualiza", "nextNode": "wrong-first", "score": 3 },
-          { "id": "c", "text": "La base de datos lanza un error por el nombre duplicado", "nextNode": "wrong-error", "score": 2 }
-        ]
-      },
-      "correct-both": {
-        "narrative": "¡Exactamente! WHERE name = 'Alex Johnson' coincide con AMBAS filas, así que ambos usuarios obtienen la misma bio. Por eso nunca debes identificar filas por nombre. ¿Cómo deberíamos arreglar esta tabla?",
-        "choices": [
-          { "id": "a", "text": "Agregar una columna id auto-incremental como clave primaria", "nextNode": "correct-fix", "score": 10 },
-          { "id": "b", "text": "Usar la columna email como clave primaria ya que los emails son únicos", "nextNode": "partial-email", "score": 5 },
-          { "id": "c", "text": "Solo asegurarse de que los usuarios no puedan tener nombres duplicados", "nextNode": "wrong-unique-name", "score": 2 }
+          { "id": "a", "text": "Ambos Alex Johnson obtienen la misma bio -- la cláusula WHERE coincide con dos filas", "nextNode": "diagnose-fix", "score": 4 },
+          { "id": "b", "text": "Solo el primer Alex Johnson se actualiza", "nextNode": "wrong-first", "score": 1 },
+          { "id": "c", "text": "La base de datos lanza un error por el nombre duplicado", "nextNode": "wrong-error", "score": 0 }
         ]
       },
       "wrong-first": {
-        "narrative": "SQL no tiene el concepto de 'primera' o 'segunda' fila -- las filas en una tabla no tienen un orden inherente. La cláusula WHERE coincide con TODAS las filas que cumplen la condición. Ambos Alex Johnson coinciden con WHERE name = 'Alex Johnson', así que ambos se actualizan.",
+        "narrative": "SQL no tiene el concepto de 'primera' o 'segunda' fila -- las filas en una tabla no tienen orden inherente. WHERE coincide con TODAS las filas que cumplen la condición. Ambos Alex Johnson coinciden, así que ambos se actualizan.",
         "choices": [
-          { "id": "a", "text": "Entonces ambas filas se modifican porque el WHERE coincide con ambas", "nextNode": "correct-both", "score": 5 }
+          { "id": "a", "text": "Entonces ambas filas se modifican porque el WHERE coincide con ambas", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
       "wrong-error": {
-        "narrative": "La base de datos no lanzará un error -- tener nombres duplicados es perfectamente válido. La columna name no tiene restricción UNIQUE. SQL felizmente actualizará cada fila que coincida con la cláusula WHERE, incluso si son 100 filas. ¡Ese es exactamente el problema!",
+        "narrative": "La base de datos no lanzará un error -- los nombres duplicados son perfectamente válidos porque la columna name no tiene restricción UNIQUE. SQL felizmente actualizará cada fila que coincida, incluso si son 100 filas. Ese es exactamente el problema.",
         "choices": [
-          { "id": "a", "text": "Entonces ambos Alex Johnson obtienen la misma actualización", "nextNode": "correct-both", "score": 5 }
+          { "id": "a", "text": "Entonces ambos Alex Johnson obtienen la misma actualización", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
-      "correct-fix": {
-        "narrative": "Agregas: ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY. Ahora cada usuario tiene un ID numérico único. La app usa UPDATE users SET bio = 'new bio' WHERE id = 42 en lugar de WHERE name = 'Alex Johnson'. ¡Problema resuelto! ¿Cuál es la ventaja de usar un entero auto-incremental?",
+      "diagnose-fix": {
+        "narrative": "Estás de acuerdo en que la tabla necesita una clave primaria real. ¿Qué columna eliges?",
         "choices": [
-          { "id": "a", "text": "Siempre es único, nunca cambia, y la base de datos lo genera automáticamente", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Es más fácil de escribir que un UUID", "nextNode": "end-ok", "score": 5 }
+          { "id": "a", "text": "Agregar una nueva columna id SERIAL PRIMARY KEY -- auto-generada, única, inmutable", "nextNode": "alter-table", "score": 4 },
+          { "id": "b", "text": "Promover la columna email a PRIMARY KEY -- los emails son únicos", "nextNode": "alter-table", "score": 2 },
+          { "id": "c", "text": "Agregar restricción UNIQUE a la columna name y prohibir nombres duplicados", "nextNode": "alter-table", "score": 0 }
         ]
       },
-      "partial-email": {
-        "narrative": "Los emails son únicos, pero no son ideales como claves primarias. Los usuarios cambian sus direcciones de correo, lo que requeriría actualizar la clave primaria en todos los lugares donde se referencia. Una buena clave primaria nunca debería cambiar. Un entero auto-incremental (1, 2, 3...) es mejor porque nunca cambia.",
+      "alter-table": {
+        "narrative": "¿Cómo agregas la nueva columna id de forma segura en una tabla que ya tiene miles de filas en producción?",
         "choices": [
-          { "id": "a", "text": "Usar un id auto-incremental en su lugar ya que nunca cambia", "nextNode": "correct-fix", "score": 7 }
+          { "id": "a", "text": "ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY -- Postgres rellena IDs secuenciales para las filas existentes automáticamente", "nextNode": "update-callers", "score": 4 },
+          { "id": "b", "text": "Tirar la tabla, recrearla con id SERIAL PRIMARY KEY, luego re-insertar todos los datos desde un backup", "nextNode": "update-callers", "score": 1 },
+          { "id": "c", "text": "Agregar la columna como nullable, correr un UPDATE para asignar enteros aleatorios, luego agregar PRIMARY KEY -- y rezar que nada colisione", "nextNode": "update-callers", "score": 1 }
         ]
       },
-      "wrong-unique-name": {
-        "narrative": "Forzar nombres únicos es una experiencia de usuario terrible -- ¿qué pasa si dos personas genuinamente se llaman 'Alex Johnson'? No puedes decirle a una de ellas que no puede usar su nombre real. La solución es darle a cada fila su propio identificador único que esté separado de cualquier dato del mundo real.",
+      "update-callers": {
+        "narrative": "La columna id existe. Pero el código de la app sigue corriendo UPDATE users SET bio = ? WHERE name = ?. El bug no está arreglado hasta que los callers también cambien. ¿Cuál es tu estrategia de migración?",
         "choices": [
-          { "id": "a", "text": "Agregar una columna id auto-incremental como clave primaria", "nextNode": "correct-fix", "score": 5 }
+          { "id": "a", "text": "Actualizar cada caller WHERE-por-nombre a WHERE id = ?, desplegar la app y la migración juntas, y agregar un check de code-review que marque cualquier nuevo WHERE name = ?", "nextNode": "verify", "score": 4 },
+          { "id": "b", "text": "Actualizar solo el endpoint de actualización de perfil (el del reporte de bug) y dejar el resto de los callers WHERE-por-nombre para después", "nextNode": "verify", "score": 2 },
+          { "id": "c", "text": "Saltar la actualización de código -- solo tener la columna id debería ser suficiente", "nextNode": "verify", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "El id auto-incremental se genera automáticamente (nunca lo estableces manualmente), es único garantizado (no hay duplicados posibles), y nunca necesita cambiar. Incluso si un usuario cambia su nombre, email o cualquier otro campo, su id permanece igual. El error está corregido.",
+      "verify": {
+        "narrative": "Migración desplegada. Antes de declarar el bug cerrado, ¿cómo demuestras que el fix realmente funciona para el escenario reportado?",
+        "choices": [
+          { "id": "a", "text": "Reproducir el bug original en staging con dos filas 'Alex Johnson': una actualiza su bio, confirmar que solo esa fila cambió, y agregar un test de regresión que lo asegure", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Echar un vistazo a producción: consultar a ambos Alex Johnson y ver si sus bios se ven diferentes ahora", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Confiar en la migración y cerrar el ticket -- el esquema claramente tiene una clave primaria ahora", "nextNode": "end-weak", "score": 0 }
+        ]
+      },
+      "end-good": {
+        "narrative": "La repro en staging muestra que exactamente la bio de un Alex Johnson cambió -- la del otro está intacta. El test de regresión falla en el código VIEJO y pasa en el nuevo, demostrando que habría atrapado el bug original. Con la migración completa de los callers más el test, la CLASE de bug (no solo este bug) desapareció.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Identificaste correctamente que identificar filas por datos no únicos causa errores, y que las claves primarias auto-incrementales resuelven esto permanentemente. Este es un concepto fundamental: cada tabla debería tener una clave primaria, y debería ser un identificador único sin significado, no datos del mundo real."
+        "feedback": "Hiciste el trabajo completo: diagnosticaste la causa raíz (sin clave primaria), elegiste el tipo correcto de clave (entero auto-incremental, no datos del mundo real), migraste el esquema de forma segura, actualizaste los callers, y verificaste con un test de regresión. Las claves primarias solo te protegen si el código realmente las usa Y el test lo prueba."
       },
-      "end-ok": {
-        "narrative": "Cierto, pero las razones principales son más importantes: es único garantizado, se genera automáticamente y nunca necesita cambiar. Esas propiedades lo hacen una manera confiable de identificar cualquier fila para siempre.",
+      "end-mediocre": {
+        "narrative": "Las dos bios se ven diferentes en producción hoy, así que cierras el ticket. Pero solo actualizaste el endpoint de actualización de perfil, y el flujo de verificación de email sigue corriendo WHERE name = ? -- simplemente no lo activaste durante el vistazo. La próxima vez que dos usuarios compartan nombre y uno verifique su email, se verifica la cuenta del otro en su lugar.",
         "choices": [],
         "isEnd": true,
         "finalScore": 12,
-        "feedback": "Los beneficios clave de los IDs auto-incrementales son: generación automática (sin trabajo manual), unicidad garantizada (sin duplicados), e inmutabilidad (nunca cambian incluso cuando otros datos sí lo hacen). Estas propiedades los hacen la opción estándar para claves primarias."
+        "feedback": "Echar un vistazo a producción verifica un momento en el tiempo, no una clase de bug. Una repro real en staging más un test de regresión hubieran sacado a la luz los otros callers WHERE-por-nombre, porque escribir el test te obliga a enumerar los escenarios. La verificación manual solo atrapa los bugs que recuerdas buscar."
+      },
+      "end-weak": {
+        "narrative": "La migración corrió y la columna id está poblada, pero ningún código de la app la usa y no corriste ninguna verificación. Cada UPDATE sigue corriendo WHERE name = ?, ambos Alex Johnson siguen obteniendo la misma actualización de bio, y el bug original se envía sin cambios. Agregaste una columna y le llamaste fix.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Una clave primaria en el esquema no hace nada si la app sigue identificando filas por datos no únicos, y saltar la verificación significa que ni siquiera lo sabes. El esquema, las consultas y el test son un solo sistema -- cambiar solo una parte es lo mismo que no cambiar nada para el bug que ve el usuario."
       }
     },
     "glossaryTerms": ["primary-key", "serial", "uuid", "unique-constraint"]

@@ -43,50 +43,75 @@
       "start": {
         "narrative": "Los usuarios reportan una pantalla blanca de 3 segundos antes de que tu sitio web aparezca. Abres Chrome DevTools y revisas la pestaña Network. Ves que un archivo JavaScript de 2MB (bundle.js) se está cargando en el <head> de la página. Este archivo tarda 2.8 segundos en descargarse. ¿Cuál es el problema?",
         "choices": [
-          { "id": "a", "text": "El archivo JavaScript en el <head> está bloqueando al navegador de renderizar cualquier cosa", "nextNode": "correct-blocking", "score": 10 },
-          { "id": "b", "text": "El servidor es demasiado lento para responder", "nextNode": "wrong-server", "score": 3 },
-          { "id": "c", "text": "El archivo HTML en sí es demasiado grande", "nextNode": "wrong-html", "score": 2 }
-        ]
-      },
-      "correct-blocking": {
-        "narrative": "¡Exactamente! Una etiqueta <script> en el <head> bloquea al navegador de renderizar hasta que el script se descarga y ejecuta. Un archivo de 2MB que tarda 2.8 segundos significa que los usuarios no ven nada durante casi 3 segundos. ¿Cómo deberíamos arreglar esto?",
-        "choices": [
-          { "id": "a", "text": "Mover el script al final del <body> o agregar el atributo 'defer'", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Hacer el archivo JavaScript más pequeño", "nextNode": "end-good", "score": 7 },
-          { "id": "c", "text": "Eliminar JavaScript completamente", "nextNode": "wrong-remove", "score": 2 }
+          { "id": "a", "text": "El archivo JavaScript en el <head> está bloqueando al navegador de renderizar cualquier cosa", "nextNode": "fix-blocking", "score": 4 },
+          { "id": "b", "text": "El servidor es demasiado lento para responder", "nextNode": "wrong-server", "score": 1 },
+          { "id": "c", "text": "El archivo HTML en sí es demasiado grande", "nextNode": "wrong-html", "score": 0 }
         ]
       },
       "wrong-server": {
         "narrative": "La pestaña Network muestra que el servidor responde en 200ms -- eso es rápido. El retraso está en el lado del cliente: el navegador está esperando a que un archivo JavaScript grande termine de descargarse antes de renderizar cualquier cosa. El archivo es el cuello de botella, no el servidor.",
         "choices": [
-          { "id": "a", "text": "Entonces el archivo JavaScript está bloqueando al navegador de renderizar", "nextNode": "correct-blocking", "score": 5 }
+          { "id": "ws-redirect", "text": "Entonces el archivo JavaScript en el <head> está bloqueando el render", "nextNode": "fix-blocking", "score": 2 }
         ]
       },
       "wrong-html": {
-        "narrative": "El archivo HTML es solo de 15KB y carga en 100ms. El problema es el archivo JavaScript de 2MB referenciado en el <head> -- el navegador detiene el renderizado mientras descarga y analiza ese script.",
+        "narrative": "El archivo HTML es solo de 15KB y carga en 100ms. El problema es el archivo JavaScript de 2MB referenciado en el <head> -- el navegador detiene el análisis mientras descarga y ejecuta ese script.",
         "choices": [
-          { "id": "a", "text": "El JavaScript en el head es el problema que bloquea el renderizado", "nextNode": "correct-blocking", "score": 5 }
+          { "id": "wh-redirect", "text": "Entendido -- el script en el <head> es el culpable que bloquea el renderizado", "nextNode": "fix-blocking", "score": 2 }
         ]
       },
-      "wrong-remove": {
-        "narrative": "El sitio necesita JavaScript para la interactividad. Pero no necesita bloquear la página de mostrar contenido mientras el JS carga. Hay un punto medio -- dejar que el HTML y CSS se rendericen primero mientras JavaScript carga en segundo plano.",
+      "fix-blocking": {
+        "narrative": "El paso 1 del pipeline (analizar HTML para construir el DOM) está bloqueado por el script. ¿Cómo lo desbloqueas para que el navegador pueda construir el DOM en paralelo con la descarga del script?",
         "choices": [
-          { "id": "a", "text": "Cargar el script con defer para que no bloquee el renderizado", "nextNode": "end-great", "score": 7 }
+          { "id": "fb-defer", "text": "Agregar el atributo 'defer': <script defer src='bundle.js'> -- el script descarga en paralelo y se ejecuta después de que el DOM esté construido", "nextNode": "css-step", "score": 4 },
+          { "id": "fb-async", "text": "Agregar 'async' en su lugar -- se ejecuta en cuanto descarga, aunque interrumpa el análisis del HTML", "nextNode": "css-step", "score": 2 },
+          { "id": "fb-remove", "text": "Eliminar JavaScript de la página completamente", "nextNode": "css-step", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "Agregas 'defer' a la etiqueta script: <script defer src='bundle.js'>. Ahora el navegador renderiza el HTML y CSS inmediatamente mientras el JavaScript se descarga en segundo plano. La pantalla blanca desapareció -- los usuarios ven contenido de inmediato, y JavaScript se activa cuando está listo.",
-        "choices": [],
+      "css-step": {
+        "narrative": "La construcción del DOM ahora fluye. Pero el siguiente paso del pipeline -- construir el CSSOM y aplicar estilos -- sigue lento. Un solo archivo CSS de 800KB en el <head> bloquea la pintura hasta que termine de descargarse. ¿Qué haces?",
+        "choices": [
+          { "id": "css-critical", "text": "Inlinear el CSS crítico above-the-fold dentro de <style> y cargar el resto con media queries o rel='preload'", "nextNode": "layout-step", "score": 4 },
+          { "id": "css-split", "text": "Dividir la hoja de estilos por ruta y solo enviar el CSS que esa página necesita", "nextNode": "layout-step", "score": 3 },
+          { "id": "css-leave", "text": "Dejar el CSS como está — los usuarios se acostumbrarán a la espera", "nextNode": "layout-step", "score": 0 }
+        ]
+      },
+      "layout-step": {
+        "narrative": "La página ahora pinta rápido. Pero el scroll se siente trabado en una lista larga de productos — cada evento de scroll dispara un recálculo de layout porque tu código lee element.offsetHeight en un loop y luego escribe nuevos estilos. ¿Cuál es el arreglo?",
+        "choices": [
+          { "id": "ly-batch", "text": "Agrupar todas las lecturas primero, luego todas las escrituras — evitar el ciclo lectura/escritura/lectura/escritura que fuerza layouts síncronos", "nextNode": "paint-step", "score": 4 },
+          { "id": "ly-raf", "text": "Envolver las escrituras en requestAnimationFrame para que corran antes del próximo paint", "nextNode": "paint-step", "score": 3 },
+          { "id": "ly-throttle", "text": "Throttlear el handler de scroll a 100ms — menos recálculos, pero feedback laggeado", "nextNode": "paint-step", "score": 1 }
+        ]
+      },
+      "paint-step": {
+        "narrative": "El layout es estable. El paso final del pipeline es pintar y componer. Tienes un header sticky que se repinta en cada scroll, bajando los frames a 30fps. ¿Cómo mantienes barato el costo de pintura?",
+        "choices": [
+          { "id": "pt-layer", "text": "Promover el header a su propia capa de compositor con transform: translateZ(0) o will-change: transform — la GPU maneja el movimiento sin repintar", "nextNode": "excellent-end", "score": 4 },
+          { "id": "pt-shadow", "text": "Animar top/left en JS — esas propiedades casualmente disparan layout y paint cada frame", "nextNode": "mediocre-end", "score": 1 },
+          { "id": "pt-noop", "text": "Aceptar 30fps — la mayoría de los usuarios no se dará cuenta", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Recorriste el pipeline completo: desbloqueaste la construcción del DOM con defer, inlineaste el CSS crítico para que el paint arrancara rápido, agrupaste lecturas y escrituras para que el layout siguiera barato, y promoviste el header sticky a una capa de GPU para que el scroll llegara a 60fps. La pantalla blanca se fue y la página se siente instantánea.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Identificaste que un script que bloquea el renderizado en el <head> estaba causando la pantalla blanca y lo arreglaste con el atributo 'defer'. Esta es una de las mejoras de rendimiento más comunes en desarrollo web. El atributo 'defer' le dice al navegador que descargue el script en segundo plano y lo ejecute después de que el HTML sea analizado."
+        "feedback": "Esto es rendimiento de renderizado bien hecho. Cada arreglo apuntó a una etapa específica del pipeline: parse, estilo, layout, paint. Cuando los usuarios dicen 'el sitio se siente rápido', esto es lo que están sintiendo.",
+        "choices": []
       },
-      "end-good": {
-        "narrative": "Hacer el archivo más pequeño ayuda, pero incluso un archivo más pequeño en el <head> bloqueará el renderizado. La mejor solución es combinar ambos: hacerlo más pequeño Y agregar 'defer' para que no bloquee el renderizado en absoluto.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "La página pinta rápido en la primera carga, pero el scroll todavía relayoutea cada frame porque la animación del header golpea propiedades pesadas para paint. Los puntajes de performance son mixtos.",
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Reducir el tamaño del archivo siempre es bueno, pero el problema central es que los scripts en el <head> bloquean el renderizado. Agregar 'defer' o mover el script al final del <body> eliminaría la pantalla blanca independientemente del tamaño del archivo."
+        "finalScore": 12,
+        "feedback": "Manejaste bien el pipeline de carga, pero paint es su propia disciplina. Anima transform y opacity (solo compositor) en lugar de top/left/width/height (que fuerzan layout y paint).",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Algunas etapas del pipeline están afinadas, pero aceptaste un scroll trabado. Los usuarios en teléfonos de gama baja abandonan la página en segundos.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "30fps se siente roto al ojo humano, sobre todo en mobile. Los arreglos para el costo de paint son baratos — al mínimo promueve el elemento animado a su propia capa para que el scroll quede suave.",
+        "choices": []
       }
     },
     "glossaryTerms": ["rendering", "dom", "render-blocking", "defer"]

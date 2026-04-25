@@ -43,63 +43,83 @@
       "start": {
         "narrative": "La tasa de conversión de tu sitio de e-commerce cayó un 30% de la noche a la mañana. Los ingresos bajaron significativamente. El equipo de desarrollo dice que no se desplegó código. ¿Por dónde empiezas a investigar?",
         "choices": [
-          { "id": "a", "text": "Verificar si el sitio está cargando más lento de lo normal usando herramientas de monitoreo", "nextNode": "check-speed", "score": 10 },
-          { "id": "b", "text": "Revisar los logs de errores del servidor en busca de caídas", "nextNode": "check-errors", "score": 5 },
-          { "id": "c", "text": "Verificar si un competidor lanzó una oferta", "nextNode": "check-competitor", "score": 2 }
+          { "id": "a", "text": "Revisar los tiempos de carga de página en tus herramientas de monitoreo (dashboard de RUM, Lighthouse, etc.)", "nextNode": "check-speed", "score": 4 },
+          { "id": "b", "text": "Revisar los logs de errores del servidor en busca de caídas", "nextNode": "check-errors", "score": 2 },
+          { "id": "c", "text": "Verificar si un competidor lanzó una oferta", "nextNode": "check-competitor", "score": 1 }
         ]
       },
       "check-speed": {
-        "narrative": "Abres tu panel de monitoreo y lo ves: el tiempo promedio de carga de página saltó de 1.8 segundos a 7.2 segundos ayer. El sitio no está roto -- solo es dolorosamente lento. Los usuarios están llegando pero se van antes de que la página termine de cargar. ¿Cuál es la causa probable?",
+        "narrative": "Abres tu panel de monitoreo y lo ves: el tiempo promedio de carga de página saltó de 1.8 segundos a 7.2 segundos ayer. El sitio no está roto -- solo es dolorosamente lento. ¿En qué parte de la cadena de la solicitud se está yendo el tiempo?",
         "choices": [
-          { "id": "a", "text": "Verificar si un script de terceros o CDN está teniendo problemas", "nextNode": "found-cdn", "score": 10 },
-          { "id": "b", "text": "Verificar si la base de datos está lenta", "nextNode": "check-db", "score": 6 },
-          { "id": "c", "text": "Verificar si hay un ataque DDoS", "nextNode": "check-ddos", "score": 4 }
+          { "id": "a", "text": "Abrir la pestaña Network en DevTools para ver qué solicitudes específicas son lentas", "nextNode": "find-cause", "score": 4 },
+          { "id": "b", "text": "Verificar si la base de datos está lenta", "nextNode": "find-cause", "score": 2 },
+          { "id": "c", "text": "Asumir que es un ataque DDoS y activar rate limiting", "nextNode": "find-cause", "score": 1 }
         ]
       },
       "check-errors": {
         "narrative": "Sin errores de servidor ni caídas. El sitio técnicamente funciona bien -- todas las páginas devuelven respuestas 200 OK. Pero algo está haciendo que los usuarios se vayan sin comprar. ¿Quizás el problema no son errores sino velocidad?",
         "choices": [
-          { "id": "a", "text": "Verificar la velocidad de carga del sitio en herramientas de monitoreo", "nextNode": "check-speed", "score": 7 }
+          { "id": "a", "text": "Verificar la velocidad de carga del sitio en herramientas de monitoreo", "nextNode": "check-speed", "score": 3 }
         ]
       },
       "check-competitor": {
         "narrative": "No hay actividad importante de competidores. Tus números de tráfico son en realidad los mismos de siempre -- la gente está visitando. Simplemente no están comprando. El problema está de tu lado.",
         "choices": [
-          { "id": "a", "text": "Verificar si el sitio se está comportando diferente de lo normal", "nextNode": "check-speed", "score": 5 }
+          { "id": "a", "text": "Verificar si el sitio se está comportando diferente de lo normal", "nextNode": "check-speed", "score": 2 }
         ]
       },
-      "found-cdn": {
-        "narrative": "¡Lo encontraste! Tu proveedor de CDN de imágenes tuvo una interrupción parcial ayer. Todas las imágenes de productos se están cargando desde un servidor de respaldo que es 10 veces más lento. Las imágenes están ahí, pero tardan más de 5 segundos en aparecer. Los usuarios ven una página llena de marcadores de imagen vacíos y se van. ¿Qué haces?",
+      "find-cause": {
+        "narrative": "La pestaña Network cuenta la historia: HTML y respuestas de API vuelven en menos de 200ms, pero cada imagen de producto está tardando más de 5 segundos y todas se sirven desde cdn.imagekit.io. Verificas status.imagekit.io y ves un aviso de interrupción parcial. ¿Cuál es tu movimiento inmediato?",
         "choices": [
-          { "id": "a", "text": "Cambiar a un CDN de respaldo y agregar carga diferida para imágenes debajo del pliegue", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Esperar a que el proveedor de CDN arregle su interrupción", "nextNode": "end-wait", "score": 3 }
+          { "id": "a", "text": "Cambiar el origen de imágenes a un CDN de respaldo (Cloudflare, Bunny o tu fallback) para restaurar la velocidad en minutos", "nextNode": "harden-frontend", "score": 4 },
+          { "id": "b", "text": "Abrir un ticket de soporte con el proveedor de CDN y esperar a que se recupere", "nextNode": "harden-frontend", "score": 1 },
+          { "id": "c", "text": "Mandar a todos los clientes un código de cupón para compensar la lentitud", "nextNode": "harden-frontend", "score": 0 }
         ]
       },
-      "check-db": {
-        "narrative": "Los tiempos de respuesta de la base de datos son normales -- las consultas son rápidas. Las respuestas de la API también son rápidas. La lentitud está ocurriendo en el frontend, después de que los datos llegan. Algo sobre renderizar la página está tomando mucho más tiempo de lo normal.",
+      "harden-frontend": {
+        "narrative": "El CDN de respaldo está sirviendo imágenes y los tiempos de carga bajaron a 2.4 segundos. Todavía más lento de lo ideal. ¿Qué cambio en el frontend reduce el impacto de un CDN lento aun cuando uno esté degradado?",
         "choices": [
-          { "id": "a", "text": "Verificar si los recursos estáticos (imágenes, CSS, JS) están cargando lento", "nextNode": "found-cdn", "score": 8 }
+          { "id": "a", "text": "Agregar 'loading=\"lazy\"' a las imágenes debajo del pliegue y servir tamaños responsivos con 'srcset' para que móvil descargue menos datos", "nextNode": "set-monitoring", "score": 4 },
+          { "id": "b", "text": "Reemplazar todas las etiquetas <img> con background-images de CSS para diferir la carga", "nextNode": "set-monitoring", "score": 2 },
+          { "id": "c", "text": "Quitar las imágenes de las tarjetas de producto por completo hasta que el CDN se recupere", "nextNode": "set-monitoring", "score": 0 }
         ]
       },
-      "check-ddos": {
-        "narrative": "Los patrones de tráfico se ven normales -- no hay picos inusuales en las solicitudes. Esto no es un ataque. El servidor está manejando las solicitudes bien, pero algo posterior es lento.",
+      "set-monitoring": {
+        "narrative": "Lazy loading desplegado, el p75 de tiempo de carga volvió a 1.9 segundos. Hoy te enteraste de la lentitud por el dashboard de tasa de conversión. No quieres enterarte de la próxima por los números de ingresos. ¿Qué configuras?",
         "choices": [
-          { "id": "a", "text": "Verificar servicios de terceros y CDNs", "nextNode": "found-cdn", "score": 6 }
+          { "id": "a", "text": "Configurar alertas de RUM que llamen al on-call cuando el p75 de LCP exceda 3s por 10 minutos, más checks sintéticos contra el CDN cada minuto", "nextNode": "post-mortem", "score": 4 },
+          { "id": "b", "text": "Agregar un canal de Slack donde el equipo postee manualmente los scores de Lighthouse una vez por semana", "nextNode": "post-mortem", "score": 2 },
+          { "id": "c", "text": "Confiar en que el dashboard de tasa de conversión vuelva a marcarlo como esta vez", "nextNode": "post-mortem", "score": 0 }
+        ]
+      },
+      "post-mortem": {
+        "narrative": "El monitoreo está en su lugar. Decisión final: ¿qué haces con lo que aprendiste hoy?",
+        "choices": [
+          { "id": "a", "text": "Escribir un post-mortem corto documentando la línea de tiempo, la causa raíz, los arreglos y una lista de seguimientos (definir un SLO, agregar un segundo CDN al build, auditar otras dependencias de terceros)", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Mencionar lo que pasó en el standup mañana y seguir adelante", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Nada -- el sitio vuelve a estar rápido, no hay por qué darle vueltas", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Cambias a un CDN de respaldo, agregas carga diferida para que las imágenes debajo del pliegue no bloqueen la carga inicial de la página, y agregas alertas de monitoreo para tiempos de respuesta del CDN. En una hora, los tiempos de carga vuelven a 2 segundos y las conversiones comienzan a recuperarse.",
+        "narrative": "Diagnosticaste con datos de RUM, ubicaste la solicitud lenta en la pestaña Network, mitigaste la interrupción del CDN con un fallback, endureciste el frontend con lazy loading e imágenes responsivas, configuraste monitoreo activo para que la próxima regresión dispare una alerta en minutos y escribiste un post-mortem con seguimientos concretos. Las conversiones volvieron -- y el equipo ahora es significativamente más resiliente que ayer.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Excelente investigación! Identificaste correctamente que una dependencia de terceros (el CDN) causó la ralentización. La lección clave: tu app es tan rápida como su dependencia más lenta. Siempre ten opciones de respaldo para servicios críticos de terceros, y configura alertas para regresiones de rendimiento para detectarlas antes que tu CEO."
+        "feedback": "Esto es ingeniería de rendimiento madura. La velocidad de detección (monitoreo) y la velocidad de mitigación (un cambio en caliente de CDN) importan tanto como el trabajo original de rendimiento. El post-mortem es lo que convierte un incendio único en mejora permanente -- sin él, la misma forma de incidente vuelve a pegar el próximo trimestre."
       },
-      "end-wait": {
-        "narrative": "Mientras esperas, la carga lenta continúa. Cada hora te cuesta más ventas perdidas. Las interrupciones de CDN pueden durar horas o incluso días. Mientras tanto, tu tasa de conversión sigue cayendo y los usuarios frustrados publican quejas en redes sociales.",
+      "end-okay": {
+        "narrative": "Restauraste la velocidad, hiciste lazy loading de imágenes y configuraste alertas. Saltarte el post-mortem escrito significa que las lecciones se quedan en tu cabeza -- la próxima vez que otra persona esté de on-call, va a tener que redescubrir el playbook desde cero.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Esperar a que un tercero arregle su problema pone tu negocio a su merced. Siempre ten un plan de respaldo para dependencias críticas. Técnicas como CDNs de respaldo, service workers con recursos en caché y carga diferida pueden mantener tu sitio utilizable incluso cuando una dependencia tiene problemas."
+        "finalScore": 13,
+        "feedback": "Respuesta a incidentes fuerte. El post-mortem se siente como trabajo extra pero son los 30 minutos de mayor palanca de todo el incidente: captura la línea de tiempo, la causa raíz y los seguimientos en un lugar donde el próximo on-call los puede leer. Sin él, estás reconstruyendo el mismo modelo mental cada caída."
+      },
+      "end-weak": {
+        "narrative": "La velocidad está restaurada y las alertas configuradas, pero nadie fuera de este incidente sabe qué pasó. La próxima caída de CDN puede tardar más en mitigarse porque el playbook vive solo en tu cabeza. Los seguimientos (segundo CDN, definición de SLO, auditoría de terceros) no van a pasar porque nunca se escribieron.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Estabilizaste el sitio, que es lo más importante. La carencia es la falta de documentación: un post-mortem de cinco párrafos convierte este incidente en una capacidad permanente del equipo. Sin él, el próximo tercero lento va a resetear el reloj del tiempo de respuesta."
       }
     },
     "glossaryTerms": ["bounce-rate", "cdn", "conversion-rate", "lazy-loading"]

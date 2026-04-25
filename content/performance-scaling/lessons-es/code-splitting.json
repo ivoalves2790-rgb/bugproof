@@ -45,43 +45,76 @@
       "start": {
         "narrative": "El bundle único de tu app es de 2MB. Lo analizas y encuentras:\n\n- Código del dashboard: 200KB\n- Página de configuración: 150KB\n- Panel de administración: 300KB\n- Biblioteca de gráficos (usada solo en admin): 600KB\n- Generador de PDF (usado solo en configuración): 400KB\n- React compartido + utilidades: 350KB\n\nEl 80% de los usuarios solo visitan el dashboard. ¿Cuál es tu primera estrategia de división de código?",
         "choices": [
-          { "id": "a", "text": "Dividir por ruta -- cada página se convierte en su propio fragmento", "nextNode": "route-split", "score": 10 },
-          { "id": "b", "text": "Separar la biblioteca de gráficos en su propio fragmento ya que es la más grande", "nextNode": "chart-split", "score": 6 },
-          { "id": "c", "text": "Minificar todo más agresivamente para hacer el bundle único más pequeño", "nextNode": "minify-only", "score": 2 }
+          { "id": "a", "text": "Dividir por ruta -- cada página se convierte en su propio fragmento", "nextNode": "route-split", "score": 4 },
+          { "id": "b", "text": "Separar la biblioteca de gráficos en su propio fragmento ya que es la más grande", "nextNode": "chart-split", "score": 2 },
+          { "id": "c", "text": "Minificar todo más agresivamente para hacer el bundle único más pequeño", "nextNode": "minify-only", "score": 0 }
         ]
       },
       "route-split": {
-        "narrative": "Divides la app en fragmentos basados en rutas:\n\n- Fragmento principal (código compartido): 350KB\n- Fragmento del dashboard: 200KB\n- Configuración + generador de PDF: 550KB\n- Admin + gráficos: 900KB\n\nAhora los usuarios del dashboard solo descargan 550KB en lugar de 2MB. Pero el fragmento de admin sigue siendo 900KB. ¿Qué haces al respecto?",
+        "narrative": "Divides la app en fragmentos basados en rutas:\n\n- Fragmento principal (código compartido): 350KB\n- Fragmento del dashboard: 200KB\n- Configuración + generador de PDF: 550KB\n- Admin + gráficos: 900KB\n\nAhora los usuarios del dashboard solo descargan 550KB en lugar de 2MB. El fragmento de admin sigue siendo 900KB porque la biblioteca de gráficos vive dentro de él.",
         "choices": [
-          { "id": "a", "text": "También cargar de forma diferida la biblioteca de gráficos para que solo se cargue cuando el componente de gráficos se renderice", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "900KB está bien ya que solo los admins lo ven", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "Cargar la biblioteca de gráficos a nivel de componente, así solo se carga cuando el componente de gráficos se renderiza", "nextNode": "preload-strategy", "score": 4 },
+          { "id": "b", "text": "Dejar el fragmento de admin en 900KB -- solo los admins lo ven", "nextNode": "preload-strategy", "score": 2 }
         ]
       },
       "chart-split": {
-        "narrative": "Separar la biblioteca de gráficos ayuda, pero sigues enviando 1.4MB a los usuarios del dashboard que no necesitan la página de configuración, el panel de administración ni el generador de PDF. La división basada en rutas sería más impactante como primer paso.",
+        "narrative": "Separar la biblioteca de gráficos en su propio fragmento te quita 600KB de la descarga inicial, pero sigues enviando 1.4MB a los usuarios del dashboard que no necesitan configuración, admin ni código del PDF. La división por rutas es la palanca más grande para el primer corte.",
         "choices": [
-          { "id": "a", "text": "Empezar con la división basada en rutas en su lugar", "nextNode": "route-split", "score": 7 }
+          { "id": "a", "text": "Empezar con la división por rutas primero, y luego volver a la biblioteca de gráficos", "nextNode": "preload-strategy", "score": 3 }
         ]
       },
       "minify-only": {
         "narrative": "Tu código ya está minificado. Podrías exprimir otro 5-10%, pero el problema fundamental permanece: estás enviando 2MB de código a usuarios que solo necesitan 200KB. La solución no es archivos más pequeños -- es menos archivos cargados de entrada.",
         "choices": [
-          { "id": "a", "text": "Probar la división de código en lugar de solo compresión", "nextNode": "route-split", "score": 5 }
+          { "id": "a", "text": "Probar la división por rutas en lugar de solo compresión", "nextNode": "preload-strategy", "score": 2 }
+        ]
+      },
+      "preload-strategy": {
+        "narrative": "La división sola introduce un nuevo problema: cuando un usuario hace click al link del panel de administración, ahora espera mientras el fragmento se descarga con caché frío. El fallback de Suspense parpadea. La página se siente más lenta que antes, aunque el bundle es más chico. ¿Cómo cierras esa brecha?",
+        "choices": [
+          { "id": "a", "text": "Precargar los fragmentos de admin y configuración en el hover/focus de sus links de navegación, para que el fragmento esté en caché cuando el usuario haga click", "nextNode": "measure-impact", "score": 4 },
+          { "id": "b", "text": "Hacer prefetch de todos los fragmentos secundarios durante el tiempo de inactividad del navegador después de que el dashboard hidrata", "nextNode": "measure-impact", "score": 3 },
+          { "id": "c", "text": "Agregar un esqueleto de fallback de Suspense más largo para que los usuarios no noten la espera", "nextNode": "measure-impact", "score": 1 },
+          { "id": "d", "text": "Saltarse el preload -- la espera bajo demanda es aceptable", "nextNode": "measure-impact", "score": 1 }
+        ]
+      },
+      "measure-impact": {
+        "narrative": "Las divisiones y los preloads están conectados. Antes de hacer ship, necesitas confirmar que el cambio realmente ayudó (y no perjudicó por accidente) algo medible. ¿Cuál es tu paso de verificación?",
+        "choices": [
+          { "id": "a", "text": "Correr Lighthouse en las páginas de dashboard, configuración y admin con perfil 'Slow 4G' restringido y comparar LCP/TTI antes vs después", "nextNode": "ship-iterate", "score": 4 },
+          { "id": "b", "text": "Revisar el bundle analyzer de producción para confirmar que los tamaños de los fragmentos coinciden con lo esperado", "nextNode": "ship-iterate", "score": 3 },
+          { "id": "c", "text": "Recargar el dashboard una vez localmente con conexión rápida y dar por bueno", "nextNode": "ship-iterate", "score": 1 },
+          { "id": "d", "text": "Saltarse la medición -- un fragmento inicial más chico tiene que ser más rápido", "nextNode": "ship-iterate", "score": 0 }
+        ]
+      },
+      "ship-iterate": {
+        "narrative": "Los números se ven bien en pruebas sintéticas. Pero los usuarios reales que te importan están en una mezcla de dispositivos y redes que no puedes simular. ¿Cómo haces ship del cambio de forma que detectes una regresión que no anticipaste?",
+        "choices": [
+          { "id": "a", "text": "Hacer ship con un rollout 50/50 con monitoreo de usuario real (Web Vitals enviados a tu analytics) y revertir si el LCP p75 regresa", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Hacer ship al 100% de los usuarios y vigilar el dashboard de Web Vitals durante las próximas 24 horas", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Hacer ship al 100% de los usuarios y confiar en los números sintéticos de Lighthouse", "nextNode": "end-bad", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Ahora tu desglose de carga es:\n\n- Usuarios del dashboard: 350KB (compartido) + 200KB (dashboard) = 550KB\n- Usuarios de configuración: + 550KB cuando navegan ahí\n- Usuarios admin: + 300KB para admin, luego + 600KB para gráficos solo cuando abren la pestaña de gráficos\n\nEl tiempo de carga del dashboard bajó de 10 segundos a menos de 3 segundos en conexiones lentas.",
+        "narrative": "El LCP p75 de usuarios reales baja de 6.8s a 2.4s para usuarios del dashboard en conexiones lentas. El TTI de la página de admin no cambia (el preload absorbe el costo del caché frío). El rollout 50/50 detectó una regresión en Safari que arreglaste antes de pasar al 100%. El tiempo de carga del dashboard en Slow 4G bajó de 10 segundos a menos de 3 segundos.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Estrategia perfecta! La división basada en rutas dio la mayor ganancia al evitar que los usuarios del dashboard descarguen código de admin y configuración. Luego la división a nivel de componente de la biblioteca de gráficos aseguró que incluso los usuarios admin no carguen 600KB de gráficos hasta que realmente los vean. Este enfoque en capas es exactamente cómo las apps en producción manejan la división de código."
+        "feedback": "Trabajo de performance de punta a punta hecho bien. Elegiste la división con más palanca primero (rutas), profundizaste (a nivel de componente para la biblioteca de gráficos), cerraste la brecha del caché frío con preload, verificaste con pruebas sintéticas y enviaste detrás de un rollout protegido respaldado por métricas de usuario real. Ese es el ciclo que convierte una optimización de una corazonada a una victoria medida."
       },
       "end-okay": {
-        "narrative": "La división por rutas sola es una gran victoria para la mayoría de los usuarios. El rendimiento de la página de admin podría ser mejor, pero es un trade-off razonable si los usuarios admin están en conexiones rápidas.",
+        "narrative": "El cambio sale a todos a la vez. La mayoría de los usuarios ven la mejora, pero un subconjunto en una clase de dispositivo específica regresa y solo lo notas tres días después cuando la revisión semanal de analytics lo trae a la superficie. Aplicas un fix hacia adelante, pero los usuarios lentos tuvieron una semana peor de la necesaria.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "La división basada en rutas fue el primer movimiento correcto y dio la mayor ganancia de rendimiento. Para la página de admin, cargar de forma diferida la biblioteca de gráficos de 600KB ayudaría, especialmente para usuarios admin en conexiones más lentas. Pero en general, has reducido la carga inicial para el 80% de los usuarios de 2MB a 550KB."
+        "finalScore": 13,
+        "feedback": "Pruebas sintéticas + monitoreo post-lanzamiento es mucho mejor que nada, pero pone a toda la base de usuarios en la versión experimental al mismo tiempo. Un rollout escalonado (10% -> 50% -> 100%) con rollback automático ante una regresión de Web Vitals detecta regresiones específicas de dispositivo o red antes de que afecten a todos."
+      },
+      "end-bad": {
+        "narrative": "Lighthouse decía que era más rápido, así que enviaste al 100%. Una semana después notas que el bounce rate sube en configuración -- el preload está peleando con el data fetch propio del dashboard en conexiones lentas, y has empeorado la página justo para los usuarios a los que más querías ayudar. Reviertes.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Lighthouse es una corrida sintética única en un perfil de dispositivo -- te dice qué podría pasar, no qué está pasando. El monitoreo de usuario real (RUM) es lo que te dice si tu cambio realmente mejoró el LCP p75 para los usuarios que tienes. Siempre combina la medición sintética con un rollout protegido respaldado por RUM."
       }
     },
     "glossaryTerms": ["code-splitting", "lazy-loading", "bundle", "chunk"]

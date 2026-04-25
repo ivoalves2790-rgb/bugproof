@@ -41,58 +41,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Has agregado una funcionalidad de código de descuento al checkout. Funciona genial en tus pruebas locales. Despliegas a producción el jueves por la tarde. El viernes por la mañana, recibes un mensaje de pánico: '¡Los clientes están obteniendo 100% de descuento en todos los pedidos!' ¿Qué pasó?",
+        "narrative": "Agregaste una funcionalidad de código de descuento al checkout. Funcionaba localmente. Desplegaste el jueves por la tarde. El viernes por la mañana, un mensaje de pánico: '¡Los clientes están obteniendo 100% de descuento en todos los pedidos!' ¿Cuál es tu primer movimiento?",
         "choices": [
-          { "id": "a", "text": "Revisar el código de cálculo de descuento en busca de bugs", "nextNode": "check-code", "score": 10 },
-          { "id": "b", "text": "Desactivar inmediatamente la funcionalidad de descuento", "nextNode": "disable-feature", "score": 7 },
+          { "id": "a", "text": "Abrir el código de cálculo de descuento y buscar el bug", "nextNode": "check-code", "score": 10 },
+          { "id": "b", "text": "Desactivar inmediatamente la funcionalidad de descuento en producción", "nextNode": "disable-feature", "score": 7 },
           { "id": "c", "text": "Verificar si alguien ingresó un código de descuento fraudulento", "nextNode": "check-fraud", "score": 3 }
         ]
       },
       "check-code": {
-        "narrative": "Miras la función de descuento y encuentras el bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nCuando alguien ingresa 20 para un descuento del 20%, la función calcula price - (price * 20), lo que hace que el total sea masivamente negativo. Debería dividir entre 100 primero. ¿Cómo habrían ayudado los tests?",
+        "narrative": "Encuentras el bug:\n\nfunction applyDiscount(price, percent) {\n  return price - (price * percent);\n}\n\nCuando alguien ingresa 20 para un 20%, esto devuelve price - (price * 20) = un número negativo enorme. Debería dividir entre 100. ¿Qué te enseña esto sobre los tests?",
         "choices": [
-          { "id": "a", "text": "Un test verificando applyDiscount(100, 20) === 80 habría detectado esto al instante", "nextNode": "test-would-help", "score": 10 },
-          { "id": "b", "text": "Los tests no habrían ayudado -- este es un error de lógica que necesitas pensar bien", "nextNode": "tests-do-help", "score": 3 }
+          { "id": "a", "text": "Un test que afirme applyDiscount(100, 20) === 80 lo habría detectado en 2 segundos", "nextNode": "write-the-tests", "score": 10 },
+          { "id": "b", "text": "Los tests no habrían ayudado -- es un error de lógica", "nextNode": "write-the-tests", "score": 3 }
         ]
       },
       "disable-feature": {
-        "narrative": "Buena idea detener la hemorragia. Desactivas la funcionalidad de descuento. Pero ahora necesitas averiguar qué salió mal y arreglarlo. Mirando el cálculo de descuento...\n\napplyDiscount(100, 20) debería devolver 80 pero devuelve -1900.\n\nLa función está tratando el porcentaje como un multiplicador (20x) en lugar de dividir entre 100 primero (0.20x).",
+        "narrative": "Inteligente -- detuviste la hemorragia. Ahora rastreas el bug: applyDiscount(100, 20) devuelve -1900 en lugar de 80. La función multiplica por 20 en lugar de 0.20. ¿Cuál es la lección?",
         "choices": [
-          { "id": "a", "text": "Arreglar el bug y agregar un test para que esto nunca pase de nuevo", "nextNode": "test-would-help", "score": 7 }
+          { "id": "a", "text": "Hasta un solo test para esta función lo habría detectado antes del despliegue", "nextNode": "write-the-tests", "score": 8 },
+          { "id": "b", "text": "Solo despliega la corrección -- los tests son lindos pero te frenan", "nextNode": "write-the-tests", "score": 3 }
         ]
       },
       "check-fraud": {
-        "narrative": "No es fraude -- los códigos de descuento son legítimos. El problema es que el cálculo está mal. Incluso un código de descuento válido del 20% resulta en pedidos con totales negativos porque la función multiplica por 20 en lugar de 0.20.",
+        "narrative": "No es fraude -- los códigos son legítimos. La matemática está mal. Hasta los códigos válidos del 20% producen totales negativos porque la función multiplica por 20 en lugar de 0.20.",
         "choices": [
-          { "id": "a", "text": "Revisar el código de cálculo de descuento", "nextNode": "check-code", "score": 5 }
+          { "id": "a", "text": "Abrir el código de cálculo de descuento", "nextNode": "check-code", "score": 5 }
         ]
       },
-      "test-would-help": {
-        "narrative": "¡Exacto! Un test simple como:\n\ntest('20% discount on $100 = $80', () => {\n  expect(applyDiscount(100, 20)).toBe(80);\n});\n\nEste habría fallado inmediatamente cuando escribiste el código con bugs, antes de que llegara a producción. ¿Cuál es tu conclusión?",
+      "write-the-tests": {
+        "narrative": "Te sientas a escribir tests para la función de descuento ya corregida. ¿Qué casos deberías cubrir además del 20% obvio?",
         "choices": [
-          { "id": "a", "text": "Debería escribir tests para cualquier código que involucre cálculos o dinero", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Debería testear todo antes de cada despliegue", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "Valores límite: 0%, 100%, porcentaje negativo y precios muy grandes", "nextNode": "test-related-code", "score": 10 },
+          { "id": "b", "text": "Solo los casos que coincidan con lo que producía el código bugueado", "nextNode": "test-related-code", "score": 4 },
+          { "id": "c", "text": "Un solo test del camino feliz -- los tests de casos límite son exagerados", "nextNode": "test-related-code", "score": 2 }
         ]
       },
-      "tests-do-help": {
-        "narrative": "En realidad, ¡los tests son PERFECTOS para detectar errores de lógica! Ese es su trabajo principal. Un test que dice 'un descuento del 20% en $100 debería ser igual a $80' habría fallado inmediatamente con el código con bugs, haciendo el error obvio antes de que lo desplegaras.",
+      "test-related-code": {
+        "narrative": "La función de descuento ya es segura. Pero los códigos de descuento tocan el cálculo de impuestos, los totales y el render del recibo. Ninguno tiene tests tampoco. ¿Cómo decides qué cubrir después?",
         "choices": [
-          { "id": "a", "text": "Entendido -- los tests detectan exactamente este tipo de errores de cálculo", "nextNode": "end-good", "score": 5 }
+          { "id": "a", "text": "Cubrir todo lo que toque dinero: impuestos, totales, recibos, flujo de reembolsos", "nextNode": "prevent-recurrence", "score": 10 },
+          { "id": "b", "text": "Agregar tests uno por uno cuando se reporte un bug relacionado", "nextNode": "prevent-recurrence", "score": 5 },
+          { "id": "c", "text": "Parar acá -- arreglaste el problema inmediato", "nextNode": "prevent-recurrence", "score": 2 }
+        ]
+      },
+      "prevent-recurrence": {
+        "narrative": "Desplegaste la corrección y agregaste tests. Pregunta final: ¿cómo te aseguras de que ningún cambio futuro reintroduzca exactamente este bug?",
+        "choices": [
+          { "id": "a", "text": "Bloquear merges en CI si los tests de descuento fallan y exigir test para cualquier código nuevo de precios", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Agregar un comentario en el código diciendo 'recordar dividir entre 100'", "nextNode": "end-okay", "score": 4 },
+          { "id": "c", "text": "Confiar en que el equipo recordará este incidente", "nextNode": "end-poor", "score": 1 }
         ]
       },
       "end-good": {
-        "narrative": "Arreglas la función de descuento (dividiendo entre 100), escribes cinco tests cubriendo diferentes montos de descuento incluyendo casos límite como 0% y 100%, y despliegas la corrección. Los tests evitarán que este bug regrese, incluso si alguien refactoriza el código después.",
+        "narrative": "Desplegaste la corrección, escribiste tests con conciencia de límites para descuento, extendiste cobertura a cada camino que toca dinero y lo aseguraste con una regla de CI. Esa clase de bug ya no puede colarse silenciosamente, y el próximo contribuidor hereda la restricción sin necesitar conocer tu historia.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Gran razonamiento! El código que maneja dinero, cálculos o lógica de negocio crítica siempre debería tener tests. Un test de 30 segundos habría evitado que este bug llegara a producción y habría ahorrado dinero real."
+        "finalScore": 50,
+        "feedback": "Este es el arco completo: investigar, corregir, endurecer el código local con tests fuertes, expandir cobertura a vecinos y forzarla en CI. Un incidente se vuelve una garantía permanente."
       },
       "end-okay": {
-        "narrative": "Testear todo es admirable pero impráctico. La clave es testear las partes más importantes -- especialmente cualquier cosa que involucre dinero, datos de usuarios o lógica de negocio central. Unos pocos tests enfocados valen más que intentar testear cada línea.",
+        "narrative": "La corrección se desplegó. La función de descuento está testeada. Pero el código relacionado con precios fuera del archivo de descuento no tiene refuerzo, y un comentario es la salvaguarda más débil posible -- el próximo refactor lo borrará.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Buen instinto, pero sé estratégico con el testing. Enfócate en código que maneja dinero, datos de usuarios, autenticación y lógica de negocio central. No necesitas 100% de cobertura de tests -- necesitas los tests correctos en los lugares correctos."
+        "finalScore": 27,
+        "feedback": "Manejaste bien el incendio inmediato. La falta es el refuerzo: los comentarios no son tests, y los tests que no corren en CI son apenas tests. Asegura la corrección con automatización."
+      },
+      "end-poor": {
+        "narrative": "Arreglaste la función pero no agregaste tests, no expandiste cobertura y dependes de la memoria del equipo. En seis meses un nuevo desarrollador refactorizará la lógica de descuento y el mismo bug volverá -- porque nada en disco lo evita.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 16,
+        "feedback": "La memoria no es una red de seguridad. Sin tests, el bug existe en forma latente, esperando el próximo cambio. Los 30 segundos que toma escribir la afirmación son lo que detiene el ciclo."
       }
     },
     "glossaryTerms": ["regression", "safety-net", "test-coverage"]

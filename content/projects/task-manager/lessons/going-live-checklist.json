@@ -40,43 +40,75 @@
       "start": {
         "narrative": "It's 9 AM on launch day. Your task manager is deployed to Vercel and everything looks good. You're about to share the link on social media. But you haven't tested the production environment yet — only development. What do you do?",
         "choices": [
-          { "id": "a", "text": "Post the link now — it worked in development, it should be fine", "nextNode": "yolo-launch", "score": 0 },
-          { "id": "b", "text": "Do a quick smoke test: sign up, create a task, complete it, delete it — all in production", "nextNode": "smoke-test", "score": 4 },
-          { "id": "c", "text": "Delay the launch by a week to do extensive QA testing", "nextNode": "over-delay", "score": 1 }
+          { "id": "yolo-launch", "text": "Post the link now — it worked in development, it should be fine", "nextNode": "yolo-recovery", "score": 0 },
+          { "id": "smoke-test", "text": "Do a quick smoke test: sign up, create a task, complete it, delete it — all in production", "nextNode": "smoke-test", "score": 4 },
+          { "id": "over-delay", "text": "Delay the launch by a week to do extensive QA testing", "nextNode": "over-delay", "score": 1 }
         ]
       },
-      "yolo-launch": {
-        "narrative": "You post the link. Within 30 minutes, someone tries to sign up and gets a blank screen. The Supabase auth redirect URL is still set to localhost. You scramble to fix it while people are tweeting about your broken app. First impressions are lost.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "A 5-minute production smoke test would have caught the auth redirect issue before anyone else saw it. Always test the real environment before announcing your launch.",
-        "choices": []
+      "yolo-recovery": {
+        "narrative": "You posted the link before testing. Within 30 minutes someone tries to sign up and gets a blank screen — the Supabase auth redirect URL is still set to localhost. You take down the post and pull the deploy. What's your move now?",
+        "choices": [
+          { "id": "fix-and-test", "text": "Fix the auth redirect URL, redeploy, and run a real smoke test in production before reposting", "nextNode": "soft-launch-step", "score": 4 },
+          { "id": "fix-and-repost", "text": "Fix the redirect URL and repost immediately — no time for another test", "nextNode": "soft-launch-step", "score": 1 }
+        ]
       },
       "smoke-test": {
-        "narrative": "Good call. You try to sign up and the auth flow fails — the OAuth redirect URL is set to localhost. You fix it in the Supabase dashboard, retest, and everything works. What's next before launching?",
+        "narrative": "Good call. You try to sign up and the auth flow fails — the OAuth redirect URL is set to localhost. You fix it in the Supabase dashboard, retest, and everything works. How do you decide who gets the link first?",
         "choices": [
-          { "id": "b1", "text": "Share with 5 friends first, fix any issues they find, then do the public launch", "nextNode": "soft-launch", "score": 3 },
-          { "id": "b2", "text": "Everything works now — launch publicly immediately", "nextNode": "quick-launch", "score": 2 }
+          { "id": "soft-list", "text": "Pick 5 friends who will actually try the app and give honest feedback within the hour", "nextNode": "soft-launch-step", "score": 4 },
+          { "id": "broad-blast", "text": "Email everyone in your contacts at once to maximize early signups", "nextNode": "soft-launch-step", "score": 1 }
         ]
       },
       "over-delay": {
-        "narrative": "A week-long delay for a side project kills your momentum. By the time you launch, you've lost interest. You compromise: do a 2-hour focused test session today and launch this afternoon.",
+        "narrative": "A week-long delay for a side project kills momentum. By the third day you've already opened five new Figma files for v2 features. You force yourself to compromise: do a focused 2-hour test session today and launch this afternoon.",
         "choices": [
-          { "id": "c1", "text": "Run through the critical flows in production and launch today", "nextNode": "smoke-test", "score": 3 }
+          { "id": "compress-and-test", "text": "Run the smoke test in production, fix what breaks, and pick a launch group for this evening", "nextNode": "soft-launch-step", "score": 3 },
+          { "id": "delay-again", "text": "Decide one more week of polish won't hurt and push the launch date again", "nextNode": "soft-launch-step", "score": 0 }
         ]
       },
-      "soft-launch": {
-        "narrative": "Your friends find two small issues: a typo on the homepage and a confusing button label. You fix both in 20 minutes, redeploy, and launch publicly with confidence. The launch goes smoothly.",
+      "soft-launch-step": {
+        "narrative": "Your soft-launch group is using the app. They surface two small bugs: a typo on the homepage and a confusing button label. While you fix them, what monitoring do you put in place?",
+        "choices": [
+          { "id": "alerts-and-rollback", "text": "Wire Sentry to alert on production errors and write down the exact command to roll back the last deploy", "nextNode": "social-meta-step", "score": 4 },
+          { "id": "logs-only", "text": "Tail Vercel runtime logs in a terminal tab and refresh occasionally", "nextNode": "social-meta-step", "score": 2 },
+          { "id": "no-monitoring", "text": "If users complain, they'll tell you on Twitter — no need for tooling yet", "nextNode": "social-meta-step", "score": 0 }
+        ]
+      },
+      "social-meta-step": {
+        "narrative": "Bugs are fixed and monitoring is up. You're about to draft the launch tweet. You paste the URL into the compose box and the link preview shows... a generic favicon and no description. What do you fix before the public announcement?",
+        "choices": [
+          { "id": "set-og-tags", "text": "Add Open Graph title, description, and image meta tags so the link preview is branded", "nextNode": "announce-step", "score": 4 },
+          { "id": "ship-no-preview", "text": "Skip the meta tags — the URL on its own is enough", "nextNode": "announce-step", "score": 1 },
+          { "id": "screenshot-instead", "text": "Don't fix the meta tags; just attach a screenshot to the tweet manually", "nextNode": "announce-step", "score": 2 }
+        ]
+      },
+      "announce-step": {
+        "narrative": "Smoke-tested, soft-launched, monitored, branded. How do you do the public announcement?",
+        "choices": [
+          { "id": "staggered-announce", "text": "Post on one channel, watch error rates and signups for an hour, then expand to more channels", "nextNode": "excellent-end", "score": 4 },
+          { "id": "all-channels", "text": "Post simultaneously to every social channel, newsletter, and forum to maximize reach", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "quiet-launch", "text": "Don't actually announce it publicly — let users find it organically", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "The launch unfolds calmly: smoke test caught the auth bug, soft-launch friends caught the cosmetic ones, Sentry stays quiet, link previews look polished, and you have a known rollback command ready. By the end of the day, your task manager has its first real users without a single fire to put out.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "A soft launch with trusted testers is the gold standard. They find the embarrassing issues before the public does, and you can fix them calmly instead of scrambling.",
+        "finalScore": 20,
+        "feedback": "Launch day done right. The discipline you applied — verify in production, test with real humans, set up monitoring before the rush, polish the social surface, then announce in waves — is exactly what separates a launch that builds trust from one that burns it.",
         "choices": []
       },
-      "quick-launch": {
-        "narrative": "The launch goes mostly well. A few users report minor UI issues, but nothing is broken. You fix issues as they come in.",
+      "mediocre-end": {
+        "narrative": "The launch goes okay. The smoke test and soft launch saved you from the worst bugs, but blasting every channel at once means you can't tell what worked, and a bug spike at hour two becomes hard to triage among the noise.",
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Solid foundation, sloppy finish. A staggered announcement gives you signal: which channel sent the most engaged users, where errors spiked, where to double down. Spread it across the day, not the same five-minute window.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "You skipped the announcement. Three weeks later, the app has six users — all friends — and you've lost the energy to relaunch. Momentum is the launch's most fragile asset and you let it leak away.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "An acceptable launch. The smoke test saved you from the auth bug, but a soft launch with friends would have caught the remaining UI issues too.",
+        "feedback": "A quiet launch is barely a launch. You did the engineering work to make the app trustworthy; let the world know it exists. Pick one channel, post once, and use the response to plan the next move.",
         "choices": []
       }
     },

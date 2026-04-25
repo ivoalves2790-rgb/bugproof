@@ -41,52 +41,76 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Your task manager has been live for two weeks. You have 200 active users. You've collected feedback and have limited development time. Where do you focus next?",
+        "narrative": "Your task manager has been live for two weeks. You have 200 active users and a backlog of feedback. Where do you focus next?",
         "choices": [
           { "id": "all-features", "text": "Build every feature users requested — team sharing, AI summaries, calendar sync, mobile app", "nextNode": "overwhelmed", "score": 0 },
-          { "id": "top-requests", "text": "Analyze which features were requested most and pick the top 2-3 to build", "nextNode": "focused", "score": 4 },
+          { "id": "top-requests", "text": "Look at the data: which features were requested most? Which users churned? Pick the top 2-3 to build.", "nextNode": "focused", "score": 4 },
           { "id": "rewrite", "text": "Rewrite the app from scratch with a better architecture now that you know what users want", "nextNode": "rewrite-trap", "score": 1 }
         ]
       },
       "overwhelmed": {
         "narrative": "You try to build everything at once. After a month, nothing is finished. Half-built features create bugs, and users are confused by an inconsistent experience. What do you do?",
         "choices": [
-          { "id": "stop-prioritize", "text": "Stop, remove half-finished features, and focus on the top 2 most requested ones", "nextNode": "recovery", "score": 3 },
-          { "id": "keep-going", "text": "Push through and try to finish everything", "nextNode": "burnout-end", "score": 0 }
+          { "id": "stop-prioritize", "text": "Stop, remove half-finished features, and pick the top 2 most-requested ones to finish properly", "nextNode": "scope", "score": 4 },
+          { "id": "keep-going", "text": "Push through and try to finish everything", "nextNode": "scope", "score": 0 }
         ]
       },
       "focused": {
-        "narrative": "You identify that 80% of users want due date reminders and a better mobile experience. You scope both features to 2-week sprints each. You ship due date reminders first. Usage jumps 40%. What's your next move?",
+        "narrative": "The data is clear: 80% of users want due-date reminders, and 60% complain about the mobile experience. You're ready to commit to a list.",
         "choices": [
-          { "id": "mobile", "text": "Ship the mobile improvements as planned, then reassess priorities", "nextNode": "great-end", "score": 4 },
-          { "id": "pivot", "text": "Forget mobile — add 5 more features while you have momentum", "nextNode": "recovery", "score": 1 }
+          { "id": "continue-focused", "text": "Pick due-date reminders and mobile improvements as the next two bets", "nextNode": "scope", "score": 3 }
         ]
       },
       "rewrite-trap": {
         "narrative": "You spend 6 weeks rewriting. The new version has fewer features than the old one. Users leave because nothing new has shipped. You've fallen into the 'rewrite trap.'",
         "choices": [
-          { "id": "learn", "text": "Stop the rewrite, go back to the working app, and iterate on it instead", "nextNode": "recovery", "score": 3 }
+          { "id": "learn", "text": "Stop the rewrite, go back to the working app, and use the real feedback you collected to pick 2 high-impact improvements", "nextNode": "scope", "score": 3 },
+          { "id": "double-down-rewrite", "text": "Push through the rewrite — sunk-cost is sunk-cost, you'll finish it eventually", "nextNode": "scope", "score": 0 }
         ]
       },
-      "recovery": {
-        "narrative": "You get back on track by focusing on 2 high-impact features. It takes an extra month, but the app improves and users come back.",
+      "scope": {
+        "narrative": "You have 2 candidate features. Before you start building, how do you scope them?",
+        "choices": [
+          { "id": "smallest-version", "text": "Define the smallest useful version of each — what's the one screen, one query, one notification that delivers the value?", "nextNode": "ship", "score": 4 },
+          { "id": "full-feature", "text": "Spec out the complete feature with every edge case — settings page, custom recurrences, snooze options, the works", "nextNode": "ship", "score": 2 },
+          { "id": "no-scope", "text": "Skip scoping — start coding and see where you end up", "nextNode": "ship", "score": 0 }
+        ]
+      },
+      "ship": {
+        "narrative": "Reminders are scoped down to a single email at 9am the day a task is due. Time to ship. How do you roll it out?",
+        "choices": [
+          { "id": "feature-flag", "text": "Hide it behind a feature flag, roll out to 10% of users first, watch the metrics, then expand", "nextNode": "measure", "score": 4 },
+          { "id": "ship-all", "text": "Ship it to 100% of users immediately so everyone gets it at once", "nextNode": "measure", "score": 2 },
+          { "id": "ship-no-tests", "text": "Push to production without any tests or monitoring — you'll fix issues if users complain", "nextNode": "measure", "score": 0 }
+        ]
+      },
+      "measure": {
+        "narrative": "Reminders are out. A week later you have data: open rates, click-through, opt-outs, and a small bump in retention. How do you decide what to build next?",
+        "choices": [
+          { "id": "data-driven", "text": "Compare the bump against your hypothesis. Did reminders move the needle? Use that signal to decide whether to invest more in reminders or pivot to mobile.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "gut-feel", "text": "Skip the analysis — you feel good about reminders, just keep adding to them", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-data", "text": "Ignore the metrics and start a new feature you personally find more exciting", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Three months in, you ship 2-3 small, measured improvements every month. Each one is informed by real user data, scoped to the smallest useful version, rolled out gradually, and evaluated against a clear hypothesis. You have 1,000 active users, a roadmap grounded in evidence, and a sustainable pace.",
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "This is how durable products get built — analyze data, pick a small bet, scope it down, ship it safely, measure honestly, repeat. You stayed focused, listened to users, and let evidence (not enthusiasm) drive the roadmap. Congratulations on completing the Task Manager project!",
+        "choices": []
+      },
+      "mediocre-end": {
+        "narrative": "Reminders keep growing — recurring schedules, custom times, snooze, push notifications. Some users love it, but the original 80% who only wanted a simple email are buried under settings they don't need. Other priorities slip.",
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Doubling down on a feature without measuring its actual impact leads to over-engineering. Always tie investment to evidence: did the last increment move retention, or just feel productive?",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "You ignore the reminders data and chase a new shiny feature. Users notice you're not improving the things they actually use. Retention flatlines and the next batch of feedback is more critical than ever.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "You recovered! The key lesson: focus beats breadth. Build 2 features well rather than 10 features poorly. Iterate based on data, not gut feeling.",
-        "choices": []
-      },
-      "great-end": {
-        "narrative": "Your task manager grows steadily. Each month you ship 2-3 focused improvements based on user data. After 3 months, you have 1,000 active users and a clear product roadmap. You've built a real product.",
-        "isEnd": true,
-        "finalScore": 8,
-        "feedback": "This is how successful products are built — ship, measure, learn, repeat. You stayed focused, listened to users, and made data-driven decisions. Congratulations on completing the Task Manager project!",
-        "choices": []
-      },
-      "burnout-end": {
-        "narrative": "After 2 months of crunch, you're burned out and the app is buggy. Users leave because of reliability issues. Trying to build everything at once built nothing well.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Scope creep is the #1 killer of side projects. Always prioritize ruthlessly. It's better to ship 2 polished features than 10 broken ones.",
+        "feedback": "Building what excites you instead of what users need is how side projects die. The data is the whole point of shipping — if you don't read it, you might as well have stayed in planning. Let evidence drive the next bet.",
         "choices": []
       }
     },

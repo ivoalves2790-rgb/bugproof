@@ -46,59 +46,69 @@
         ]
       },
       "good-nextjs": {
-        "narrative": "The senior nods. 'Fair points. Now tell me about your database choice. Why Supabase with PostgreSQL instead of something like Firebase or a plain REST API you build yourself?'",
+        "narrative": "The senior nods. 'Fair points. Now defend the database. Why Supabase with PostgreSQL instead of Firebase?'",
         "choices": [
-          { "id": "structured", "text": "\"Our task data is structured and relational — tasks belong to users, have statuses and dates. SQL handles that cleanly. Supabase gives us managed PostgreSQL plus built-in auth and RLS, so we skip building a whole backend.\"", "nextNode": "great-end", "score": 4 },
-          { "id": "free", "text": "\"Supabase is free, so it saves money.\"", "nextNode": "okay-end", "score": 2 }
+          { "id": "structured", "text": "\"Tasks are structured and relational — they belong to users and have statuses. SQL handles that cleanly. Supabase gives us managed PostgreSQL, auth, and RLS in one product.\"", "nextNode": "typescript-q", "score": 4 },
+          { "id": "free", "text": "\"Supabase is free, so it saves money.\"", "nextNode": "typescript-q", "score": 2 }
         ]
       },
       "bad-popularity": {
-        "narrative": "The senior frowns. 'Popularity isn't a technical argument. Half the internet ran on jQuery once — that doesn't mean you should use it for a new project. Can you give me an actual reason?'",
+        "narrative": "The senior frowns. 'Popularity isn't a technical argument. Half the internet ran on jQuery once. Try again — give me a real reason.'",
         "choices": [
-          { "id": "recover", "text": "\"You're right. The real reason is that Next.js handles routing, API endpoints, and SSR in one framework, which means less setup for a full-stack app like ours.\"", "nextNode": "recovered-path", "score": 3 },
-          { "id": "double-down", "text": "\"Well, it has the most GitHub stars, so it's clearly the best.\"", "nextNode": "bad-end", "score": 0 }
+          { "id": "recover", "text": "\"You're right. The real reason is that Next.js bundles routing, API endpoints, and SSR into one framework, which means less setup for a full-stack app.\"", "nextNode": "typescript-q", "score": 3 },
+          { "id": "double-down", "text": "\"Well, it has the most GitHub stars, so it's clearly the best.\"", "nextNode": "typescript-q", "score": 0 }
         ]
       },
       "weak-tutorial": {
-        "narrative": "The senior looks concerned. 'Following a tutorial is fine for learning, but you should understand why those choices were made. What specific features of Next.js does your project actually use?'",
+        "narrative": "The senior looks concerned. 'Following a tutorial is fine for learning, but you should understand why those choices were made. What specific Next.js features does your project actually use?'",
         "choices": [
-          { "id": "think", "text": "\"Now that I think about it — the file-based routing maps perfectly to our pages, and API routes let us keep backend logic in the same project without a separate server.\"", "nextNode": "recovered-path", "score": 3 },
-          { "id": "shrug", "text": "\"I'm not sure, but it seems to work fine.\"", "nextNode": "bad-end", "score": 0 }
+          { "id": "think", "text": "\"File-based routing maps to our pages, and API routes let us keep backend logic in the same project without a separate server.\"", "nextNode": "typescript-q", "score": 3 },
+          { "id": "shrug", "text": "\"I'm not sure, but it seems to work fine.\"", "nextNode": "typescript-q", "score": 0 }
         ]
       },
-      "recovered-path": {
-        "narrative": "The senior looks relieved. 'Good, you do understand the reasoning. One more question: why TypeScript instead of plain JavaScript?'",
+      "typescript-q": {
+        "narrative": "'Next question. Why TypeScript instead of plain JavaScript?'",
         "choices": [
-          { "id": "types-help", "text": "\"TypeScript catches bugs before they happen. If a task needs a 'status' field and I forget it, the compiler tells me immediately instead of crashing at runtime.\"", "nextNode": "okay-end", "score": 3 },
-          { "id": "resume", "text": "\"It looks good on a resume.\"", "nextNode": "weak-end", "score": 1 }
+          { "id": "types-help", "text": "\"TypeScript catches whole categories of bugs at compile time — typos in field names, wrong argument shapes, missing properties. With an AI co-pilot writing a lot of the code, the type checker is the safety net that says 'this won't actually run' before I waste time on it.\"", "nextNode": "deploy-q", "score": 4 },
+          { "id": "auto-complete", "text": "\"Better autocomplete in my editor.\"", "nextNode": "deploy-q", "score": 2 },
+          { "id": "resume", "text": "\"It looks good on a resume.\"", "nextNode": "deploy-q", "score": 0 }
+        ]
+      },
+      "deploy-q": {
+        "narrative": "'Where does this thing actually run? Why Vercel and not, say, AWS or Render?'",
+        "choices": [
+          { "id": "first-party", "text": "\"Vercel makes Next.js — they have first-party support for everything from edge functions to image optimization. I get push-to-deploy, preview URLs per pull request, and automatic SSL with no config.\"", "nextNode": "tradeoff-q", "score": 4 },
+          { "id": "easy-deploy", "text": "\"Vercel is the easiest to deploy to.\"", "nextNode": "tradeoff-q", "score": 2 },
+          { "id": "no-reason", "text": "\"It was the default in the Next.js docs.\"", "nextNode": "tradeoff-q", "score": 0 }
+        ]
+      },
+      "tradeoff-q": {
+        "narrative": "'Last one. What do you give up by choosing this stack? Every choice has a cost — name one.'",
+        "choices": [
+          { "id": "honest-tradeoff", "text": "\"Vendor coupling. Vercel pricing scales with traffic, and Supabase ties us to PostgreSQL. If we ever needed to leave, we'd swap two providers, not one — but the speed we gain in months 0-12 is worth it.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "no-tradeoff", "text": "\"Nothing — this stack is great in every way.\"", "nextNode": "okay-end", "score": 1 },
+          { "id": "hand-wave", "text": "\"I dunno, you tell me?\"", "nextNode": "weak-end", "score": 0 }
         ]
       },
       "great-end": {
-        "narrative": "The senior is impressed. 'You clearly thought this through. The stack makes sense for the project, and you can articulate why each piece is there. That's exactly the kind of thinking we look for. Ship it.'",
+        "narrative": "The senior smiles. 'You clearly thought this through. Stack makes sense, you can defend each piece, and you understand the tradeoffs. That's exactly the kind of thinking we look for. Ship it.'",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excellent. You justified every choice with a concrete reason tied to your project's needs. This is how professionals evaluate technology — not by hype, but by fit.",
+        "finalScore": 20,
+        "feedback": "This is how professionals evaluate technology — not by hype, but by fit, and not by 'best' but by 'best for this project, knowing what we're trading away.' Being able to name your tradeoffs is the mark of an engineer who actually understands their stack.",
         "choices": []
       },
       "okay-end": {
-        "narrative": "The senior nods. 'Decent reasoning. You understand some of the tradeoffs, but try to go deeper. Cost is a factor, but the technical fit matters more. Overall, your stack works for this project.'",
+        "narrative": "The senior nods slowly. 'You can defend most of your choices, but every stack has tradeoffs. If you can't name them, you don't fully understand what you picked. Read up on the costs and you'll be in good shape.'",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "You made reasonable choices but could explain them better. Practice articulating the technical reasons — what problem does each tool solve, and what would happen if you chose differently?",
+        "finalScore": 13,
+        "feedback": "You made reasonable choices but missed the tradeoff question. Every tool has costs — vendor lock-in, complexity, learning curve, scaling limits. Knowing the costs makes you ready for the day they actually hit.",
         "choices": []
       },
       "weak-end": {
-        "narrative": "The senior sighs. 'Look, every tool in your stack should be there for a reason you can explain. Go back and write one sentence for each choice: what problem does it solve for this specific project.'",
+        "narrative": "The senior sighs. 'Look, every tool in your stack should be there for a reason you can articulate, and every choice should come with a tradeoff you can name. Go research, then come back.'",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Your stack is actually fine, but you couldn't justify it. Being able to explain your choices is just as important as making them. Always know the 'why' behind your tools.",
-        "choices": []
-      },
-      "bad-end": {
-        "narrative": "The senior shakes their head. 'I can't approve a project where the developer doesn't know why they picked their own tools. Go research your choices and come back when you can explain the tradeoffs.'",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Popularity and hype are never valid technical arguments. Before you pick any tool, ask: What does it do for my project? What are the alternatives? What tradeoffs am I making?",
+        "finalScore": 4,
+        "feedback": "Hype is not a technical argument and 'I dunno' is not a tradeoff. Before picking any tool, write one sentence on what it does for your project, one on what you considered instead, and one on what you give up by choosing it.",
         "choices": []
       }
     },

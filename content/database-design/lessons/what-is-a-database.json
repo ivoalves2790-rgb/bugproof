@@ -43,56 +43,75 @@
       "start": {
         "narrative": "You're building a to-do app. The founder says: 'Let's keep it simple -- just save the tasks in a JSON file on the server.' This works at first with 5 test users. But then you launch and get 500 users. Problems start appearing: some users' tasks disappear randomly. What's most likely happening?",
         "choices": [
-          { "id": "a", "text": "Two users are writing to the file at the same time, overwriting each other's data", "nextNode": "correct-concurrency", "score": 10 },
-          { "id": "b", "text": "The JSON file is getting too big and slowing down", "nextNode": "partial-size", "score": 5 },
-          { "id": "c", "text": "The server is running out of memory", "nextNode": "wrong-memory", "score": 2 }
-        ]
-      },
-      "correct-concurrency": {
-        "narrative": "Exactly! When User A and User B both read the file at the same time, make changes, and write it back, the second write overwrites the first. User A's new task disappears. This is called a 'race condition.' The founder says: 'OK, what should we use instead?'",
-        "choices": [
-          { "id": "a", "text": "A database like PostgreSQL or SQLite -- they handle concurrent writes safely", "nextNode": "correct-database", "score": 10 },
-          { "id": "b", "text": "Just add file locking so only one user writes at a time", "nextNode": "partial-locking", "score": 5 }
+          { "id": "a", "text": "Two users are writing to the file at the same time, overwriting each other's data", "nextNode": "diagnose-fix", "score": 4 },
+          { "id": "b", "text": "The JSON file is getting too big and slowing down", "nextNode": "partial-size", "score": 2 },
+          { "id": "c", "text": "The server is running out of memory", "nextNode": "wrong-memory", "score": 0 }
         ]
       },
       "partial-size": {
-        "narrative": "File size could be a factor eventually, but 500 users' worth of to-do items would only be a few megabytes -- that's not big enough to cause issues. The real problem is concurrency: multiple users writing to the same file at the same time, overwriting each other's changes.",
+        "narrative": "File size could matter eventually, but 500 users' worth of to-dos is only a few megabytes -- not big enough to cause data loss. The real problem is concurrency: multiple users writing to the same file at the same time, overwriting each other's changes.",
         "choices": [
-          { "id": "a", "text": "So it's a race condition -- two writes happening at once", "nextNode": "correct-concurrency", "score": 5 }
+          { "id": "a", "text": "So it's a race condition -- two writes happening at once", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
       "wrong-memory": {
         "narrative": "Memory usually isn't the issue for 500 users. A JSON file with task data would be tiny in memory. The problem is more fundamental: the file can't handle multiple users writing to it at the same time. When two writes overlap, data gets lost.",
         "choices": [
-          { "id": "a", "text": "Got it -- concurrent writes are causing data loss", "nextNode": "correct-concurrency", "score": 5 }
+          { "id": "a", "text": "Got it -- concurrent writes are causing data loss", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
-      "correct-database": {
-        "narrative": "You migrate to SQLite (simple to set up) and the disappearing task problem vanishes. The database handles concurrent writes safely using transactions. Three months later, the app has 50,000 users and searches are starting to slow down. What's your next move?",
+      "diagnose-fix": {
+        "narrative": "Confirmed: it's a race condition. The founder asks 'OK, what should we use instead?' Pick the right replacement.",
         "choices": [
-          { "id": "a", "text": "Upgrade to PostgreSQL and add indexes for faster searches", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "SQLite should be fine, just get a faster server", "nextNode": "end-ok", "score": 4 }
+          { "id": "a", "text": "A real database like PostgreSQL or SQLite -- they handle concurrent writes safely with transactions", "nextNode": "pick-engine", "score": 4 },
+          { "id": "b", "text": "Just add file locking so only one user writes at a time -- everyone else queues", "nextNode": "pick-engine", "score": 2 },
+          { "id": "c", "text": "Save each user's tasks in a separate file so writes never overlap", "nextNode": "pick-engine", "score": 1 }
         ]
       },
-      "partial-locking": {
-        "narrative": "File locking could work for a small number of users, but it means only one user can write at a time -- everyone else waits. With 500 users, that creates terrible performance. A database handles concurrent access much more efficiently, allowing many users to write simultaneously without conflicts.",
+      "pick-engine": {
+        "narrative": "You agree on a database. The team is small, the app is single-server, and you want to ship today. Which engine do you start with?",
         "choices": [
-          { "id": "a", "text": "A real database is the better solution", "nextNode": "correct-database", "score": 7 }
+          { "id": "a", "text": "SQLite -- single file, zero setup, transactions out of the box, easy to migrate to Postgres later", "nextNode": "design-schema", "score": 4 },
+          { "id": "b", "text": "PostgreSQL -- start with the production-grade option even if it means setting up a separate DB server", "nextNode": "design-schema", "score": 3 },
+          { "id": "c", "text": "MongoDB -- to-do items are document-shaped, schemaless will be faster", "nextNode": "design-schema", "score": 2 }
         ]
       },
-      "end-great": {
-        "narrative": "PostgreSQL handles 50,000 users easily. You add indexes on the user_id and due_date columns, and searches go from 500ms to 2ms. The app is fast, reliable, and ready to scale further.",
+      "design-schema": {
+        "narrative": "Time to design the data. You need to store tasks belonging to users. What's your minimum viable schema?",
+        "choices": [
+          { "id": "a", "text": "Two tables: users (id, email) and tasks (id, user_id, title, done, created_at) with user_id as a foreign key", "nextNode": "scale-up", "score": 4 },
+          { "id": "b", "text": "One tasks table with a username TEXT column instead of a user_id foreign key", "nextNode": "scale-up", "score": 2 },
+          { "id": "c", "text": "Skip the schema -- store everything as a JSON blob in a single 'data' column", "nextNode": "scale-up", "score": 1 }
+        ]
+      },
+      "scale-up": {
+        "narrative": "You ship and the disappearing-task bug vanishes. Three months later you have 50,000 users and the page that loads a user's tasks has slowed from 50ms to 800ms. What's your next move?",
+        "choices": [
+          { "id": "a", "text": "EXPLAIN the slow query, add an index on tasks(user_id), and re-measure -- if SQLite then becomes the bottleneck, migrate to PostgreSQL", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Migrate straight to PostgreSQL -- bigger DB will be faster", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Buy a faster server -- the database is fine, the hardware is the problem", "nextNode": "end-weak", "score": 0 }
+        ]
+      },
+      "end-good": {
+        "narrative": "EXPLAIN shows a full table scan on tasks. You add CREATE INDEX idx_tasks_user_id ON tasks(user_id) and the query drops to 4ms. SQLite handles 50,000 users comfortably. Six months and one Postgres migration later, you're at 500,000 users with the same data model and the same indexes. You measured before you migrated, so every step was justified.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "You made the right call at every step: identified the concurrency problem with flat files, chose a database for safe concurrent access, and upgraded to a more powerful database as the app grew. This progression -- file to SQLite to PostgreSQL -- is actually how many real startups evolve their data storage."
+        "feedback": "You walked the natural progression: flat file -> SQLite -> indexed SQLite -> PostgreSQL, with each step driven by a measured problem instead of a guess. That's how real apps evolve their storage. Premature migration to a 'bigger' database without an index would have hidden the actual bottleneck behind a much more expensive change."
       },
-      "end-ok": {
-        "narrative": "SQLite is great for small to medium apps, but it's designed for single-server use and can become a bottleneck with many concurrent writers. PostgreSQL is better suited for production web apps with many users.",
+      "end-mediocre": {
+        "narrative": "You spend a weekend migrating to PostgreSQL. The query goes from 800ms to 600ms -- faster, but not by much, because the underlying problem is still a full scan on a 5-million-row table. You eventually add the index anyway. The migration was real work, just not the work that actually mattered.",
         "choices": [],
         "isEnd": true,
         "finalScore": 10,
-        "feedback": "SQLite is wonderful for getting started, but production web apps with many concurrent users usually need a client-server database like PostgreSQL. It handles concurrent writes better and offers features like connection pooling that help with high traffic."
+        "feedback": "Migrating engines without first understanding the bottleneck is a common, expensive mistake. EXPLAIN is free, indexes are cheap, and either change is reversible -- always exhaust them before committing to a migration that touches every connection in your app."
+      },
+      "end-weak": {
+        "narrative": "The faster server costs 4x as much per month and the slow page now takes 700ms instead of 800ms. The CPU graph is flat -- the bottleneck was never CPU, it was a missing index doing a full table scan. You're now paying more every month for a problem that an index would have fixed for free.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Throwing hardware at a database problem is the most expensive way to get the smallest improvement. Slowness in a database is almost always about missing indexes, bad query plans, or N+1 queries -- not raw CPU. Always profile before you provision."
       }
     },
     "glossaryTerms": ["database", "concurrency", "race-condition", "transaction"]

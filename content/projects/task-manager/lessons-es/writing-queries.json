@@ -38,7 +38,7 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Tu gestor de tareas necesita una funcionalidad de 'mostrar mis tareas'. Estas escribiendo la consulta para obtener las tareas de un usuario de la base de datos. Como la escribes?",
+        "narrative": "Tu gestor de tareas necesita una funcionalidad de 'mostrar mis tareas'. Estas escribiendo la consulta para obtener las tareas de un usuario de la base de datos. ¿Como la escribes?",
         "choices": [
           { "id": "select-all", "text": "SELECT * FROM tasks; — obtener todo, filtrar en el frontend", "nextNode": "no-filter", "score": 0 },
           { "id": "select-filtered", "text": "SELECT * FROM tasks WHERE user_id = $1 ORDER BY created_at DESC;", "nextNode": "good-query", "score": 4 },
@@ -46,66 +46,76 @@
         ]
       },
       "no-filter": {
-        "narrative": "Tu consulta devuelve cada tarea de cada usuario en la base de datos. Durante las pruebas con 3 usuarios, el Usuario A puede ver las tareas privadas del Usuario B. Un tester beta reporta el bug publicamente. Como respondes?",
+        "narrative": "Tu consulta devuelve cada tarea de cada usuario en la base de datos. Durante las pruebas con 3 usuarios, el Usuario A puede ver las tareas privadas del Usuario B. Un tester beta reporta el bug publicamente. ¿Como respondes?",
         "choices": [
-          { "id": "add-filter", "text": "Agregar inmediatamente una clausula WHERE user_id = $1 y desplegar un parche urgente", "nextNode": "recovered-end", "score": 3 },
-          { "id": "frontend-filter", "text": "Filtrar los resultados en JavaScript en el frontend antes de renderizar", "nextNode": "frontend-filter-end", "score": 1 }
+          { "id": "add-filter", "text": "Agregar inmediatamente una clausula WHERE user_id = $1 y desplegar un parche urgente", "nextNode": "update-query", "score": 4 },
+          { "id": "frontend-filter", "text": "Filtrar los resultados en JavaScript en el frontend antes de renderizar", "nextNode": "update-query", "score": 1 }
         ]
       },
       "good-query": {
-        "narrative": "Tu consulta funciona perfectamente — cada usuario solo ve sus propias tareas, ordenadas de mas nueva a mas antigua. Ahora necesitas agregar una funcionalidad de 'marcar tarea como completada'. Como escribes la consulta UPDATE?",
+        "narrative": "Tu consulta funciona perfectamente — cada usuario solo ve sus propias tareas, ordenadas de mas nueva a mas antigua. Es momento de agregar interacciones.",
         "choices": [
-          { "id": "update-with-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1 AND user_id = $2;", "nextNode": "excellent-end", "score": 4 },
-          { "id": "update-no-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1;", "nextNode": "insecure-update-end", "score": 1 }
+          { "id": "continue", "text": "Pasar a la consulta UPDATE para marcar tareas como completadas", "nextNode": "update-query", "score": 3 }
         ]
       },
       "missing-order": {
-        "narrative": "La consulta devuelve las tareas correctas, pero aparecen en un orden aleatorio. Los usuarios se quejan de que las tareas recien creadas aparecen al final o en medio de la lista. Como lo arreglas?",
+        "narrative": "La consulta devuelve las tareas correctas, pero aparecen en un orden aleatorio. Los usuarios se quejan de que las tareas recien creadas aparecen al final o en medio de la lista. ¿Como lo arreglas?",
         "choices": [
-          { "id": "add-order-by", "text": "Agregar ORDER BY created_at DESC para mostrar las tareas más nuevas primero", "nextNode": "decent-end", "score": 3 },
-          { "id": "sort-frontend", "text": "Ordenar las tareas en JavaScript después de obtenerlas", "nextNode": "frontend-sort-end", "score": 1 }
+          { "id": "add-order-by", "text": "Agregar ORDER BY created_at DESC para mostrar las tareas más nuevas primero", "nextNode": "update-query", "score": 3 },
+          { "id": "sort-frontend", "text": "Ordenar las tareas en JavaScript después de obtenerlas", "nextNode": "update-query", "score": 1 }
         ]
       },
-      "recovered-end": {
-        "narrative": "El parche urgente sale en una hora. La fuga de datos esta parcheada, pero el dano esta hecho — los usuarios vieron las tareas de otras personas. Agregas politicas de Seguridad a Nivel de Fila para prevenir esta clase de bug completamente.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Te recuperaste, pero el filtrado deberia haber estado desde el inicio. Siempre incluye un filtro de user_id y considera usar Seguridad a Nivel de Fila (RLS) como red de seguridad para que la base de datos imponga reglas de acceso incluso si tu consulta tiene un bug.",
-        "choices": []
+      "update-query": {
+        "narrative": "La lista funciona. Ahora los usuarios necesitan marcar tareas como completadas. ¿Como escribes la consulta UPDATE?",
+        "choices": [
+          { "id": "update-with-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1 AND user_id = $2;", "nextNode": "delete-query", "score": 4 },
+          { "id": "update-no-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1;", "nextNode": "delete-query", "score": 1 },
+          { "id": "update-no-where", "text": "UPDATE tasks SET is_complete = true; — el WHERE lo arreglo despues", "nextNode": "delete-query", "score": 0 }
+        ]
       },
-      "frontend-filter-end": {
-        "narrative": "Los datos aun viajan de la base de datos al frontend con las tareas de todos incluidas. Un usuario con conocimientos tecnicos abre la pestana de Red del navegador y ve las tareas de todos los usuarios en la respuesta de la API. Ocultaste el problema en la interfaz pero el agujero de seguridad sigue abierto.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Nunca dependas del filtrado en el frontend para seguridad. La respuesta cruda de la API contiene todos los datos — cualquiera con herramientas de desarrollo del navegador puede verlos. La seguridad debe imponerse a nivel de base de datos o API, no en la interfaz.",
-        "choices": []
+      "delete-query": {
+        "narrative": "Las tareas se acumulan. Los usuarios quieren eliminar las que ya no necesitan. ¿Como escribes la consulta DELETE?",
+        "choices": [
+          { "id": "delete-with-owner", "text": "DELETE FROM tasks WHERE id = $1 AND user_id = $2;", "nextNode": "performance", "score": 4 },
+          { "id": "soft-delete", "text": "Agregar un timestamp deleted_at en su lugar y filtrarlo en cada SELECT, para que deshacer el borrado siga siendo posible", "nextNode": "performance", "score": 4 },
+          { "id": "delete-no-owner", "text": "DELETE FROM tasks WHERE id = $1; — cualquiera con el ID puede borrar una fila", "nextNode": "performance", "score": 0 }
+        ]
+      },
+      "performance": {
+        "narrative": "Los usuarios avanzados ahora tienen miles de tareas cada uno. La consulta de la lista tarda mas de 2 segundos y la pagina se siente lenta. ¿Como arreglas el rendimiento sin cambiar la forma de la consulta?",
+        "choices": [
+          { "id": "index-columns", "text": "Agregar un indice sobre (user_id, created_at) para que la base de datos pueda encontrar y ordenar las filas coincidentes directamente", "nextNode": "rls", "score": 4 },
+          { "id": "limit-pagination", "text": "Agregar LIMIT y OFFSET para paginar los resultados — obtener 50 tareas a la vez en lugar de todas", "nextNode": "rls", "score": 3 },
+          { "id": "ignore-perf", "text": "Dejar la consulta — 2 segundos esta bien, los usuarios pueden esperar", "nextNode": "rls", "score": 0 }
+        ]
+      },
+      "rls": {
+        "narrative": "Tus consultas son correctas, pero notaste en las noticias que otra startup filtro datos porque una sola clausula WHERE olvidada expuso los registros de todos. Quieres una red de seguridad para que un bug futuro no pueda hacer lo mismo. ¿Que configuras?",
+        "choices": [
+          { "id": "rls-policies", "text": "Habilitar Seguridad a Nivel de Fila en la tabla tasks y escribir una politica: USING (auth.uid() = user_id). La base de datos impone el filtro de usuario incluso si el codigo de la app lo olvida.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "code-review", "text": "Agregar un item de checklist a cada PR: '¿incluiste user_id en WHERE?' y confiar en que los revisores atrapen los errores", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "trust-app", "text": "Saltar RLS — tus consultas son correctas, no se necesita capa extra", "nextNode": "weak-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "Tu gestor de tareas es seguro y funcional. Cada consulta filtra por user_id, asegurando que los usuarios solo puedan interactuar con sus propios datos. Los resultados ordenados hacen que la interfaz se sienta pulida y predecible.",
+        "narrative": "Tus consultas estan filtradas, ordenadas, indexadas y protegidas por Seguridad a Nivel de Fila. Incluso si un futuro contribuyente escribe una consulta sin WHERE user_id, la base de datos silenciosamente acota el resultado al usuario conectado. Defensa en profundidad.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excelente trabajo! Seguiste dos reglas criticas: siempre filtrar por user_id para propiedad de datos, y siempre incluir ORDER BY para resultados consistentes. Estos habitos previenen los bugs de base de datos más comunes en apps en producción.",
+        "finalScore": 20,
+        "feedback": "Esto es trabajo de consultas a nivel produccion. Filtraste por propiedad, ordenaste para predictibilidad, indexaste para rendimiento y agregaste RLS como red de seguridad. La combinacion significa que una sola consulta descuidada no puede filtrar datos — la base de datos misma se niega.",
         "choices": []
       },
-      "insecure-update-end": {
-        "narrative": "Un usuario descubre que puede marcar las tareas de cualquiera como completadas adivinando IDs de tareas. Como los UUIDs son dificiles de adivinar toma un tiempo, pero un atacante determinado escribe un script para probar IDs aleatorios. Tu app tiene una vulnerabilidad de control de acceso roto.",
+      "mediocre-end": {
+        "narrative": "Tus consultas funcionan hoy. Seis meses despues, un contribuyente junior agrega un nuevo endpoint y olvida el filtro de user_id. La revision de codigo lo pasa por alto. Produccion silenciosamente filtra datos hasta que un usuario lo reporta.",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Siempre incluye user_id en consultas UPDATE y DELETE. Filtrar solo por ID significa que cualquiera que conozca (o adivine) un ID de tarea puede modificarlo. La verificacion de user_id asegura que solo el dueño de la tarea pueda hacer cambios.",
+        "finalScore": 12,
+        "feedback": "La revision de codigo es necesaria pero no suficiente. Los humanos pasan cosas por alto — por eso agregamos salvaguardas automatizadas. La Seguridad a Nivel de Fila traslada la responsabilidad de 'cada desarrollador recuerda' a 'la base de datos impone'.",
         "choices": []
       },
-      "decent-end": {
-        "narrative": "Agregar ORDER BY arregla el orden de visualizacion. Los usuarios ahora ven sus tareas mas nuevas primero. Haces una nota mental de siempre definir el orden en tus consultas en lugar de dejarlo al azar.",
+      "weak-end": {
+        "narrative": "Sin RLS, la tabla tasks confia en cualquier consulta que la app envie. Un typo, un bug, un pull request apresurado y todo el dataset queda expuesto. Estas a un solo error de un incidente serio.",
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Buena corrección. Las bases de datos devuelven resultados en un orden indefinido a menos que especifiques ORDER BY. Ordenar en la base de datos es más rápido y confiable que ordenar en JavaScript, especialmente a medida que tus datos crecen.",
-        "choices": []
-      },
-      "frontend-sort-end": {
-        "narrative": "Funciona por ahora, pero a medida que los usuarios acumulan cientos de tareas, el frontend lucha para ordenar arrays grandes. La pagina se vuelve lenta. Eventualmente mueves el ordenamiento a la consulta de base de datos donde pertenece.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Las bases de datos estan optimizadas para ordenar — usan indices y algoritmos eficientes. Ordenar en el frontend significa descargar datos desordenados y hacer trabajo extra en el navegador. Deja que la base de datos lo maneje con ORDER BY.",
+        "finalScore": 5,
+        "feedback": "Saltar RLS en una tabla multi-tenant es una bomba de tiempo. Incluso los equipos cuidadosos lanzan consultas con bugs eventualmente. RLS hace de la base de datos tu ultima linea de defensa — actívala en cada tabla que contenga datos de usuarios.",
         "choices": []
       }
     },

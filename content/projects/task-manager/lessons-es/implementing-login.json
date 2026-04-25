@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "auth-security",
   "projectSlug": "task-manager",
-  "intro": "Estas agregando login a tu gestor de tareas. Piensa en ello como construir la puerta principal — necesita mantener a los intrusos afuera mientras deja entrar a los residentes sin problema. Un usuario reporta que no puede iniciar sesión y descubres que la implementación de auth tiene algunos problemas fundamentales. Como lo arreglas?",
+  "intro": "Estas agregando login a tu gestor de tareas. Piensa en ello como construir la puerta principal — necesita mantener a los intrusos afuera mientras deja entrar a los residentes sin problema. Un usuario reporta que no puede iniciar sesión y descubres que la implementación de auth tiene algunos problemas fundamentales. ¿Como lo arreglas?",
   "teach": [
     {
       "type": "text",
@@ -38,45 +38,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Un usuario reporta que no puede iniciar sesion en tu gestor de tareas. Revisas el endpoint de login y descubres que la contrasena se esta comparando en texto plano, y el mensaje de error dice 'Contrasena incorrecta para el usuario john@example.com'. Cual es tu primera prioridad?",
+        "narrative": "Un usuario reporta que no puede iniciar sesion en tu gestor de tareas. Revisas el endpoint de login y descubres que la contrasena se esta comparando en texto plano, y el mensaje de error dice 'Contrasena incorrecta para el usuario john@example.com'. ¿Cual es tu primera prioridad?",
         "choices": [
-          { "id": "a", "text": "Solo arreglar el mensaje de error para que sea menos especifico", "nextNode": "surface-fix", "score": 1 },
-          { "id": "b", "text": "Arreglar la comparacion de contrasena en texto plano primero, luego abordar el mensaje de error", "nextNode": "fix-hashing", "score": 4 },
-          { "id": "c", "text": "Reescribir todo el sistema de auth desde cero", "nextNode": "overhaul", "score": 1 }
+          { "id": "surface-fix", "text": "Solo arreglar el mensaje de error para que sea menos especifico", "nextNode": "surface-fix", "score": 1 },
+          { "id": "fix-hashing", "text": "Arreglar la comparacion de contrasena en texto plano primero, luego abordar el mensaje de error", "nextNode": "fix-hashing", "score": 4 },
+          { "id": "overhaul", "text": "Reescribir todo el sistema de auth desde cero", "nextNode": "overhaul", "score": 1 }
         ]
       },
       "surface-fix": {
-        "narrative": "Cambias el error a 'Credenciales invalidas' — mejor, pero las contrasenas aun se almacenan y comparan en texto plano. Una filtracion de la base de datos expondria la contrasena de cada usuario. Dos meses despues, tu base de datos es vulnerada y cada contrasena en texto plano de los usuarios se filtra.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Las contrasenas en texto plano son una vulnerabilidad de seguridad critica. Un mensaje de error vago no protege contra filtraciones de base de datos — el hashing si. Siempre prioriza la solución de seguridad sobre los cambios cosmeticos.",
-        "choices": []
+        "narrative": "Cambias el error a 'Credenciales invalidas' — mejor, pero las contrasenas aun se almacenan y comparan en texto plano. Un revisor de codigo lee el diff y pregunta por que el bug subyacente sigue ahi. Te das cuenta de que los arreglos cosmeticos no atacan el riesgo real.",
+        "choices": [
+          { "id": "add-hash-now", "text": "Agregar hashing con bcrypt encima del arreglo cosmetico y mantener los cambios del mensaje", "nextNode": "migrate-existing", "score": 3 },
+          { "id": "leave-it", "text": "Insistir en que el cambio del mensaje es suficiente y aprobar el PR tal cual", "nextNode": "migrate-existing", "score": 0 }
+        ]
       },
       "fix-hashing": {
-        "narrative": "Buena decision. Implementas hashing con bcrypt y actualizas el mensaje de error a un generico 'Email o contrasena invalidos'. Ahora necesitas manejar las contrasenas existentes en texto plano en la base de datos. Cual es tu enfoque?",
+        "narrative": "Buena decision. Implementas hashing con bcrypt en la ruta de signup y actualizas el mensaje de error a un generico 'Email o contrasena invalidos'. Las cuentas nuevas estan seguras — pero la base de datos aun guarda las contrasenas en texto plano de los usuarios existentes. ¿Cual es tu enfoque?",
         "choices": [
-          { "id": "b1", "text": "Escribir una migración que hashee todas las contrasenas existentes, luego actualizar el login para usar bcrypt.compare", "nextNode": "migration-done", "score": 3 },
-          { "id": "b2", "text": "Forzar a todos los usuarios a restablecer sus contrasenas en el próximo inicio de sesión", "nextNode": "forced-reset", "score": 2 }
+          { "id": "migration", "text": "Escribir un script unico que aplique bcrypt a cada fila de contrasena existente en su lugar, luego cambiar el login a bcrypt.compare", "nextNode": "migrate-existing", "score": 4 },
+          { "id": "lazy-migration", "text": "Hashear cada contrasena existente la próxima vez que el usuario inicie sesion exitosamente, y forzar reset a quien no haya entrado en 90 dias", "nextNode": "migrate-existing", "score": 3 }
         ]
       },
       "overhaul": {
         "narrative": "Reescribir desde cero es arriesgado y lento. Los usuarios aun no pueden iniciar sesion. Tu lider de equipo pregunta por que la correccion de un bug de login se esta convirtiendo en un proyecto de dos semanas. Reduces el alcance para solo arreglar los problemas criticos primero.",
         "choices": [
-          { "id": "c1", "text": "Arreglar el hashing y los mensajes de error, planificar la reescritura mayor para después", "nextNode": "fix-hashing", "score": 3 }
+          { "id": "scope-down", "text": "Arreglar el hashing y los mensajes de error, planificar la reescritura mayor para después", "nextNode": "migrate-existing", "score": 3 },
+          { "id": "keep-rewriting", "text": "Insistir y mantener la reescritura completa en el cronograma", "nextNode": "migrate-existing", "score": 1 }
         ]
       },
-      "migration-done": {
-        "narrative": "Escribes un script de migracion que hashea todas las contrasenas existentes con bcrypt, actualizas el endpoint de login para usar bcrypt.compare y despliegas. Todo funciona y los usuarios pueden iniciar sesion de forma segura.",
+      "migrate-existing": {
+        "narrative": "Ahora las contrasenas estan hasheadas en todos lados. El login autentica correctamente. Ahora necesitas decidir como vive la sesion entre requests. ¿Donde guardas el token de sesion despues de un login exitoso?",
+        "choices": [
+          { "id": "httponly-cookie", "text": "Configurar una cookie firmada, httpOnly y secure con un JWT de corta duración y rotacion de refresh token", "nextNode": "error-handling", "score": 4 },
+          { "id": "localstorage", "text": "Guardar el JWT en localStorage y leerlo en cada fetch", "nextNode": "error-handling", "score": 1 },
+          { "id": "no-expiry-cookie", "text": "Configurar una cookie sin expiración y sin la bandera httpOnly — es mas simple", "nextNode": "error-handling", "score": 0 }
+        ]
+      },
+      "error-handling": {
+        "narrative": "Las sesiones persisten correctamente. Un usuario envia el formulario con el campo de email vacio y obtiene un error 500 con un stack trace en el navegador. ¿Como aprietas el camino de errores?",
+        "choices": [
+          { "id": "validate-and-message", "text": "Validar la entrada en el servidor, devolver un 400 con un mensaje de error limpio a nivel de campo y registrar el error completo solo en el servidor", "nextNode": "rate-limit-step", "score": 4 },
+          { "id": "frontend-only-validation", "text": "Agregar un atributo 'required' en el input y darlo por hecho", "nextNode": "rate-limit-step", "score": 2 },
+          { "id": "swallow-errors", "text": "Envolver el handler en un try/catch que devuelva 200 con cuerpo vacio para que el usuario nunca vea el error", "nextNode": "rate-limit-step", "score": 0 }
+        ]
+      },
+      "rate-limit-step": {
+        "narrative": "Sentry muestra una sola IP intentando 800 logins en 10 minutos contra el mismo email. Tu endpoint procesa cada uno con gusto. ¿Que agregas?",
+        "choices": [
+          { "id": "rate-limit-and-lockout", "text": "Agregar limitacion de tasa por IP y por cuenta mas un bloqueo temporal despues de N fallos, con un mensaje de error generico", "nextNode": "excellent-end", "score": 4 },
+          { "id": "captcha-only", "text": "Agregar un CAPTCHA en el formulario y asumir que eso detiene a los bots", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-attack", "text": "Bloquear la unica IP en tu firewall y seguir adelante", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu flujo de login ahora hashea contrasenas con bcrypt, migro todos los datos legados, guarda sesiones en cookies httpOnly, valida la entrada limpiamente y limita los intentos de fuerza bruta. El bug original esta arreglado y la superficie a su alrededor esta endurecida.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Excelente. Priorizaste la corrección de seguridad, manejaste los datos legados con una migración y usaste mensajes de error genéricos. Así es como se deben manejar los bugs de auth en producción.",
+        "finalScore": 20,
+        "feedback": "Esto es auth de produccion: hashing real, seguridad de sesion real, contrato de errores limpio y resistente al abuso. El patron — arreglar el bug y luego auditar todo lo adyacente — es lo que convierte arreglos puntuales en mejoras sistemicas de seguridad.",
         "choices": []
       },
-      "forced-reset": {
-        "narrative": "Los usuarios estan molestos por el restablecimiento forzado, pero las contrasenas ahora estan correctamente hasheadas de aqui en adelante. Algunos usuarios abandonan la app debido a la inconveniencia.",
+      "mediocre-end": {
+        "narrative": "El auth es en su mayoria seguro, pero un CAPTCHA por si solo lo evaden servicios que los resuelven por fracciones de centavo. Sin limitacion de tasa y bloqueos, un atacante decidido sigue trabajando tus cuentas a escala.",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Los restablecimientos forzados funcionan pero afectan la experiencia del usuario. Una migración en segundo plano que hashea las contrasenas existentes es más fluida — los usuarios nunca notan el cambio.",
+        "finalScore": 13,
+        "feedback": "El CAPTCHA es un tope de velocidad, no una barrera. Aplicalo encima de limites de tasa y bloqueos de cuenta — defensa en profundidad. Un solo control es un solo punto de falla.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Bloqueaste una IP. El atacante rota por un pool de proxies residenciales y continua sin obstaculos. En un dia ha hecho credential stuffing en docenas de cuentas usando contrasenas filtradas de otras brechas.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Los bloqueos a nivel de IP son triviales de evadir. Asume que cualquier atacante tiene IPs ilimitadas y diseña limites de tasa por cuenta, con bloqueos progresivos. Bloquea el comportamiento, no la direccion.",
         "choices": []
       }
     },

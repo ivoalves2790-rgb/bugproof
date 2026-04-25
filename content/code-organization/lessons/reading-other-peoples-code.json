@@ -45,56 +45,75 @@
       "start": {
         "narrative": "Bug report: 'Users see the wrong price on the product detail page. The price shows $0 instead of the actual price.'\n\nYou've never seen this codebase before. The project has this structure:\n\nsrc/\n  components/ (Header, ProductList, ProductDetail, Cart)\n  hooks/ (useAuth, useProducts, useCart)\n  api/ (auth.js, products.js, orders.js)\n  utils/ (formatPrice.js, validators.js)\n\nWhere do you start?",
         "choices": [
-          { "id": "a", "text": "Open ProductDetail component since that's where the bug is visible", "nextNode": "open-detail", "score": 10 },
-          { "id": "b", "text": "Open api/products.js to check if the API returns the right price", "nextNode": "open-api", "score": 6 },
-          { "id": "c", "text": "Start at App.js and read through the entire codebase", "nextNode": "read-all", "score": 2 }
+          { "id": "a", "text": "Open ProductDetail component since that's where the bug is visible", "nextNode": "open-detail", "score": 4 },
+          { "id": "b", "text": "Open api/products.js to check if the API returns the right price", "nextNode": "open-api", "score": 2 },
+          { "id": "c", "text": "Start at App.js and read through the entire codebase", "nextNode": "read-all", "score": 0 }
         ]
       },
       "open-detail": {
-        "narrative": "You open ProductDetail.jsx and see:\n\nconst { product } = useProducts(id);\nreturn <h2>{product.name}</h2>\n       <p>{formatPrice(product.price)}</p>\n\nThe component uses useProducts() hook and formatPrice() utility. The data flows: API -> hook -> component -> formatter. Where's the $0 coming from?",
+        "narrative": "You open ProductDetail.jsx and see:\n\nconst { product } = useProducts(id);\nreturn <h2>{product.name}</h2>\n       <p>{formatPrice(product.price)}</p>\n\nThe component uses useProducts() hook and formatPrice() utility. The data flow is: API -> hook -> component -> formatter. Where do you go next to find the $0?",
         "choices": [
-          { "id": "a", "text": "Check formatPrice() in utils/ -- maybe it's formatting the price wrong", "nextNode": "check-format", "score": 8 },
-          { "id": "b", "text": "Check useProducts() hook -- maybe it's not passing the price correctly", "nextNode": "check-hook", "score": 10 }
+          { "id": "a", "text": "Walk the data backward: hook first, then API, then formatter -- closest layer to the symptom", "nextNode": "trace-shape", "score": 4 },
+          { "id": "b", "text": "Check formatPrice() in utils/ first because it touches the value last", "nextNode": "trace-shape", "score": 2 },
+          { "id": "c", "text": "Open every related file at once and skim them in parallel", "nextNode": "trace-shape", "score": 1 }
         ]
       },
       "open-api": {
-        "narrative": "The API function looks correct -- it fetches from /api/products/:id and returns the full product object. But the bug might be between the API response and what the component displays. You need to trace the data through the hook to see if something transforms it along the way.",
+        "narrative": "api/products.js fetches from /api/products/:id and returns the raw response. It looks correct. But the bug might be between the API response and what the component displays. You realize you skipped a layer.",
         "choices": [
-          { "id": "a", "text": "Check the component that displays the price to trace the data flow", "nextNode": "open-detail", "score": 7 }
+          { "id": "a", "text": "Go back to the symptom -- open the component first to see what it actually consumes", "nextNode": "open-detail", "score": 3 }
         ]
       },
       "read-all": {
         "narrative": "30 minutes later, you've read 400 lines of unrelated code about authentication and cart logic. You still haven't looked at anything related to product prices. Reading everything is too slow when you have a specific bug to find.",
         "choices": [
-          { "id": "a", "text": "Focus on the product detail page where the bug actually appears", "nextNode": "open-detail", "score": 5 }
+          { "id": "a", "text": "Focus on the product detail page where the bug actually appears", "nextNode": "open-detail", "score": 2 }
         ]
       },
-      "check-format": {
-        "narrative": "formatPrice(price) converts a number to a dollar string: '$' + price.toFixed(2). It works correctly with any number. If price is 0, it returns '$0.00'. The formatter isn't the problem -- it's displaying whatever value it receives. The issue is upstream.",
+      "trace-shape": {
+        "narrative": "You open useProducts.js and find:\n\nconst product = {\n  name: data.name,\n  price: data.price_cents || 0,\n  image: data.image_url\n};\n\nThe API field is named price_cents. What does that name tell you about the data, before you even check a value?",
         "choices": [
-          { "id": "a", "text": "Check the useProducts hook to see what value it passes as price", "nextNode": "check-hook", "score": 8 }
+          { "id": "a", "text": "The value is in cents (integers like 2999 for $29.99) -- a unit conversion is missing somewhere", "nextNode": "verify-data", "score": 4 },
+          { "id": "b", "text": "The name is just legacy -- I'll trust the value as-is and move on", "nextNode": "verify-data", "score": 1 },
+          { "id": "c", "text": "Hard to say -- need to log it to see", "nextNode": "verify-data", "score": 2 }
         ]
       },
-      "check-hook": {
-        "narrative": "You open useProducts.js and find:\n\nconst product = {\n  name: data.name,\n  price: data.price_cents,\n  image: data.image_url\n};\n\nThe API returns price_cents (e.g., 2999 for $29.99) but the hook assigns it directly to price without converting. formatPrice() then shows $2999.00 -- wait, the bug report says $0. You check the API response and realize for a new product, price_cents is null, and null.toFixed(2) would crash. There must be a fallback. You search and find: price: data.price_cents || 0. What's the real fix?",
+      "verify-data": {
+        "narrative": "You confirm at runtime: a normal product has price_cents = 2999 ($29.99). A newly-created product without a price has price_cents = null, and the || 0 fallback makes it become 0. The bug-reporting user happens to be looking at one of those new products. So there are TWO problems: the unit mismatch AND the silent fallback. How do you fix it?",
         "choices": [
-          { "id": "a", "text": "Convert cents to dollars: price: (data.price_cents || 0) / 100", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Just remove the || 0 fallback so null prices show an error instead", "nextNode": "end-partial", "score": 4 }
+          { "id": "a", "text": "Convert cents to dollars AND surface missing prices: price: data.price_cents == null ? null : data.price_cents / 100, then render 'Price unavailable' when null", "nextNode": "verify-fix", "score": 4 },
+          { "id": "b", "text": "Just convert cents to dollars: price: (data.price_cents || 0) / 100", "nextNode": "verify-fix", "score": 2 },
+          { "id": "c", "text": "Just remove the || 0 fallback and let null crash", "nextNode": "verify-fix", "score": 0 }
+        ]
+      },
+      "verify-fix": {
+        "narrative": "Before you ship, how do you verify the fix and protect against regressions?",
+        "choices": [
+          { "id": "a", "text": "Reproduce the original bug locally with a null-price product, confirm it now shows 'Price unavailable', then add a unit test for both the cents-conversion and the null case", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Eyeball the change in the dev environment with one normal product and call it done", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Push to production and let real users tell us if it broke anything else", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "The price was in cents from the API but displayed as dollars without conversion. For a $29.99 product, data.price_cents is 2999, and it was showing $2,999.00. For new products with null prices, the || 0 fallback made it show $0.00. Dividing by 100 fixes both cases.",
+        "narrative": "Test passes, the original repro now shows 'Price unavailable' for the null case and $29.99 for normal products. You traced the bug from the symptom backward through the component -> hook -> API, found the unit mismatch hidden by the fallback, and locked the fix in with a test. Total time: under an hour in code you'd never seen.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent code reading! You traced the data flow from component -> hook -> API and found the unit mismatch (cents vs dollars). The strategy worked: start where the bug is visible, trace the data backward, and check each transformation step. This is exactly how experienced developers navigate unfamiliar code."
+        "feedback": "This is the experienced developer's playbook for unfamiliar code: start at the symptom, walk the data backward, read field names as clues (price_cents tells you the unit), and lock the fix in with a test so the next reader inherits both the fix AND the proof. The code didn't need to be familiar -- just methodically followed."
       },
-      "end-partial": {
-        "narrative": "Removing the fallback would cause a crash (null.toFixed) instead of showing $0. That's worse than the original bug. The real problem is the cents-to-dollars conversion missing in the hook.",
+      "end-mediocre": {
+        "narrative": "The eyeball test on a normal product shows $29.99 instead of $0 -- looks fixed! You ship. Two days later, QA reports that the 'Price unavailable' wording is missing for null-price products: the page just shows '$0.00' again, because you only fixed the conversion, not the fallback path. You're back in this code for a second debugging round.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "You found the right area but missed the root cause. The || 0 fallback was hiding the null issue, but the real problem is that price_cents needs to be divided by 100 to convert to dollars. When reading unfamiliar code, always check the data at each step: what does the API return, what does the hook transform, what does the component expect?"
+        "finalScore": 10,
+        "feedback": "You found the right area but verified only the happy path. When you spot two problems (unit mismatch AND silent fallback), you have to test both. A 30-second test for the null case would have caught the partial fix before it shipped."
+      },
+      "end-weak": {
+        "narrative": "Production users now see -- in some cases -- a JavaScript crash on the product page (null.toFixed). Support tickets pile up overnight. The on-call engineer rolls back your change and the original $0 bug returns. You broke a working-but-buggy page into a fully broken page.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Shipping unverified changes to unfamiliar code is the highest-risk move you can make. The whole point of reading other people's code methodically is to build enough understanding to know what to test. Skipping verification turns careful detective work into a coin flip."
       }
     },
     "glossaryTerms": ["data-flow", "debugging", "code-reading", "entry-point"]

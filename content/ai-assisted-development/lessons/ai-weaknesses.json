@@ -43,63 +43,77 @@
       "start": {
         "narrative": "A customer emails that they were charged $49.99 twice for a single order. You check the database and confirm the duplicate charge. The checkout code was written entirely by AI. What's your first step?",
         "choices": [
-          { "id": "a", "text": "Read through the AI-generated checkout code yourself", "nextNode": "read-code", "score": 10 },
-          { "id": "b", "text": "Ask AI to fix the double-charge bug", "nextNode": "ask-ai-fix", "score": 3 },
-          { "id": "c", "text": "Refund the customer and hope it doesn't happen again", "nextNode": "just-refund", "score": 1 }
+          { "id": "a", "text": "Read through the AI-generated checkout code yourself", "nextNode": "read-code", "score": 4 },
+          { "id": "b", "text": "Ask AI to fix the double-charge bug", "nextNode": "ask-ai-fix", "score": 1 },
+          { "id": "c", "text": "Refund the customer and hope it doesn't happen again", "nextNode": "just-refund", "score": 0 }
         ]
       },
       "read-code": {
-        "narrative": "You read the checkout function and notice the AI wrote the payment processing like this:\n\nawait chargeCard(order.total);\nawait saveOrder(order);\nawait chargeCard(order.total);\nawait sendConfirmation(order);\n\nThere are two calls to chargeCard! The AI duplicated the payment call, probably from an editing session where it lost track of what was already there. What do you do?",
+        "narrative": "You read the checkout function and notice the AI wrote the payment processing like this:\n\nawait chargeCard(order.total);\nawait saveOrder(order);\nawait chargeCard(order.total);\nawait sendConfirmation(order);\n\nThere are two calls to chargeCard. The AI duplicated the payment call, probably from an editing session where it lost track of what was already there. What do you do?",
         "choices": [
-          { "id": "a", "text": "Remove the duplicate chargeCard call and add a safeguard to prevent double charges", "nextNode": "good-fix", "score": 10 },
-          { "id": "b", "text": "Just remove the duplicate line", "nextNode": "partial-fix", "score": 6 },
-          { "id": "c", "text": "Ask AI to rewrite the whole checkout flow", "nextNode": "ai-rewrite", "score": 3 }
+          { "id": "a", "text": "Remove the duplicate chargeCard call and add an idempotency key as a safeguard", "nextNode": "add-safeguard", "score": 4 },
+          { "id": "b", "text": "Just remove the duplicate line", "nextNode": "add-safeguard", "score": 2 },
+          { "id": "c", "text": "Ask AI to rewrite the whole checkout flow", "nextNode": "add-safeguard", "score": 1 }
         ]
       },
       "ask-ai-fix": {
         "narrative": "You paste the code into AI and ask it to fix the double charge. The AI says 'I don't see any issues with this code, it looks correct.' AI can't always spot its own mistakes, especially when the code is syntactically valid. The duplicate call is logically wrong but structurally fine.",
         "choices": [
-          { "id": "a", "text": "Read through the code yourself line by line", "nextNode": "read-code", "score": 5 }
+          { "id": "a", "text": "Read through the code yourself line by line", "nextNode": "read-code", "score": 2 }
         ]
       },
       "just-refund": {
         "narrative": "You refund the customer, but the next day three more customers report the same issue. The bug is still there. Ignoring the root cause just delays the inevitable -- and costs your business money and trust.",
         "choices": [
-          { "id": "a", "text": "Okay, time to actually look at the code", "nextNode": "read-code", "score": 3 }
+          { "id": "a", "text": "Okay, time to actually look at the code", "nextNode": "read-code", "score": 1 }
         ]
       },
-      "good-fix": {
-        "narrative": "You remove the duplicate chargeCard call and add an idempotency key to prevent double charges even if the function is accidentally called twice. You also add a test that verifies chargeCard is only called once per order. How do you prevent this in the future?",
+      "add-safeguard": {
+        "narrative": "You've removed the duplicate chargeCard call. The immediate bug is gone, but if a future AI edit (or a tired human) re-introduces the same pattern, the same customers get billed twice again. What defense do you add at the layer below the function?",
         "choices": [
-          { "id": "a", "text": "Always review AI-generated code for payment and security logic, and write tests for critical paths", "nextNode": "end-best", "score": 10 },
-          { "id": "b", "text": "Stop using AI for the checkout flow entirely", "nextNode": "end-okay", "score": 5 }
+          { "id": "a", "text": "Add an idempotency key on the order so chargeCard refuses to run twice for the same orderId, even if called twice", "nextNode": "add-tests", "score": 4 },
+          { "id": "b", "text": "Add a runtime guard inside chargeCard that throws if the order has already been charged in the last 60 seconds", "nextNode": "add-tests", "score": 3 },
+          { "id": "c", "text": "Add a code comment '// do not call twice' above the call site", "nextNode": "add-tests", "score": 1 },
+          { "id": "d", "text": "Skip the safeguard -- you trust yourself not to reintroduce the bug", "nextNode": "add-tests", "score": 0 }
         ]
       },
-      "partial-fix": {
-        "narrative": "Removing the duplicate line fixes the immediate bug, but without a safeguard, a future code change (or another AI edit) could reintroduce the problem. Production payment code needs defensive programming.",
+      "add-tests": {
+        "narrative": "Safeguard is in place. Now you need a regression test that fails loudly the next time something in the checkout flow tries to charge twice. What test do you write?",
         "choices": [
-          { "id": "a", "text": "Add an idempotency check and a test", "nextNode": "good-fix", "score": 5 }
+          { "id": "a", "text": "An integration test that runs the full checkout flow against a fake payment gateway and asserts chargeCard was called exactly once per order", "nextNode": "review-policy", "score": 4 },
+          { "id": "b", "text": "A unit test that mocks chargeCard and asserts the spy was called exactly once when checkout() runs once", "nextNode": "review-policy", "score": 3 },
+          { "id": "c", "text": "A snapshot test of the checkout function source -- if anyone changes it, the snapshot fails", "nextNode": "review-policy", "score": 1 },
+          { "id": "d", "text": "Skip the test -- the safeguard is enough", "nextNode": "review-policy", "score": 0 }
         ]
       },
-      "ai-rewrite": {
-        "narrative": "The AI rewrites the checkout flow. It looks different, but you have no way to know if it has other subtle bugs without reading it carefully. Replacing AI code with more unreviewed AI code doesn't solve the underlying problem.",
+      "review-policy": {
+        "narrative": "Bug fixed, safeguard installed, regression test in place. The deeper question: how do you keep AI from quietly shipping the next version of this bug in another critical path? You want a policy you'll actually follow, not a wish.",
         "choices": [
-          { "id": "a", "text": "Actually read through the code this time", "nextNode": "read-code", "score": 3 }
+          { "id": "a", "text": "Tag files that touch money/auth/PII with a CODEOWNERS rule so PRs touching them require explicit human review, plus mandatory tests for critical paths", "nextNode": "end-best", "score": 4 },
+          { "id": "b", "text": "Promise yourself you'll review AI output more carefully from now on", "nextNode": "end-vague", "score": 1 },
+          { "id": "c", "text": "Stop using AI for any backend code", "nextNode": "end-okay", "score": 2 }
         ]
       },
       "end-best": {
-        "narrative": "You've fixed the bug, added a safeguard, written a test, and established a rule: all payment-related code gets human review. AI is still useful for the checkout UI and non-critical logic, but the money-handling code gets extra scrutiny.",
+        "narrative": "Money-handling code now has CODEOWNERS-enforced human review and required test coverage on every PR. AI still writes the boilerplate, scaffolding, and UI -- but the next double-charge bug can't slip through unnoticed. The original incident becomes the last of its kind, not the first of many.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "This is the right approach. AI is great at many things, but financial logic, security, and critical business rules need human oversight. The key lesson: use AI to speed up development, but always review the critical paths yourself and add tests as safety nets."
+        "feedback": "Right call from end to end. You read the code yourself, removed the bug, hardened the layer below it, added a regression test that catches the failure pattern, and made the review policy automatic instead of aspirational. AI keeps its speed-up where it's safe; humans keep the gate where mistakes cost money."
       },
       "end-okay": {
-        "narrative": "Avoiding AI entirely for checkout works, but it's overly cautious. AI can still help with the UI, validation, and non-payment parts of the flow. The real lesson is to review critical code, not to avoid AI altogether.",
+        "narrative": "Banning AI from backend work prevents this specific class of bug but throws away a lot of legitimate productivity. The real failure was the lack of review and tests on critical paths, not the use of AI itself.",
         "choices": [],
         "isEnd": true,
         "finalScore": 12,
-        "feedback": "You fixed the bug, but the takeaway is too extreme. You don't need to ban AI from your checkout flow -- you just need to review the critical parts (payment, auth, data handling) more carefully. AI can still help with boilerplate, UI, and non-critical logic."
+        "feedback": "Overcorrection. The lesson isn't 'no AI in backend' -- it's 'critical paths get human review and tests, regardless of who wrote the first draft.' AI can still speed up validation, queries, and scaffolding in the backend; the gate just goes around money/auth/data, not around the tool."
+      },
+      "end-vague": {
+        "narrative": "Two months later, AI inserts a subtle off-by-one in the loyalty-points calculation. You meant to review carefully but were on a deadline. The same class of bug ships again because nothing structural changed.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "'Be more careful' is the same advice you got after the first incident. Personal vigilance doesn't survive sprint pressure. Make the review structural -- CODEOWNERS, required tests on critical paths, mandatory reviewers -- so the policy holds even on your worst day."
       }
     },
     "glossaryTerms": ["idempotency", "code-review", "defensive-programming"]

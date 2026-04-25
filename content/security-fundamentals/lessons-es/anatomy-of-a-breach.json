@@ -20,8 +20,8 @@
     },
     {
       "type": "text",
-      "title": "Los cuatro pasos de la respuesta a incidentes",
-      "body": "Cuando ocurre una brecha de seguridad, sigue estos pasos en orden:\n\n1. **Contener** -- detener la fuga inmediatamente (deshabilitar el endpoint, revocar la clave)\n2. **Evaluar** -- revisar los logs para ver cuántos datos fueron accedidos\n3. **Notificar** -- informar a los usuarios afectados y a tu equipo\n4. **Corregir** -- parchar la vulnerabilidad y agregar protecciones para evitar que vuelva a pasar"
+      "title": "Las cinco fases de la respuesta a incidentes",
+      "body": "Cuando ocurre una brecha de seguridad, recorre estas fases en orden:\n\n1. **Detectar** -- reconocer que un incidente está pasando y confirmar que es real\n2. **Contener** -- detener la fuga inmediatamente (deshabilitar el endpoint, revocar la clave)\n3. **Erradicar** -- eliminar la vulnerabilidad y todo acceso del atacante\n4. **Recuperar** -- restaurar el servicio de forma segura y notificar a los usuarios afectados\n5. **Postmortem** -- aprender del incidente y poner barandales para que no pueda volver a pasar"
     },
     {
       "type": "code_example",
@@ -36,72 +36,84 @@
     },
     {
       "type": "key_takeaway",
-      "body": "En una filtración, contén primero, luego evalúa el alcance, notifica a los usuarios y corrige la causa raíz. Cada endpoint de API necesita verificaciones de autorización -- nunca asumas que el frontend prevendrá el acceso no autorizado."
+      "body": "Detectar, contener, erradicar, recuperar, aprender. Cada endpoint de API necesita verificaciones de autorización -- nunca asumas que el frontend prevendrá el acceso no autorizado -- y cada incidente debería dejar un barandal que prevenga la recurrencia."
     }
   ],
   "exercise": {
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Ves el tweet: un usuario navegó a /api/users/42 y recibió el perfil completo de otro usuario incluyendo email, número de teléfono y contraseña hasheada. Tu API está filtrando datos privados. ¿Cuál es tu primer movimiento?",
+        "narrative": "DETECTAR. Ves el tweet: un usuario navegó a /api/users/42 y recibió el perfil completo de otro usuario -- email, teléfono, contraseña hasheada. Antes de hacer cualquier otra cosa, necesitas confirmar que esto es real. ¿Cuál es tu primer movimiento?",
         "choices": [
-          { "id": "a", "text": "Restringir inmediatamente el endpoint vulnerable de la API", "nextNode": "restrict-endpoint", "score": 10 },
+          { "id": "a", "text": "Reproducir la solicitud tú mismo contra staging para confirmar que la fuga es real", "nextNode": "contain", "score": 10 },
           { "id": "b", "text": "Responder al tweet agradeciéndoles por el reporte", "nextNode": "reply-tweet", "score": 3 },
-          { "id": "c", "text": "Verificar si otros endpoints tienen el mismo problema", "nextNode": "check-others-first", "score": 5 }
-        ]
-      },
-      "restrict-endpoint": {
-        "narrative": "Bien -- detén la hemorragia primero. Agregas verificaciones de autenticación al endpoint para que solo los usuarios autenticados puedan acceder a sus propios datos. La fuga inmediata está tapada. ¿Cuál es tu siguiente paso?",
-        "choices": [
-          { "id": "a", "text": "Revisar los logs del servidor para ver cuántos datos de usuarios fueron accedidos", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Volver a dormir -- la corrección ya está desplegada", "nextNode": "ignore-scope", "score": 0 },
-          { "id": "c", "text": "Auditar todos los demás endpoints de API para la misma vulnerabilidad", "nextNode": "audit-endpoints", "score": 7 }
+          { "id": "c", "text": "Verificar primero si otros endpoints podrían tener el mismo problema", "nextNode": "check-others-first", "score": 5 }
         ]
       },
       "reply-tweet": {
-        "narrative": "Reconocer el reporte públicamente está bien, pero el endpoint sigue filtrando datos mientras compones tweets. Cada minuto que permanece abierto, más datos de usuarios podrían ser extraídos. Contención primero, comunicación después.",
+        "narrative": "El reconocimiento público está bien después, pero ni siquiera has confirmado que el bug es real -- y el endpoint sigue filtrando mientras compones tweets. Confirma primero, contén segundo, comunica al final.",
         "choices": [
-          { "id": "a", "text": "Tienes razón -- déjame restringir el endpoint primero", "nextNode": "restrict-endpoint", "score": 5 }
+          { "id": "a", "text": "Tienes razón -- reproducir contra staging primero para confirmar", "nextNode": "contain", "score": 5 }
         ]
       },
       "check-others-first": {
-        "narrative": "Verificar el alcance es inteligente, pero el endpoint reportado está filtrando datos activamente ahora mismo. Un atacante podría estar extrayendo el perfil de cada usuario mientras tú auditas. Tapa la fuga conocida primero, luego investiga el alcance.",
+        "narrative": "Mapear el alcance es inteligente, pero el endpoint reportado está filtrando activamente ahora mismo. Un atacante podría estar extrayendo cada perfil mientras tú deambulas por otro código. Confirma y contén la fuga conocida primero, luego amplía la búsqueda.",
         "choices": [
-          { "id": "a", "text": "Restringir el endpoint reportado primero, luego verificar los demás", "nextNode": "restrict-endpoint", "score": 7 }
+          { "id": "a", "text": "Reproducir el endpoint reportado, luego pasar a contención", "nextNode": "contain", "score": 7 }
         ]
       },
-      "check-logs": {
-        "narrative": "Tus logs muestran 347 solicitudes a /api/users/{id} con IDs secuenciales desde una sola dirección IP en las últimas 6 horas. Alguien estaba extrayendo perfiles de usuarios sistemáticamente. Esto significa que los datos de hasta 347 usuarios pueden estar comprometidos. ¿Qué haces?",
+      "contain": {
+        "narrative": "CONTENER. El bug se reproduce en staging. El endpoint genuinamente devuelve cualquier usuario por ID. Necesitas detener la hemorragia ahora mismo. ¿Cuál es la forma más rápida y segura de taparlo?",
         "choices": [
-          { "id": "a", "text": "Notificar a los usuarios afectados y a tu equipo, luego auditar todos los endpoints", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Bloquear la IP del atacante y dar por terminado", "nextNode": "end-mediocre", "score": 3 }
+          { "id": "a", "text": "Agregar middleware de auth que devuelva 403 a menos que req.user.id coincida con el id pedido, desplegar hotfix", "nextNode": "eradicate", "score": 10 },
+          { "id": "b", "text": "Sacar la ruta /api/users entera del aire en el load balancer", "nextNode": "eradicate", "score": 6 },
+          { "id": "c", "text": "Solo bloquear la IP del tweet para que no pueda seguir extrayendo", "nextNode": "eradicate", "score": 1 }
         ]
       },
-      "audit-endpoints": {
-        "narrative": "Encuentras 3 endpoints más con el mismo problema -- sin verificaciones de autorización. Los corriges todos. Pero aún no has determinado cuántos datos ya fueron accedidos.",
+      "eradicate": {
+        "narrative": "ERRADICAR. El endpoint reportado está cerrado. Pero el patrón del bug -- asumir que el frontend nunca pediría el id de otro -- podría existir en otros lugares. ¿Cómo encuentras y eliminas el resto?",
         "choices": [
-          { "id": "a", "text": "Revisar los logs para determinar el alcance de la filtración", "nextNode": "check-logs", "score": 8 }
+          { "id": "a", "text": "Buscar con grep cada handler de ruta con :id sin autenticación y agregar la misma verificación", "nextNode": "recover", "score": 10 },
+          { "id": "b", "text": "Agregar un middleware global de autorización que por defecto deniegue y exigir opt-in explícito por ruta", "nextNode": "recover", "score": 10 },
+          { "id": "c", "text": "Esperar a ver si alguien reporta otro endpoint vulnerable", "nextNode": "recover", "score": 1 }
         ]
       },
-      "ignore-scope": {
-        "narrative": "El endpoint está arreglado, pero no tienes idea de cuántos datos ya se filtraron, si otros endpoints tienen el mismo problema, o si los usuarios afectados necesitan ser notificados. En muchas jurisdicciones, no reportar una filtración de datos es ilegal. Esto no ha terminado.",
+      "recover": {
+        "narrative": "RECUPERAR. Los logs muestran 347 solicitudes con IDs secuenciales desde una IP en 6 horas -- hasta 347 usuarios tuvieron datos extraídos. El servicio está estable de nuevo. ¿Cómo se ve una recuperación responsable?",
         "choices": [
-          { "id": "a", "text": "Tienes razón -- déjame investigar el alcance completo", "nextNode": "check-logs", "score": 3 }
+          { "id": "a", "text": "Enviar email a usuarios afectados con qué se expuso, forzar reseteo de contraseña y notificar a tu DPO/legal", "nextNode": "postmortem", "score": 10 },
+          { "id": "b", "text": "Arreglarlo en silencio -- la notificación pública asustará a los clientes", "nextNode": "postmortem", "score": 2 },
+          { "id": "c", "text": "Notificar solo a los 50 usuarios más activos y saltarse al resto", "nextNode": "postmortem", "score": 4 }
+        ]
+      },
+      "postmortem": {
+        "narrative": "POSTMORTEM. El servicio está recuperado, los usuarios notificados. El último trabajo es asegurar que esta clase de bug nunca pueda colarse de nuevo. ¿Qué va en el writeup?",
+        "choices": [
+          { "id": "a", "text": "Documentar timeline, causa raíz, escribir tests de autorización, agregar lint en CI que marque rutas sin auth, programar auditorías trimestrales", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Escribir un mensaje corto en Slack: 'arreglado el bug de BOLA, no volverá a pasar'", "nextNode": "end-mediocre", "score": 4 },
+          { "id": "c", "text": "Saltarse el postmortem -- el equipo está agotado y la corrección está hecha", "nextNode": "end-poor", "score": 1 }
         ]
       },
       "end-good": {
-        "narrative": "Contuviste la fuga, determinaste el alcance, notificaste a los usuarios afectados, auditaste todos los endpoints y agregaste verificaciones de autorización en todo el sistema. También agregaste limitación de velocidad para prevenir futuros intentos de extracción. Tu equipo configura pruebas de seguridad automatizadas para detectar esta clase de error antes de que llegue a producción.",
+        "narrative": "Seguiste el ciclo completo de respuesta a incidentes: confirmaste la fuga, la contuviste con un hotfix dirigido, erradicaste el patrón en todo el código, recuperaste con notificación honesta y cumplimiento legal, y convertiste el incidente en barandales permanentes -- tests, reglas de lint y una auditoría recurrente. El próximo contribuidor no puede colar accidentalmente el mismo bug.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Respuesta a incidentes de manual: contener, evaluar alcance, notificar, remediar y mejorar. La idea clave es que la autorización (quién puede acceder a qué) debe verificarse en cada endpoint de API, no solo en el frontend. Esta vulnerabilidad se llama Broken Object Level Authorization (BOLA) y es el elemento #1 en el OWASP API Security Top 10."
+        "finalScore": 50,
+        "feedback": "Respuesta a incidentes de manual. La vulnerabilidad que manejaste se llama Broken Object Level Authorization (BOLA), el problema #1 del OWASP API Security Top 10. La razón por la que sigue siendo #1 es que la mayoría de los equipos para en la contención. Tú llegaste hasta la prevención -- así es como las brechas dejan de repetirse."
       },
       "end-mediocre": {
-        "narrative": "Bloquear una IP es como cerrar una puerta mientras dejas las ventanas abiertas. El atacante puede usar una IP diferente, VPN o proxy. No has notificado a los usuarios afectados, no has verificado otros endpoints vulnerables y podrías estar violando las leyes de notificación de filtraciones de datos.",
+        "narrative": "El fuego está apagado, pero sin documento, sin verificación automática, sin revisión programada. En seis meses un nuevo contribuidor agrega /api/orders/:id sin auth, y vuelves a este punto.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "El bloqueo de IP no es una corrección de seguridad -- es un tope de velocidad. La verdadera corrección fue la verificación de autorización que agregaste al endpoint. Pero la respuesta a incidentes no termina en la contención: necesitas evaluar el alcance completo, notificar a los usuarios afectados, auditar problemas similares y poner protecciones para prevenir la recurrencia."
+        "finalScore": 28,
+        "feedback": "Manejaste el incidente vivo con competencia. Saltarte el postmortem es donde el costo se acumula: los incidentes que no generan barandales están condenados a repetirse. Un writeup de 30 minutos y un lint en CI cuestan menos que otra brecha."
+      },
+      "end-poor": {
+        "narrative": "Sin notificación, sin postmortem, el equipo sigue adelante. Meses después otro endpoint es explotado de la misma forma. Para entonces, el incidente original es memoria institucional perdida -- y posiblemente una violación regulatoria, ya que te saltaste la notificación.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Cada fase que te saltaste multiplica el costo. La notificación es a menudo legalmente requerida (GDPR, CCPA, leyes de notificación de brechas). Un postmortem es lo que convierte una mala noche en aprendizaje permanente. Sin ninguno, la brecha se repite y la exposición legal crece."
       }
     },
     "glossaryTerms": ["data-breach", "authorization", "bola", "incident-response", "rate-limiting"]

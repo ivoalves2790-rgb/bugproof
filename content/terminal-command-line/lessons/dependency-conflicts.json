@@ -45,64 +45,77 @@
       "start": {
         "narrative": "You cloned a teammate's project and ran `npm install`. The terminal shows:\n\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! While resolving: react-calendar@4.0.0\nnpm ERR! Found: react@18.2.0\nnpm ERR! peer react@\"^17.0.0\" from react-calendar@4.0.0\nnpm ERR! Fix the upstream dependency conflict\n\nThe project uses React 18, but react-calendar@4.0.0 only supports React 17. What do you do first?",
         "choices": [
-          { "id": "a", "text": "Run npm install --legacy-peer-deps to skip the conflict for now", "nextNode": "legacy-install", "score": 7 },
-          { "id": "b", "text": "Check if there's a newer version of react-calendar that supports React 18", "nextNode": "check-version", "score": 10 },
-          { "id": "c", "text": "Downgrade React to version 17 to match what react-calendar wants", "nextNode": "downgrade-react", "score": 3 }
+          { "id": "a", "text": "Run npm install --legacy-peer-deps to skip the conflict for now", "nextNode": "legacy-install", "score": 2 },
+          { "id": "b", "text": "Check if there's a newer version of react-calendar that supports React 18", "nextNode": "check-version", "score": 4 },
+          { "id": "c", "text": "Downgrade React to version 17 to match what react-calendar wants", "nextNode": "downgrade-react", "score": 0 }
         ]
       },
       "check-version": {
-        "narrative": "Smart move! You run `npm view react-calendar versions` and find that version 5.0.0 was released last month with React 18 support. The package.json lists \"react-calendar\": \"^4.0.0\". What's your next step?",
+        "narrative": "Smart move. You run `npm view react-calendar versions` and find that version 5.0.0 was released last month with React 18 support. The package.json lists \"react-calendar\": \"^4.0.0\". What's your next step?",
         "choices": [
-          { "id": "a", "text": "Update package.json to \"react-calendar\": \"^5.0.0\" and run npm install", "nextNode": "update-package", "score": 10 },
-          { "id": "b", "text": "Run npm install react-calendar@latest to force the newest version", "nextNode": "force-latest", "score": 6 }
+          { "id": "a", "text": "Update package.json to \"react-calendar\": \"^5.0.0\" and run npm install", "nextNode": "verify-install", "score": 4 },
+          { "id": "b", "text": "Run npm install react-calendar@latest to force the newest version", "nextNode": "verify-install", "score": 2 }
         ]
       },
       "legacy-install": {
         "narrative": "The install completes with --legacy-peer-deps. The project starts, but you see a warning:\n\n'Warning: react-calendar@4.0.0 may not work correctly with React 18. Some features may break.'\n\nThe calendar component renders but date selection is glitchy. The workaround got you running but didn't fix the root cause.",
         "choices": [
-          { "id": "a", "text": "Check if a newer version of react-calendar supports React 18", "nextNode": "check-version", "score": 8 },
-          { "id": "b", "text": "Keep using --legacy-peer-deps and ignore the warning", "nextNode": "end-bad", "score": 2 }
+          { "id": "a", "text": "Stop and check if a newer react-calendar supports React 18 instead", "nextNode": "verify-install", "score": 3 },
+          { "id": "b", "text": "Press on with --legacy-peer-deps for now and verify nothing else broke", "nextNode": "verify-install", "score": 1 }
         ]
       },
       "downgrade-react": {
         "narrative": "Downgrading React from 18 to 17 breaks three other packages that require React 18: next@14, react-query@5, and framer-motion@11. Now you have even more conflicts. Downgrading a core framework to fix one library is almost never the right approach.",
         "choices": [
-          { "id": "a", "text": "Undo the downgrade and check for a newer react-calendar version instead", "nextNode": "check-version", "score": 6 }
+          { "id": "a", "text": "Undo the downgrade and look for a newer react-calendar version", "nextNode": "verify-install", "score": 2 },
+          { "id": "b", "text": "Roll React back to 18 and verify the rest of the install before deciding next", "nextNode": "verify-install", "score": 1 }
         ]
       },
-      "update-package": {
-        "narrative": "You update package.json to use react-calendar@^5.0.0 and run npm install. Everything installs cleanly -- no errors. But before celebrating, you should make sure nothing else broke. What do you do?",
+      "verify-install": {
+        "narrative": "You've landed on react-calendar@5.0.0 and the install completes without ERESOLVE errors. But you haven't verified that the upgrade is actually safe yet. A 4.x to 5.x bump usually includes API changes that may break the calendar component at runtime. How do you verify before going further?",
         "choices": [
-          { "id": "a", "text": "Run npm audit to check for vulnerabilities, then start the dev server to test", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Commit the changes and push immediately", "nextNode": "end-ok", "score": 4 }
+          { "id": "a", "text": "Start the dev server and exercise the calendar component end to end", "nextNode": "audit-and-lock", "score": 4 },
+          { "id": "b", "text": "Run the project's test suite to catch breaking-change regressions", "nextNode": "audit-and-lock", "score": 4 },
+          { "id": "c", "text": "Skim the react-calendar v5 changelog for breaking changes only", "nextNode": "audit-and-lock", "score": 2 },
+          { "id": "d", "text": "Trust the install -- if npm didn't error, the upgrade is safe", "nextNode": "audit-and-lock", "score": 0 }
         ]
       },
-      "force-latest": {
-        "narrative": "npm install react-calendar@latest installs v5.0.0 and the conflict is resolved. However, your package.json still says \"^4.0.0\" because you didn't update the file -- you only changed what's installed. The next person who runs npm install will hit the same error.",
+      "audit-and-lock": {
+        "narrative": "The calendar renders and date selection works. Now you need to audit for security issues and make sure your teammates get the same packages you just installed. What do you do before committing?",
         "choices": [
-          { "id": "a", "text": "Update package.json to match: change to \"^5.0.0\" and run npm install again", "nextNode": "update-package", "score": 8 }
+          { "id": "a", "text": "Run npm audit, fix high-severity issues, and commit package.json AND package-lock.json together", "nextNode": "prevent-recurrence", "score": 4 },
+          { "id": "b", "text": "Run npm audit fix --force to auto-resolve everything before committing", "nextNode": "prevent-recurrence", "score": 1 },
+          { "id": "c", "text": "Add package-lock.json to .gitignore so each teammate resolves on their own", "nextNode": "prevent-recurrence", "score": 0 }
+        ]
+      },
+      "prevent-recurrence": {
+        "narrative": "The fix is committed. The same kind of ERESOLVE conflict will hit your team again the next time someone adds a package. What do you put in place so the next person doesn't burn an hour rediscovering this?",
+        "choices": [
+          { "id": "a", "text": "Add a CI step that runs npm ci and npm audit on every PR, and document the resolution in a CONTRIBUTING note", "nextNode": "end-great", "score": 4 },
+          { "id": "b", "text": "Pin a Node version with .nvmrc and add an engines field, so installs at least share the same Node", "nextNode": "end-ok", "score": 2 },
+          { "id": "c", "text": "Tell the team in Slack to use --legacy-peer-deps if they hit ERESOLVE", "nextNode": "end-bad", "score": 0 }
         ]
       },
       "end-great": {
-        "narrative": "npm audit shows 0 vulnerabilities. The dev server starts clean. The calendar component works perfectly with React 18. You updated both the lockfile and package.json, so your teammate will get a clean install too.",
+        "narrative": "CI now catches dependency conflicts on every PR before they reach main. npm audit runs in the same pipeline so security regressions surface immediately. The next teammate to hit a peer-dependency conflict will see exactly how the last one was resolved.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Perfect resolution! You diagnosed the conflict (react-calendar needed React 17 but the project uses React 18), found the real fix (upgrading to v5.0.0 with React 18 support), updated package.json properly, and verified with npm audit. This is exactly how experienced developers handle dependency conflicts: check for compatible versions first, update the source of truth (package.json), and verify before committing."
+        "feedback": "Textbook resolution. You diagnosed the root cause (incompatible peer dependency), found the real fix (compatible major version), verified at runtime, audited for vulnerabilities, locked the install, and built guardrails so this doesn't happen quietly again. That's how senior developers handle dependency hygiene -- not as a one-off fix, but as a process."
       },
       "end-ok": {
-        "narrative": "The install worked, but you committed without running npm audit or testing the dev server. If react-calendar v5.0.0 has a breaking API change (renamed props, different import paths), your teammate will discover it in production.",
+        "narrative": "Pinning Node and the engines field helps, but it doesn't catch peer-dependency conflicts on its own. The next teammate to add a package without checking peer ranges will still hit ERESOLVE -- they just won't have a CI signal flagging it before merge.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "You found the right fix but skipped verification. Always run npm audit after resolving conflicts to catch security issues, and start the dev server to make sure the upgrade didn't introduce breaking changes. A major version bump (4.x to 5.x) often includes API changes that need code updates."
+        "finalScore": 13,
+        "feedback": "Decent foundation, but incomplete. .nvmrc and engines stop one class of mismatches (Node version) without addressing the actual incident (peer dependency drift). Add npm ci and npm audit to CI so peer conflicts and known vulnerabilities are blocked before merge, not discovered after."
       },
       "end-bad": {
-        "narrative": "Ignoring peer dependency warnings leads to subtle bugs: components crash on edge cases, features silently fail, and debugging becomes a nightmare because the library wasn't designed for your React version.",
+        "narrative": "Telling the team to use --legacy-peer-deps as the default treats every peer conflict as a paper cut to ignore. Six months from now, three packages have silently broken contracts with their peers and a Sentry error nobody can reproduce locally is your first sign.",
         "choices": [],
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Using --legacy-peer-deps is a quick workaround, not a solution. It tells npm to install packages even though they say they're incompatible. The right approach is to find a version of the conflicting package that actually supports your project's React version, or find an alternative library."
+        "feedback": "--legacy-peer-deps is an escape hatch, not a policy. It hides the conflict instead of resolving it, and the bugs that result (silent prop changes, runtime crashes on edge cases) cost far more debugging time than reading a peer-dependency error and finding a compatible version."
       }
     },
     "glossaryTerms": ["dependency", "lockfile", "peer-dependency", "npm-audit"]

@@ -1,1 +1,121 @@
-{"slug":"ai-weaknesses","title":"Dónde la IA tiene dificultades","type":"incident_response","difficulty":2,"xpReward":15,"unitSlug":"ai-basics","courseSlug":"ai-assisted-development","intro":"Estás construyendo una pequeña app de e-commerce y has estado usando IA para todo. Las cosas han ido genial -- hasta que dejan de ir. Imagina un puente hermoso con una grieta oculta en una viga de soporte -- el código de IA puede verse perfecto en la superficie pero esconder fallas peligrosas. Un cliente reporta que le cobraron dos veces por el mismo pedido.","teach":[{"type":"analogy","title":"El código de IA puede ser como un puente hermoso con cimientos débiles","body":"El código generado por IA a menudo se ve limpio y profesional en la superficie. Pero debajo, podría tener problemas sutiles -- como un puente que se ve genial pero tiene una grieta en una viga de soporte. El código compila, los tests pasan, pero hay un error de lógica esperando causar daño real."},{"type":"analogy","title":"La IA es como un corrector ortográfico que no sabe leer","body":"Un corrector ortográfico atrapa errores de escritura a la perfección pero no tiene idea de si tu oración realmente tiene sentido. Puede corregir 'teh' a 'the' pero no notará si dijiste 'el carro voló al supermercado.' El código generado por IA es similar -- se ve sintácticamente correcto y sigue convenciones, pero puede contener lógica que no tiene sentido en el mundo real."},{"type":"text","title":"Modos de falla comunes de la IA","body":"El código generado por IA comúnmente falla de estas maneras:\n\n1. **Lógica duplicada** -- La IA pierde el hilo durante la edición y repite operaciones\n2. **Casos límite faltantes** -- Maneja el camino feliz pero no errores o inputs vacíos\n3. **Patrones obsoletos** -- Usa APIs o sintaxis de versiones viejas de bibliotecas\n4. **Confiada pero equivocada** -- El código se ve correcto pero tiene bugs de lógica sutiles"},{"type":"text","title":"La regla del código crítico","body":"Cualquier código que maneje **dinero, seguridad o datos de usuario** necesita escrutinio extra. La IA es genial para scaffolding y UI, pero el procesamiento de pagos, la autenticación y el manejo de datos siempre deberían ser revisados línea por línea por un humano. Agrega tests como redes de seguridad para caminos críticos."},{"type":"motivation","body":"Conocer los puntos débiles de la IA no te frena -- te acelera. Atraparás bugs antes que tus usuarios, lo que significa menos reembolsos, mejores reseñas y más confianza en los productos que lanzas."},{"type":"key_takeaway","body":"El código de IA puede verse perfecto y aún tener bugs sutiles. Siempre revisa la lógica crítica tú mismo, especialmente cualquier cosa que involucre dinero, seguridad o datos de usuario. Escribe tests para caminos de código importantes."}],"exercise":{"startNode":"start","nodes":{"start":{"narrative":"Un cliente envía un email diciendo que le cobraron $49.99 dos veces por un solo pedido. Verificas la base de datos y confirmas el cargo duplicado. El código de checkout fue escrito completamente por IA. ¿Cuál es tu primer paso?","choices":[{"id":"a","text":"Leer el código de checkout generado por IA tú mismo","nextNode":"read-code","score":10},{"id":"b","text":"Pedirle a la IA que arregle el bug del doble cargo","nextNode":"ask-ai-fix","score":3},{"id":"c","text":"Reembolsar al cliente y esperar que no pase de nuevo","nextNode":"just-refund","score":1}]},"read-code":{"narrative":"Lees la función de checkout y notas que la IA escribió el procesamiento de pago así:\n\nawait chargeCard(order.total);\nawait saveOrder(order);\nawait chargeCard(order.total);\nawait sendConfirmation(order);\n\n¡Hay dos llamadas a chargeCard! La IA duplicó la llamada de pago, probablemente de una sesión de edición donde perdió el hilo de lo que ya estaba ahí. ¿Qué haces?","choices":[{"id":"a","text":"Eliminar la llamada duplicada a chargeCard y agregar una salvaguarda para prevenir cargos dobles","nextNode":"good-fix","score":10},{"id":"b","text":"Solo eliminar la línea duplicada","nextNode":"partial-fix","score":6},{"id":"c","text":"Pedirle a la IA que reescriba todo el flujo de checkout","nextNode":"ai-rewrite","score":3}]},"ask-ai-fix":{"narrative":"Pegas el código en la IA y le pides que arregle el doble cargo. La IA dice 'No veo ningún problema con este código, se ve correcto.' La IA no siempre puede detectar sus propios errores, especialmente cuando el código es sintácticamente válido. La llamada duplicada es lógicamente incorrecta pero estructuralmente está bien.","choices":[{"id":"a","text":"Leer el código tú mismo línea por línea","nextNode":"read-code","score":5}]},"just-refund":{"narrative":"Reembolsas al cliente, pero al día siguiente tres clientes más reportan el mismo problema. El bug sigue ahí. Ignorar la causa raíz solo retrasa lo inevitable -- y le cuesta a tu negocio dinero y confianza.","choices":[{"id":"a","text":"Ok, hora de realmente mirar el código","nextNode":"read-code","score":3}]},"good-fix":{"narrative":"Eliminas la llamada duplicada a chargeCard y agregas una clave de idempotencia para prevenir cargos dobles incluso si la función se llama accidentalmente dos veces. También agregas un test que verifica que chargeCard solo se llama una vez por pedido. ¿Cómo previenes esto en el futuro?","choices":[{"id":"a","text":"Siempre revisar el código generado por IA para lógica de pagos y seguridad, y escribir tests para caminos críticos","nextNode":"end-best","score":10},{"id":"b","text":"Dejar de usar IA para el flujo de checkout por completo","nextNode":"end-okay","score":5}]},"partial-fix":{"narrative":"Eliminar la línea duplicada arregla el bug inmediato, pero sin una salvaguarda, un cambio de código futuro (u otra edición de IA) podría reintroducir el problema. El código de pagos en producción necesita programación defensiva.","choices":[{"id":"a","text":"Agregar una verificación de idempotencia y un test","nextNode":"good-fix","score":5}]},"ai-rewrite":{"narrative":"La IA reescribe el flujo de checkout. Se ve diferente, pero no tienes forma de saber si tiene otros bugs sutiles sin leerlo cuidadosamente. Reemplazar código de IA con más código de IA sin revisar no resuelve el problema subyacente.","choices":[{"id":"a","text":"En realidad leer el código esta vez","nextNode":"read-code","score":3}]},"end-best":{"narrative":"Has arreglado el bug, agregado una salvaguarda, escrito un test y establecido una regla: todo el código relacionado con pagos recibe revisión humana. La IA sigue siendo útil para la UI del checkout y la lógica no crítica, pero el código que maneja dinero recibe escrutinio extra.","choices":[],"isEnd":true,"finalScore":20,"feedback":"Este es el enfoque correcto. La IA es genial en muchas cosas, pero la lógica financiera, la seguridad y las reglas de negocio críticas necesitan supervisión humana. La lección clave: usa IA para acelerar el desarrollo, pero siempre revisa los caminos críticos tú mismo y agrega tests como redes de seguridad."},"end-okay":{"narrative":"Evitar la IA completamente para el checkout funciona, pero es excesivamente cauteloso. La IA aún puede ayudar con la UI, validación y partes no relacionadas con pagos del flujo. La lección real es revisar el código crítico, no evitar la IA por completo.","choices":[],"isEnd":true,"finalScore":12,"feedback":"Arreglaste el bug, pero la conclusión es demasiado extrema. No necesitas prohibir la IA de tu flujo de checkout -- solo necesitas revisar las partes críticas (pagos, autenticación, manejo de datos) más cuidadosamente. La IA aún puede ayudar con boilerplate, UI y lógica no crítica."}},"glossaryTerms":["idempotency","code-review","defensive-programming"]}}
+{
+  "slug": "ai-weaknesses",
+  "title": "Dónde la IA tiene dificultades",
+  "type": "incident_response",
+  "difficulty": 2,
+  "xpReward": 15,
+  "unitSlug": "ai-basics",
+  "courseSlug": "ai-assisted-development",
+  "intro": "Estás construyendo una pequeña app de e-commerce y has estado usando IA para todo. Las cosas han ido genial -- hasta que dejan de ir. Imagina un puente hermoso con una grieta oculta en una viga de soporte -- el código de IA puede verse perfecto en la superficie pero esconder fallas peligrosas. Un cliente reporta que le cobraron dos veces por el mismo pedido.",
+  "teach": [
+    {
+      "type": "analogy",
+      "title": "El código de IA puede ser como un puente hermoso con cimientos débiles",
+      "body": "El código generado por IA a menudo se ve limpio y profesional en la superficie. Pero debajo, podría tener problemas sutiles -- como un puente que se ve genial pero tiene una grieta en una viga de soporte. El código compila, los tests pasan, pero hay un error de lógica esperando causar daño real."
+    },
+    {
+      "type": "analogy",
+      "title": "La IA es como un corrector ortográfico que no sabe leer",
+      "body": "Un corrector ortográfico atrapa errores de escritura a la perfección pero no tiene idea de si tu oración realmente tiene sentido. Puede corregir 'teh' a 'the' pero no notará si dijiste 'el carro voló al supermercado.' El código generado por IA es similar -- se ve sintácticamente correcto y sigue convenciones, pero puede contener lógica que no tiene sentido en el mundo real."
+    },
+    {
+      "type": "text",
+      "title": "Modos de falla comunes de la IA",
+      "body": "El código generado por IA comúnmente falla de estas maneras:\n\n1. **Lógica duplicada** -- La IA pierde el hilo durante la edición y repite operaciones\n2. **Casos límite faltantes** -- Maneja el camino feliz pero no errores o inputs vacíos\n3. **Patrones obsoletos** -- Usa APIs o sintaxis de versiones viejas de bibliotecas\n4. **Confiada pero equivocada** -- El código se ve correcto pero tiene bugs de lógica sutiles"
+    },
+    {
+      "type": "text",
+      "title": "La regla del código crítico",
+      "body": "Cualquier código que maneje **dinero, seguridad o datos de usuario** necesita escrutinio extra. La IA es genial para scaffolding y UI, pero el procesamiento de pagos, la autenticación y el manejo de datos siempre deberían ser revisados línea por línea por un humano. Agrega tests como redes de seguridad para caminos críticos."
+    },
+    {
+      "type": "motivation",
+      "body": "Conocer los puntos débiles de la IA no te frena -- te acelera. Atraparás bugs antes que tus usuarios, lo que significa menos reembolsos, mejores reseñas y más confianza en los productos que lanzas."
+    },
+    {
+      "type": "key_takeaway",
+      "body": "El código de IA puede verse perfecto y aún tener bugs sutiles. Siempre revisa la lógica crítica tú mismo, especialmente cualquier cosa que involucre dinero, seguridad o datos de usuario. Escribe tests para caminos de código importantes."
+    }
+  ],
+  "exercise": {
+    "startNode": "start",
+    "nodes": {
+      "start": {
+        "narrative": "Un cliente envía un email diciendo que le cobraron $49.99 dos veces por un solo pedido. Verificas la base de datos y confirmas el cargo duplicado. El código de checkout fue escrito completamente por IA. ¿Cuál es tu primer paso?",
+        "choices": [
+          { "id": "a", "text": "Leer el código de checkout generado por IA tú mismo", "nextNode": "read-code", "score": 4 },
+          { "id": "b", "text": "Pedirle a la IA que arregle el bug del doble cargo", "nextNode": "ask-ai-fix", "score": 1 },
+          { "id": "c", "text": "Reembolsar al cliente y esperar que no pase de nuevo", "nextNode": "just-refund", "score": 0 }
+        ]
+      },
+      "read-code": {
+        "narrative": "Lees la función de checkout y notas que la IA escribió el procesamiento de pago así:\n\nawait chargeCard(order.total);\nawait saveOrder(order);\nawait chargeCard(order.total);\nawait sendConfirmation(order);\n\nHay dos llamadas a chargeCard. La IA duplicó la llamada de pago, probablemente de una sesión de edición donde perdió el hilo de lo que ya estaba ahí. ¿Qué haces?",
+        "choices": [
+          { "id": "a", "text": "Eliminar la llamada duplicada a chargeCard y agregar una clave de idempotencia como salvaguarda", "nextNode": "add-safeguard", "score": 4 },
+          { "id": "b", "text": "Solo eliminar la línea duplicada", "nextNode": "add-safeguard", "score": 2 },
+          { "id": "c", "text": "Pedirle a la IA que reescriba todo el flujo de checkout", "nextNode": "add-safeguard", "score": 1 }
+        ]
+      },
+      "ask-ai-fix": {
+        "narrative": "Pegas el código en la IA y le pides que arregle el doble cargo. La IA dice 'No veo ningún problema con este código, se ve correcto.' La IA no siempre puede detectar sus propios errores, especialmente cuando el código es sintácticamente válido. La llamada duplicada es lógicamente incorrecta pero estructuralmente está bien.",
+        "choices": [
+          { "id": "a", "text": "Leer el código tú mismo línea por línea", "nextNode": "read-code", "score": 2 }
+        ]
+      },
+      "just-refund": {
+        "narrative": "Reembolsas al cliente, pero al día siguiente tres clientes más reportan el mismo problema. El bug sigue ahí. Ignorar la causa raíz solo retrasa lo inevitable -- y le cuesta a tu negocio dinero y confianza.",
+        "choices": [
+          { "id": "a", "text": "Ok, hora de realmente mirar el código", "nextNode": "read-code", "score": 1 }
+        ]
+      },
+      "add-safeguard": {
+        "narrative": "Eliminaste la llamada duplicada a chargeCard. El bug inmediato se fue, pero si una edición futura de IA (o un humano cansado) reintroduce el mismo patrón, los mismos clientes vuelven a recibir doble cargo. ¿Qué defensa agregas en la capa debajo de la función?",
+        "choices": [
+          { "id": "a", "text": "Agregar una clave de idempotencia en el pedido para que chargeCard se rehúse a ejecutarse dos veces para el mismo orderId, aunque se llame dos veces", "nextNode": "add-tests", "score": 4 },
+          { "id": "b", "text": "Agregar una guarda dentro de chargeCard que lance error si el pedido ya fue cobrado en los últimos 60 segundos", "nextNode": "add-tests", "score": 3 },
+          { "id": "c", "text": "Agregar un comentario '// no llamar dos veces' arriba del call site", "nextNode": "add-tests", "score": 1 },
+          { "id": "d", "text": "Saltarse la salvaguarda -- confías en no reintroducir el bug", "nextNode": "add-tests", "score": 0 }
+        ]
+      },
+      "add-tests": {
+        "narrative": "La salvaguarda está en su lugar. Ahora necesitas un test de regresión que falle ruidosamente la próxima vez que algo en el flujo de checkout intente cobrar dos veces. ¿Qué test escribes?",
+        "choices": [
+          { "id": "a", "text": "Un test de integración que ejecute el flujo completo de checkout contra un gateway de pago falso y verifique que chargeCard fue llamado exactamente una vez por pedido", "nextNode": "review-policy", "score": 4 },
+          { "id": "b", "text": "Un test unitario que mockea chargeCard y verifica que el spy fue llamado exactamente una vez cuando checkout() se ejecuta una vez", "nextNode": "review-policy", "score": 3 },
+          { "id": "c", "text": "Un snapshot test del código fuente de la función checkout: si alguien lo cambia, el snapshot falla", "nextNode": "review-policy", "score": 1 },
+          { "id": "d", "text": "Saltarse el test -- la salvaguarda es suficiente", "nextNode": "review-policy", "score": 0 }
+        ]
+      },
+      "review-policy": {
+        "narrative": "Bug arreglado, salvaguarda instalada, test de regresión en su lugar. La pregunta más profunda: ¿cómo evitas que la IA envíe en silencio la próxima versión de este bug en otro camino crítico? Quieres una política que realmente vayas a seguir, no un deseo.",
+        "choices": [
+          { "id": "a", "text": "Etiquetar los archivos que tocan dinero/auth/PII con una regla de CODEOWNERS para que los PR que los tocan requieran revisión humana explícita, más tests obligatorios para caminos críticos", "nextNode": "end-best", "score": 4 },
+          { "id": "b", "text": "Prometerte que de ahora en adelante revisarás la salida de IA con más cuidado", "nextNode": "end-vague", "score": 1 },
+          { "id": "c", "text": "Dejar de usar IA para cualquier código de backend", "nextNode": "end-okay", "score": 2 }
+        ]
+      },
+      "end-best": {
+        "narrative": "El código que maneja dinero ahora tiene revisión humana obligatoria por CODEOWNERS y cobertura de tests requerida en cada PR. La IA sigue escribiendo el boilerplate, scaffolding y UI -- pero el próximo bug de doble cargo no puede colarse sin que nadie lo vea. El incidente original se vuelve el último de su tipo, no el primero de muchos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Decisión correcta de punta a punta. Leíste el código tú mismo, eliminaste el bug, endureciste la capa de abajo, agregaste un test de regresión que detecta el patrón de falla y volviste la política de revisión automática en lugar de aspiracional. La IA conserva su aceleración donde es seguro; los humanos conservan la puerta donde los errores cuestan dinero."
+      },
+      "end-okay": {
+        "narrative": "Prohibir la IA en el trabajo de backend previene esta clase específica de bug pero tira mucha productividad legítima. La falla real fue la falta de revisión y tests en los caminos críticos, no el uso de IA en sí.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Sobrecorrección. La lección no es 'sin IA en el backend' -- es 'los caminos críticos reciben revisión humana y tests, sin importar quién escribió el primer borrador.' La IA aún puede acelerar validación, queries y scaffolding en el backend; la puerta solo se pone alrededor de dinero/auth/datos, no alrededor de la herramienta."
+      },
+      "end-vague": {
+        "narrative": "Dos meses después, la IA inserta un off-by-one sutil en el cálculo de puntos de fidelidad. Querías revisar con cuidado pero estabas con deadline. La misma clase de bug se vuelve a enviar porque nada estructural cambió.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "'Tener más cuidado' es el mismo consejo que recibiste después del primer incidente. La vigilancia personal no sobrevive a la presión del sprint. Vuelve la revisión estructural -- CODEOWNERS, tests requeridos en caminos críticos, revisores obligatorios -- para que la política aguante incluso en tu peor día."
+      }
+    },
+    "glossaryTerms": ["idempotency", "code-review", "defensive-programming"]
+  }
+}

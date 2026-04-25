@@ -51,50 +51,68 @@
         ]
       },
       "mock-api": {
-        "narrative": "¡Buena idea! Reemplazas las llamadas reales a la API con mocks. Ahora los tests siempre devuelven datos predecibles. Pero un compañero pregunta: 'Si hacemos mock de la API, ¿cómo sabemos que nuestro código realmente funciona con la API real?' Buena pregunta. ¿Cuál es tu respuesta?",
+        "narrative": "¡Buena idea! Reemplazas las llamadas reales con mocks. Los tests pasan otra vez. Un compañero pregunta: 'Si hacemos mock de la API, ¿cómo sabemos que nuestro código realmente funciona con la API real?'",
         "choices": [
-          { "id": "a", "text": "Los tests unitarios usan mocks por velocidad; unos pocos tests de integración pueden testear la API real por separado", "nextNode": "correct-strategy", "score": 10 },
-          { "id": "b", "text": "No lo sabemos -- los mocks siempre son suficientes", "nextNode": "overconfident", "score": 4 }
+          { "id": "a", "text": "Los tests unitarios usan mocks; unos pocos de integración llaman a la API real en otra programación", "nextNode": "design-mocks", "score": 10 },
+          { "id": "b", "text": "No lo sabemos -- los mocks siempre son suficientes", "nextNode": "design-mocks", "score": 4 }
         ]
       },
       "skip-tests": {
-        "narrative": "Omites los tests y despliegas. Una hora después, descubres que un cambio de código accidentalmente rompió la visualización del clima -- la función ahora se bloquea con el formato de respuesta de la API. Si los tests no se hubieran omitido, habrían detectado esto (incluso con mocks que devuelven el formato esperado).",
+        "narrative": "Omites los tests fallidos y despliegas. Una hora después, un cambio de código rompe la visualización del clima -- la función crashea con el formato de respuesta. Los tests omitidos lo habrían detectado (los mocks devuelven el formato esperado).",
         "choices": [
-          { "id": "a", "text": "Ok, déjame configurar mocks en lugar de omitir tests", "nextNode": "mock-api", "score": 5 }
+          { "id": "a", "text": "Hacer rollback, configurar mocks y reactivar los tests", "nextNode": "design-mocks", "score": 5 }
         ]
       },
       "wait": {
-        "narrative": "Tres horas después, la API sigue caída. Tu equipo no puede desplegar ningún código. Un desarrollador terminó una corrección urgente de bug pero está atorada en el pipeline. Los tests que dependen de servicios externos siempre eventualmente te bloquearán así.",
+        "narrative": "Tres horas después, la API sigue caída. El pipeline está congelado. Una corrección urgente está atorada esperando una caída de un tercero que no controlas. Esto va a seguir pasando mientras los tests crucen la red.",
         "choices": [
-          { "id": "a", "text": "Déjame hacer mock de la API para no depender de ella", "nextNode": "mock-api", "score": 3 }
+          { "id": "a", "text": "Dejar de esperar -- hacer mock de la API para que el suite sea hermético", "nextNode": "design-mocks", "score": 3 }
         ]
       },
-      "correct-strategy": {
-        "narrative": "¡Perfecto! Configuras el mock para devolver datos realistas:\n\njest.mock('./weatherApi', () => ({\n  getWeather: jest.fn(() => Promise.resolve({ temp: 72, condition: 'sunny' }))\n}));\n\nTambién mantienes 2 tests de integración que se ejecutan contra la API real en un suite de tests separado (sin bloquear despliegues). ¿Cómo manejas el testing de escenarios de error?",
+      "design-mocks": {
+        "narrative": "Decides hacer mock. Pero ¿cómo le das forma al mock para que los tests realmente atrapen bugs reales? Es tentador hardcodear { temp: 72 } y seguir.",
         "choices": [
-          { "id": "a", "text": "Crear diferentes mocks para respuestas de éxito, error y vacías", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Solo testear el caso de éxito -- los errores son raros", "nextNode": "end-okay", "score": 5 }
+          { "id": "a", "text": "Definir mocks separados para éxito, error (500), timeout y payload vacío", "nextNode": "verify-fidelity", "score": 10 },
+          { "id": "b", "text": "Un mock de éxito con una forma realista -- los errores son raros", "nextNode": "verify-fidelity", "score": 5 },
+          { "id": "c", "text": "Devolver la forma que haga pasar los tests actuales", "nextNode": "verify-fidelity", "score": 1 }
         ]
       },
-      "overconfident": {
-        "narrative": "Los mocks son geniales para tests unitarios, pero no pueden verificar que tu código funcione con el formato de respuesta REAL de la API. Si la API cambia su estructura de respuesta, tus mocks no lo detectarán. Unos pocos tests de integración contra la API real (en un suite de tests que no bloquee) proporcionan esa confianza.",
+      "verify-fidelity": {
+        "narrative": "Ahora el peligro: tu mock podría desviarse de la realidad. La API real podría agregar un campo, renombrar uno o cambiar un código de status, y tus tests verdes mentirían. ¿Cómo mantienes los mocks honestos?",
         "choices": [
-          { "id": "a", "text": "Entendido -- usar mocks para tests unitarios pero mantener unos pocos tests de integración para la API real", "nextNode": "end-okay", "score": 5 }
+          { "id": "a", "text": "Correr un pequeño test de contrato cada noche contra la API real y alertar de diferencias", "nextNode": "use-in-tests", "score": 10 },
+          { "id": "b", "text": "Mirar los docs de la API cada pocos meses y actualizar los mocks si hace falta", "nextNode": "use-in-tests", "score": 4 },
+          { "id": "c", "text": "Confiar en el mock -- la API casi nunca cambia", "nextNode": "use-in-tests", "score": 1 }
+        ]
+      },
+      "use-in-tests": {
+        "narrative": "Tienes mocks realistas y verificados por contrato. Ahora escribe el test unitario. El componente carga el clima y renderiza la temperatura. ¿Qué afirma un buen test?",
+        "choices": [
+          { "id": "a", "text": "Hacer mock de la API, renderizar el componente, verificar que la temperatura aparece en el DOM", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Hacer mock de la API, llamar a la función, verificar que el mock fue llamado una vez", "nextNode": "end-okay", "score": 5 },
+          { "id": "c", "text": "Tomar un snapshot del output renderizado y confiar en los diffs futuros", "nextNode": "end-poor", "score": 2 }
         ]
       },
       "end-good": {
-        "narrative": "Creas tres escenarios de mock: éxito (temp: 72), error de API (status 500) y respuesta vacía (sin datos). Tus tests ahora cubren todos los caminos -- camino feliz, manejo de errores y casos límite. El suite de tests se ejecuta en 0.5 segundos en lugar de 30 segundos y nunca falla por interrupciones de la API.",
+        "narrative": "Tu suite tiene mocks herméticos para éxito, errores, timeouts y payloads vacíos, más un test nocturno de contrato que llama a la API real y avisa si cambia la forma. El test del componente afirma comportamiento visible para el usuario: 'cuando la API devuelve 72, la página muestra 72'. El pipeline está desbloqueado, rápido y confiable.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Excelente! Usaste mocks para hacer los tests rápidos y confiables, creaste múltiples escenarios de mock para testear diferentes caminos, y mantuviste tests de integración separados para verificación de la API real. Esto es exactamente cómo los equipos profesionales manejan dependencias externas en tests."
+        "finalScore": 50,
+        "feedback": "Excelente. Los mocks hicieron los tests rápidos, los múltiples escenarios los hicieron honestos, los tests de contrato los mantuvieron alineados con la realidad y las afirmaciones de comportamiento los hicieron significativos. Así es exactamente como los equipos maduros manejan dependencias externas."
       },
       "end-okay": {
-        "narrative": "El mock desbloquea tu pipeline y los tests pasan de nuevo. Pero solo testear el camino de éxito significa que tu código de manejo de errores no está testeado. ¿Qué pasa cuando la API devuelve un error 500? Tus usuarios podrían ver un crash en lugar de un mensaje de error amigable.",
+        "narrative": "Los tests pasan y el pipeline está desbloqueado. Pero tu afirmación verifica que el mock fue llamado -- no que el usuario ve lo correcto. Si un refactor rompe el renderizado pero sigue llamando a la API, el test queda verde y el bug se despliega.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "Hacer mock de la API fue la decisión correcta, pero solo testear el camino feliz es riesgoso. Siempre haz mock de escenarios de error también -- errores de API, timeouts y respuestas inesperadas. Estas son las situaciones donde tu app es más probable que crashee en producción."
+        "finalScore": 32,
+        "feedback": "La estrategia de mocking estuvo sólida. El punto débil es afirmar sobre detalles de implementación (que el mock fue llamado) en lugar de resultados visibles. Siempre testea lo que el usuario experimenta, no lo que el código hace internamente."
+      },
+      "end-poor": {
+        "narrative": "Los snapshots dejan el test verde, pero cada cambio cosmético dispara un diff y nadie sabe qué es intencional. Peor: tu snapshot fue tomado con una forma de mock vieja -- el test sigue pasando incluso si la API real cambia debajo.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 16,
+        "feedback": "Los snapshots sin afirmaciones de comportamiento documentan el pasado, no el contrato. Combinados con mocks delgados, te dan tests que pasan mientras producción se rompe. Afirma comportamiento, haz mock de múltiples escenarios y verifica la fidelidad del mock contra la realidad."
       }
     },
     "glossaryTerms": ["mock", "dependency", "integration-test"]

@@ -45,63 +45,83 @@
       "start": {
         "narrative": "You deployed a new feature at 4pm on Friday. The deployment succeeded, but users are reporting a blank white page. Your local version works perfectly. The production error log shows: 'TypeError: Cannot read properties of undefined (reading \"NEXT_PUBLIC_API_URL\")'. Where do you start?",
         "choices": [
-          { "id": "a", "text": "Check if NEXT_PUBLIC_API_URL is set in the hosting platform's environment variables", "nextNode": "check-env", "score": 10 },
-          { "id": "b", "text": "Roll back to the previous version immediately, investigate Monday", "nextNode": "rollback-first", "score": 5 },
-          { "id": "c", "text": "Add a try-catch around the code that uses that variable", "nextNode": "band-aid", "score": 2 }
+          { "id": "a", "text": "Check if NEXT_PUBLIC_API_URL is set in the hosting platform's environment variables", "nextNode": "check-env", "score": 4 },
+          { "id": "b", "text": "Roll back to the previous version immediately, investigate Monday", "nextNode": "rollback-first", "score": 2 },
+          { "id": "c", "text": "Add a try-catch around the code that uses that variable", "nextNode": "band-aid", "score": 0 }
         ]
       },
       "check-env": {
-        "narrative": "You open the Vercel dashboard and look at the environment variables. NEXT_PUBLIC_API_URL is missing! You had it in your local .env file but never added it to Vercel. You add it and redeploy. But the site still shows a blank page. The logs now show a different error: 'Error: connect ECONNREFUSED 127.0.0.1:5432'. What's happening?",
+        "narrative": "You open the Vercel dashboard and look at the environment variables. NEXT_PUBLIC_API_URL is missing! You had it in your local .env file but never added it to Vercel. You add it and redeploy. But the site still shows a blank page. The logs now show: 'Error: connect ECONNREFUSED 127.0.0.1:5432'. What's happening?",
         "choices": [
-          { "id": "a", "text": "The DATABASE_URL is pointing to localhost -- it needs the production database URL", "nextNode": "fix-db", "score": 10 },
-          { "id": "b", "text": "The database server is down -- contact the hosting provider", "nextNode": "wrong-diagnosis", "score": 3 },
-          { "id": "c", "text": "Try restarting the deployment", "nextNode": "restart", "score": 1 }
+          { "id": "a", "text": "DATABASE_URL is pointing to localhost -- it needs the production database URL", "nextNode": "fix-db", "score": 4 },
+          { "id": "b", "text": "The database server is down -- contact the hosting provider", "nextNode": "fix-db", "score": 1 },
+          { "id": "c", "text": "Try restarting the deployment", "nextNode": "fix-db", "score": 0 }
         ]
       },
       "rollback-first": {
         "narrative": "Rolling back gets the old version live again -- good instinct for protecting users. But you still need to fix the issue. Looking at the error message, it's about a missing environment variable. This is a configuration problem, not a code problem.",
         "choices": [
-          { "id": "a", "text": "Check the environment variables on the hosting platform", "nextNode": "check-env", "score": 5 }
+          { "id": "a", "text": "Check the environment variables on the hosting platform", "nextNode": "check-env", "score": 2 }
         ]
       },
       "band-aid": {
         "narrative": "A try-catch would silence the error but the feature would still be broken -- it needs that API URL to function. The root cause is that the variable doesn't exist in production. You need to set it up properly.",
         "choices": [
-          { "id": "a", "text": "Check the environment variables on the hosting platform", "nextNode": "check-env", "score": 3 }
+          { "id": "a", "text": "Check the environment variables on the hosting platform", "nextNode": "check-env", "score": 1 }
         ]
       },
       "fix-db": {
-        "narrative": "You found it -- DATABASE_URL was set to the localhost connection string from development. You update it to the production database URL and redeploy. The site comes back to life! What's your final step to prevent this from happening again?",
+        "narrative": "DATABASE_URL was the dev connection string. You update it to the production URL and redeploy. The app boots! But now an internal error fires when uploading images: 'ReferenceError: structuredClone is not defined'. That's a Node API. What's likely going on?",
         "choices": [
-          { "id": "a", "text": "Create a .env.example file listing all required variables and add a deploy checklist", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Send a message to the team explaining what happened", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "The production server is on Node 16, but my code uses APIs that need Node 18+", "nextNode": "match-node", "score": 4 },
+          { "id": "b", "text": "I forgot to import a polyfill for structuredClone", "nextNode": "match-node", "score": 2 },
+          { "id": "c", "text": "Production is fine -- the error must be from a stale browser cache", "nextNode": "match-node", "score": 0 }
         ]
       },
-      "wrong-diagnosis": {
-        "narrative": "127.0.0.1 IS localhost -- the error is saying the app is trying to connect to a database on the same machine. But in production, the database is on a completely different server. The DATABASE_URL environment variable must be pointing to localhost.",
+      "match-node": {
+        "narrative": "You check: your laptop runs Node 20, the platform defaults to Node 16. That's why structuredClone is missing. How do you make sure every developer and every server uses the same version?",
         "choices": [
-          { "id": "a", "text": "Update DATABASE_URL to the production database URL", "nextNode": "fix-db", "score": 5 }
+          { "id": "a", "text": "Set 'engines.node' in package.json AND commit a '.nvmrc' (or 'volta' / 'mise.toml') so local installs match", "nextNode": "reproduce-prod", "score": 4 },
+          { "id": "b", "text": "Just bump Node on the platform dashboard and tell teammates to upgrade Node manually", "nextNode": "reproduce-prod", "score": 2 },
+          { "id": "c", "text": "Avoid the new APIs and stick to Node 16 syntax forever", "nextNode": "reproduce-prod", "score": 1 }
         ]
       },
-      "restart": {
-        "narrative": "Restarting won't help -- the environment variable is still pointing to the wrong place. The error 'ECONNREFUSED 127.0.0.1' means the app is trying to connect to localhost, which doesn't have a database in production.",
+      "reproduce-prod": {
+        "narrative": "Versions are now pinned. Before you celebrate, you want to be able to reproduce production-style problems on your laptop instead of finding out from users. What's the most reliable way to do that?",
         "choices": [
-          { "id": "a", "text": "Update DATABASE_URL to the production database URL", "nextNode": "fix-db", "score": 3 }
+          { "id": "a", "text": "Add a 'pnpm start:prod' script that runs 'npm run build && NODE_ENV=production node server.js' against a copy of your prod env vars", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Spin up a Docker container that mirrors the production base image and run the build inside it", "nextNode": "prevent-future", "score": 4 },
+          { "id": "c", "text": "Just keep using 'npm run dev' and trust that prod will behave the same", "nextNode": "prevent-future", "score": 0 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "You can now reproduce prod locally. Final move: how do you stop the next 'I forgot to set DATABASE_URL on the platform' from ever shipping?",
+        "choices": [
+          { "id": "a", "text": "Add a startup health check that lists every required env var; fail loudly at boot if any is missing AND require deploys to pass that check before promotion", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Create a .env.example file and update the deploy checklist on Notion", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Send a Slack message to the team explaining what happened today", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You create a .env.example file listing every required variable with placeholder values, add it to the repo, and update the team's deploy checklist to include 'verify all env vars are set'. Future deployments will be much safer.",
+        "narrative": "You found two missing env vars, fixed the localhost DATABASE_URL, pinned Node, set up a way to run a production build locally, and added a boot-time env-var health check that refuses to start with missing variables. The next missing variable will fail in CI, not in production at 4pm Friday.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent debugging and prevention! You identified two missing environment variables, fixed them, and set up safeguards for the future. The .env.example pattern is industry standard -- it documents which variables your app needs without exposing the actual values."
+        "feedback": "Senior-level operational instinct. The big move is the boot-time check that fails loud when config is wrong -- it converts a silent runtime error into an obvious deploy failure. Combined with version pinning and a way to reproduce prod locally, you've eliminated the three biggest 'works on my machine' classes."
       },
       "end-okay": {
-        "narrative": "Good communication, but without a .env.example file or checklist, the same mistake will likely happen again the next time someone deploys. A systemic fix is better than a one-time message.",
+        "narrative": "You shipped a clean fix and documented the variables. Documentation helps onboarding, but it doesn't enforce anything -- the next deploy can still ship missing env vars without anyone noticing until users do.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "You fixed the immediate issue -- nice work. But to prevent it from happening again, create a .env.example file that lists all required variables. This way, anyone deploying can quickly check that all variables are configured."
+        "finalScore": 13,
+        "feedback": "Solid recovery. .env.example is industry standard, but it's still a manual safeguard. A startup health check that refuses to boot with missing config is the active version of the same idea -- and it never gets skipped, even on a Friday at 4pm."
+      },
+      "end-weak": {
+        "narrative": "Today's bug is fixed, but nothing structural changed. The next person to deploy a feature that needs a new env var will get the same blank-page incident, and you'll spend another Friday on the same kind of debugging.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "You handled the immediate fire but didn't reduce the surface of future fires. Tribal knowledge in Slack messages does not scale. A startup health check or a CI step that validates env vars is the cheap, durable fix."
       }
     },
     "glossaryTerms": ["environment-variable", "production", "localhost"]

@@ -45,51 +45,75 @@
       "start": {
         "narrative": "INCIDENT: A developer reports that after installing a new Node.js version manager (nvm), their terminal shows 'node: command not found' even though Node was working fine yesterday. The app needs to be deployed within the hour.\n\nYou SSH into the server. What's your first move?",
         "choices": [
-          { "id": "a", "text": "Run 'echo $PATH' to check if the Node.js directory is in the PATH", "nextNode": "check-path", "score": 10 },
-          { "id": "b", "text": "Reinstall Node.js from scratch", "nextNode": "reinstall", "score": 3 },
-          { "id": "c", "text": "Run 'which node' to see if the system can find the node binary", "nextNode": "which-node", "score": 7 }
+          { "id": "a", "text": "Run 'echo $PATH' to check if the Node.js directory is in the PATH", "nextNode": "check-path", "score": 4 },
+          { "id": "b", "text": "Reinstall Node.js from scratch", "nextNode": "reinstall", "score": 0 },
+          { "id": "c", "text": "Run 'which node' to see if the system can find the node binary", "nextNode": "which-node", "score": 3 }
         ]
       },
       "check-path": {
-        "narrative": "You run `echo $PATH` and see:\n/usr/local/bin:/usr/bin:/bin:/usr/sbin\n\nNotice anything missing? The nvm directory isn't listed. Node was installed via nvm to ~/.nvm/versions/node/v20.11.0/bin/ but that path isn't in PATH. The system has no idea where to look for it.\n\nHow do you fix it?",
+        "narrative": "You run `echo $PATH` and see:\n/usr/local/bin:/usr/bin:/bin:/usr/sbin\n\nThe nvm directory isn't listed. Node was installed via nvm to ~/.nvm/versions/node/v20.11.0/bin/ but that path isn't in PATH. The system has no idea where to look for it. You've confirmed the diagnosis -- now move to a fix.",
         "choices": [
-          { "id": "a", "text": "Run: export PATH=\"$PATH:$HOME/.nvm/versions/node/v20.11.0/bin\"", "nextNode": "temp-fix", "score": 7 },
-          { "id": "b", "text": "Check if nvm's init script is in ~/.bashrc or ~/.zshrc, then source it", "nextNode": "end-good", "score": 10 }
+          { "id": "a", "text": "Apply a temporary export to add the nvm bin directory to PATH", "nextNode": "temp-fix", "score": 4 },
+          { "id": "b", "text": "Skip the temp fix and edit the shell config file directly", "nextNode": "temp-fix", "score": 3 }
         ]
       },
       "which-node": {
-        "narrative": "You run `which node` and get no output -- the system can't find the node binary anywhere in the current PATH. The binary exists on disk (nvm installed it) but the PATH doesn't include its location. Now you know it's a PATH issue.\n\nWhat's your next step?",
+        "narrative": "You run `which node` and get no output -- the system can't find the node binary anywhere in the current PATH. The binary exists on disk (nvm installed it) but the PATH doesn't include its location. Now you know it's a PATH issue.",
         "choices": [
-          { "id": "a", "text": "Run 'echo $PATH' to see which directories are being searched", "nextNode": "check-path", "score": 8 },
-          { "id": "b", "text": "Manually add the node binary location to PATH", "nextNode": "temp-fix", "score": 5 }
+          { "id": "a", "text": "Confirm with 'echo $PATH' to see exactly which directories are being searched", "nextNode": "temp-fix", "score": 4 },
+          { "id": "b", "text": "Skip the verification and start patching PATH directly", "nextNode": "temp-fix", "score": 2 }
         ]
       },
       "reinstall": {
-        "narrative": "You spend 20 minutes reinstalling Node.js, but after installation you get the same error: 'node: command not found.' Reinstalling didn't help because the problem was never about Node being missing -- it was about the system not knowing where Node lives. The PATH variable doesn't include Node's install directory.",
+        "narrative": "You spend 20 minutes reinstalling Node.js, but after installation you get the same error: 'node: command not found.' Reinstalling didn't help because the problem was never about Node being missing -- it was about the system not knowing where Node lives.",
         "choices": [
-          { "id": "a", "text": "Check the PATH variable to understand why the system can't find node", "nextNode": "check-path", "score": 5 }
+          { "id": "a", "text": "Stop and investigate PATH before installing anything else", "nextNode": "temp-fix", "score": 2 }
         ]
       },
       "temp-fix": {
-        "narrative": "You run the export command and now `node --version` works! But this fix is temporary -- it will disappear when the terminal session ends. For a permanent fix, you need to ensure the nvm initialization script runs every time a new terminal opens.\n\nDo you check the shell config file?",
+        "narrative": "You run `export PATH=\"$PATH:$HOME/.nvm/versions/node/v20.11.0/bin\"` and `node --version` finally works. The deploy script will run. But this export evaporates when the SSH session ends. What do you do before logging out?",
         "choices": [
-          { "id": "a", "text": "Yes, check ~/.bashrc or ~/.zshrc for the nvm init lines", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "No, the temporary fix is enough for the deploy", "nextNode": "end-partial", "score": 4 }
+          { "id": "a", "text": "Open ~/.zshrc and confirm whether nvm's init lines are present and being sourced", "nextNode": "permanent-fix", "score": 4 },
+          { "id": "b", "text": "Append the raw export line to ~/.zshrc as the permanent fix", "nextNode": "permanent-fix", "score": 2 },
+          { "id": "c", "text": "Leave it -- the deploy is what matters and the temp fix held", "nextNode": "permanent-fix", "score": 0 }
+        ]
+      },
+      "permanent-fix": {
+        "narrative": "You open ~/.zshrc and find the nvm init lines were stripped during a recent dotfile cleanup:\n\n# (missing)\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && source \"$NVM_DIR/nvm.sh\"\n\nHow do you restore them so future shells work cleanly?",
+        "choices": [
+          { "id": "a", "text": "Add both lines back, then run `source ~/.zshrc` and open a fresh shell to confirm", "nextNode": "prevent-recurrence", "score": 4 },
+          { "id": "b", "text": "Add the lines, save the file, and trust the next SSH session to pick them up", "nextNode": "prevent-recurrence", "score": 2 },
+          { "id": "c", "text": "Hardcode the v20.11.0 bin path into PATH instead of sourcing nvm.sh", "nextNode": "prevent-recurrence", "score": 1 }
+        ]
+      },
+      "prevent-recurrence": {
+        "narrative": "The deploy goes through and `node --version` survives a fresh SSH session. But the dotfile cleanup that broke nvm could happen again, and other servers may have the same gap. What do you put in place to keep this from biting the team again?",
+        "choices": [
+          { "id": "a", "text": "Pin the dotfiles in version control with a setup script that re-sources nvm, and add a healthcheck that runs `node --version` on deploy", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Document the manual fix in the team wiki and move on", "nextNode": "end-partial", "score": 2 },
+          { "id": "c", "text": "Nothing -- the immediate fire is out and the deploy succeeded", "nextNode": "end-bad", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You open ~/.zshrc and find that the nvm initialization lines are missing -- they were accidentally deleted during a recent config cleanup:\n\nexport NVM_DIR=\"$HOME/.nvm\"\n[ -s \"$NVM_DIR/nvm.sh\" ] && source \"$NVM_DIR/nvm.sh\"\n\nYou add them back, run `source ~/.zshrc`, and confirm `node --version` now works. The deploy succeeds. Crisis resolved!",
+        "narrative": "Dotfiles are now versioned. A deploy healthcheck runs `node --version` and aborts if PATH is broken. The next time someone cleans up shell config, the missing nvm lines fail loudly in CI instead of silently in production at 2am.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent diagnosis! You correctly identified this as a PATH issue rather than a missing installation. The nvm init script in the shell config file is what adds Node's directory to PATH on each new terminal session. When those lines were removed, PATH no longer included Node's location. Always check the shell config file (~/.bashrc, ~/.zshrc) when commands suddenly stop working after system changes."
+        "feedback": "Excellent end-to-end response. You diagnosed PATH (not the install), made the fix permanent in shell config, and built a guardrail so the same dotfile drift can't silently take production down again. That's the difference between a one-time hero fix and a hardened system."
       },
       "end-partial": {
-        "narrative": "The deploy works for now, but the next time the server restarts or a new SSH session opens, 'node: command not found' will return. The team will face the same incident again tomorrow.",
+        "narrative": "The wiki page exists but nobody reads docs they didn't know they needed. The next time PATH breaks on a different server, someone burns another hour rediscovering the same nvm-init lines.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "You found the immediate fix but didn't make it permanent. Temporary PATH exports vanish when the terminal session ends. The proper fix is adding the nvm initialization script to ~/.bashrc or ~/.zshrc so that PATH is configured correctly every time a new shell opens. Always look for the root cause, not just a quick workaround."
+        "finalScore": 11,
+        "feedback": "Documentation is helpful but it's a passive guardrail -- it only protects people who already know to look. Active guardrails (versioned dotfiles, deploy healthchecks, CI smoke tests) catch this class of drift automatically. Pair the doc with one of those and the same incident won't recur."
+      },
+      "end-bad": {
+        "narrative": "Two weeks later the staging server reboots, the SSH session opens fresh, nvm isn't sourced, and a teammate burns 90 minutes diagnosing the same 'command not found' error. The cycle repeats every time the dotfile cleanup happens.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Walking away after the deploy succeeds means treating PATH as someone else's problem. Environment-variable bugs love to come back -- a fresh shell, a new server, a rebuild -- because nothing prevents the same dotfile drift from happening again. Always close the loop with a guardrail."
       }
     },
     "glossaryTerms": ["env-var", "path", "export", "shell-config"]

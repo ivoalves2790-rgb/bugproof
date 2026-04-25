@@ -43,63 +43,83 @@
       "start": {
         "narrative": "Your e-commerce site's conversion rate dropped 30% overnight. Revenue is down significantly. The development team says no code was deployed. Where do you start investigating?",
         "choices": [
-          { "id": "a", "text": "Check if the site is loading slower than usual using monitoring tools", "nextNode": "check-speed", "score": 10 },
-          { "id": "b", "text": "Look at the server error logs for crashes", "nextNode": "check-errors", "score": 5 },
-          { "id": "c", "text": "Check if a competitor launched a sale", "nextNode": "check-competitor", "score": 2 }
+          { "id": "a", "text": "Check page load times in your monitoring tools (RUM dashboard, Lighthouse, etc.)", "nextNode": "check-speed", "score": 4 },
+          { "id": "b", "text": "Look at the server error logs for crashes", "nextNode": "check-errors", "score": 2 },
+          { "id": "c", "text": "Check if a competitor launched a sale", "nextNode": "check-competitor", "score": 1 }
         ]
       },
       "check-speed": {
-        "narrative": "You open your monitoring dashboard and see it: average page load time jumped from 1.8 seconds to 7.2 seconds yesterday. The site isn't broken -- it's just painfully slow. Users are arriving but leaving before the page finishes loading. What's the likely cause?",
+        "narrative": "You open your monitoring dashboard and see it: average page load time jumped from 1.8 seconds to 7.2 seconds yesterday. The site isn't broken -- it's just painfully slow. Where in the request chain is the time going?",
         "choices": [
-          { "id": "a", "text": "Check if a third-party script or CDN is having issues", "nextNode": "found-cdn", "score": 10 },
-          { "id": "b", "text": "Check if the database is slow", "nextNode": "check-db", "score": 6 },
-          { "id": "c", "text": "Check if there's a DDoS attack", "nextNode": "check-ddos", "score": 4 }
+          { "id": "a", "text": "Open the Network tab in DevTools to see which specific requests are slow", "nextNode": "find-cause", "score": 4 },
+          { "id": "b", "text": "Check if the database is slow", "nextNode": "find-cause", "score": 2 },
+          { "id": "c", "text": "Assume it's a DDoS attack and enable rate limiting", "nextNode": "find-cause", "score": 1 }
         ]
       },
       "check-errors": {
         "narrative": "No server errors or crashes. The site is technically working fine -- all pages return 200 OK responses. But something is making users leave without buying. Maybe the issue isn't errors but speed?",
         "choices": [
-          { "id": "a", "text": "Check the site's loading speed in monitoring tools", "nextNode": "check-speed", "score": 7 }
+          { "id": "a", "text": "Check the site's loading speed in monitoring tools", "nextNode": "check-speed", "score": 3 }
         ]
       },
       "check-competitor": {
         "narrative": "No major competitor activity. Your traffic numbers are actually the same as usual -- people are visiting. They're just not buying. The problem is on your end.",
         "choices": [
-          { "id": "a", "text": "Check if the site is performing differently than usual", "nextNode": "check-speed", "score": 5 }
+          { "id": "a", "text": "Check if the site is performing differently than usual", "nextNode": "check-speed", "score": 2 }
         ]
       },
-      "found-cdn": {
-        "narrative": "You found it! Your image CDN provider had a partial outage yesterday. All product images are loading from a backup server that's 10x slower. The images are there, but they take 5+ seconds to appear. Users see a page full of blank image placeholders and leave. What do you do?",
+      "find-cause": {
+        "narrative": "Network tab tells the story: HTML and API responses come back in under 200ms, but every product image is taking 5+ seconds and they're all served from cdn.imagekit.io. You check status.imagekit.io and see a partial outage notice. What's your immediate move?",
         "choices": [
-          { "id": "a", "text": "Switch to a backup CDN and add lazy loading for images below the fold", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Wait for the CDN provider to fix their outage", "nextNode": "end-wait", "score": 3 }
+          { "id": "a", "text": "Flip your image origin to a backup CDN (Cloudflare, Bunny, or your fallback) to restore speed within minutes", "nextNode": "harden-frontend", "score": 4 },
+          { "id": "b", "text": "Open a support ticket with the CDN provider and wait for them to recover", "nextNode": "harden-frontend", "score": 1 },
+          { "id": "c", "text": "Email all customers a coupon code to make up for the slowness", "nextNode": "harden-frontend", "score": 0 }
         ]
       },
-      "check-db": {
-        "narrative": "Database response times are normal -- queries are fast. The API responses are also quick. The slowness is happening on the frontend, after the data arrives. Something about rendering the page is taking much longer than usual.",
+      "harden-frontend": {
+        "narrative": "The backup CDN is serving images and load times dropped to 2.4 seconds. Still slower than ideal. What frontend change reduces the impact of a slow CDN even when one is degraded?",
         "choices": [
-          { "id": "a", "text": "Check if static assets (images, CSS, JS) are loading slowly", "nextNode": "found-cdn", "score": 8 }
+          { "id": "a", "text": "Add 'loading=\"lazy\"' to images below the fold and serve responsive 'srcset' sizes so mobile downloads less data", "nextNode": "set-monitoring", "score": 4 },
+          { "id": "b", "text": "Replace all <img> tags with CSS background-images to defer loading", "nextNode": "set-monitoring", "score": 2 },
+          { "id": "c", "text": "Remove images from product cards entirely until the CDN recovers", "nextNode": "set-monitoring", "score": 0 }
         ]
       },
-      "check-ddos": {
-        "narrative": "Traffic patterns look normal -- no unusual spike in requests. This isn't an attack. The server is handling requests fine, but something downstream is slow.",
+      "set-monitoring": {
+        "narrative": "Lazy loading shipped, p75 load time is back to 1.9 seconds. Today you found out about the slowdown from the conversion-rate dashboard. You don't want to learn about the next one from revenue numbers. What do you set up?",
         "choices": [
-          { "id": "a", "text": "Check third-party services and CDNs", "nextNode": "found-cdn", "score": 6 }
+          { "id": "a", "text": "Configure RUM alerts that page on-call when p75 LCP exceeds 3s for 10 minutes, plus synthetic checks against the CDN every minute", "nextNode": "post-mortem", "score": 4 },
+          { "id": "b", "text": "Add a Slack channel where the team manually posts Lighthouse scores once a week", "nextNode": "post-mortem", "score": 2 },
+          { "id": "c", "text": "Trust the conversion-rate dashboard to keep flagging it like it did this time", "nextNode": "post-mortem", "score": 0 }
+        ]
+      },
+      "post-mortem": {
+        "narrative": "Monitoring is in place. Final decision: what do you do with what you learned today?",
+        "choices": [
+          { "id": "a", "text": "Write a short post-mortem documenting the timeline, root cause, fixes, and a list of follow-ups (define an SLO, add a second CDN to the build, audit other third-party deps)", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Mention what happened in standup tomorrow and move on", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Nothing -- the site is fast again, no need to dwell on it", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You switch to a backup CDN, add lazy loading so images below the fold don't block the initial page load, and add monitoring alerts for CDN response times. Within an hour, load times are back to 2 seconds and conversions start recovering.",
+        "narrative": "You diagnosed from RUM data, located the slow request in the network tab, mitigated the CDN outage with a fallback, hardened the frontend with lazy loading and responsive images, set up active monitoring so the next regression triggers a page within minutes, and wrote a post-mortem with concrete follow-ups. Conversions are back -- and the team is now meaningfully more resilient than yesterday.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent investigation! You correctly identified that a third-party dependency (the CDN) caused the slowdown. The key lesson: your app is only as fast as its slowest dependency. Always have fallback options for critical third-party services, and set up alerts for performance regressions so you catch them before your CEO does."
+        "feedback": "This is mature performance engineering. Speed of detection (monitoring) and speed of mitigation (a hot CDN swap) matter as much as the original performance work. The post-mortem is what turns a one-time fire into permanent improvement -- without it, the same shape of incident hits again next quarter."
       },
-      "end-wait": {
-        "narrative": "While you wait, the slow loading continues. Every hour costs you more lost sales. CDN outages can last hours or even days. Meanwhile, your conversion rate keeps dropping and frustrated users are posting complaints on social media.",
+      "end-okay": {
+        "narrative": "You restored speed, lazy-loaded images, and set up alerts. Skipping the written post-mortem means the lessons stay in your head -- next time a different person is on-call, they'll have to re-discover the playbook from scratch.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Waiting for a third-party to fix their problem puts your business at their mercy. Always have a backup plan for critical dependencies. Techniques like fallback CDNs, service workers with cached assets, and lazy loading can keep your site usable even when a dependency has issues."
+        "finalScore": 13,
+        "feedback": "Strong incident response. The post-mortem feels like extra work but it's the highest-leverage 30 minutes of the whole incident: it captures the timeline, the root cause, and the follow-ups in a place the next on-call can read. Without it, you're rebuilding the same mental model every outage."
+      },
+      "end-weak": {
+        "narrative": "Speed is restored and alerts are set, but no one outside this incident knows what happened. The next CDN outage may take longer to mitigate because the playbook lives only in your head. The follow-ups (second CDN, SLO definition, third-party audit) won't happen because they were never written down.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "You stabilized the site, which is the most important thing. The miss is the lack of documentation: a five-paragraph post-mortem turns this incident into a permanent capability for the team. Without it, the next slow third party will reset the clock on response time."
       }
     },
     "glossaryTerms": ["bounce-rate", "cdn", "conversion-rate", "lazy-loading"]

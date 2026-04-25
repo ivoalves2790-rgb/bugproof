@@ -50,63 +50,83 @@
       "start": {
         "narrative": "La página de inicio de sesión muestra una pantalla blanca después del despliegue de hoy. Tu compañero de equipo está en pánico. ¿Cuál es tu primer movimiento?",
         "choices": [
-          { "id": "a", "text": "Ejecutar 'git log' para ver los commits recientes", "nextNode": "check-log", "score": 10 },
-          { "id": "b", "text": "Revertir inmediatamente a la versión de ayer", "nextNode": "revert-blind", "score": 3 },
+          { "id": "a", "text": "Ejecutar 'git log --oneline' para ver los commits recientes", "nextNode": "check-log", "score": 4 },
+          { "id": "b", "text": "Revertir inmediatamente a la versión de ayer", "nextNode": "revert-blind", "score": 1 },
           { "id": "c", "text": "Empezar a reescribir la página de inicio de sesión desde cero", "nextNode": "rewrite", "score": 0 }
         ]
       },
       "check-log": {
         "narrative": "¡Buena decisión! Ejecutas 'git log --oneline' y ves:\n\na1b2c3d Fix navbar styling\nb4e5f6a Update login form validation\nc7d8e9f Add new marketing banner\nd0e1f2a Initial deploy setup\n\nUno de estos commits probablemente causó el problema. ¿Cuál investigas primero?",
         "choices": [
-          { "id": "a", "text": "Revisar 'b4e5f6a Update login form validation' -- toca directamente el login", "nextNode": "found-commit", "score": 10 },
-          { "id": "b", "text": "Revisar 'a1b2c3d Fix navbar styling' -- es el más reciente", "nextNode": "wrong-commit", "score": 5 },
-          { "id": "c", "text": "Revisar todos los commits uno por uno empezando por el más antiguo", "nextNode": "slow-path", "score": 3 }
+          { "id": "a", "text": "Revisar 'b4e5f6a Update login form validation' -- toca directamente el login", "nextNode": "inspect-commit", "score": 4 },
+          { "id": "b", "text": "Revisar 'a1b2c3d Fix navbar styling' -- es el más reciente", "nextNode": "inspect-commit", "score": 2 },
+          { "id": "c", "text": "Revisar todos los commits uno por uno empezando por el más antiguo", "nextNode": "inspect-commit", "score": 1 }
         ]
       },
       "revert-blind": {
         "narrative": "Reviertes sin verificar qué cambió. La página de inicio de sesión funciona de nuevo, pero ahora el nuevo banner de marketing que tu jefe pidió también desapareció. No está contento. Habría sido mejor revisar el registro primero para entender qué rompió las cosas específicamente.",
         "choices": [
-          { "id": "a", "text": "Volver y revisar el registro para entender qué pasó", "nextNode": "check-log", "score": 5 }
+          { "id": "a", "text": "Volver y revisar el registro para entender qué pasó", "nextNode": "check-log", "score": 2 }
         ]
       },
       "rewrite": {
         "narrative": "Reescribir toda la página de inicio de sesión tomaría horas y perderías todas las mejoras recientes. El historial de Git tiene la respuesta -- solo necesitas ver qué cambió recientemente.",
         "choices": [
-          { "id": "a", "text": "De acuerdo, déjame revisar git log en su lugar", "nextNode": "check-log", "score": 3 }
+          { "id": "a", "text": "De acuerdo, déjame revisar git log en su lugar", "nextNode": "check-log", "score": 1 }
         ]
       },
-      "found-commit": {
-        "narrative": "Ejecutas 'git show b4e5f6a' y ves que el commit cambió la URL de acción del formulario a una ruta inválida. ¡Ese es el error! Ahora sabes exactamente qué línea arreglar. ¿Cómo procedes?",
+      "inspect-commit": {
+        "narrative": "Sospechas de 'b4e5f6a Update login form validation'. El mensaje del commit te dice qué *intentó* hacer alguien, pero necesitas ver el cambio de código real. ¿Cómo lees exactamente qué se modificó?",
         "choices": [
-          { "id": "a", "text": "Arreglar solo la URL rota y hacer un nuevo commit", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Revertir el commit completo", "nextNode": "end-okay", "score": 7 }
+          { "id": "a", "text": "Ejecutar 'git show b4e5f6a' para ver el diff completo de ese commit", "nextNode": "found-bug", "score": 4 },
+          { "id": "b", "text": "Ejecutar 'git log -p b4e5f6a' para poder desplazarme por diffs de varios commits", "nextNode": "found-bug", "score": 3 },
+          { "id": "c", "text": "Abrir el archivo en mi editor e intentar adivinar qué líneas cambiaron", "nextNode": "found-bug", "score": 0 }
         ]
       },
-      "wrong-commit": {
-        "narrative": "El commit de estilos de la barra de navegación solo cambió colores CSS -- nada que rompería el inicio de sesión. Deberías buscar commits que realmente toquen código relacionado con el login.",
+      "found-bug": {
+        "narrative": "El diff es claro: el commit cambió la URL de acción del formulario de '/api/login' a '/api/loign' (typo) y además agregó dos reglas de validación válidas. El bug es una sola línea. ¿Cómo lo arreglas sin perder el trabajo de validación?",
         "choices": [
-          { "id": "a", "text": "Revisar 'b4e5f6a Update login form validation' en su lugar", "nextNode": "found-commit", "score": 5 }
+          { "id": "a", "text": "Editar el typo, hacer commit solo de esa línea, push -- conservar las reglas de validación intactas", "nextNode": "verify-fix", "score": 4 },
+          { "id": "b", "text": "Ejecutar 'git revert b4e5f6a' para deshacer todo el commit y volver a agregar la validación después", "nextNode": "verify-fix", "score": 1 },
+          { "id": "c", "text": "Hacer hard-reset de main al commit anterior a b4e5f6a", "nextNode": "verify-fix", "score": 0 }
         ]
       },
-      "slow-path": {
-        "narrative": "Verificar desde el commit más antiguo hacia arriba eventualmente funcionará, pero es lento. Una mejor estrategia es mirar los mensajes de los commits y verificar primero los más probablemente relacionados con la función rota.",
+      "verify-fix": {
+        "narrative": "El arreglo está dentro. Antes de decirle a tu compañero que el incendio se apagó, ¿cómo confirmas que el despliegue realmente recogió tu parche y que la página de login funciona para los usuarios?",
         "choices": [
-          { "id": "a", "text": "Enfocarme en el commit relacionado con login en su lugar", "nextNode": "found-commit", "score": 5 }
+          { "id": "a", "text": "Ejecutar 'git log --oneline -3' para confirmar que mi arreglo es el commit más reciente, y luego cargar la página de login en producción en una ventana de incógnito", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Confiar en el check verde de CI y avisarle al compañero que ya está", "nextNode": "prevent-future", "score": 2 },
+          { "id": "c", "text": "Refrescar producción una vez -- si carga, vamos bien", "nextNode": "prevent-future", "score": 1 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "El login vuelve a funcionar. Ahora: este typo se coló porque nadie leyó el diff antes de mergear. ¿Cuál es la salvaguarda más práctica contra el próximo typo?",
+        "choices": [
+          { "id": "a", "text": "Agregar un test de humo con Playwright que haga POST a /api/login en cada PR -- un 404 hace fallar el build", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Exigir code review en cada PR que toque el formulario de login", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Mandar un recordatorio por Slack para tener cuidado con las URLs de la API", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Arreglaste solo la URL rota, hiciste commit de la corrección y desplegaste. El inicio de sesión funciona perfectamente y ninguna otra función se vio afectada. Tu compañero de equipo está impresionado por lo rápido que diagnosticaste el problema usando el historial de Git.",
+        "narrative": "Usaste 'git log' para revisar el historial reciente, elegiste el commit más probable por su mensaje, usaste 'git show' para leer el diff real, arreglaste solo la línea rota, verificaste el despliegue en producción y agregaste un test de humo que captura exactamente esta clase de bug en el siguiente PR. Tiempo total caído: menos de 10 minutos.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Excelente trabajo! Usaste 'git log' para revisar el historial reciente, identificaste el commit más probable por su mensaje, usaste 'git show' para ver exactamente qué cambió e hiciste una corrección específica. Así es exactamente como los desarrolladores experimentados depuran problemas en producción."
+        "feedback": "Respuesta profesional a incidentes con Git. El patrón -- log, show, arreglo específico, verificar, automatizar la captura -- es la diferencia entre apagar incendios para siempre y reducir la superficie de bugs con el tiempo. El test de humo significa que esta clase de bug ya está extinta en tu repo."
       },
       "end-okay": {
-        "narrative": "Revertir todo el commit arregló el login pero también eliminó las mejoras válidas de validación del formulario. Tendrás que rehacer ese trabajo después. Una corrección más específica habría sido mejor.",
+        "narrative": "Encontraste y arreglaste el bug de forma limpia. El code review ayuda, pero los revisores se pierden typos en diffs largos todo el tiempo -- así fue como este se coló al principio.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "¡Encontraste el commit correcto, lo cual es genial! Pero revertir el commit completo eliminó cambios buenos junto con los malos. La próxima vez, intenta arreglar solo la línea rota para conservar las partes buenas."
+        "finalScore": 13,
+        "feedback": "Depuración sólida. La revisión está bien, pero un test de humo es mejor: nunca se cansa, nunca lee por encima, nunca aprueba un PR a las 5pm de un viernes. Combina la revisión con un check automático por flujo crítico de usuario y dejarás de ver este tipo de regresión."
+      },
+      "end-weak": {
+        "narrative": "El login funciona por ahora, pero nada cambió en cómo el equipo despliega. El próximo typo en un commit entrará igual de fácil, y la próxima semana volverás a ejecutar 'git log'.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 9,
+        "feedback": "Manejaste el bug, pero un recordatorio por Slack es un deseo, no una salvaguarda. La gente olvida. CI no. Agrega aunque sea un solo test de humo para el flujo de login y te ahorrarás horas de depuración futura."
       }
     },
     "glossaryTerms": ["git-log", "git-show", "commit-hash"]

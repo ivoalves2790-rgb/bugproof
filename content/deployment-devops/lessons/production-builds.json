@@ -45,63 +45,83 @@
       "start": {
         "narrative": "You push to main and the deploy starts. Two minutes later, you get an alert: 'Build failed'. The site is still showing the old version. Your PM is asking when the new feature will be live. What do you do first?",
         "choices": [
-          { "id": "a", "text": "Check the build logs on the hosting platform", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Push the same code again -- maybe it was a temporary glitch", "nextNode": "retry-blind", "score": 2 },
+          { "id": "a", "text": "Open the build logs on the hosting platform", "nextNode": "check-logs", "score": 4 },
+          { "id": "b", "text": "Push the same code again -- maybe it was a temporary glitch", "nextNode": "retry-blind", "score": 1 },
           { "id": "c", "text": "Tell the PM it will be ready tomorrow and go to lunch", "nextNode": "ignore", "score": 0 }
         ]
       },
       "check-logs": {
         "narrative": "Good call! You open the build logs and see:\n\nError: Module not found: Can't resolve './components/Header'\n  at ./src/pages/index.js\n\nBuild failed with 1 error.\n\nThe file exists on your computer. What could be wrong?",
         "choices": [
-          { "id": "a", "text": "Check if the filename casing matches -- Mac is case-insensitive but Linux servers aren't", "nextNode": "found-issue", "score": 10 },
-          { "id": "b", "text": "Delete the node_modules folder and reinstall", "nextNode": "wrong-fix", "score": 3 },
-          { "id": "c", "text": "The server must be broken -- contact hosting support", "nextNode": "blame-server", "score": 1 }
+          { "id": "a", "text": "Check if the filename casing matches -- Mac is case-insensitive but Linux servers aren't", "nextNode": "found-issue", "score": 4 },
+          { "id": "b", "text": "Delete the node_modules folder and reinstall", "nextNode": "found-issue", "score": 1 },
+          { "id": "c", "text": "The server must be broken -- contact hosting support", "nextNode": "found-issue", "score": 0 }
         ]
       },
       "retry-blind": {
         "narrative": "You push again and... same error. Build failures are almost never temporary glitches -- they're caused by real problems in your code or configuration. You need to actually read the error message.",
         "choices": [
-          { "id": "a", "text": "Okay, let me check the build logs", "nextNode": "check-logs", "score": 3 }
+          { "id": "a", "text": "Okay, let me check the build logs", "nextNode": "check-logs", "score": 1 }
         ]
       },
       "ignore": {
         "narrative": "Ignoring a build failure means the new feature isn't live and you're no closer to fixing it. The PM will ask again after lunch. Better to investigate now while the error is fresh.",
         "choices": [
-          { "id": "a", "text": "Fine, let me check the build logs", "nextNode": "check-logs", "score": 1 }
+          { "id": "a", "text": "Fine, let me check the build logs", "nextNode": "check-logs", "score": 0 }
         ]
       },
       "found-issue": {
-        "narrative": "Bingo! Your file is named 'header.js' but your import says './components/Header'. On your Mac, this works because macOS doesn't care about case. But the Linux server does -- 'Header' and 'header' are different files. How do you fix it?",
+        "narrative": "Bingo! Your file is named 'header.js' but your import says './components/Header'. On your Mac, this works because macOS is case-insensitive. The Linux build server is case-sensitive -- 'Header' and 'header' are different files. How do you fix it?",
         "choices": [
-          { "id": "a", "text": "Rename the file to match the import: Header.js", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Change the import to lowercase: ./components/header", "nextNode": "end-okay", "score": 7 }
+          { "id": "a", "text": "Use 'git mv components/header.js components/Header.js' so Git records the casing change", "nextNode": "reproduce-locally", "score": 4 },
+          { "id": "b", "text": "Just rename the file in Finder and commit -- Git will pick it up", "nextNode": "reproduce-locally", "score": 1 },
+          { "id": "c", "text": "Change the import to lowercase: ./components/header", "nextNode": "reproduce-locally", "score": 2 }
         ]
       },
-      "wrong-fix": {
-        "narrative": "Reinstalling dependencies didn't help because the problem isn't with your packages -- it's with your file path. Look at the error more carefully: it says the module can't be found. The file exists, so maybe it's a naming issue.",
+      "reproduce-locally": {
+        "narrative": "You fixed the file. Before you push to main and find out from the build server whether it works, how do you confirm the production build actually succeeds on your laptop?",
         "choices": [
-          { "id": "a", "text": "Check if the filename casing matches the import", "nextNode": "found-issue", "score": 5 }
+          { "id": "a", "text": "Run 'npm run build' locally and watch for errors before pushing", "nextNode": "check-bundle", "score": 4 },
+          { "id": "b", "text": "Push to a preview branch first and let the platform's preview deploy verify it", "nextNode": "check-bundle", "score": 3 },
+          { "id": "c", "text": "Push straight to main -- the local dev server already worked", "nextNode": "check-bundle", "score": 0 }
         ]
       },
-      "blame-server": {
-        "narrative": "The server is fine -- it's running your build command exactly as instructed. The error is in your code. Read the error message again: it says a specific module can't be found.",
+      "check-bundle": {
+        "narrative": "The build succeeds. Now the deploy goes out, but the page is showing slowly on mobile. You open the build output and see the JS bundle is 4.2MB. What's the most useful next step?",
         "choices": [
-          { "id": "a", "text": "Okay, let me look at the file path more carefully", "nextNode": "found-issue", "score": 3 }
+          { "id": "a", "text": "Run 'npx vite-bundle-visualizer' (or the equivalent for your bundler) to see which dependency is fattest", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Enable gzip on the CDN and call it done -- compression will hide the size", "nextNode": "prevent-future", "score": 2 },
+          { "id": "c", "text": "Ignore the size -- 4.2MB is normal for a modern app", "nextNode": "prevent-future", "score": 0 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "You shaved the bundle down by tree-shaking an oversized icon library. To stop the next 'works locally, fails on Linux' surprise, what do you put in CI?",
+        "choices": [
+          { "id": "a", "text": "Add a CI step that runs 'npm run build' on Linux for every PR -- failed builds block the merge", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Set up a pre-push Git hook that runs the build locally before allowing a push", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Put a note in the README telling people to remember to test the build", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You rename 'header.js' to 'Header.js', commit, and push. The build succeeds and the site deploys in under 2 minutes. The PM is happy, and you've learned an important lesson about case sensitivity across operating systems.",
+        "narrative": "You read the build logs, fixed the casing with 'git mv', verified the build locally, trimmed the bundle, and added CI that runs the production build on Linux for every PR. The next case-sensitivity bug -- and there will be one -- can never reach main.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Perfect debugging! You checked the build logs, identified the case-sensitivity issue, and made a clean fix. File casing is one of the most common 'works on my machine' bugs because Mac and Windows are case-insensitive but Linux servers are case-sensitive."
+        "feedback": "This is what mature deployment hygiene looks like. The most important step was the CI build on Linux: it removes the gap between your laptop and the production environment, which is where 90% of 'works on my machine' bugs hide. Pair this with a bundle-size check and you've got a deploy pipeline that catches problems before users do."
       },
       "end-okay": {
-        "narrative": "Changing the import to lowercase also works, but now your code style is inconsistent -- some imports use PascalCase and others don't. The convention for React components is PascalCase filenames, so renaming the file would be cleaner.",
+        "narrative": "You shipped a clean fix and a pre-push hook. The hook helps for you, but a teammate on Windows or a contractor without your dotfiles won't have it -- so the bug class isn't fully closed.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "You found the root cause -- great job! Either fix works, but renaming the file to PascalCase (Header.js) is the better convention for React components. Always be consistent with file casing to avoid these cross-platform bugs."
+        "finalScore": 13,
+        "feedback": "Solid recovery. Local hooks help individuals; CI helps the whole team. Move the build check to CI so every contributor gets the same safety net regardless of their machine setup."
+      },
+      "end-weak": {
+        "narrative": "The site is back online but nothing structural changed. The next case-sensitivity bug, the next missing dependency, the next platform-specific surprise will all reach main again, because the only safeguard is people remembering to read the README.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "You fixed today's bug, but you didn't shrink tomorrow's bug surface. Documentation is a wish; CI is a guarantee. One 'npm run build' step in CI would have caught this without any human attention."
       }
     },
     "glossaryTerms": ["production-build", "build-error", "case-sensitivity"]

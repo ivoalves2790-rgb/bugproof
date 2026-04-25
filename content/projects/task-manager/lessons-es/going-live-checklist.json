@@ -38,45 +38,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Son las 9 AM del dia del lanzamiento. Tu gestor de tareas esta desplegado en Vercel y todo se ve bien. Estas a punto de compartir el enlace en redes sociales. Pero no has probado el entorno de produccion aun — solo desarrollo. Que haces?",
+        "narrative": "Son las 9 AM del dia del lanzamiento. Tu gestor de tareas esta desplegado en Vercel y todo se ve bien. Estas a punto de compartir el enlace en redes sociales. Pero no has probado el entorno de producción aun — solo desarrollo. ¿Que haces?",
         "choices": [
-          { "id": "a", "text": "Publicar el enlace ahora — funciono en desarrollo, deberia estar bien", "nextNode": "yolo-launch", "score": 0 },
-          { "id": "b", "text": "Hacer una prueba de humo rápida: registrarse, crear una tarea, completarla, eliminarla — todo en producción", "nextNode": "smoke-test", "score": 4 },
-          { "id": "c", "text": "Retrasar el lanzamiento una semana para hacer pruebas QA extensas", "nextNode": "over-delay", "score": 1 }
+          { "id": "yolo-launch", "text": "Publicar el enlace ahora — funciono en desarrollo, deberia estar bien", "nextNode": "yolo-recovery", "score": 0 },
+          { "id": "smoke-test", "text": "Hacer una prueba de humo rápida: registrarse, crear una tarea, completarla, eliminarla — todo en producción", "nextNode": "smoke-test", "score": 4 },
+          { "id": "over-delay", "text": "Retrasar el lanzamiento una semana para hacer pruebas QA extensas", "nextNode": "over-delay", "score": 1 }
         ]
       },
-      "yolo-launch": {
-        "narrative": "Publicas el enlace. En 30 minutos, alguien intenta registrarse y obtiene una pantalla en blanco. La URL de redireccion de auth de Supabase todavia esta configurada a localhost. Te apresuras a arreglarlo mientras la gente tuitea sobre tu app rota. Las primeras impresiones se perdieron.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Una prueba de humo de 5 minutos en producción habría detectado el problema de redireccion de auth antes de que alguien más lo viera. Siempre prueba el entorno real antes de anunciar tu lanzamiento.",
-        "choices": []
+      "yolo-recovery": {
+        "narrative": "Publicaste el enlace antes de probar. En 30 minutos alguien intenta registrarse y obtiene una pantalla en blanco — la URL de redireccion de auth de Supabase aun esta configurada a localhost. Bajas la publicacion y desconectas el despliegue. ¿Cual es tu siguiente movimiento?",
+        "choices": [
+          { "id": "fix-and-test", "text": "Arreglar la URL de redireccion de auth, redesplegar y correr una prueba de humo real en producción antes de volver a publicar", "nextNode": "soft-launch-step", "score": 4 },
+          { "id": "fix-and-repost", "text": "Arreglar la URL de redireccion y volver a publicar de inmediato — no hay tiempo para otra prueba", "nextNode": "soft-launch-step", "score": 1 }
+        ]
       },
       "smoke-test": {
-        "narrative": "Buena decision. Intentas registrarte y el flujo de auth falla — la URL de redireccion OAuth esta configurada a localhost. La arreglas en el panel de Supabase, vuelves a probar y todo funciona. Que sigue antes de lanzar?",
+        "narrative": "Buena decision. Intentas registrarte y el flujo de auth falla — la URL de redireccion OAuth esta configurada a localhost. La arreglas en el panel de Supabase, vuelves a probar y todo funciona. ¿Como decides quien recibe el enlace primero?",
         "choices": [
-          { "id": "b1", "text": "Compartir con 5 amigos primero, arreglar cualquier problema que encuentren y luego hacer el lanzamiento publico", "nextNode": "soft-launch", "score": 3 },
-          { "id": "b2", "text": "Todo funciona ahora — lanzar publicamente de inmediato", "nextNode": "quick-launch", "score": 2 }
+          { "id": "soft-list", "text": "Elegir a 5 amigos que de verdad probaran la app y daran retroalimentación honesta en la próxima hora", "nextNode": "soft-launch-step", "score": 4 },
+          { "id": "broad-blast", "text": "Mandar correo a todos en tu lista de contactos a la vez para maximizar los registros tempranos", "nextNode": "soft-launch-step", "score": 1 }
         ]
       },
       "over-delay": {
-        "narrative": "Un retraso de una semana para un proyecto personal mata tu impulso. Para cuando lanzas, has perdido el interes. Haces un compromiso: hacer una sesion de pruebas enfocada de 2 horas hoy y lanzar esta tarde.",
+        "narrative": "Un retraso de una semana para un proyecto personal mata el impulso. Para el tercer dia ya abriste cinco archivos de Figma para funcionalidades v2. Te obligas a un compromiso: hacer una sesion de pruebas enfocada de 2 horas hoy y lanzar esta tarde.",
         "choices": [
-          { "id": "c1", "text": "Ejecutar los flujos criticos en producción y lanzar hoy", "nextNode": "smoke-test", "score": 3 }
+          { "id": "compress-and-test", "text": "Correr la prueba de humo en producción, arreglar lo que se rompa y elegir un grupo de lanzamiento para esta noche", "nextNode": "soft-launch-step", "score": 3 },
+          { "id": "delay-again", "text": "Decidir que una semana mas de pulido no hace dano y posponer la fecha de lanzamiento de nuevo", "nextNode": "soft-launch-step", "score": 0 }
         ]
       },
-      "soft-launch": {
-        "narrative": "Tus amigos encuentran dos problemas pequenos: un error tipografico en la pagina principal y una etiqueta de boton confusa. Arreglas ambos en 20 minutos, redespliegas y lanzas publicamente con confianza. El lanzamiento sale sin problemas.",
+      "soft-launch-step": {
+        "narrative": "Tu grupo de lanzamiento suave esta usando la app. Encuentran dos bugs pequenos: un error tipografico en la pagina principal y una etiqueta de boton confusa. Mientras los arreglas, ¿que monitoreo dejas listo?",
+        "choices": [
+          { "id": "alerts-and-rollback", "text": "Conectar Sentry para alertar sobre errores de producción y anotar el comando exacto para revertir el ultimo despliegue", "nextNode": "social-meta-step", "score": 4 },
+          { "id": "logs-only", "text": "Dejar los logs en tiempo de ejecución de Vercel corriendo en una pestana de terminal y refrescar de vez en cuando", "nextNode": "social-meta-step", "score": 2 },
+          { "id": "no-monitoring", "text": "Si los usuarios se quejan te lo diran en Twitter — no se necesita herramientas todavia", "nextNode": "social-meta-step", "score": 0 }
+        ]
+      },
+      "social-meta-step": {
+        "narrative": "Los bugs estan arreglados y el monitoreo esta listo. Estas por redactar el tweet de lanzamiento. Pegas la URL en la caja de redacción y el preview del enlace muestra... un favicon generico y ninguna descripcion. ¿Que arreglas antes del anuncio publico?",
+        "choices": [
+          { "id": "set-og-tags", "text": "Agregar meta tags de Open Graph con titulo, descripcion e imagen para que el preview del enlace tenga marca", "nextNode": "announce-step", "score": 4 },
+          { "id": "ship-no-preview", "text": "Saltarte los meta tags — la URL sola es suficiente", "nextNode": "announce-step", "score": 1 },
+          { "id": "screenshot-instead", "text": "No arreglar los meta tags; solo adjuntar una captura de pantalla al tweet manualmente", "nextNode": "announce-step", "score": 2 }
+        ]
+      },
+      "announce-step": {
+        "narrative": "Probada con humo, lanzada suave, monitoreada, con marca. ¿Como haces el anuncio publico?",
+        "choices": [
+          { "id": "staggered-announce", "text": "Publicar en un canal, observar las tasas de error y los registros por una hora, y luego expandir a mas canales", "nextNode": "excellent-end", "score": 4 },
+          { "id": "all-channels", "text": "Publicar simultaneamente en cada canal social, newsletter y foro para maximizar el alcance", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "quiet-launch", "text": "No anunciarlo publicamente — dejar que los usuarios lo encuentren organicamente", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "El lanzamiento sale con calma: la prueba de humo atrapo el bug de auth, los amigos del lanzamiento suave atraparon los cosmeticos, Sentry permanece en silencio, los previews de enlace se ven pulidos y tienes el comando de rollback listo. Para el final del dia, tu gestor de tareas tiene sus primeros usuarios reales sin un solo incendio que apagar.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Un lanzamiento suave con testers de confianza es el estandar de oro. Encuentran los problemas vergonzosos antes de que el publico lo haga, y puedes arreglarlos con calma en lugar de apurarte.",
+        "finalScore": 20,
+        "feedback": "Dia de lanzamiento bien hecho. La disciplina que aplicaste — verificar en producción, probar con humanos reales, configurar monitoreo antes del aluvion, pulir la superficie social y luego anunciar en oleadas — es exactamente lo que separa un lanzamiento que construye confianza de uno que la quema.",
         "choices": []
       },
-      "quick-launch": {
-        "narrative": "El lanzamiento sale mayormente bien. Algunos usuarios reportan problemas menores de UI, pero nada esta roto. Arreglas los problemas conforme llegan.",
+      "mediocre-end": {
+        "narrative": "El lanzamiento sale aceptable. La prueba de humo y el lanzamiento suave te salvaron de los peores bugs, pero disparar a todos los canales a la vez significa que no puedes saber que funciono, y un pico de bugs en la hora dos se vuelve dificil de triagear entre el ruido.",
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Base solida, final descuidado. Un anuncio escalonado te da senal: que canal mando los usuarios mas comprometidos, donde subieron los errores, donde redoblar la apuesta. Distribuyelo a lo largo del dia, no en la misma ventana de cinco minutos.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Te saltaste el anuncio. Tres semanas despues, la app tiene seis usuarios — todos amigos — y has perdido la energia para relanzar. El impulso es el activo mas fragil del lanzamiento y dejaste que se escapara.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Un lanzamiento aceptable. La prueba de humo te salvo del bug de auth, pero un lanzamiento suave con amigos habría detectado los problemas de UI restantes también.",
+        "feedback": "Un lanzamiento silencioso apenas es un lanzamiento. Hiciste el trabajo de ingenieria para que la app sea confiable; deja que el mundo sepa que existe. Elige un canal, publica una vez, y usa la respuesta para planear el siguiente movimiento.",
         "choices": []
       }
     },

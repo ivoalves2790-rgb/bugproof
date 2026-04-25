@@ -43,72 +43,75 @@
       "start": {
         "narrative": "You just ran create-next-app and your task manager project is scaffolded. You want to make your first git commit. What do you do first?",
         "choices": [
-          { "id": "check-status", "text": "Run 'git status' to see what files are about to be committed", "nextNode": "review-files", "score": 3 },
+          { "id": "check-status", "text": "Run 'git status' to see what files are about to be committed", "nextNode": "review-files", "score": 4 },
           { "id": "add-all-commit", "text": "Run 'git add . && git commit -m initial commit' immediately", "nextNode": "blind-commit", "score": 1 },
-          { "id": "start-coding", "text": "Skip the commit and start building features — you'll commit later when there's something worth saving", "nextNode": "no-commit-end", "score": 0 }
+          { "id": "start-coding", "text": "Skip the commit and start building features — you'll commit later when there's something worth saving", "nextNode": "no-commit-recovery", "score": 0 }
         ]
       },
       "review-files": {
         "narrative": "git status shows your project files. You notice that create-next-app already initialized git and created a .gitignore. You also see a .env.local file you created with your Supabase keys. What do you do?",
         "choices": [
-          { "id": "check-gitignore", "text": "Open .gitignore to verify .env.local is listed, then check that no secrets appear in git status", "nextNode": "verify-gitignore", "score": 3 },
-          { "id": "commit-anyway", "text": "The .gitignore is probably fine — just commit everything that shows up in git status", "nextNode": "leaked-secrets", "score": 0 }
+          { "id": "check-gitignore", "text": "Open .gitignore to verify .env.local is listed, then check that no secrets appear in git status", "nextNode": "stage-files", "score": 4 },
+          { "id": "commit-anyway", "text": "The .gitignore is probably fine — just commit everything that shows up in git status", "nextNode": "stage-files", "score": 0 }
         ]
       },
       "blind-commit": {
-        "narrative": "You committed everything without checking. The commit includes a .env.local file with your Supabase API key and a .DS_Store file from macOS. The API key is now in your git history. Even if you delete the file later, it's still recoverable from old commits.",
+        "narrative": "You committed everything without checking. The commit includes a .env.local file with your Supabase API key and a .DS_Store file from macOS. The API key is now in your git history. You realize the mistake before pushing anywhere. What's your move?",
         "choices": [
-          { "id": "try-to-fix", "text": "Delete the .env.local, add it to .gitignore, and make a new commit", "nextNode": "partial-fix-end", "score": 1 },
-          { "id": "rewrite-history", "text": "Use git to rewrite history and remove the file from all commits, then rotate the exposed API key", "nextNode": "good-fix-end", "score": 3 }
+          { "id": "rewrite-history", "text": "Reset the local commit, add .env.local and .DS_Store to .gitignore, then start the commit flow over from scratch", "nextNode": "stage-files", "score": 3 },
+          { "id": "ignore-and-push", "text": "It hasn't been pushed yet, so it doesn't matter — keep going", "nextNode": "stage-files", "score": 0 }
         ]
       },
-      "verify-gitignore": {
-        "narrative": "You confirm .env.local is in .gitignore. git status shows only the project scaffolding files — no secrets, no node_modules, no build files. Everything looks clean. Time to commit. What message do you write?",
+      "no-commit-recovery": {
+        "narrative": "After two hours of coding without a single commit, you accidentally delete a folder and lose work. You finally accept that the first commit has to happen now, before you write anything else. You're back at git status. How do you handle staging?",
         "choices": [
-          { "id": "good-message", "text": "git commit -m 'Initialize Next.js project with TypeScript, Tailwind, and ESLint'", "nextNode": "clean-commit-end", "score": 3 },
-          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "lazy-message-end", "score": 1 }
+          { "id": "back-to-basics", "text": "Run git status, verify .gitignore covers .env files, and stage only the scaffolded files", "nextNode": "stage-files", "score": 3 },
+          { "id": "yolo-add-all", "text": "git add . and hope for the best — at least it'll be saved", "nextNode": "stage-files", "score": 1 }
         ]
       },
-      "leaked-secrets": {
-        "narrative": "Your Supabase API key is now committed to git history. If you ever push this repo to GitHub, the key will be publicly visible. Bots scan GitHub for exposed keys and can compromise your database within minutes.",
+      "stage-files": {
+        "narrative": "You're ready to stage. git status lists about 30 scaffolded files. How do you stage them?",
+        "choices": [
+          { "id": "add-all-clean", "text": "git add . — you've already verified .gitignore so everything visible is intentional", "nextNode": "compose-message", "score": 4 },
+          { "id": "add-by-path", "text": "git add app/ public/ package.json tsconfig.json next.config.js — explicit paths only", "nextNode": "compose-message", "score": 3 },
+          { "id": "add-interactive", "text": "git add -p and accept every hunk one by one without reading them", "nextNode": "compose-message", "score": 1 }
+        ]
+      },
+      "compose-message": {
+        "narrative": "Files are staged. Time to write the commit message. What do you type?",
+        "choices": [
+          { "id": "good-message", "text": "git commit -m 'Initialize Next.js project with TypeScript, Tailwind, and ESLint'", "nextNode": "remote-setup", "score": 4 },
+          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "remote-setup", "score": 2 },
+          { "id": "no-message", "text": "git commit --allow-empty-message -m ''", "nextNode": "remote-setup", "score": 0 }
+        ]
+      },
+      "remote-setup": {
+        "narrative": "The commit lands on your local main branch. You want this work backed up off your laptop. What do you do next?",
+        "choices": [
+          { "id": "private-remote", "text": "Create a private repo on GitHub, add it as origin, and push the initial commit", "nextNode": "excellent-end", "score": 4 },
+          { "id": "public-remote", "text": "Create a public repo on GitHub and push immediately so it's visible in your profile", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "no-remote", "text": "Skip the remote — you can set it up later when there's more code worth backing up", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your first commit is clean: scaffold only, no secrets, descriptive message, and pushed to a private remote. You have a real backup, a clean history, and a baseline you can reset to. This is how a project should start.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Always check what you're committing. A committed secret is extremely hard to fully remove from git history. The safest response is to rotate the key immediately and use git filter-branch or BFG to scrub it from history.",
+        "finalScore": 20,
+        "feedback": "Textbook first-commit hygiene. You verified status, respected .gitignore, staged intentionally, wrote a message future-you can search for, and got the work off your laptop. Every commit from here can follow this same discipline.",
         "choices": []
       },
-      "no-commit-end": {
-        "narrative": "You build features for three hours without committing. Then you accidentally delete a component file and break the import chain. Without any commits, there's no way to recover the file. You have to rewrite it from memory.",
+      "mediocre-end": {
+        "narrative": "The repo is backed up, but going public on day one means anyone can scan your code as you learn. If a secret slips into a future commit, it gets indexed by GitHub search before you notice.",
         "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Commits are save points. The first thing you should do after creating a project is commit the initial scaffolding. This gives you a clean baseline to return to if anything goes wrong.",
+        "finalScore": 12,
+        "feedback": "Public-by-default is fine for finished open source projects, but during the messy build phase, private repos give you room to fix mistakes quietly. Flip it to public when the app is launch-ready, not before.",
         "choices": []
       },
-      "clean-commit-end": {
-        "narrative": "Your first commit is clean: only scaffolding files, no secrets, and a descriptive message. You now have a known-good baseline. If you ever need to start over on a feature, you can reset to this commit with confidence.",
-        "isEnd": true,
-        "finalScore": 9,
-        "feedback": "Perfect. You checked the files, verified .gitignore, and wrote a clear message. This first commit is your safety net for the entire project. Every commit from here should follow this same discipline.",
-        "choices": []
-      },
-      "lazy-message-end": {
-        "narrative": "The commit is clean and safe, but the message 'init' doesn't tell you anything. Two months from now, when you're searching git history for when TypeScript was configured, 'init' won't help.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Your commit hygiene was good but the message was lazy. A clear first commit message like 'Initialize Next.js project with TypeScript and Tailwind' documents your tech stack choices right in the history.",
-        "choices": []
-      },
-      "partial-fix-end": {
-        "narrative": "The .env.local file is gone from the latest commit, but it still exists in the first commit's history. Anyone who clones the repo can check out that old commit and see the key. The secret is still compromised.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Deleting a file and making a new commit doesn't remove it from history. You need to rewrite git history (using BFG Repo-Cleaner or git filter-branch) AND rotate the compromised key. Prevention is always easier than cleanup.",
-        "choices": []
-      },
-      "good-fix-end": {
-        "narrative": "You rewrite the git history to remove the .env.local file, update .gitignore, and rotate your Supabase API key in the dashboard. The old key no longer works, so even if someone finds it in a cached copy, it's useless.",
+      "weak-end": {
+        "narrative": "Your commit lives only on your laptop. A spilled coffee or a crashed disk wipes out the project, and there's nothing to clone from. The whole point of git was to have a recoverable history — and you skipped half of it.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Good recovery. You did the two essential things: removed the secret from history AND rotated the key. But this entire crisis was avoidable by checking git status and .gitignore before the first commit.",
+        "feedback": "A local-only repo is half a backup. Push to a remote on day one — even if the project never goes public, the off-machine copy is what saves you from hardware failures, theft, and accidental rm -rf.",
         "choices": []
       }
     },

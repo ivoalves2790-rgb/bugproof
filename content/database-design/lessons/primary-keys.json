@@ -45,63 +45,75 @@
       "start": {
         "narrative": "Users report a weird bug: when they update their profile, sometimes another user's profile changes instead. You look at the users table and discover it has no primary key -- the app identifies users by their name column. Two users are both named 'Alex Johnson.' When the app runs UPDATE users SET bio = 'new bio' WHERE name = 'Alex Johnson', what happens?",
         "choices": [
-          { "id": "a", "text": "Both Alex Johnsons get the same bio -- the WHERE clause matches two rows", "nextNode": "correct-both", "score": 10 },
-          { "id": "b", "text": "Only the first Alex Johnson gets updated", "nextNode": "wrong-first", "score": 3 },
-          { "id": "c", "text": "The database throws an error because of the duplicate name", "nextNode": "wrong-error", "score": 2 }
-        ]
-      },
-      "correct-both": {
-        "narrative": "Exactly! WHERE name = 'Alex Johnson' matches BOTH rows, so both users get the same bio. This is why you never identify rows by name. How should we fix this table?",
-        "choices": [
-          { "id": "a", "text": "Add an auto-incrementing id column as the primary key", "nextNode": "correct-fix", "score": 10 },
-          { "id": "b", "text": "Use the email column as the primary key since emails are unique", "nextNode": "partial-email", "score": 5 },
-          { "id": "c", "text": "Just make sure users can't have duplicate names", "nextNode": "wrong-unique-name", "score": 2 }
+          { "id": "a", "text": "Both Alex Johnsons get the same bio -- the WHERE clause matches two rows", "nextNode": "diagnose-fix", "score": 4 },
+          { "id": "b", "text": "Only the first Alex Johnson gets updated", "nextNode": "wrong-first", "score": 1 },
+          { "id": "c", "text": "The database throws an error because of the duplicate name", "nextNode": "wrong-error", "score": 0 }
         ]
       },
       "wrong-first": {
-        "narrative": "SQL doesn't have a concept of 'first' or 'second' row -- rows in a table have no inherent order. The WHERE clause matches ALL rows that meet the condition. Both Alex Johnsons match WHERE name = 'Alex Johnson', so both get updated.",
+        "narrative": "SQL has no concept of 'first' or 'second' row -- rows in a table have no inherent order. WHERE matches ALL rows that meet the condition. Both Alex Johnsons match, so both get updated.",
         "choices": [
-          { "id": "a", "text": "So both rows get modified because the WHERE matches both", "nextNode": "correct-both", "score": 5 }
+          { "id": "a", "text": "So both rows get modified because the WHERE matches both", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
       "wrong-error": {
-        "narrative": "The database won't throw an error -- having duplicate names is perfectly valid. The name column has no UNIQUE constraint. SQL will happily update every row that matches the WHERE clause, even if that's 100 rows. That's exactly the problem!",
+        "narrative": "The database won't error -- duplicate names are perfectly valid because the name column has no UNIQUE constraint. SQL will happily update every matching row, even if that's 100 rows. That's exactly the problem.",
         "choices": [
-          { "id": "a", "text": "So both Alex Johnsons get the same update", "nextNode": "correct-both", "score": 5 }
+          { "id": "a", "text": "So both Alex Johnsons get the same update", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
-      "correct-fix": {
-        "narrative": "You add: ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY. Now every user has a unique numeric ID. The app uses UPDATE users SET bio = 'new bio' WHERE id = 42 instead of WHERE name = 'Alex Johnson'. Problem solved! What's the advantage of using an auto-incrementing integer?",
+      "diagnose-fix": {
+        "narrative": "You agree the table needs a real primary key. Which column do you choose?",
         "choices": [
-          { "id": "a", "text": "It's always unique, never changes, and the database generates it automatically", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "It's easier to type than a UUID", "nextNode": "end-ok", "score": 5 }
+          { "id": "a", "text": "Add a new id SERIAL PRIMARY KEY column -- auto-generated, unique, unchanging", "nextNode": "alter-table", "score": 4 },
+          { "id": "b", "text": "Promote the email column to PRIMARY KEY -- emails are unique", "nextNode": "alter-table", "score": 2 },
+          { "id": "c", "text": "Add a UNIQUE constraint to the name column and forbid duplicate names", "nextNode": "alter-table", "score": 0 }
         ]
       },
-      "partial-email": {
-        "narrative": "Emails are unique, but they're not ideal as primary keys. Users change their email addresses, which would require updating the primary key everywhere it's referenced. A good primary key should never change. An auto-incrementing integer (1, 2, 3...) is better because it never changes.",
+      "alter-table": {
+        "narrative": "How do you add the new id column safely on a table that already has thousands of rows in production?",
         "choices": [
-          { "id": "a", "text": "Use an auto-incrementing id instead since it never changes", "nextNode": "correct-fix", "score": 7 }
+          { "id": "a", "text": "ALTER TABLE users ADD COLUMN id SERIAL PRIMARY KEY -- Postgres backfills sequential IDs for existing rows automatically", "nextNode": "update-callers", "score": 4 },
+          { "id": "b", "text": "Drop the table, recreate it with id SERIAL PRIMARY KEY, then re-insert all the data from a backup", "nextNode": "update-callers", "score": 1 },
+          { "id": "c", "text": "Add the column nullable, run an UPDATE to assign random integers, then add PRIMARY KEY -- and hope nothing collides", "nextNode": "update-callers", "score": 1 }
         ]
       },
-      "wrong-unique-name": {
-        "narrative": "Forcing unique names is a terrible user experience -- what if two people are genuinely named 'Alex Johnson'? You can't tell one of them they can't use their real name. The solution is to give each row its own unique identifier that's separate from any real-world data.",
+      "update-callers": {
+        "narrative": "The id column exists. But the app code still runs UPDATE users SET bio = ? WHERE name = ?. The bug isn't fixed until the callers change too. What's your migration strategy?",
         "choices": [
-          { "id": "a", "text": "Add an auto-incrementing id column as the primary key", "nextNode": "correct-fix", "score": 5 }
+          { "id": "a", "text": "Update every WHERE-by-name caller to WHERE id = ?, deploy the app and the migration together, and add a code-review check that flags any new WHERE name = ?", "nextNode": "verify", "score": 4 },
+          { "id": "b", "text": "Update only the profile-update endpoint (the one in the bug report) and leave the rest of the WHERE-by-name callers for later", "nextNode": "verify", "score": 2 },
+          { "id": "c", "text": "Skip the code update -- just having the id column should be enough", "nextNode": "verify", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "The auto-incrementing id is automatically generated (you never set it manually), guaranteed unique (no duplicates possible), and it never needs to change. Even if a user changes their name, email, or every other field, their id stays the same. The bug is fixed.",
+      "verify": {
+        "narrative": "Migration deployed. Before you call the bug closed, how do you prove the fix actually works for the reported scenario?",
+        "choices": [
+          { "id": "a", "text": "Reproduce the original bug in staging with two 'Alex Johnson' rows: one updates their bio, confirm only that row's bio changed, then add a regression test that asserts the same", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Eyeball production: query both Alex Johnsons and check their bios look different now", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Trust the migration and close the ticket -- the schema clearly has a primary key now", "nextNode": "end-weak", "score": 0 }
+        ]
+      },
+      "end-good": {
+        "narrative": "The staging repro shows exactly one Alex Johnson's bio changed -- the other is untouched. The regression test fails on the OLD code and passes on the new code, proving it would have caught the original bug. With the full caller migration plus the test, the bug CLASS (not just this bug) is gone.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "You correctly identified that identifying rows by non-unique data causes bugs, and that auto-incrementing primary keys solve this permanently. This is a foundational concept: every table should have a primary key, and it should be a meaningless unique identifier, not real-world data."
+        "feedback": "You did the full job: diagnosed the root cause (no primary key), chose the right kind of key (auto-incrementing integer, not real-world data), migrated the schema safely, updated the callers, and verified with a regression test. Primary keys only protect you if the code actually uses them AND the test proves it."
       },
-      "end-ok": {
-        "narrative": "True, but the main reasons are more important: it's guaranteed unique, automatically generated, and never needs to change. Those properties make it a reliable way to identify any row forever.",
+      "end-mediocre": {
+        "narrative": "The two bios look different in production today, so you close the ticket. But you only updated the profile-update endpoint, and the email-verification flow still runs WHERE name = ? -- you just didn't trigger it during the eyeball check. The next time two users share a name and one verifies their email, the other's account gets verified instead.",
         "choices": [],
         "isEnd": true,
         "finalScore": 12,
-        "feedback": "The key benefits of auto-incrementing IDs are: automatic generation (no manual work), guaranteed uniqueness (no duplicates), and immutability (they never change even when other data does). These properties make them the standard choice for primary keys."
+        "feedback": "Eyeballing production verifies one moment in time, not a class of bug. A real repro in staging plus a regression test would have surfaced the other WHERE-by-name callers, because writing the test forces you to enumerate the scenarios. Manual verification only catches the bugs you remember to look for."
+      },
+      "end-weak": {
+        "narrative": "The migration ran and the id column is populated, but no app code uses it and you ran no verification. Every UPDATE still runs WHERE name = ?, both Alex Johnsons still get the same bio update, and the original bug ships unchanged. You added a column and called it a fix.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "A primary key in the schema does nothing if the app keeps identifying rows by non-unique data, and skipping verification means you don't even know that. The schema, the queries, and the test are one system -- changing only one part is the same as changing nothing for the user-visible bug."
       }
     },
     "glossaryTerms": ["primary-key", "serial", "uuid", "unique-constraint"]

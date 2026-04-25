@@ -46,52 +46,70 @@
         ]
       },
       "too-much": {
-        "narrative": "Tu test tiene 40 lineas, crea una tarea, la completa, la verifica y luego la elimina. Cuando falla, no puedes saber que parte se rompio. Lo divides en tres tests separados, cada uno verificando un comportamiento.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Un test por comportamiento es la regla de oro. Los mega-tests son difíciles de depurar y mantener. Aprendiste de primera mano por qué los tests enfocados importan.",
-        "choices": []
+        "narrative": "Tu test tiene 40 lineas, crea una tarea, la completa, la verifica y luego la elimina. Cuando falla, no puedes saber que parte se rompio. Lo divides en tres tests separados, cada uno verificando un comportamiento. Ahora tienes que preparar las entradas que cada uno necesita.",
+        "choices": [
+          { "id": "tm-arrange", "text": "Definir un objeto de tarea pendiente fresco dentro de cada test — claro, sin estado compartido", "nextNode": "act-assert", "score": 4 },
+          { "id": "tm-share", "text": "Reutilizar un objeto de tarea entre los tres tests para no repetir el setup", "nextNode": "act-assert", "score": 1 }
+        ]
       },
       "focused-test": {
-        "narrative": "Tu test pasa. Ahora quieres probar que pasa cuando se llama completeTask en una tarea ya completada. Que haces?",
+        "narrative": "Acotaste el test a un solo comportamiento. Ahora necesitas preparar los datos de entrada — una tarea pendiente sobre la que completeTask pueda actuar. ¿Como la armas?",
         "choices": [
-          { "id": "b1", "text": "Escribir un segundo test: 'deberia lanzar un error si la tarea ya esta completada'", "nextNode": "edge-case", "score": 3 },
-          { "id": "b2", "text": "Un test que pasa es suficiente, seguir construyendo funcionalidades", "nextNode": "one-test-end", "score": 1 }
+          { "id": "ft-factory", "text": "Usar una pequena factory: makeTask({ status: 'pending' }) — legible, con defaults llenos", "nextNode": "act-assert", "score": 4 },
+          { "id": "ft-inline", "text": "Construir el objeto de tarea inline con cada campo requerido escrito a mano", "nextNode": "act-assert", "score": 2 },
+          { "id": "ft-db", "text": "Insertar una tarea real en la base de datos antes de que corra el test", "nextNode": "act-assert", "score": 1 }
         ]
       },
       "skip-tests": {
-        "narrative": "Pruebas manualmente y parece funcionar. Dos semanas despues, refactorizas el modelo de tareas y la funcion completeTask se rompe silenciosamente — ya no establece la marca de tiempo. Los usuarios se quejan de que sus tareas completadas no muestran fecha de completacion.",
+        "narrative": "Pruebas manualmente y parece funcionar. Dos semanas despues, refactorizas el modelo de tareas y la funcion completeTask se rompe silenciosamente — ya no establece la marca de tiempo. Los usuarios se quejan de que sus tareas completadas no muestran fecha de completacion. Finalmente aceptas escribir un test.",
         "choices": [
-          { "id": "c1", "text": "Arreglar el bug y finalmente escribir tests para prevenir que esto pase de nuevo", "nextNode": "late-test-end", "score": 2 },
-          { "id": "c2", "text": "Arreglar el bug y volver a las pruebas manuales", "nextNode": "manual-end", "score": 0 }
+          { "id": "st-arrange", "text": "Empezar con un test enfocado para la regresion: una tarea pendiente entra, una tarea completada con timestamp sale", "nextNode": "act-assert", "score": 3 },
+          { "id": "st-fix", "text": "Solo parchar el bug y mandarlo — escribir tests despues cuando tengas mas tiempo", "nextNode": "act-assert", "score": 0 }
         ]
       },
-      "edge-case": {
-        "narrative": "Tu segundo test revela que completeTask no maneja este caso limite — silenciosamente sobreescribe la marca de tiempo completedAt. Agregas una clausula de proteccion y ahora tienes dos tests solidos cubriendo el camino feliz y un caso limite.",
+      "act-assert": {
+        "narrative": "El paso de preparar esta listo. Ahora llamas completeTask(task). ¿Que afirmas sobre el resultado?",
+        "choices": [
+          { "id": "aa-specific", "text": "Afirmar exactamente los dos contratos: status === 'done' Y completedAt es un Date — un test, dos expectativas claras", "nextNode": "edge-cases", "score": 4 },
+          { "id": "aa-snapshot", "text": "Hacer snapshot del objeto retornado completo y dejar que el framework haga diff en futuras corridas", "nextNode": "edge-cases", "score": 2 },
+          { "id": "aa-truthy", "text": "Solo afirmar que el resultado es truthy — si retorno algo, probablemente funciono", "nextNode": "edge-cases", "score": 0 }
+        ]
+      },
+      "edge-cases": {
+        "narrative": "El test del camino feliz pasa. Los bugs se esconden en los casos limite. ¿Cual cubres ahora?",
+        "choices": [
+          { "id": "ec-already-done", "text": "Llamar completeTask sobre una tarea ya completada — ¿deberia lanzar, no hacer nada o sobreescribir el timestamp?", "nextNode": "ci-runs", "score": 4 },
+          { "id": "ec-null", "text": "Pasar null como argumento de tarea — deberia fallar con un error claro", "nextNode": "ci-runs", "score": 2 },
+          { "id": "ec-skip", "text": "Saltarse los casos limite — el camino feliz es suficiente para un primer test", "nextNode": "ci-runs", "score": 0 }
+        ]
+      },
+      "ci-runs": {
+        "narrative": "Dos tests adentro, ambos pasando local. ¿Donde deberian correr?",
+        "choices": [
+          { "id": "ci-pr", "text": "En cada pull request — los tests fallidos bloquean el merge, asi ninguna regresion llega a main", "nextNode": "excellent-end", "score": 4 },
+          { "id": "ci-precommit", "text": "Solo como hook de pre-commit en tu maquina — feedback rapido para ti, sin costo de CI", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ci-manual", "text": "Correrlos a mano cuando te acuerdes — la automatizacion puede venir despues", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu primer stack de tests es pequeno pero real: un test enfocado del camino feliz, un test deliberado de caso limite, ambos bloqueantes en cada PR. Cuando el proximo refactor toque accidentalmente completeTask, el check fallido en CI dispara antes de que el bug llegue a un usuario.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Así es exactamente como deberia funcionar el testing. Tests enfocados que verifican comportamientos especificos, incluyendo casos limite. El test literalmente encontro un bug antes de que tus usuarios lo hicieran.",
+        "finalScore": 16,
+        "feedback": "Este es el ciclo para el que se invento el testing: escribir el test mas pequeno que prueba un comportamiento, agregar un caso limite, automatizar para que una regresion no pueda mandarse. Esquivaste la trampa de sobre-testear (mega-tests) y de no testear (nada).",
         "choices": []
       },
-      "one-test-end": {
-        "narrative": "Tu unico test da algo de confianza, pero cuando el comportamiento de completeTask cambia, no detectas los casos limite. Los usuarios descubren bugs que podrias haber probado.",
+      "mediocre-end": {
+        "narrative": "Tus tests corren en tu maquina, pero nunca en el PR de un companero. Dos semanas despues, alguien sube un cambio que no revisaste y la regresion se cuela.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Un test es mejor que cero, pero los casos limite son donde se esconden la mayoria de los bugs. Prueba el camino feliz y al menos un caso de error para cada función.",
+        "finalScore": 11,
+        "feedback": "Los hooks locales ayudan al autor, pero los tests pagan mas cuando protegen al equipo entero. Muevelos a CI para que cada PR — tuyo o no — quede gateado.",
         "choices": []
       },
-      "late-test-end": {
-        "narrative": "Escribes tests de regresion para el bug. Las futuras refactorizaciones son ahora mas seguras, aunque los usuarios ya experimentaron el bug.",
+      "weak-end": {
+        "narrative": "Escribiste los tests, despues te olvidaste. Tres meses despues ni siquiera compilan porque la firma de la funcion cambio.",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Los tests de regresion son valiosos — previenen que el mismo bug vuelva a ocurrir. Pero escribir tests desde el inicio habría detectado esto antes de que los usuarios se vieran afectados.",
-        "choices": []
-      },
-      "manual-end": {
-        "narrative": "El mismo patron se repite: arreglas un bug, vuelve despues de una refactorizacion, lo arreglas de nuevo. Cada ciclo cuesta mas tiempo que lo que habria tomado escribir un test.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Sin tests automatizados, los bugs siguen regresando. El tiempo gastado arreglando bugs recurrentes siempre excede el tiempo que toma escribir tests.",
+        "finalScore": 5,
+        "feedback": "Un test que nunca corre es un test que no existe. Elige un lugar — pre-commit, CI o ambos — y conectalo el mismo dia que escribes el test, no despues.",
         "choices": []
       }
     },

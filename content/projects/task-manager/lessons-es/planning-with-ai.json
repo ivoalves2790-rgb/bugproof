@@ -43,67 +43,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Abres tu asistente de IA para planificar el proyecto del gestor de tareas. Tienes tu lista de funcionalidades e historias de usuario listas. Como comienzas la sesion de planificacion?",
+        "narrative": "Abres tu asistente de IA para planificar el proyecto del gestor de tareas. Tienes tu lista de funcionalidades e historias de usuario listas. ¿Como comienzas la sesion de planificacion?",
         "choices": [
           { "id": "jump-to-code", "text": "\"Genera una app de gestor de tareas con Next.js y Supabase\"", "nextNode": "code-first", "score": 0 },
           { "id": "plan-first", "text": "\"Estoy construyendo un gestor de tareas. Aquí estan mis funcionalidades: [lista]. Ayudame a crear un plan de proyecto con hitos.\"", "nextNode": "plan-first", "score": 4 },
-          { "id": "ask-ai-to-decide", "text": "\"Que deberia construir? Dame una idea de proyecto\"", "nextNode": "ai-decides", "score": 1 }
+          { "id": "ask-ai-to-decide", "text": "\"¿Que deberia construir? Dame una idea de proyecto\"", "nextNode": "ai-decides", "score": 1 }
         ]
       },
       "code-first": {
-        "narrative": "La IA genera 500 lineas de codigo. Funciona, mas o menos — pero el modelo de datos no coincide con tu lista de funcionalidades, no hay autenticacion, y la interfaz es generica. Te saltaste la planificacion y ahora estas depurando las decisiones de arquitectura de alguien mas. Que haces?",
+        "narrative": "La IA genera 500 lineas de codigo. Funciona, mas o menos — pero el modelo de datos no coincide con tu lista de funcionalidades, no hay autenticacion, y la interfaz es generica. Te saltaste la planificacion y ahora estas depurando las decisiones de arquitectura de alguien mas. ¿Que haces?",
         "choices": [
-          { "id": "scrap-restart", "text": "Desecharlo. Volver atrás y planificar correctamente, LUEGO programar.", "nextNode": "good-recovery", "score": 3 },
-          { "id": "patch-it", "text": "Intentar arreglar el código generado pieza por pieza", "nextNode": "patch-end", "score": 1 }
+          { "id": "scrap-restart", "text": "Desechar el codigo generado, pegar tu lista real de funcionalidades de vuelta en el chat y pedir un plan de hitos en su lugar", "nextNode": "review-plan", "score": 4 },
+          { "id": "patch-it", "text": "Intentar arreglar el codigo generado pieza por pieza sin volver a la planificacion", "nextNode": "review-plan", "score": 1 }
         ]
       },
       "plan-first": {
-        "narrative": "La IA sugiere un plan de 4 hitos: 1) Configuracion + modelo de datos, 2) Interfaz CRUD principal, 3) Filtrado + ordenamiento, 4) Pulido + despliegue. Tambien senala una pregunta: 'Los usuarios necesitaran cuentas, o es solo local?' Como manejas esto?",
+        "narrative": "La IA sugiere un plan de 4 hitos: 1) Configuracion + modelo de datos, 2) Interfaz CRUD principal, 3) Filtrado + ordenamiento, 4) Pulido + despliegue. Tambien senala una pregunta: '¿Los usuarios necesitaran cuentas, o es solo local?' ¿Como manejas esto?",
         "choices": [
-          { "id": "answer-and-continue", "text": "\"Los usuarios necesitan cuentas — usaremos Supabase Auth. Agrega un hito 0 para la configuración de autenticación.\" Luego pedirle a la IA que identifique otros riesgos.", "nextNode": "excellent-end", "score": 4 },
-          { "id": "skip-auth", "text": "\"Omite la autenticación por ahora, la agregaremos después\"", "nextNode": "skip-auth-end", "score": 2 }
+          { "id": "answer-and-continue", "text": "\"Los usuarios necesitan cuentas — usaremos Supabase Auth. Agrega un hito 0 para la configuración de autenticación.\"", "nextNode": "review-plan", "score": 4 },
+          { "id": "skip-auth", "text": "\"Omite la autenticación por ahora, la agregaremos después\"", "nextNode": "review-plan", "score": 1 }
         ]
       },
       "ai-decides": {
-        "narrative": "La IA sugiere una app de recetas, un rastreador de habitos y una herramienta de presupuesto. Ninguna de estas es lo que querias. Perdiste tiempo porque la IA no sabia que ya tenias un plan.",
+        "narrative": "La IA sugiere una app de recetas, un rastreador de habitos y una herramienta de presupuesto. Ninguna de estas es lo que querias. Te das cuenta de que dejaste a la IA llevar el liderazgo en lugar de liderarla. ¿Y ahora?",
         "choices": [
-          { "id": "redirect", "text": "\"En realidad, ya se lo que voy a construir. Dejame compartir mi lista de funcionalidades...\"", "nextNode": "good-recovery", "score": 2 },
-          { "id": "go-with-it", "text": "Elegir el rastreador de habitos porque suena divertido", "nextNode": "distracted-end", "score": 0 }
+          { "id": "redirect", "text": "\"En realidad, ya se lo que voy a construir. Aquí esta mi lista de funcionalidades e historias de usuario — planifiquemos a partir de esto.\"", "nextNode": "review-plan", "score": 3 },
+          { "id": "go-with-it", "text": "Elegir el rastreador de habitos porque suena divertido y pivotar todo el proyecto", "nextNode": "review-plan", "score": 0 }
         ]
       },
-      "good-recovery": {
-        "narrative": "Compartes tu lista de funcionalidades e historias de usuario. La IA crea un plan de proyecto solido. Estas de vuelta en el camino, aunque perdiste algo de tiempo.",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Te recuperaste al traer tu propio plan a la IA. Recuerda: llega a la IA con un objetivo claro y restricciones. Dejala ayudarte a planificar, no dejes que decida por ti.",
-        "choices": []
+      "review-plan": {
+        "narrative": "Ahora tienes un borrador de plan de hitos de la IA. Antes de tratarlo como sagrado, ¿como lo revisas?",
+        "choices": [
+          { "id": "critique-prompt", "text": "Pedir a la IA que critique su propio plan: '¿Que falta? ¿Que podria salir mal? ¿Donde estoy siendo poco realista?'", "nextNode": "scope-risks", "score": 4 },
+          { "id": "spot-check", "text": "Ojear los hitos, arreglar lo que se vea obviamente mal y seguir adelante", "nextNode": "scope-risks", "score": 2 },
+          { "id": "rubber-stamp", "text": "Confiar en el plan tal cual — la IA es mas inteligente que tu sobre software", "nextNode": "scope-risks", "score": 0 }
+        ]
+      },
+      "scope-risks": {
+        "narrative": "El plan esta revisado. La IA senala tres riesgos: scope creep (tu lista de funcionalidades es grande), sin tiempo presupuestado para pruebas y un plazo ambicioso de 2 semanas. ¿Como abordas el alcance antes de escribir cualquier codigo?",
+        "choices": [
+          { "id": "cut-to-mvp", "text": "Marcar cada funcionalidad como 'MVP' o 'V2'. Cualquier cosa no estrictamente necesaria para lanzar un gestor de tareas usable se mueve a V2.", "nextNode": "first-step", "score": 4 },
+          { "id": "extend-deadline", "text": "Mantener todas las funcionalidades pero extender el plazo de 2 semanas a 6 semanas", "nextNode": "first-step", "score": 2 },
+          { "id": "ignore-risks", "text": "Dejar la lista de funcionalidades tal cual y confiar en que avanzaras lo suficientemente rapido", "nextNode": "first-step", "score": 0 }
+        ]
+      },
+      "first-step": {
+        "narrative": "El plan esta acotado, los riesgos anotados. Ahora tienes que elegir la primera tarea concreta para empezar a construir. ¿Que le pides a la IA?",
+        "choices": [
+          { "id": "data-model", "text": "\"Guíame por el modelo de datos primero: tablas, columnas y relaciones para tareas y usuarios.\"", "nextNode": "excellent-end", "score": 4 },
+          { "id": "ui-mockup", "text": "\"Genera la interfaz de la pagina principal para que tenga algo visible que mostrar.\"", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "dump-everything", "text": "\"Ahora genera todo el codigo del hito 1 de una sola vez.\"", "nextNode": "weak-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "La IA produce un plan detallado con hitos y senales de riesgo. Lo revisas, ajustas el cronograma y agregas notas sobre que partes le pediras a la IA. Ahora tienes una hoja de ruta clara antes de escribir cualquier codigo.",
+        "narrative": "Empiezas con el modelo de datos — la base sobre la que se asienta todo lo demas. La IA expone tablas, columnas y relaciones. Detectas dos campos faltantes antes de escribir cualquier codigo y los arreglas en segundos. Ahora tienes una hoja de ruta, un MVP acotado y una base solida sobre la cual construir.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Enfoque perfecto! Trajiste tu propia visión, usaste la IA para planificar (no solo para programar), abordaste preguntas arquitectonicas temprano y pediste análisis de riesgos. Así es como trabajan los desarrolladores senior.",
+        "finalScore": 20,
+        "feedback": "Asi es como los desarrolladores senior usan la IA: trae tu propia vision, planifica antes de programar, pide a la IA que critique su propio trabajo, acota despiadadamente al MVP y construye fundamentos antes que funcionalidades. Te quedaste al volante todo el camino.",
         "choices": []
       },
-      "skip-auth-end": {
-        "narrative": "Continuas sin autenticacion. Tres hitos despues, te das cuenta de que cada funcionalidad asume un usuario conectado. Ahora tienes que adaptar la autenticacion a todo el codigo — un trabajo mucho mas grande que agregarla al inicio.",
+      "mediocre-end": {
+        "narrative": "Empiezas con la interfaz de la pagina principal. Se ve genial, pero dos dias despues te das cuenta de que el mockup asumio una forma de datos que tus tablas no soportan. Rehaces la interfaz para que coincida con los datos reales, perdiendo tiempo que no podias gastar.",
+        "isEnd": true,
+        "finalScore": 11,
+        "feedback": "Empezar por la interfaz se siente productivo porque ves resultados rapido, pero fija suposiciones sobre los datos que pueden no sostenerse. Construye el modelo de datos primero — la interfaz es mucho mas facil de rehacer que el esquema.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Le pides a la IA que genere todo lo del hito 1 de una sola vez. Produce cientos de lineas de codigo que no encajan del todo. Pasas el resto de la semana depurando problemas de integracion que una planificacion paso a paso habria evitado.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "La autenticación es fundamental — afecta todo (propiedad de datos, seguridad de API, estado de interfaz). Cuando la IA señala una decisión como esta, abordala inmediatamente en lugar de posponerla.",
-        "choices": []
-      },
-      "patch-end": {
-        "narrative": "Despues de horas de parches, el codigo mas o menos funciona pero es un Frankenstein de tus cambios y el original de la IA. La arquitectura es inconsistente y dificil de extender.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Parchear código generado sin entender su arquitectura lleva a un resultado fragil. Casi siempre es más rápido planificar correctamente y luego generar, que generar y luego arreglar.",
-        "choices": []
-      },
-      "distracted-end": {
-        "narrative": "Pasas dos dias en un rastreador de habitos antes de darte cuenta de que querias construir un gestor de tareas. El codigo del rastreador de habitos es inutil para tu proyecto real.",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "No dejes que la IA decida lo que TU debes construir. Llega con tu propia visión. La IA es una herramienta, no un lider.",
+        "feedback": "La generacion masiva de codigo derrota el proposito de la planificacion. La IA funciona mejor cuando le das una tarea acotada a la vez. Genera el esquema, revisalo, genera un componente, revisalo — los ciclos pequenos te mantienen en control.",
         "choices": []
       }
     },

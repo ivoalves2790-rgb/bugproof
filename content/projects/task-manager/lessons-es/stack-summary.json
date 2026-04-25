@@ -6,7 +6,7 @@
   "xpReward": 15,
   "chapterSlug": "tech-stack",
   "projectSlug": "task-manager",
-  "intro": "Has elegido tu stack: Next.js, Supabase y TypeScript. Piensa en tu stack como una banda — cada instrumento cumple un rol diferente, y juntos hacen música. Ahora un ingeniero senior te pide que justifiques tus elecciones. Puedes explicar por qué cada pieza encaja?",
+  "intro": "Has elegido tu stack: Next.js, Supabase y TypeScript. Piensa en tu stack como una banda — cada instrumento cumple un rol diferente, y juntos hacen música. Ahora un ingeniero senior te pide que justifiques tus elecciones. ¿Puedes explicar por qué cada pieza encaja?",
   "teach": [
     {
       "type": "text",
@@ -38,7 +38,7 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Un ingeniero senior revisa tu plan de proyecto y dice: 'Por que elegiste Next.js en lugar de React puro con Vite? Parece complejidad extra.' Como respondes?",
+        "narrative": "Un ingeniero senior revisa tu plan de proyecto y dice: '¿Por que elegiste Next.js en lugar de React puro con Vite? Parece complejidad extra.' ¿Como respondes?",
         "choices": [
           { "id": "reasons", "text": "\"Next.js nos da enrutamiento basado en archivos, rutas de API y renderizado del lado del servidor listo para usar. Para un gestor de tareas full-stack, eso nos ahorra configurar un enrutador, servidor y pipeline de compilación separados.\"", "nextNode": "good-nextjs", "score": 4 },
           { "id": "popular", "text": "\"Todos usan Next.js hoy en día, así que debe ser la mejor opción.\"", "nextNode": "bad-popularity", "score": 0 },
@@ -46,59 +46,69 @@
         ]
       },
       "good-nextjs": {
-        "narrative": "El senior asiente. 'Buenos puntos. Ahora cuentame sobre tu eleccion de base de datos. Por que Supabase con PostgreSQL en lugar de algo como Firebase o una API REST simple que construyas tu mismo?'",
+        "narrative": "El senior asiente. 'Buenos puntos. Ahora defiende la base de datos. ¿Por que Supabase con PostgreSQL en lugar de Firebase?'",
         "choices": [
-          { "id": "structured", "text": "\"Nuestros datos de tareas son estructurados y relacionales — las tareas pertenecen a usuarios, tienen estados y fechas. SQL maneja eso limpiamente. Supabase nos da PostgreSQL administrado más autenticación integrada y RLS, así que nos saltamos construir todo un backend.\"", "nextNode": "great-end", "score": 4 },
-          { "id": "free", "text": "\"Supabase es gratis, así que ahorra dinero.\"", "nextNode": "okay-end", "score": 2 }
+          { "id": "structured", "text": "\"Las tareas son estructuradas y relacionales — pertenecen a usuarios y tienen estados. SQL maneja eso limpiamente. Supabase nos da PostgreSQL administrado, autenticación y RLS en un solo producto.\"", "nextNode": "typescript-q", "score": 4 },
+          { "id": "free", "text": "\"Supabase es gratis, así que ahorra dinero.\"", "nextNode": "typescript-q", "score": 2 }
         ]
       },
       "bad-popularity": {
-        "narrative": "El senior frunce el ceno. 'La popularidad no es un argumento tecnico. La mitad del internet corria con jQuery antes — eso no significa que debas usarlo para un proyecto nuevo. Puedes darme una razon real?'",
+        "narrative": "El senior frunce el ceno. 'La popularidad no es un argumento tecnico. La mitad del internet corria con jQuery alguna vez. Intenta otra vez — dame una razon real.'",
         "choices": [
-          { "id": "recover", "text": "\"Tienes razón. La razón real es que Next.js maneja enrutamiento, endpoints de API y SSR en un solo framework, lo que significa menos configuración para una app full-stack como la nuestra.\"", "nextNode": "recovered-path", "score": 3 },
-          { "id": "double-down", "text": "\"Bueno, tiene más estrellas en GitHub, así que claramente es el mejor.\"", "nextNode": "bad-end", "score": 0 }
+          { "id": "recover", "text": "\"Tienes razón. La razón real es que Next.js empaqueta enrutamiento, endpoints de API y SSR en un solo framework, lo que significa menos configuración para una app full-stack.\"", "nextNode": "typescript-q", "score": 3 },
+          { "id": "double-down", "text": "\"Bueno, tiene más estrellas en GitHub, así que claramente es el mejor.\"", "nextNode": "typescript-q", "score": 0 }
         ]
       },
       "weak-tutorial": {
-        "narrative": "El senior se ve preocupado. 'Seguir un tutorial esta bien para aprender, pero deberias entender por que se hicieron esas elecciones. Que funcionalidades especificas de Next.js usa realmente tu proyecto?'",
+        "narrative": "El senior se ve preocupado. 'Seguir un tutorial esta bien para aprender, pero deberias entender por que se hicieron esas elecciones. ¿Que funcionalidades especificas de Next.js usa realmente tu proyecto?'",
         "choices": [
-          { "id": "think", "text": "\"Ahora que lo pienso — el enrutamiento basado en archivos se mapea perfectamente a nuestras páginas, y las rutas de API nos permiten mantener la lógica backend en el mismo proyecto sin un servidor separado.\"", "nextNode": "recovered-path", "score": 3 },
-          { "id": "shrug", "text": "\"No estoy seguro, pero parece funcionar bien.\"", "nextNode": "bad-end", "score": 0 }
+          { "id": "think", "text": "\"El enrutamiento basado en archivos se mapea a nuestras páginas, y las rutas de API nos permiten mantener la lógica backend en el mismo proyecto sin un servidor separado.\"", "nextNode": "typescript-q", "score": 3 },
+          { "id": "shrug", "text": "\"No estoy seguro, pero parece funcionar bien.\"", "nextNode": "typescript-q", "score": 0 }
         ]
       },
-      "recovered-path": {
-        "narrative": "El senior se ve aliviado. 'Bien, si entiendes el razonamiento. Una pregunta mas: por que TypeScript en lugar de JavaScript puro?'",
+      "typescript-q": {
+        "narrative": "'Siguiente pregunta. ¿Por que TypeScript en lugar de JavaScript puro?'",
         "choices": [
-          { "id": "types-help", "text": "\"TypeScript atrapa bugs antes de que sucedan. Si una tarea necesita un campo 'status' y lo olvido, el compilador me avisa inmediatamente en lugar de fallar en tiempo de ejecución.\"", "nextNode": "okay-end", "score": 3 },
-          { "id": "resume", "text": "\"Se ve bien en el curriculum.\"", "nextNode": "weak-end", "score": 1 }
+          { "id": "types-help", "text": "\"TypeScript atrapa categorias enteras de bugs en tiempo de compilacion — typos en nombres de campos, formas de argumentos equivocadas, propiedades faltantes. Con un copiloto de IA escribiendo gran parte del codigo, el verificador de tipos es la red de seguridad que dice 'esto no va a correr' antes de que pierda tiempo en ello.\"", "nextNode": "deploy-q", "score": 4 },
+          { "id": "auto-complete", "text": "\"Mejor autocompletado en mi editor.\"", "nextNode": "deploy-q", "score": 2 },
+          { "id": "resume", "text": "\"Se ve bien en el curriculum.\"", "nextNode": "deploy-q", "score": 0 }
+        ]
+      },
+      "deploy-q": {
+        "narrative": "'¿Donde corre realmente esta cosa? ¿Por que Vercel y no, digamos, AWS o Render?'",
+        "choices": [
+          { "id": "first-party", "text": "\"Vercel hace Next.js — tienen soporte de primera mano para todo, desde edge functions hasta optimizacion de imagenes. Obtengo deploy automatico al hacer push, URLs de preview por pull request y SSL automatico sin configuracion.\"", "nextNode": "tradeoff-q", "score": 4 },
+          { "id": "easy-deploy", "text": "\"Vercel es el mas facil de desplegar.\"", "nextNode": "tradeoff-q", "score": 2 },
+          { "id": "no-reason", "text": "\"Era el default en la documentacion de Next.js.\"", "nextNode": "tradeoff-q", "score": 0 }
+        ]
+      },
+      "tradeoff-q": {
+        "narrative": "'Ultima pregunta. ¿Que renuncias al elegir este stack? Cada decision tiene un costo — nombra uno.'",
+        "choices": [
+          { "id": "honest-tradeoff", "text": "\"Acoplamiento al proveedor. El precio de Vercel escala con el trafico, y Supabase nos ata a PostgreSQL. Si tuvieramos que irnos, cambiariamos dos proveedores, no uno — pero la velocidad que ganamos en los meses 0-12 vale la pena.\"", "nextNode": "great-end", "score": 4 },
+          { "id": "no-tradeoff", "text": "\"Nada — este stack es genial en todos los aspectos.\"", "nextNode": "okay-end", "score": 1 },
+          { "id": "hand-wave", "text": "\"No se, ¿tu dime?\"", "nextNode": "weak-end", "score": 0 }
         ]
       },
       "great-end": {
-        "narrative": "El senior esta impresionado. 'Claramente pensaste esto bien. El stack tiene sentido para el proyecto, y puedes articular por que cada pieza esta ahi. Ese es exactamente el tipo de pensamiento que buscamos. Lanzalo.'",
+        "narrative": "El senior sonrie. 'Claramente pensaste esto bien. El stack tiene sentido, puedes defender cada pieza y entiendes los tradeoffs. Ese es exactamente el tipo de pensamiento que buscamos. Lanzalo.'",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excelente. Justificaste cada eleccion con una razón concreta ligada a las necesidades de tu proyecto. Así es como los profesionales evaluan la tecnología — no por el hype, sino por la adecuacion.",
+        "finalScore": 20,
+        "feedback": "Asi evaluan los profesionales la tecnologia — no por el hype, sino por la adecuacion, y no por la 'mejor' sino por la 'mejor para este proyecto, sabiendo a que renunciamos'. Poder nombrar tus tradeoffs es la marca de un ingeniero que realmente entiende su stack.",
         "choices": []
       },
       "okay-end": {
-        "narrative": "El senior asiente. 'Razonamiento decente. Entiendes algunos de los compromisos, pero intenta ir mas profundo. El costo es un factor, pero la adecuacion tecnica importa mas. En general, tu stack funciona para este proyecto.'",
+        "narrative": "El senior asiente despacio. 'Puedes defender la mayoria de tus elecciones, pero cada stack tiene tradeoffs. Si no puedes nombrarlos, no entiendes del todo lo que elegiste. Lee sobre los costos y estaras en buena forma.'",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Hiciste elecciones razonables pero podrías explicarlas mejor. Practica articular las razones técnicas — que problema resuelve cada herramienta, y que pasaria si eligieras diferente?",
+        "finalScore": 13,
+        "feedback": "Tomaste decisiones razonables pero fallaste la pregunta del tradeoff. Cada herramienta tiene costos — vendor lock-in, complejidad, curva de aprendizaje, limites de escalado. Conocer los costos te prepara para el dia en que realmente lleguen.",
         "choices": []
       },
       "weak-end": {
-        "narrative": "El senior suspira. 'Mira, cada herramienta en tu stack deberia estar ahi por una razon que puedas explicar. Regresa y escribe una oracion para cada eleccion: que problema resuelve para este proyecto especifico.'",
+        "narrative": "El senior suspira. 'Mira, cada herramienta en tu stack deberia estar ahi por una razon que puedas articular, y cada eleccion deberia venir con un tradeoff que puedas nombrar. Ve a investigar y regresa.'",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Tu stack en realidad esta bien, pero no pudiste justificarlo. Poder explicar tus elecciones es tan importante como hacerlas. Siempre conoce el 'por qué' detrás de tus herramientas.",
-        "choices": []
-      },
-      "bad-end": {
-        "narrative": "El senior niega con la cabeza. 'No puedo aprobar un proyecto donde el desarrollador no sabe por que eligio sus propias herramientas. Ve a investigar tus elecciones y regresa cuando puedas explicar los compromisos.'",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "La popularidad y el hype nunca son argumentos técnicos validos. Antes de elegir cualquier herramienta, pregunta: Que hace por mi proyecto? Cuales son las alternativas? Que compromisos estoy haciendo?",
+        "finalScore": 4,
+        "feedback": "El hype no es un argumento tecnico y 'no se' no es un tradeoff. Antes de elegir cualquier herramienta, escribe una oracion sobre lo que hace por tu proyecto, una sobre lo que consideraste en su lugar y una sobre lo que renuncias al elegirla.",
         "choices": []
       }
     },

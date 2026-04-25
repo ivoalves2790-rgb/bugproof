@@ -51,50 +51,68 @@
         ]
       },
       "mock-api": {
-        "narrative": "Good thinking! You replace the real API calls with mocks. Now the tests always return predictable data. But a teammate asks: 'If we mock the API, how do we know our code actually works with the real API?' Good question. What's your answer?",
+        "narrative": "Good thinking! You replace the real API calls with mocks. Tests pass again. A teammate asks: 'If we mock the API, how do we know our code actually works with the real API?'",
         "choices": [
-          { "id": "a", "text": "Unit tests use mocks for speed; a few integration tests can test the real API separately", "nextNode": "correct-strategy", "score": 10 },
-          { "id": "b", "text": "We don't -- mocks are always sufficient", "nextNode": "overconfident", "score": 4 }
+          { "id": "a", "text": "Unit tests use mocks; a few integration tests hit the real API on a separate schedule", "nextNode": "design-mocks", "score": 10 },
+          { "id": "b", "text": "We don't -- mocks are always sufficient", "nextNode": "design-mocks", "score": 4 }
         ]
       },
       "skip-tests": {
-        "narrative": "You skip the tests and deploy. An hour later, you discover that a code change accidentally broke the weather display -- the function now crashes on the API response format. If the tests hadn't been skipped, they would have caught this (even with mocks that return the expected format).",
+        "narrative": "You skip the failing tests and deploy. An hour later, a code change breaks the weather display -- the function crashes on the API response format. The skipped tests would have caught it (mocks return the expected format).",
         "choices": [
-          { "id": "a", "text": "Okay, let me set up mocks instead of skipping tests", "nextNode": "mock-api", "score": 5 }
+          { "id": "a", "text": "Roll back, set up mocks instead, and re-enable the tests", "nextNode": "design-mocks", "score": 5 }
         ]
       },
       "wait": {
-        "narrative": "Three hours later, the API is still down. Your team can't deploy any code. One developer finished an urgent bug fix but it's stuck in the pipeline. Tests that depend on external services will always eventually block you like this.",
+        "narrative": "Three hours later, the API is still down. The pipeline is frozen. An urgent bugfix is stuck waiting on a third-party outage you don't control. This will keep happening as long as tests reach across the network.",
         "choices": [
-          { "id": "a", "text": "Let me mock the API so we're not dependent on it", "nextNode": "mock-api", "score": 3 }
+          { "id": "a", "text": "Stop waiting -- mock the API so the suite is hermetic", "nextNode": "design-mocks", "score": 3 }
         ]
       },
-      "correct-strategy": {
-        "narrative": "Perfect! You set up the mock to return realistic data:\n\njest.mock('./weatherApi', () => ({\n  getWeather: jest.fn(() => Promise.resolve({ temp: 72, condition: 'sunny' }))\n}));\n\nYou also keep 2 integration tests that run against the real API in a separate test suite (not blocking deploys). How do you handle testing error scenarios?",
+      "design-mocks": {
+        "narrative": "You decide to mock. But how do you shape the mock so the tests actually catch real bugs? It's tempting to just hardcode { temp: 72 } and move on.",
         "choices": [
-          { "id": "a", "text": "Create different mocks for success, error, and empty responses", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Just test the success case -- errors are rare", "nextNode": "end-okay", "score": 5 }
+          { "id": "a", "text": "Define separate mocks for success, error (500), timeout, and empty payload", "nextNode": "verify-fidelity", "score": 10 },
+          { "id": "b", "text": "One success mock with a realistic shape -- errors are rare", "nextNode": "verify-fidelity", "score": 5 },
+          { "id": "c", "text": "Return whatever shape makes the current tests pass", "nextNode": "verify-fidelity", "score": 1 }
         ]
       },
-      "overconfident": {
-        "narrative": "Mocks are great for unit tests, but they can't verify that your code works with the REAL API's actual response format. If the API changes its response structure, your mocks won't catch it. A few integration tests against the real API (in a non-blocking test suite) provide that confidence.",
+      "verify-fidelity": {
+        "narrative": "Now the danger: your mock could drift from reality. The real API might add a field, rename one, or change a status code, and your green tests would lie. How do you keep mocks honest?",
         "choices": [
-          { "id": "a", "text": "Got it -- use mocks for unit tests but keep a few integration tests for the real API", "nextNode": "end-okay", "score": 5 }
+          { "id": "a", "text": "Run a small nightly contract test against the real API and alert on diffs", "nextNode": "use-in-tests", "score": 10 },
+          { "id": "b", "text": "Eyeball the API docs every few months and update mocks if needed", "nextNode": "use-in-tests", "score": 4 },
+          { "id": "c", "text": "Trust the mock -- the API never changes much", "nextNode": "use-in-tests", "score": 1 }
+        ]
+      },
+      "use-in-tests": {
+        "narrative": "You have realistic, contract-checked mocks. Now write the actual unit test. The component fetches weather and renders the temperature. What does a good test assert?",
+        "choices": [
+          { "id": "a", "text": "Mock the API, render the component, assert the temperature appears in the DOM", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Mock the API, call the function, assert the mock was called once", "nextNode": "end-okay", "score": 5 },
+          { "id": "c", "text": "Snapshot the rendered output and trust future diffs to flag problems", "nextNode": "end-poor", "score": 2 }
         ]
       },
       "end-good": {
-        "narrative": "You create three mock scenarios: success (temp: 72), API error (status 500), and empty response (no data). Your tests now cover all paths -- happy path, error handling, and edge cases. The test suite runs in 0.5 seconds instead of 30 seconds and never fails due to API outages.",
+        "narrative": "Your suite has hermetic mocks for success, errors, timeouts, and empty payloads, plus a nightly contract test that pings the real API and warns if the shape changes. The component test asserts user-visible behavior: 'when the API returns 72, the page shows 72'. The pipeline is unblocked, fast, and trustworthy.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Excellent! You used mocks to make tests fast and reliable, created multiple mock scenarios to test different paths, and kept integration tests separate for real API verification. This is exactly how professional teams handle external dependencies in tests."
+        "finalScore": 50,
+        "feedback": "Excellent. Mocks made tests fast, multiple scenarios made them honest, contract testing kept them aligned with reality, and behavior assertions made them meaningful. This is exactly how mature teams handle external dependencies."
       },
       "end-okay": {
-        "narrative": "The mock unblocks your pipeline and tests pass again. But only testing the success path means your error handling code is untested. What happens when the API returns a 500 error? Your users might see a crash instead of a friendly error message.",
+        "narrative": "Tests pass and the pipeline is unblocked. But your assertion checks that the mock was called -- not that the user sees the right thing. If a refactor breaks the rendering but still hits the API, the test stays green and the bug ships.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "Mocking the API was the right call, but only testing the happy path is risky. Always mock error scenarios too -- API errors, timeouts, and unexpected responses. These are the situations where your app is most likely to crash in production."
+        "finalScore": 32,
+        "feedback": "Mocking strategy was solid. The weak spot is asserting on implementation details (the mock was called) instead of user-visible outcomes. Always test what the user experiences, not what the code happens to do internally."
+      },
+      "end-poor": {
+        "narrative": "Snapshots make the test green, but every cosmetic change triggers a snapshot diff and nobody knows what's intentional. Worse, your snapshot was taken with a stale mock shape -- the test will keep passing even if the real API changes underneath you.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 16,
+        "feedback": "Snapshots without behavior assertions document the past, not the contract. Combined with thin mocks, you get tests that pass while production breaks. Assert on behavior, mock multiple scenarios, and check mock fidelity against reality."
       }
     },
     "glossaryTerms": ["mock", "dependency", "integration-test"]

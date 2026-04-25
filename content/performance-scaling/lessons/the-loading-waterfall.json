@@ -51,45 +51,70 @@
         ]
       },
       "found-blocking": {
-        "narrative": "Exactly! analytics.js is render-blocking and forces app.js to wait. The app.js script then blocks the API call for content. This creates a chain: analytics (500ms) -> app.js (800ms) -> API call (1.8s) = 3.1 seconds of chained waiting. How do you fix it?",
+        "narrative": "Exactly. analytics.js is render-blocking, app.js waits for it, then the API call waits for app.js: a 3.1-second sequential chain. How do you unblock app.js?",
         "choices": [
-          { "id": "a", "text": "Add 'async' to analytics.js so it loads without blocking other scripts", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Remove analytics.js entirely", "nextNode": "end-remove", "score": 5 },
-          { "id": "c", "text": "Combine all JavaScript into one file", "nextNode": "end-combine", "score": 4 }
+          { "id": "a", "text": "Add 'async' to analytics.js so it loads without blocking other scripts", "nextNode": "fix-resources", "score": 10 },
+          { "id": "b", "text": "Remove analytics.js entirely", "nextNode": "fix-resources", "score": 5 },
+          { "id": "c", "text": "Combine all JavaScript into one giant bundle", "nextNode": "fix-resources", "score": 4 }
         ]
       },
       "image-issue": {
-        "narrative": "The hero image is large, but it loads in parallel with font files so it's not blocking other resources. The real chain is in the JavaScript: analytics.js blocks app.js, which blocks the API call. That chain adds up to over 3 seconds of sequential waiting that could happen in parallel.",
+        "narrative": "The image is heavy but loads in parallel with fonts -- it's not blocking other resources. The real cost is the JS chain: analytics → app.js → API. Three seconds of sequential waiting that could be parallel.",
         "choices": [
-          { "id": "a", "text": "Focus on the JavaScript blocking chain instead", "nextNode": "found-blocking", "score": 7 }
+          { "id": "a", "text": "Focus on the JS blocking chain instead", "nextNode": "found-blocking", "score": 7 }
         ]
       },
       "too-many-files": {
-        "narrative": "7 files isn't unusual for a web page. The problem isn't the number of files -- it's that they're loading sequentially instead of in parallel. Modern browsers can download 6+ files at once, but only if nothing is blocking them.",
+        "narrative": "7 files isn't unusual. The problem isn't the count -- it's the dependencies. Browsers can download 6+ files in parallel when nothing blocks them.",
         "choices": [
           { "id": "a", "text": "Look at what's blocking parallel downloads", "nextNode": "found-blocking", "score": 5 }
         ]
       },
+      "fix-resources": {
+        "narrative": "Scripts are unblocked. But the hero image and fonts both wait for styles.css to finish before they can even start downloading. Users see a blank page until CSS arrives. How do you start the critical resources sooner?",
+        "choices": [
+          { "id": "a", "text": "Add <link rel=\"preload\"> for the hero image and fonts in the HTML head", "nextNode": "fix-api-chain", "score": 10 },
+          { "id": "b", "text": "Inline the font @font-face rules in the HTML head so they discover sooner", "nextNode": "fix-api-chain", "score": 8 },
+          { "id": "c", "text": "Move the <link rel=\"stylesheet\"> to the bottom of the body", "nextNode": "fix-api-chain", "score": 2 }
+        ]
+      },
+      "fix-api-chain": {
+        "narrative": "Critical assets now start downloading in the first round-trip. But the API call for page content still waits for app.js to download AND parse before it can fire -- and the API itself takes 1.8s. How do you cut that chain?",
+        "choices": [
+          { "id": "a", "text": "Server-render the initial content so the page is meaningful before any JS runs", "nextNode": "measure-and-monitor", "score": 10 },
+          { "id": "b", "text": "Add a <link rel=\"preload\"> hint for the API endpoint so the browser starts the fetch in parallel", "nextNode": "measure-and-monitor", "score": 8 },
+          { "id": "c", "text": "Fire the API call from a tiny inline <script> in the head, before app.js loads", "nextNode": "measure-and-monitor", "score": 7 },
+          { "id": "d", "text": "Leave it -- 1.8s isn't that bad", "nextNode": "measure-and-monitor", "score": 1 }
+        ]
+      },
+      "measure-and-monitor": {
+        "narrative": "Local DevTools says the page is fast now. But your user is on a 4G phone in another country. How do you confirm the fix actually helps real users -- and how do you catch a regression next time someone adds a script?",
+        "choices": [
+          { "id": "a", "text": "Run Lighthouse + WebPageTest from a real device profile, then enable Real User Monitoring (RUM) in production", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Run Lighthouse once on your laptop and call it done", "nextNode": "end-okay", "score": 5 },
+          { "id": "c", "text": "Skip measurement -- the waterfall looks fine in DevTools", "nextNode": "end-poor", "score": 1 }
+        ]
+      },
       "end-good": {
-        "narrative": "You add 'async' to the analytics script:\n\n<script async src=\"/analytics.js\"></script>\n\nNow analytics loads in the background without blocking app.js. The app.js starts loading immediately after the HTML, and the API call fires sooner. Total load time drops from 8 seconds to about 4.5 seconds.",
+        "narrative": "You unblocked the JS chain with async, preloaded the hero and fonts so they didn't wait for CSS, killed the API-after-JS chain with server rendering, and validated the result with Lighthouse, WebPageTest, and ongoing RUM. Total load drops from 8s to under 2s for real users, and your monitoring will alert you the next time someone adds a render-blocking script.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Great work! The 'async' attribute tells the browser to download and run the script without blocking anything else. The key insight is that the waterfall showed a chain of dependencies that didn't need to exist. Analytics doesn't need to finish before your app code starts loading."
+        "finalScore": 50,
+        "feedback": "Complete performance loop: identify the bottleneck, unblock JS, prioritize critical resources, eliminate the API chain, then measure on real conditions and monitor in production. Each step removed a different kind of waterfall dependency."
       },
-      "end-remove": {
-        "narrative": "Removing analytics works but your team needs that data. A better approach is to load analytics with the 'async' attribute so it doesn't block other scripts. This gives you the data without the performance cost.",
+      "end-okay": {
+        "narrative": "Most chains are fixed and the waterfall looks much better. But one Lighthouse run on a fast laptop misses what real mobile users actually experience, and there's no monitoring -- the next render-blocking script will silently re-introduce the 8-second load.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "Removing blocking resources is effective but drastic. The 'async' and 'defer' attributes let you keep scripts without blocking page load. Use 'async' for independent scripts like analytics, and 'defer' for scripts that need the DOM to be ready."
+        "finalScore": 32,
+        "feedback": "Solid technical fixes; weak verification loop. Performance regressions are constant. Without RUM and a budget in CI, the gains erode within months."
       },
-      "end-combine": {
-        "narrative": "Combining scripts into one file reduces HTTP requests, but it doesn't fix the blocking issue -- one giant script still blocks rendering. And it means users download all code upfront, even code they might not need yet.",
+      "end-poor": {
+        "narrative": "The technical fixes shipped, but you never confirmed the result on real conditions. You're running on a fast laptop with a fast network. Mobile users on 4G might still be staring at a blank page for 5 seconds.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Bundling can help with HTTP overhead, but the real fix is eliminating the blocking chain. Use 'async' or 'defer' attributes to let scripts load without blocking each other, and use code splitting to only load what's needed."
+        "finalScore": 17,
+        "feedback": "DevTools timing on your machine is the easiest case in the world. Always validate against a throttled network and a real device profile, then set up RUM so the next regression doesn't slip past you."
       }
     },
     "glossaryTerms": ["waterfall", "render-blocking", "async-script", "defer"]

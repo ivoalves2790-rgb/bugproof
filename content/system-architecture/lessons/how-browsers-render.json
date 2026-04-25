@@ -43,50 +43,75 @@
       "start": {
         "narrative": "Users report a 3-second white screen before your website appears. You open Chrome DevTools and check the Network tab. You see that a 2MB JavaScript file (bundle.js) is loading in the <head> of the page. This file takes 2.8 seconds to download. What's the problem?",
         "choices": [
-          { "id": "a", "text": "The JavaScript file in the <head> is blocking the browser from rendering anything", "nextNode": "correct-blocking", "score": 10 },
-          { "id": "b", "text": "The server is too slow to respond", "nextNode": "wrong-server", "score": 3 },
-          { "id": "c", "text": "The HTML file itself is too large", "nextNode": "wrong-html", "score": 2 }
-        ]
-      },
-      "correct-blocking": {
-        "narrative": "Exactly! A <script> tag in the <head> blocks the browser from rendering until the script downloads and executes. A 2MB file taking 2.8 seconds means users see nothing for almost 3 seconds. How should we fix this?",
-        "choices": [
-          { "id": "a", "text": "Move the script to the bottom of <body> or add the 'defer' attribute", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Make the JavaScript file smaller", "nextNode": "end-good", "score": 7 },
-          { "id": "c", "text": "Remove JavaScript entirely", "nextNode": "wrong-remove", "score": 2 }
+          { "id": "a", "text": "The JavaScript file in the <head> is blocking the browser from rendering anything", "nextNode": "fix-blocking", "score": 4 },
+          { "id": "b", "text": "The server is too slow to respond", "nextNode": "wrong-server", "score": 1 },
+          { "id": "c", "text": "The HTML file itself is too large", "nextNode": "wrong-html", "score": 0 }
         ]
       },
       "wrong-server": {
         "narrative": "The Network tab shows the server responds in 200ms -- that's fast. The delay is on the client side: the browser is waiting for a large JavaScript file to finish downloading before it renders anything. The file is the bottleneck, not the server.",
         "choices": [
-          { "id": "a", "text": "So the JavaScript file is blocking the browser from rendering", "nextNode": "correct-blocking", "score": 5 }
+          { "id": "ws-redirect", "text": "So the JavaScript file in the <head> is blocking the render", "nextNode": "fix-blocking", "score": 2 }
         ]
       },
       "wrong-html": {
-        "narrative": "The HTML file is only 15KB and loads in 100ms. The problem is the 2MB JavaScript file referenced in the <head> -- the browser stops rendering while it downloads and parses that script.",
+        "narrative": "The HTML file is only 15KB and loads in 100ms. The problem is the 2MB JavaScript file referenced in the <head> -- the browser stops parsing while it downloads and runs that script.",
         "choices": [
-          { "id": "a", "text": "The JavaScript in the head is the render-blocking problem", "nextNode": "correct-blocking", "score": 5 }
+          { "id": "wh-redirect", "text": "Got it -- the script in the <head> is the render-blocking culprit", "nextNode": "fix-blocking", "score": 2 }
         ]
       },
-      "wrong-remove": {
-        "narrative": "The site needs JavaScript for interactivity. But it doesn't need to block the page from showing content while the JS loads. There's a middle ground -- let the HTML and CSS render first while JavaScript loads in the background.",
+      "fix-blocking": {
+        "narrative": "Step 1 of the pipeline (parse HTML to build the DOM) is blocked by the script. How do you unblock it so the browser can build the DOM in parallel with the script download?",
         "choices": [
-          { "id": "a", "text": "Load the script with defer so it doesn't block rendering", "nextNode": "end-great", "score": 7 }
+          { "id": "fb-defer", "text": "Add the 'defer' attribute: <script defer src='bundle.js'> -- script downloads in parallel and runs after DOM is built", "nextNode": "css-step", "score": 4 },
+          { "id": "fb-async", "text": "Add 'async' instead -- runs the moment it downloads, even if that interrupts HTML parsing", "nextNode": "css-step", "score": 2 },
+          { "id": "fb-remove", "text": "Remove JavaScript from the page entirely", "nextNode": "css-step", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "You add 'defer' to the script tag: <script defer src='bundle.js'>. Now the browser renders the HTML and CSS immediately while the JavaScript downloads in the background. The white screen is gone -- users see content right away, and JavaScript kicks in once it's ready.",
-        "choices": [],
+      "css-step": {
+        "narrative": "DOM construction is now smooth. But the next pipeline step -- building the CSSOM and applying styles -- is still slow. A single 800KB CSS file in the <head> blocks paint until it finishes downloading. What do you do?",
+        "choices": [
+          { "id": "css-critical", "text": "Inline the critical above-the-fold CSS in <style> and load the rest with media queries or rel='preload'", "nextNode": "layout-step", "score": 4 },
+          { "id": "css-split", "text": "Split the stylesheet by route and only ship the CSS that page needs", "nextNode": "layout-step", "score": 3 },
+          { "id": "css-leave", "text": "Leave the CSS as is — users will get used to the wait", "nextNode": "layout-step", "score": 0 }
+        ]
+      },
+      "layout-step": {
+        "narrative": "The page paints quickly now. But scrolling feels janky on a long product list — every scroll event triggers layout recalculation because your code reads element.offsetHeight in a loop and then writes new styles. What's the fix?",
+        "choices": [
+          { "id": "ly-batch", "text": "Batch all reads first, then all writes — avoid the read/write/read/write cycle that forces synchronous layouts", "nextNode": "paint-step", "score": 4 },
+          { "id": "ly-raf", "text": "Wrap the writes in requestAnimationFrame so they run before the next paint", "nextNode": "paint-step", "score": 3 },
+          { "id": "ly-throttle", "text": "Throttle the scroll handler to 100ms — fewer recalcs, but laggy feedback", "nextNode": "paint-step", "score": 1 }
+        ]
+      },
+      "paint-step": {
+        "narrative": "Layout is stable. The final pipeline step is paint and composite. You have a sticky header that re-paints on every scroll, dragging the framerate down to 30fps. How do you keep paint cost low?",
+        "choices": [
+          { "id": "pt-layer", "text": "Promote the header to its own compositor layer with transform: translateZ(0) or will-change: transform — the GPU handles the move with no repaint", "nextNode": "excellent-end", "score": 4 },
+          { "id": "pt-shadow", "text": "Animate top/left in JS — those properties happen to trigger layout and paint every frame", "nextNode": "mediocre-end", "score": 1 },
+          { "id": "pt-noop", "text": "Accept 30fps — most users won't notice", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "You walked the full pipeline: unblocked DOM construction with defer, inlined critical CSS so paint started fast, batched reads/writes so layout stayed cheap, and promoted the sticky header to a GPU layer so scroll hit 60fps. The white screen is gone and the page feels instant.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "You identified that a render-blocking script in the <head> was causing the white screen and fixed it with the 'defer' attribute. This is one of the most common performance wins in web development. The 'defer' attribute tells the browser to download the script in the background and run it after the HTML is parsed."
+        "feedback": "This is rendering performance done right. Each fix targeted a specific pipeline stage: parse, style, layout, paint. When users say 'the site feels fast,' this is what they're feeling.",
+        "choices": []
       },
-      "end-good": {
-        "narrative": "Making the file smaller helps, but even a smaller file in the <head> will block rendering. The best fix is combining both: make it smaller AND add 'defer' so it doesn't block rendering at all.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "The page paints fast on first load, but scrolling still re-lays out every frame because the header animation hits paint-heavy properties. Performance scores are mixed.",
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Reducing file size is always good, but the core issue is that scripts in the <head> block rendering. Adding 'defer' or moving the script to the bottom of <body> would eliminate the white screen regardless of file size."
+        "finalScore": 12,
+        "feedback": "You handled the load pipeline well, but paint is its own discipline. Animate transform and opacity (compositor-only) instead of top/left/width/height (which force layout and paint).",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Some pipeline stages are tuned, but you accepted a janky scroll. Users on lower-end phones drop the page within seconds.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "30fps feels broken to the human eye, especially on mobile. The fixes for paint cost are cheap — at minimum promote the animated element to its own layer so scroll stays smooth.",
+        "choices": []
       }
     },
     "glossaryTerms": ["rendering", "dom", "render-blocking", "defer"]

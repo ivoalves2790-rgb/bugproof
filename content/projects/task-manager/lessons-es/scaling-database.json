@@ -46,38 +46,69 @@
         ]
       },
       "throw-money": {
-        "narrative": "El servidor mas grande ayuda temporalmente — los tiempos de carga bajan a 3 segundos. Pero el problema fundamental (sin indice, sin paginacion) permanece. A medida que los datos crecen, necesitaras un servidor aun mas grande y los costos siguen subiendo.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Tirar hardware a un problema de software es costoso e insostenible. Un indice toma una línea de SQL y resuelve el problema gratis. Siempre optimiza antes de escalar.",
-        "choices": []
+        "narrative": "El servidor mas grande ayuda temporalmente — los tiempos de carga bajan a 3 segundos. Pero el problema fundamental (sin indice, sin paginacion) permanece. A medida que los datos crecen, necesitaras un servidor aun mas grande y los costos siguen subiendo. Finalmente aceptas mirar la consulta real.",
+        "choices": [
+          { "id": "tm-explain", "text": "Correr EXPLAIN ANALYZE sobre la consulta lenta para ver exactamente que operacion es el cuello de botella", "nextNode": "fix-n-plus-one", "score": 4 },
+          { "id": "tm-guess", "text": "Agregar indices en cada columna de la tabla por las dudas", "nextNode": "fix-n-plus-one", "score": 1 }
+        ]
       },
       "add-index": {
-        "narrative": "Agregas un indice en user_id e implementas paginacion (20 tareas por pagina). El tiempo de carga baja de 8 segundos a 200ms. Pero notas que la pagina de detalle de tarea tambien es lenta — carga la tarea mas todos sus comentarios en consultas separadas. Que haces?",
+        "narrative": "Agregas un indice en user_id e implementas paginacion (20 tareas por pagina). El tiempo de carga baja de 8 segundos a 200ms. Pero notas que la pagina de detalle de tarea tambien es lenta — carga la tarea mas todos sus comentarios. Revisas los logs y ves que disparan 21 consultas separadas para una sola carga de pagina.",
         "choices": [
-          { "id": "b1", "text": "Usar una consulta JOIN para obtener la tarea y sus comentarios en una sola llamada a la base de datos", "nextNode": "join-query", "score": 3 },
-          { "id": "b2", "text": "Almacenar en cache la página de detalles de la tarea ya que las tareas no cambian a menudo", "nextNode": "cache-approach", "score": 2 }
+          { "id": "ai-confirm", "text": "Confirmar con EXPLAIN ANALYZE que es un N+1 — una consulta para la tarea, despues una por cada comentario", "nextNode": "fix-n-plus-one", "score": 4 },
+          { "id": "ai-skip", "text": "Saltarse el diagnostico y asumir que es el mismo problema de indices de antes", "nextNode": "fix-n-plus-one", "score": 1 }
         ]
       },
       "switch-db": {
-        "narrative": "Migrar a una base de datos diferente es un esfuerzo masivo — reescribir consultas, cambiar el esquema, migrar datos. Tres semanas despues, descubres que MongoDB tiene los mismos problemas de rendimiento sin indices. El tipo de base de datos nunca fue el problema.",
+        "narrative": "Migrar a una base de datos diferente es un esfuerzo masivo — reescribir consultas, cambiar el esquema, migrar datos. Tres semanas despues, descubres que MongoDB tiene los mismos problemas de rendimiento sin indices. El tipo de base de datos nunca fue el problema. Haces rollback y finalmente lees EXPLAIN ANALYZE.",
+        "choices": [
+          { "id": "sd-explain", "text": "Correr EXPLAIN ANALYZE sobre la consulta lenta y encontrar el indice faltante mas un N+1 al traer los comentarios", "nextNode": "fix-n-plus-one", "score": 3 },
+          { "id": "sd-blame", "text": "Echarle la culpa al equipo por elegir la base de datos equivocada en primer lugar", "nextNode": "fix-n-plus-one", "score": 0 }
+        ]
+      },
+      "fix-n-plus-one": {
+        "narrative": "La pagina de detalle dispara una consulta para la tarea y N consultas mas — una por cada comentario. Con 50 comentarios son 51 viajes a la base de datos por una sola pagina. ¿Como lo colapsas?",
+        "choices": [
+          { "id": "np-join", "text": "Usar un solo JOIN: SELECT tasks.*, comments.* FROM tasks LEFT JOIN comments ON comments.task_id = tasks.id WHERE tasks.id = $1", "nextNode": "add-cache", "score": 4 },
+          { "id": "np-batch", "text": "Usar un batch estilo DataLoader: juntar todos los IDs de tarea, despues correr SELECT * FROM comments WHERE task_id IN (...) una sola vez", "nextNode": "add-cache", "score": 3 },
+          { "id": "np-loop", "text": "Mantener el loop pero paralelizar con Promise.all para que las consultas disparen al mismo tiempo", "nextNode": "add-cache", "score": 1 }
+        ]
+      },
+      "add-cache": {
+        "narrative": "Las consultas son ahora eficientes. El tiempo de carga es 150ms. Pero el endpoint de la lista de tareas se golpea miles de veces por minuto y la CPU de la base de datos esta subiendo. ¿Como le quitas presion a la base de datos?",
+        "choices": [
+          { "id": "cache-redis", "text": "Agregar un cache Redis para la lista de tareas con clave por user_id, TTL de 60 segundos e invalidacion en escrituras", "nextNode": "scale-out", "score": 4 },
+          { "id": "cache-app", "text": "Cachear resultados en un Map en memoria dentro de la app de Node", "nextNode": "scale-out", "score": 2 },
+          { "id": "cache-none", "text": "Saltarse el cache — cada request deberia golpear la base de datos por exactitud", "nextNode": "scale-out", "score": 1 }
+        ]
+      },
+      "scale-out": {
+        "narrative": "El cache bajo la carga de la base de datos en un 70%. El trafico sigue creciendo — tu unica base primaria esta llegando al limite de conexiones y el throughput de escritura esta al maximo. ¿Cual es el siguiente movimiento?",
+        "choices": [
+          { "id": "out-replicas", "text": "Agregar read replicas: mandar todos los SELECTs a las replicas y mantener las escrituras en la primaria, luego sumar un pooler de conexiones como PgBouncer", "nextNode": "excellent-end", "score": 4 },
+          { "id": "out-bigger", "text": "Escalar verticalmente la primaria a la instancia mas grande que ofrece la nube", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "out-shard", "text": "Shardear la tabla de tareas en 16 bases de datos por user_id hoy mismo", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu gestor de tareas ahora sirve la carga completa: consultas indexadas, sin N+1, una capa de cache absorbiendo presion de lectura, y read replicas mas pooling de conexiones para margen horizontal. Escalaste en el orden correcto — arreglar la consulta, despues cache, despues hardware.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Cambiar de base de datos rara vez resuelve problemas de rendimiento. Los mismos principios de indexacion y optimización de consultas se aplican en todas partes. Optimiza tu configuración actual antes de considerar una migración.",
+        "finalScore": 20,
+        "feedback": "Este es el orden de escalado de libro: diagnosticar con EXPLAIN ANALYZE, arreglar indices y N+1, despues cachear, despues escalar horizontalmente. Saltarse el diagnostico o ir directo a sharding es como los equipos queman dinero y mandan sistemas fragiles.",
         "choices": []
       },
-      "join-query": {
-        "narrative": "Una sola consulta JOIN reemplaza mas de 20 consultas separadas. La pagina de detalles de la tarea ahora carga en 150ms. Tu base de datos funciona eficientemente con indices adecuados, paginacion y consultas optimizadas.",
+      "mediocre-end": {
+        "narrative": "La instancia mas grande ayuda por un trimestre, despues llegas al mismo techo — pero ahora tu factura mensual es el doble y aun no separaste lecturas de escrituras.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Esta es optimización de base de datos de libro. Indices, paginacion y consultas JOIN resuelven la gran mayoria de los problemas de rendimiento de base de datos. No se necesita nueva infraestructura.",
+        "finalScore": 13,
+        "feedback": "Escalar verticalmente compra tiempo pero no margen. Read replicas mas pooling cuestan menos y te dejan seguir agregando capacidad. Llegales antes de quedarte sin instancia mas grande.",
         "choices": []
       },
-      "cache-approach": {
-        "narrative": "El cache ayuda, pero todavia tienes el problema de consultas N+1. Cada fallo de cache es lento. Eventualmente agregas la consulta JOIN tambien, haciendo el cache menos necesario pero aun util.",
+      "weak-end": {
+        "narrative": "Shardear sin necesidad reescribe cada consulta de la app, rompe transacciones entre usuarios y triplica la complejidad de on-call. Pasas tres meses sobre un problema que aun no tenias.",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "El cache es una estrategia valida pero esta tratando el síntoma, no la causa. Arregla la consulta subyacente primero, luego agrega cache como mejora.",
+        "finalScore": 6,
+        "feedback": "Sharding es un martillo de ultimo recurso. Siempre agota indices, optimizacion de consultas, cache y read replicas primero. La mayoria de las apps nunca necesitan shardear.",
         "choices": []
       }
     },

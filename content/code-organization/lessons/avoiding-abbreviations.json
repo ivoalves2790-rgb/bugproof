@@ -45,70 +45,77 @@
       "start": {
         "narrative": "Bug report: 'Discount codes aren't applied correctly. Some customers are being overcharged.'\n\nYou open the checkout function and find:\n\nfunction procOrd(usrId, itmLst, dscCd) {\n  const usr = getUsr(usrId);\n  const ttl = calcTtl(itmLst);\n  const dsc = getDsc(dscCd);\n  const amt = ttl - (ttl * dsc.pct) + shpCst(usr.addr);\n  return chrgUsr(usr.pmtMthd, amt);\n}\n\nWhat's your first reaction?",
         "choices": [
-          { "id": "a", "text": "Decode each abbreviation: usrId=userId, itmLst=itemList, dscCd=discountCode, etc.", "nextNode": "decode", "score": 10 },
-          { "id": "b", "text": "Run the function with test data to see what happens", "nextNode": "test-first", "score": 5 },
-          { "id": "c", "text": "Rewrite the function with clear names before debugging", "nextNode": "rewrite-first", "score": 7 }
+          { "id": "a", "text": "Decode each abbreviation: usrId=userId, itmLst=itemList, dscCd=discountCode, etc.", "nextNode": "decode", "score": 4 },
+          { "id": "b", "text": "Run the function with test data to see what happens", "nextNode": "test-first", "score": 2 },
+          { "id": "c", "text": "Rewrite the function with clear names before debugging", "nextNode": "rewrite-first", "score": 3 }
         ]
       },
       "decode": {
         "narrative": "You decode the abbreviations:\n\n- procOrd = processOrder\n- usrId = userId, itmLst = itemList, dscCd = discountCode\n- ttl = total, dsc = discount, amt = amount\n- shpCst = shippingCost, pmtMthd = paymentMethod\n\nNow the formula reads: amount = total - (total * discount.percent) + shippingCost(user.address)\n\nWith clear names, can you spot the bug?",
         "choices": [
-          { "id": "a", "text": "The discount is applied to the total but shipping should be added BEFORE the discount calculation", "nextNode": "wrong-order", "score": 3 },
-          { "id": "b", "text": "The discount percentage might be stored as 20 instead of 0.20, making the math wrong", "nextNode": "found-bug", "score": 10 },
-          { "id": "c", "text": "The shipping cost function might be returning the wrong value", "nextNode": "check-shipping", "score": 4 }
+          { "id": "a", "text": "The discount percentage might be stored as 20 instead of 0.20, making the math wrong", "nextNode": "isolate", "score": 4 },
+          { "id": "b", "text": "The discount is applied to the total but shipping should be added BEFORE the discount calculation", "nextNode": "isolate", "score": 1 },
+          { "id": "c", "text": "The shipping cost function might be returning the wrong value", "nextNode": "isolate", "score": 1 }
         ]
       },
       "test-first": {
-        "narrative": "You run the function with a $100 order and a 20% discount code. Expected result: $80 + shipping. Actual result: -$1,900 + shipping. The discount is way too large! But with these abbreviations, it's hard to trace where the math goes wrong.",
+        "narrative": "You run the function with a $100 order and a 20% discount code. Expected result: $80 + shipping. Actual result: -$1,900 + shipping. The discount is way too large! With these abbreviations you can see SOMETHING is wrong, but tracing the math is painful. Where do you go now?",
         "choices": [
-          { "id": "a", "text": "Decode the abbreviations first so I can read the formula", "nextNode": "decode", "score": 8 }
+          { "id": "a", "text": "Decode the abbreviations first so I can read the formula", "nextNode": "decode", "score": 4 },
+          { "id": "b", "text": "Stick with the abbreviations and try more test inputs to narrow it down", "nextNode": "decode", "score": 1 }
         ]
       },
       "rewrite-first": {
-        "narrative": "Smart instinct! You rename everything clearly. Now the formula is readable:\n\nconst amount = total - (total * discount.percent) + shippingCost;\n\nWith clear names, the logic is exposed. Can you see the discount bug?",
+        "narrative": "Smart instinct! You rename everything clearly. Now the formula is readable:\n\nconst amount = total - (total * discount.percent) + shippingCost;\n\nWith clear names, the logic is exposed. You're ready to find the bug.",
         "choices": [
-          { "id": "a", "text": "discount.percent might be stored as 20 instead of 0.20", "nextNode": "found-bug", "score": 10 },
-          { "id": "b", "text": "The parentheses are in the wrong place", "nextNode": "wrong-parens", "score": 3 }
+          { "id": "a", "text": "Now skim each variable's value to see which one is unexpected", "nextNode": "decode", "score": 4 },
+          { "id": "b", "text": "Now move on -- the rewrite alone might have fixed it", "nextNode": "decode", "score": 1 }
         ]
       },
-      "found-bug": {
-        "narrative": "You check the discount object and confirm: dsc.pct is 20 (not 0.20). So the formula calculates: 100 - (100 * 20) = 100 - 2000 = -1900. A 20% discount is subtracting 2000% instead! How do you fix it?",
+      "isolate": {
+        "narrative": "You inspect runtime values. discount.percent is 20 (not 0.20). shippingCost returns a normal $9.99. The formula calculates: 100 - (100 * 20) + 9.99 = -1890.01. A 20% discount is subtracting 2000% instead. How do you isolate the exact line at fault?",
         "choices": [
-          { "id": "a", "text": "Divide the percentage by 100: total * (discount.percent / 100)", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Change the discount database to store 0.20 instead of 20", "nextNode": "end-db-change", "score": 6 }
+          { "id": "a", "text": "Add a quick log: console.log({ total, percent: discount.percent, calculatedDiscount: total * discount.percent })", "nextNode": "fix-choice", "score": 4 },
+          { "id": "b", "text": "Use the debugger and step through the function once with a known order", "nextNode": "fix-choice", "score": 3 },
+          { "id": "c", "text": "Skip isolation -- I already see the percent is 20, just patch the math", "nextNode": "fix-choice", "score": 1 }
         ]
       },
-      "wrong-order": {
-        "narrative": "Whether shipping is added before or after the discount depends on business rules, and in this case shipping SHOULD be calculated separately from the discount. The real bug is in how the discount percentage is used in the math.",
+      "fix-choice": {
+        "narrative": "Confirmed: the bug is in the discount math, not the shipping or the user lookup. Now choose the fix.",
         "choices": [
-          { "id": "a", "text": "Look more carefully at the discount calculation", "nextNode": "found-bug", "score": 5 }
+          { "id": "a", "text": "Divide by 100 in the calculation: total * (discount.percent / 100)", "nextNode": "rename-choice", "score": 4 },
+          { "id": "b", "text": "Change the database to store 0.20 instead of 20 and update every existing discount row", "nextNode": "rename-choice", "score": 2 },
+          { "id": "c", "text": "Add a guard that caps the discount: Math.min(total * discount.percent, total)", "nextNode": "rename-choice", "score": 1 }
         ]
       },
-      "check-shipping": {
-        "narrative": "The shipping function works correctly. The bug is in the discount calculation. Look at the formula: total - (total * discount.percent). If discount.percent is 20 (for 20%), what's 100 * 20?",
+      "rename-choice": {
+        "narrative": "Math is fixed. Before you commit, what do you do about the abbreviations that hid the bug for so long?",
         "choices": [
-          { "id": "a", "text": "2000! The percent needs to be divided by 100 first", "nextNode": "found-bug", "score": 8 }
-        ]
-      },
-      "wrong-parens": {
-        "narrative": "The parentheses are actually fine for the intended formula. The issue is simpler: the discount percentage value. If a 20% discount is stored as 20, then total * 20 gives 2000% of the total, not 20%.",
-        "choices": [
-          { "id": "a", "text": "The percent needs to be divided by 100", "nextNode": "found-bug", "score": 7 }
+          { "id": "a", "text": "Rename every abbreviated variable in this function (usr, ttl, dsc, amt, shpCst, pmtMthd) so the next reader sees the logic immediately", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Rename only the discount-related variables and leave the rest -- minimal diff", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Leave the names as they are -- the bug is fixed, the rename is out of scope", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Fixed! The formula now reads:\nconst amount = total - (total * discount.percent / 100) + shippingCost;\n\nA $100 order with 20% off: 100 - (100 * 20/100) + shipping = $80 + shipping. You also rename all the abbreviated variables so the next developer won't have to decode them.",
+        "narrative": "The function now reads:\n\nfunction processOrder(userId, itemList, discountCode) {\n  const user = getUser(userId);\n  const total = calculateTotal(itemList);\n  const discount = getDiscount(discountCode);\n  const amount = total - (total * discount.percent / 100) + shippingCost(user.address);\n  return chargeUser(user.paymentMethod, amount);\n}\n\nA $100 order with 20% off: 100 - (100 * 20/100) + shipping = $80 + shipping. The next developer can review this code in seconds.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "The bug was simple -- a missing /100 -- but the abbreviations made it much harder to find. If the code had said 'total * discount.percent' in full words from the start, the bug would have been obvious during code review. Abbreviations don't just make code hard to read; they hide bugs by making the logic opaque."
+        "feedback": "The bug was simple -- a missing /100 -- but the abbreviations made it much harder to find. By renaming as you fixed, you stopped the next bug before it was written. Abbreviations don't just make code hard to read; they hide bugs by making the logic opaque."
       },
-      "end-db-change": {
-        "narrative": "Changing the database works but is risky -- other code might expect the percentage as a whole number (20 not 0.20). It's safer to handle the conversion in code. You also need to update every existing discount in the database.",
+      "end-mediocre": {
+        "narrative": "The discount math is fixed and the discount-related variables are clear, but procOrd, usr, shpCst, and pmtMthd still demand decoding from anyone who opens this file. The next bug in this function will start with the same 5-minute decoding session you just suffered through.",
         "choices": [],
         "isEnd": true,
         "finalScore": 12,
-        "feedback": "The fix works but database changes are riskier than code changes because other systems might depend on the current format. The safer fix is dividing by 100 in the calculation. The bigger lesson: if the code had used clear names instead of abbreviations, this bug would have been caught during the original code review."
+        "feedback": "Half-renaming saves time today and costs time on every future read. When you've already loaded the context to fix one bug, that's the cheapest possible moment to clean up the names around it -- the diff is bigger but the cognitive cost is near zero."
+      },
+      "end-weak": {
+        "narrative": "Six weeks later, a new teammate looks at this function for an unrelated change, misreads dsc.pct again, and ships a different rounding bug to production. The fix worked, but the trap stayed armed.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Bug-fix-only changes are the cheapest short-term move and the most expensive long-term one. The abbreviations were already proven to cause real bugs in real money -- not renaming them is choosing to let the same trap fire again."
       }
     },
     "glossaryTerms": ["abbreviation", "readability", "code-review", "naming"]

@@ -50,63 +50,83 @@
       "start": {
         "narrative": "The login page is showing a blank white screen after today's deploy. Your teammate is panicking. What's your first move?",
         "choices": [
-          { "id": "a", "text": "Run 'git log' to see recent commits", "nextNode": "check-log", "score": 10 },
-          { "id": "b", "text": "Immediately revert to yesterday's version", "nextNode": "revert-blind", "score": 3 },
+          { "id": "a", "text": "Run 'git log --oneline' to see recent commits", "nextNode": "check-log", "score": 4 },
+          { "id": "b", "text": "Immediately revert to yesterday's version", "nextNode": "revert-blind", "score": 1 },
           { "id": "c", "text": "Start rewriting the login page from scratch", "nextNode": "rewrite", "score": 0 }
         ]
       },
       "check-log": {
         "narrative": "Smart move! You run 'git log --oneline' and see:\n\na1b2c3d Fix navbar styling\nb4e5f6a Update login form validation\nc7d8e9f Add new marketing banner\nd0e1f2a Initial deploy setup\n\nOne of these commits likely caused the issue. Which one do you investigate first?",
         "choices": [
-          { "id": "a", "text": "Check 'b4e5f6a Update login form validation' -- it directly touches login", "nextNode": "found-commit", "score": 10 },
-          { "id": "b", "text": "Check 'a1b2c3d Fix navbar styling' -- it's the most recent", "nextNode": "wrong-commit", "score": 5 },
-          { "id": "c", "text": "Check all commits one by one starting from the oldest", "nextNode": "slow-path", "score": 3 }
+          { "id": "a", "text": "Check 'b4e5f6a Update login form validation' -- it directly touches login", "nextNode": "inspect-commit", "score": 4 },
+          { "id": "b", "text": "Check 'a1b2c3d Fix navbar styling' -- it's the most recent", "nextNode": "inspect-commit", "score": 2 },
+          { "id": "c", "text": "Check all commits one by one starting from the oldest", "nextNode": "inspect-commit", "score": 1 }
         ]
       },
       "revert-blind": {
         "narrative": "You revert without checking what changed. The login page works again, but now the new marketing banner that your boss asked for is also gone. They're not happy. It would have been better to check the log first to understand what specifically broke things.",
         "choices": [
-          { "id": "a", "text": "Go back and check the log to understand what happened", "nextNode": "check-log", "score": 5 }
+          { "id": "a", "text": "Go back and check the log to understand what happened", "nextNode": "check-log", "score": 2 }
         ]
       },
       "rewrite": {
         "narrative": "Rewriting the entire login page would take hours and you'd lose all the recent improvements. Git's history has the answer -- you just need to look at what changed recently.",
         "choices": [
-          { "id": "a", "text": "Okay, let me check git log instead", "nextNode": "check-log", "score": 3 }
+          { "id": "a", "text": "Okay, let me check git log instead", "nextNode": "check-log", "score": 1 }
         ]
       },
-      "found-commit": {
-        "narrative": "You run 'git show b4e5f6a' and see the commit changed the form's action URL to an invalid path. That's the bug! You now know exactly what line to fix. How do you proceed?",
+      "inspect-commit": {
+        "narrative": "You suspect 'b4e5f6a Update login form validation'. The commit message tells you what someone *intended* to do, but you need to see the actual code change. How do you read exactly what was modified?",
         "choices": [
-          { "id": "a", "text": "Fix just the broken URL and make a new commit", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Revert the entire commit", "nextNode": "end-okay", "score": 7 }
+          { "id": "a", "text": "Run 'git show b4e5f6a' to see the full diff for that commit", "nextNode": "found-bug", "score": 4 },
+          { "id": "b", "text": "Run 'git log -p b4e5f6a' so I can scroll through diffs of multiple commits", "nextNode": "found-bug", "score": 3 },
+          { "id": "c", "text": "Open the file in my editor and try to guess which lines changed", "nextNode": "found-bug", "score": 0 }
         ]
       },
-      "wrong-commit": {
-        "narrative": "The navbar styling commit only changed CSS colors -- nothing that would break login. You should look at commits that actually touch login-related code.",
+      "found-bug": {
+        "narrative": "The diff is clear: the commit changed the form's action URL from '/api/login' to '/api/loign' (typo) and also added two valid validation rules. The bug is one line. How do you fix this without losing the validation work?",
         "choices": [
-          { "id": "a", "text": "Check 'b4e5f6a Update login form validation' instead", "nextNode": "found-commit", "score": 5 }
+          { "id": "a", "text": "Edit the typo, commit just that line, push -- keep the validation rules intact", "nextNode": "verify-fix", "score": 4 },
+          { "id": "b", "text": "Run 'git revert b4e5f6a' to undo the entire commit, then re-add validation later", "nextNode": "verify-fix", "score": 1 },
+          { "id": "c", "text": "Hard-reset main to the commit before b4e5f6a", "nextNode": "verify-fix", "score": 0 }
         ]
       },
-      "slow-path": {
-        "narrative": "Checking from the oldest commit up will work eventually, but it's slow. A better strategy is to look at commit messages and check the ones most likely related to the broken feature first.",
+      "verify-fix": {
+        "narrative": "The fix is in. Before you tell your teammate the fire is out, how do you confirm the deploy actually picked up your patch and the login page works for users?",
         "choices": [
-          { "id": "a", "text": "Focus on the login-related commit instead", "nextNode": "found-commit", "score": 5 }
+          { "id": "a", "text": "Run 'git log --oneline -3' to confirm my fix is the latest commit, then load the production login page in an incognito window", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Trust the CI green check and tell the teammate it's done", "nextNode": "prevent-future", "score": 2 },
+          { "id": "c", "text": "Refresh production once -- if it loads, we're good", "nextNode": "prevent-future", "score": 1 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "Login works again. Now: this typo slipped through because nobody read the diff before merging. What's the most practical safeguard against the next typo?",
+        "choices": [
+          { "id": "a", "text": "Add a Playwright smoke test that POSTs to /api/login on every PR -- a 404 fails the build", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Require code review on every PR touching the login form", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Send a Slack reminder to be careful with API URLs", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You fixed just the broken URL, committed the fix, and deployed. Login works perfectly and no other features were affected. Your teammate is impressed by how quickly you diagnosed the problem using Git's history.",
+        "narrative": "You used 'git log' to scan recent history, picked the most likely commit from its message, used 'git show' to read the actual diff, fixed only the broken line, verified the deploy in production, and added a smoke test that catches this exact class of bug on the next PR. Total downtime: under 10 minutes.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent work! You used 'git log' to scan recent history, identified the most likely commit from its message, used 'git show' to see exactly what changed, and made a targeted fix. This is exactly how experienced developers debug production issues."
+        "feedback": "Professional incident response with Git. The pattern -- log, show, targeted fix, verify, automate the catch -- is the difference between firefighting forever and shrinking the bug surface over time. The smoke test means this bug class is now extinct in your repo."
       },
       "end-okay": {
-        "narrative": "Reverting the whole commit fixed login but also removed the valid form validation improvements. You'll need to redo that work later. A more targeted fix would have been better.",
+        "narrative": "You found and fixed the bug cleanly. Code review will help, but reviewers miss typos in long diffs all the time -- that's how this one got in to begin with.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "You found the right commit, which is great! But reverting the entire commit threw away good changes along with the bad. Next time, try fixing just the broken line so you keep the good parts."
+        "finalScore": 13,
+        "feedback": "Solid debugging. Review is good, but a smoke test is better: it never gets tired, never skims, never approves a PR at 5pm on Friday. Pair the review with one automated check per critical user flow and you'll stop seeing this kind of regression."
+      },
+      "end-weak": {
+        "narrative": "The login works for now, but nothing has changed about how the team ships. The next typo in a commit will land just as easily, and you'll be running 'git log' again next week.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 9,
+        "feedback": "You handled the bug, but a Slack reminder is a wish, not a safeguard. People forget. CI doesn't. Add even one smoke test for the login flow and you'll save hours of future debugging."
       }
     },
     "glossaryTerms": ["git-log", "git-show", "commit-hash"]

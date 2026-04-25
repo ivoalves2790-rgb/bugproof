@@ -41,52 +41,76 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Tu gestor de tareas lleva dos semanas en produccion. Tienes 200 usuarios activos. Has recopilado retroalimentacion y tienes tiempo de desarrollo limitado. Donde te enfocas ahora?",
+        "narrative": "Tu gestor de tareas lleva dos semanas en produccion. Tienes 200 usuarios activos y un backlog de retroalimentacion. ¿Donde te enfocas ahora?",
         "choices": [
           { "id": "all-features", "text": "Construir todas las funcionalidades que los usuarios pidieron — compartir con equipo, resumenes con IA, sincronizacion con calendario, app movil", "nextNode": "overwhelmed", "score": 0 },
-          { "id": "top-requests", "text": "Analizar que funcionalidades fueron más solicitadas y elegir las 2-3 principales para construir", "nextNode": "focused", "score": 4 },
+          { "id": "top-requests", "text": "Mirar los datos: ¿que funcionalidades fueron mas pedidas? ¿Que usuarios se fueron? Elegir las 2-3 principales para construir.", "nextNode": "focused", "score": 4 },
           { "id": "rewrite", "text": "Reescribir la app desde cero con una mejor arquitectura ahora que sabes lo que quieren los usuarios", "nextNode": "rewrite-trap", "score": 1 }
         ]
       },
       "overwhelmed": {
-        "narrative": "Intentas construir todo a la vez. Despues de un mes, nada esta terminado. Funcionalidades a medio construir crean bugs y los usuarios estan confundidos por una experiencia inconsistente. Que haces?",
+        "narrative": "Intentas construir todo a la vez. Despues de un mes, nada esta terminado. Funcionalidades a medio construir crean bugs y los usuarios estan confundidos por una experiencia inconsistente. ¿Que haces?",
         "choices": [
-          { "id": "stop-prioritize", "text": "Parar, eliminar funcionalidades a medio terminar y enfocarte en las 2 más solicitadas", "nextNode": "recovery", "score": 3 },
-          { "id": "keep-going", "text": "Seguir adelante e intentar terminar todo", "nextNode": "burnout-end", "score": 0 }
+          { "id": "stop-prioritize", "text": "Parar, eliminar funcionalidades a medio terminar y elegir las 2 mas pedidas para terminarlas bien", "nextNode": "scope", "score": 4 },
+          { "id": "keep-going", "text": "Seguir adelante e intentar terminar todo", "nextNode": "scope", "score": 0 }
         ]
       },
       "focused": {
-        "narrative": "Identificas que el 80% de los usuarios quieren recordatorios de fecha limite y una mejor experiencia movil. Planificas ambas funcionalidades en sprints de 2 semanas cada una. Lanzas los recordatorios de fecha limite primero. El uso sube un 40%. Cual es tu siguiente movimiento?",
+        "narrative": "Los datos son claros: el 80% de los usuarios quieren recordatorios de fecha limite y el 60% se queja de la experiencia movil. Estas listo para comprometerte con una lista.",
         "choices": [
-          { "id": "mobile", "text": "Lanzar las mejoras moviles como estaba planeado, luego reevaluar prioridades", "nextNode": "great-end", "score": 4 },
-          { "id": "pivot", "text": "Olvidar lo movil — agregar 5 funcionalidades más mientras tienes impulso", "nextNode": "recovery", "score": 1 }
+          { "id": "continue-focused", "text": "Elegir recordatorios de fecha limite y mejoras moviles como las dos siguientes apuestas", "nextNode": "scope", "score": 3 }
         ]
       },
       "rewrite-trap": {
         "narrative": "Pasas 6 semanas reescribiendo. La nueva version tiene menos funcionalidades que la anterior. Los usuarios se van porque nada nuevo se ha lanzado. Has caido en la 'trampa de la reescritura.'",
         "choices": [
-          { "id": "learn", "text": "Detener la reescritura, volver a la app que funciona e iterar sobre ella", "nextNode": "recovery", "score": 3 }
+          { "id": "learn", "text": "Detener la reescritura, volver a la app que funciona y usar la retroalimentacion real que recolectaste para elegir 2 mejoras de alto impacto", "nextNode": "scope", "score": 3 },
+          { "id": "double-down-rewrite", "text": "Empujar la reescritura — el costo hundido es costo hundido, eventualmente la terminaras", "nextNode": "scope", "score": 0 }
         ]
       },
-      "recovery": {
-        "narrative": "Vuelves al camino enfocandote en 2 funcionalidades de alto impacto. Toma un mes extra, pero la app mejora y los usuarios regresan.",
+      "scope": {
+        "narrative": "Tienes 2 funcionalidades candidatas. Antes de empezar a construir, ¿como las acotas?",
+        "choices": [
+          { "id": "smallest-version", "text": "Definir la version util mas pequena de cada una — ¿cual es la unica pantalla, unica consulta, unica notificacion que entrega el valor?", "nextNode": "ship", "score": 4 },
+          { "id": "full-feature", "text": "Especificar la funcionalidad completa con cada caso borde — pagina de configuracion, recurrencias personalizadas, opciones de posponer, todo", "nextNode": "ship", "score": 2 },
+          { "id": "no-scope", "text": "Saltar el acotamiento — empezar a programar y ver donde acabas", "nextNode": "ship", "score": 0 }
+        ]
+      },
+      "ship": {
+        "narrative": "Los recordatorios estan acotados a un solo correo a las 9am del dia que vence una tarea. Es momento de lanzar. ¿Como lo despliegas?",
+        "choices": [
+          { "id": "feature-flag", "text": "Esconderlo detras de una feature flag, lanzarlo al 10% de usuarios primero, mirar las metricas y luego expandir", "nextNode": "measure", "score": 4 },
+          { "id": "ship-all", "text": "Lanzarlo al 100% de usuarios inmediatamente para que todos lo reciban a la vez", "nextNode": "measure", "score": 2 },
+          { "id": "ship-no-tests", "text": "Empujar a produccion sin tests ni monitoreo — arreglas problemas si los usuarios se quejan", "nextNode": "measure", "score": 0 }
+        ]
+      },
+      "measure": {
+        "narrative": "Los recordatorios estan afuera. Una semana despues tienes datos: tasa de apertura, click-through, opt-outs y un pequeno aumento en retencion. ¿Como decides que construir despues?",
+        "choices": [
+          { "id": "data-driven", "text": "Comparar el aumento contra tu hipotesis. ¿Los recordatorios movieron la aguja? Usar esa senal para decidir si invertir mas en recordatorios o pivotar a movil.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "gut-feel", "text": "Saltar el analisis — te sientes bien con los recordatorios, sigue agregandoles cosas", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-data", "text": "Ignorar las metricas y empezar una nueva funcionalidad que personalmente encuentres mas emocionante", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tres meses despues, lanzas 2-3 mejoras pequenas y medidas cada mes. Cada una esta informada por datos reales de usuarios, acotada a la version util mas pequena, desplegada gradualmente y evaluada contra una hipotesis clara. Tienes 1,000 usuarios activos, una hoja de ruta basada en evidencia y un ritmo sostenible.",
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Asi se construyen los productos duraderos — analiza datos, elige una apuesta pequena, acotala, lanzala de forma segura, mide con honestidad, repite. Te mantuviste enfocado, escuchaste a los usuarios y dejaste que la evidencia (no el entusiasmo) guiara la hoja de ruta. ¡Felicidades por completar el proyecto del Gestor de Tareas!",
+        "choices": []
+      },
+      "mediocre-end": {
+        "narrative": "Los recordatorios siguen creciendo — horarios recurrentes, horarios personalizados, posponer, notificaciones push. A algunos usuarios les encanta, pero el 80% original que solo queria un correo simple esta enterrado bajo configuraciones que no necesita. Otras prioridades se atrasan.",
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Apostar mas a una funcionalidad sin medir su impacto real lleva a sobre-ingenieria. Siempre liga la inversion a la evidencia: ¿el ultimo incremento movio la retencion, o solo se sintio productivo?",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Ignoras los datos de los recordatorios y persigues una nueva funcionalidad atractiva. Los usuarios notan que no estas mejorando las cosas que realmente usan. La retencion se aplana y el siguiente lote de retroalimentacion es mas critico que nunca.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Te recuperaste! La lección clave: el enfoque supera a la amplitud. Construye 2 funcionalidades bien en lugar de 10 funcionalidades mal. Itera basandote en datos, no en intuicion.",
-        "choices": []
-      },
-      "great-end": {
-        "narrative": "Tu gestor de tareas crece de manera constante. Cada mes lanzas 2-3 mejoras enfocadas basadas en datos de usuarios. Despues de 3 meses, tienes 1,000 usuarios activos y un roadmap de producto claro. Has construido un producto real.",
-        "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Así se construyen productos exitosos — lanza, mide, aprende, repite. Te mantuviste enfocado, escuchaste a los usuarios y tomaste decisiones basadas en datos. Felicitaciones por completar el proyecto del Gestor de Tareas!",
-        "choices": []
-      },
-      "burnout-end": {
-        "narrative": "Despues de 2 meses de esfuerzo intenso, estas agotado y la app tiene bugs. Los usuarios se van por problemas de confiabilidad. Intentar construir todo a la vez no construyo nada bien.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "El scope creep es el asesino número 1 de proyectos personales. Siempre prioriza de forma despiadada. Es mejor lanzar 2 funcionalidades pulidas que 10 rotas.",
+        "feedback": "Construir lo que te emociona en lugar de lo que los usuarios necesitan es como mueren los proyectos personales. Los datos son el punto entero de lanzar — si no los lees, tanto da que te hubieras quedado en planificacion. Deja que la evidencia guie la siguiente apuesta.",
         "choices": []
       }
     },

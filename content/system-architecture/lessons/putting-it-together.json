@@ -43,56 +43,75 @@
       "start": {
         "narrative": "You type www.coolshop.com into your browser and press Enter. What's the very first thing that needs to happen?",
         "choices": [
-          { "id": "a", "text": "DNS lookup -- find the IP address for coolshop.com", "nextNode": "after-dns", "score": 10 },
-          { "id": "b", "text": "Send an HTTP request for the homepage", "nextNode": "wrong-http-first", "score": 3 },
-          { "id": "c", "text": "Start rendering the page", "nextNode": "wrong-render-first", "score": 1 }
-        ]
-      },
-      "after-dns": {
-        "narrative": "DNS resolves coolshop.com to 93.184.216.34. Now your browser knows WHERE to send the request. What happens next?",
-        "choices": [
-          { "id": "a", "text": "Open a TCP connection to the server at that IP address", "nextNode": "after-tcp", "score": 10 },
-          { "id": "b", "text": "Send the HTTP request immediately", "nextNode": "close-tcp", "score": 5 }
+          { "id": "a", "text": "DNS lookup -- find the IP address for coolshop.com", "nextNode": "after-dns", "score": 4 },
+          { "id": "b", "text": "Send an HTTP request for the homepage", "nextNode": "wrong-http-first", "score": 1 },
+          { "id": "c", "text": "Start rendering the page", "nextNode": "wrong-render-first", "score": 0 }
         ]
       },
       "wrong-http-first": {
         "narrative": "You can't send a request yet -- you don't know WHERE to send it. Your browser only knows the name 'coolshop.com,' not the actual address. First, DNS has to translate that name into an IP address.",
         "choices": [
-          { "id": "a", "text": "Right, DNS lookup first to get the IP address", "nextNode": "after-dns", "score": 5 }
+          { "id": "wh-redirect", "text": "Right, DNS lookup first to get the IP address", "nextNode": "after-dns", "score": 2 }
         ]
       },
       "wrong-render-first": {
         "narrative": "There's nothing to render yet! Your browser hasn't received any HTML. First it needs to find the server, connect to it, request the page, and receive the response. Only then can it start rendering.",
         "choices": [
-          { "id": "a", "text": "OK, we need to find the server first with DNS", "nextNode": "after-dns", "score": 5 }
+          { "id": "wr-redirect", "text": "OK, we need to find the server first with DNS", "nextNode": "after-dns", "score": 2 }
         ]
       },
-      "after-tcp": {
-        "narrative": "The TCP connection is established (this includes the TLS handshake for HTTPS). Now your browser sends: GET / HTTP/1.1. The server processes the request and sends back HTML. Your browser starts rendering but notices the HTML references a CSS file and 3 images. What happens?",
+      "after-dns": {
+        "narrative": "DNS resolves coolshop.com to 93.184.216.34. Now your browser knows WHERE to send the request. What happens next?",
         "choices": [
-          { "id": "a", "text": "The browser sends additional HTTP requests for each of those files", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "The server automatically sends all the files at once", "nextNode": "end-ok", "score": 4 }
+          { "id": "ad-tcp", "text": "Open a TCP connection to the server at that IP address (and TLS handshake for HTTPS)", "nextNode": "send-request", "score": 4 },
+          { "id": "ad-http", "text": "Send the HTTP request immediately — the IP is enough", "nextNode": "send-request", "score": 1 },
+          { "id": "ad-render", "text": "Start rendering a placeholder while waiting", "nextNode": "send-request", "score": 0 }
         ]
       },
-      "close-tcp": {
-        "narrative": "Close! Your browser does send the HTTP request, but first it needs to establish a TCP connection -- a reliable channel between your computer and the server. Think of it like dialing a phone number before speaking. The TCP handshake ensures both sides are ready to communicate.",
+      "send-request": {
+        "narrative": "The TCP connection is established. Now your browser sends the actual HTTP request. What does it look like at minimum?",
         "choices": [
-          { "id": "a", "text": "Got it -- TCP connection first, then the HTTP request", "nextNode": "after-tcp", "score": 7 }
+          { "id": "sr-full", "text": "GET / HTTP/1.1 with a Host header (Host: coolshop.com), an Accept header, and any cookies for that domain", "nextNode": "server-process", "score": 4 },
+          { "id": "sr-bare", "text": "GET / HTTP/1.1 with nothing else — the connection already knows where it's going", "nextNode": "server-process", "score": 1 },
+          { "id": "sr-binary", "text": "A raw binary blob — HTTP is just bytes after all", "nextNode": "server-process", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "The browser parses the HTML, discovers it needs style.css, logo.png, hero.jpg, and promo.png, and fires off requests for all of them. Modern browsers send these in parallel for speed. Once everything arrives, the page is fully rendered.",
-        "choices": [],
+      "server-process": {
+        "narrative": "The server receives the request. It needs to build the homepage HTML before sending anything back. What's the realistic flow inside the server?",
+        "choices": [
+          { "id": "sp-route", "text": "Route the request to a handler, query the database for products, render the HTML template, return it with status 200", "nextNode": "follow-up-assets", "score": 4 },
+          { "id": "sp-static", "text": "Read a single static index.html file from disk and return it — no logic involved", "nextNode": "follow-up-assets", "score": 2 },
+          { "id": "sp-magic", "text": "The server magically knows what HTML the user wants without any processing", "nextNode": "follow-up-assets", "score": 0 }
+        ]
+      },
+      "follow-up-assets": {
+        "narrative": "The HTML arrives in 300ms. Your browser starts parsing and notices the page references style.css, app.js, logo.png, hero.jpg, and a Google Font. What does the browser do?",
+        "choices": [
+          { "id": "fa-parallel", "text": "Fire HTTP requests for each asset in parallel, reusing the existing TCP/HTTP/2 connection where possible", "nextNode": "excellent-end", "score": 4 },
+          { "id": "fa-serial", "text": "Wait for each asset to download fully before starting the next one", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "fa-skip", "text": "Skip the assets — the HTML alone is enough to render", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "You traced the whole journey: DNS resolved the name, TCP plus TLS opened a secure channel, the browser sent a complete HTTP request, the server routed it through a handler and database, then the browser fired parallel requests for every referenced asset. The page paints in under a second.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "You traced the complete journey: DNS lookup, TCP connection, HTTP request, server response, and follow-up requests for additional assets. This is exactly what happens every time you visit any website. Understanding this flow helps you debug loading issues -- if a page is slow, you can figure out which step is the bottleneck."
+        "feedback": "This is the full request lifecycle as it actually plays out. Knowing every step lets you debug 'why is this slow' by isolating which stage owns the delay — DNS, connection, request, server, or assets.",
+        "choices": []
       },
-      "end-ok": {
-        "narrative": "Actually, the server only sends what was specifically requested. The browser has to discover it needs those extra files by reading the HTML, then send separate requests for each one. Modern HTTP/2 can be smarter about this, but the browser still drives the process.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "Most of the journey is right, but downloading assets serially leaves a lot of speed on the table. The page paints, but it takes 4 seconds instead of 1.",
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "You got most of the flow right! The key insight is that loading a page usually involves many requests, not just one. The initial HTML is just the starting point -- it references CSS, JavaScript, images, and fonts that each require their own request."
+        "finalScore": 13,
+        "feedback": "Modern browsers parallelize asset downloads precisely because serial loading is so slow. Understanding parallelism — and HTTP/2 multiplexing on top of it — is the difference between fast and tolerable.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Without the CSS, JavaScript, and images, the page is unstyled, unscripted, and missing media. Users see a broken-looking 1995-era webpage and leave.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "The HTML is just the entry point. The browser has to discover and request every referenced asset for the page to look and behave like the real site. Skipping that step skips most of what makes a webpage a webpage.",
+        "choices": []
       }
     },
     "glossaryTerms": ["dns", "tcp", "http-request", "rendering"]

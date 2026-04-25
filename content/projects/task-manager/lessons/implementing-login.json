@@ -40,43 +40,75 @@
       "start": {
         "narrative": "A user reports they can't log in to your task manager. You check the login endpoint and find the password is being compared in plain text, and the error message says 'Incorrect password for user john@example.com'. What's your first priority?",
         "choices": [
-          { "id": "a", "text": "Just fix the error message to be less specific", "nextNode": "surface-fix", "score": 1 },
-          { "id": "b", "text": "Fix the plain-text password comparison first, then address the error message", "nextNode": "fix-hashing", "score": 4 },
-          { "id": "c", "text": "Rewrite the entire auth system from scratch", "nextNode": "overhaul", "score": 1 }
+          { "id": "surface-fix", "text": "Just fix the error message to be less specific", "nextNode": "surface-fix", "score": 1 },
+          { "id": "fix-hashing", "text": "Fix the plain-text password comparison first, then address the error message", "nextNode": "fix-hashing", "score": 4 },
+          { "id": "overhaul", "text": "Rewrite the entire auth system from scratch", "nextNode": "overhaul", "score": 1 }
         ]
       },
       "surface-fix": {
-        "narrative": "You change the error to 'Invalid credentials' — better, but passwords are still stored and compared in plain text. A database leak would expose every user's password. Two months later, your database is breached and every user's plain-text password is leaked.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Plain-text passwords are a critical security vulnerability. A vague error message doesn't protect against database breaches — hashing does. Always prioritize the security fix over cosmetic changes.",
-        "choices": []
+        "narrative": "You change the error to 'Invalid credentials' — better, but passwords are still stored and compared in plain text. A code reviewer reads the diff and asks why the underlying bug is still there. You realize cosmetic fixes don't address the real risk.",
+        "choices": [
+          { "id": "add-hash-now", "text": "Add bcrypt hashing on top of the cosmetic fix and keep the message changes", "nextNode": "migrate-existing", "score": 3 },
+          { "id": "leave-it", "text": "Insist the message change is enough and merge the PR as-is", "nextNode": "migrate-existing", "score": 0 }
+        ]
       },
       "fix-hashing": {
-        "narrative": "Good call. You implement bcrypt hashing and update the error message to a generic 'Invalid email or password'. Now you need to handle existing plain-text passwords in the database. What's your approach?",
+        "narrative": "Good call. You implement bcrypt hashing on the signup path and update the error message to a generic 'Invalid email or password'. New accounts are safe — but the database still holds plain-text passwords for existing users. What's your approach?",
         "choices": [
-          { "id": "b1", "text": "Write a migration that hashes all existing passwords, then update the login to use bcrypt.compare", "nextNode": "migration-done", "score": 3 },
-          { "id": "b2", "text": "Force all users to reset their passwords on next login", "nextNode": "forced-reset", "score": 2 }
+          { "id": "migration", "text": "Write a one-off script that bcrypts every existing password row in place, then switch login to bcrypt.compare", "nextNode": "migrate-existing", "score": 4 },
+          { "id": "lazy-migration", "text": "Hash each existing password the next time the user logs in successfully, and force-reset everyone who hasn't logged in within 90 days", "nextNode": "migrate-existing", "score": 3 }
         ]
       },
       "overhaul": {
         "narrative": "Rewriting from scratch is risky and slow. Users still can't log in. Your team lead asks why a login bug fix is turning into a two-week project. You scope it down to just fix the critical issues first.",
         "choices": [
-          { "id": "c1", "text": "Fix hashing and error messages, plan the bigger rewrite for later", "nextNode": "fix-hashing", "score": 3 }
+          { "id": "scope-down", "text": "Fix hashing and error messages, plan the bigger rewrite for later", "nextNode": "migrate-existing", "score": 3 },
+          { "id": "keep-rewriting", "text": "Push back and keep the full rewrite on the schedule", "nextNode": "migrate-existing", "score": 1 }
         ]
       },
-      "migration-done": {
-        "narrative": "You write a migration script that hashes all existing passwords with bcrypt, update the login endpoint to use bcrypt.compare, and deploy. Everything works and users can log in securely.",
+      "migrate-existing": {
+        "narrative": "Passwords are now hashed everywhere. Login authenticates correctly. Now you need to decide how the session lives across requests. Where do you store the session token after a successful login?",
+        "choices": [
+          { "id": "httponly-cookie", "text": "Set a signed, httpOnly, secure cookie with a short-lived JWT and a refresh token rotation", "nextNode": "error-handling", "score": 4 },
+          { "id": "localstorage", "text": "Store the JWT in localStorage and read it on each fetch", "nextNode": "error-handling", "score": 1 },
+          { "id": "no-expiry-cookie", "text": "Set a cookie with no expiry and no httpOnly flag — it's simpler", "nextNode": "error-handling", "score": 0 }
+        ]
+      },
+      "error-handling": {
+        "narrative": "Sessions persist correctly. A user submits the form with an empty email field and gets a 500 error and a stack trace in the browser. How do you tighten the error path?",
+        "choices": [
+          { "id": "validate-and-message", "text": "Validate the input on the server, return a 400 with a clean field-level error message, and log the full error server-side only", "nextNode": "rate-limit-step", "score": 4 },
+          { "id": "frontend-only-validation", "text": "Add a 'required' attribute on the input and call it done", "nextNode": "rate-limit-step", "score": 2 },
+          { "id": "swallow-errors", "text": "Wrap the handler in a try/catch that returns 200 with an empty body so the user never sees the error", "nextNode": "rate-limit-step", "score": 0 }
+        ]
+      },
+      "rate-limit-step": {
+        "narrative": "Sentry shows one IP attempting 800 logins in 10 minutes against the same email. Your endpoint happily processes every one. What do you add?",
+        "choices": [
+          { "id": "rate-limit-and-lockout", "text": "Add per-IP and per-account rate limiting plus a temporary lockout after N failures, with a generic error message", "nextNode": "excellent-end", "score": 4 },
+          { "id": "captcha-only", "text": "Add a CAPTCHA on the form and assume that stops bots", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-attack", "text": "Block the single IP in your firewall and move on", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your login flow now hashes passwords with bcrypt, migrated all legacy data, stores sessions in httpOnly cookies, validates input cleanly, and rate-limits brute-force attempts. The original bug is fixed and the surface area around it is hardened.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Excellent. You prioritized the security fix, handled legacy data with a migration, and used generic error messages. This is how production auth bugs should be handled.",
+        "finalScore": 20,
+        "feedback": "This is production-grade auth: real hashing, real session security, clean error contract, and abuse-resistant. The pattern — fix the bug, then audit everything adjacent to it — is what turns one-time fixes into systematic security improvements.",
         "choices": []
       },
-      "forced-reset": {
-        "narrative": "Users are annoyed by the forced reset, but passwords are now properly hashed going forward. Some users abandon the app due to the inconvenience.",
+      "mediocre-end": {
+        "narrative": "Auth is mostly secure, but a CAPTCHA on its own gets bypassed by services that solve them for fractions of a cent. Without rate limiting and lockouts, a determined attacker still works through your accounts at scale.",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Forced resets work but hurt user experience. A background migration that hashes existing passwords is smoother — users never notice the change.",
+        "finalScore": 13,
+        "feedback": "CAPTCHA is a speed bump, not a barrier. Layer it on top of rate limits and account lockouts — defense in depth. A single control is a single point of failure.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "You blocked one IP. The attacker rotates through a residential proxy pool and continues unimpeded. Within a day they've credential-stuffed dozens of accounts using passwords leaked from other breaches.",
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "IP-level blocks are trivial to bypass. Assume any attacker has unlimited IPs and design rate limits per account, with progressive lockouts. Block the behavior, not the address.",
         "choices": []
       }
     },

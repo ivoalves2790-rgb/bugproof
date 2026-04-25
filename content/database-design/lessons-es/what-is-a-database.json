@@ -43,56 +43,75 @@
       "start": {
         "narrative": "Estás construyendo una app de lista de tareas. El fundador dice: 'Mantengámoslo simple -- solo guarda las tareas en un archivo JSON en el servidor.' Esto funciona al principio con 5 usuarios de prueba. Pero luego lanzas y obtienes 500 usuarios. Los problemas empiezan a aparecer: las tareas de algunos usuarios desaparecen aleatoriamente. ¿Qué está pasando probablemente?",
         "choices": [
-          { "id": "a", "text": "Dos usuarios están escribiendo en el archivo al mismo tiempo, sobrescribiendo los datos del otro", "nextNode": "correct-concurrency", "score": 10 },
-          { "id": "b", "text": "El archivo JSON se está volviendo demasiado grande y ralentizándose", "nextNode": "partial-size", "score": 5 },
-          { "id": "c", "text": "El servidor se está quedando sin memoria", "nextNode": "wrong-memory", "score": 2 }
-        ]
-      },
-      "correct-concurrency": {
-        "narrative": "¡Exactamente! Cuando el Usuario A y el Usuario B leen el archivo al mismo tiempo, hacen cambios y lo escriben de vuelta, la segunda escritura sobrescribe la primera. La nueva tarea del Usuario A desaparece. Esto se llama una 'condición de carrera.' El fundador dice: 'OK, ¿qué deberíamos usar en su lugar?'",
-        "choices": [
-          { "id": "a", "text": "Una base de datos como PostgreSQL o SQLite -- manejan escrituras concurrentes de forma segura", "nextNode": "correct-database", "score": 10 },
-          { "id": "b", "text": "Solo agregar bloqueo de archivos para que solo un usuario escriba a la vez", "nextNode": "partial-locking", "score": 5 }
+          { "id": "a", "text": "Dos usuarios están escribiendo en el archivo al mismo tiempo, sobrescribiendo los datos del otro", "nextNode": "diagnose-fix", "score": 4 },
+          { "id": "b", "text": "El archivo JSON se está volviendo demasiado grande y ralentizándose", "nextNode": "partial-size", "score": 2 },
+          { "id": "c", "text": "El servidor se está quedando sin memoria", "nextNode": "wrong-memory", "score": 0 }
         ]
       },
       "partial-size": {
-        "narrative": "El tamaño del archivo podría ser un factor eventualmente, pero las tareas de 500 usuarios serían solo unos pocos megabytes -- eso no es suficiente para causar problemas. El problema real es la concurrencia: múltiples usuarios escribiendo en el mismo archivo al mismo tiempo, sobrescribiendo los cambios del otro.",
+        "narrative": "El tamaño del archivo podría importar eventualmente, pero las tareas de 500 usuarios son solo unos pocos megabytes -- no lo suficiente para causar pérdida de datos. El problema real es la concurrencia: múltiples usuarios escribiendo en el mismo archivo al mismo tiempo, sobrescribiendo los cambios del otro.",
         "choices": [
-          { "id": "a", "text": "Entonces es una condición de carrera -- dos escrituras ocurriendo a la vez", "nextNode": "correct-concurrency", "score": 5 }
+          { "id": "a", "text": "Entonces es una condición de carrera -- dos escrituras ocurriendo a la vez", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
       "wrong-memory": {
         "narrative": "La memoria generalmente no es el problema para 500 usuarios. Un archivo JSON con datos de tareas sería diminuto en memoria. El problema es más fundamental: el archivo no puede manejar múltiples usuarios escribiendo en él al mismo tiempo. Cuando dos escrituras se superponen, los datos se pierden.",
         "choices": [
-          { "id": "a", "text": "Entendido -- las escrituras concurrentes están causando pérdida de datos", "nextNode": "correct-concurrency", "score": 5 }
+          { "id": "a", "text": "Entendido -- las escrituras concurrentes están causando pérdida de datos", "nextNode": "diagnose-fix", "score": 2 }
         ]
       },
-      "correct-database": {
-        "narrative": "Migras a SQLite (simple de configurar) y el problema de las tareas que desaparecen se esfuma. La base de datos maneja escrituras concurrentes de forma segura usando transacciones. Tres meses después, la app tiene 50,000 usuarios y las búsquedas empiezan a ralentizarse. ¿Cuál es tu siguiente movimiento?",
+      "diagnose-fix": {
+        "narrative": "Confirmado: es una condición de carrera. El fundador pregunta '¿OK, qué deberíamos usar en su lugar?' Elige el reemplazo correcto.",
         "choices": [
-          { "id": "a", "text": "Actualizar a PostgreSQL y agregar índices para búsquedas más rápidas", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "SQLite debería estar bien, solo consigue un servidor más rápido", "nextNode": "end-ok", "score": 4 }
+          { "id": "a", "text": "Una base de datos real como PostgreSQL o SQLite -- manejan escrituras concurrentes de forma segura con transacciones", "nextNode": "pick-engine", "score": 4 },
+          { "id": "b", "text": "Solo agregar bloqueo de archivos para que solo un usuario escriba a la vez -- todos los demás hacen cola", "nextNode": "pick-engine", "score": 2 },
+          { "id": "c", "text": "Guardar las tareas de cada usuario en un archivo separado para que las escrituras nunca se superpongan", "nextNode": "pick-engine", "score": 1 }
         ]
       },
-      "partial-locking": {
-        "narrative": "El bloqueo de archivos podría funcionar para un número pequeño de usuarios, pero significa que solo un usuario puede escribir a la vez -- todos los demás esperan. Con 500 usuarios, eso crea un rendimiento terrible. Una base de datos maneja el acceso concurrente de manera mucho más eficiente, permitiendo que muchos usuarios escriban simultáneamente sin conflictos.",
+      "pick-engine": {
+        "narrative": "Acuerdan usar una base de datos. El equipo es pequeño, la app es de un solo servidor, y quieres entregar hoy. ¿Con qué motor empiezas?",
         "choices": [
-          { "id": "a", "text": "Una base de datos real es la mejor solución", "nextNode": "correct-database", "score": 7 }
+          { "id": "a", "text": "SQLite -- archivo único, configuración cero, transacciones de fábrica, fácil de migrar a Postgres después", "nextNode": "design-schema", "score": 4 },
+          { "id": "b", "text": "PostgreSQL -- empezar con la opción de grado producción aunque signifique configurar un servidor de base de datos separado", "nextNode": "design-schema", "score": 3 },
+          { "id": "c", "text": "MongoDB -- los items de tareas tienen forma de documento, sin esquema será más rápido", "nextNode": "design-schema", "score": 2 }
         ]
       },
-      "end-great": {
-        "narrative": "PostgreSQL maneja 50,000 usuarios fácilmente. Agregas índices en las columnas user_id y due_date, y las búsquedas pasan de 500ms a 2ms. La app es rápida, confiable y lista para escalar más.",
+      "design-schema": {
+        "narrative": "Hora de diseñar los datos. Necesitas almacenar tareas que pertenecen a usuarios. ¿Cuál es tu esquema mínimo viable?",
+        "choices": [
+          { "id": "a", "text": "Dos tablas: users (id, email) y tasks (id, user_id, title, done, created_at) con user_id como llave foránea", "nextNode": "scale-up", "score": 4 },
+          { "id": "b", "text": "Una sola tabla tasks con una columna username TEXT en lugar de una llave foránea user_id", "nextNode": "scale-up", "score": 2 },
+          { "id": "c", "text": "Saltarse el esquema -- almacenar todo como un blob JSON en una sola columna 'data'", "nextNode": "scale-up", "score": 1 }
+        ]
+      },
+      "scale-up": {
+        "narrative": "Lanzas y el bug de tareas desaparecidas se esfuma. Tres meses después tienes 50,000 usuarios y la página que carga las tareas de un usuario se ralentizó de 50ms a 800ms. ¿Cuál es tu siguiente movimiento?",
+        "choices": [
+          { "id": "a", "text": "EXPLAIN la consulta lenta, agregar un índice en tasks(user_id), y re-medir -- si SQLite se vuelve el cuello de botella, migrar a PostgreSQL", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Migrar directo a PostgreSQL -- una BD más grande será más rápida", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Comprar un servidor más rápido -- la base de datos está bien, el hardware es el problema", "nextNode": "end-weak", "score": 0 }
+        ]
+      },
+      "end-good": {
+        "narrative": "EXPLAIN muestra un escaneo completo de tabla en tasks. Agregas CREATE INDEX idx_tasks_user_id ON tasks(user_id) y la consulta cae a 4ms. SQLite maneja 50,000 usuarios cómodamente. Seis meses y una migración a Postgres después, estás en 500,000 usuarios con el mismo modelo de datos y los mismos índices. Mediste antes de migrar, así que cada paso estuvo justificado.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Tomaste la decisión correcta en cada paso: identificaste el problema de concurrencia con archivos planos, elegiste una base de datos para acceso concurrente seguro, y actualizaste a una base de datos más poderosa a medida que la app creció. Esta progresión -- archivo a SQLite a PostgreSQL -- es en realidad cómo muchas startups reales evolucionan su almacenamiento de datos."
+        "feedback": "Caminaste la progresión natural: archivo plano -> SQLite -> SQLite indexado -> PostgreSQL, con cada paso impulsado por un problema medido en lugar de una corazonada. Así evolucionan las apps reales su almacenamiento. Una migración prematura a una base de datos 'más grande' sin un índice habría escondido el cuello de botella real detrás de un cambio mucho más caro."
       },
-      "end-ok": {
-        "narrative": "SQLite es genial para apps pequeñas a medianas, pero está diseñado para uso en un solo servidor y puede convertirse en un cuello de botella con muchos escritores concurrentes. PostgreSQL es más adecuado para aplicaciones web en producción con muchos usuarios.",
+      "end-mediocre": {
+        "narrative": "Pasas un fin de semana migrando a PostgreSQL. La consulta va de 800ms a 600ms -- más rápido, pero no por mucho, porque el problema subyacente sigue siendo un escaneo completo en una tabla de 5 millones de filas. Eventualmente agregas el índice de todos modos. La migración fue trabajo real, solo no el trabajo que realmente importaba.",
         "choices": [],
         "isEnd": true,
         "finalScore": 10,
-        "feedback": "SQLite es maravilloso para comenzar, pero las aplicaciones web en producción con muchos usuarios concurrentes generalmente necesitan una base de datos cliente-servidor como PostgreSQL. Maneja mejor las escrituras concurrentes y ofrece características como agrupación de conexiones que ayudan con alto tráfico."
+        "feedback": "Migrar motores sin entender primero el cuello de botella es un error común y caro. EXPLAIN es gratis, los índices son baratos, y cualquiera de los dos cambios es reversible -- siempre agótalos antes de comprometerte a una migración que toca cada conexión en tu app."
+      },
+      "end-weak": {
+        "narrative": "El servidor más rápido cuesta 4x más por mes y la página lenta ahora toma 700ms en lugar de 800ms. La gráfica de CPU está plana -- el cuello de botella nunca fue CPU, era un índice faltante haciendo un escaneo completo de tabla. Ahora estás pagando más cada mes por un problema que un índice habría arreglado gratis.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Tirarle hardware a un problema de base de datos es la forma más cara de obtener la mejora más pequeña. La lentitud en una base de datos casi siempre es por índices faltantes, planes de consulta malos, o consultas N+1 -- no por CPU bruto. Siempre hace profile antes de aprovisionar."
       }
     },
     "glossaryTerms": ["database", "concurrency", "race-condition", "transaction"]

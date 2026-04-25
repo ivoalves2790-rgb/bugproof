@@ -43,56 +43,75 @@
       "start": {
         "narrative": "Escribes www.coolshop.com en tu navegador y presionas Enter. ¿Cuál es la primera cosa que necesita suceder?",
         "choices": [
-          { "id": "a", "text": "Búsqueda DNS -- encontrar la dirección IP de coolshop.com", "nextNode": "after-dns", "score": 10 },
-          { "id": "b", "text": "Enviar una petición HTTP para la página principal", "nextNode": "wrong-http-first", "score": 3 },
-          { "id": "c", "text": "Comenzar a renderizar la página", "nextNode": "wrong-render-first", "score": 1 }
-        ]
-      },
-      "after-dns": {
-        "narrative": "DNS resuelve coolshop.com a 93.184.216.34. Ahora tu navegador sabe DÓNDE enviar la petición. ¿Qué sucede después?",
-        "choices": [
-          { "id": "a", "text": "Abrir una conexión TCP al servidor en esa dirección IP", "nextNode": "after-tcp", "score": 10 },
-          { "id": "b", "text": "Enviar la petición HTTP inmediatamente", "nextNode": "close-tcp", "score": 5 }
+          { "id": "a", "text": "Búsqueda DNS -- encontrar la dirección IP de coolshop.com", "nextNode": "after-dns", "score": 4 },
+          { "id": "b", "text": "Enviar una petición HTTP para la página principal", "nextNode": "wrong-http-first", "score": 1 },
+          { "id": "c", "text": "Comenzar a renderizar la página", "nextNode": "wrong-render-first", "score": 0 }
         ]
       },
       "wrong-http-first": {
         "narrative": "No puedes enviar una petición todavía -- no sabes DÓNDE enviarla. Tu navegador solo conoce el nombre 'coolshop.com,' no la dirección real. Primero, DNS tiene que traducir ese nombre en una dirección IP.",
         "choices": [
-          { "id": "a", "text": "Correcto, primero la búsqueda DNS para obtener la dirección IP", "nextNode": "after-dns", "score": 5 }
+          { "id": "wh-redirect", "text": "Correcto, primero la búsqueda DNS para obtener la dirección IP", "nextNode": "after-dns", "score": 2 }
         ]
       },
       "wrong-render-first": {
         "narrative": "¡No hay nada que renderizar todavía! Tu navegador no ha recibido ningún HTML. Primero necesita encontrar el servidor, conectarse a él, solicitar la página y recibir la respuesta. Solo entonces puede comenzar a renderizar.",
         "choices": [
-          { "id": "a", "text": "OK, necesitamos encontrar el servidor primero con DNS", "nextNode": "after-dns", "score": 5 }
+          { "id": "wr-redirect", "text": "OK, necesitamos encontrar el servidor primero con DNS", "nextNode": "after-dns", "score": 2 }
         ]
       },
-      "after-tcp": {
-        "narrative": "La conexión TCP está establecida (esto incluye el handshake TLS para HTTPS). Ahora tu navegador envía: GET / HTTP/1.1. El servidor procesa la petición y envía de vuelta HTML. Tu navegador comienza a renderizar pero nota que el HTML referencia un archivo CSS y 3 imágenes. ¿Qué sucede?",
+      "after-dns": {
+        "narrative": "DNS resuelve coolshop.com a 93.184.216.34. Ahora tu navegador sabe DÓNDE enviar la petición. ¿Qué sucede después?",
         "choices": [
-          { "id": "a", "text": "El navegador envía peticiones HTTP adicionales para cada uno de esos archivos", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "El servidor envía automáticamente todos los archivos de una vez", "nextNode": "end-ok", "score": 4 }
+          { "id": "ad-tcp", "text": "Abrir una conexión TCP al servidor en esa dirección IP (y handshake TLS para HTTPS)", "nextNode": "send-request", "score": 4 },
+          { "id": "ad-http", "text": "Enviar la petición HTTP inmediatamente — la IP ya alcanza", "nextNode": "send-request", "score": 1 },
+          { "id": "ad-render", "text": "Empezar a renderizar un placeholder mientras se espera", "nextNode": "send-request", "score": 0 }
         ]
       },
-      "close-tcp": {
-        "narrative": "¡Casi! Tu navegador sí envía la petición HTTP, pero primero necesita establecer una conexión TCP -- un canal confiable entre tu computadora y el servidor. Piensa en ello como marcar un número de teléfono antes de hablar. El handshake TCP asegura que ambos lados estén listos para comunicarse.",
+      "send-request": {
+        "narrative": "La conexión TCP está establecida. Ahora tu navegador envía la petición HTTP real. ¿Cómo se ve como mínimo?",
         "choices": [
-          { "id": "a", "text": "Entendido -- primero la conexión TCP, luego la petición HTTP", "nextNode": "after-tcp", "score": 7 }
+          { "id": "sr-full", "text": "GET / HTTP/1.1 con un header Host (Host: coolshop.com), un header Accept y cualquier cookie para ese dominio", "nextNode": "server-process", "score": 4 },
+          { "id": "sr-bare", "text": "GET / HTTP/1.1 y nada más — la conexión ya sabe a dónde va", "nextNode": "server-process", "score": 1 },
+          { "id": "sr-binary", "text": "Un blob binario crudo — HTTP al final son solo bytes", "nextNode": "server-process", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "El navegador analiza el HTML, descubre que necesita style.css, logo.png, hero.jpg y promo.png, y lanza peticiones para todos ellos. Los navegadores modernos envían estas en paralelo para mayor velocidad. Una vez que todo llega, la página está completamente renderizada.",
-        "choices": [],
+      "server-process": {
+        "narrative": "El servidor recibe la petición. Necesita construir el HTML de la página principal antes de mandar nada de vuelta. ¿Cuál es el flujo realista dentro del servidor?",
+        "choices": [
+          { "id": "sp-route", "text": "Rutear la petición a un handler, consultar la base de datos por productos, renderizar el template HTML, devolverlo con status 200", "nextNode": "follow-up-assets", "score": 4 },
+          { "id": "sp-static", "text": "Leer un único archivo index.html estático del disco y devolverlo — sin lógica involucrada", "nextNode": "follow-up-assets", "score": 2 },
+          { "id": "sp-magic", "text": "El servidor mágicamente sabe qué HTML quiere el usuario sin procesamiento", "nextNode": "follow-up-assets", "score": 0 }
+        ]
+      },
+      "follow-up-assets": {
+        "narrative": "El HTML llega en 300ms. Tu navegador empieza a parsear y nota que la página referencia style.css, app.js, logo.png, hero.jpg y una Google Font. ¿Qué hace el navegador?",
+        "choices": [
+          { "id": "fa-parallel", "text": "Disparar peticiones HTTP por cada asset en paralelo, reutilizando la conexión TCP/HTTP/2 existente cuando sea posible", "nextNode": "excellent-end", "score": 4 },
+          { "id": "fa-serial", "text": "Esperar a que cada asset termine de descargar antes de empezar el siguiente", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "fa-skip", "text": "Saltarse los assets — el HTML solo es suficiente para renderizar", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Rastreaste el viaje entero: DNS resolvió el nombre, TCP más TLS abrieron un canal seguro, el navegador envió una petición HTTP completa, el servidor la ruteó por un handler y la base de datos, luego el navegador disparó peticiones paralelas por cada asset referenciado. La página pinta en menos de un segundo.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Rastreaste el viaje completo: búsqueda DNS, conexión TCP, petición HTTP, respuesta del servidor, y peticiones adicionales para recursos extra. Esto es exactamente lo que sucede cada vez que visitas cualquier sitio web. Entender este flujo te ayuda a depurar problemas de carga -- si una página es lenta, puedes determinar qué paso es el cuello de botella."
+        "feedback": "Este es el ciclo completo de petición tal como ocurre. Conocer cada paso te deja depurar 'por qué esto está lento' aislando qué etapa se queda con el retraso — DNS, conexión, petición, servidor o assets.",
+        "choices": []
       },
-      "end-ok": {
-        "narrative": "En realidad, el servidor solo envía lo que fue específicamente solicitado. El navegador tiene que descubrir que necesita esos archivos extra leyendo el HTML, y luego enviar peticiones separadas para cada uno. HTTP/2 moderno puede ser más inteligente sobre esto, pero el navegador sigue dirigiendo el proceso.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "Casi todo el viaje está bien, pero descargar los assets en serie deja mucha velocidad sobre la mesa. La página pinta, pero toma 4 segundos en lugar de 1.",
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "¡Acertaste la mayor parte del flujo! La idea clave es que cargar una página generalmente involucra muchas peticiones, no solo una. El HTML inicial es solo el punto de partida -- referencia CSS, JavaScript, imágenes y fuentes que cada uno requiere su propia petición."
+        "finalScore": 13,
+        "feedback": "Los navegadores modernos paralelizan las descargas de assets precisamente porque cargar en serie es muy lento. Entender la paralelización — y el multiplexing de HTTP/2 encima — es la diferencia entre rápido y tolerable.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Sin el CSS, el JavaScript y las imágenes, la página queda sin estilo, sin scripts y sin medios. Los usuarios ven una página rota tipo 1995 y se van.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "El HTML es solo el punto de entrada. El navegador tiene que descubrir y pedir cada asset referenciado para que la página luzca y se comporte como el sitio real. Saltar ese paso saltea casi todo lo que hace que una página web sea una página web.",
+        "choices": []
       }
     },
     "glossaryTerms": ["dns", "tcp", "http-request", "rendering"]

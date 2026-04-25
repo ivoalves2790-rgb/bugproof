@@ -45,63 +45,83 @@
       "start": {
         "narrative": "Desplegaste una nueva funcionalidad a las 4pm del viernes. El despliegue tuvo éxito, pero los usuarios están reportando una página blanca en blanco. Tu versión local funciona perfectamente. El log de errores de producción muestra: 'TypeError: Cannot read properties of undefined (reading \"NEXT_PUBLIC_API_URL\")'. ¿Por dónde empiezas?",
         "choices": [
-          { "id": "a", "text": "Verificar si NEXT_PUBLIC_API_URL está configurada en las variables de entorno de la plataforma de hosting", "nextNode": "check-env", "score": 10 },
-          { "id": "b", "text": "Revertir a la versión anterior inmediatamente, investigar el lunes", "nextNode": "rollback-first", "score": 5 },
-          { "id": "c", "text": "Agregar un try-catch alrededor del código que usa esa variable", "nextNode": "band-aid", "score": 2 }
+          { "id": "a", "text": "Verificar si NEXT_PUBLIC_API_URL está configurada en las variables de entorno de la plataforma de hosting", "nextNode": "check-env", "score": 4 },
+          { "id": "b", "text": "Revertir a la versión anterior inmediatamente, investigar el lunes", "nextNode": "rollback-first", "score": 2 },
+          { "id": "c", "text": "Agregar un try-catch alrededor del código que usa esa variable", "nextNode": "band-aid", "score": 0 }
         ]
       },
       "check-env": {
-        "narrative": "Abres el dashboard de Vercel y miras las variables de entorno. ¡NEXT_PUBLIC_API_URL falta! La tenías en tu archivo .env local pero nunca la agregaste a Vercel. La agregas y redespliegas. Pero el sitio todavía muestra una página en blanco. Los logs ahora muestran un error diferente: 'Error: connect ECONNREFUSED 127.0.0.1:5432'. ¿Qué está pasando?",
+        "narrative": "Abres el dashboard de Vercel y miras las variables de entorno. ¡NEXT_PUBLIC_API_URL falta! La tenías en tu archivo .env local pero nunca la agregaste a Vercel. La agregas y redespliegas. Pero el sitio todavía muestra una página en blanco. Los logs ahora muestran: 'Error: connect ECONNREFUSED 127.0.0.1:5432'. ¿Qué está pasando?",
         "choices": [
-          { "id": "a", "text": "El DATABASE_URL está apuntando a localhost -- necesita la URL de la base de datos de producción", "nextNode": "fix-db", "score": 10 },
-          { "id": "b", "text": "El servidor de base de datos está caído -- contactar al proveedor de hosting", "nextNode": "wrong-diagnosis", "score": 3 },
-          { "id": "c", "text": "Intentar reiniciar el despliegue", "nextNode": "restart", "score": 1 }
+          { "id": "a", "text": "DATABASE_URL está apuntando a localhost -- necesita la URL de la base de datos de producción", "nextNode": "fix-db", "score": 4 },
+          { "id": "b", "text": "El servidor de base de datos está caído -- contactar al proveedor de hosting", "nextNode": "fix-db", "score": 1 },
+          { "id": "c", "text": "Intentar reiniciar el despliegue", "nextNode": "fix-db", "score": 0 }
         ]
       },
       "rollback-first": {
         "narrative": "Revertir pone la versión anterior en vivo de nuevo -- buen instinto para proteger a los usuarios. Pero todavía necesitas arreglar el problema. Mirando el mensaje de error, es sobre una variable de entorno faltante. Esto es un problema de configuración, no de código.",
         "choices": [
-          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 5 }
+          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 2 }
         ]
       },
       "band-aid": {
         "narrative": "Un try-catch silenciaría el error pero la funcionalidad seguiría rota -- necesita esa URL de API para funcionar. La causa raíz es que la variable no existe en producción. Necesitas configurarla correctamente.",
         "choices": [
-          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 3 }
+          { "id": "a", "text": "Verificar las variables de entorno en la plataforma de hosting", "nextNode": "check-env", "score": 1 }
         ]
       },
       "fix-db": {
-        "narrative": "Lo encontraste -- DATABASE_URL estaba configurada con la cadena de conexión de localhost de desarrollo. La actualizas a la URL de la base de datos de producción y redespliegas. ¡El sitio vuelve a la vida! ¿Cuál es tu paso final para prevenir que esto pase de nuevo?",
+        "narrative": "DATABASE_URL era la cadena de conexión de desarrollo. La actualizas a la URL de producción y redespliegas. ¡La app arranca! Pero ahora se dispara un error interno al subir imágenes: 'ReferenceError: structuredClone is not defined'. Eso es una API de Node. ¿Qué está pasando probablemente?",
         "choices": [
-          { "id": "a", "text": "Crear un archivo .env.example listando todas las variables requeridas y agregar un checklist de despliegue", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Enviar un mensaje al equipo explicando qué pasó", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "El servidor de producción está en Node 16, pero mi código usa APIs que necesitan Node 18+", "nextNode": "match-node", "score": 4 },
+          { "id": "b", "text": "Olvidé importar un polyfill para structuredClone", "nextNode": "match-node", "score": 2 },
+          { "id": "c", "text": "Producción está bien -- el error debe ser de un caché de navegador viejo", "nextNode": "match-node", "score": 0 }
         ]
       },
-      "wrong-diagnosis": {
-        "narrative": "127.0.0.1 ES localhost -- el error está diciendo que la app está intentando conectarse a una base de datos en la misma máquina. Pero en producción, la base de datos está en un servidor completamente diferente. La variable de entorno DATABASE_URL debe estar apuntando a localhost.",
+      "match-node": {
+        "narrative": "Verificas: tu laptop corre Node 20, la plataforma usa Node 16 por defecto. Por eso falta structuredClone. ¿Cómo te aseguras de que cada desarrollador y cada servidor usen la misma versión?",
         "choices": [
-          { "id": "a", "text": "Actualizar DATABASE_URL a la URL de la base de datos de producción", "nextNode": "fix-db", "score": 5 }
+          { "id": "a", "text": "Definir 'engines.node' en package.json Y hacer commit de un '.nvmrc' (o 'volta' / 'mise.toml') para que las instalaciones locales coincidan", "nextNode": "reproduce-prod", "score": 4 },
+          { "id": "b", "text": "Solo subir Node en el dashboard de la plataforma y decirle al equipo que actualice Node a mano", "nextNode": "reproduce-prod", "score": 2 },
+          { "id": "c", "text": "Evitar las APIs nuevas y quedarme con sintaxis de Node 16 para siempre", "nextNode": "reproduce-prod", "score": 1 }
         ]
       },
-      "restart": {
-        "narrative": "Reiniciar no ayudará -- la variable de entorno todavía está apuntando al lugar equivocado. El error 'ECONNREFUSED 127.0.0.1' significa que la app está intentando conectarse a localhost, que no tiene una base de datos en producción.",
+      "reproduce-prod": {
+        "narrative": "Las versiones ya están fijadas. Antes de celebrar, quieres poder reproducir problemas estilo producción en tu laptop en vez de enterarte por los usuarios. ¿Cuál es la forma más confiable de hacerlo?",
         "choices": [
-          { "id": "a", "text": "Actualizar DATABASE_URL a la URL de la base de datos de producción", "nextNode": "fix-db", "score": 3 }
+          { "id": "a", "text": "Agregar un script 'pnpm start:prod' que corra 'npm run build && NODE_ENV=production node server.js' contra una copia de tus variables de entorno de producción", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Levantar un contenedor Docker que replique la imagen base de producción y correr el build adentro", "nextNode": "prevent-future", "score": 4 },
+          { "id": "c", "text": "Solo seguir usando 'npm run dev' y confiar en que producción se va a comportar igual", "nextNode": "prevent-future", "score": 0 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "Ya puedes reproducir producción localmente. Movimiento final: ¿cómo evitas que el próximo 'olvidé poner DATABASE_URL en la plataforma' llegue a producción?",
+        "choices": [
+          { "id": "a", "text": "Agregar un health check de arranque que liste cada variable de entorno requerida; fallar ruidosamente al boot si falta alguna Y exigir que los deploys pasen ese check antes de promocionar", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Crear un archivo .env.example y actualizar el checklist de despliegue en Notion", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Mandar un mensaje en Slack al equipo explicando lo que pasó hoy", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Creas un archivo .env.example listando cada variable requerida con valores de ejemplo, lo agregas al repositorio, y actualizas el checklist de despliegue del equipo para incluir 'verificar que todas las variables de entorno estén configuradas'. Los futuros despliegues serán mucho más seguros.",
+        "narrative": "Encontraste dos variables de entorno faltantes, arreglaste el DATABASE_URL apuntando a localhost, fijaste Node, configuraste una forma de correr un build de producción localmente, y agregaste un health check de arranque que se niega a iniciar con variables faltantes. La próxima variable faltante va a fallar en CI, no en producción a las 4pm del viernes.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Excelente depuración y prevención! Identificaste dos variables de entorno faltantes, las arreglaste, y configuraste salvaguardas para el futuro. El patrón .env.example es estándar de la industria -- documenta qué variables necesita tu app sin exponer los valores reales."
+        "feedback": "Instinto operacional de nivel senior. El gran movimiento es el check de arranque que falla ruidoso cuando la config está mal -- convierte un error silencioso en runtime en una falla de deploy obvia. Combinado con el pinning de versión y una forma de reproducir producción localmente, eliminaste las tres clases más grandes de 'funciona en mi máquina'."
       },
       "end-okay": {
-        "narrative": "Buena comunicación, pero sin un archivo .env.example o checklist, el mismo error probablemente pasará de nuevo la próxima vez que alguien despliegue. Una corrección sistémica es mejor que un mensaje único.",
+        "narrative": "Mandaste un arreglo limpio y documentaste las variables. La documentación ayuda al onboarding, pero no obliga nada -- el próximo deploy todavía puede subir con variables de entorno faltantes sin que nadie lo note hasta que los usuarios lo hagan.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Arreglaste el problema inmediato -- buen trabajo. Pero para prevenir que pase de nuevo, crea un archivo .env.example que liste todas las variables requeridas. De esta manera, cualquiera que despliegue puede verificar rápidamente que todas las variables estén configuradas."
+        "finalScore": 13,
+        "feedback": "Recuperación sólida. .env.example es estándar de la industria, pero sigue siendo una salvaguarda manual. Un health check de arranque que se niega a bootear con config faltante es la versión activa de la misma idea -- y nunca se salta, ni siquiera un viernes a las 4pm."
+      },
+      "end-weak": {
+        "narrative": "El bug de hoy está arreglado, pero nada cambió estructuralmente. La próxima persona que despliegue una funcionalidad que necesite una nueva variable de entorno va a recibir el mismo incidente de página en blanco, y tú vas a pasar otro viernes en el mismo tipo de depuración.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 8,
+        "feedback": "Manejaste el incendio inmediato pero no redujiste la superficie de incendios futuros. El conocimiento tribal en mensajes de Slack no escala. Un health check de arranque o un paso de CI que valide variables de entorno es el arreglo barato y duradero."
       }
     },
     "glossaryTerms": ["environment-variable", "production", "localhost"]

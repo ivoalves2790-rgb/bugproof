@@ -41,60 +41,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Abres tu terminal para crear el proyecto de Next.js para tu gestor de tareas. Que comando ejecutas?",
+        "narrative": "Abres tu terminal para crear el proyecto de Next.js para tu gestor de tareas. ¿Que comando ejecutas?",
         "choices": [
-          { "id": "correct-command", "text": "npx create-next-app@latest task-manager", "nextNode": "options-screen", "score": 3 },
+          { "id": "correct-command", "text": "npx create-next-app@latest task-manager", "nextNode": "options-screen", "score": 4 },
           { "id": "manual-setup", "text": "mkdir task-manager && npm init -y && npm install next react react-dom", "nextNode": "manual-setup", "score": 1 },
           { "id": "clone-template", "text": "Buscar en GitHub 'next.js task manager template' y clonar el proyecto de otra persona", "nextNode": "cloned-template", "score": 0 }
         ]
       },
       "options-screen": {
-        "narrative": "create-next-app te hace una serie de preguntas de configuracion. Pregunta: 'Te gustaria usar TypeScript?' Como respondes a esta y las demas preguntas?",
+        "narrative": "create-next-app te hace una serie de preguntas de configuración. Pregunta: '¿Te gustaria usar TypeScript?' ¿Como respondes a esta y las demas preguntas?",
         "choices": [
-          { "id": "yes-all-good", "text": "Si a TypeScript, Si a ESLint, Si a Tailwind, Si a App Router, No al directorio src/", "nextNode": "good-setup", "score": 3 },
-          { "id": "no-typescript", "text": "No a TypeScript porque parece complicado. Si a todo lo demas.", "nextNode": "no-ts-end", "score": 1 }
+          { "id": "yes-all-good", "text": "Si a TypeScript, Si a ESLint, Si a Tailwind, Si a App Router, No al directorio src/", "nextNode": "first-run", "score": 4 },
+          { "id": "no-typescript", "text": "No a TypeScript porque parece complicado. Si a todo lo demas.", "nextNode": "first-run", "score": 1 }
         ]
       },
       "manual-setup": {
-        "narrative": "Has instalado los paquetes manualmente, pero ahora no tienes archivos de configuracion, no tienes configuracion de TypeScript, no tienes linting ni estructura de proyecto. Necesitaras crear next.config.js, tsconfig.json y configurar ESLint manualmente. Que haces?",
+        "narrative": "Has instalado los paquetes manualmente, pero ahora no tienes archivos de configuración, no tienes configuración de TypeScript, no tienes linting ni estructura de proyecto. Necesitaras crear next.config.js, tsconfig.json y configurar ESLint manualmente. ¿Que haces?",
         "choices": [
-          { "id": "scrap-use-cli", "text": "Eliminar esta carpeta y usar create-next-app en su lugar", "nextNode": "recovery-end", "score": 3 },
-          { "id": "configure-manually", "text": "Pasar la próxima hora configurando todo a mano", "nextNode": "manual-end", "score": 1 }
+          { "id": "scrap-use-cli", "text": "Eliminar esta carpeta y volver a ejecutar create-next-app con los valores recomendados", "nextNode": "first-run", "score": 4 },
+          { "id": "configure-manually", "text": "Pasar la próxima hora configurando todo a mano", "nextNode": "first-run", "score": 1 }
         ]
       },
       "cloned-template": {
-        "narrative": "Clonaste una plantilla de 2022. Usa el Pages Router (patron obsoleto), tiene 47 dependencias que no entiendes, y el README dice 'Trabajo en progreso, no usar en produccion.' El codigo no coincide con ningun tutorial actual de Next.js.",
+        "narrative": "Clonaste una plantilla de 2022. Usa el Pages Router (patron obsoleto), tiene 47 dependencias que no entiendes, y el README dice 'Trabajo en progreso, no usar en producción.' Te das cuenta de que necesitas empezar de cero.",
+        "choices": [
+          { "id": "abandon-template", "text": "Eliminar el repo clonado y ejecutar create-next-app en su lugar", "nextNode": "first-run", "score": 3 },
+          { "id": "patch-template", "text": "Intentar actualizar las dependencias de la plantilla y migrar al App Router por tu cuenta", "nextNode": "first-run", "score": 0 }
+        ]
+      },
+      "first-run": {
+        "narrative": "La instalación termina. Entras a la carpeta del proyecto y necesitas confirmar que todo funciona antes de empezar a programar. ¿Cual es tu primer movimiento dentro de la nueva carpeta?",
+        "choices": [
+          { "id": "npm-run-dev", "text": "Ejecutar 'npm run dev' y abrir http://localhost:3000 para confirmar que la pagina de bienvenida se renderiza", "nextNode": "explore-folders", "score": 4 },
+          { "id": "open-package", "text": "Abrir package.json y leer cada dependencia antes de ejecutar nada", "nextNode": "explore-folders", "score": 2 },
+          { "id": "start-deleting", "text": "Empezar a borrar archivos como el favicon predeterminado y los estilos de ejemplo antes de ejecutar la app una vez", "nextNode": "explore-folders", "score": 0 }
+        ]
+      },
+      "explore-folders": {
+        "narrative": "El servidor de desarrollo esta corriendo. Ahora quieres encontrar donde agregar la UI de tu gestor de tareas. El scaffold te dio app/, public/ y algunos archivos de configuración. ¿Donde haces tu primera edición?",
+        "choices": [
+          { "id": "edit-page", "text": "Editar app/page.tsx — esa es la pagina principal renderizada por el App Router", "nextNode": "next-steps", "score": 4 },
+          { "id": "edit-layout", "text": "Editar app/layout.tsx y reemplazar el contenido del body con una pagina principal", "nextNode": "next-steps", "score": 1 },
+          { "id": "make-pages", "text": "Crear un directorio pages/ en la raiz y agregar un archivo index.tsx ahí", "nextNode": "next-steps", "score": 0 }
+        ]
+      },
+      "next-steps": {
+        "narrative": "Tu edición aparece en el navegador al guardar. Antes de empezar a construir funcionalidades, ¿que deberias preparar para no perder trabajo?",
+        "choices": [
+          { "id": "git-and-readme", "text": "Confirmar que git esta inicializado, escribir un README rápido y hacer un primer commit limpio del scaffold", "nextNode": "excellent-end", "score": 4 },
+          { "id": "just-keep-going", "text": "Saltarte git por ahora y empezar a construir — haras commit cuando haya algo interesante que guardar", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "install-everything", "text": "Instalar diez librerias que podrias necesitar despues (drag-and-drop, graficas, animaciones) antes de escribir una sola funcionalidad", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Elegiste el CLI oficial, aceptaste los valores recomendados, verificaste que el servidor de desarrollo arranca, editaste el archivo correcto y dejaste asegurada una linea base de git limpia. Tu gestor de tareas tiene una base profesional y puedes empezar a construir funcionalidades con confianza.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Clonar plantillas aleatorias te da la deuda técnica de otra persona y patrones obsoletos. create-next-app siempre te da la última configuración estable sin equipaje. Empieza de cero.",
+        "finalScore": 20,
+        "feedback": "Configuración de manual. create-next-app + TypeScript + Tailwind + App Router + un dev verificado + un primer commit es exactamente la pista que cada proyecto Next.js deberia tener. Tu yo del futuro te lo agradecera cada vez que abras una configuración que ya esta correcta.",
         "choices": []
       },
-      "good-setup": {
-        "narrative": "Tu proyecto esta creado con TypeScript, ESLint, Tailwind y el App Router. Ejecutas 'npm run dev' y ves la pagina de bienvenida de Next.js en localhost:3000. Limpio, moderno, listo para construir.",
+      "mediocre-end": {
+        "narrative": "Tu proyecto arranca y has empezado a editar app/page.tsx, pero sin git no tienes puntos de guardado. La primera vez que borres el archivo equivocado o rompas un layout, lo estaras reconstruyendo de memoria.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excelentes elecciones. TypeScript detecta bugs en tiempo de compilación, ESLint refuerza la calidad del código, Tailwind acelera el estilizado, y el App Router es el futuro de Next.js. Estas preparado para el éxito.",
+        "finalScore": 12,
+        "feedback": "El scaffold en si esta bien, pero saltarte el primer commit significa que ya renunciaste a tu red de seguridad. Haz el commit inicial antes de la segunda funcionalidad — cada minuto de código sin versionar es un minuto de riesgo.",
         "choices": []
       },
-      "no-ts-end": {
-        "narrative": "El proyecto funciona, pero sin TypeScript te perderas el autocompletado, la verificacion de tipos y la deteccion temprana de bugs. Tres dias despues, pasas un string donde se esperaba un numero y pasas una hora buscando un bug que TypeScript habria detectado instantaneamente.",
+      "weak-end": {
+        "narrative": "Pasaste una hora instalando librerias que aun no necesitas, tu package.json esta inflado, y todavia no has escrito una sola funcionalidad. Cuando TypeScript se queja de un conflicto de peer dependencies, no sabes cual instalación lo causo.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "TypeScript se siente como trabajo extra al principio, pero se paga solo inmediatamente a traves de mejor autocompletado y deteccion de errores. Para cualquier proyecto que planees mantener, siempre elige TypeScript.",
-        "choices": []
-      },
-      "recovery-end": {
-        "narrative": "Movimiento inteligente. Eliminas la configuracion manual, ejecutas create-next-app, y en 30 segundos tienes un proyecto completamente configurado. El CLI se encargo de todos los archivos de configuracion que habrias tardado una hora en escribir.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Reconocer cuando has tomado el camino difícil y cambiar al más fácil es una habilidad valiosa. create-next-app existe para que no tengas que configurar boilerplate a mano.",
-        "choices": []
-      },
-      "manual-end": {
-        "narrative": "Despues de una hora de configuracion, tienes un setup funcional. Pero a tu tsconfig.json le faltan algunas opciones del compilador que create-next-app incluye, y tu configuracion de ESLint no tiene las reglas especificas de Next.js. Bugs sutiles se colaran despues.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "La configuración manual es educativa pero impractica para proyectos reales. El CLI oficial es mantenido por el equipo de Next.js e incluye configuraciones ajustadas para su framework. Usalo.",
+        "finalScore": 5,
+        "feedback": "Las dependencias prematuras son deuda técnica antes de que hayas siquiera entregado una funcionalidad. Agrega librerias cuando aparezca un requisito real, no 'por si acaso'. Empieza ligero, prueba que la funcionalidad funciona y luego instala lo que realmente necesitas.",
         "choices": []
       }
     },

@@ -45,63 +45,83 @@
       "start": {
         "narrative": "Haces push a main y el despliegue comienza. Dos minutos después, recibes una alerta: 'Build failed'. El sitio todavía muestra la versión anterior. Tu PM está preguntando cuándo estará en vivo la nueva funcionalidad. ¿Qué haces primero?",
         "choices": [
-          { "id": "a", "text": "Revisar los logs de compilación en la plataforma de hosting", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Enviar el mismo código de nuevo -- tal vez fue un fallo temporal", "nextNode": "retry-blind", "score": 2 },
+          { "id": "a", "text": "Abrir los logs de compilación en la plataforma de hosting", "nextNode": "check-logs", "score": 4 },
+          { "id": "b", "text": "Enviar el mismo código de nuevo -- tal vez fue un fallo temporal", "nextNode": "retry-blind", "score": 1 },
           { "id": "c", "text": "Decirle al PM que estará listo mañana e ir a almorzar", "nextNode": "ignore", "score": 0 }
         ]
       },
       "check-logs": {
         "narrative": "¡Buena decisión! Abres los logs de compilación y ves:\n\nError: Module not found: Can't resolve './components/Header'\n  at ./src/pages/index.js\n\nBuild failed with 1 error.\n\nEl archivo existe en tu computadora. ¿Qué podría estar mal?",
         "choices": [
-          { "id": "a", "text": "Verificar si las mayúsculas del nombre del archivo coinciden -- Mac no distingue mayúsculas pero los servidores Linux sí", "nextNode": "found-issue", "score": 10 },
-          { "id": "b", "text": "Eliminar la carpeta node_modules y reinstalar", "nextNode": "wrong-fix", "score": 3 },
-          { "id": "c", "text": "El servidor debe estar roto -- contactar soporte de hosting", "nextNode": "blame-server", "score": 1 }
+          { "id": "a", "text": "Verificar si las mayúsculas del nombre del archivo coinciden -- Mac no distingue mayúsculas pero los servidores Linux sí", "nextNode": "found-issue", "score": 4 },
+          { "id": "b", "text": "Eliminar la carpeta node_modules y reinstalar", "nextNode": "found-issue", "score": 1 },
+          { "id": "c", "text": "El servidor debe estar roto -- contactar soporte de hosting", "nextNode": "found-issue", "score": 0 }
         ]
       },
       "retry-blind": {
         "narrative": "Haces push de nuevo y... el mismo error. Los fallos de compilación casi nunca son fallas temporales -- son causados por problemas reales en tu código o configuración. Necesitas realmente leer el mensaje de error.",
         "choices": [
-          { "id": "a", "text": "Está bien, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 3 }
+          { "id": "a", "text": "Está bien, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 1 }
         ]
       },
       "ignore": {
         "narrative": "Ignorar un fallo de compilación significa que la nueva funcionalidad no está en vivo y no estás más cerca de arreglarlo. El PM preguntará de nuevo después del almuerzo. Mejor investigar ahora mientras el error está fresco.",
         "choices": [
-          { "id": "a", "text": "Bueno, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 1 }
+          { "id": "a", "text": "Bueno, déjame revisar los logs de compilación", "nextNode": "check-logs", "score": 0 }
         ]
       },
       "found-issue": {
-        "narrative": "¡Exacto! Tu archivo se llama 'header.js' pero tu import dice './components/Header'. En tu Mac, esto funciona porque macOS no distingue mayúsculas de minúsculas. Pero el servidor Linux sí -- 'Header' y 'header' son archivos diferentes. ¿Cómo lo arreglas?",
+        "narrative": "¡Exacto! Tu archivo se llama 'header.js' pero tu import dice './components/Header'. En tu Mac esto funciona porque macOS no distingue mayúsculas. El servidor Linux de build sí lo hace -- 'Header' y 'header' son archivos diferentes. ¿Cómo lo arreglas?",
         "choices": [
-          { "id": "a", "text": "Renombrar el archivo para que coincida con el import: Header.js", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Cambiar el import a minúsculas: ./components/header", "nextNode": "end-okay", "score": 7 }
+          { "id": "a", "text": "Usar 'git mv components/header.js components/Header.js' para que Git registre el cambio de mayúsculas", "nextNode": "reproduce-locally", "score": 4 },
+          { "id": "b", "text": "Solo renombrar el archivo en Finder y hacer commit -- Git lo va a tomar", "nextNode": "reproduce-locally", "score": 1 },
+          { "id": "c", "text": "Cambiar el import a minúsculas: ./components/header", "nextNode": "reproduce-locally", "score": 2 }
         ]
       },
-      "wrong-fix": {
-        "narrative": "Reinstalar las dependencias no ayudó porque el problema no es con tus paquetes -- es con la ruta del archivo. Mira el error más cuidadosamente: dice que el módulo no se puede encontrar. El archivo existe, así que tal vez es un problema de nombres.",
+      "reproduce-locally": {
+        "narrative": "Arreglaste el archivo. Antes de hacer push a main y enterarte por el servidor de build de si funciona, ¿cómo confirmas que el build de producción realmente tiene éxito en tu laptop?",
         "choices": [
-          { "id": "a", "text": "Verificar si las mayúsculas del nombre del archivo coinciden con el import", "nextNode": "found-issue", "score": 5 }
+          { "id": "a", "text": "Ejecutar 'npm run build' localmente y vigilar los errores antes de hacer push", "nextNode": "check-bundle", "score": 4 },
+          { "id": "b", "text": "Hacer push a una rama de preview primero y dejar que el deploy de preview de la plataforma lo verifique", "nextNode": "check-bundle", "score": 3 },
+          { "id": "c", "text": "Hacer push directo a main -- el servidor de desarrollo local ya funcionó", "nextNode": "check-bundle", "score": 0 }
         ]
       },
-      "blame-server": {
-        "narrative": "El servidor está bien -- está ejecutando tu comando de compilación exactamente como se le indicó. El error está en tu código. Lee el mensaje de error de nuevo: dice que un módulo específico no se puede encontrar.",
+      "check-bundle": {
+        "narrative": "El build tiene éxito. Ahora el deploy sale, pero la página se ve lenta en móvil. Abres la salida del build y ves que el bundle de JS pesa 4.2 MB. ¿Cuál es el siguiente paso más útil?",
         "choices": [
-          { "id": "a", "text": "Está bien, déjame mirar la ruta del archivo más cuidadosamente", "nextNode": "found-issue", "score": 3 }
+          { "id": "a", "text": "Ejecutar 'npx vite-bundle-visualizer' (o el equivalente para tu bundler) para ver qué dependencia es la más gorda", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Activar gzip en el CDN y darlo por hecho -- la compresión va a esconder el tamaño", "nextNode": "prevent-future", "score": 2 },
+          { "id": "c", "text": "Ignorar el tamaño -- 4.2 MB es normal para una app moderna", "nextNode": "prevent-future", "score": 0 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "Adelgazaste el bundle haciendo tree-shaking de una librería de íconos sobredimensionada. Para evitar la próxima sorpresa de 'funciona local, falla en Linux', ¿qué pones en CI?",
+        "choices": [
+          { "id": "a", "text": "Agregar un paso de CI que ejecute 'npm run build' en Linux para cada PR -- los builds fallidos bloquean el merge", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Configurar un hook pre-push de Git que ejecute el build localmente antes de permitir el push", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Poner una nota en el README diciéndole a la gente que recuerde probar el build", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Renombras 'header.js' a 'Header.js', haces commit y push. La compilación tiene éxito y el sitio se despliega en menos de 2 minutos. El PM está contento, y has aprendido una lección importante sobre la sensibilidad a mayúsculas entre sistemas operativos.",
+        "narrative": "Leíste los logs de build, arreglaste las mayúsculas con 'git mv', verificaste el build localmente, recortaste el bundle y agregaste CI que corre el build de producción en Linux para cada PR. El próximo bug de mayúsculas -- y va a haber uno -- nunca va a llegar a main.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Depuración perfecta! Revisaste los logs de compilación, identificaste el problema de sensibilidad a mayúsculas, e hiciste una corrección limpia. Las mayúsculas en archivos son uno de los errores más comunes de 'funciona en mi máquina' porque Mac y Windows no distinguen mayúsculas pero los servidores Linux sí."
+        "feedback": "Así se ve la higiene madura de despliegue. El paso más importante fue el build en CI sobre Linux: elimina la brecha entre tu laptop y el entorno de producción, que es donde se esconden el 90% de los bugs de 'funciona en mi máquina'. Combina esto con un check de tamaño de bundle y tienes un pipeline de deploy que captura problemas antes que los usuarios."
       },
       "end-okay": {
-        "narrative": "Cambiar el import a minúsculas también funciona, pero ahora tu estilo de código es inconsistente -- algunos imports usan PascalCase y otros no. La convención para componentes React es nombres de archivo en PascalCase, así que renombrar el archivo sería más limpio.",
+        "narrative": "Mandaste un arreglo limpio y un hook pre-push. El hook te ayuda a ti, pero un compañero en Windows o un contratista sin tus dotfiles no lo va a tener -- así que la clase de bug no queda totalmente cerrada.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Encontraste la causa raíz -- ¡buen trabajo! Ambas correcciones funcionan, pero renombrar el archivo a PascalCase (Header.js) es la mejor convención para componentes React. Siempre sé consistente con las mayúsculas de archivos para evitar estos errores entre plataformas."
+        "finalScore": 13,
+        "feedback": "Recuperación sólida. Los hooks locales ayudan a las personas; CI ayuda al equipo entero. Mueve el check de build a CI para que cada contribuidor tenga la misma red de seguridad sin importar la configuración de su máquina."
+      },
+      "end-weak": {
+        "narrative": "El sitio volvió a estar en línea pero nada cambió estructuralmente. El próximo bug de mayúsculas, la próxima dependencia faltante, la próxima sorpresa específica de plataforma volverán a llegar a main, porque la única salvaguarda es que la gente se acuerde de leer el README.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Arreglaste el bug de hoy, pero no redujiste la superficie de bugs de mañana. La documentación es un deseo; CI es una garantía. Un solo paso de 'npm run build' en CI habría capturado esto sin necesidad de atención humana."
       }
     },
     "glossaryTerms": ["production-build", "build-error", "case-sensitivity"]

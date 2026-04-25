@@ -45,43 +45,76 @@
       "start": {
         "narrative": "Your app's single bundle is 2MB. You analyze it and find:\n\n- Dashboard code: 200KB\n- Settings page: 150KB\n- Admin panel: 300KB\n- Chart library (used only in admin): 600KB\n- PDF generator (used only in settings): 400KB\n- Shared React + utilities: 350KB\n\n80% of users only visit the dashboard. What's your first code splitting strategy?",
         "choices": [
-          { "id": "a", "text": "Split by route -- each page becomes its own chunk", "nextNode": "route-split", "score": 10 },
-          { "id": "b", "text": "Split the chart library into its own chunk since it's the biggest", "nextNode": "chart-split", "score": 6 },
-          { "id": "c", "text": "Minify everything harder to make the single bundle smaller", "nextNode": "minify-only", "score": 2 }
+          { "id": "a", "text": "Split by route -- each page becomes its own chunk", "nextNode": "route-split", "score": 4 },
+          { "id": "b", "text": "Split the chart library into its own chunk since it's the biggest", "nextNode": "chart-split", "score": 2 },
+          { "id": "c", "text": "Minify everything harder to make the single bundle smaller", "nextNode": "minify-only", "score": 0 }
         ]
       },
       "route-split": {
-        "narrative": "You split the app into route-based chunks:\n\n- Main chunk (shared code): 350KB\n- Dashboard chunk: 200KB\n- Settings + PDF generator: 550KB\n- Admin + charts: 900KB\n\nNow dashboard users only download 550KB instead of 2MB. But the admin chunk is still 900KB. What do you do about it?",
+        "narrative": "You split the app into route-based chunks:\n\n- Main chunk (shared code): 350KB\n- Dashboard chunk: 200KB\n- Settings + PDF generator: 550KB\n- Admin + charts: 900KB\n\nNow dashboard users only download 550KB instead of 2MB. The admin chunk is still 900KB because the chart library lives inside it.",
         "choices": [
-          { "id": "a", "text": "Also lazy load the chart library so it only loads when the charts component renders", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "900KB is fine since only admins see it", "nextNode": "end-okay", "score": 6 }
+          { "id": "a", "text": "Lazy-load the chart library at the component level so it only loads when the charts component renders", "nextNode": "preload-strategy", "score": 4 },
+          { "id": "b", "text": "Leave the admin chunk at 900KB -- only admins see it", "nextNode": "preload-strategy", "score": 2 }
         ]
       },
       "chart-split": {
-        "narrative": "Splitting the chart library helps, but you're still sending 1.4MB to dashboard users who don't need the settings page, admin panel, or PDF generator. Route-based splitting would be more impactful as a first step.",
+        "narrative": "Splitting the chart library into its own chunk shaves 600KB off the initial download, but you're still sending 1.4MB to dashboard users who don't need settings, admin, or PDF code. Route-based splitting is the bigger lever for the first cut.",
         "choices": [
-          { "id": "a", "text": "Start with route-based splitting instead", "nextNode": "route-split", "score": 7 }
+          { "id": "a", "text": "Start with route-based splitting first, then come back to the chart library", "nextNode": "preload-strategy", "score": 3 }
         ]
       },
       "minify-only": {
         "narrative": "Your code is already minified. You might squeeze out another 5-10%, but the fundamental problem remains: you're sending 2MB of code to users who only need 200KB. The solution isn't smaller files -- it's fewer files loaded upfront.",
         "choices": [
-          { "id": "a", "text": "Try code splitting instead of just compression", "nextNode": "route-split", "score": 5 }
+          { "id": "a", "text": "Try route-based splitting instead of just compression", "nextNode": "preload-strategy", "score": 2 }
+        ]
+      },
+      "preload-strategy": {
+        "narrative": "Splitting alone introduces a new problem: when a user clicks the link to the admin panel, they now wait while the chunk downloads on a cold cache. The Suspense fallback flashes. The page feels slower than before, even though the bundle is smaller. How do you bridge that gap?",
+        "choices": [
+          { "id": "a", "text": "Preload the admin and settings chunks on hover/focus of their nav links so the chunk is in cache by the time the user clicks", "nextNode": "measure-impact", "score": 4 },
+          { "id": "b", "text": "Prefetch all secondary chunks during browser idle time after the dashboard hydrates", "nextNode": "measure-impact", "score": 3 },
+          { "id": "c", "text": "Add a longer Suspense fallback skeleton so users don't notice the wait", "nextNode": "measure-impact", "score": 1 },
+          { "id": "d", "text": "Skip preloading -- the on-demand wait is acceptable", "nextNode": "measure-impact", "score": 1 }
+        ]
+      },
+      "measure-impact": {
+        "narrative": "Splits and preloads are wired up. Before you ship, you need to confirm the change actually helped (and didn't accidentally hurt) something measurable. What's your verification step?",
+        "choices": [
+          { "id": "a", "text": "Run Lighthouse on dashboard, settings, and admin pages on a throttled 'Slow 4G' profile and compare LCP/TTI before vs after", "nextNode": "ship-iterate", "score": 4 },
+          { "id": "b", "text": "Check the production bundle analyzer to confirm chunk sizes match expectations", "nextNode": "ship-iterate", "score": 3 },
+          { "id": "c", "text": "Reload the dashboard once locally on a fast connection and call it good", "nextNode": "ship-iterate", "score": 1 },
+          { "id": "d", "text": "Skip measurement -- smaller initial chunk has to be faster", "nextNode": "ship-iterate", "score": 0 }
+        ]
+      },
+      "ship-iterate": {
+        "narrative": "Numbers look good in synthetic tests. But the real users you care about are on a mix of devices and networks you can't simulate. How do you ship the change in a way that catches a regression you didn't anticipate?",
+        "choices": [
+          { "id": "a", "text": "Ship behind a 50/50 rollout with real-user monitoring (Web Vitals to your analytics) and roll back if p75 LCP regresses", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Ship to 100% of users and watch the Web Vitals dashboard for the next 24 hours", "nextNode": "end-okay", "score": 2 },
+          { "id": "c", "text": "Ship to 100% of users and trust the synthetic Lighthouse numbers", "nextNode": "end-bad", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "Now your loading breakdown is:\n\n- Dashboard users: 350KB (shared) + 200KB (dashboard) = 550KB\n- Settings users: + 550KB when they navigate there\n- Admin users: + 300KB for admin, then + 600KB for charts only when they open the charts tab\n\nDashboard load time dropped from 10 seconds to under 3 seconds on slow connections.",
+        "narrative": "Real-user p75 LCP drops from 6.8s to 2.4s for dashboard users on slow connections. Admin-page TTI is unchanged (preload absorbs the cold-cache cost). The 50/50 rollout caught a regression in Safari that you fixed before going to 100%. Dashboard load time on Slow 4G dropped from 10 seconds to under 3 seconds.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Perfect strategy! Route-based splitting gave the biggest win by keeping dashboard users from downloading admin and settings code. Then component-level splitting of the chart library ensured even admin users don't load 600KB of charts until they actually view charts. This layered approach is exactly how production apps handle code splitting."
+        "feedback": "End-to-end performance work done right. You picked the highest-leverage split first (routes), pushed deeper (component-level for the chart library), bridged the cold-cache gap with preloading, verified with synthetic tests, and shipped behind a guarded rollout backed by real-user metrics. That's the loop that turns an optimization from a guess into a measured win."
       },
       "end-okay": {
-        "narrative": "The route splitting alone is a huge win for most users. Admin page performance could be better, but this is a reasonable trade-off if admin users are on fast connections.",
+        "narrative": "The change goes out to everyone at once. Most users see the improvement, but a subset on a specific device class regresses and you only notice three days later when your analytics weekly review surfaces it. You roll forward a fix, but slow users had a worse week than they needed to.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 14,
-        "feedback": "Route-based splitting was the right first move and gave the biggest performance win. For the admin page, lazily loading the 600KB chart library would help, especially for admin users on slower connections. But overall, you've cut the initial load for 80% of users from 2MB to 550KB."
+        "finalScore": 13,
+        "feedback": "Synthetic tests + post-launch monitoring is much better than nothing, but it puts the entire user base on the experimental version at once. A staged rollout (10% → 50% → 100%) with automated rollback on a Web Vitals regression catches device- or network-specific regressions before they hit everyone."
+      },
+      "end-bad": {
+        "narrative": "Lighthouse said it was faster, so you shipped to 100%. A week later you notice bounce rate up on settings -- preloading is fighting the dashboard's own data fetch on slow connections, and you've made the page worse for the users you most wanted to help. You roll back.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Lighthouse is a synthetic single-run on one device profile -- it tells you what could happen, not what is happening. Real-user monitoring (RUM) is what tells you whether your change actually improved p75 LCP for the users you have. Always pair synthetic measurement with a guarded rollout backed by RUM."
       }
     },
     "glossaryTerms": ["code-splitting", "lazy-loading", "bundle", "chunk"]

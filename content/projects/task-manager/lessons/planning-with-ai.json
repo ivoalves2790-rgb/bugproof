@@ -53,57 +53,67 @@
       "code-first": {
         "narrative": "The AI generates 500 lines of code. It works, sort of — but the data model doesn't match your feature list, there's no auth, and the UI is generic. You've skipped planning and now you're debugging someone else's architecture decisions. What do you do?",
         "choices": [
-          { "id": "scrap-restart", "text": "Scrap it. Go back and plan properly, THEN code.", "nextNode": "good-recovery", "score": 3 },
-          { "id": "patch-it", "text": "Try to fix the generated code piece by piece", "nextNode": "patch-end", "score": 1 }
+          { "id": "scrap-restart", "text": "Scrap the generated code, paste your real feature list back into the chat, and ask for a milestone plan instead", "nextNode": "review-plan", "score": 4 },
+          { "id": "patch-it", "text": "Try to fix the generated code piece by piece without going back to planning", "nextNode": "review-plan", "score": 1 }
         ]
       },
       "plan-first": {
         "narrative": "The AI suggests a 4-milestone plan: 1) Setup + data model, 2) Core CRUD UI, 3) Filtering + sorting, 4) Polish + deploy. It also flags a question: 'Will users need accounts, or is this local-only?' How do you handle this?",
         "choices": [
-          { "id": "answer-and-continue", "text": "\"Users need accounts — we'll use Supabase Auth. Add a milestone 0 for auth setup.\" Then ask the AI to identify other risks.", "nextNode": "excellent-end", "score": 4 },
-          { "id": "skip-auth", "text": "\"Skip auth for now, we'll add it later\"", "nextNode": "skip-auth-end", "score": 2 }
+          { "id": "answer-and-continue", "text": "\"Users need accounts — we'll use Supabase Auth. Add a milestone 0 for auth setup.\"", "nextNode": "review-plan", "score": 4 },
+          { "id": "skip-auth", "text": "\"Skip auth for now, we'll add it later\"", "nextNode": "review-plan", "score": 1 }
         ]
       },
       "ai-decides": {
-        "narrative": "The AI suggests a recipe app, a habit tracker, and a budget tool. None of these are what you wanted. You've wasted time because the AI didn't know you already had a plan.",
+        "narrative": "The AI suggests a recipe app, a habit tracker, and a budget tool. None of these are what you wanted. You realize you let the AI lead instead of leading it. What now?",
         "choices": [
-          { "id": "redirect", "text": "\"Actually, I already know what I'm building. Let me share my feature list...\"", "nextNode": "good-recovery", "score": 2 },
-          { "id": "go-with-it", "text": "Pick the habit tracker because it sounds fun", "nextNode": "distracted-end", "score": 0 }
+          { "id": "redirect", "text": "\"Actually, I already know what I'm building. Here's my feature list and user stories — let's plan from this.\"", "nextNode": "review-plan", "score": 3 },
+          { "id": "go-with-it", "text": "Pick the habit tracker because it sounds fun and pivot the whole project", "nextNode": "review-plan", "score": 0 }
         ]
       },
-      "good-recovery": {
-        "narrative": "You share your feature list and user stories. The AI creates a solid project plan. You're back on track, though you lost some time.",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "You recovered by bringing your own plan to the AI. Remember: come to the AI with a clear goal and constraints. Let it help you plan, don't let it decide for you.",
-        "choices": []
+      "review-plan": {
+        "narrative": "You now have a draft milestone plan from the AI. Before you treat it as gospel, how do you review it?",
+        "choices": [
+          { "id": "critique-prompt", "text": "Ask the AI to critique its own plan: 'What's missing? What could go wrong? Where am I being unrealistic?'", "nextNode": "scope-risks", "score": 4 },
+          { "id": "spot-check", "text": "Skim the milestones, fix anything that looks obviously wrong, and move on", "nextNode": "scope-risks", "score": 2 },
+          { "id": "rubber-stamp", "text": "Trust the plan as-is — the AI is smarter than you about software", "nextNode": "scope-risks", "score": 0 }
+        ]
+      },
+      "scope-risks": {
+        "narrative": "The plan is reviewed. The AI flags three risks: scope creep (your feature list is large), no time budgeted for testing, and an ambitious 2-week deadline. How do you address scope before writing any code?",
+        "choices": [
+          { "id": "cut-to-mvp", "text": "Mark each feature as 'MVP' or 'V2'. Anything not strictly required to ship a usable task manager moves to V2.", "nextNode": "first-step", "score": 4 },
+          { "id": "extend-deadline", "text": "Keep every feature but extend the deadline from 2 weeks to 6 weeks", "nextNode": "first-step", "score": 2 },
+          { "id": "ignore-risks", "text": "Leave the feature list as-is and trust that you'll move fast enough", "nextNode": "first-step", "score": 0 }
+        ]
+      },
+      "first-step": {
+        "narrative": "Plan is scoped, risks are noted. Now you have to pick the very first concrete task to start building. What do you ask the AI for?",
+        "choices": [
+          { "id": "data-model", "text": "\"Walk me through the data model first: tables, columns, and relationships for tasks and users.\"", "nextNode": "excellent-end", "score": 4 },
+          { "id": "ui-mockup", "text": "\"Generate the homepage UI so I have something visible to show.\"", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "dump-everything", "text": "\"Now generate all the code for milestone 1 in one go.\"", "nextNode": "weak-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "The AI produces a detailed milestone plan with risk flags. You review it, adjust the timeline, and add notes about which parts you'll prompt the AI for. You now have a clear roadmap before writing any code.",
+        "narrative": "You start with the data model — the foundation everything else sits on. The AI lays out tables, columns, and relationships. You spot two missing fields before any code is written and fix them in seconds. You now have a roadmap, scoped MVP, and a solid foundation to build on.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Perfect approach! You brought your own vision, used AI for planning (not just coding), addressed architectural questions early, and asked for risk analysis. This is how senior developers work.",
+        "finalScore": 20,
+        "feedback": "This is how senior developers use AI: bring your own vision, plan before coding, ask the AI to critique its own work, ruthlessly scope to MVP, and build foundations before features. You stayed in the driver's seat the whole way.",
         "choices": []
       },
-      "skip-auth-end": {
-        "narrative": "You proceed without auth. Three milestones later, you realize every feature assumes a logged-in user. You now have to retrofit auth into the entire codebase — a much bigger job than adding it at the start.",
+      "mediocre-end": {
+        "narrative": "You start with the homepage UI. It looks great, but two days later you realize the mockup assumed a data shape your tables don't support. You rework the UI to match the real data, losing time you didn't have to spare.",
+        "isEnd": true,
+        "finalScore": 11,
+        "feedback": "Starting with UI feels productive because you see results fast, but it locks in assumptions about data that may not hold. Build the data model first — the UI is much easier to redo than the schema.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "You ask the AI to generate everything for milestone 1 at once. It produces hundreds of lines of code that don't quite fit together. You spend the rest of the week debugging integration issues that careful step-by-step planning would have prevented.",
         "isEnd": true,
         "finalScore": 4,
-        "feedback": "Auth is foundational — it touches everything (data ownership, API security, UI state). When the AI flags a decision like this, address it immediately rather than deferring it.",
-        "choices": []
-      },
-      "patch-end": {
-        "narrative": "After hours of patching, the code sort of works but is a Frankenstein of your changes and the AI's original. The architecture is inconsistent and hard to extend.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Patching generated code without understanding its architecture leads to a fragile mess. It's almost always faster to plan properly and then generate, rather than generate and then fix.",
-        "choices": []
-      },
-      "distracted-end": {
-        "narrative": "You spend two days on a habit tracker before realizing you wanted to build a task manager. The habit tracker code is useless for your real project.",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Don't let AI decide what YOU should build. Come with your own vision. AI is a tool, not a leader.",
+        "feedback": "Big-bang code generation defeats the point of planning. AI works best when you feed it one bounded task at a time. Generate the schema, review it, generate one component, review it — small loops keep you in control.",
         "choices": []
       }
     },

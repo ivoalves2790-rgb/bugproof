@@ -43,63 +43,75 @@
       "start": {
         "narrative": "Tu amigo acaba de lanzar su sitio web en www.coolstore.com. Te dice: 'Compré el dominio hace una hora y lo apunté a mi servidor, pero cuando escribo la URL obtengo un error: DNS_PROBE_FINISHED_NXDOMAIN.' ¿Qué significa este error?",
         "choices": [
-          { "id": "a", "text": "DNS no pudo encontrar una dirección IP para ese nombre de dominio", "nextNode": "correct-dns", "score": 10 },
-          { "id": "b", "text": "El servidor está caído y no responde", "nextNode": "wrong-server-down", "score": 3 },
-          { "id": "c", "text": "El código del sitio web tiene un error", "nextNode": "wrong-code-bug", "score": 1 }
-        ]
-      },
-      "correct-dns": {
-        "narrative": "¡Correcto! NXDOMAIN significa 'Dominio No Existente' -- DNS buscó coolstore.com pero no pudo encontrar ninguna dirección IP para él. Tu amigo dice que actualizó la configuración DNS en su registrador de dominios hace una hora. ¿Qué está pasando probablemente?",
-        "choices": [
-          { "id": "a", "text": "Los cambios de DNS tardan en propagarse por internet (propagación)", "nextNode": "correct-propagation", "score": 10 },
-          { "id": "b", "text": "Probablemente escribió la dirección IP incorrecta en la configuración DNS", "nextNode": "possible-typo", "score": 5 },
-          { "id": "c", "text": "El registrador de dominios está fallando", "nextNode": "wrong-registrar", "score": 2 }
+          { "id": "a", "text": "DNS no pudo encontrar una dirección IP para ese nombre de dominio", "nextNode": "verify-records", "score": 4 },
+          { "id": "b", "text": "El servidor está caído y no responde", "nextNode": "wrong-server-down", "score": 1 },
+          { "id": "c", "text": "El código del sitio web tiene un error", "nextNode": "wrong-code-bug", "score": 0 }
         ]
       },
       "wrong-server-down": {
         "narrative": "No exactamente. Si el servidor estuviera caído, obtendrías un error diferente -- como un tiempo de espera agotado o conexión rechazada. El error NXDOMAIN ocurre antes en el proceso: tu navegador ni siquiera puede encontrar DÓNDE está el servidor. Es un problema de DNS, no del servidor.",
         "choices": [
-          { "id": "a", "text": "Entonces, ¿DNS no pudo encontrar la dirección IP del nombre de dominio?", "nextNode": "correct-dns", "score": 5 }
+          { "id": "wsd-redirect", "text": "Entendido -- DNS no pudo resolver el dominio a una IP", "nextNode": "verify-records", "score": 2 }
         ]
       },
       "wrong-code-bug": {
         "narrative": "Un error en el código solo importaría si tu navegador pudiera realmente alcanzar el servidor. El error NXDOMAIN ocurre antes de que se haga cualquier conexión -- tu navegador todavía está intentando averiguar DÓNDE enviar la petición. Está atascado en el paso de DNS.",
         "choices": [
-          { "id": "a", "text": "OK, entonces es un problema de DNS -- el nombre de dominio no se puede resolver", "nextNode": "correct-dns", "score": 5 }
+          { "id": "wcb-redirect", "text": "OK, entonces el nombre de dominio en sí no resuelve — es un problema de DNS", "nextNode": "verify-records", "score": 2 }
         ]
       },
-      "correct-propagation": {
-        "narrative": "¡Exactamente! La propagación de DNS puede tardar hasta 48 horas. Los servidores DNS de todo el mundo almacenan resultados en caché y no buscan actualizaciones de inmediato. Tu amigo debería esperar unas horas más. Mientras tanto, ¿qué puede hacer para verificar que su configuración es correcta?",
+      "verify-records": {
+        "narrative": "Antes de asumir propagación, quieres verificar que los registros se configuraron correctamente. ¿Cómo revisas la configuración DNS real?",
         "choices": [
-          { "id": "a", "text": "Usar una herramienta de búsqueda DNS para verificar si los registros están configurados correctamente", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Solo esperar y desear lo mejor", "nextNode": "end-ok", "score": 5 }
+          { "id": "vr-dig", "text": "Correr dig coolstore.com @8.8.8.8 para preguntarle al resolver de Google y ver exactamente qué registro (o falta de registro) devuelve", "nextNode": "check-propagation", "score": 4 },
+          { "id": "vr-tool", "text": "Usar un verificador DNS online como dnschecker.org para ver cómo se ve el registro desde muchas regiones", "nextNode": "check-propagation", "score": 3 },
+          { "id": "vr-refresh", "text": "Solo refrescar el navegador unas veces y esperar que resuelva", "nextNode": "check-propagation", "score": 0 }
         ]
       },
-      "possible-typo": {
-        "narrative": "¡Eso es posible! Pero como acaba de hacer el cambio, la razón más probable es la propagación de DNS -- toma tiempo para que los cambios de DNS se propaguen por internet. Los servidores DNS almacenan resultados en caché y solo se actualizan periódicamente, lo cual puede tomar de minutos a 48 horas.",
+      "check-propagation": {
+        "narrative": "Confirmas que el registro A está configurado correctamente en el registrador — apunta a la IP correcta. Pero tu resolver local sigue devolviendo NXDOMAIN. ¿Qué es lo más probable que esté pasando?",
         "choices": [
-          { "id": "a", "text": "Entonces deberíamos esperar la propagación y también verificar la configuración", "nextNode": "end-great", "score": 7 }
+          { "id": "cp-propagation", "text": "Propagación DNS: el nuevo registro existe en los servidores autoritativos pero los resolvers que cachean todavía no lo levantaron — puede tomar hasta 48 horas", "nextNode": "ttl-step", "score": 4 },
+          { "id": "cp-flush", "text": "Tu OS local está cacheando el viejo NXDOMAIN — vacíalo con sudo dscacheutil -flushcache (mac) o ipconfig /flushdns (windows)", "nextNode": "ttl-step", "score": 3 },
+          { "id": "cp-blame", "text": "El registrador debe estar mintiendo — abrir un ticket de soporte de inmediato", "nextNode": "ttl-step", "score": 0 }
         ]
       },
-      "wrong-registrar": {
-        "narrative": "Los registradores de dominios casi nunca se caen completamente. El problema mucho más común es la propagación de DNS -- cuando actualizas los registros DNS, toma tiempo para que todos los servidores DNS del mundo obtengan la nueva información.",
+      "ttl-step": {
+        "narrative": "Tu amigo quiere cambiar de proveedor de hosting el próximo mes y le preocupa otro retraso largo de propagación. El TTL actual del registro A es 86400 segundos (24 horas). ¿Qué debería hacer antes de la migración?",
         "choices": [
-          { "id": "a", "text": "Entonces necesitamos esperar a que los cambios DNS se propaguen", "nextNode": "correct-propagation", "score": 5 }
+          { "id": "ttl-lower", "text": "Bajar el TTL a 300 segundos (5 minutos) un día o dos antes del cambio, luego subirlo de vuelta cuando la nueva IP propague", "nextNode": "monitor-step", "score": 4 },
+          { "id": "ttl-keep", "text": "Dejar el TTL como está — son solo 24 horas, es tolerable", "nextNode": "monitor-step", "score": 1 },
+          { "id": "ttl-zero", "text": "Poner TTL en 0 permanentemente para que las actualizaciones sean instantáneas", "nextNode": "monitor-step", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "Usas un verificador de DNS en línea y confirmas que el registro A apunta a la dirección IP correcta. El verificador muestra que algunos servidores DNS ya tienen el nuevo registro mientras otros todavía muestran el antiguo. ¡Propagación clásica! Le dices a tu amigo que espere unas horas más.",
-        "choices": [],
+      "monitor-step": {
+        "narrative": "El sitio finalmente está vivo y resolviendo en todo el mundo. Tu amigo pregunta: '¿Cómo sabré si DNS se rompe de nuevo en el futuro?' ¿Qué le recomiendas?",
+        "choices": [
+          { "id": "mon-uptime", "text": "Configurar un monitor de uptime que golpee el dominio desde múltiples regiones cada minuto y alerte ante fallos de resolución", "nextNode": "excellent-end", "score": 4 },
+          { "id": "mon-manual", "text": "Marcar dnschecker.org en favoritos y revisarlo una vez por semana", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "mon-wait", "text": "Esperar hasta que los usuarios se quejen — DNS rara vez se rompe solo", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Recorriste el ciclo completo de DNS: identificaste NXDOMAIN como un fallo de resolución, verificaste el registro con dig, explicaste la propagación, bajaste el TTL antes de la próxima migración, y configuraste monitoreo multi-región. Tu amigo ahora entiende DNS como un sistema en lugar de una caja negra.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Excelente trabajo! Identificaste que NXDOMAIN significa que DNS no puede encontrar el dominio, entendiste que la propagación de DNS toma tiempo, y sugeriste usar una herramienta de búsqueda para verificar la configuración. Los problemas de DNS son uno de los más comunes al lanzar un nuevo sitio web."
+        "feedback": "Así depuran DNS los ingenieros senior: confirman que el registro existe en la autoridad, distinguen cacheo de mala configuración, planean cambios de TTL alrededor de migraciones, y monitorean desde fuera de su red. NXDOMAIN es un punto de partida, no un veredicto.",
+        "choices": []
       },
-      "end-ok": {
-        "narrative": "Esperar probablemente funcionará, pero es mejor verificar primero que la configuración DNS sea correcta. Si hay un error tipográfico en la dirección IP, esperar no ayudará. Usar una herramienta de búsqueda DNS toma 10 segundos y te da tranquilidad.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "El sitio funciona y entiendes lo básico, pero un chequeo manual semanal no atrapará una caída a las 3am de un domingo. El primer problema regional de DNS toma 8 horas en descubrirse.",
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "Identificaste correctamente la propagación de DNS como el problema, pero ser proactivo verificando los registros DNS es un buen hábito. Siempre verifica tu configuración con una herramienta de búsqueda DNS en lugar de solo esperar y desear lo mejor."
+        "finalScore": 13,
+        "feedback": "Los chequeos manuales son mejores que nada, pero los problemas DNS suelen golpear regiones o resolvers específicos. Un monitor continuo que pinguea desde varias geografías es lo que atrapa los bugs que no puedes ver desde tu propio escritorio.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Días después, el sitio silenciosamente desaparece para usuarios de un ISP específico por culpa de un resolver caché mal configurado. Tu amigo se entera por un cliente enojado.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "DNS sí se rompe solo — expiraciones de TTL, errores de registrador, caídas de resolver. Trata DNS como cualquier otra dependencia de producción: monitorealo, alerta ante fallos, y ensaya el playbook de ventana de cambio.",
+        "choices": []
       }
     },
     "glossaryTerms": ["dns", "ip-address", "domain", "dns-propagation"]

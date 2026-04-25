@@ -38,46 +38,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Subes tu gestor de tareas a GitHub y conectas el repositorio a Vercel. La compilacion comienza e inmediatamente falla con: 'Error: NEXT_PUBLIC_SUPABASE_URL is not defined.' Que haces?",
+        "narrative": "Subes tu gestor de tareas a GitHub y conectas el repositorio a Vercel. La compilacion comienza e inmediatamente falla con: 'Error: NEXT_PUBLIC_SUPABASE_URL is not defined.' ¿Que haces?",
         "choices": [
-          { "id": "a", "text": "Escribir la URL de Supabase directamente en el código para que la compilación no necesite variables de entorno", "nextNode": "hardcode", "score": 0 },
-          { "id": "b", "text": "Agregar las variables de entorno en la configuración del proyecto en el panel de Vercel, luego redesplegar", "nextNode": "add-env-vars", "score": 4 },
-          { "id": "c", "text": "Subir tu archivo .env al repositorio para que Vercel pueda leerlo", "nextNode": "push-env", "score": 0 }
+          { "id": "hardcode", "text": "Escribir la URL de Supabase directamente en el código para que la compilación no necesite variables de entorno", "nextNode": "hardcode", "score": 0 },
+          { "id": "add-env-vars", "text": "Agregar las variables de entorno en la configuración del proyecto en el panel de Vercel, luego redesplegar", "nextNode": "add-env-vars", "score": 4 },
+          { "id": "push-env", "text": "Subir tu archivo .env al repositorio para que Vercel pueda leerlo", "nextNode": "push-env", "score": 0 }
         ]
       },
       "hardcode": {
-        "narrative": "La compilacion pasa, pero ahora tu URL de Supabase es visible en el codigo fuente publico. Cualquiera puede encontrar tu endpoint de base de datos. Un colega consciente de la seguridad senala el problema.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Incluso las URLs deben tratarse como configuración, no como valores escritos directamente en el código. Las variables de entorno existen precisamente para valores que cambian entre entornos y no deberian ser publicos.",
-        "choices": []
+        "narrative": "La compilación pasa, pero ahora tu URL de Supabase es visible en el código fuente publico. Un companero la marca en el code review y te pide que la revertas. ¿Que haces?",
+        "choices": [
+          { "id": "revert-and-env", "text": "Revertir el hardcode, agregar las variables de entorno en la configuración de Vercel y redesplegar correctamente", "nextNode": "second-deploy-bug", "score": 4 },
+          { "id": "argue-its-fine", "text": "Argumentar que esta bien porque la URL es publica de todos modos, y dejar el hardcode en su lugar", "nextNode": "second-deploy-bug", "score": 1 }
+        ]
       },
       "add-env-vars": {
-        "narrative": "Agregas las variables de entorno en la configuracion de Vercel. La compilacion pasa. Pero la app muestra una pagina en blanco. La consola del navegador revela: 'TypeError: Cannot read properties of undefined.' Cual es tu siguiente paso?",
+        "narrative": "Agregas las variables de entorno en la configuración de Vercel. La compilacion pasa. Pero la app muestra una pagina en blanco. La consola del navegador revela: 'TypeError: Cannot read properties of undefined.' ¿Cual es tu siguiente paso?",
         "choices": [
-          { "id": "b1", "text": "Revisar los logs de despliegue de Vercel y la consola del navegador para encontrar el componente exacto que falla", "nextNode": "debug-logs", "score": 3 },
-          { "id": "b2", "text": "Ejecutar npm run build localmente para reproducir el problema en una compilación de producción local", "nextNode": "local-build", "score": 4 }
+          { "id": "debug-logs", "text": "Revisar los logs de despliegue de Vercel y la consola del navegador para encontrar el componente exacto que falla", "nextNode": "second-deploy-bug", "score": 3 },
+          { "id": "local-build", "text": "Ejecutar npm run build localmente para reproducir el problema en una compilación de producción local", "nextNode": "second-deploy-bug", "score": 4 }
         ]
       },
       "push-env": {
-        "narrative": "Accidentalmente subes tu archivo .env con tu clave real de service role de Supabase. En minutos, un bot que rastrea GitHub la encuentra. Recibes un email de Supabase advirtiendo sobre credenciales expuestas. Inmediatamente rotas las claves y agregas .env a .gitignore.",
+        "narrative": "Accidentalmente subes tu archivo .env con tu clave real de service role de Supabase. En minutos, un bot que rastrea GitHub la encuentra. Rotas la clave, limpias el archivo del historial y agregas .env a .gitignore. La compilacion sigue fallando porque Vercel nunca tuvo las variables de entorno en primer lugar.",
+        "choices": [
+          { "id": "configure-vercel-vars", "text": "Agregar las variables de entorno rotadas a la configuración del proyecto en Vercel y redesplegar", "nextNode": "second-deploy-bug", "score": 3 },
+          { "id": "panic-rollback", "text": "Eliminar el proyecto de Vercel completo y empezar de nuevo desde el panel", "nextNode": "second-deploy-bug", "score": 1 }
+        ]
+      },
+      "second-deploy-bug": {
+        "narrative": "La compilación esta verde y las variables de entorno estan conectadas. Pero antes de promover a producción, quieres verificar el despliegue. Vercel te dio automaticamente una URL de preview en el ultimo commit. ¿Como la usas?",
+        "choices": [
+          { "id": "use-preview", "text": "Abrir la URL de preview, registrarte como usuario de prueba, crear y completar una tarea y confirmar que los datos llegan a Supabase", "nextNode": "domain-step", "score": 4 },
+          { "id": "skip-preview", "text": "Saltarte el preview — la compilación tuvo éxito, eso es suficiente para subir a producción", "nextNode": "domain-step", "score": 1 },
+          { "id": "promote-blindly", "text": "Promover el preview a producción de inmediato y probar en la URL de producción despues", "nextNode": "domain-step", "score": 0 }
+        ]
+      },
+      "domain-step": {
+        "narrative": "El preview se ve bien. Hora de darle al despliegue una direccion real. Eres dueno de taskmanager.app. ¿Como lo conectas?",
+        "choices": [
+          { "id": "vercel-domain", "text": "Agregar taskmanager.app en la configuración de Domains de Vercel y seguir los registros DNS que genera", "nextNode": "monitoring-step", "score": 4 },
+          { "id": "wildcard-cname", "text": "Apuntar un CNAME comodin a vercel-dns.com sin configurar el dominio en el panel", "nextNode": "monitoring-step", "score": 1 },
+          { "id": "use-vercel-url", "text": "Saltarte el dominio personalizado — compartir la URL .vercel.app con los usuarios por ahora", "nextNode": "monitoring-step", "score": 2 }
+        ]
+      },
+      "monitoring-step": {
+        "narrative": "La app esta en vivo en tu dominio personalizado. Pregunta final: ¿como sabras si el proximo despliegue rompe algo para los usuarios?",
+        "choices": [
+          { "id": "logs-and-alerts", "text": "Habilitar los logs en tiempo de ejecución de Vercel e integrar un rastreador de errores (Sentry) para que las solicitudes fallidas te avisen", "nextNode": "excellent-end", "score": 4 },
+          { "id": "check-occasionally", "text": "Abrir la app una vez al dia y hacer clics para asegurarte de que sigue funcionando", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "trust-the-build", "text": "Si la compilación esta verde, la app esta bien — no se necesita monitoreo extra", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu gestor de tareas esta en vivo en su propio dominio, las variables de entorno estan correctamente configuradas en Vercel, verificaste el despliegue en una URL de preview antes de promover, y los errores en tiempo de ejecución se reportan en el momento que ocurren. Este es un despliegue en el que puedes confiar.",
         "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Nunca subas archivos .env a Git. Incluso después de eliminarlos, los secretos permanecen en el historial de Git. Siempre agrega .env a .gitignore antes de tu primer commit, y rota cualquier credencial filtrada inmediatamente.",
+        "finalScore": 20,
+        "feedback": "Este es el flujo completo de Vercel: variables de entorno en el panel, despliegues de preview para verificacion, dominio personalizado via DNS de Vercel y un rastreador de errores para las cosas que solo se rompen en producción. Los despliegues futuros son de un solo clic porque la base esta correcta.",
         "choices": []
       },
-      "debug-logs": {
-        "narrative": "Los logs muestran que un componente esta intentando leer una propiedad de datos que aun no se han cargado. Agregas una verificacion de estado de carga y la app funciona perfectamente en el siguiente despliegue.",
+      "mediocre-end": {
+        "narrative": "Tu app esta en vivo y sabes como encontrar problemas — pero solo cuando te toca mirar. La primera vez que un despliegue meta una regresion a las 11 de la noche, tus usuarios chocaran con el bug por horas antes de que lo notes a la manana siguiente.",
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Buen proceso de depuración. Los logs de despliegue y la consola del navegador son tus mejores aliados. El problema del estado de carga es comun — la obtencion de datos se comporta diferente en producción vs desarrollo.",
+        "finalScore": 11,
+        "feedback": "Las verificaciones manuales escalan hasta que dejan de hacerlo. Un rastreador de errores toma 15 minutos en conectar y muestra problemas que no detectarias haciendo clics. Agregalo antes de que tu cuenta de usuarios supere a tus ojos.",
         "choices": []
       },
-      "local-build": {
-        "narrative": "Ejecutar 'npm run build' localmente revela exactamente el mismo error con un stack trace completo apuntando a un componente que no maneja el estado de carga. Lo arreglas localmente, subes los cambios y Vercel auto-despliega exitosamente.",
+      "weak-end": {
+        "narrative": "Tu app esta en vivo pero no tienes idea de lo que los usuarios estan experimentando realmente. Un mal merge sube un flujo de registro roto; te enteras una semana despues por un email de soporte preguntando por que nadie puede registrarse.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Ejecutar la compilación de producción localmente es la mejor practica. Reproduce la mayoria de los problemas de despliegue con un ciclo de retroalimentacion más rápido que subir y esperar a que Vercel compile.",
+        "finalScore": 4,
+        "feedback": "Una compilación verde solo prueba que el código compilo, no que funciona para usuarios reales. Sin logs en tiempo de ejecución y rastreo de errores, estas volando a ciegas. Trata la observabilidad como parte del despliegue mismo, no como un agregado.",
         "choices": []
       }
     },

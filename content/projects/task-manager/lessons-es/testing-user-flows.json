@@ -46,45 +46,69 @@
         ]
       },
       "one-big-test": {
-        "narrative": "Tu test E2E funciona pero tarda 30 segundos en ejecutarse y se rompe cada vez que la UI cambia. Cuando falla, el error dice 'element not found' pero no sabes que paso fallo. Agregas etiquetas descriptivas y divides en tests mas pequenos.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Buena recuperacion. Los tests enfocados son más fáciles de mantener y depurar. Aprendiste de primera mano por qué un test gigante es difícil de manejar.",
-        "choices": []
+        "narrative": "Tu test E2E funciona pero tarda 30 segundos en ejecutarse y se rompe cada vez que la UI cambia. Cuando falla, el error dice 'element not found' pero no sabes que paso fallo. Agregas etiquetas descriptivas y divides en tests mas pequenos. Ahora necesitas elegir un runner de tests antes de seguir.",
+        "choices": [
+          { "id": "a1", "text": "Usar Playwright con trazas — cada fallo viene con captura, snapshot del DOM y línea de tiempo", "nextNode": "pick-selectors", "score": 4 },
+          { "id": "a2", "text": "Quedarte con asserts crudos de Node y leer los fallos desde los logs de consola", "nextNode": "pick-selectors", "score": 1 }
+        ]
       },
       "balanced-approach": {
         "narrative": "Tus tests estan limpios: el login se prueba por separado, la creacion de tareas usa un estado pre-autenticado y la completacion se basa en una tarea pre-creada. Pero el PM pregunta: 'Como se que el flujo completo funciona si esta dividido?' Que dices?",
         "choices": [
-          { "id": "b1", "text": "Agregar un test de humo que ejecute el flujo completo de extremo a extremo, mientras mantienes los tests detallados separados", "nextNode": "smoke-test", "score": 3 },
-          { "id": "b2", "text": "Los tests de integración cubren cada pieza — si todas las piezas funcionan, el flujo funciona", "nextNode": "good-enough-end", "score": 2 }
+          { "id": "b1", "text": "Agregar un test de humo que ejecute el flujo completo de extremo a extremo, mientras mantienes los tests detallados separados", "nextNode": "pick-selectors", "score": 4 },
+          { "id": "b2", "text": "Los tests de integración cubren cada pieza — si todas las piezas funcionan, el flujo funciona", "nextNode": "pick-selectors", "score": 2 }
         ]
       },
       "unit-only": {
-        "narrative": "Todos los tests unitarios pasan. Pero cuando un usuario intenta crear una tarea, el formulario se envia exitosamente pero no aparece ninguna tarea en la lista. La API y el frontend son correctos por separado — el bug esta en como se comunican.",
+        "narrative": "Todos los tests unitarios pasan. Pero cuando un usuario intenta crear una tarea, el formulario se envia exitosamente pero no aparece ninguna tarea en la lista. La API y el frontend son correctos por separado — el bug esta en como se comunican. Aceptas agregar tests de flujo reales ahora.",
         "choices": [
-          { "id": "c1", "text": "Agregar tests de integración que verifiquen que la API y el frontend funcionan juntos", "nextNode": "balanced-approach", "score": 3 },
-          { "id": "c2", "text": "Depurar el problema especifico y agregar un test unitario para el", "nextNode": "miss-end", "score": 1 }
+          { "id": "c1", "text": "Agregar tests de integración que manejen la UI y verifiquen la base de datos — el mismo camino que tomó el bug", "nextNode": "pick-selectors", "score": 3 },
+          { "id": "c2", "text": "Mockear la API en los tests de integración para que sigan rápidos", "nextNode": "pick-selectors", "score": 1 }
         ]
       },
-      "smoke-test": {
-        "narrative": "Tienes tests de integracion detallados para cada pieza, mas un test de humo que ejecuta el flujo completo. El test de humo detecta problemas de integracion, mientras que los tests enfocados senalan exactamente donde estan los bugs. Lo mejor de ambos mundos.",
+      "pick-selectors": {
+        "narrative": "Ahora empiezas a escribir el flujo real. El primer paso necesita hacer clic en el boton 'New Task'. ¿Como lo localizas en el test?",
+        "choices": [
+          { "id": "sel-role", "text": "Usar un selector basado en rol: getByRole('button', { name: 'New Task' }) — sobrevive a cambios de estilos y clases", "nextNode": "wait-strategy", "score": 4 },
+          { "id": "sel-testid", "text": "Agregar data-testid='new-task-btn' al componente y apuntar a eso — contrato explicito para los tests", "nextNode": "wait-strategy", "score": 2 },
+          { "id": "sel-css", "text": "Usar un selector CSS fragil como .header > div:nth-child(3) > button.primary", "nextNode": "wait-strategy", "score": 0 }
+        ]
+      },
+      "wait-strategy": {
+        "narrative": "Tu test llena el formulario y hace clic en Save, luego revisa inmediatamente la lista de tareas. Pasa local pero falla en CI 1 de cada 5 corridas — a veces la nueva tarea aun no esta en el DOM. ¿Como manejas el timing?",
+        "choices": [
+          { "id": "wait-auto", "text": "Usar las aserciones con auto-espera del framework: expect(taskList).toContainText('Buy milk') reintenta hasta que aparezca o se acabe el tiempo", "nextNode": "ci-integration", "score": 4 },
+          { "id": "wait-sleep", "text": "Agregar await sleep(1000) antes de la asercion — es bastante rapido, problema resuelto", "nextNode": "ci-integration", "score": 1 },
+          { "id": "wait-poll", "text": "Escribir un loop de polling personalizado con setInterval", "nextNode": "ci-integration", "score": 2 }
+        ]
+      },
+      "ci-integration": {
+        "narrative": "Tu test de flujo es solido localmente. Ahora necesitas que corra en cada pull request para que una regresion no se cuele nunca. ¿Como lo conectas a CI?",
+        "choices": [
+          { "id": "ci-block", "text": "Correr el test de flujo en cada PR y bloquear merges si falla — con trazas subidas como artefactos para que los fallos sean depurables", "nextNode": "excellent-end", "score": 4 },
+          { "id": "ci-nightly", "text": "Correrlo cada noche solo en main — mantiene los PRs rapidos", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ci-local", "text": "Dejarlo como test solo local — los devs pueden correrlo antes de mergear si quieren", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu gestor de tareas tiene un stack enfocado de tests de flujo: selectores basados en rol, aserciones con auto-espera y un test de humo que corre en cada PR. Cuando una regresion se cuele en un refactor de estilos el proximo trimestre, el check fallido en el PR la atrapara antes de que ningun usuario vea el flujo roto.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Estrategia perfecta. Tests detallados para depuración más un test de humo para confianza. Así es como los equipos profesionales prueban flujos de usuario criticos.",
+        "finalScore": 16,
+        "feedback": "Este es el panorama completo del testing de flujos de usuario. Selectores estables, aserciones con auto-espera y bloqueo en CI convierten los tests de flujo en una verdadera red de seguridad — no solo algo que los devs corren cuando se acuerdan.",
         "choices": []
       },
-      "good-enough-end": {
-        "narrative": "Tus tests de integracion detectan la mayoria de los problemas. Ocasionalmente un bug de flujo completo se escapa, pero lo detectas en QA. Un compromiso razonable para una ejecucion de tests mas rapida.",
+      "mediocre-end": {
+        "narrative": "Tus tests de flujo detectan problemas, pero solo a la mañana siguiente de que una regresion mergea. Para cuando el nightly falla, otros tres PRs ya estan apilados encima y tienes que bisectar.",
+        "isEnd": true,
+        "finalScore": 11,
+        "feedback": "Las corridas nocturnas son mejor que nada, pero los tests de flujo pagan mas cuando bloquean codigo malo de mergear. Muevelos a bloqueo en PR cuando esten estables.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "El test de flujo existe pero nadie lo corre. A las tres semanas, deja de pasar porque nadie noto que un endpoint de la API se movio. El test se pudre y un usuario real reporta el flujo de signup roto.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Esto funciona pero no es ideal. Un único test de extremo a extremo de humo agrega mínima sobrecarga y detecta los vacios de integración. Considera agregar uno para el flujo más critico.",
-        "choices": []
-      },
-      "miss-end": {
-        "narrative": "Arreglas este bug especifico, pero el patron se repite. Los tests unitarios siguen pasando mientras los bugs de integracion siguen llegando a produccion.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Los tests unitarios verifican partes en aislamiento. Los tests de integración verifican que las partes funcionen juntas. Necesitas ambos — especialmente para flujos de datos entre frontend y backend.",
+        "feedback": "Un test no probado es peor que no tener test — da una falsa confianza de que 'tenemos cobertura de flujos'. Si no puedes ponerlo en CI, borralo; si vale la pena conservarlo, hazlo bloqueante de merges.",
         "choices": []
       }
     },

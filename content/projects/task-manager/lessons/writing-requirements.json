@@ -48,50 +48,67 @@
       "vague-result": {
         "narrative": "The AI generates a very basic todo app with just a text input and a list. No priorities, no due dates, no status tracking. It works, but it's not what you wanted. What do you do?",
         "choices": [
-          { "id": "start-over", "text": "Start over with a detailed prompt describing exactly what you need", "nextNode": "good-recovery", "score": 3 },
-          { "id": "add-on", "text": "Ask the AI to 'make it better' without specifics", "nextNode": "bad-end", "score": 0 }
+          { "id": "start-over", "text": "Start over with a detailed prompt describing exactly what you need", "nextNode": "edge-cases", "score": 3 },
+          { "id": "add-on", "text": "Ask the AI to 'make it better' without specifics", "nextNode": "edge-cases", "score": 0 }
         ]
       },
       "features-result": {
         "narrative": "Good start! The AI asks a follow-up question: 'Should tasks have due dates? How should they be sorted?' How do you respond?",
         "choices": [
-          { "id": "specify", "text": "\"Yes, tasks have: title (required), description (optional), due date (optional), priority (low/medium/high), status (todo/in-progress/done). Default sort by priority then due date.\"", "nextNode": "great-end", "score": 4 },
-          { "id": "delegate", "text": "\"Just do whatever makes sense\"", "nextNode": "mediocre-end", "score": 1 }
+          { "id": "specify", "text": "\"Yes, tasks have: title (required), description (optional), due date (optional), priority (low/medium/high), status (todo/in-progress/done). Default sort by priority then due date.\"", "nextNode": "edge-cases", "score": 4 },
+          { "id": "delegate", "text": "\"Just do whatever makes sense\"", "nextNode": "edge-cases", "score": 1 }
         ]
       },
       "technical-result": {
         "narrative": "The AI starts building, but you only told it the tech stack, not what the app should actually do. It creates a generic CRUD interface. The data model has only 'title' and 'completed'. What now?",
         "choices": [
-          { "id": "add-fields", "text": "Add the missing fields and behaviors one by one in follow-up prompts", "nextNode": "mediocre-end", "score": 2 },
-          { "id": "rewrite", "text": "Write a complete feature spec first, then give it to the AI in one clear prompt", "nextNode": "good-recovery", "score": 3 }
+          { "id": "add-fields", "text": "Add the missing fields and behaviors one by one in follow-up prompts", "nextNode": "edge-cases", "score": 2 },
+          { "id": "rewrite", "text": "Write a complete feature spec first, then give it to the AI in one clear prompt", "nextNode": "edge-cases", "score": 3 }
         ]
       },
-      "good-recovery": {
-        "narrative": "You rewrite your prompt with specific features, data fields, and user flows. The AI generates a much better result. It takes one round of back-and-forth to fine-tune, and you end up with a solid foundation.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "You recovered well! Starting with detailed requirements would have saved a round trip, but you recognized the problem and fixed it. Remember: specify features, data fields, and rules upfront.",
-        "choices": []
+      "edge-cases": {
+        "narrative": "Your spec is taking shape, but the AI flags questions about edge cases — what shows when the task list is empty? What if a title is 500 characters? What if a task has no due date? How do you handle this?",
+        "choices": [
+          { "id": "explicit-cases", "text": "Add an 'Edge Cases' section: empty list shows an onboarding prompt, titles capped at 100 chars, due dates default to none, max 100 tasks per list", "nextNode": "validation", "score": 4 },
+          { "id": "let-ai-default", "text": "Tell the AI to 'use sensible defaults for edge cases'", "nextNode": "validation", "score": 1 },
+          { "id": "skip-edges", "text": "Skip edge cases — fix them when bugs come up", "nextNode": "validation", "score": 0 }
+        ]
       },
-      "great-end": {
-        "narrative": "The AI generates a comprehensive task manager with exactly the fields and sorting you specified. The data model is clean, the UI matches your requirements, and you can start building immediately.",
+      "validation": {
+        "narrative": "Before the AI writes a single line of code, you want to confirm it understood your requirements. What's your move?",
+        "choices": [
+          { "id": "summarize-back", "text": "Ask: 'Restate the data model and feature list in your own words. Don't write code yet.'", "nextNode": "iteration", "score": 4 },
+          { "id": "trust-and-go", "text": "Trust the AI got it and ask it to start coding", "nextNode": "iteration", "score": 2 },
+          { "id": "yes-no", "text": "Ask: 'Are my requirements clear?' — a yes/no question the AI will always answer 'yes' to", "nextNode": "iteration", "score": 1 }
+        ]
+      },
+      "iteration": {
+        "narrative": "Halfway through building, you realize you forgot a requirement: tasks need to be assignable to other users. How do you communicate this change?",
+        "choices": [
+          { "id": "structured-update", "text": "Write a clear delta: 'New requirement: tasks have an assignee field (optional, references user.id). Update the data model, the create/edit forms, and add a filter by assignee.'", "nextNode": "excellent-end", "score": 4 },
+          { "id": "throw-it-in", "text": "Just say: 'also tasks should have an assignee'", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "scrap-and-restart", "text": "Scrap the project and start over with a fresh prompt that includes everything", "nextNode": "wasteful-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your requirements are now a living spec — clear features, edge cases addressed, validated by the AI before any code, and updated with structured deltas as you discover new needs. The AI builds exactly what you intended, and future changes are easy to communicate.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Excellent! You specified features, data fields, constraints, and defaults. This is exactly how to communicate with AI — be specific about what you want, and it will deliver.",
+        "finalScore": 19,
+        "feedback": "This is professional-level requirements work. The decisions you made — specify features upfront, address edge cases explicitly, validate the AI's understanding before coding, and communicate changes as structured deltas — are how engineers ship products on the first try.",
         "choices": []
       },
       "mediocre-end": {
-        "narrative": "The AI builds something that kind of works, but you'll need several more rounds of prompting to get it right. Each round risks introducing inconsistencies.",
+        "narrative": "The AI adds an assignee field, but interprets it loosely — it ends up as a free-text string instead of a reference to a user. You'll need to refactor it later. The product works, but the data model is inconsistent.",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "The app works, but the iterative approach led to a messy result. Next time, invest time upfront writing clear, specific requirements. It saves time overall.",
+        "finalScore": 13,
+        "feedback": "Quick deltas feel fast in the moment, but they leave the AI guessing. A short structured update — 'field name, type, what it references, where it appears' — takes 30 seconds and prevents an hour of refactoring later.",
         "choices": []
       },
-      "bad-end": {
-        "narrative": "The AI makes random improvements — adds a color picker, a tag system, but still no priorities or due dates. You're further from your goal than when you started.",
+      "wasteful-end": {
+        "narrative": "You scrap the project and rewrite the prompt from scratch. The AI builds it again — but now you've thrown away every small fix you made manually. You lost half a day of progress over one missing field.",
         "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Vague prompts get vague results. 'Make it better' means nothing to an AI. Always specify exactly what you want changed.",
+        "finalScore": 7,
+        "feedback": "Restarting from scratch is rarely necessary. Requirements are meant to evolve. Learn to write structured updates that the AI can apply incrementally, and your project will keep growing instead of resetting.",
         "choices": []
       }
     },

@@ -43,63 +43,75 @@
       "start": {
         "narrative": "Tu líder de equipo dice: 'Un usuario reporta que no puede ver sus pedidos. Revisa la base de datos para ver si sus datos existen. La información de conexión está en el archivo .env.' ¿Cuál es tu primer paso?",
         "choices": [
-          { "id": "a", "text": "Revisar el archivo .env para la cadena de conexión de la base de datos", "nextNode": "found-env", "score": 10 },
-          { "id": "b", "text": "Abrir el código de producción y buscar la URL de la base de datos en los archivos fuente", "nextNode": "wrong-source", "score": 3 },
-          { "id": "c", "text": "Pedirle la contraseña al líder del equipo", "nextNode": "partial-ask", "score": 5 }
+          { "id": "a", "text": "Revisar el archivo .env para la cadena de conexión de la base de datos", "nextNode": "found-env", "score": 4 },
+          { "id": "b", "text": "Abrir el código fuente de producción y hacer grep por la URL de la base de datos", "nextNode": "wrong-source", "score": 1 },
+          { "id": "c", "text": "Pedirle al líder que pegue la contraseña en el chat", "nextNode": "partial-ask", "score": 2 }
         ]
       },
       "found-env": {
-        "narrative": "Encuentras el archivo .env con: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. Ahora necesitas conectarte. ¿Qué herramienta usas?",
+        "narrative": "Encuentras: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. También notas que la app tiene una base de datos de staging SEPARADA listada justo abajo. Antes de conectarte, ¿qué haces?",
         "choices": [
-          { "id": "a", "text": "Usar una herramienta GUI como TablePlus -- más fácil para navegar y buscar datos visualmente", "nextNode": "gui-choice", "score": 10 },
-          { "id": "b", "text": "Usar la herramienta de línea de comandos psql", "nextNode": "cli-choice", "score": 8 },
-          { "id": "c", "text": "Escribir un script rápido en el código de tu app para consultar la base de datos", "nextNode": "code-choice", "score": 5 }
+          { "id": "a", "text": "Usar la cadena de staging para investigar -- las lecturas en producción siguen siendo riesgosas y staging suele tener el mismo esquema", "nextNode": "pick-tool", "score": 4 },
+          { "id": "b", "text": "Usar producción -- el bug está en datos de producción, solo datos de producción lo reproducirán", "nextNode": "pick-tool", "score": 2 },
+          { "id": "c", "text": "Usar producción pero planeando ser rápido y cuidadoso", "nextNode": "pick-tool", "score": 3 }
         ]
       },
       "wrong-source": {
-        "narrative": "¡Las cadenas de conexión NUNCA deberían estar en el código fuente -- contienen contraseñas! La práctica estándar es almacenarlas en archivos .env (que no se commitean a git) o en variables de entorno configuradas en el servidor. Revisa el archivo .env en su lugar.",
+        "narrative": "Las cadenas de conexión NUNCA deberían estar en el código fuente -- contienen contraseñas. La práctica estándar es almacenarlas en archivos .env (que no se commitean a git) o en variables de entorno configuradas en el servidor. Revisa el archivo .env en su lugar.",
         "choices": [
-          { "id": "a", "text": "Correcto, revisar el archivo .env para la cadena de conexión", "nextNode": "found-env", "score": 5 }
+          { "id": "a", "text": "Correcto, revisar el archivo .env para la cadena de conexión", "nextNode": "found-env", "score": 2 }
         ]
       },
       "partial-ask": {
-        "narrative": "Eso funciona, pero la información de conexión ya debería estar documentada en el archivo .env -- ese es el lugar estándar donde los equipos almacenan credenciales de base de datos. Revisa ahí primero para no molestar a tu líder.",
+        "narrative": "Eso funciona, pero la información de conexión ya debería estar en el archivo .env -- ese es el lugar estándar donde los equipos almacenan credenciales de base de datos. Revisa ahí primero para no molestar a tu líder.",
         "choices": [
-          { "id": "a", "text": "Déjame revisar el archivo .env primero", "nextNode": "found-env", "score": 7 }
+          { "id": "a", "text": "Déjame revisar el archivo .env primero", "nextNode": "found-env", "score": 3 }
         ]
       },
-      "gui-choice": {
-        "narrative": "Pegas la cadena de conexión en TablePlus y te conectas. Puedes ver todas las tablas visualmente. Navegas a la tabla 'orders', buscas el ID del usuario y encuentras... cero pedidos. Pero la tabla 'users' muestra que el usuario existe. ¿Qué revisas después?",
+      "pick-tool": {
+        "narrative": "Ahora elige cómo conectarte. Necesitas mirar los pedidos de un usuario -- una exploración rápida, no un script.",
         "choices": [
-          { "id": "a", "text": "Verificar si el ID del usuario en la tabla de pedidos coincide con su ID de usuario real", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Verificar si la tabla de pedidos está vacía para todos", "nextNode": "end-good", "score": 7 }
+          { "id": "a", "text": "Herramienta GUI como TablePlus -- puedo navegar tablas, hacer clic en filas y escribir un SELECT en la misma ventana", "nextNode": "write-query", "score": 4 },
+          { "id": "b", "text": "Línea de comandos psql -- rápida de lanzar y la consulta es el mismo SQL", "nextNode": "write-query", "score": 3 },
+          { "id": "c", "text": "Escribir un script de un solo uso en el código de la app que imprima los pedidos", "nextNode": "write-query", "score": 1 }
         ]
       },
-      "cli-choice": {
-        "narrative": "Ejecutas psql con la cadena de conexión y te conectas. Consultas: SELECT * FROM orders WHERE user_id = 42; y obtienes cero resultados. El usuario existe en la tabla users pero no tiene pedidos. ¡Una GUI habría hecho la exploración más fácil, pero la línea de comandos también funciona!",
+      "write-query": {
+        "narrative": "Estás conectado. El id del usuario que reporta es 42. ¿Qué consulta corres para confirmar si sus datos de pedidos existen?",
         "choices": [
-          { "id": "a", "text": "Verificar si el user_id en los pedidos recientes coincide con este usuario", "nextNode": "end-great", "score": 10 }
+          { "id": "a", "text": "SELECT id, user_id, created_at, status FROM orders WHERE user_id = 42 ORDER BY created_at DESC LIMIT 10;", "nextNode": "interpret", "score": 4 },
+          { "id": "b", "text": "SELECT * FROM orders; -- voy a buscar visualmente al usuario 42", "nextNode": "interpret", "score": 1 },
+          { "id": "c", "text": "DELETE FROM orders WHERE user_id = 42; -- espera, quise decir SELECT", "nextNode": "interpret", "score": 0 }
         ]
       },
-      "code-choice": {
-        "narrative": "Escribir código para una consulta única es excesivo. Una herramienta GUI o la línea de comandos te permite explorar datos interactivamente, lo cual es mucho más rápido para depurar. Reserva las consultas basadas en código para la lógica de tu aplicación.",
+      "interpret": {
+        "narrative": "Resultado: cero filas. Mientras tanto, SELECT id, email FROM users WHERE id = 42 devuelve una fila -- el usuario existe. ¿Qué revisas después para entender por qué faltan sus pedidos?",
         "choices": [
-          { "id": "a", "text": "Déjame usar una herramienta GUI en su lugar para exploración rápida", "nextNode": "gui-choice", "score": 5 }
+          { "id": "a", "text": "Revisar si la columna user_id en orders coincide con el tipo/valor de users.id, y buscar pedidos vinculados a otra cuenta con el email de este usuario", "nextNode": "end-great", "score": 4 },
+          { "id": "b", "text": "Revisar si la tabla orders está vacía para todos -- descartar una caída a nivel de sistema", "nextNode": "end-good", "score": 3 },
+          { "id": "c", "text": "Decirle al usuario que no tiene pedidos y cerrar el ticket", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-great": {
-        "narrative": "Descubres que el usuario recientemente cambió su correo electrónico y se re-registró, creando una nueva cuenta con user_id 87. Sus pedidos antiguos están vinculados al user_id 42. ¡Los datos están ahí -- solo están vinculados a su cuenta anterior! Reportas el hallazgo al equipo.",
+        "narrative": "Haces un join de las tablas por email y descubres que el usuario recientemente cambió su email y se re-registró, creando una cuenta nueva con user_id 87. Sus pedidos viejos están vinculados al email del user_id 42 pero la cuenta nueva es la 87. ¡Los datos están ahí -- solo están vinculados a su cuenta anterior! Reportas el hallazgo para que el equipo pueda fusionar las cuentas.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "¡Gran investigación! Encontraste la cadena de conexión en el archivo .env (el lugar correcto), usaste una herramienta apropiada para conectarte, y diagnosticaste una discrepancia de user_id. Este tipo de trabajo detectivesco con bases de datos es una tarea diaria para desarrolladores backend."
+        "feedback": "Gran investigación. Usaste la herramienta correcta para una tarea exploratoria (una GUI), te conectaste vía la config del .env (el lugar correcto), escribiste un SELECT acotado (no una consulta destructiva), y conectaste los puntos entre users y orders. Así se ve el trabajo detectivesco diario con bases de datos."
       },
       "end-good": {
-        "narrative": "Revisas y otros usuarios SÍ tienen pedidos -- es solo este usuario específico quien no tiene ninguno. Eso descarta un problema a nivel del sistema y apunta a un problema específico del usuario. ¡Buen pensamiento sistemático!",
+        "narrative": "Confirmas que otros usuarios sí tienen pedidos, así que esto no es una caída a nivel de sistema -- es específico del usuario 42. Le pasas el ticket de vuelta a un ingeniero de backend con esta acotación. Información útil, pero te detuviste una consulta antes de encontrar la causa real.",
         "choices": [],
         "isEnd": true,
         "finalScore": 14,
-        "feedback": "¡Buen enfoque! Verificar si el problema es específico del usuario o del sistema completo es una estrategia de depuración inteligente. El siguiente paso sería mirar datos relacionados (como el historial de la cuenta del usuario) para encontrar por qué faltan sus pedidos."
+        "feedback": "Acotar el bug (a nivel de sistema vs específico del usuario) es una primera jugada inteligente y la hiciste bien. La próxima vez, sigue el hilo un paso más: una vez que sabes que es específico del usuario, pregunta '¿qué tiene de diferente ESTE usuario?' -- cuenta diferente, región diferente, rol diferente -- y un JOIN usualmente encuentra la respuesta."
+      },
+      "end-weak": {
+        "narrative": "Cierras el ticket como 'sin pedidos para este usuario'. A la mañana siguiente el usuario manda screenshots de tres confirmaciones de pedido del mes pasado. Soporte tiene que reabrir el ticket, escalarlo más allá de ti, y tu equipo confía menos en tu trabajo con bases de datos.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Cero filas de una consulta es un punto de partida, no una conclusión. El usuario reportó que no podía VER sus pedidos -- no que nunca había hecho ninguno. El punto entero de tener herramientas de base de datos es excavar más allá de la primera respuesta hasta que los datos cuenten una historia coherente."
       }
     },
     "glossaryTerms": ["connection-string", "gui", "psql", "environment-variable"]

@@ -43,7 +43,7 @@
       "start": {
         "narrative": "You open your terminal to create the Next.js project for your task manager. What command do you run?",
         "choices": [
-          { "id": "correct-command", "text": "npx create-next-app@latest task-manager", "nextNode": "options-screen", "score": 3 },
+          { "id": "correct-command", "text": "npx create-next-app@latest task-manager", "nextNode": "options-screen", "score": 4 },
           { "id": "manual-setup", "text": "mkdir task-manager && npm init -y && npm install next react react-dom", "nextNode": "manual-setup", "score": 1 },
           { "id": "clone-template", "text": "Search GitHub for 'next.js task manager template' and clone someone else's project", "nextNode": "cloned-template", "score": 0 }
         ]
@@ -51,50 +51,67 @@
       "options-screen": {
         "narrative": "create-next-app asks you a series of setup questions. It prompts: 'Would you like to use TypeScript?' How do you answer this and the remaining prompts?",
         "choices": [
-          { "id": "yes-all-good", "text": "Yes to TypeScript, Yes to ESLint, Yes to Tailwind, Yes to App Router, No to src/ directory", "nextNode": "good-setup", "score": 3 },
-          { "id": "no-typescript", "text": "No to TypeScript because it looks complicated. Yes to everything else.", "nextNode": "no-ts-end", "score": 1 }
+          { "id": "yes-all-good", "text": "Yes to TypeScript, Yes to ESLint, Yes to Tailwind, Yes to App Router, No to src/ directory", "nextNode": "first-run", "score": 4 },
+          { "id": "no-typescript", "text": "No to TypeScript because it looks complicated. Yes to everything else.", "nextNode": "first-run", "score": 1 }
         ]
       },
       "manual-setup": {
         "narrative": "You've manually installed the packages, but now you have no config files, no TypeScript setup, no linting, and no project structure. You'll need to create next.config.js, tsconfig.json, and set up ESLint manually. What do you do?",
         "choices": [
-          { "id": "scrap-use-cli", "text": "Delete this folder and use create-next-app instead", "nextNode": "recovery-end", "score": 3 },
-          { "id": "configure-manually", "text": "Spend the next hour configuring everything by hand", "nextNode": "manual-end", "score": 1 }
+          { "id": "scrap-use-cli", "text": "Delete this folder and rerun create-next-app with the recommended defaults", "nextNode": "first-run", "score": 4 },
+          { "id": "configure-manually", "text": "Spend the next hour configuring everything by hand", "nextNode": "first-run", "score": 1 }
         ]
       },
       "cloned-template": {
-        "narrative": "You cloned a template from 2022. It uses the Pages Router (deprecated pattern), has 47 dependencies you don't understand, and the README says 'Work in progress, do not use in production.' The code doesn't match any current Next.js tutorial.",
+        "narrative": "You cloned a template from 2022. It uses the Pages Router (deprecated pattern), has 47 dependencies you don't understand, and the README says 'Work in progress, do not use in production.' You realize you need a clean slate.",
+        "choices": [
+          { "id": "abandon-template", "text": "Delete the cloned repo and run create-next-app instead", "nextNode": "first-run", "score": 3 },
+          { "id": "patch-template", "text": "Try to upgrade the template's dependencies and migrate to the App Router yourself", "nextNode": "first-run", "score": 0 }
+        ]
+      },
+      "first-run": {
+        "narrative": "Install finishes. You cd into the project and need to confirm everything works before you start coding. What's your first move inside the new folder?",
+        "choices": [
+          { "id": "npm-run-dev", "text": "Run 'npm run dev' and open http://localhost:3000 to confirm the welcome page renders", "nextNode": "explore-folders", "score": 4 },
+          { "id": "open-package", "text": "Open package.json and read every dependency before running anything", "nextNode": "explore-folders", "score": 2 },
+          { "id": "start-deleting", "text": "Start deleting files like the default favicon and example styles before running the app once", "nextNode": "explore-folders", "score": 0 }
+        ]
+      },
+      "explore-folders": {
+        "narrative": "The dev server is up. Now you want to find where to add your task manager UI. The scaffold gave you app/, public/, and a few config files. Where do you put your first edit?",
+        "choices": [
+          { "id": "edit-page", "text": "Edit app/page.tsx — that's the homepage rendered by the App Router", "nextNode": "next-steps", "score": 4 },
+          { "id": "edit-layout", "text": "Edit app/layout.tsx and replace the body content with a homepage", "nextNode": "next-steps", "score": 1 },
+          { "id": "make-pages", "text": "Create a pages/ directory at the root and add an index.tsx file there", "nextNode": "next-steps", "score": 0 }
+        ]
+      },
+      "next-steps": {
+        "narrative": "Your edit shows up in the browser on save. Before you start building features, what should you set up so you don't lose work?",
+        "choices": [
+          { "id": "git-and-readme", "text": "Confirm git is initialized, write a quick README, and make a clean first commit of the scaffold", "nextNode": "excellent-end", "score": 4 },
+          { "id": "just-keep-going", "text": "Skip git for now and start building — you'll commit once there's something interesting to save", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "install-everything", "text": "Install ten libraries you might need later (drag-and-drop, charts, animations) before writing any feature", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "You picked the official CLI, accepted the recommended defaults, verified the dev server boots, edited the right file, and locked in a clean git baseline. Your task manager has a professional foundation and you can start building features with confidence.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Cloning random templates gives you someone else's tech debt and outdated patterns. create-next-app always gives you the latest stable setup with zero baggage. Start fresh.",
+        "finalScore": 20,
+        "feedback": "Textbook setup. create-next-app + TypeScript + Tailwind + App Router + a verified dev run + a first commit is exactly the runway every Next.js project should have. Future you will thank present you every time you reach for a config that's already correct.",
         "choices": []
       },
-      "good-setup": {
-        "narrative": "Your project is created with TypeScript, ESLint, Tailwind, and the App Router. You run 'npm run dev' and see the Next.js welcome page at localhost:3000. Clean, modern, ready to build on.",
+      "mediocre-end": {
+        "narrative": "Your project boots and you've started editing app/page.tsx, but without git you have no save points. The first time you delete the wrong file or break a layout, you'll be reconstructing it from memory.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excellent choices. TypeScript catches bugs at compile time, ESLint enforces code quality, Tailwind speeds up styling, and the App Router is the future of Next.js. You're set up for success.",
+        "finalScore": 12,
+        "feedback": "The scaffold itself is fine, but skipping the first commit means you've already given up your safety net. Make the initial commit before the second feature — every minute of unversioned code is a minute of risk.",
         "choices": []
       },
-      "no-ts-end": {
-        "narrative": "The project works, but without TypeScript you'll miss out on autocomplete, type checking, and early bug detection. Three days later, you pass a string where a number was expected and spend an hour hunting a bug that TypeScript would have caught instantly.",
+      "weak-end": {
+        "narrative": "You spent an hour installing libraries you don't need yet, your package.json is bloated, and you still haven't written a single feature. When TypeScript complains about a peer dep mismatch, you don't know which install caused it.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "TypeScript feels like extra work at first, but it pays for itself immediately through better autocomplete and error catching. For any project you plan to maintain, always choose TypeScript.",
-        "choices": []
-      },
-      "recovery-end": {
-        "narrative": "Smart move. You delete the manual setup, run create-next-app, and in 30 seconds you have a fully configured project. The CLI handled all the config files you would have spent an hour writing.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Recognizing when you've taken the hard road and switching to the easier one is a valuable skill. create-next-app exists so you don't have to configure boilerplate by hand.",
-        "choices": []
-      },
-      "manual-end": {
-        "narrative": "After an hour of configuring, you have a working setup. But your tsconfig.json is missing some compiler options that create-next-app includes, and your ESLint config doesn't have the Next.js-specific rules. Subtle bugs will creep in later.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Manual setup is educational but impractical for real projects. The official CLI is maintained by the Next.js team and includes configs tuned for their framework. Use it.",
+        "finalScore": 5,
+        "feedback": "Premature dependencies are technical debt before you've even shipped a feature. Add libraries when a real requirement appears, not 'just in case.' Start lean, prove the feature works, then install what you actually need.",
         "choices": []
       }
     },

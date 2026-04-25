@@ -40,73 +40,82 @@
       "start": {
         "narrative": "You're setting up the database for your task manager. Your app needs to store tasks with titles, statuses, due dates, and priorities. Tasks belong to users. You need filtering and sorting. What type of database do you choose?",
         "choices": [
-          { "id": "sql", "text": "A SQL database like PostgreSQL — my data is structured and relational", "nextNode": "sql-path", "score": 3 },
+          { "id": "sql", "text": "A SQL database like PostgreSQL — my data is structured and relational", "nextNode": "sql-path", "score": 4 },
           { "id": "nosql", "text": "A NoSQL database like MongoDB — I want flexibility", "nextNode": "nosql-path", "score": 1 },
           { "id": "localstorage", "text": "Just use localStorage in the browser — no server needed", "nextNode": "local-path", "score": 0 }
         ]
       },
       "sql-path": {
-        "narrative": "Good choice. PostgreSQL is reliable and perfect for structured data like tasks. Now you need to decide how to host it. What's your approach?",
+        "narrative": "Good choice. PostgreSQL is reliable and perfect for structured data like tasks. You're ready to design the schema.",
         "choices": [
-          { "id": "managed", "text": "Use a managed database service like Supabase or Neon so I don't have to manage servers", "nextNode": "managed-end", "score": 4 },
-          { "id": "self-host", "text": "Install PostgreSQL on my own server so I have full control", "nextNode": "selfhost-end", "score": 2 },
-          { "id": "local-only", "text": "Just run it locally on my laptop for now", "nextNode": "localdb-end", "score": 1 }
+          { "id": "continue-sql", "text": "Move on to schema design", "nextNode": "schema", "score": 3 }
         ]
       },
       "nosql-path": {
         "narrative": "You set up MongoDB and start building. Things work at first, but when you try to query 'all tasks for user X sorted by due date and filtered by status,' the query gets complicated. Joining user data with tasks requires extra work. What do you do?",
         "choices": [
-          { "id": "switch-sql", "text": "Switch to PostgreSQL now before you're in too deep", "nextNode": "switch-end", "score": 3 },
-          { "id": "push-through", "text": "Keep going with MongoDB — you'll figure out the queries eventually", "nextNode": "nosql-end", "score": 1 }
+          { "id": "switch-sql", "text": "Switch to PostgreSQL now before you're in too deep", "nextNode": "schema", "score": 4 },
+          { "id": "push-through", "text": "Keep going with MongoDB — you'll figure out the queries eventually", "nextNode": "schema", "score": 1 }
         ]
       },
       "local-path": {
-        "narrative": "You build the whole app using localStorage. It works on your laptop, but then you realize: the data disappears when the user clears their browser. There's no way to sync across devices. And your friend can't see their tasks on their phone. What now?",
+        "narrative": "You build the whole app using localStorage. It works on your laptop, but the data disappears when the user clears their browser, there's no way to sync across devices, and your friend can't see their tasks on their phone. What now?",
         "choices": [
-          { "id": "add-db", "text": "Add a real database — you need server-side persistence", "nextNode": "switch-end", "score": 3 },
-          { "id": "keep-local", "text": "Keep localStorage and just tell users not to clear their browser data", "nextNode": "local-end", "score": 0 }
+          { "id": "add-db", "text": "Add a real database — you need server-side persistence", "nextNode": "schema", "score": 4 },
+          { "id": "keep-local", "text": "Keep localStorage and just tell users not to clear their browser data", "nextNode": "schema", "score": 0 }
         ]
       },
-      "managed-end": {
-        "narrative": "You sign up for a managed PostgreSQL service. In 5 minutes, you have a production-ready database with automatic backups, connection pooling, and a dashboard to inspect your data. You can focus on building features instead of managing infrastructure.",
+      "schema": {
+        "narrative": "You're designing the tasks schema. You need columns for the basics — title, status, due_date, user_id — but also need to think about relationships and types. What does your schema look like?",
+        "choices": [
+          { "id": "typed-schema", "text": "id UUID PK, user_id UUID FK to users(id), title TEXT, status task_status (enum), due_date TIMESTAMPTZ, created_at TIMESTAMPTZ DEFAULT now()", "nextNode": "hosting", "score": 4 },
+          { "id": "loose-types", "text": "id INT, user_id INT, title VARCHAR, status VARCHAR, due_date VARCHAR — keep types loose so you can put anything in", "nextNode": "hosting", "score": 1 },
+          { "id": "single-jsonb", "text": "id UUID PK, data JSONB — stuff every field into one JSON column for flexibility", "nextNode": "hosting", "score": 2 }
+        ]
+      },
+      "hosting": {
+        "narrative": "Schema is ready. Now you need to decide where the database actually runs. What's your hosting approach?",
+        "choices": [
+          { "id": "managed", "text": "Use a managed service like Supabase or Neon — they run PostgreSQL with automatic backups, connection pooling, and a dashboard", "nextNode": "backups", "score": 4 },
+          { "id": "self-host", "text": "Install PostgreSQL on a VPS you rent yourself for full control", "nextNode": "backups", "score": 2 },
+          { "id": "local-only", "text": "Just run it locally on your laptop for now", "nextNode": "backups", "score": 0 }
+        ]
+      },
+      "backups": {
+        "narrative": "The database is hosted and live. Real users will store real tasks. How do you handle backups and schema changes safely?",
+        "choices": [
+          { "id": "automated-backups", "text": "Enable daily point-in-time-recovery backups, and manage every schema change through versioned SQL migration files committed to Git", "nextNode": "scaling", "score": 4 },
+          { "id": "manual-export", "text": "Export the database to a CSV every few weeks and apply schema changes by running ad-hoc SQL in the dashboard", "nextNode": "scaling", "score": 2 },
+          { "id": "no-backups", "text": "Skip backups — you have no users yet, and you can always restore from your local copy", "nextNode": "scaling", "score": 0 }
+        ]
+      },
+      "scaling": {
+        "narrative": "Six months in, you have 5,000 active users and the database CPU sits at 70% during peak hours. The list query is starting to slow down. What do you do?",
+        "choices": [
+          { "id": "indexes-pooler", "text": "Profile the slow queries with EXPLAIN, add the missing indexes, and route reads through a connection pooler", "nextNode": "excellent-end", "score": 4 },
+          { "id": "scale-up", "text": "Pay for the next compute tier — throw more CPU at it without changing anything in the code", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-scale", "text": "Ignore it — 70% is fine, the database will sort itself out", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your database journey is complete: SQL for structure, a typed schema, managed hosting, point-in-time backups, versioned migrations, and a clean scaling path with indexes and pooling. Your task manager runs on rock-solid foundations and will keep up as users grow.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Perfect choice. A managed SQL database gives you the structure your task data needs without the ops headache. Services like Supabase even add auth and real-time features out of the box.",
+        "finalScore": 23,
+        "feedback": "This is how senior engineers think about databases — not just 'pick one and go,' but a chain of decisions covering type, schema, hosting, durability, and scale. Each decision compounds: the right ones make the next problem easier; the wrong ones make every future change painful.",
         "choices": []
       },
-      "selfhost-end": {
-        "narrative": "You spend two days setting up PostgreSQL on a VPS, configuring backups, setting up SSL, and troubleshooting connection issues. It works, but you haven't written a single line of task manager code yet.",
+      "mediocre-end": {
+        "narrative": "Throwing more compute at the problem buys you a few months. The bill grows, but the underlying slow query is still slow — and the next time traffic spikes, you'll be back here with a bigger CPU and the same problem.",
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Vertical scaling is the easy answer, but it hides the real bottleneck. Profile first, add indexes, and only scale hardware after you've fixed the queries. Otherwise you're paying to run inefficient code faster.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "70% becomes 95% during the next launch. Queries time out. Users see error pages. You spend a panicked Saturday adding indexes and rotating credentials while customers churn.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Self-hosting works, but for a learning project, it's a time sink. Managed services let you skip the DevOps and focus on building. Save self-hosting for when you need custom configurations.",
-        "choices": []
-      },
-      "localdb-end": {
-        "narrative": "Your app works on your machine, but it can't be deployed or shared with anyone. When you eventually need to move to a hosted database, you'll need to migrate everything.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Local-only databases are fine for quick experiments, but a task manager needs to be accessible from anywhere. Start with a hosted solution so deployment is seamless.",
-        "choices": []
-      },
-      "switch-end": {
-        "narrative": "Smart move. You switch to PostgreSQL with a managed service. The migration costs you a few hours, but your queries are now clean and fast. Filtering tasks by status and sorting by date takes one simple SQL query.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Recognizing a wrong choice early and switching is a valuable skill. SQL is the right fit for structured, relational data. Next time, match your data shape to the database type from the start.",
-        "choices": []
-      },
-      "nosql-end": {
-        "narrative": "You spend days writing complex aggregation pipelines for queries that would be one line in SQL. The app works, but every new feature requires fighting the database instead of building the feature.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "NoSQL can work, but it's the wrong tool for structured, relational data. When your data has clear relationships (users own tasks, tasks have categories), SQL makes your life much easier.",
-        "choices": []
-      },
-      "local-end": {
-        "narrative": "Users lose their tasks constantly. Nobody wants to use the app. The project fizzles out because the foundation was broken from the start.",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "localStorage is not a database. It has size limits, no queries, no multi-device sync, and vanishes when the browser data is cleared. Always use a real database for data that matters.",
+        "feedback": "Database performance issues compound fast. By the time you 'feel' it on the dashboard, users are already feeling it in the app. Set up alerts, profile slow queries weekly, and treat 70% sustained CPU as a yellow light, not a green one.",
         "choices": []
       }
     },

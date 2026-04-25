@@ -38,53 +38,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Un usuario llamado Alex descubre que visitando /api/tasks?userId=42 puede ver las tareas de otro usuario. Tu API devuelve tareas basandose en el parametro userId de la query sin verificar quien esta logueado. Como respondes?",
+        "narrative": "Un usuario llamado Alex descubre que visitando /api/tasks?userId=42 puede ver las tareas de otro usuario. Tu API devuelve tareas basandose en el parametro userId de la query sin verificar quien esta logueado. ¿Como respondes?",
         "choices": [
-          { "id": "a", "text": "Ocultar el parametro userId de la URL del frontend para que los usuarios no puedan verlo", "nextNode": "hide-param", "score": 0 },
-          { "id": "b", "text": "Agregar middleware que extraiga el ID de usuario del token de auth en lugar del parametro de query", "nextNode": "fix-middleware", "score": 4 },
-          { "id": "c", "text": "Agregar una verificacion en el frontend que prevenga navegar a las páginas de otros usuarios", "nextNode": "frontend-only", "score": 1 }
+          { "id": "hide-param", "text": "Ocultar el parametro userId de la URL del frontend para que los usuarios no puedan verlo", "nextNode": "hide-param", "score": 0 },
+          { "id": "fix-middleware", "text": "Agregar middleware que extraiga el ID de usuario del token de auth en lugar del parametro de query", "nextNode": "fix-middleware", "score": 4 },
+          { "id": "frontend-only", "text": "Agregar una verificacion en el frontend que prevenga navegar a las páginas de otros usuarios", "nextNode": "frontend-only", "score": 1 }
         ]
       },
       "hide-param": {
-        "narrative": "Ocultar el parametro no ayuda — cualquiera con las herramientas de desarrollo del navegador puede ver las llamadas a la API y cambiar el userId. En horas, alguien en Twitter publica sobre la vulnerabilidad.",
+        "narrative": "Ocultar el parametro no ayuda — cualquiera con las herramientas de desarrollo del navegador puede ver las llamadas a la API y cambiar el userId. En horas, alguien en Twitter publica sobre la vulnerabilidad. Necesitas proteccion real del lado del servidor.",
         "choices": [
-          { "id": "a1", "text": "OK, implementar verificaciones de auth adecuadas en el servidor ahora", "nextNode": "fix-middleware", "score": 3 },
-          { "id": "a2", "text": "Agregar limitacion de tasa para frenar a los atacantes", "nextNode": "band-aid-end", "score": 1 }
+          { "id": "switch-to-middleware", "text": "Implementar middleware que derive el ID de usuario del token de auth verificado", "nextNode": "endpoint-audit", "score": 3 },
+          { "id": "rate-limit", "text": "Agregar limitacion de tasa para frenar a los atacantes y darlo por bueno", "nextNode": "endpoint-audit", "score": 1 }
         ]
       },
       "fix-middleware": {
-        "narrative": "Agregas middleware de auth que lee el ID de usuario del token JWT verificado, no del parametro de query. Ahora GET /api/tasks siempre devuelve las tareas del usuario logueado. Pero notas que el endpoint PUT /api/tasks/:id todavia no verifica si la tarea pertenece al usuario actual. Que haces?",
+        "narrative": "Agregas middleware de auth que lee el ID de usuario del token JWT verificado, no del parametro de query. GET /api/tasks ahora devuelve solo las tareas del usuario logueado. Hora de mirar el resto de la API.",
         "choices": [
-          { "id": "b1", "text": "Auditar todos los endpoints de API y agregar verificaciones de propiedad a cada uno que acceda a datos de usuario", "nextNode": "full-audit", "score": 3 },
-          { "id": "b2", "text": "Solo arreglar el endpoint PUT y seguir adelante", "nextNode": "partial-fix-end", "score": 1 }
+          { "id": "audit-now", "text": "Abrir cada otro archivo de ruta y agregar el mismo middleware donde falte", "nextNode": "endpoint-audit", "score": 4 },
+          { "id": "ship-and-wait", "text": "Subir el arreglo del GET y esperar a que los usuarios reporten cualquier otro endpoint roto", "nextNode": "endpoint-audit", "score": 1 }
         ]
       },
       "frontend-only": {
-        "narrative": "La verificacion del frontend funciona en el navegador, pero un usuario usa curl para llamar tu API directamente, evadiendo el frontend por completo. Todavia puede acceder a los datos de cualquier usuario.",
+        "narrative": "La verificacion del frontend funciona en el navegador, pero un usuario usa curl para llamar tu API directamente, evadiendo el frontend por completo. Todavia puede acceder a los datos de cualquier usuario. El arreglo tiene que vivir en el servidor.",
         "choices": [
-          { "id": "c1", "text": "Implementar middleware del lado del servidor para validar auth en cada solicitud de API", "nextNode": "fix-middleware", "score": 3 },
-          { "id": "c2", "text": "Bloquear solicitudes curl verificando el header User-Agent", "nextNode": "band-aid-end", "score": 0 }
+          { "id": "server-middleware", "text": "Implementar middleware del lado del servidor para validar auth en cada solicitud de API", "nextNode": "endpoint-audit", "score": 3 },
+          { "id": "user-agent-block", "text": "Bloquear solicitudes curl verificando el header User-Agent", "nextNode": "endpoint-audit", "score": 0 }
         ]
       },
-      "full-audit": {
-        "narrative": "Auditas los 12 endpoints de API, agregas verificaciones de propiedad a cada uno y escribes tests para verificar que el acceso no autorizado devuelve 403. La vulnerabilidad esta completamente parcheada.",
+      "endpoint-audit": {
+        "narrative": "El middleware esta conectado en /api/tasks. Empiezas a auditar los endpoints restantes. PUT /api/tasks/:id autentica al usuario pero no verifica que la tarea realmente le pertenezca. ¿Que haces?",
+        "choices": [
+          { "id": "ownership-everywhere", "text": "Agregar una verificacion de propiedad a cada ruta que toque datos de usuario — PUT, DELETE, GET-por-id, compartir, exportar", "nextNode": "db-enforcement", "score": 4 },
+          { "id": "fix-put-only", "text": "Solo parchar el handler PUT y seguir adelante; el resto puede esperar", "nextNode": "db-enforcement", "score": 1 },
+          { "id": "wrap-in-helper", "text": "Escribir un solo helper requireOwnership(taskId, userId) y llamarlo desde cada endpoint mutador", "nextNode": "db-enforcement", "score": 4 }
+        ]
+      },
+      "db-enforcement": {
+        "narrative": "Las verificaciones a nivel de endpoint estan listas, pero un companero senala que cualquier ruta futura que olvide la verificacion sigue filtrando datos. Estas usando Supabase. ¿Como construyes una red de seguridad mas profunda?",
+        "choices": [
+          { "id": "rls-policies", "text": "Habilitar Row Level Security en la tabla tasks con una politica que restrinja el acceso a las filas donde user_id coincide con auth.uid()", "nextNode": "regression-tests", "score": 4 },
+          { "id": "service-role-only", "text": "Usar la service role key de Supabase en el servidor para todo y confiar en que el codigo de la app filtre", "nextNode": "regression-tests", "score": 1 },
+          { "id": "skip-db-layer", "text": "Las verificaciones a nivel de app son suficientes — la base de datos no necesita saber sobre usuarios", "nextNode": "regression-tests", "score": 0 }
+        ]
+      },
+      "regression-tests": {
+        "narrative": "El auth se aplica en la capa de rutas y en la capa de base de datos. ¿Como te aseguras de que nadie rompa esta proteccion silenciosamente en un PR futuro?",
+        "choices": [
+          { "id": "auth-tests", "text": "Agregar tests de integracion que peguen a cada endpoint como Usuario A y aseveren que no puede leer ni mutar los datos del Usuario B", "nextNode": "excellent-end", "score": 4 },
+          { "id": "manual-checklist", "text": "Agregar una linea 'verificar auth' a tu plantilla de PR y confiar en que los revisores recuerden", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "trust-team", "text": "Confiar en el equipo para hacer lo correcto — los tests son exagerar para auth", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu gestor de tareas ahora deriva la identidad del usuario del token de auth, verifica la propiedad en cada endpoint mutador, aplica row-level security en la base de datos y tiene tests que prueban que el acceso no autorizado devuelve 403. El bug IDOR original esta cerrado y cualquier regresion sera atrapada antes de subir.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Este es el enfoque correcto. Un endpoint vulnerable generalmente significa que otros también lo son. Una auditoria completa con tests asegura que detectes todo y previene regresiones.",
+        "finalScore": 20,
+        "feedback": "Esto es autorizacion en capas hecha bien: middleware para quien eres, verificaciones de endpoint para que puedes tocar, RLS como ultima linea de defensa, y tests para mantener honestas a las tres. Una de esas capas te salvara el dia que alguien olvide agregar las otras.",
         "choices": []
       },
-      "partial-fix-end": {
-        "narrative": "El endpoint PUT esta arreglado, pero el endpoint DELETE todavia permite a los usuarios eliminar las tareas de otros. Una semana despues, alguien lo explota y los usuarios pierden datos.",
+      "mediocre-end": {
+        "narrative": "Tres meses despues, un nuevo endpoint sube sin verificacion de propiedad porque el revisor le paso por encima a la plantilla del PR. El bug solo aflora cuando un usuario accidentalmente ve los datos de otro y manda email a soporte.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Arreglar un endpoint a la vez es como jugar whack-a-mole. Cuando encuentres un bug de autorizacion, audita todos los endpoints sistemáticamente — el mismo patron probablemente se repite.",
+        "finalScore": 12,
+        "feedback": "Las listas en plantillas de PR dependen de la atencion. Los tests no se cansan. Agrega al menos un test de integracion de auth por familia de endpoints y eliminas el error humano de la ecuacion.",
         "choices": []
       },
-      "band-aid-end": {
-        "narrative": "Tu solucion temporal se evade facilmente. El problema central — autorizacion faltante del lado del servidor — permanece. Los datos de usuario continuan filtrandose.",
+      "weak-end": {
+        "narrative": "Sin tests, tu arreglo de auth dura exactamente hasta el siguiente refactor. Alguien cambia el orden del middleware, la verificacion de propiedad deja de correr y las tareas del Usuario B se filtran de nuevo. El mismo bug, dos veces, en tres semanas.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "La seguridad por oscuridad (ocultar parametros, bloquear user agents) nunca funciona. La seguridad real requiere que el servidor verifique la identidad y aplique la propiedad de datos en cada solicitud.",
+        "finalScore": 5,
+        "feedback": "Seguridad sin tests es seguridad teorica. El dia que una libreria vendor se actualice o alguien refactorice una ruta, tus protecciones desaparecen en silencio. Los tests son lo unico que convierte un arreglo puntual en uno permanente.",
         "choices": []
       }
     },

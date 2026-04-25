@@ -20,8 +20,8 @@
     },
     {
       "type": "text",
-      "title": "The Four Steps of Incident Response",
-      "body": "When a security breach happens, follow these steps in order:\n\n1. **Contain** -- stop the leak immediately (disable the endpoint, revoke the key)\n2. **Assess** -- check logs to see how much data was accessed\n3. **Notify** -- tell affected users and your team\n4. **Fix** -- patch the vulnerability and add safeguards to prevent it from happening again"
+      "title": "The Five Phases of Incident Response",
+      "body": "When a security breach happens, walk through these phases in order:\n\n1. **Detect** -- recognize that an incident is happening and confirm it's real\n2. **Contain** -- stop the leak immediately (disable the endpoint, revoke the key)\n3. **Eradicate** -- remove the vulnerability and any attacker access\n4. **Recover** -- restore service safely and notify affected users\n5. **Postmortem** -- learn from it and put guardrails in place so it can't happen again"
     },
     {
       "type": "code_example",
@@ -36,72 +36,84 @@
     },
     {
       "type": "key_takeaway",
-      "body": "In a breach, contain first, then assess scope, notify users, and fix the root cause. Every API endpoint needs authorization checks -- never assume the frontend will prevent unauthorized access."
+      "body": "Detect, contain, eradicate, recover, learn. Every API endpoint needs authorization checks -- never assume the frontend will prevent unauthorized access -- and every incident should leave behind a guardrail that prevents recurrence."
     }
   ],
   "exercise": {
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "You see the tweet: a user navigated to /api/users/42 and got back another user's full profile including email, phone number, and hashed password. Your API is leaking private data. What's your first move?",
+        "narrative": "DETECT. You see the tweet: a user navigated to /api/users/42 and got back another user's full profile -- email, phone, hashed password. Before you do anything else, you need to confirm this is real. What's your first move?",
         "choices": [
-          { "id": "a", "text": "Immediately restrict the vulnerable API endpoint", "nextNode": "restrict-endpoint", "score": 10 },
+          { "id": "a", "text": "Reproduce the request yourself against staging to confirm the leak is real", "nextNode": "contain", "score": 10 },
           { "id": "b", "text": "Reply to the tweet thanking them for the report", "nextNode": "reply-tweet", "score": 3 },
-          { "id": "c", "text": "Check if any other endpoints have the same problem", "nextNode": "check-others-first", "score": 5 }
-        ]
-      },
-      "restrict-endpoint": {
-        "narrative": "Good -- stop the bleeding first. You add authentication checks to the endpoint so only authenticated users can access their own data. The immediate leak is plugged. What's your next step?",
-        "choices": [
-          { "id": "a", "text": "Check your server logs to see how many users' data was accessed", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Go back to sleep -- the fix is deployed", "nextNode": "ignore-scope", "score": 0 },
-          { "id": "c", "text": "Audit all other API endpoints for the same vulnerability", "nextNode": "audit-endpoints", "score": 7 }
+          { "id": "c", "text": "Check if other endpoints might have the same issue first", "nextNode": "check-others-first", "score": 5 }
         ]
       },
       "reply-tweet": {
-        "narrative": "Acknowledging the report publicly is fine, but the endpoint is still leaking data while you compose tweets. Every minute it stays open, more user data could be scraped. Containment first, communication second.",
+        "narrative": "Public acknowledgment is fine later, but you haven't even confirmed the bug is real -- and the endpoint is still leaking while you compose tweets. Confirm first, contain second, communicate last.",
         "choices": [
-          { "id": "a", "text": "Right -- let me restrict the endpoint first", "nextNode": "restrict-endpoint", "score": 5 }
+          { "id": "a", "text": "Right -- reproduce against staging first to confirm", "nextNode": "contain", "score": 5 }
         ]
       },
       "check-others-first": {
-        "narrative": "Checking scope is smart, but the reported endpoint is actively leaking data right now. An attacker could be scraping every user's profile while you're auditing. Plug the known leak first, then investigate the scope.",
+        "narrative": "Scope mapping is smart, but the reported endpoint is actively leaking right now. An attacker could be scraping every profile while you wander other code. Confirm and contain the known leak first, then widen the search.",
         "choices": [
-          { "id": "a", "text": "Restrict the reported endpoint first, then check others", "nextNode": "restrict-endpoint", "score": 7 }
+          { "id": "a", "text": "Reproduce the reported endpoint, then move to containment", "nextNode": "contain", "score": 7 }
         ]
       },
-      "check-logs": {
-        "narrative": "Your logs show 347 requests to /api/users/{id} with sequential IDs from a single IP address in the past 6 hours. Someone was systematically scraping user profiles. This means the data of up to 347 users may be compromised. What do you do?",
+      "contain": {
+        "narrative": "CONTAIN. The bug reproduces in staging. The endpoint is genuinely returning any user by ID. You need to stop the bleeding right now. What's the fastest, safest way to plug it?",
         "choices": [
-          { "id": "a", "text": "Notify affected users and your team, then audit all endpoints", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Block the attacker's IP and call it done", "nextNode": "end-mediocre", "score": 3 }
+          { "id": "a", "text": "Add auth middleware that returns 403 unless req.user.id matches the requested id, deploy hotfix", "nextNode": "eradicate", "score": 10 },
+          { "id": "b", "text": "Take the entire /api/users route offline at the load balancer", "nextNode": "eradicate", "score": 6 },
+          { "id": "c", "text": "Just block the IP from the tweet so they can't keep scraping", "nextNode": "eradicate", "score": 1 }
         ]
       },
-      "audit-endpoints": {
-        "narrative": "You find 3 more endpoints with the same problem -- no authorization checks. You fix them all. But you haven't yet determined how much data was already accessed.",
+      "eradicate": {
+        "narrative": "ERADICATE. The reported endpoint is locked down. But the bug pattern -- assuming the frontend would never request someone else's id -- might exist elsewhere. How do you find and remove the rest?",
         "choices": [
-          { "id": "a", "text": "Check the logs to determine the scope of the breach", "nextNode": "check-logs", "score": 8 }
+          { "id": "a", "text": "Grep every route handler for unauthenticated :id params and add the same auth check", "nextNode": "recover", "score": 10 },
+          { "id": "b", "text": "Add a global authorization middleware that defaults to deny and opt routes in explicitly", "nextNode": "recover", "score": 10 },
+          { "id": "c", "text": "Wait and see if anyone reports another vulnerable endpoint", "nextNode": "recover", "score": 1 }
         ]
       },
-      "ignore-scope": {
-        "narrative": "The endpoint is fixed, but you have no idea how much data was already leaked, whether other endpoints have the same issue, or whether affected users need to be notified. In many jurisdictions, failing to report a data breach is illegal. This isn't over.",
+      "recover": {
+        "narrative": "RECOVER. Logs show 347 sequential ID requests from one IP over 6 hours -- up to 347 users had data scraped. Service is stable again. What does responsible recovery look like?",
         "choices": [
-          { "id": "a", "text": "You're right -- let me investigate the full scope", "nextNode": "check-logs", "score": 3 }
+          { "id": "a", "text": "Email affected users with what was exposed, force password reset, and notify your DPO/legal", "nextNode": "postmortem", "score": 10 },
+          { "id": "b", "text": "Quietly fix it -- public notification will spook customers", "nextNode": "postmortem", "score": 2 },
+          { "id": "c", "text": "Notify only the most active 50 users and skip the rest", "nextNode": "postmortem", "score": 4 }
+        ]
+      },
+      "postmortem": {
+        "narrative": "POSTMORTEM. Service is recovered, users are notified. The last job is making sure this class of bug can never ship again. What goes into the writeup?",
+        "choices": [
+          { "id": "a", "text": "Document timeline, root cause, write authorization tests, add a CI lint that flags routes without auth, schedule quarterly auth audits", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Write a short Slack message: 'fixed the BOLA bug, won't happen again'", "nextNode": "end-mediocre", "score": 4 },
+          { "id": "c", "text": "Skip the postmortem -- the team is exhausted and the fix is in", "nextNode": "end-poor", "score": 1 }
         ]
       },
       "end-good": {
-        "narrative": "You contained the leak, determined the scope, notified affected users, audited all endpoints, and added authorization checks across the board. You also added rate limiting to prevent future scraping attempts. Your team sets up automated security testing to catch this class of bug before it ships.",
+        "narrative": "You followed the full incident response loop: confirmed the leak, contained it with a targeted hotfix, eradicated the pattern across the codebase, recovered with honest user notification and legal compliance, and turned the incident into permanent guardrails -- tests, lint rules, and a recurring audit. The next contributor cannot accidentally ship the same bug.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "Textbook incident response: contain, assess scope, notify, remediate, and improve. The key insight is that authorization (who can access what) must be checked on every API endpoint, not just the frontend. This vulnerability is called Broken Object Level Authorization (BOLA) and it's the #1 item on the OWASP API Security Top 10."
+        "finalScore": 50,
+        "feedback": "Textbook incident response. The vulnerability you handled is called Broken Object Level Authorization (BOLA), the #1 issue on the OWASP API Security Top 10. The reason it stays #1 is that most teams stop at containment. You went all the way to prevention -- that's how breaches stop repeating."
       },
       "end-mediocre": {
-        "narrative": "Blocking one IP is like locking one door while leaving the windows open. The attacker can use a different IP, VPN, or proxy. You haven't notified affected users, haven't checked for other vulnerable endpoints, and may be violating data breach notification laws.",
+        "narrative": "The fire is out, but no document, no automated check, no scheduled review. In six months a new contributor adds /api/orders/:id without auth, and you're back here.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "IP blocking is not a security fix -- it's a speed bump. The real fix was the authorization check you added to the endpoint. But incident response doesn't end at containment: you need to assess the full scope, notify affected users, audit for similar issues, and put safeguards in place to prevent recurrence."
+        "finalScore": 28,
+        "feedback": "You handled the live incident competently. Skipping the postmortem is where the cost compounds: incidents that don't generate guardrails are doomed to recur. A 30-minute writeup and a CI lint cost less than another breach."
+      },
+      "end-poor": {
+        "narrative": "No notification, no postmortem, the team moves on. Months later another endpoint is exploited the same way. By then, the original incident is lost institutional memory -- and possibly a regulatory violation, since you skipped notification.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 12,
+        "feedback": "Each phase you skipped multiplies the cost. Notification is often legally required (GDPR, CCPA, breach notification laws). A postmortem is what converts a bad night into permanent learning. Without either, the breach repeats and the legal exposure grows."
       }
     },
     "glossaryTerms": ["data-breach", "authorization", "bola", "incident-response", "rate-limiting"]

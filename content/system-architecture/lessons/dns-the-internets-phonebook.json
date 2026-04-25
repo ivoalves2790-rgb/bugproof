@@ -43,63 +43,75 @@
       "start": {
         "narrative": "Your friend just launched their website at www.coolstore.com. They say: 'I bought the domain an hour ago and pointed it to my server, but when I type the URL I get an error: DNS_PROBE_FINISHED_NXDOMAIN.' What does this error mean?",
         "choices": [
-          { "id": "a", "text": "DNS couldn't find an IP address for that domain name", "nextNode": "correct-dns", "score": 10 },
-          { "id": "b", "text": "The server is down and not responding", "nextNode": "wrong-server-down", "score": 3 },
-          { "id": "c", "text": "The website code has a bug", "nextNode": "wrong-code-bug", "score": 1 }
-        ]
-      },
-      "correct-dns": {
-        "narrative": "Correct! NXDOMAIN means 'Non-Existent Domain' -- DNS looked up coolstore.com but couldn't find any IP address for it. Your friend says they updated the DNS settings at their domain registrar an hour ago. What's likely happening?",
-        "choices": [
-          { "id": "a", "text": "DNS changes take time to spread across the internet (propagation)", "nextNode": "correct-propagation", "score": 10 },
-          { "id": "b", "text": "They probably typed the wrong IP address in the DNS settings", "nextNode": "possible-typo", "score": 5 },
-          { "id": "c", "text": "The domain registrar is broken", "nextNode": "wrong-registrar", "score": 2 }
+          { "id": "a", "text": "DNS couldn't find an IP address for that domain name", "nextNode": "verify-records", "score": 4 },
+          { "id": "b", "text": "The server is down and not responding", "nextNode": "wrong-server-down", "score": 1 },
+          { "id": "c", "text": "The website code has a bug", "nextNode": "wrong-code-bug", "score": 0 }
         ]
       },
       "wrong-server-down": {
         "narrative": "Not quite. If the server were down, you'd get a different error -- like a timeout or connection refused. The NXDOMAIN error happens earlier in the process: your browser can't even find WHERE the server is. It's a DNS problem, not a server problem.",
         "choices": [
-          { "id": "a", "text": "So DNS couldn't find the IP address for the domain name?", "nextNode": "correct-dns", "score": 5 }
+          { "id": "wsd-redirect", "text": "Got it -- DNS couldn't resolve the domain to an IP", "nextNode": "verify-records", "score": 2 }
         ]
       },
       "wrong-code-bug": {
         "narrative": "A code bug would only matter if your browser could actually reach the server. The NXDOMAIN error happens before any connection is made -- your browser is still trying to figure out WHERE to send the request. It's stuck at the DNS step.",
         "choices": [
-          { "id": "a", "text": "OK, so it's a DNS problem -- the domain name can't be resolved", "nextNode": "correct-dns", "score": 5 }
+          { "id": "wcb-redirect", "text": "OK, so the domain name itself isn't resolving — it's a DNS problem", "nextNode": "verify-records", "score": 2 }
         ]
       },
-      "correct-propagation": {
-        "narrative": "Exactly! DNS propagation can take up to 48 hours. DNS servers around the world cache results and don't check for updates immediately. Your friend should wait a few more hours. In the meantime, what can they do to verify their settings are correct?",
+      "verify-records": {
+        "narrative": "Before assuming propagation, you want to verify the records were set correctly. How do you check the actual DNS configuration?",
         "choices": [
-          { "id": "a", "text": "Use a DNS lookup tool to check if the records are set correctly", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Just wait and hope for the best", "nextNode": "end-ok", "score": 5 }
+          { "id": "vr-dig", "text": "Run dig coolstore.com @8.8.8.8 to query Google's resolver and see exactly what record (or lack of record) is returned", "nextNode": "check-propagation", "score": 4 },
+          { "id": "vr-tool", "text": "Use an online DNS checker like dnschecker.org to see how the record looks from many regions", "nextNode": "check-propagation", "score": 3 },
+          { "id": "vr-refresh", "text": "Just refresh the browser a few times and hope it resolves", "nextNode": "check-propagation", "score": 0 }
         ]
       },
-      "possible-typo": {
-        "narrative": "That's possible! But since they just made the change, the more likely reason is DNS propagation -- it takes time for DNS changes to spread across the internet. DNS servers cache results and only refresh periodically, which can take minutes to 48 hours.",
+      "check-propagation": {
+        "narrative": "You confirm the A record is set correctly at the registrar — it points to the right IP. But your local resolver still returns NXDOMAIN. What's most likely going on?",
         "choices": [
-          { "id": "a", "text": "So we should wait for propagation and also double-check the settings", "nextNode": "end-great", "score": 7 }
+          { "id": "cp-propagation", "text": "DNS propagation: the new record exists at the authoritative servers but caching resolvers haven't picked it up yet — can take up to 48 hours", "nextNode": "ttl-step", "score": 4 },
+          { "id": "cp-flush", "text": "Your local OS is caching the old NXDOMAIN — flush it with sudo dscacheutil -flushcache (mac) or ipconfig /flushdns (windows)", "nextNode": "ttl-step", "score": 3 },
+          { "id": "cp-blame", "text": "The registrar must be lying — open a support ticket immediately", "nextNode": "ttl-step", "score": 0 }
         ]
       },
-      "wrong-registrar": {
-        "narrative": "Domain registrars almost never go down entirely. The much more common issue is DNS propagation -- when you update DNS records, it takes time for all the DNS servers around the world to get the new information.",
+      "ttl-step": {
+        "narrative": "Your friend wants to switch hosting providers next month and is worried about another long propagation delay. The current TTL on the A record is 86400 seconds (24 hours). What should they do before the migration?",
         "choices": [
-          { "id": "a", "text": "So we need to wait for the DNS changes to propagate", "nextNode": "correct-propagation", "score": 5 }
+          { "id": "ttl-lower", "text": "Lower the TTL to 300 seconds (5 minutes) a day or two before the cutover, then raise it back after the new IP propagates", "nextNode": "monitor-step", "score": 4 },
+          { "id": "ttl-keep", "text": "Leave the TTL alone — it's only 24 hours, that's tolerable", "nextNode": "monitor-step", "score": 1 },
+          { "id": "ttl-zero", "text": "Set TTL to 0 permanently so updates are instant", "nextNode": "monitor-step", "score": 0 }
         ]
       },
-      "end-great": {
-        "narrative": "You use an online DNS checker and confirm the A record is pointing to the right IP address. The checker shows some DNS servers already have the new record while others still show the old one. Classic propagation! You tell your friend to wait a few more hours.",
-        "choices": [],
+      "monitor-step": {
+        "narrative": "The site is finally live and resolving worldwide. Your friend asks: 'How will I know if DNS breaks again in the future?' What do you recommend?",
+        "choices": [
+          { "id": "mon-uptime", "text": "Set up an uptime monitor that hits the domain from multiple regions every minute and alerts on resolution failures", "nextNode": "excellent-end", "score": 4 },
+          { "id": "mon-manual", "text": "Bookmark dnschecker.org and check it once a week", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "mon-wait", "text": "Wait until users complain — DNS rarely breaks on its own", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "You walked the full DNS lifecycle: identified NXDOMAIN as a resolution failure, verified the record with dig, explained propagation, lowered TTL ahead of the next migration, and set up multi-region monitoring. Your friend now understands DNS as a system rather than a black box.",
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Great work! You identified that NXDOMAIN means DNS can't find the domain, understood that DNS propagation takes time, and suggested using a lookup tool to verify settings. DNS issues are one of the most common problems when launching a new website."
+        "feedback": "This is how senior engineers debug DNS: confirm the record exists at the authority, distinguish caching from misconfiguration, plan TTL changes around migrations, and monitor from outside your network. NXDOMAIN is a starting point, not a verdict.",
+        "choices": []
       },
-      "end-ok": {
-        "narrative": "Waiting will probably work, but it's better to verify the DNS settings are correct first. If there's a typo in the IP address, waiting won't help. Using a DNS lookup tool takes 10 seconds and gives you peace of mind.",
-        "choices": [],
+      "mediocre-end": {
+        "narrative": "The site works and you understand the basics, but a manual weekly check won't catch a 3am outage on a Sunday. The first regional DNS issue takes 8 hours to discover.",
         "isEnd": true,
-        "finalScore": 12,
-        "feedback": "You correctly identified DNS propagation as the issue, but being proactive about checking DNS records is a good habit. Always verify your settings with a DNS lookup tool rather than just waiting and hoping."
+        "finalScore": 13,
+        "feedback": "Manual checks are better than nothing, but DNS issues often hit specific regions or resolvers. A continuous monitor that pings from multiple geographies is what catches the bugs you can't see from your own desk.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "Days later, the site silently disappears for users on a specific ISP because of a misconfigured caching resolver. Your friend finds out from an angry customer.",
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "DNS does break on its own — TTL expirations, registrar errors, resolver outages. Treat DNS like any other production dependency: monitor it, alert on failures, and rehearse the change-window playbook.",
+        "choices": []
       }
     },
     "glossaryTerms": ["dns", "ip-address", "domain", "dns-propagation"]

@@ -45,56 +45,75 @@
       "start": {
         "narrative": "Task: Display the logged-in user's name in the navigation bar. Expected time: 30 minutes.\n\nYou open the codebase and find a single file called app.js with 2,400 lines. There's also helpers.js (800 lines), stuff.js (350 lines), and components.js (1,200 lines). Where do you start looking for user data?",
         "choices": [
-          { "id": "a", "text": "Search for 'user' across all files to find where user data is handled", "nextNode": "search-user", "score": 10 },
-          { "id": "b", "text": "Start reading app.js from the top since it's the main file", "nextNode": "read-app", "score": 3 },
-          { "id": "c", "text": "Check helpers.js since getting user data sounds like a helper function", "nextNode": "check-helpers", "score": 5 }
+          { "id": "a", "text": "Search for 'user' across all files to find where user data is handled", "nextNode": "search-user", "score": 4 },
+          { "id": "b", "text": "Start reading app.js from the top since it's the main file", "nextNode": "read-app", "score": 1 },
+          { "id": "c", "text": "Check helpers.js since getting user data sounds like a helper function", "nextNode": "check-helpers", "score": 2 }
         ]
       },
       "search-user": {
-        "narrative": "Searching for 'user' returns 147 results across all files. There's 'user', 'userData', 'currentUser', 'userInfo', 'usr', and 'loggedInUser' -- all meaning slightly different things in different places. Some are the same data fetched differently. Which do you use?",
+        "narrative": "Searching for 'user' returns 147 results across all files. There's 'user', 'userData', 'currentUser', 'userInfo', 'usr', and 'loggedInUser' -- all meaning slightly different things in different places. Some are the same data fetched differently. Which do you trust?",
         "choices": [
-          { "id": "a", "text": "Find where the authentication/login logic is to trace the source of truth", "nextNode": "find-auth", "score": 10 },
-          { "id": "b", "text": "Just pick the first 'currentUser' variable you find and use it", "nextNode": "wrong-user", "score": 3 }
+          { "id": "a", "text": "Find the login/auth code and trace forward to identify the source of truth", "nextNode": "trace-truth", "score": 4 },
+          { "id": "b", "text": "Pick the variable name that appears most often and assume it's canonical", "nextNode": "trace-truth", "score": 2 },
+          { "id": "c", "text": "Just grab the first 'currentUser' I see and use it", "nextNode": "trace-truth", "score": 0 }
         ]
       },
       "read-app": {
-        "narrative": "You start reading app.js line by line. 45 minutes later, you're at line 600 and have found database setup code, routing, middleware, authentication, and socket handlers all jumbled together. The user logic is somewhere in these 2,400 lines but there are no sections or comments to guide you.",
+        "narrative": "You read app.js line by line. 45 minutes later, you're at line 600 and have found database setup, routing, middleware, authentication, and socket handlers all jumbled together. The user logic is somewhere in these 2,400 lines but there are no sections or comments to guide you. You give up reading sequentially.",
         "choices": [
-          { "id": "a", "text": "Try searching for 'user' instead of reading line by line", "nextNode": "search-user", "score": 7 }
+          { "id": "a", "text": "Switch to searching the codebase for 'user' to jump to the right area", "nextNode": "search-user", "score": 3 }
         ]
       },
       "check-helpers": {
-        "narrative": "helpers.js has 47 functions with names like doThing(), process(), handle(), and format2(). None of them clearly relate to user data. There's a getCurrentUser() but it returns different data than getUserInfo() in stuff.js. Nobody documented which one is correct.",
+        "narrative": "helpers.js has 47 functions with names like doThing(), process(), handle(), and format2(). There's a getCurrentUser() but it returns different data than getUserInfo() in stuff.js. Nobody documented which one is correct. You can't tell from this file alone.",
         "choices": [
-          { "id": "a", "text": "Search all files for 'user' to see the full picture", "nextNode": "search-user", "score": 7 }
+          { "id": "a", "text": "Search all files for 'user' to see the full picture", "nextNode": "search-user", "score": 3 }
         ]
       },
-      "find-auth": {
-        "narrative": "You trace the login flow and find the source of truth: a function called fetchUser() on line 1,847 of app.js that calls the API and stores the result in a global variable called 'usr'. The navigation component is on line 342 of components.js. But 'usr' is not accessible from there because it's scoped to a function in app.js. What do you do?",
+      "trace-truth": {
+        "narrative": "You find the source of truth: fetchUser() on line 1,847 of app.js calls the API on login and stores the result in a local variable 'usr' inside an IIFE. The nav component (line 342 of components.js) lives in a different module entirely and has no access to that local. How do you bridge them?",
         "choices": [
-          { "id": "a", "text": "Pass the user data through props or use React context to share it properly", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Make 'usr' a global window variable so it's accessible everywhere", "nextNode": "end-hacky", "score": 3 }
+          { "id": "a", "text": "Lift fetchUser into a UserContext provider and consume it from the nav with useUser()", "nextNode": "scope-control", "score": 4 },
+          { "id": "b", "text": "Export the user variable from app.js and import it in the nav component", "nextNode": "scope-control", "score": 2 },
+          { "id": "c", "text": "Attach the user object to window.usr so any file can read it anywhere", "nextNode": "scope-control", "score": 0 }
         ]
       },
-      "wrong-user": {
-        "narrative": "You grab 'currentUser' from helpers.js, but it turns out that variable holds cached data from the previous session. The nav bar shows the wrong name after login. You've now spent 2 hours and introduced a bug.",
+      "scope-control": {
+        "narrative": "Now think about staleness. After login, fetchUser runs once and caches the result. If the user updates their name later in /settings, the nav still shows the old name until refresh. How do you handle updates?",
         "choices": [
-          { "id": "a", "text": "Step back and trace the authentication flow to find the real source of truth", "nextNode": "find-auth", "score": 5 }
+          { "id": "a", "text": "Make UserContext re-fetch on profile-save events and broadcast the new value to all consumers", "nextNode": "prevent-future", "score": 4 },
+          { "id": "b", "text": "Force a full page reload after profile-save -- simple and guaranteed fresh", "nextNode": "prevent-future", "score": 2 },
+          { "id": "c", "text": "Tell users to refresh manually if their name looks wrong", "nextNode": "prevent-future", "score": 0 }
+        ]
+      },
+      "prevent-future": {
+        "narrative": "The feature ships. While you have the codebase loaded, what (if anything) do you do to prevent the next 30-minute task from also taking 3 days?",
+        "choices": [
+          { "id": "a", "text": "Move auth/user code into src/auth/ and src/hooks/useUser.ts so the next person finds it immediately, and add a 5-line README of the data flow", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Add a one-line comment near fetchUser pointing to UserContext and move on", "nextNode": "end-mediocre", "score": 2 },
+          { "id": "c", "text": "Nothing -- the ticket is closed, refactoring is somebody else's problem", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You create a UserContext that provides the current user to all components, and the nav bar accesses it cleanly. The feature works. Total time: 4 hours -- mostly spent understanding the codebase. A well-organized project would have had this done in 20 minutes.",
+        "narrative": "The feature works AND the codebase is incrementally cleaner. The next teammate looking for user data finds src/auth/useUser.ts in 10 seconds. A 30-minute task next time will actually take 30 minutes. You paid back a small chunk of the technical debt that delayed you.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "You navigated a messy codebase by tracing the source of truth instead of guessing. But notice how a 30-minute task took 4 hours because of poor organization: vague file names, 6 different user variables, 2,400-line files, and no clear data flow. This is the real cost of disorganization -- it's paid on every single change."
+        "feedback": "This is the boy-scout rule in action: leave the campsite a little cleaner than you found it. The big-bang refactor that 'fixes everything' never ships, but a small, scoped cleanup tied to a real ticket always does. Disorganization compounds; so do small cleanups."
       },
-      "end-hacky": {
-        "narrative": "Making 'usr' a global variable works today but creates a maintenance nightmare. Now any code anywhere can read or modify the user data with no tracking. When a bug appears with wrong user data, there's no way to trace where it was changed.",
+      "end-mediocre": {
+        "narrative": "The feature works. The next person looking for user data still has to grep across 5,350 lines, but at least when they find fetchUser they'll see your comment pointing to UserContext. You saved 5 minutes of someone's future search time and not much more.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Global variables are a classic short-term fix that creates long-term pain. The codebase is already a mess because of shortcuts like this. A proper solution (React context, a state management library, or even just exporting from a module) gives you the same access but with clear ownership and traceability."
+        "finalScore": 12,
+        "feedback": "A breadcrumb is better than nothing, but it doesn't change the underlying structure -- the codebase is still a maze. Comments rot; structure scales. The next time you touch this area, prefer moving code into a clearly-named file over leaving a note about where it lives."
+      },
+      "end-weak": {
+        "narrative": "Ticket closed in 4 hours. Two weeks later, a new hire is asked to add the user's avatar next to their name. They spend a day repeating the exact same archaeological dig you just did, and probably introduce yet another 'currentUser' variable in the process.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 6,
+        "feedback": "Doing nothing is the choice that keeps the cycle going. You had the context loaded and the proof of cost (3 days for a 30-minute task) right in front of you -- that was the cheapest moment to spend 20 minutes on cleanup. Skipping it ensures the next feature pays the full price again."
       }
     },
     "glossaryTerms": ["spaghetti-code", "source-of-truth", "technical-debt", "global-variable"]

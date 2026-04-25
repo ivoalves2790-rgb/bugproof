@@ -43,58 +43,76 @@
       "start": {
         "narrative": "Tu app de e-commerce tiene 50 páginas y cero tests. Necesitas actualizar la función de formato de moneda para soportar euros. Se usa en docenas de lugares: páginas de productos, carrito, checkout, recibos e informes de administración. ¿Cómo lo abordas?",
         "choices": [
-          { "id": "a", "text": "Cambiar la función y verificar manualmente cada página donde se usa", "nextNode": "manual-check", "score": 5 },
-          { "id": "b", "text": "Escribir tests para la función de formato primero, luego cambiarla", "nextNode": "write-tests-first", "score": 10 },
-          { "id": "c", "text": "Crear una función nueva en lugar de modificar la existente", "nextNode": "duplicate", "score": 3 }
+          { "id": "a", "text": "Cambiar la función y hacer clic manualmente en cada página que la usa", "nextNode": "manual-check", "score": 5 },
+          { "id": "b", "text": "Escribir tests para el formateador primero, luego cambiarlo (test-first)", "nextNode": "write-tests-first", "score": 10 },
+          { "id": "c", "text": "Crear una función nueva solo-euros junto a la vieja de dólares", "nextNode": "duplicate", "score": 3 }
         ]
       },
       "manual-check": {
-        "narrative": "Pasas 2 horas haciendo clic manualmente por la app. Las páginas de productos se ven bien. El carrito se ve bien. Despliegas. El lunes por la mañana, descubres que la página de informes de administración (que olvidaste revisar) muestra los precios como NaN. El equipo de finanzas ha estado exportando informes rotos todo el fin de semana.",
+        "narrative": "Pasas 2 horas haciendo clic por la app. Las páginas de productos se ven bien. El carrito se ve bien. Despliegas. El lunes por la mañana, el informe de administración (que olvidaste revisar) muestra los precios como NaN. Finanzas ha estado exportando informes rotos todo el fin de semana.",
         "choices": [
-          { "id": "a", "text": "Arreglar el informe de administración y agregar tests para que esto no pase de nuevo", "nextNode": "end-learned", "score": 7 },
-          { "id": "b", "text": "Arreglar el informe de administración y seguir adelante", "nextNode": "end-poor", "score": 3 }
+          { "id": "a", "text": "Arreglar el informe y fijar un test de regresión para el formateador", "nextNode": "audit-coverage", "score": 8 },
+          { "id": "b", "text": "Arreglar el informe y seguir adelante -- ya lo detectaste ahora", "nextNode": "audit-coverage", "score": 3 }
         ]
       },
       "write-tests-first": {
-        "narrative": "Escribes 8 tests para el formateador de moneda: dólares, euros, montos cero, montos negativos, números grandes, moneda faltante, valores nulos y el formato de informe de administración. Luego actualizas la función. 6 tests pasan, 2 fallan -- el formato del informe de administración y el manejo de nulos se rompieron. Los arreglas en 5 minutos. ¿Qué haces después?",
+        "narrative": "Escribes 8 tests para el formateador: dólares, euros, cero, negativos, números grandes, moneda faltante, nulos y el formato del informe de administración. Luego cambias la función. 6 tests pasan, 2 fallan -- el formato del informe y el manejo de nulos se rompieron. Los arreglas en 5 minutos.",
         "choices": [
-          { "id": "a", "text": "Ejecutar todos los tests una vez más, luego desplegar con confianza", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "También verificar manualmente algunas páginas por seguridad", "nextNode": "end-great", "score": 10 }
+          { "id": "a", "text": "Todos los tests verdes -- ahora planea cómo mantener la cobertura en todo el código", "nextNode": "audit-coverage", "score": 10 },
+          { "id": "b", "text": "Pasan los tests -- despliega ya, el resto del código lo vemos después", "nextNode": "audit-coverage", "score": 5 }
         ]
       },
       "duplicate": {
-        "narrative": "Ahora tienes dos funciones de formato haciendo casi lo mismo. Algunas páginas usan la vieja, algunas usan la nueva. En 3 meses, alguien cambiará una y olvidará la otra. Así es como los códigos base sin tests empeoran con el tiempo -- la gente tiene miedo de modificar código existente, así que lo duplican.",
+        "narrative": "Ahora tienes dos funciones de formato haciendo casi lo mismo. Algunas páginas usan la vieja, otras la nueva. En 3 meses, alguien cambia una y olvida la otra. Así es como se deteriora un código sin tests -- la duplicación crece porque nadie confía en el original.",
         "choices": [
-          { "id": "a", "text": "En realidad, déjame escribir tests para la función original y modificarla correctamente", "nextNode": "write-tests-first", "score": 5 }
+          { "id": "a", "text": "Borrar la duplicada, escribir tests para la original y modificarla bien", "nextNode": "audit-coverage", "score": 6 },
+          { "id": "b", "text": "Dejar ambas por ahora -- no está rompiendo nada activamente", "nextNode": "audit-coverage", "score": 1 }
         ]
       },
-      "end-learned": {
-        "narrative": "Arreglas el informe y escribes tests. Este bug le costó al equipo de finanzas un fin de semana de datos malos. Si hubieras tenido tests, esos 2 segundos de ejecución de tests habrían detectado esto antes de que llegara a producción.",
-        "choices": [],
-        "isEnd": true,
-        "finalScore": 12,
-        "feedback": "¡Al menos aprendiste la lección! El testing manual pasó por alto el informe de administración porque es fácil olvidar páginas que no usas seguido. Los tests verifican todo automáticamente, cada vez. Escribe los tests ahora y nunca tendrás este problema de nuevo."
+      "audit-coverage": {
+        "narrative": "El formateador está arreglado. Pero el código base sigue sin tests en ningún otro lado. La próxima rotura solo está esperando al próximo cambio. Tienes una tarde para invertir en cobertura. ¿Dónde la gastas?",
+        "choices": [
+          { "id": "a", "text": "Cubrir primero los módulos de mayor riesgo: checkout, pagos, moneda, auth", "nextNode": "wire-ci", "score": 10 },
+          { "id": "b", "text": "Apuntar al 100% de cobertura en los archivos de utilidades más pequeños y fáciles", "nextNode": "wire-ci", "score": 4 },
+          { "id": "c", "text": "Agregar un solo test end-to-end que haga clic por todas las páginas", "nextNode": "wire-ci", "score": 6 }
+        ]
       },
-      "end-poor": {
-        "narrative": "Arreglas el problema inmediato pero no agregas tests. La próxima vez que alguien cambie la función de formato, lo mismo probablemente pasará de nuevo -- quizás en una página diferente que olvidaste revisar. Sin tests, solo estás jugando a aplastar topos con los bugs.",
-        "choices": [],
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Arreglar el bug sin agregar tests significa que seguirás teniendo el mismo tipo de problema. Los 15 minutos que toma escribir tests para esta función evitarían horas de depuración en el futuro."
+      "wire-ci": {
+        "narrative": "Ya tienes tests para los caminos de mayor riesgo. No sirven de nada si nadie los corre. ¿Cómo te aseguras de que realmente detecten regresiones antes que los usuarios?",
+        "choices": [
+          { "id": "a", "text": "Correr los tests en CI en cada pull request y bloquear los merges si fallan", "nextNode": "decide-ship", "score": 10 },
+          { "id": "b", "text": "Pedirle al equipo que corra los tests localmente antes de pushear -- confiar en el proceso", "nextNode": "decide-ship", "score": 4 },
+          { "id": "c", "text": "Correr los tests cada noche y enviar los fallos al canal del equipo por email", "nextNode": "decide-ship", "score": 6 }
+        ]
+      },
+      "decide-ship": {
+        "narrative": "CI está conectado. Los tests pasan. El equipo pregunta cuándo desplegarás el cambio de moneda. ¿Cuál es el movimiento final responsable?",
+        "choices": [
+          { "id": "a", "text": "Desplegar detrás de una feature flag, observar las tasas de error y luego liberar a todos", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Desplegar directo a producción -- los tests están verdes", "nextNode": "end-okay", "score": 6 },
+          { "id": "c", "text": "Esperar dos semanas más de QA manual antes de desplegar", "nextNode": "end-poor", "score": 2 }
+        ]
       },
       "end-good": {
-        "narrative": "Los 8 tests pasan. Despliegas con confianza, sabiendo que cada formato -- dólares, euros, casos límite -- ha sido verificado. Si alguien modifica esta función en el futuro, los tests detectarán cualquier problema inmediatamente.",
+        "narrative": "Despliegas detrás de una flag. Un pequeño porcentaje de usuarios usa el nuevo formateador mientras vigilas los logs de errores. Cero anomalías, así que escalas al 100% al día siguiente. CI ahora bloquea cualquier cambio futuro que rompa el formato de moneda -- y el resto de los módulos de alto riesgo también están cubiertos.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Este es el enfoque correcto! Escribir tests antes de modificar código compartido se llama 'test-first' y es increíblemente efectivo. Los tests detectaron 2 bugs en 2 segundos que habrían tomado horas en descubrir manualmente."
+        "finalScore": 50,
+        "feedback": "Cambio de rumbo de manual: escribir tests primero, priorizar módulos riesgosos, conectar CI y desplegar detrás de una flag. El código ya no está a un cambio de CSS del desastre. Cada contribuidor futuro hereda la red de seguridad que construiste en una tarde."
       },
-      "end-great": {
-        "narrative": "Tests + una verificación manual rápida es el estándar de oro. Los tests verifican la lógica, y tu verificación manual detecta problemas visuales que los tests podrían pasar por alto (como que el formato se vea raro en la página). Despliegas con confianza.",
+      "end-okay": {
+        "narrative": "El cambio se despliega. Los tests pasan, sin incendios inmediatos. Pero te saltaste el rollout gradual, así que si algo sutil estuviera mal, todos los usuarios lo habrían recibido a la vez. Esta vez tuviste suerte.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Lo mejor de ambos mundos! Los tests automatizados detectaron los bugs de lógica, y tu verificación manual confirmó la presentación visual. Esta combinación es lo que los equipos profesionales usan para cambios críticos."
+        "finalScore": 32,
+        "feedback": "Hiciste el trabajo duro -- tests, CI, priorización. Saltarte el rollout con feature flag fue el único eslabón débil. Los tests detectan los modos de fallo conocidos; los rollouts escalonados detectan los desconocidos. Usa ambos."
+      },
+      "end-poor": {
+        "narrative": "Después de dos semanas de QA manual, finalmente despliegas. El equipo está frustrado por la demora, y el QA manual igual se perdió un caso límite del informe de administración. Tus tests tan trabajados están sin usar mientras vuelves a hacer clic en las páginas a mano.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 18,
+        "feedback": "Los tests existen para reemplazar la verificación manual, no para complementarla indefinidamente. Si confías en tu suite de tests lo suficiente como para escribirla, confía lo suficiente como para desplegar detrás de ella. De lo contrario los tests se vuelven decoración."
       }
     },
     "glossaryTerms": ["regression", "test-first", "codebase-decay"]

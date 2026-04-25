@@ -38,75 +38,84 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Estas configurando la base de datos para tu gestor de tareas. Tu app necesita almacenar tareas con titulos, estados, fechas limite y prioridades. Las tareas pertenecen a usuarios. Necesitas filtrado y ordenamiento. Que tipo de base de datos eliges?",
+        "narrative": "Estas configurando la base de datos para tu gestor de tareas. Tu app necesita almacenar tareas con titulos, estados, fechas limite y prioridades. Las tareas pertenecen a usuarios. Necesitas filtrado y ordenamiento. ¿Que tipo de base de datos eliges?",
         "choices": [
-          { "id": "sql", "text": "Una base de datos SQL como PostgreSQL — mis datos son estructurados y relacionales", "nextNode": "sql-path", "score": 3 },
+          { "id": "sql", "text": "Una base de datos SQL como PostgreSQL — mis datos son estructurados y relacionales", "nextNode": "sql-path", "score": 4 },
           { "id": "nosql", "text": "Una base de datos NoSQL como MongoDB — quiero flexibilidad", "nextNode": "nosql-path", "score": 1 },
           { "id": "localstorage", "text": "Solo usar localStorage en el navegador — no se necesita servidor", "nextNode": "local-path", "score": 0 }
         ]
       },
       "sql-path": {
-        "narrative": "Buena eleccion. PostgreSQL es confiable y perfecto para datos estructurados como tareas. Ahora necesitas decidir como alojarlo. Cual es tu enfoque?",
+        "narrative": "Buena eleccion. PostgreSQL es confiable y perfecto para datos estructurados como tareas. Estas listo para diseñar el esquema.",
         "choices": [
-          { "id": "managed", "text": "Usar un servicio de base de datos administrado como Supabase o Neon para no tener que administrar servidores", "nextNode": "managed-end", "score": 4 },
-          { "id": "self-host", "text": "Instalar PostgreSQL en mi propio servidor para tener control total", "nextNode": "selfhost-end", "score": 2 },
-          { "id": "local-only", "text": "Solo ejecutarlo localmente en mi laptop por ahora", "nextNode": "localdb-end", "score": 1 }
+          { "id": "continue-sql", "text": "Pasar al diseño del esquema", "nextNode": "schema", "score": 3 }
         ]
       },
       "nosql-path": {
-        "narrative": "Configuras MongoDB y empiezas a construir. Las cosas funcionan al principio, pero cuando intentas consultar 'todas las tareas del usuario X ordenadas por fecha limite y filtradas por estado,' la consulta se complica. Unir datos de usuario con tareas requiere trabajo extra. Que haces?",
+        "narrative": "Configuras MongoDB y empiezas a construir. Las cosas funcionan al principio, pero cuando intentas consultar 'todas las tareas del usuario X ordenadas por fecha limite y filtradas por estado,' la consulta se complica. Unir datos de usuario con tareas requiere trabajo extra. ¿Que haces?",
         "choices": [
-          { "id": "switch-sql", "text": "Cambiar a PostgreSQL ahora antes de estar demasiado metido", "nextNode": "switch-end", "score": 3 },
-          { "id": "push-through", "text": "Seguir con MongoDB — ya descubriras las consultas eventualmente", "nextNode": "nosql-end", "score": 1 }
+          { "id": "switch-sql", "text": "Cambiar a PostgreSQL ahora antes de estar demasiado metido", "nextNode": "schema", "score": 4 },
+          { "id": "push-through", "text": "Seguir con MongoDB — ya descubriras las consultas eventualmente", "nextNode": "schema", "score": 1 }
         ]
       },
       "local-path": {
-        "narrative": "Construyes toda la app usando localStorage. Funciona en tu laptop, pero luego te das cuenta: los datos desaparecen cuando el usuario limpia su navegador. No hay forma de sincronizar entre dispositivos. Y tu amigo no puede ver sus tareas en su telefono. Y ahora?",
+        "narrative": "Construyes toda la app usando localStorage. Funciona en tu laptop, pero los datos desaparecen cuando el usuario limpia su navegador, no hay forma de sincronizar entre dispositivos y tu amigo no puede ver sus tareas en su telefono. ¿Y ahora?",
         "choices": [
-          { "id": "add-db", "text": "Agregar una base de datos real — necesitas persistencia del lado del servidor", "nextNode": "switch-end", "score": 3 },
-          { "id": "keep-local", "text": "Mantener localStorage y simplemente decirles a los usuarios que no limpien los datos de su navegador", "nextNode": "local-end", "score": 0 }
+          { "id": "add-db", "text": "Agregar una base de datos real — necesitas persistencia del lado del servidor", "nextNode": "schema", "score": 4 },
+          { "id": "keep-local", "text": "Mantener localStorage y simplemente decirles a los usuarios que no limpien los datos de su navegador", "nextNode": "schema", "score": 0 }
         ]
       },
-      "managed-end": {
-        "narrative": "Te registras en un servicio de PostgreSQL administrado. En 5 minutos, tienes una base de datos lista para produccion con respaldos automaticos, pool de conexiones y un panel para inspeccionar tus datos. Puedes enfocarte en construir funcionalidades en lugar de administrar infraestructura.",
+      "schema": {
+        "narrative": "Estas diseñando el esquema de tasks. Necesitas columnas para lo basico — title, status, due_date, user_id — pero tambien tienes que pensar en relaciones y tipos. ¿Como se ve tu esquema?",
+        "choices": [
+          { "id": "typed-schema", "text": "id UUID PK, user_id UUID FK a users(id), title TEXT, status task_status (enum), due_date TIMESTAMPTZ, created_at TIMESTAMPTZ DEFAULT now()", "nextNode": "hosting", "score": 4 },
+          { "id": "loose-types", "text": "id INT, user_id INT, title VARCHAR, status VARCHAR, due_date VARCHAR — mantener tipos sueltos para poder meter cualquier cosa", "nextNode": "hosting", "score": 1 },
+          { "id": "single-jsonb", "text": "id UUID PK, data JSONB — meter cada campo en una sola columna JSON para flexibilidad", "nextNode": "hosting", "score": 2 }
+        ]
+      },
+      "hosting": {
+        "narrative": "El esquema esta listo. Ahora necesitas decidir donde se ejecuta la base de datos. ¿Cual es tu enfoque de hosting?",
+        "choices": [
+          { "id": "managed", "text": "Usar un servicio administrado como Supabase o Neon — corren PostgreSQL con respaldos automaticos, pool de conexiones y un panel", "nextNode": "backups", "score": 4 },
+          { "id": "self-host", "text": "Instalar PostgreSQL en un VPS que rentes tu mismo para tener control total", "nextNode": "backups", "score": 2 },
+          { "id": "local-only", "text": "Solo ejecutarlo localmente en tu laptop por ahora", "nextNode": "backups", "score": 0 }
+        ]
+      },
+      "backups": {
+        "narrative": "La base de datos esta hosteada y en vivo. Usuarios reales almacenaran tareas reales. ¿Como manejas los respaldos y los cambios de esquema de forma segura?",
+        "choices": [
+          { "id": "automated-backups", "text": "Habilitar respaldos diarios con recuperacion punto-en-el-tiempo, y manejar cada cambio de esquema mediante archivos de migracion SQL versionados commiteados a Git", "nextNode": "scaling", "score": 4 },
+          { "id": "manual-export", "text": "Exportar la base de datos a un CSV cada pocas semanas y aplicar cambios de esquema corriendo SQL ad-hoc en el panel", "nextNode": "scaling", "score": 2 },
+          { "id": "no-backups", "text": "Saltar los respaldos — no tienes usuarios aun, y siempre puedes restaurar desde tu copia local", "nextNode": "scaling", "score": 0 }
+        ]
+      },
+      "scaling": {
+        "narrative": "Seis meses despues, tienes 5,000 usuarios activos y la CPU de la base de datos esta al 70% en horas pico. La consulta de la lista empieza a ralentizarse. ¿Que haces?",
+        "choices": [
+          { "id": "indexes-pooler", "text": "Perfilar las consultas lentas con EXPLAIN, agregar los indices faltantes y enrutar las lecturas a traves de un pooler de conexiones", "nextNode": "excellent-end", "score": 4 },
+          { "id": "scale-up", "text": "Pagar el siguiente plan de computo — meter mas CPU sin cambiar nada en el codigo", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "ignore-scale", "text": "Ignorarlo — 70% esta bien, la base de datos se acomodara sola", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu recorrido de base de datos esta completo: SQL por estructura, esquema tipado, hosting administrado, respaldos punto-en-el-tiempo, migraciones versionadas y una ruta de escalado limpia con indices y pooling. Tu gestor de tareas corre sobre fundamentos solidos y aguantara mientras los usuarios crecen.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Eleccion perfecta. Una base de datos SQL administrada te da la estructura que tus datos de tareas necesitan sin el dolor de cabeza de operaciones. Servicios como Supabase incluso agregan autenticación y funcionalidades en tiempo real incluidas.",
+        "finalScore": 23,
+        "feedback": "Asi piensan los ingenieros senior sobre bases de datos — no solo 'elige una y arranca,' sino una cadena de decisiones que cubre tipo, esquema, hosting, durabilidad y escala. Cada decision se acumula: las correctas hacen el siguiente problema mas facil; las equivocadas hacen cada cambio futuro doloroso.",
         "choices": []
       },
-      "selfhost-end": {
-        "narrative": "Pasas dos dias configurando PostgreSQL en un VPS, configurando respaldos, configurando SSL y resolviendo problemas de conexion. Funciona, pero no has escrito una sola linea de codigo del gestor de tareas aun.",
+      "mediocre-end": {
+        "narrative": "Echarle mas computo al problema te compra unos meses. La factura crece, pero la consulta lenta sigue siendo lenta — y la proxima vez que el trafico suba, estaras de vuelta aqui con una CPU mas grande y el mismo problema.",
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Escalar verticalmente es la respuesta facil, pero esconde el cuello de botella real. Perfila primero, agrega indices y solo escala el hardware despues de haber arreglado las consultas. De lo contrario estas pagando para correr codigo ineficiente mas rapido.",
+        "choices": []
+      },
+      "weak-end": {
+        "narrative": "El 70% se vuelve 95% durante el siguiente lanzamiento. Las consultas hacen timeout. Los usuarios ven paginas de error. Pasas un sabado en panico agregando indices y rotando credenciales mientras los clientes se van.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "El auto-alojamiento funciona, pero para un proyecto de aprendizaje, es una perdida de tiempo. Los servicios administrados te permiten saltarte las operaciones y enfocarte en construir. Guarda el auto-alojamiento para cuando necesites configuraciones personalizadas.",
-        "choices": []
-      },
-      "localdb-end": {
-        "narrative": "Tu app funciona en tu maquina, pero no se puede desplegar ni compartir con nadie. Cuando eventualmente necesites moverte a una base de datos alojada, tendras que migrar todo.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Las bases de datos solo locales estan bien para experimentos rápidos, pero un gestor de tareas necesita ser accesible desde cualquier lugar. Empieza con una solución alojada para que el despliegue sea fluido.",
-        "choices": []
-      },
-      "switch-end": {
-        "narrative": "Movimiento inteligente. Cambias a PostgreSQL con un servicio administrado. La migracion te cuesta unas horas, pero tus consultas ahora son limpias y rapidas. Filtrar tareas por estado y ordenar por fecha toma una simple consulta SQL.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Reconocer una mala eleccion temprano y cambiar es una habilidad valiosa. SQL es la opción correcta para datos estructurados y relacionales. La próxima vez, empareja la forma de tus datos con el tipo de base de datos desde el inicio.",
-        "choices": []
-      },
-      "nosql-end": {
-        "narrative": "Pasas dias escribiendo pipelines de agregacion complejos para consultas que serian una linea en SQL. La app funciona, pero cada nueva funcionalidad requiere luchar contra la base de datos en lugar de construir la funcionalidad.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "NoSQL puede funcionar, pero es la herramienta equivocada para datos estructurados y relacionales. Cuando tus datos tienen relaciones claras (los usuarios tienen tareas, las tareas tienen categorías), SQL te hace la vida mucho más fácil.",
-        "choices": []
-      },
-      "local-end": {
-        "narrative": "Los usuarios pierden sus tareas constantemente. Nadie quiere usar la app. El proyecto se desvanece porque la base era defectuosa desde el inicio.",
-        "isEnd": true,
-        "finalScore": 0,
-        "feedback": "localStorage no es una base de datos. Tiene limites de tamano, no tiene consultas, no tiene sincronizacion entre dispositivos y desaparece cuando se limpian los datos del navegador. Siempre usa una base de datos real para datos que importan.",
+        "feedback": "Los problemas de rendimiento de base de datos se acumulan rapido. Para cuando los 'sientes' en el panel, los usuarios ya los estan sintiendo en la app. Configura alertas, perfila consultas lentas semanalmente y trata el 70% sostenido de CPU como una luz amarilla, no verde.",
         "choices": []
       }
     },

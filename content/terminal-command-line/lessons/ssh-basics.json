@@ -45,63 +45,75 @@
       "start": {
         "narrative": "Your client calls in a panic -- their web app is down. You need to SSH into the production server at deploy@app.example.com to investigate. You try to connect but get 'Permission denied (publickey)'. What do you do first?",
         "choices": [
-          { "id": "a", "text": "Check if your SSH key is added to the ssh-agent with ssh-add -l", "nextNode": "check-agent", "score": 10 },
-          { "id": "b", "text": "Generate a brand new SSH key pair with ssh-keygen", "nextNode": "new-key", "score": 3 },
-          { "id": "c", "text": "Try connecting with a password instead: ssh deploy@app.example.com -o PasswordAuthentication=yes", "nextNode": "try-password", "score": 5 }
+          { "id": "a", "text": "Check if your SSH key is added to the ssh-agent with ssh-add -l", "nextNode": "check-agent", "score": 4 },
+          { "id": "b", "text": "Generate a brand new SSH key pair with ssh-keygen", "nextNode": "new-key", "score": 0 },
+          { "id": "c", "text": "Try connecting with a password instead: ssh deploy@app.example.com -o PasswordAuthentication=yes", "nextNode": "try-password", "score": 1 }
         ]
       },
       "check-agent": {
         "narrative": "You run ssh-add -l and get 'The agent has no identities'. Your SSH key exists on disk but isn't loaded into the agent. You add it with ssh-add ~/.ssh/id_ed25519 and try connecting again. This time you get in. The server's terminal prompt appears. Now what?",
         "choices": [
-          { "id": "a", "text": "Check the application logs to see what went wrong", "nextNode": "check-logs", "score": 10 },
-          { "id": "b", "text": "Immediately restart the application service", "nextNode": "blind-restart", "score": 5 },
-          { "id": "c", "text": "Run top to check if the server is overloaded", "nextNode": "check-top", "score": 7 }
+          { "id": "a", "text": "Check the application logs to see what went wrong", "nextNode": "diagnose-on-server", "score": 4 },
+          { "id": "b", "text": "Immediately restart the application service", "nextNode": "diagnose-on-server", "score": 1 },
+          { "id": "c", "text": "Run top to check if the server is overloaded", "nextNode": "diagnose-on-server", "score": 2 }
         ]
       },
       "new-key": {
-        "narrative": "You generate a new key, but the server doesn't recognize it -- you'd need to add the new public key to the server's authorized_keys file, which you can't do because you can't connect. Generating a new key doesn't help when the existing key just needs to be loaded. Try a different approach.",
+        "narrative": "You generate a new key, but the server doesn't recognize it -- you'd need to add the new public key to the server's authorized_keys file, which you can't do because you can't connect. Generating a new key doesn't help when the existing key just needs to be loaded.",
         "choices": [
-          { "id": "a", "text": "Check if the existing SSH key is loaded in the agent", "nextNode": "check-agent", "score": 5 }
+          { "id": "a", "text": "Roll back the new key and check whether the existing key is loaded in the agent", "nextNode": "diagnose-on-server", "score": 2 }
         ]
       },
       "try-password": {
         "narrative": "The server has password authentication disabled for security (which is a best practice). Password-based SSH is vulnerable to brute-force attacks. The issue is with your SSH key, not the authentication method.",
         "choices": [
-          { "id": "a", "text": "Check if my SSH key is loaded in the ssh-agent", "nextNode": "check-agent", "score": 5 }
+          { "id": "a", "text": "Add the existing key to the agent and try again", "nextNode": "diagnose-on-server", "score": 2 }
         ]
       },
-      "check-logs": {
-        "narrative": "You run 'tail -100 /var/log/app/error.log' and see the application crashed because it ran out of disk space. The log directory itself grew to 50GB of old log files. The fix is clear -- clean up old logs and restart. What's your approach?",
+      "diagnose-on-server": {
+        "narrative": "You're connected. The app is down. Before you touch anything, you need to know WHY it's down. What's your diagnostic move on the server?",
         "choices": [
-          { "id": "a", "text": "Delete old log files to free space, then restart the app", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Just restart the app and hope it works", "nextNode": "end-mediocre", "score": 3 }
+          { "id": "a", "text": "Tail the app's error log: `tail -100 /var/log/app/error.log` and `df -h` for disk usage", "nextNode": "fix-root-cause", "score": 4 },
+          { "id": "b", "text": "Run `pm2 status` and `journalctl -u app -n 100` to see process state and system logs", "nextNode": "fix-root-cause", "score": 4 },
+          { "id": "c", "text": "Skip diagnosis and run `pm2 restart all` -- the app is down, just turn it back on", "nextNode": "fix-root-cause", "score": 1 }
         ]
       },
-      "blind-restart": {
-        "narrative": "You restart the app with 'pm2 restart all' but it crashes again immediately. Without checking logs first, you're guessing at the problem. A restart won't fix an underlying issue like disk space, memory leaks, or config errors.",
+      "fix-root-cause": {
+        "narrative": "Diagnosis points to disk pressure: the app's log directory has ballooned to 50GB and the partition is at 100%. Writes to the log file fail, the app catches the I/O error, and pm2 keeps restarting it in a loop. What do you do?",
         "choices": [
-          { "id": "a", "text": "Check the application logs to find the actual cause", "nextNode": "check-logs", "score": 5 }
+          { "id": "a", "text": "Free disk space safely: `find /var/log/app -name \"*.log\" -mtime +30 -delete`, then `pm2 restart all` and confirm it's serving traffic", "nextNode": "prevent-recurrence", "score": 4 },
+          { "id": "b", "text": "Run `rm -rf /var/log/app/*` to instantly free space, then restart", "nextNode": "prevent-recurrence", "score": 2 },
+          { "id": "c", "text": "Just `pm2 restart all` -- maybe disk usage will sort itself out", "nextNode": "prevent-recurrence", "score": 0 }
         ]
       },
-      "check-top": {
-        "narrative": "You run 'top' and see CPU and memory look normal, but disk usage is at 100%. That's a clue, but the application logs will tell you exactly what went wrong and when.",
+      "prevent-recurrence": {
+        "narrative": "The app is back up. But the same disk-fills-up failure mode will return in roughly the same number of weeks. You're connected over SSH right now -- what's the right preventative move before you log out?",
         "choices": [
-          { "id": "a", "text": "Check the application logs for the specific error", "nextNode": "check-logs", "score": 8 }
+          { "id": "a", "text": "Configure logrotate (daily rotation, gzip, 14-day retention) and add a disk-usage alert in your monitoring", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Add a cron job that runs the find/-delete cleanup nightly", "nextNode": "end-ok", "score": 2 },
+          { "id": "c", "text": "Note 'check disk usage weekly' in your calendar and log out", "nextNode": "end-bad", "score": 0 }
         ]
       },
       "end-good": {
-        "narrative": "You run 'find /var/log/app/ -name \"*.log\" -mtime +30 -delete' to remove log files older than 30 days, freeing 45GB. Then you restart the app with 'pm2 restart all' and it comes back online. You also set up log rotation to prevent this from happening again. The client's app is back up in under 10 minutes.",
+        "narrative": "logrotate caps the log directory at a sane size automatically. The monitoring alert will page you at 80% disk usage long before the partition fills. The same incident cannot recur silently the way it just did. Total downtime: under 10 minutes.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Excellent incident response over SSH. You diagnosed the key loading issue, connected to the server, checked logs before taking action, identified the root cause (disk full), fixed it, and added prevention (log rotation). This is exactly how production issues are handled in the real world."
+        "feedback": "Production-grade SSH incident response. You diagnosed the auth issue locally, connected, gathered evidence before touching state, fixed the actual root cause (not the restart loop symptom), and installed both a control (logrotate) and a signal (alerting) so the failure mode is closed. That's the difference between a hero fix and a fix that holds."
       },
-      "end-mediocre": {
-        "narrative": "The app crashes again immediately because the disk is still full. Restarting without fixing the root cause just repeats the failure. You need to free disk space first.",
+      "end-ok": {
+        "narrative": "The cron cleanup will keep the partition from filling at the same rate, but it has no signal -- if cron fails or logs grow faster than expected, the next time you'll know is when the app crashes again.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Always diagnose before you fix. Restarting a crashed application without understanding why it crashed means it will likely crash again. In this case, the disk was full -- no amount of restarts would help until old log files were cleaned up. Check logs, identify the root cause, fix it, then restart."
+        "finalScore": 13,
+        "feedback": "Better than nothing, but a cleanup job without alerting is a control without a signal. Pair it with logrotate (so growth is bounded by policy, not a script) and a disk-usage alert (so you're warned before it crashes again). Otherwise the same incident recurs the day cron silently fails."
+      },
+      "end-bad": {
+        "narrative": "Three weeks later the partition fills again, the app crash-loops, the client calls in another panic, and you're SSHing into the same server to delete the same logs. Calendar reminders don't survive contact with a busy week.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 5,
+        "feedback": "Manual reminders are not infrastructure. The only reliable fix for a class of failures is to remove the failure mode (logrotate caps growth) and add a signal that catches drift (a disk-usage alert). Otherwise you're paying with downtime every few weeks."
       }
     },
     "glossaryTerms": ["ssh", "ssh-key"]

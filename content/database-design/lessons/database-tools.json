@@ -43,63 +43,75 @@
       "start": {
         "narrative": "Your team lead says: 'A user reports they can't see their orders. Check the database to see if their data exists. The connection info is in the .env file.' What's your first step?",
         "choices": [
-          { "id": "a", "text": "Check the .env file for the database connection string", "nextNode": "found-env", "score": 10 },
-          { "id": "b", "text": "Open the production code and look for the database URL in the source files", "nextNode": "wrong-source", "score": 3 },
-          { "id": "c", "text": "Ask the team lead for the password", "nextNode": "partial-ask", "score": 5 }
+          { "id": "a", "text": "Check the .env file for the database connection string", "nextNode": "found-env", "score": 4 },
+          { "id": "b", "text": "Open the production source code and grep for the database URL", "nextNode": "wrong-source", "score": 1 },
+          { "id": "c", "text": "Ask the team lead to paste the password in chat", "nextNode": "partial-ask", "score": 2 }
         ]
       },
       "found-env": {
-        "narrative": "You find the .env file with: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. Now you need to connect. Which tool do you use?",
+        "narrative": "You find: DATABASE_URL=postgresql://app_user:secret123@db.myapp.com:5432/production. You also notice the app has a SEPARATE staging database listed below it. Before connecting, what do you do?",
         "choices": [
-          { "id": "a", "text": "Use a GUI tool like TablePlus -- easier to browse and search data visually", "nextNode": "gui-choice", "score": 10 },
-          { "id": "b", "text": "Use the psql command line tool", "nextNode": "cli-choice", "score": 8 },
-          { "id": "c", "text": "Write a quick script in your app code to query the database", "nextNode": "code-choice", "score": 5 }
+          { "id": "a", "text": "Use the staging connection string to investigate -- production reads are still risky and staging usually has the same schema", "nextNode": "pick-tool", "score": 4 },
+          { "id": "b", "text": "Use production -- the bug is in production data, only production data will reproduce it", "nextNode": "pick-tool", "score": 2 },
+          { "id": "c", "text": "Use production but plan to be fast and careful", "nextNode": "pick-tool", "score": 3 }
         ]
       },
       "wrong-source": {
-        "narrative": "Connection strings should NEVER be in source code -- they contain passwords! The standard practice is to store them in .env files (which are not committed to git) or in environment variables set on the server. Check the .env file instead.",
+        "narrative": "Connection strings should NEVER be in source code -- they contain passwords. The standard practice is to store them in .env files (which are not committed to git) or in environment variables set on the server. Check the .env file instead.",
         "choices": [
-          { "id": "a", "text": "Right, check the .env file for the connection string", "nextNode": "found-env", "score": 5 }
+          { "id": "a", "text": "Right, check the .env file for the connection string", "nextNode": "found-env", "score": 2 }
         ]
       },
       "partial-ask": {
-        "narrative": "That works, but the connection info should already be documented in the .env file -- that's the standard place teams store database credentials. Check there first so you don't need to bother your lead.",
+        "narrative": "That works, but the connection info should already be in the .env file -- that's the standard place teams store database credentials. Check there first so you don't need to bother your lead.",
         "choices": [
-          { "id": "a", "text": "Let me check the .env file first", "nextNode": "found-env", "score": 7 }
+          { "id": "a", "text": "Let me check the .env file first", "nextNode": "found-env", "score": 3 }
         ]
       },
-      "gui-choice": {
-        "narrative": "You paste the connection string into TablePlus and connect. You can see all the tables visually. You navigate to the 'orders' table, search for the user's ID, and find... zero orders. But the 'users' table shows the user exists. What do you check next?",
+      "pick-tool": {
+        "narrative": "Now choose how to connect. You need to look at one user's orders -- a quick exploration, not a script.",
         "choices": [
-          { "id": "a", "text": "Check if the user's ID in the orders table matches their actual user ID", "nextNode": "end-great", "score": 10 },
-          { "id": "b", "text": "Check if the orders table is empty for everyone", "nextNode": "end-good", "score": 7 }
+          { "id": "a", "text": "GUI tool like TablePlus -- I can browse tables, click into rows, and write a SELECT in the same window", "nextNode": "write-query", "score": 4 },
+          { "id": "b", "text": "psql command line -- fast to launch and the query is the same SQL", "nextNode": "write-query", "score": 3 },
+          { "id": "c", "text": "Write a one-off script in the app codebase that prints the orders", "nextNode": "write-query", "score": 1 }
         ]
       },
-      "cli-choice": {
-        "narrative": "You run psql with the connection string and connect. You query: SELECT * FROM orders WHERE user_id = 42; and get zero results. The user exists in the users table but has no orders. A GUI would have made browsing easier, but the command line works too!",
+      "write-query": {
+        "narrative": "You're connected. The reporting user's id is 42. Which query do you run to confirm whether their order data exists?",
         "choices": [
-          { "id": "a", "text": "Check if the user_id in recent orders matches this user", "nextNode": "end-great", "score": 10 }
+          { "id": "a", "text": "SELECT id, user_id, created_at, status FROM orders WHERE user_id = 42 ORDER BY created_at DESC LIMIT 10;", "nextNode": "interpret", "score": 4 },
+          { "id": "b", "text": "SELECT * FROM orders; -- I'll scan visually for user 42", "nextNode": "interpret", "score": 1 },
+          { "id": "c", "text": "DELETE FROM orders WHERE user_id = 42; -- wait, I meant SELECT", "nextNode": "interpret", "score": 0 }
         ]
       },
-      "code-choice": {
-        "narrative": "Writing code for a one-time query is overkill. A GUI tool or command line lets you explore data interactively, which is much faster for debugging. Save code-based queries for your application logic.",
+      "interpret": {
+        "narrative": "Result: zero rows. Meanwhile, SELECT id, email FROM users WHERE id = 42 returns one row -- the user exists. What do you check next to figure out why their orders are missing?",
         "choices": [
-          { "id": "a", "text": "Let me use a GUI tool instead for quick exploration", "nextNode": "gui-choice", "score": 5 }
+          { "id": "a", "text": "Check whether the user_id column on orders matches the users.id type/value, and look for any orders linked to a different account with this user's email", "nextNode": "end-great", "score": 4 },
+          { "id": "b", "text": "Check whether the orders table is empty for everyone -- rule out a system-wide outage", "nextNode": "end-good", "score": 3 },
+          { "id": "c", "text": "Tell the user they have no orders and close the ticket", "nextNode": "end-weak", "score": 0 }
         ]
       },
       "end-great": {
-        "narrative": "You discover the user recently changed their email and re-registered, creating a new account with user_id 87. Their old orders are linked to user_id 42. The data is there -- it's just linked to their old account! You report the finding to the team.",
+        "narrative": "You join the tables on email and discover the user recently changed their email and re-registered, creating a new account with user_id 87. Their old orders are linked to user_id 42's email but the new account is 87. The data is there -- it's just linked to their old account. You report the finding so the team can merge the accounts.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Great investigation! You found the connection string in the .env file (the right place), used an appropriate tool to connect, and diagnosed a user_id mismatch. This kind of database detective work is a daily task for backend developers."
+        "feedback": "Great investigation. You used the right tool for an exploratory task (a GUI), connected via the .env config (the right place), wrote a scoped SELECT (not a destructive query), and joined the dots between users and orders. This is what daily database detective work looks like."
       },
       "end-good": {
-        "narrative": "You check and other users DO have orders -- it's just this specific user who has none. That rules out a system-wide problem and points to a user-specific issue. Good systematic thinking!",
+        "narrative": "You confirm other users do have orders, so this is not a system-wide outage -- it's specific to user 42. You hand the ticket back to a backend engineer with this scoping. Useful information, but you stopped one query short of finding the actual cause.",
         "choices": [],
         "isEnd": true,
         "finalScore": 14,
-        "feedback": "Good approach! Checking whether the problem is user-specific or system-wide is a smart debugging strategy. The next step would be to look at related data (like the user's account history) to find why their orders are missing."
+        "feedback": "Scoping the bug (system-wide vs user-specific) is a smart first move and you did it well. Next time, follow the thread one more step: once you know it's user-specific, ask 'what's different about THIS user?' -- different account, different region, different role -- and a JOIN usually finds the answer."
+      },
+      "end-weak": {
+        "narrative": "You close the ticket as 'no orders for this user'. The next morning the user emails screenshots of three order confirmations from last month. Support has to reopen the ticket, escalate it past you, and your team trusts your database work less.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 4,
+        "feedback": "Zero rows from one query is a starting point, not a conclusion. The user reported they couldn't SEE their orders -- not that they had never placed any. The whole point of having database tools is to dig past the first answer until the data tells a coherent story."
       }
     },
     "glossaryTerms": ["connection-string", "gui", "psql", "environment-variable"]

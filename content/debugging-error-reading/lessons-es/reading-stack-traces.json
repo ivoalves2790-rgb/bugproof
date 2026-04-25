@@ -45,71 +45,95 @@
       "start": {
         "narrative": "Tu aplicación React falla con este error:\n\nTypeError: Cannot read properties of null (reading 'map')\n    at ProductList (src/components/ProductList.jsx:12)\n    at renderWithHooks (react-dom.development.js:14985)\n    at mountIndeterminateComponent (react-dom.development.js:17811)\n    at App (src/App.jsx:8)\n\n¿Dónde miras primero?",
         "choices": [
-          { "id": "a", "text": "La parte superior de la traza de pila: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 10 },
-          { "id": "b", "text": "La parte inferior de la traza de pila: App.jsx línea 8", "nextNode": "wrong-bottom", "score": 3 },
+          { "id": "a", "text": "La parte superior de la traza: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 10 },
+          { "id": "b", "text": "La parte inferior de la traza: App.jsx línea 8", "nextNode": "wrong-bottom", "score": 3 },
           { "id": "c", "text": "Las líneas de react-dom -- el error probablemente está en React mismo", "nextNode": "wrong-framework", "score": 1 }
         ]
       },
       "correct-top": {
-        "narrative": "¡Correcto! La primera línea de tu código en la traza de pila es generalmente donde está el problema. Abres ProductList.jsx y ves la línea 12:\n\nconst items = products.map(p => <li>{p.name}</li>);\n\nEl error dice que 'null' no tiene '.map'. ¿Qué te dice esto?",
+        "narrative": "Correcto. ProductList.jsx línea 12:\n\nconst items = products.map(p => <li>{p.name}</li>);\n\nEl error dice que 'null' no tiene '.map'. ¿Qué te dice esto?",
         "choices": [
-          { "id": "a", "text": "La variable 'products' es null cuando se ejecuta esta línea", "nextNode": "found-null", "score": 10 },
+          { "id": "a", "text": "La variable 'products' es null cuando se ejecuta esta línea", "nextNode": "find-source", "score": 10 },
           { "id": "b", "text": "La función .map() está rota", "nextNode": "wrong-map", "score": 2 },
           { "id": "c", "text": "El elemento <li> está causando el fallo", "nextNode": "wrong-li", "score": 1 }
         ]
       },
       "wrong-bottom": {
-        "narrative": "Las trazas de pila se leen de arriba a abajo, donde la parte superior es la llamada más reciente -- el lugar donde el error realmente ocurrió. La parte inferior es donde la cadena de llamadas a funciones comenzó. Comienza arriba y busca TUS archivos (no código del framework).",
+        "narrative": "Las trazas de pila se leen de arriba a abajo, donde la parte superior es la llamada más reciente -- el sitio real del fallo. La parte inferior es donde la cadena de llamadas comenzó. Empieza arriba y busca TUS archivos.",
         "choices": [
-          { "id": "a", "text": "OK, déjame mirar arriba: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 5 }
+          { "id": "a", "text": "OK, mira arriba: ProductList.jsx línea 12", "nextNode": "correct-top", "score": 5 }
         ]
       },
       "wrong-framework": {
-        "narrative": "Las líneas de node_modules o archivos del framework como react-dom casi nunca son la fuente de tu error. Aparecen en la traza porque tu código llamó al framework, que luego encontró el error. Salta las líneas del framework y busca TUS archivos fuente.",
+        "narrative": "Las líneas de react-dom y node_modules casi nunca contienen tu bug. Aparecen porque tu código llamó al framework. Salta las líneas del framework y busca TUS archivos fuente.",
         "choices": [
-          { "id": "a", "text": "OK, déjame enfocarme en mis propios archivos en la traza", "nextNode": "correct-top", "score": 5 }
-        ]
-      },
-      "found-null": {
-        "narrative": "¡Exacto! El mensaje de error 'Cannot read properties of null (reading 'map')' te está diciendo que llamaste .map() en algo que es null. La variable 'products' es null. Ahora, ¿cómo lo arreglas?",
-        "choices": [
-          { "id": "a", "text": "Agregar una verificación: si products es null, mostrar un estado de carga o lista vacía", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Inicializar products como un array vacío por defecto", "nextNode": "end-okay", "score": 7 },
-          { "id": "c", "text": "Envolverlo en un bloque try-catch", "nextNode": "end-trycatch", "score": 4 }
+          { "id": "a", "text": "OK, enfocarme en mis propios archivos en la traza", "nextNode": "correct-top", "score": 5 }
         ]
       },
       "wrong-map": {
-        "narrative": "La función .map() funciona bien -- es un método integrado de arrays de JavaScript. El problema es EN QUÉ estás llamando .map(). El error dice que estás llamando .map() en null, lo que significa que la variable antes de .map() tiene un valor null.",
+        "narrative": "La función .map() funciona bien -- es un método integrado de arrays. El problema es EN QUÉ estás llamando .map(). El error dice que estás llamando .map() en null.",
         "choices": [
-          { "id": "a", "text": "Entonces 'products' debe ser null cuando se ejecuta esta línea", "nextNode": "found-null", "score": 5 }
+          { "id": "a", "text": "Entonces 'products' es null cuando se ejecuta esta línea", "nextNode": "find-source", "score": 5 }
         ]
       },
       "wrong-li": {
-        "narrative": "Los elementos JSX dentro de .map() no son el problema. El fallo ocurre antes de que el callback de .map() siquiera se ejecute. Mira el mensaje de error de nuevo: dice que 'null' no tiene la propiedad 'map'. Lo que estás llamando .map() es null.",
+        "narrative": "El JSX dentro de .map() nunca se ejecuta -- el fallo ocurre antes de que el callback corra. El error es que 'null' no tiene la propiedad 'map'. Lo que estás llamando .map() es null.",
         "choices": [
-          { "id": "a", "text": "Entonces la variable products es null", "nextNode": "found-null", "score": 5 }
+          { "id": "a", "text": "Entonces la variable products es null", "nextNode": "find-source", "score": 5 }
+        ]
+      },
+      "find-source": {
+        "narrative": "Confirmaste: products es null. Ahora necesitas saber POR QUÉ. Subes en ProductList.jsx y ves:\n\nconst { data: products } = useQuery('products', fetchProducts);\n\nuseQuery devuelve null mientras la solicitud está en curso. ¿En qué punto de la cadena de llamadas entra el valor malo al render?",
+        "choices": [
+          { "id": "a", "text": "El render corre una vez con products=null en el mount inicial, antes de que el fetch resuelva", "nextNode": "choose-fix", "score": 10 },
+          { "id": "b", "text": "useQuery está bugueado y devuelve null aleatoriamente", "nextNode": "choose-fix", "score": 2 },
+          { "id": "c", "text": "fetchProducts debe estar devolviendo null desde la API", "nextNode": "choose-fix", "score": 4 }
+        ]
+      },
+      "choose-fix": {
+        "narrative": "Mount inicial sin datos -- un ciclo de vida asíncrono normal. Ahora elige la corrección. El comportamiento visible para el usuario importa acá, no solo la ausencia del crash.",
+        "choices": [
+          { "id": "a", "text": "Renderizar <p>Loading...</p> mientras products es null, luego la lista cuando lleguen los datos", "nextNode": "regression-test", "score": 10 },
+          { "id": "b", "text": "Por defecto un array vacío: (products || []).map(...)", "nextNode": "regression-test", "score": 7 },
+          { "id": "c", "text": "Envolver el .map en try/catch e ignorar el error en silencio", "nextNode": "regression-test", "score": 2 }
+        ]
+      },
+      "regression-test": {
+        "narrative": "El crash está corregido localmente. Pero a menos que algo impida que el próximo contribuidor borre tu guarda, el bug volverá. ¿Qué test fija este comportamiento?",
+        "choices": [
+          { "id": "a", "text": "Renderizar ProductList con products=null y verificar que aparece el estado de carga (sin crash)", "nextNode": "ship-safely", "score": 10 },
+          { "id": "b", "text": "Renderizar ProductList con products=[{name:'a'}] y verificar que el item se renderiza", "nextNode": "ship-safely", "score": 5 },
+          { "id": "c", "text": "Agregar un console.log para notarlo si vuelve a crashear", "nextNode": "ship-safely", "score": 1 }
+        ]
+      },
+      "ship-safely": {
+        "narrative": "Corrección hecha, test de regresión en CI. Última decisión: ¿cómo despliegas? El crash le está pasando a los usuarios ahora mismo.",
+        "choices": [
+          { "id": "a", "text": "Hotfix a producción inmediatamente, monitorear las tasas de error por 30 minutos", "nextNode": "end-good", "score": 10 },
+          { "id": "b", "text": "Mergear a main y esperar al próximo release programado mañana", "nextNode": "end-okay", "score": 5 },
+          { "id": "c", "text": "Sentarse en él -- el test de regresión es prueba suficiente", "nextNode": "end-poor", "score": 1 }
         ]
       },
       "end-good": {
-        "narrative": "Agregas una verificación de guardia:\n\nif (!products) return <p>Loading...</p>;\n\nAhora el componente muestra un mensaje de carga mientras products es null (como durante la carga inicial de la API), y renderiza la lista una vez que llegan los datos. El fallo desapareció.",
+        "narrative": "Decodificaste la traza de arriba abajo, rastreaste products hasta una carrera con useQuery, elegiste la corrección amigable con el usuario (estado de carga), la fijaste con un test de regresión con null y desplegaste un hotfix a producción mientras observabas las métricas. El conteo de crashes baja a cero en minutos y un contribuidor futuro no puede deshacer accidentalmente tu corrección.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 20,
-        "feedback": "¡Gran depuración! Leíste la traza de pila de arriba a abajo, te enfocaste en tus propios archivos (no en código del framework), descifraste el mensaje de error para entender que 'products' era null y agregaste una verificación de guardia adecuada. Este patrón -- verificar null antes de usar datos -- es algo que harás constantemente en aplicaciones reales."
+        "finalScore": 50,
+        "feedback": "Ciclo completo de depuración: leer la traza, encontrar el origen, elegir la corrección visible al usuario correcta, prevenir recurrencia con un test y desplegar de forma segura. El patrón de 'verificar null antes de usar datos asíncronos' es algo que harás todos los días en apps React reales."
       },
       "end-okay": {
-        "narrative": "Establecer un array vacío por defecto (const items = (products || []).map(...)) previene el fallo. Pero podría ocultar el hecho de que tus datos aún no se han cargado. Un estado de carga daría mejor retroalimentación a los usuarios.",
+        "narrative": "La corrección está en main con un test de regresión. Pero los usuarios siguen crasheando por otras 24 horas mientras esperas la ventana de release. La línea de proceso que construiste estuvo correcta; la urgencia no.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 15,
-        "feedback": "Identificaste correctamente la variable null y previniste el fallo. El array vacío por defecto funciona, pero un estado de carga sería aún mejor para la experiencia del usuario. Aun así, buena depuración -- leíste la traza de pila, encontraste el archivo y línea correctos y entendiste el problema de null."
+        "finalScore": 33,
+        "feedback": "Hiciste la ingeniería bien. Los crashes en producción merecen hotfixes -- el mismo test de regresión corre tanto si despliegas ahora como mañana. Ajusta la velocidad de despliegue al impacto en el usuario."
       },
-      "end-trycatch": {
-        "narrative": "Un try-catch oculta el error pero no lo arregla realmente. El componente aún no mostrará ningún producto. Es mejor manejar el caso null explícitamente con un estado de carga o valor predeterminado.",
+      "end-poor": {
+        "narrative": "El código está corregido localmente, el test existe, pero nada se despliega. Los usuarios siguen recibiendo el mismo crash. El test de regresión atrapará el problema si alguien toca el archivo de nuevo -- pero eso no le sirve al usuario que está mirando una pantalla en blanco ahora mismo.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 10,
-        "feedback": "Encontraste el problema correcto, pero try-catch es generalmente una curita. Silencia el error sin realmente manejar el estado null. La próxima vez, agrega una verificación adecuada para null y muestra un respaldo significativo (como un indicador de carga) en lugar de simplemente capturar e ignorar el error."
+        "finalScore": 17,
+        "feedback": "Los tests evitan que el bug vuelva; los despliegues remueven el bug que ya está ahí. Necesitas ambos. Despliega la corrección."
       }
     },
     "glossaryTerms": ["stack-trace", "null", "call-stack"]

@@ -31,14 +31,14 @@
     },
     {
       "type": "key_takeaway",
-      "body": "Los buenos requisitos responden: Que puede HACER el usuario? Que DATOS tiene cada cosa? Cuales son los ESTADOS o REGLAS? Escribe esto antes de dar cualquier prompt a la IA."
+      "body": "Los buenos requisitos responden: ¿Que puede HACER el usuario? ¿Que DATOS tiene cada cosa? ¿Cuales son los ESTADOS o REGLAS? Escribe esto antes de dar cualquier prompt a la IA."
     }
   ],
   "exercise": {
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Estas listo para describir tu gestor de tareas a un asistente de programacion con IA. Abres el chat y piensas en como empezar. Que escribes primero?",
+        "narrative": "Estas listo para describir tu gestor de tareas a un asistente de programacion con IA. Abres el chat y piensas en como empezar. ¿Que escribes primero?",
         "choices": [
           { "id": "vague", "text": "\"Construyeme una app de gestion de tareas\"", "nextNode": "vague-result", "score": 0 },
           { "id": "features", "text": "\"Necesito un gestor de tareas con estas funcionalidades: ...\" y listas las funcionalidades principales", "nextNode": "features-result", "score": 3 },
@@ -46,52 +46,69 @@
         ]
       },
       "vague-result": {
-        "narrative": "La IA genera una app de tareas muy basica con solo un campo de texto y una lista. Sin prioridades, sin fechas limite, sin seguimiento de estado. Funciona, pero no es lo que querias. Que haces?",
+        "narrative": "La IA genera una app de tareas muy basica con solo un campo de texto y una lista. Sin prioridades, sin fechas limite, sin seguimiento de estado. Funciona, pero no es lo que querias. ¿Que haces?",
         "choices": [
-          { "id": "start-over", "text": "Empezar de nuevo con un prompt detallado describiendo exactamente lo que necesitas", "nextNode": "good-recovery", "score": 3 },
-          { "id": "add-on", "text": "Pedirle a la IA que 'lo mejore' sin especificos", "nextNode": "bad-end", "score": 0 }
+          { "id": "start-over", "text": "Empezar de nuevo con un prompt detallado describiendo exactamente lo que necesitas", "nextNode": "edge-cases", "score": 3 },
+          { "id": "add-on", "text": "Pedirle a la IA que 'lo mejore' sin especificos", "nextNode": "edge-cases", "score": 0 }
         ]
       },
       "features-result": {
-        "narrative": "Buen comienzo! La IA hace una pregunta de seguimiento: 'Las tareas deberian tener fechas limite? Como deberian ordenarse?' Como respondes?",
+        "narrative": "¡Buen comienzo! La IA hace una pregunta de seguimiento: '¿Las tareas deberian tener fechas limite? ¿Como deberian ordenarse?' ¿Como respondes?",
         "choices": [
-          { "id": "specify", "text": "\"Si, las tareas tienen: titulo (requerido), descripción (opcional), fecha limite (opcional), prioridad (baja/media/alta), estado (por hacer/en progreso/hecho). Ordenar por defecto por prioridad y luego fecha limite.\"", "nextNode": "great-end", "score": 4 },
-          { "id": "delegate", "text": "\"Solo haz lo que tenga sentido\"", "nextNode": "mediocre-end", "score": 1 }
+          { "id": "specify", "text": "\"Si, las tareas tienen: titulo (requerido), descripción (opcional), fecha limite (opcional), prioridad (baja/media/alta), estado (por hacer/en progreso/hecho). Ordenar por defecto por prioridad y luego fecha limite.\"", "nextNode": "edge-cases", "score": 4 },
+          { "id": "delegate", "text": "\"Solo haz lo que tenga sentido\"", "nextNode": "edge-cases", "score": 1 }
         ]
       },
       "technical-result": {
-        "narrative": "La IA empieza a construir, pero solo le dijiste el stack tecnologico, no lo que la app realmente debe hacer. Crea una interfaz CRUD generica. El modelo de datos solo tiene 'titulo' y 'completado'. Y ahora?",
+        "narrative": "La IA empieza a construir, pero solo le dijiste el stack tecnologico, no lo que la app realmente debe hacer. Crea una interfaz CRUD generica. El modelo de datos solo tiene 'titulo' y 'completado'. ¿Y ahora?",
         "choices": [
-          { "id": "add-fields", "text": "Agregar los campos y comportamientos faltantes uno por uno en prompts de seguimiento", "nextNode": "mediocre-end", "score": 2 },
-          { "id": "rewrite", "text": "Escribir una especificacion completa de funcionalidades primero, luego darsela a la IA en un prompt claro", "nextNode": "good-recovery", "score": 3 }
+          { "id": "add-fields", "text": "Agregar los campos y comportamientos faltantes uno por uno en prompts de seguimiento", "nextNode": "edge-cases", "score": 2 },
+          { "id": "rewrite", "text": "Escribir una especificacion completa de funcionalidades primero, luego darsela a la IA en un prompt claro", "nextNode": "edge-cases", "score": 3 }
         ]
       },
-      "good-recovery": {
-        "narrative": "Reescribes tu prompt con funcionalidades especificas, campos de datos y flujos de usuario. La IA genera un resultado mucho mejor. Toma una ronda de ida y vuelta para afinar, y terminas con una base solida.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Te recuperaste bien! Empezar con requisitos detallados habría ahorrado un viaje de ida y vuelta, pero reconociste el problema y lo corregiste. Recuerda: especifica funcionalidades, campos de datos y reglas desde el inicio.",
-        "choices": []
+      "edge-cases": {
+        "narrative": "Tu spec va tomando forma, pero la IA te plantea preguntas sobre casos limite — ¿que se muestra cuando la lista de tareas esta vacia? ¿Que pasa si un titulo tiene 500 caracteres? ¿Y si una tarea no tiene fecha limite? ¿Como lo manejas?",
+        "choices": [
+          { "id": "explicit-cases", "text": "Agregar una sección de 'Casos Limite': lista vacia muestra una pantalla de bienvenida, titulos limitados a 100 caracteres, fechas limite por defecto en ninguna, maximo 100 tareas por lista", "nextNode": "validation", "score": 4 },
+          { "id": "let-ai-default", "text": "Decirle a la IA que 'use valores por defecto razonables para los casos limite'", "nextNode": "validation", "score": 1 },
+          { "id": "skip-edges", "text": "Saltar los casos limite — los arreglo cuando aparezcan los bugs", "nextNode": "validation", "score": 0 }
+        ]
       },
-      "great-end": {
-        "narrative": "La IA genera un gestor de tareas completo con exactamente los campos y el ordenamiento que especificaste. El modelo de datos es limpio, la interfaz coincide con tus requisitos y puedes empezar a construir inmediatamente.",
+      "validation": {
+        "narrative": "Antes de que la IA escriba una sola linea de codigo, quieres confirmar que entendio tus requisitos. ¿Cual es tu jugada?",
+        "choices": [
+          { "id": "summarize-back", "text": "Pedir: 'Reformula el modelo de datos y la lista de funcionalidades en tus propias palabras. No escribas codigo aun.'", "nextNode": "iteration", "score": 4 },
+          { "id": "trust-and-go", "text": "Confiar en que la IA lo entendio y pedirle que empiece a programar", "nextNode": "iteration", "score": 2 },
+          { "id": "yes-no", "text": "Preguntar: '¿Estan claros mis requisitos?' — una pregunta de si/no a la que la IA siempre respondera 'si'", "nextNode": "iteration", "score": 1 }
+        ]
+      },
+      "iteration": {
+        "narrative": "A mitad de la construccion, te das cuenta de que olvidaste un requisito: las tareas deben poder asignarse a otros usuarios. ¿Como comunicas este cambio?",
+        "choices": [
+          { "id": "structured-update", "text": "Escribir un delta claro: 'Nuevo requisito: las tareas tienen un campo asignado (opcional, referencia a user.id). Actualiza el modelo de datos, los formularios de crear/editar, y agrega un filtro por asignado.'", "nextNode": "excellent-end", "score": 4 },
+          { "id": "throw-it-in", "text": "Decir simplemente: 'ah, las tareas tambien deben tener un asignado'", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "scrap-and-restart", "text": "Desechar el proyecto y empezar de nuevo con un prompt que incluya todo", "nextNode": "wasteful-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tus requisitos son ahora una especificacion viva — funcionalidades claras, casos limite resueltos, validados por la IA antes de cualquier codigo, y actualizados con deltas estructurados a medida que descubres nuevas necesidades. La IA construye exactamente lo que querias, y los cambios futuros son faciles de comunicar.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Excelente! Especificaste funcionalidades, campos de datos, restricciones y valores por defecto. Así es exactamente como comunicarse con la IA — se especifico sobre lo que quieres y lo entregara.",
+        "finalScore": 19,
+        "feedback": "Esto es trabajo de requisitos a nivel profesional. Las decisiones que tomaste — especificar funcionalidades desde el inicio, abordar los casos limite explicitamente, validar lo que la IA entendio antes de programar, y comunicar cambios como deltas estructurados — son la forma en que los ingenieros lanzan productos al primer intento.",
         "choices": []
       },
       "mediocre-end": {
-        "narrative": "La IA construye algo que mas o menos funciona, pero necesitaras varias rondas mas de prompts para hacerlo bien. Cada ronda arriesga introducir inconsistencias.",
+        "narrative": "La IA agrega un campo asignado, pero lo interpreta de forma laxa — termina como un campo de texto libre en lugar de una referencia a un usuario. Tendras que refactorizarlo despues. El producto funciona, pero el modelo de datos es inconsistente.",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "La app funciona, pero el enfoque iterativo llevo a un resultado desordenado. La próxima vez, invierte tiempo al inicio escribiendo requisitos claros y especificos. Ahorra tiempo en general.",
+        "finalScore": 13,
+        "feedback": "Los deltas rapidos se sienten veloces en el momento, pero dejan a la IA adivinando. Una actualizacion estructurada corta — 'nombre del campo, tipo, a que referencia, donde aparece' — toma 30 segundos y previene una hora de refactorizacion despues.",
         "choices": []
       },
-      "bad-end": {
-        "narrative": "La IA hace mejoras aleatorias — agrega un selector de colores, un sistema de etiquetas, pero aun sin prioridades ni fechas limite. Estas mas lejos de tu objetivo que cuando empezaste.",
+      "wasteful-end": {
+        "narrative": "Desechas el proyecto y reescribes el prompt desde cero. La IA lo construye de nuevo — pero ahora tiraste a la basura cada pequeño arreglo manual que habias hecho. Perdiste medio dia de progreso por un solo campo faltante.",
         "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Prompts vagos generan resultados vagos. 'Mejoralo' no significa nada para una IA. Siempre especifica exactamente lo que quieres cambiar.",
+        "finalScore": 7,
+        "feedback": "Reiniciar desde cero rara vez es necesario. Los requisitos estan hechos para evolucionar. Aprende a escribir actualizaciones estructuradas que la IA pueda aplicar incrementalmente, y tu proyecto seguira creciendo en lugar de reiniciarse.",
         "choices": []
       }
     },

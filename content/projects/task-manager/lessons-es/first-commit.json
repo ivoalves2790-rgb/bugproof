@@ -41,74 +41,77 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Acabas de ejecutar create-next-app y tu proyecto de gestor de tareas esta generado. Quieres hacer tu primer commit de git. Que haces primero?",
+        "narrative": "Acabas de ejecutar create-next-app y tu proyecto de gestor de tareas esta generado. Quieres hacer tu primer commit de git. ¿Que haces primero?",
         "choices": [
-          { "id": "check-status", "text": "Ejecutar 'git status' para ver que archivos estan a punto de ser commiteados", "nextNode": "review-files", "score": 3 },
+          { "id": "check-status", "text": "Ejecutar 'git status' para ver que archivos estan a punto de ser commiteados", "nextNode": "review-files", "score": 4 },
           { "id": "add-all-commit", "text": "Ejecutar 'git add . && git commit -m initial commit' inmediatamente", "nextNode": "blind-commit", "score": 1 },
-          { "id": "start-coding", "text": "Saltarte el commit y empezar a construir funcionalidades — haras commit después cuando haya algo que valga la pena guardar", "nextNode": "no-commit-end", "score": 0 }
+          { "id": "start-coding", "text": "Saltarte el commit y empezar a construir funcionalidades — haras commit después cuando haya algo que valga la pena guardar", "nextNode": "no-commit-recovery", "score": 0 }
         ]
       },
       "review-files": {
-        "narrative": "git status muestra los archivos de tu proyecto. Notas que create-next-app ya inicializo git y creo un .gitignore. Tambien ves un archivo .env.local que creaste con tus claves de Supabase. Que haces?",
+        "narrative": "git status muestra los archivos de tu proyecto. Notas que create-next-app ya inicializo git y creo un .gitignore. Tambien ves un archivo .env.local que creaste con tus claves de Supabase. ¿Que haces?",
         "choices": [
-          { "id": "check-gitignore", "text": "Abrir .gitignore para verificar que .env.local esta listado, luego verificar que no aparezcan secretos en git status", "nextNode": "verify-gitignore", "score": 3 },
-          { "id": "commit-anyway", "text": "El .gitignore probablemente esta bien — solo hacer commit de todo lo que aparece en git status", "nextNode": "leaked-secrets", "score": 0 }
+          { "id": "check-gitignore", "text": "Abrir .gitignore para verificar que .env.local esta listado, luego verificar que no aparezcan secretos en git status", "nextNode": "stage-files", "score": 4 },
+          { "id": "commit-anyway", "text": "El .gitignore probablemente esta bien — solo hacer commit de todo lo que aparece en git status", "nextNode": "stage-files", "score": 0 }
         ]
       },
       "blind-commit": {
-        "narrative": "Hiciste commit de todo sin verificar. El commit incluye un archivo .env.local con tu clave API de Supabase y un archivo .DS_Store de macOS. La clave API ahora esta en tu historial de git. Incluso si eliminas el archivo despues, aun es recuperable de commits anteriores.",
+        "narrative": "Hiciste commit de todo sin verificar. El commit incluye un archivo .env.local con tu clave API de Supabase y un archivo .DS_Store de macOS. La clave API ahora esta en tu historial de git. Te das cuenta del error antes de subir el repo a ningun lado. ¿Cual es tu siguiente paso?",
         "choices": [
-          { "id": "try-to-fix", "text": "Eliminar el .env.local, agregarlo a .gitignore y hacer un nuevo commit", "nextNode": "partial-fix-end", "score": 1 },
-          { "id": "rewrite-history", "text": "Usar git para reescribir el historial y eliminar el archivo de todos los commits, luego rotar la clave API expuesta", "nextNode": "good-fix-end", "score": 3 }
+          { "id": "rewrite-history", "text": "Resetear el commit local, agregar .env.local y .DS_Store al .gitignore, y empezar el flujo de commit de nuevo desde cero", "nextNode": "stage-files", "score": 3 },
+          { "id": "ignore-and-push", "text": "Aun no se ha subido a ningun lado, asi que no importa — seguir adelante", "nextNode": "stage-files", "score": 0 }
         ]
       },
-      "verify-gitignore": {
-        "narrative": "Confirmas que .env.local esta en .gitignore. git status muestra solo los archivos generados del proyecto — sin secretos, sin node_modules, sin archivos de compilacion. Todo se ve limpio. Hora de hacer commit. Que mensaje escribes?",
+      "no-commit-recovery": {
+        "narrative": "Despues de dos horas de programar sin un solo commit, accidentalmente borras una carpeta y pierdes trabajo. Por fin aceptas que el primer commit tiene que pasar ahora, antes de escribir nada mas. Estas de regreso en git status. ¿Como manejas el staging?",
         "choices": [
-          { "id": "good-message", "text": "git commit -m 'Inicializar proyecto Next.js con TypeScript, Tailwind y ESLint'", "nextNode": "clean-commit-end", "score": 3 },
-          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "lazy-message-end", "score": 1 }
+          { "id": "back-to-basics", "text": "Ejecutar git status, verificar que .gitignore cubra los archivos .env y preparar solo los archivos del scaffold", "nextNode": "stage-files", "score": 3 },
+          { "id": "yolo-add-all", "text": "git add . y esperar lo mejor — al menos quedara guardado", "nextNode": "stage-files", "score": 1 }
         ]
       },
-      "leaked-secrets": {
-        "narrative": "Tu clave API de Supabase ahora esta commiteada en el historial de git. Si alguna vez subes este repositorio a GitHub, la clave sera visible publicamente. Los bots escanean GitHub buscando claves expuestas y pueden comprometer tu base de datos en minutos.",
+      "stage-files": {
+        "narrative": "Estas listo para preparar los cambios. git status lista alrededor de 30 archivos del scaffold. ¿Como los preparas?",
+        "choices": [
+          { "id": "add-all-clean", "text": "git add . — ya verificaste el .gitignore asi que todo lo visible es intencional", "nextNode": "compose-message", "score": 4 },
+          { "id": "add-by-path", "text": "git add app/ public/ package.json tsconfig.json next.config.js — solo rutas explicitas", "nextNode": "compose-message", "score": 3 },
+          { "id": "add-interactive", "text": "git add -p y aceptar cada hunk uno por uno sin leerlos", "nextNode": "compose-message", "score": 1 }
+        ]
+      },
+      "compose-message": {
+        "narrative": "Los archivos estan preparados. Hora de escribir el mensaje del commit. ¿Que escribes?",
+        "choices": [
+          { "id": "good-message", "text": "git commit -m 'Inicializar proyecto Next.js con TypeScript, Tailwind y ESLint'", "nextNode": "remote-setup", "score": 4 },
+          { "id": "lazy-message", "text": "git commit -m 'init'", "nextNode": "remote-setup", "score": 2 },
+          { "id": "no-message", "text": "git commit --allow-empty-message -m ''", "nextNode": "remote-setup", "score": 0 }
+        ]
+      },
+      "remote-setup": {
+        "narrative": "El commit queda en tu rama main local. Quieres este trabajo respaldado fuera de tu laptop. ¿Que haces despues?",
+        "choices": [
+          { "id": "private-remote", "text": "Crear un repo privado en GitHub, agregarlo como origin y subir el commit inicial", "nextNode": "excellent-end", "score": 4 },
+          { "id": "public-remote", "text": "Crear un repo publico en GitHub y subirlo de inmediato para que sea visible en tu perfil", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "no-remote", "text": "Saltarte el remoto — puedes configurarlo despues cuando haya mas codigo que valga la pena respaldar", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Tu primer commit esta limpio: solo el scaffold, sin secretos, mensaje descriptivo, y subido a un remoto privado. Tienes un respaldo real, un historial limpio y una linea base a la que puedes resetear. Asi es como debe empezar un proyecto.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Siempre verifica lo que estas commiteando. Un secreto commiteado es extremadamente difícil de eliminar completamente del historial de git. La respuesta más segura es rotar la clave inmediatamente y usar git filter-branch o BFG para limpiarlo del historial.",
+        "finalScore": 20,
+        "feedback": "Higiene de primer commit de manual. Verificaste el status, respetaste .gitignore, preparaste con intencion, escribiste un mensaje que tu yo del futuro puede buscar, y sacaste el trabajo de tu laptop. Cada commit de aqui en adelante puede seguir esta misma disciplina.",
         "choices": []
       },
-      "no-commit-end": {
-        "narrative": "Construyes funcionalidades por tres horas sin hacer commit. Luego accidentalmente eliminas un archivo de componente y rompes la cadena de imports. Sin ningun commit, no hay forma de recuperar el archivo. Tienes que reescribirlo de memoria.",
+      "mediocre-end": {
+        "narrative": "El repo esta respaldado, pero ir publico el dia uno significa que cualquiera puede revisar tu codigo mientras aprendes. Si un secreto se cuela en un commit futuro, queda indexado en la busqueda de GitHub antes de que lo notes.",
         "isEnd": true,
-        "finalScore": 0,
-        "feedback": "Los commits son puntos de guardado. Lo primero que debes hacer después de crear un proyecto es hacer commit de la estructura inicial. Esto te da una línea base limpia a la que volver si algo sale mal.",
+        "finalScore": 12,
+        "feedback": "Publico por defecto esta bien para proyectos open source terminados, pero durante la fase de construccion desordenada, los repos privados te dan espacio para arreglar errores en silencio. Cambialo a publico cuando la app este lista para lanzar, no antes.",
         "choices": []
       },
-      "clean-commit-end": {
-        "narrative": "Tu primer commit esta limpio: solo archivos generados, sin secretos, y un mensaje descriptivo. Ahora tienes una linea base conocida y funcional. Si alguna vez necesitas empezar de nuevo con una funcionalidad, puedes resetear a este commit con confianza.",
-        "isEnd": true,
-        "finalScore": 9,
-        "feedback": "Perfecto. Verificaste los archivos, revisaste .gitignore y escribiste un mensaje claro. Este primer commit es tu red de seguridad para todo el proyecto. Cada commit de aquí en adelante deberia seguir esta misma disciplina.",
-        "choices": []
-      },
-      "lazy-message-end": {
-        "narrative": "El commit esta limpio y seguro, pero el mensaje 'init' no te dice nada. Dos meses despues, cuando estes buscando en el historial de git cuando se configuro TypeScript, 'init' no te ayudara.",
-        "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Tu higiene de commits fue buena pero el mensaje fue perezoso. Un primer mensaje de commit claro como 'Inicializar proyecto Next.js con TypeScript y Tailwind' documenta tus elecciones de stack tecnologico directamente en el historial.",
-        "choices": []
-      },
-      "partial-fix-end": {
-        "narrative": "El archivo .env.local ya no esta en el ultimo commit, pero aun existe en el historial del primer commit. Cualquiera que clone el repositorio puede revisar ese commit antiguo y ver la clave. El secreto aun esta comprometido.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Eliminar un archivo y hacer un nuevo commit no lo elimina del historial. Necesitas reescribir el historial de git (usando BFG Repo-Cleaner o git filter-branch) Y rotar la clave comprometida. La prevencion siempre es más fácil que la limpieza.",
-        "choices": []
-      },
-      "good-fix-end": {
-        "narrative": "Reescribes el historial de git para eliminar el archivo .env.local, actualizas .gitignore y rotas tu clave API de Supabase en el panel de control. La clave antigua ya no funciona, asi que incluso si alguien la encuentra en una copia en cache, es inutil.",
+      "weak-end": {
+        "narrative": "Tu commit vive solo en tu laptop. Un cafe derramado o un disco corrupto borra el proyecto y no hay nada que clonar. El punto entero de git era tener un historial recuperable — y te saltaste la mitad.",
         "isEnd": true,
         "finalScore": 5,
-        "feedback": "Buena recuperacion. Hiciste las dos cosas esenciales: eliminaste el secreto del historial Y rotaste la clave. Pero toda esta crisis era evitable verificando git status y .gitignore antes del primer commit.",
+        "feedback": "Un repo solo local es medio respaldo. Sube a un remoto el dia uno — incluso si el proyecto nunca se hace publico, la copia fuera de tu maquina es lo que te salva de fallas de hardware, robos y rm -rf accidentales.",
         "choices": []
       }
     },

@@ -46,38 +46,69 @@
         ]
       },
       "throw-money": {
-        "narrative": "The bigger server helps temporarily — load times drop to 3 seconds. But the fundamental problem (no index, no pagination) remains. As data grows, you'll need an even bigger server and the costs keep climbing.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Throwing hardware at a software problem is expensive and unsustainable. An index takes one line of SQL and solves the problem for free. Always optimize before scaling up.",
-        "choices": []
+        "narrative": "The bigger server helps temporarily — load times drop to 3 seconds. But the fundamental problem (no index, no pagination) remains. As data grows, you'll need an even bigger server and the costs keep climbing. You finally agree to look at the actual query.",
+        "choices": [
+          { "id": "tm-explain", "text": "Run EXPLAIN ANALYZE on the slow query to see exactly which operation is the bottleneck", "nextNode": "fix-n-plus-one", "score": 4 },
+          { "id": "tm-guess", "text": "Add indexes on every column in the table just to be safe", "nextNode": "fix-n-plus-one", "score": 1 }
+        ]
       },
       "add-index": {
-        "narrative": "You add an index on user_id and implement pagination (20 tasks per page). Load time drops from 8 seconds to 200ms. But you notice the task detail page is also slow — it loads the task plus all its comments in separate queries. What do you do?",
+        "narrative": "You add an index on user_id and implement pagination (20 tasks per page). Load time drops from 8 seconds to 200ms. But you notice the task detail page is also slow — it loads the task plus all its comments. You check the logs and see 21 separate queries fire for one page load.",
         "choices": [
-          { "id": "b1", "text": "Use a JOIN query to fetch the task and its comments in a single database call", "nextNode": "join-query", "score": 3 },
-          { "id": "b2", "text": "Cache the task details page since tasks don't change often", "nextNode": "cache-approach", "score": 2 }
+          { "id": "ai-confirm", "text": "Confirm with EXPLAIN ANALYZE that this is an N+1 — one query for the task, then one for each comment", "nextNode": "fix-n-plus-one", "score": 4 },
+          { "id": "ai-skip", "text": "Skip diagnosis and assume it's the same indexing problem as before", "nextNode": "fix-n-plus-one", "score": 1 }
         ]
       },
       "switch-db": {
-        "narrative": "Migrating to a different database is a massive undertaking — rewriting queries, changing the schema, migrating data. Three weeks later, you discover MongoDB has the same performance issues without indexes. The database type was never the problem.",
+        "narrative": "Migrating to a different database is a massive undertaking — rewriting queries, changing the schema, migrating data. Three weeks later, you discover MongoDB has the same performance issues without indexes. The database type was never the problem. You roll back and finally read EXPLAIN ANALYZE.",
+        "choices": [
+          { "id": "sd-explain", "text": "Run EXPLAIN ANALYZE on the slow query and find the missing index plus an N+1 in the comments fetch", "nextNode": "fix-n-plus-one", "score": 3 },
+          { "id": "sd-blame", "text": "Blame the team for picking the wrong database in the first place", "nextNode": "fix-n-plus-one", "score": 0 }
+        ]
+      },
+      "fix-n-plus-one": {
+        "narrative": "The task detail page is firing one query for the task and N more queries — one per comment. With 50 comments that's 51 round-trips to the database for one page. How do you collapse it?",
+        "choices": [
+          { "id": "np-join", "text": "Use a single JOIN: SELECT tasks.*, comments.* FROM tasks LEFT JOIN comments ON comments.task_id = tasks.id WHERE tasks.id = $1", "nextNode": "add-cache", "score": 4 },
+          { "id": "np-batch", "text": "Use a DataLoader-style batch: collect all task IDs, then run SELECT * FROM comments WHERE task_id IN (...) once", "nextNode": "add-cache", "score": 3 },
+          { "id": "np-loop", "text": "Keep the loop but parallelize with Promise.all so the queries fire at the same time", "nextNode": "add-cache", "score": 1 }
+        ]
+      },
+      "add-cache": {
+        "narrative": "The queries are now efficient. Load time is 150ms. But the task list endpoint is hit thousands of times per minute and the database CPU is climbing. How do you take pressure off the database?",
+        "choices": [
+          { "id": "cache-redis", "text": "Add a Redis cache for the task list keyed by user_id, with a 60-second TTL and invalidation on writes", "nextNode": "scale-out", "score": 4 },
+          { "id": "cache-app", "text": "Cache results in an in-process Map inside the Node app", "nextNode": "scale-out", "score": 2 },
+          { "id": "cache-none", "text": "Skip caching — every request should hit the database for accuracy", "nextNode": "scale-out", "score": 1 }
+        ]
+      },
+      "scale-out": {
+        "narrative": "Caching cut database load by 70%. Traffic keeps growing — your single primary database is now hitting its connection limit and write throughput is maxing out. What's the next move?",
+        "choices": [
+          { "id": "out-replicas", "text": "Add read replicas: send all SELECTs to replicas and keep writes on the primary, then add a connection pooler like PgBouncer", "nextNode": "excellent-end", "score": 4 },
+          { "id": "out-bigger", "text": "Vertically scale the primary to the largest instance the cloud offers", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "out-shard", "text": "Shard the tasks table across 16 databases by user_id today", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your task manager now serves the full traffic load: indexed queries, no N+1s, a cache layer absorbing read pressure, and read replicas plus connection pooling for horizontal headroom. You scaled in the right order — fix the query, then cache, then add hardware.",
         "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Switching databases rarely solves performance problems. The same indexing and query optimization principles apply everywhere. Optimize your current setup before considering a migration.",
+        "finalScore": 20,
+        "feedback": "This is the textbook scaling order: diagnose with EXPLAIN ANALYZE, fix indexes and N+1s, then cache, then scale out. Skipping the diagnosis or jumping straight to sharding is how teams burn money and ship fragile systems.",
         "choices": []
       },
-      "join-query": {
-        "narrative": "A single JOIN query replaces 20+ separate queries. The task detail page now loads in 150ms. Your database is humming along efficiently with proper indexes, pagination, and optimized queries.",
+      "mediocre-end": {
+        "narrative": "The bigger box helps for a quarter, then you hit the same ceiling — but now your monthly bill is double what it was and you still haven't separated reads from writes.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "This is textbook database optimization. Indexes, pagination, and JOIN queries solve the vast majority of database performance problems. No new infrastructure needed.",
+        "finalScore": 13,
+        "feedback": "Vertical scaling buys time but not headroom. Read replicas plus connection pooling cost less and let you keep adding capacity. Reach for them before you outgrow the largest instance.",
         "choices": []
       },
-      "cache-approach": {
-        "narrative": "Caching helps, but you still have the N+1 query problem. Every cache miss is slow. You eventually add the JOIN query too, making the cache less necessary but still useful.",
+      "weak-end": {
+        "narrative": "Sharding without need rewrites every query in the app, breaks transactions across users, and triples on-call complexity. You spend three months on a problem you didn't have yet.",
         "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Caching is a valid strategy but it's treating the symptom, not the cause. Fix the underlying query first, then add caching as an enhancement.",
+        "finalScore": 6,
+        "feedback": "Sharding is a last-resort hammer. Always exhaust indexes, query optimization, caching, and read replicas first. Most apps never need to shard at all.",
         "choices": []
       }
     },

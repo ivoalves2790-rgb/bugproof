@@ -43,58 +43,76 @@
     "startNode": "start",
     "nodes": {
       "start": {
-        "narrative": "Un desarrollador junior de tu equipo envia un mensaje en panico: 'Creo que acabo de borrar algo importante. Estaba intentando limpiar archivos de build viejos y ejecute rm -rf dist/ pero estaba en el directorio equivocado. Estaba en la raiz del proyecto en vez de la subcarpeta frontend/.'\n\nLa estructura del proyecto es:\n\nmy-project/\n  frontend/\n    dist/       <- archivos de build viejos (seguro borrar)\n    src/\n  backend/\n    dist/       <- codigo del servidor compilado (NO seguro borrar)\n  dist/         <- no existe en el nivel raiz\n\nQue le dices primero?",
+        "narrative": "Un desarrollador junior de tu equipo envia un mensaje en panico: 'Creo que acabo de borrar algo importante. Estaba intentando limpiar archivos de build viejos y ejecute rm -rf dist/ pero estaba en el directorio equivocado. Estaba en la raiz del proyecto en vez de la subcarpeta frontend/.'\n\nLa estructura del proyecto es:\n\nmy-project/\n  frontend/\n    dist/       <- archivos de build viejos (seguro borrar)\n    src/\n  backend/\n    dist/       <- codigo del servidor compilado (NO seguro borrar)\n  dist/         <- no existe en el nivel raiz\n\n¿Que le dices primero?",
         "choices": [
-          { "id": "a", "text": "Pedirle que ejecute pwd y ls para confirmar en que directorio esta y que se borro", "nextNode": "check-damage", "score": 10 },
+          { "id": "a", "text": "Pedirle que ejecute pwd y ls para confirmar en que directorio esta y que se borro", "nextNode": "check-damage", "score": 4 },
           { "id": "b", "text": "Decirle que inmediatamente ejecute rm -rf para limpiar más y ocultar la evidencia", "nextNode": "bad-cover-up", "score": 0 },
-          { "id": "c", "text": "Decirle que entre en pánico y restaure desde un respaldo inmediatamente", "nextNode": "premature-restore", "score": 3 }
+          { "id": "c", "text": "Decirle que entre en pánico y restaure desde un respaldo inmediatamente", "nextNode": "premature-restore", "score": 1 }
         ]
       },
       "check-damage": {
-        "narrative": "Ejecuta pwd y confirma que esta en /home/user/my-project/ (la raiz). Ejecuta ls y ve:\n\nfrontend/  backend/  package.json  README.md\n\nNo hay carpeta dist/ en el nivel raiz, asi que rm -rf dist/ en realidad no hizo nada -- no habia nada que borrar! Pero sigue preocupado. Cual es el siguiente paso?",
+        "narrative": "Ejecuta pwd y confirma que esta en /home/user/my-project/ (la raiz). Ejecuta ls y ve:\n\nfrontend/  backend/  package.json  README.md\n\nNo hay carpeta dist/ en el nivel raiz, asi que rm -rf dist/ en realidad no hizo nada -- no habia nada que borrar. Pero sigue preocupado. ¿Cual es el siguiente paso?",
         "choices": [
-          { "id": "a", "text": "Verificar que los directorios importantes estan intactos: ls frontend/dist/ y ls backend/dist/", "nextNode": "verify-intact", "score": 10 },
-          { "id": "b", "text": "Decirle que todo esta bien y seguir adelante sin verificar", "nextNode": "skip-verification", "score": 4 }
+          { "id": "a", "text": "Verificar que los directorios importantes estan intactos: ls frontend/dist/ y ls backend/dist/", "nextNode": "verify-intact", "score": 4 },
+          { "id": "b", "text": "Decirle que todo esta bien y seguir adelante sin verificar", "nextNode": "verify-intact", "score": 1 }
         ]
       },
       "bad-cover-up": {
         "narrative": "Ejecutar mas comandos rm sin entender la situacion es extremadamente peligroso. Podrias accidentalmente borrar archivos que en realidad estaban bien. La primera regla de respuesta a incidentes es: DETENTE y evalua el dano antes de tomar cualquier accion.",
         "choices": [
-          { "id": "a", "text": "Detenerse y evaluar el dano primero verificando el directorio actual y listando archivos", "nextNode": "check-damage", "score": 5 }
+          { "id": "a", "text": "Detenerse y evaluar el dano primero verificando el directorio actual y listando archivos", "nextNode": "check-damage", "score": 2 }
         ]
       },
       "premature-restore": {
-        "narrative": "Restaurar desde un respaldo antes de entender que paso desperdicia tiempo y podria sobrescribir cambios recientes. Necesitas evaluar el dano primero -- la solucion podria ser mucho mas simple que una restauracion completa.",
+        "narrative": "Restaurar desde un respaldo antes de entender que paso desperdicia tiempo y podria sobrescribir cambios recientes sin commitear. Necesitas evaluar el dano primero -- la solucion podria ser mucho mas simple que una restauracion completa.",
         "choices": [
-          { "id": "a", "text": "Primero verificar que paso realmente antes de decidir una estrategia de recuperacion", "nextNode": "check-damage", "score": 5 }
+          { "id": "a", "text": "Primero verificar que paso realmente antes de decidir una estrategia de recuperacion", "nextNode": "check-damage", "score": 2 }
         ]
       },
       "verify-intact": {
-        "narrative": "Verificas ambos directorios:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nTodo esta intacto! Como no habia carpeta dist/ en la raiz del proyecto, rm -rf dist/ simplemente no hizo nada y salio silenciosamente. Ningun archivo fue danado. Ahora que deberias ensenarle al desarrollador junior?",
+        "narrative": "Verificas ambos directorios:\n\n$ ls frontend/dist/\nindex.html  bundle.js  assets/\n\n$ ls backend/dist/\nserver.js  routes/  middleware/\n\nTodo esta intacto. La carpeta dist/ no existia en la raiz, asi que rm -rf dist/ salio silenciosamente. Nada se perdió. Pero el junior no tuvo suerte: estaba a un cd de barrer backend/dist/. ¿Cómo cierras la verificación antes de pasar al siguiente paso?",
         "choices": [
-          { "id": "a", "text": "Ensenarle a siempre ejecutar pwd antes de comandos destructivos y usar ls para previsualizar lo que va a borrar", "nextNode": "end-good", "score": 10 },
-          { "id": "b", "text": "Decirle que tenga más cuidado la próxima vez sin explicar como", "nextNode": "end-vague", "score": 4 }
+          { "id": "a", "text": "Confirmar el árbol de trabajo contra git: ejecutar `git status` para asegurar que nada rastreado fue modificado o eliminado", "nextNode": "recovery-action", "score": 4 },
+          { "id": "b", "text": "Probar a iniciar el servidor de desarrollo y el servicio del backend para asegurar que ambos siguen compilando", "nextNode": "recovery-action", "score": 3 },
+          { "id": "c", "text": "Saltar la verificación -- ls ya mostró que los directorios siguen ahí", "nextNode": "recovery-action", "score": 1 }
         ]
       },
-      "skip-verification": {
-        "narrative": "Sin verificar, no puedes estar seguro de que nada fue danado. Siempre verifica. En este caso todo estaba bien, pero saltarse la verificacion es un mal habito que te mordra cuando ocurra dano real.",
+      "recovery-action": {
+        "narrative": "Confirmaste que nada se rompió. Pero el junior sigue nervioso y tiene miedo de repetir el error mañana con otro comando. ¿Qué ensayo de recuperación le haces ahora, mientras el susto está fresco?",
         "choices": [
-          { "id": "a", "text": "Regresar y verificar que los directorios importantes estan realmente intactos", "nextNode": "verify-intact", "score": 5 }
+          { "id": "a", "text": "Mostrarle `git restore`, `git reflog` y dónde vive la papelera del sistema operativo, para que conozca las opciones de recuperación antes del próximo error", "nextNode": "teach-habits", "score": 4 },
+          { "id": "b", "text": "Configurarle un alias de `rm` a `rm -i` (prompt interactivo) en su máquina por el próximo mes", "nextNode": "teach-habits", "score": 3 },
+          { "id": "c", "text": "Decirle que solo tenga más cuidado y saltarse el ensayo", "nextNode": "teach-habits", "score": 0 }
+        ]
+      },
+      "teach-habits": {
+        "narrative": "Las opciones de recuperación quedaron claras. Ahora, ¿qué hábito instalas para que el próximo comando destructivo no dependa de la suerte? Quieres algo que realmente vaya a hacer, no una regla que olvide para el viernes.",
+        "choices": [
+          { "id": "a", "text": "Enseñar el reflejo pwd-luego-ls antes de cualquier rm, y agregar un prompt de shell que siempre muestre el directorio actual en texto rojo", "nextNode": "end-good", "score": 4 },
+          { "id": "b", "text": "Decirle que tenga más cuidado la próxima vez sin darle un hábito concreto", "nextNode": "end-vague", "score": 1 },
+          { "id": "c", "text": "Hacer que deshabilite rm -rf por completo en su máquina", "nextNode": "end-overkill", "score": 2 }
         ]
       },
       "end-good": {
-        "narrative": "Le ensenas al desarrollador junior tres habitos de seguridad:\n\n1. Siempre ejecutar pwd antes de cualquier comando rm\n2. Ejecutar ls sobre el objetivo antes de borrarlo\n3. Usar Git -- si los archivos estan rastreados, git checkout puede recuperarlos\n\nEl desarrollador agrega estos habitos a su flujo de trabajo y nunca vuelve a tener un susto como este.",
+        "narrative": "El junior se va de la conversación con tres cosas concretas: un reflejo pwd-luego-ls antes de cualquier comando destructivo, un prompt que siempre muestra el directorio actual en su visión periférica, y una checklist de recuperación (git status, git restore, git reflog, papelera del sistema) para cuando algo sí salga mal. Nunca vuelve a tener un susto como este.",
         "choices": [],
         "isEnd": true,
         "finalScore": 20,
-        "feedback": "Respuesta a incidentes perfecta! Mantuviste la calma, evaluaste el dano antes de actuar, verificaste que nada se perdio y convertiste el susto en una oportunidad de aprendizaje. La lección clave: siempre ejecuta pwd y ls antes de comandos destructivos, y recuerda que rm -rf sobre un directorio inexistente simplemente no hace nada."
+        "feedback": "Respuesta a incidentes de manual. Mantuviste la calma, evaluaste antes de actuar, verificaste con git (no solo ls), ensayaste la recuperación mientras la lección estaba fresca, y reemplazaste 'ten cuidado' con un hábito y una señal del entorno. El encuadre correcto: el objetivo no es nunca equivocarse, sino que los errores sean recuperables y raros."
       },
       "end-vague": {
-        "narrative": "El desarrollador junior asiente pero comete el mismo error dos semanas despues, esta vez borrando accidentalmente la carpeta backend/dist/. Consejos vagos como 'ten cuidado' no construyen habitos.",
+        "narrative": "El junior asiente pero comete un error similar dos semanas después, esta vez con otro comando. Consejos vagos como 'ten cuidado' no construyen hábitos.",
         "choices": [],
         "isEnd": true,
-        "finalScore": 10,
-        "feedback": "Resolviste el problema inmediato pero perdiste la oportunidad de enseñar. La próxima vez, da habitos especificos y accionables: ejecuta pwd antes de rm, usa ls para previsualizar borrados, y confia en Git para la recuperacion. Los habitos concretos previenen errores futuros mejor que la precaucion vaga."
+        "finalScore": 11,
+        "feedback": "Manejaste el susto inmediato pero te saltaste el trabajo de hábito. Las conductas concretas -- pwd antes de rm, ls para previsualizar, git restore para recuperar -- previenen el siguiente error mucho mejor que la cautela abstracta. Cierra siempre con un hábito específico y una señal del entorno."
+      },
+      "end-overkill": {
+        "narrative": "Deshabilitar rm -rf a nivel de alias no arregla nada: el junior solo escribe `\\rm -rf` para saltarse el alias y ahora tampoco puede limpiar directorios grandes. Prohibir una herramienta no es lo mismo que construir el hábito de usarla con seguridad.",
+        "choices": [],
+        "isEnd": true,
+        "finalScore": 7,
+        "feedback": "Bloquear duro los comandos destructivos suena seguro pero es frágil: los alias se saltan, la regla no viaja a máquinas nuevas y el hábito subyacente nunca se forma. Reemplaza prohibiciones por reflejos: pwd antes de rm, ls para previsualizar, control de versiones como red de seguridad."
       }
     },
     "glossaryTerms": ["rm", "pwd", "ls", "destructive-command", "incident-response"]

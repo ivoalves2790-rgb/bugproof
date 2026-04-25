@@ -48,64 +48,74 @@
       "no-filter": {
         "narrative": "Your query returns every task from every user in the database. During testing with 3 users, User A can see User B's private tasks. A beta tester reports the bug publicly. How do you respond?",
         "choices": [
-          { "id": "add-filter", "text": "Immediately add a WHERE user_id = $1 clause and deploy a hotfix", "nextNode": "recovered-end", "score": 3 },
-          { "id": "frontend-filter", "text": "Filter the results in JavaScript on the frontend before rendering", "nextNode": "frontend-filter-end", "score": 1 }
+          { "id": "add-filter", "text": "Immediately add a WHERE user_id = $1 clause and deploy a hotfix", "nextNode": "update-query", "score": 4 },
+          { "id": "frontend-filter", "text": "Filter the results in JavaScript on the frontend before rendering", "nextNode": "update-query", "score": 1 }
         ]
       },
       "good-query": {
-        "narrative": "Your query works perfectly — each user only sees their own tasks, sorted newest first. Now you need to add a 'mark task complete' feature. How do you write the UPDATE query?",
+        "narrative": "Your query works perfectly — each user only sees their own tasks, sorted newest first. Time to add interactions.",
         "choices": [
-          { "id": "update-with-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1 AND user_id = $2;", "nextNode": "excellent-end", "score": 4 },
-          { "id": "update-no-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1;", "nextNode": "insecure-update-end", "score": 1 }
+          { "id": "continue", "text": "Move on to the UPDATE query for marking tasks complete", "nextNode": "update-query", "score": 3 }
         ]
       },
       "missing-order": {
         "narrative": "The query returns the right tasks, but they appear in a random order. Users complain that newly created tasks show up at the bottom or in the middle of the list. How do you fix it?",
         "choices": [
-          { "id": "add-order-by", "text": "Add ORDER BY created_at DESC to show newest tasks first", "nextNode": "decent-end", "score": 3 },
-          { "id": "sort-frontend", "text": "Sort the tasks in JavaScript after fetching them", "nextNode": "frontend-sort-end", "score": 1 }
+          { "id": "add-order-by", "text": "Add ORDER BY created_at DESC to show newest tasks first", "nextNode": "update-query", "score": 3 },
+          { "id": "sort-frontend", "text": "Sort the tasks in JavaScript after fetching them", "nextNode": "update-query", "score": 1 }
         ]
       },
-      "recovered-end": {
-        "narrative": "The hotfix goes out within the hour. The data leak is patched, but the damage was done — users saw other people's tasks. You add Row Level Security policies to prevent this class of bug entirely.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "You recovered, but filtering should have been there from the start. Always include a user_id filter and consider using Row Level Security (RLS) as a safety net so the database enforces access rules even if your query has a bug.",
-        "choices": []
+      "update-query": {
+        "narrative": "The list works. Now users need to mark tasks complete. How do you write the UPDATE query?",
+        "choices": [
+          { "id": "update-with-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1 AND user_id = $2;", "nextNode": "delete-query", "score": 4 },
+          { "id": "update-no-owner", "text": "UPDATE tasks SET is_complete = true WHERE id = $1;", "nextNode": "delete-query", "score": 1 },
+          { "id": "update-no-where", "text": "UPDATE tasks SET is_complete = true; — fix the WHERE later", "nextNode": "delete-query", "score": 0 }
+        ]
       },
-      "frontend-filter-end": {
-        "narrative": "The data still travels from the database to the frontend with everyone's tasks included. A tech-savvy user opens the browser's Network tab and sees all users' tasks in the API response. You've hidden the problem in the UI but the security hole is still wide open.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Never rely on frontend filtering for security. The raw API response contains all the data — anyone with browser dev tools can see it. Security must be enforced at the database or API level, not in the UI.",
-        "choices": []
+      "delete-query": {
+        "narrative": "Tasks pile up. Users want to delete the ones they no longer need. How do you write the DELETE query?",
+        "choices": [
+          { "id": "delete-with-owner", "text": "DELETE FROM tasks WHERE id = $1 AND user_id = $2;", "nextNode": "performance", "score": 4 },
+          { "id": "soft-delete", "text": "Add a deleted_at timestamp instead and filter it out of every SELECT, so undelete stays possible", "nextNode": "performance", "score": 4 },
+          { "id": "delete-no-owner", "text": "DELETE FROM tasks WHERE id = $1; — anyone with the ID can wipe a row", "nextNode": "performance", "score": 0 }
+        ]
+      },
+      "performance": {
+        "narrative": "Power users now have thousands of tasks each. The list query takes 2+ seconds and the page feels slow. How do you fix performance without changing the query shape?",
+        "choices": [
+          { "id": "index-columns", "text": "Add an index on (user_id, created_at) so the database can find and sort matching rows directly", "nextNode": "rls", "score": 4 },
+          { "id": "limit-pagination", "text": "Add LIMIT and OFFSET to paginate the results — fetch 50 tasks at a time instead of all of them", "nextNode": "rls", "score": 3 },
+          { "id": "ignore-perf", "text": "Leave the query — 2 seconds is fine, users can wait", "nextNode": "rls", "score": 0 }
+        ]
+      },
+      "rls": {
+        "narrative": "Your queries are correct, but you noticed in the news that another startup leaked data because a single forgotten WHERE clause exposed everyone's records. You want a safety net so a future bug can't do the same. What do you set up?",
+        "choices": [
+          { "id": "rls-policies", "text": "Enable Row Level Security on the tasks table and write a policy: USING (auth.uid() = user_id). The database enforces the user filter even if the application code forgets it.", "nextNode": "excellent-end", "score": 4 },
+          { "id": "code-review", "text": "Add a checklist item to every PR: 'did you include user_id in WHERE?' and trust reviewers to catch mistakes", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "trust-app", "text": "Skip RLS — your queries are correct, no extra layer needed", "nextNode": "weak-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "Your task manager is secure and functional. Every query filters by user_id, ensuring users can only interact with their own data. The sorted results make the UI feel polished and predictable.",
+        "narrative": "Your queries are filtered, sorted, indexed, and protected by Row Level Security. Even if a future contributor writes a query without WHERE user_id, the database silently scopes the result to the logged-in user. Defense in depth.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excellent work! You followed two critical rules: always filter by user_id for data ownership, and always include ORDER BY for consistent results. These habits prevent the most common database bugs in production apps.",
+        "finalScore": 20,
+        "feedback": "This is production-grade query work. You filtered for ownership, ordered for predictability, indexed for performance, and added RLS as a safety net. The combination means a single careless query cannot leak data — the database itself refuses.",
         "choices": []
       },
-      "insecure-update-end": {
-        "narrative": "A user discovers they can mark anyone's tasks as complete by guessing task IDs. Since UUIDs are hard to guess it takes a while to find, but a determined attacker writes a script to try random IDs. Your app has a broken access control vulnerability.",
+      "mediocre-end": {
+        "narrative": "Your queries work today. Six months later, a junior contributor adds a new endpoint and forgets the user_id filter. Code review misses it. Production silently leaks data until a user reports it.",
         "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Always include user_id in UPDATE and DELETE queries. Filtering by ID alone means anyone who knows (or guesses) a task ID can modify it. The user_id check ensures only the task owner can make changes.",
+        "finalScore": 12,
+        "feedback": "Code review is necessary but not sufficient. Humans miss things — that's why we add automated safeguards. Row Level Security shifts the responsibility from 'every developer remembers' to 'the database enforces.'",
         "choices": []
       },
-      "decent-end": {
-        "narrative": "Adding ORDER BY fixes the display order. Users now see their newest tasks at the top. You make a mental note to always define sort order in your queries rather than leaving it to chance.",
+      "weak-end": {
+        "narrative": "Without RLS, the tasks table trusts whatever query the application sends. One typo, one bug, one rushed pull request and the entire dataset is exposed. You're one mistake away from a serious incident.",
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Good fix. Databases return results in an undefined order unless you specify ORDER BY. Sorting in the database is faster and more reliable than sorting in JavaScript, especially as your data grows.",
-        "choices": []
-      },
-      "frontend-sort-end": {
-        "narrative": "It works for now, but as users accumulate hundreds of tasks, the frontend struggles to sort large arrays. The page becomes sluggish. You eventually move the sorting to the database query where it belongs.",
-        "isEnd": true,
-        "finalScore": 3,
-        "feedback": "Databases are optimized for sorting — they use indexes and efficient algorithms. Sorting in the frontend means downloading unsorted data and doing extra work in the browser. Let the database handle it with ORDER BY.",
+        "finalScore": 5,
+        "feedback": "Skipping RLS on a multi-tenant table is a ticking time bomb. Even careful teams ship buggy queries eventually. RLS makes the database your last line of defense — turn it on for every table that holds user data.",
         "choices": []
       }
     },

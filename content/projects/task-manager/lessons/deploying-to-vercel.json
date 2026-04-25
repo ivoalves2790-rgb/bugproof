@@ -40,44 +40,75 @@
       "start": {
         "narrative": "You push your task manager to GitHub and connect the repo to Vercel. The build starts and immediately fails with: 'Error: NEXT_PUBLIC_SUPABASE_URL is not defined.' What do you do?",
         "choices": [
-          { "id": "a", "text": "Hardcode the Supabase URL directly in the code so the build doesn't need env vars", "nextNode": "hardcode", "score": 0 },
-          { "id": "b", "text": "Add the environment variables in the Vercel project settings dashboard, then redeploy", "nextNode": "add-env-vars", "score": 4 },
-          { "id": "c", "text": "Push your .env file to the repo so Vercel can read it", "nextNode": "push-env", "score": 0 }
+          { "id": "hardcode", "text": "Hardcode the Supabase URL directly in the code so the build doesn't need env vars", "nextNode": "hardcode", "score": 0 },
+          { "id": "add-env-vars", "text": "Add the environment variables in the Vercel project settings dashboard, then redeploy", "nextNode": "add-env-vars", "score": 4 },
+          { "id": "push-env", "text": "Push your .env file to the repo so Vercel can read it", "nextNode": "push-env", "score": 0 }
         ]
       },
       "hardcode": {
-        "narrative": "The build passes, but now your Supabase URL is visible in the public source code. Anyone can find your database endpoint. A security-conscious colleague flags the issue.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Even URLs should be treated as configuration, not hardcoded values. Environment variables exist precisely for values that change between environments and should not be public.",
-        "choices": []
+        "narrative": "The build passes, but now your Supabase URL is visible in the public source code. A teammate flags it on review and asks you to back it out. What do you do?",
+        "choices": [
+          { "id": "revert-and-env", "text": "Revert the hardcode, add the env vars in Vercel settings, and redeploy properly", "nextNode": "second-deploy-bug", "score": 4 },
+          { "id": "argue-its-fine", "text": "Argue it's fine since the URL is technically public anyway, and leave the hardcode in place", "nextNode": "second-deploy-bug", "score": 1 }
+        ]
       },
       "add-env-vars": {
         "narrative": "You add the env vars in Vercel settings. The build passes. But the app shows a blank page. The browser console reveals: 'TypeError: Cannot read properties of undefined.' What's your next step?",
         "choices": [
-          { "id": "b1", "text": "Check Vercel's deployment logs and the browser console to find the exact failing component", "nextNode": "debug-logs", "score": 3 },
-          { "id": "b2", "text": "Run npm run build locally to reproduce the issue in a local production build", "nextNode": "local-build", "score": 4 }
+          { "id": "debug-logs", "text": "Check Vercel's deployment logs and the browser console to find the exact failing component", "nextNode": "second-deploy-bug", "score": 3 },
+          { "id": "local-build", "text": "Run npm run build locally to reproduce the issue in a local production build", "nextNode": "second-deploy-bug", "score": 4 }
         ]
       },
       "push-env": {
-        "narrative": "You accidentally push your .env file with your real Supabase service role key. Within minutes, a bot scraping GitHub finds it. You get an email from Supabase warning about exposed credentials. You immediately rotate keys and add .env to .gitignore.",
+        "narrative": "You accidentally push your .env file with your real Supabase service role key. Within minutes, a bot scraping GitHub finds it. You rotate the key, scrub the file from history, and add .env to .gitignore. The build still fails because Vercel never had the env vars in the first place.",
+        "choices": [
+          { "id": "configure-vercel-vars", "text": "Add the rotated env vars to Vercel project settings and redeploy", "nextNode": "second-deploy-bug", "score": 3 },
+          { "id": "panic-rollback", "text": "Delete the Vercel project entirely and start over from the dashboard", "nextNode": "second-deploy-bug", "score": 1 }
+        ]
+      },
+      "second-deploy-bug": {
+        "narrative": "The build is green and the env vars are wired up. But before promoting to production, you want to verify the deploy. Vercel automatically gave you a preview URL on the latest commit. How do you use it?",
+        "choices": [
+          { "id": "use-preview", "text": "Open the preview URL, sign in as a test user, create and complete a task, and confirm the data lands in Supabase", "nextNode": "domain-step", "score": 4 },
+          { "id": "skip-preview", "text": "Skip the preview — the build succeeded, that's good enough to push live", "nextNode": "domain-step", "score": 1 },
+          { "id": "promote-blindly", "text": "Promote the preview to production immediately and test on the production URL afterward", "nextNode": "domain-step", "score": 0 }
+        ]
+      },
+      "domain-step": {
+        "narrative": "Preview looks good. Time to give the deploy a real address. You own taskmanager.app. How do you wire it up?",
+        "choices": [
+          { "id": "vercel-domain", "text": "Add taskmanager.app in Vercel's Domains settings and follow the DNS records it generates", "nextNode": "monitoring-step", "score": 4 },
+          { "id": "wildcard-cname", "text": "Point a wildcard CNAME at vercel-dns.com without configuring the domain in the dashboard", "nextNode": "monitoring-step", "score": 1 },
+          { "id": "use-vercel-url", "text": "Skip the custom domain — share the .vercel.app URL with users for now", "nextNode": "monitoring-step", "score": 2 }
+        ]
+      },
+      "monitoring-step": {
+        "narrative": "The app is live on your custom domain. Final question: how will you know if the next deploy breaks something for users?",
+        "choices": [
+          { "id": "logs-and-alerts", "text": "Enable Vercel's runtime logs and integrate an error tracker (Sentry) so failed requests page you", "nextNode": "excellent-end", "score": 4 },
+          { "id": "check-occasionally", "text": "Open the app once a day and click around to make sure it still works", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "trust-the-build", "text": "If the build is green, the app is fine — no extra monitoring needed", "nextNode": "weak-end", "score": 0 }
+        ]
+      },
+      "excellent-end": {
+        "narrative": "Your task manager is live on its own domain, the env vars are properly configured in Vercel, you verified the deploy on a preview URL before promoting, and runtime errors get reported the moment they happen. This is a deploy you can trust.",
         "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Never push .env files to Git. Even after deletion, secrets remain in Git history. Always add .env to .gitignore before your first commit, and rotate any leaked credentials immediately.",
+        "finalScore": 20,
+        "feedback": "This is the full Vercel workflow: env vars in the dashboard, preview deploys for verification, custom domain via Vercel's DNS, and an error tracker for the things that only break in production. Future deploys are a one-click affair because the foundation is right.",
         "choices": []
       },
-      "debug-logs": {
-        "narrative": "The logs show a component is trying to read a property from data that hasn't loaded yet. You add a loading state check and the app works perfectly on the next deploy.",
+      "mediocre-end": {
+        "narrative": "Your app is live and you know how to find issues — but only when you happen to look. The first time a deploy ships a regression at 11pm, your users will hit the bug for hours before you notice the next morning.",
         "isEnd": true,
-        "finalScore": 6,
-        "feedback": "Good debugging process. Deployment logs and browser console are your best friends. The loading state issue is common — data fetching behaves differently in production vs development.",
+        "finalScore": 11,
+        "feedback": "Manual checks scale until they don't. An error tracker takes 15 minutes to wire up and surfaces problems you wouldn't catch on a click-around. Add it before your user count outgrows your eyeballs.",
         "choices": []
       },
-      "local-build": {
-        "narrative": "Running 'npm run build' locally reveals the exact same error with a full stack trace pointing to a component that doesn't handle the loading state. You fix it locally, push, and Vercel auto-deploys successfully.",
+      "weak-end": {
+        "narrative": "Your app is live but you have no idea what users are actually experiencing. A bad merge ships a broken sign-up flow; you find out a week later from a support email asking why nobody can register.",
         "isEnd": true,
-        "finalScore": 7,
-        "feedback": "Running the production build locally is the best practice. It reproduces most deployment issues with a faster feedback loop than pushing and waiting for Vercel to build.",
+        "finalScore": 4,
+        "feedback": "A green build only proves the code compiled, not that it works for real users. Without runtime logs and error tracking, you're flying blind. Treat observability as part of the deploy itself, not an afterthought.",
         "choices": []
       }
     },
