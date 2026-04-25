@@ -49,66 +49,69 @@
         ]
       },
       "minimal-start": {
-        "narrative": "Gran eleccion. Tu TaskCard minima funciona y se ve limpia. Ahora los requisitos del producto dicen que necesitas mostrar la fecha limite. La fecha limite puede estar en el futuro, hoy o vencida. Como manejas los diferentes estados?",
+        "narrative": "Tu TaskCard minima funciona y se ve limpia. Ahora los requisitos del producto dicen que necesitas mostrar la fecha limite, que puede estar en el futuro, hoy o vencida. Como manejas los diferentes estados?",
         "choices": [
-          { "id": "conditional-styling", "text": "Crear un sub-componente <DueDateBadge> con clases condicionales de Tailwind: verde para futuro, amarillo para hoy, rojo para vencida", "nextNode": "excellent-end", "score": 4 },
-          { "id": "just-text", "text": "Mostrar la fecha como texto plano sin distincion visual entre vencida y futura", "nextNode": "plain-date-end", "score": 1 }
+          { "id": "conditional-styling", "text": "Crear un sub-componente <DueDateBadge> con clases condicionales de Tailwind: verde para futuro, amarillo para hoy, rojo para vencida", "nextNode": "interaction-states", "score": 4 },
+          { "id": "just-text", "text": "Mostrar la fecha como texto plano sin distincion visual entre vencida y futura", "nextNode": "interaction-states", "score": 1 }
         ]
       },
       "overloaded": {
         "narrative": "La tarjeta esta saturada de informacion. En movil, el texto es diminuto y el layout se rompe. Los usuarios en pruebas dicen que no pueden escanear rapidamente su lista de tareas porque cada tarjeta es un muro de datos. Cual es tu solucion?",
         "choices": [
-          { "id": "hide-on-mobile", "text": "Usar clases responsivas para ocultar la mayoria de campos en movil, mostrando solo titulo y estado", "nextNode": "responsive-recovery", "score": 3 },
-          { "id": "smaller-font", "text": "Hacer la fuente más pequeña para que todo quepa", "nextNode": "tiny-text-end", "score": 0 }
+          { "id": "hide-on-mobile", "text": "Usar clases responsivas para ocultar la mayoria de campos en movil, mostrando solo titulo y estado", "nextNode": "interaction-states", "score": 3 },
+          { "id": "smaller-font", "text": "Hacer la fuente más pequeña para que todo quepa", "nextNode": "interaction-states", "score": 0 }
         ]
       },
       "library-card": {
         "narrative": "Instalaste una libreria de UI y personalizaste su componente Card. Se ve bien, pero la tarjeta de la libreria no soporta un estado 'completado' con texto tachado, y sobreescribir los estilos CSS de la libreria requiere luchar contra su especificidad. Que haces?",
         "choices": [
-          { "id": "build-own", "text": "Construir tu propio TaskCard desde cero usando la tarjeta de la libreria como referencia visual, pero con tus propios estilos de Tailwind", "nextNode": "own-card-end", "score": 3 },
-          { "id": "force-override", "text": "Usar sobreescrituras con !important y CSS personalizado para forzar que la tarjeta de la libreria se vea bien", "nextNode": "override-end", "score": 1 }
+          { "id": "build-own", "text": "Construir tu propio TaskCard desde cero usando la tarjeta de la libreria como referencia visual, pero con tus propios estilos de Tailwind", "nextNode": "interaction-states", "score": 3 },
+          { "id": "force-override", "text": "Usar sobreescrituras con !important y CSS personalizado para forzar que la tarjeta de la libreria se vea bien", "nextNode": "interaction-states", "score": 1 }
         ]
       },
-      "responsive-recovery": {
-        "narrative": "El enfoque responsivo funciona. En movil muestras titulo y estado; en escritorio muestras la tarjeta completa. Los usuarios pueden escanear la lista rapidamente en cualquier dispositivo. Perdiste tiempo construyendo todo de una vez, pero te recuperaste.",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Te recuperaste bien haciendo la tarjeta responsiva. Pero la lección es: empieza mínimo y agrega complejidad segun la prioridad. Si hubieras empezado con la tarjeta mínima, no habrías necesitado ocultar cosas después.",
-        "choices": []
+      "interaction-states": {
+        "narrative": "Tu TaskCard se renderiza, pero cuando los usuarios pasan el cursor o hacen clic, no pasa nada visible. La tarjeta se siente muerta — como un boton de ascensor que no se ilumina. Como agregas retroalimentación visual?",
+        "choices": [
+          { "id": "tailwind-states", "text": "Usar las utilidades hover:, active:, y data-[completed=true]: de Tailwind para estilos por estado", "nextNode": "accessibility", "score": 4 },
+          { "id": "manual-handlers", "text": "Manejar onMouseEnter/onMouseLeave con useState para alternar clases manualmente", "nextNode": "accessibility", "score": 2 },
+          { "id": "no-feedback", "text": "Dejarlo sin estados — el cursor del navegador cambia y eso es suficiente", "nextNode": "accessibility", "score": 0 }
+        ]
+      },
+      "accessibility": {
+        "narrative": "Una usuaria con lector de pantalla reporta que tu TaskCard se anuncia como 'boton sin nombre' y no puede saber si una tarea esta completada. Como arreglas la accesibilidad?",
+        "choices": [
+          { "id": "semantic-aria", "text": "Usar elementos semanticos (button, h3, time) y agregar aria-label y aria-pressed cuando el contexto visual no se traduce a texto", "nextNode": "testing", "score": 4 },
+          { "id": "alt-only", "text": "Agregar un solo aria-label='Tarea' en el div raíz y dejarlo así", "nextNode": "testing", "score": 1 },
+          { "id": "skip-a11y", "text": "Lo arreglas más tarde — primero terminemos las funcionalidades del MVP", "nextNode": "testing", "score": 0 }
+        ]
+      },
+      "testing": {
+        "narrative": "Es momento de probar el componente. Cual es tu estrategia de tests?",
+        "choices": [
+          { "id": "behavior-tests", "text": "Tests de comportamiento con React Testing Library: simular clics, verificar cambios de estado, validar atributos de accesibilidad", "nextNode": "excellent-end", "score": 4 },
+          { "id": "snapshot-only", "text": "Solo snapshots — capturan cualquier cambio visual sin esfuerzo", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "skip-tests", "text": "Saltarte los tests — el componente es simple y se ve bien al revisarlo manualmente", "nextNode": "no-tests-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "Tu TaskCard esta limpia y funcional. El sub-componente <DueDateBadge> maneja la logica de fechas por separado, asi que la tarjeta principal se mantiene simple. Los usuarios detectan inmediatamente las tareas vencidas gracias a la insignia roja. El componente es facil de probar porque cada pieza esta aislada.",
+        "narrative": "Tu TaskCard es un componente maduro: empieza mínimo, escala con sub-componentes, responde a interacciones, es accesible para lectores de pantalla, y esta cubierto por tests de comportamiento. Cuando otro desarrollador lo modifique en seis meses, los tests le diran de inmediato si rompió algo.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excelente enfoque! Empezar mínimo y extraer sub-componentes para lógica compleja (como formato de fechas con estilos condicionales) mantiene tu código limpio y cada pieza testeable. Este es diseño de componentes de nivel profesional.",
+        "finalScore": 20,
+        "feedback": "Esto es ingeniería de componentes de nivel profesional. Las decisiones que tomaste — empezar mínimo, extraer lógica compleja en sub-componentes, manejar estados con utilidades de Tailwind, semantica accesible, y tests de comportamiento — son los pilares de componentes que duran años en producción.",
         "choices": []
       },
-      "plain-date-end": {
-        "narrative": "La fecha aparece, pero los usuarios siguen perdiendo tareas vencidas porque '2024-01-15' se ve igual ya sea que este vencida o a una semana. Un usuario se queja de que perdio una fecha limite porque nada en la tarjeta senalaba urgencia.",
+      "mediocre-end": {
+        "narrative": "Tu TaskCard funciona y se ve bien. Los snapshots capturan cambios, pero cuando un colega ajusta el padding por una razón legítima, el snapshot falla y nadie sabe si el cambio fue intencional. El equipo pasa más tiempo actualizando snapshots que escribiendo código nuevo.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Las fechas necesitan contexto visual. Una cadena de fecha cruda obliga a los usuarios a hacer calculo mental. Insignias codificadas por color o tiempo relativo ('2 dias vencida') hacen la urgencia inmediatamente obvia. La interfaz deberia reducir la carga cognitiva, no agregarla.",
+        "finalScore": 12,
+        "feedback": "Llegaste a algo funcional, pero los snapshots tienen un problema fundamental: validan apariencia, no comportamiento. Los buenos tests verifican que 'al hacer clic en completar, el estado cambia y se anuncia al lector de pantalla' — no que el HTML coincide pixel por pixel.",
         "choices": []
       },
-      "tiny-text-end": {
-        "narrative": "Ahora la tarjeta cabe en movil, pero nadie puede leerla. Los usuarios hacen zoom constantemente. Las pruebas de accesibilidad senalan la fuente diminuta como un fallo. Hiciste el problema de layout peor, no mejor.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Encoger el texto nunca es la respuesta. Si el contenido no cabe, tienes demasiado contenido — no muy poco espacio. Elimina u oculta información de baja prioridad en lugar de hacer todo ilegible.",
-        "choices": []
-      },
-      "own-card-end": {
-        "narrative": "Tu TaskCard personalizado usa Tailwind para todos los estilos y soporta todos los estados que necesitas: por defecto, hover, completado (con opacidad y tachado), y vencido. Sin conflictos de libreria, control total.",
+      "no-tests-end": {
+        "narrative": "Tu TaskCard se ve bien hoy. En tres meses, alguien refactoriza el manejo de estados y rompe la accesibilidad sin notarlo. El bug llega a producción hasta que un usuario con lector de pantalla escribe un email enojado. Pasas un día depurando algo que un test de cinco líneas habría detectado al instante.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Buena recuperacion. Las librerias de UI son geniales para componentes genéricos (botones, modales), pero componentes altamente especificos del dominio como un TaskCard a menudo es mejor construirlos desde cero. Obtienes control total sobre estados y estilos sin luchar contra la libreria.",
-        "choices": []
-      },
-      "override-end": {
-        "narrative": "La tarjeta se ve bien, pero el CSS es un desorden de sobreescrituras. Cuando la libreria se actualiza, la mitad de tus sobreescrituras se rompen. Otro desarrollador del equipo no puede entender por que los estilos se comportan de forma extrana. El mantenimiento se convierte en una pesadilla.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Luchar contra el CSS de una libreria de UI es una batalla perdida. Si necesitas sobreescribir más de unos pocos estilos, es mejor construir el componente tu mismo. Los componentes de libreria funcionan mejor cuando los usas tal como son, no cuando los fuerzas a tener una forma diferente.",
+        "feedback": "Saltarte los tests es deuda técnica que se cobra con interés. Para un componente que los usuarios tocan docenas de veces al día, los tests no son un lujo — son seguro. Empieza con un test por comportamiento crítico (hacer clic en completar, mostrar fecha vencida, anuncio accesible) y agrega más cuando arregles bugs.",
         "choices": []
       }
     },

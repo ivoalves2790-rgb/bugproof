@@ -49,66 +49,69 @@
         ]
       },
       "minimal-start": {
-        "narrative": "Great choice. Your minimal TaskCard works and looks clean. Now the product requirements say you need to show the due date. The due date could be in the future, today, or overdue. How do you handle the different states?",
+        "narrative": "Your minimal TaskCard works and looks clean. Now product requirements say you need to show the due date, which can be in the future, today, or overdue. How do you handle the different states?",
         "choices": [
-          { "id": "conditional-styling", "text": "Create a <DueDateBadge> sub-component with conditional Tailwind classes: green for future, yellow for today, red for overdue", "nextNode": "excellent-end", "score": 4 },
-          { "id": "just-text", "text": "Display the date as plain text with no visual distinction between overdue and future dates", "nextNode": "plain-date-end", "score": 1 }
+          { "id": "conditional-styling", "text": "Create a <DueDateBadge> sub-component with conditional Tailwind classes: green for future, yellow for today, red for overdue", "nextNode": "interaction-states", "score": 4 },
+          { "id": "just-text", "text": "Display the date as plain text with no visual distinction between overdue and future dates", "nextNode": "interaction-states", "score": 1 }
         ]
       },
       "overloaded": {
         "narrative": "The card is packed with information. On mobile, the text is tiny and the layout breaks. Users in testing say they can't quickly scan their task list because every card is a wall of data. What's your fix?",
         "choices": [
-          { "id": "hide-on-mobile", "text": "Use responsive classes to hide most fields on mobile, only showing title and status", "nextNode": "responsive-recovery", "score": 3 },
-          { "id": "smaller-font", "text": "Make the font smaller so everything fits", "nextNode": "tiny-text-end", "score": 0 }
+          { "id": "hide-on-mobile", "text": "Use responsive classes to hide most fields on mobile, only showing title and status", "nextNode": "interaction-states", "score": 3 },
+          { "id": "smaller-font", "text": "Make the font smaller so everything fits", "nextNode": "interaction-states", "score": 0 }
         ]
       },
       "library-card": {
         "narrative": "You installed a UI library and customized its Card component. It looks good, but the library's card doesn't support a 'completed' state with strikethrough text, and overriding the library's styles requires fighting its CSS specificity. What do you do?",
         "choices": [
-          { "id": "build-own", "text": "Build your own TaskCard from scratch using the library card as visual reference, but with your own Tailwind styles", "nextNode": "own-card-end", "score": 3 },
-          { "id": "force-override", "text": "Use !important overrides and custom CSS to force the library's card to look right", "nextNode": "override-end", "score": 1 }
+          { "id": "build-own", "text": "Build your own TaskCard from scratch using the library card as visual reference, but with your own Tailwind styles", "nextNode": "interaction-states", "score": 3 },
+          { "id": "force-override", "text": "Use !important overrides and custom CSS to force the library's card to look right", "nextNode": "interaction-states", "score": 1 }
         ]
       },
-      "responsive-recovery": {
-        "narrative": "The responsive approach works. On mobile you show title and status; on desktop you show the full card. Users can scan the list quickly on any device. You lost time building everything upfront, but you recovered.",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "You recovered well by making the card responsive. But the lesson is: start minimal and add complexity based on priority. If you'd started with the minimal card, you wouldn't have needed to hide things later.",
-        "choices": []
+      "interaction-states": {
+        "narrative": "Your TaskCard renders, but when users hover or click it, nothing visible happens. The card feels dead — like an elevator button that doesn't light up. How do you add visual feedback?",
+        "choices": [
+          { "id": "tailwind-states", "text": "Use Tailwind's hover:, active:, and data-[completed=true]: utilities for state-based styling", "nextNode": "accessibility", "score": 4 },
+          { "id": "manual-handlers", "text": "Handle onMouseEnter/onMouseLeave with useState to toggle classes manually", "nextNode": "accessibility", "score": 2 },
+          { "id": "no-feedback", "text": "Leave it without states — the browser cursor changes and that's enough", "nextNode": "accessibility", "score": 0 }
+        ]
+      },
+      "accessibility": {
+        "narrative": "A screen reader user reports that your TaskCard announces as 'unnamed button' and they can't tell whether a task is completed. How do you fix accessibility?",
+        "choices": [
+          { "id": "semantic-aria", "text": "Use semantic elements (button, h3, time) and add aria-label and aria-pressed where visual context doesn't translate to text", "nextNode": "testing", "score": 4 },
+          { "id": "alt-only", "text": "Add a single aria-label='Task' on the root div and call it done", "nextNode": "testing", "score": 1 },
+          { "id": "skip-a11y", "text": "Fix it later — let's finish the MVP features first", "nextNode": "testing", "score": 0 }
+        ]
+      },
+      "testing": {
+        "narrative": "Time to test the component. What's your testing strategy?",
+        "choices": [
+          { "id": "behavior-tests", "text": "Behavior tests with React Testing Library: simulate clicks, verify state changes, validate accessibility attributes", "nextNode": "excellent-end", "score": 4 },
+          { "id": "snapshot-only", "text": "Snapshots only — they catch any visual change effortlessly", "nextNode": "mediocre-end", "score": 2 },
+          { "id": "skip-tests", "text": "Skip tests — the component is simple and looks fine when I check manually", "nextNode": "no-tests-end", "score": 0 }
+        ]
       },
       "excellent-end": {
-        "narrative": "Your TaskCard is clean and functional. The <DueDateBadge> sub-component handles date logic separately, so the main card stays simple. Users immediately spot overdue tasks thanks to the red badge. The component is easy to test because each piece is isolated.",
+        "narrative": "Your TaskCard is a mature component: starts minimal, scales with sub-components, responds to interaction, is screen-reader accessible, and is covered by behavior tests. When another developer modifies it in six months, the tests will tell them immediately if they broke anything.",
         "isEnd": true,
-        "finalScore": 8,
-        "feedback": "Excellent approach! Starting minimal and extracting sub-components for complex logic (like date formatting with conditional styles) keeps your code clean and each piece testable. This is professional-level component design.",
+        "finalScore": 20,
+        "feedback": "This is professional-level component engineering. The decisions you made — start minimal, extract complex logic into sub-components, handle states with Tailwind utilities, semantic accessibility, and behavior tests — are the pillars of components that survive years in production.",
         "choices": []
       },
-      "plain-date-end": {
-        "narrative": "The date shows up, but users keep missing overdue tasks because '2024-01-15' looks the same whether it's past due or a week away. A user complains that they missed a deadline because nothing on the card signaled urgency.",
+      "mediocre-end": {
+        "narrative": "Your TaskCard works and looks fine. Snapshots catch changes, but when a colleague tweaks padding for a legitimate reason, the snapshot fails and nobody knows whether the change was intentional. The team spends more time updating snapshots than writing new code.",
         "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Dates need visual context. A raw date string forces users to do mental math. Color-coded badges or relative time ('2 days overdue') make the urgency immediately obvious. UI should reduce cognitive load, not add to it.",
+        "finalScore": 12,
+        "feedback": "You got somewhere functional, but snapshots have a fundamental problem: they validate appearance, not behavior. Good tests verify that 'clicking complete changes the state and announces to the screen reader' — not that the HTML matches pixel for pixel.",
         "choices": []
       },
-      "tiny-text-end": {
-        "narrative": "Now the card fits on mobile, but no one can read it. Users pinch-to-zoom constantly. Accessibility testing flags the tiny font as a failure. You've made the layout problem worse, not better.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Shrinking text is never the answer. If content doesn't fit, you have too much content — not too little space. Remove or hide low-priority information instead of making everything unreadable.",
-        "choices": []
-      },
-      "own-card-end": {
-        "narrative": "Your custom TaskCard uses Tailwind for all styling and supports all the states you need: default, hover, completed (with opacity and strikethrough), and overdue. No library conflicts, full control.",
+      "no-tests-end": {
+        "narrative": "Your TaskCard looks fine today. In three months, someone refactors state handling and silently breaks accessibility. The bug ships to production until a screen-reader user emails in. You spend a day debugging something a five-line test would have caught instantly.",
         "isEnd": true,
         "finalScore": 6,
-        "feedback": "Good recovery. UI libraries are great for generic components (buttons, modals), but highly domain-specific components like a TaskCard are often better built from scratch. You get full control over states and styling without fighting the library.",
-        "choices": []
-      },
-      "override-end": {
-        "narrative": "The card looks right, but the CSS is a mess of overrides. When the library updates, half your overrides break. Another developer on the team can't figure out why styles are behaving strangely. Maintenance becomes a nightmare.",
-        "isEnd": true,
-        "finalScore": 2,
-        "feedback": "Fighting a UI library's CSS is a losing battle. If you need to override more than a few styles, you're better off building the component yourself. Library components work best when you use them as-is, not when you force them into a different shape.",
+        "feedback": "Skipping tests is technical debt that compounds. For a component users touch dozens of times a day, tests aren't a luxury — they're insurance. Start with one test per critical behavior (click complete, show overdue date, accessible announcement) and add more when you fix bugs.",
         "choices": []
       }
     },

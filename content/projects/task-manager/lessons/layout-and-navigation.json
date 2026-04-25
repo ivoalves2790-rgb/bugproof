@@ -49,70 +49,73 @@
         ]
       },
       "responsive-nav": {
-        "narrative": "Your bottom tab bar works great on mobile. On desktop, the sidebar shows section names alongside icons. Now you need to decide where to put the 'Add Task' action. It's the most important action in the entire app. Where does it go?",
+        "narrative": "Your bottom tab bar works great on mobile. On desktop, the sidebar shows section names alongside icons. Now you need to decide where to put the 'Add Task' action — the most important action in the entire app. Where does it go?",
         "choices": [
-          { "id": "fab-button", "text": "A floating action button (FAB) in the bottom-right corner on mobile, and a prominent 'Add Task' button at the top of the sidebar on desktop", "nextNode": "excellent-end", "score": 4 },
-          { "id": "in-nav", "text": "Add it as the center item in the bottom tab bar on mobile", "nextNode": "nav-action-end", "score": 2 },
-          { "id": "page-only", "text": "Put the 'Add Task' button only on the task list page, at the top of the list", "nextNode": "page-only-end", "score": 2 }
+          { "id": "fab-button", "text": "A floating action button (FAB) in the bottom-right corner on mobile, and a prominent 'Add Task' button at the top of the sidebar on desktop", "nextNode": "deep-linking", "score": 4 },
+          { "id": "in-nav", "text": "Add it as the center item in the bottom tab bar on mobile", "nextNode": "deep-linking", "score": 2 },
+          { "id": "page-only", "text": "Put the 'Add Task' button only on the task list page, at the top of the list", "nextNode": "deep-linking", "score": 2 }
         ]
       },
       "fixed-sidebar": {
         "narrative": "On desktop, the sidebar looks fine. But on mobile, the fixed sidebar takes up half the screen width, leaving barely any room for the task list. Users can see only 2-3 tasks at a time. What do you do?",
         "choices": [
-          { "id": "make-responsive", "text": "Convert the sidebar to a bottom tab bar on mobile using Tailwind responsive classes: 'hidden md:flex' for sidebar, 'flex md:hidden' for bottom bar", "nextNode": "recovery-end", "score": 3 },
-          { "id": "collapsible", "text": "Make the sidebar collapsible with a toggle button", "nextNode": "collapsible-end", "score": 2 }
+          { "id": "make-responsive", "text": "Convert the sidebar to a bottom tab bar on mobile using Tailwind responsive classes: 'hidden md:flex' for sidebar, 'flex md:hidden' for bottom bar", "nextNode": "deep-linking", "score": 3 },
+          { "id": "collapsible", "text": "Make the sidebar collapsible with a toggle button", "nextNode": "deep-linking", "score": 2 }
         ]
       },
       "hamburger": {
-        "narrative": "The hamburger menu hides all navigation behind a tap. On mobile, users have to tap the hamburger, wait for the menu to animate open, find their section, and tap again. That's 3 actions to navigate. Analytics show users rarely visit Settings or Profile because the navigation is hidden.",
+        "narrative": "The hamburger menu hides all navigation behind a tap. On mobile, users have to tap the hamburger, wait for the menu to animate open, find their section, and tap again — 3 actions to navigate. Analytics show users rarely visit Settings or Profile because the navigation is hidden.",
         "choices": [
-          { "id": "add-bottom-bar", "text": "Replace the hamburger with a visible bottom tab bar on mobile so navigation is always one tap away", "nextNode": "recovery-end", "score": 3 },
-          { "id": "keep-hamburger", "text": "Keep the hamburger but make it bigger and add a tooltip saying 'Menu'", "nextNode": "hidden-nav-end", "score": 0 }
+          { "id": "add-bottom-bar", "text": "Replace the hamburger with a visible bottom tab bar on mobile so navigation is always one tap away", "nextNode": "deep-linking", "score": 3 },
+          { "id": "keep-hamburger", "text": "Keep the hamburger but make it bigger and add a tooltip saying 'Menu'", "nextNode": "deep-linking", "score": 0 }
+        ]
+      },
+      "deep-linking": {
+        "narrative": "A user sends you a screenshot of a task asking for help — but when you click the link they copied, the app opens the task list, not the specific task. How do you handle routing?",
+        "choices": [
+          { "id": "dynamic-routes", "text": "Use Next.js dynamic routes (/tasks/[id]) so every task has its own shareable URL", "nextNode": "loading-states", "score": 4 },
+          { "id": "modal-with-id", "text": "Open the task in a modal and put the ID in a query param (?taskId=123) so refreshing keeps the modal open", "nextNode": "loading-states", "score": 3 },
+          { "id": "no-deep-links", "text": "Keep all tasks under one route — users can search for it when they enter the app", "nextNode": "loading-states", "score": 0 }
+        ]
+      },
+      "loading-states": {
+        "narrative": "When users navigate between sections, the screen goes blank while data loads. On slow connections it feels like the app froze. How do you handle loading states?",
+        "choices": [
+          { "id": "skeleton-suspense", "text": "Use Next.js Suspense with skeletons that match the final layout — users see structure while data arrives", "nextNode": "keyboard-nav", "score": 4 },
+          { "id": "spinner", "text": "Show a centered spinner while each page loads", "nextNode": "keyboard-nav", "score": 2 },
+          { "id": "blank-wait", "text": "Leave the screen blank — users understand it's loading", "nextNode": "keyboard-nav", "score": 0 }
+        ]
+      },
+      "keyboard-nav": {
+        "narrative": "A keyboard-only user reports that after switching sections, focus is lost and they have to press Tab several times to reach the content. How do you fix keyboard navigation?",
+        "choices": [
+          { "id": "focus-management", "text": "Move focus to the main heading on each route change, and ensure tab order follows the visual flow", "nextNode": "excellent-end", "score": 4 },
+          { "id": "skip-link", "text": "Add a 'Skip to content' link that appears on first Tab", "nextNode": "good-end", "score": 3 },
+          { "id": "ignore-keyboard", "text": "Most users use a mouse — it's not a priority", "nextNode": "broken-end", "score": 0 }
         ]
       },
       "excellent-end": {
-        "narrative": "Your layout is responsive and intuitive. Mobile users have a thumb-friendly bottom bar and a prominent FAB for the most important action. Desktop users get a full sidebar with clear labels. The 'Add Task' button is always visible and accessible, no matter the screen size.",
+        "narrative": "Your app feels native on every device. Navigation is responsive, the primary action is always reachable, URLs are shareable, loading states show structure, and the keyboard works the way it should. Users don't think about navigation — they just use it.",
+        "isEnd": true,
+        "finalScore": 20,
+        "feedback": "Flawless execution. You solved five UX problems many apps ignore: mobile-first responsiveness, primary action placement, deep linking, skeleton loading states, and keyboard focus management. This is what separates an app that 'looks pretty' from one that 'feels professional.'",
+        "choices": []
+      },
+      "good-end": {
+        "narrative": "Your app is functional and most users are happy. The skip-link helps keyboard users, though some still get confused when focus doesn't move automatically when they change pages.",
+        "isEnd": true,
+        "finalScore": 14,
+        "feedback": "Solid result. The skip-link is a good baseline, but proactive focus management is what makes the app feel truly accessible — not just legally compliant. Consider adding focus management on route transitions as the next step.",
+        "choices": []
+      },
+      "broken-end": {
+        "narrative": "Your app looks great for mouse users, but analytics show high abandonment in sessions detected as 'keyboard navigation'. An accessibility audit flags it as non-conforming to WCAG, and now an enterprise customer can't use it.",
         "isEnd": true,
         "finalScore": 8,
-        "feedback": "Perfect execution! Mobile-first responsive navigation with a prominent primary action is professional-grade UX. The FAB pattern is proven in apps like Google Tasks and Todoist because it puts the most important action where the user's thumb naturally rests.",
-        "choices": []
-      },
-      "recovery-end": {
-        "narrative": "After fixing the navigation to be responsive, the app feels much better on mobile. You lost some time, but the result is solid. The bottom bar gives users one-tap access to each section.",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "You got to a good place, but starting with mobile-first would have saved you the rework. Remember: design for the smallest screen first, then enhance for larger ones. Tailwind's responsive prefixes (md:, lg:) make this natural.",
-        "choices": []
-      },
-      "nav-action-end": {
-        "narrative": "The center tab works, but it breaks the mental model of tab bars. Users expect tabs to navigate between sections, not trigger actions. Some users keep accidentally tapping 'Add Task' when they meant to go to Settings (the tab next to it).",
-        "isEnd": true,
-        "finalScore": 5,
-        "feedback": "Mixing navigation and actions in a tab bar is confusing. Tab bars should navigate between views. Primary actions like 'Add Task' work better as a floating action button (FAB) or a separate button outside the nav bar. Keep navigation and actions visually distinct.",
-        "choices": []
-      },
-      "page-only-end": {
-        "narrative": "The button works on the task list page, but users on the Settings or Profile pages have to navigate back to the task list just to add a task. Quick capture — the ability to add a task from anywhere — is lost.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "The primary action should be accessible from any screen. Users think of tasks at random moments and need to capture them instantly. A globally visible 'Add Task' button (like a FAB) ensures users can always capture a task without navigating first.",
-        "choices": []
-      },
-      "collapsible-end": {
-        "narrative": "The collapsible sidebar works, but it adds complexity: you need to manage open/closed state, handle the animation, and the toggle button takes up space. On mobile, users still have to tap to open it, defeating the purpose of visible navigation.",
-        "isEnd": true,
-        "finalScore": 4,
-        "feedback": "Collapsible sidebars add state management complexity for minimal benefit on mobile. On desktop they make sense (like VS Code's sidebar), but on mobile, a bottom tab bar is simpler and more thumb-friendly. Use different navigation patterns for different screen sizes.",
-        "choices": []
-      },
-      "hidden-nav-end": {
-        "narrative": "Making the hamburger bigger doesn't solve the core problem: navigation is still hidden. Users don't explore what they can't see. Engagement with Settings and Profile remains low, and new users struggle to discover features.",
-        "isEnd": true,
-        "finalScore": 1,
-        "feedback": "Visible navigation wins over hidden navigation every time. Research consistently shows that hamburger menus reduce feature discovery and engagement. For an app with only 3-4 sections, there's no reason to hide them. Show them all in a bottom tab bar.",
+        "feedback": "Accessibility isn't optional — it's a legal requirement in many contexts and an inclusion decision in all of them. Keyboard users include people with mobility limitations, power users, and new users who haven't mastered the mouse yet. Managing focus doesn't take much code and opens your app to more people.",
         "choices": []
       }
     },
-    "glossaryTerms": ["layout", "responsive-design", "navigation", "mobile-first"]
+    "glossaryTerms": ["layout", "responsive-design", "navigation", "mobile-first", "accessibility"]
   }
 }
