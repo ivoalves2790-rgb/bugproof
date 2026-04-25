@@ -10,7 +10,8 @@
     "postbuild": "sed -i.bak \"s/bugproof-[0-9]*/bugproof-__BUILD_TIME__/\" public/sw.js && rm -f public/sw.js.bak",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.2",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
+    "husky": "^9.1.7",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

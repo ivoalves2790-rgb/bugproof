@@ -1,0 +1,2 @@
+npm run version:stamp
+git add lib/version.ts
