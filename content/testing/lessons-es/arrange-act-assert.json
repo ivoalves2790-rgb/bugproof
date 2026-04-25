@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "AAA en acción",
       "language": "javascript",
-      "code": "test('calculates total with tax', () => {\n  // ARRANGE: set up the inputs\n  const price = 100;\n  const taxRate = 0.08;\n\n  // ACT: call the function\n  const result = calculateTotal(price, taxRate);\n\n  // ASSERT: check the result\n  expect(result).toBe(108);\n});",
+      "code": "test('calcula el total con impuesto', () => {\n  // PREPARAR: configurar las entradas\n  const price = 100;\n  const taxRate = 0.08;\n\n  // ACTUAR: llamar a la funcion\n  const result = calculateTotal(price, taxRate);\n\n  // VERIFICAR: comprobar el resultado\n  expect(result).toBe(108);\n});",
       "annotation": "Cada sección tiene un trabajo claro. Si este test falla, sabes que la función calculateTotal devolvió algo diferente a 108."
     },
     {

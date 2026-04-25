@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Requisitos Malos vs Buenos",
       "language": "text",
-      "code": "BAD:  \"Make a task app\"\nGOOD: \"Users can create tasks with a title (required)\n      and description (optional). Tasks have three\n      states: todo, in-progress, done. Users can\n      filter tasks by state.\"",
+      "code": "MAL:  \"Haz una app de tareas\"\nBIEN: \"Los usuarios pueden crear tareas con titulo\n      (requerido) y descripcion (opcional). Las\n      tareas tienen tres estados: por hacer, en\n      progreso, hecho. Los usuarios pueden filtrar\n      tareas por estado.\"",
       "annotation": "El requisito malo no le da nada a la IA para trabajar. El bueno especifica exactamente que significa 'tarea' y como se comporta."
     },
     {

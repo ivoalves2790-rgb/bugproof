@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Creando una Tabla con Clave Primaria",
       "language": "sql",
-      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-increments: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Now each user has a guaranteed unique ID\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- id is automatically set to 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- id is automatically set to 2 (different Alice, no confusion!)",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,  -- auto-incrementa: 1, 2, 3, 4...\n  name TEXT NOT NULL,\n  email TEXT UNIQUE NOT NULL\n);\n\n-- Ahora cada usuario tiene un ID unico garantizado\nINSERT INTO users (name, email) VALUES ('Alice', 'alice@mail.com');\n-- el id se asigna automaticamente a 1\nINSERT INTO users (name, email) VALUES ('Alice', 'alice2@mail.com');\n-- el id se asigna automaticamente a 2 (otra Alice, sin confusion!)",
       "annotation": "SERIAL significa que la base de datos auto-genera el siguiente número. PRIMARY KEY significa que esta columna identifica de manera única cada fila. Dos usuarios llamados 'Alice' obtienen IDs diferentes."
     },
     {

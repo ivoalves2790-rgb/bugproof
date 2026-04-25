@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Previniendo re-renderizados innecesarios",
       "language": "jsx",
-      "code": "// BAD: Creates a new function on every render\n<ExpensiveList\n  items={items}\n  onSelect={(id) => setSelected(id)}\n/>\n\n// GOOD: Stable function reference\nconst handleSelect = useCallback(\n  (id) => setSelected(id),\n  []\n);\n<ExpensiveList items={items} onSelect={handleSelect} />",
+      "code": "// MAL: Crea una nueva funcion en cada render\n<ExpensiveList\n  items={items}\n  onSelect={(id) => setSelected(id)}\n/>\n\n// BIEN: Referencia de funcion estable\nconst handleSelect = useCallback(\n  (id) => setSelected(id),\n  []\n);\n<ExpensiveList items={items} onSelect={handleSelect} />",
       "annotation": "Cuando pasas una función flecha inline, React ve una función 'nueva' en cada renderizado y re-renderiza ExpensiveList. useCallback mantiene la misma referencia de función, así que React sabe que la prop no ha cambiado."
     },
     {

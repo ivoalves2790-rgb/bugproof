@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Cuando Usar Cada Comando",
       "language": "bash",
-      "code": "cat package.json        # Short config file -- read it all\nhead -n 3 README.md     # Just want the title and intro\ntail -n 20 error.log    # Check the latest errors\nless big-file.txt       # Browse a long file interactively",
+      "code": "cat package.json        # Archivo de configuracion corto -- leelo entero\nhead -n 3 README.md     # Solo quieres el titulo y la introduccion\ntail -n 20 error.log    # Revisa los errores mas recientes\nless big-file.txt       # Navega un archivo largo interactivamente",
       "annotation": "Usa cat para archivos cortos, head/tail para vistazos rápidos y less para archivos largos que quieres recorrer."
     },
     {

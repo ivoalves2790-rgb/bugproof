@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Una URL Real Desglosada",
       "language": "text",
-      "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocol:  https://\nDomain:    api.weather.com\nPath:      /forecast/daily\nQuery:     ?city=london&units=metric",
+      "code": "https://api.weather.com/forecast/daily?city=london&units=metric\n\nProtocolo: https://\nDominio:   api.weather.com\nRuta:      /forecast/daily\nConsulta:  ?city=london&units=metric",
       "annotation": "El símbolo & separa múltiples parámetros de consulta. Aquí estamos pidiendo el pronóstico de Londres en unidades métricas."
     },
     {

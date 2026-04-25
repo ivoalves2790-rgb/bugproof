@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Mala vs Buena Configuración",
       "language": "javascript",
-      "code": "// BAD: Hardcoded values\nconst db = connect('postgresql://admin:password123@localhost:5432/myapp');\n\n// GOOD: Read from environment\nconst db = connect(process.env.DATABASE_URL);\n\n// GOOD: With a fallback for development\nconst port = process.env.PORT || 3000;",
+      "code": "// MAL: Valores hardcodeados\nconst db = connect('postgresql://admin:password123@localhost:5432/myapp');\n\n// BIEN: Leer desde el ambiente\nconst db = connect(process.env.DATABASE_URL);\n\n// BIEN: Con un valor por defecto para desarrollo\nconst port = process.env.PORT || 3000;",
       "annotation": "El patrón de respaldo (|| 3000) te permite omitir establecer PORT en desarrollo mientras lo requieres en producción."
     },
     {

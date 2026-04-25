@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Antes y Después",
       "language": "javascript",
-      "code": "// YOUR CODE (readable)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// AFTER BUILD (minified)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
+      "code": "// TU CODIGO (legible)\nfunction calculateTotal(items) {\n  const subtotal = items.reduce((sum, item) => {\n    return sum + item.price;\n  }, 0);\n  return subtotal;\n}\n\n// DESPUES DEL BUILD (minificado)\nfunction c(i){return i.reduce((s,t)=>s+t.price,0)}",
       "annotation": "La versión minificada hace exactamente lo mismo pero es mucho más pequeña. Por esto los builds de producción cargan más rápido."
     },
     {

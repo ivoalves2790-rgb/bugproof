@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Ejemplos de Historias de Usuario",
       "language": "text",
-      "code": "GOOD: \"As a user, I want to set a due date\n       on my tasks, so that I can prioritize\n       what needs to be done first.\"\n\nBAD:  \"Add a date picker component\"\n\nGOOD: \"As a user, I want to filter tasks by\n       status, so that I can focus on what's\n       in progress.\"\n\nBAD:  \"Implement filtering\"",
+      "code": "BIEN: \"Como usuario, quiero poder definir una\n       fecha limite en mis tareas, para poder\n       priorizar lo que se debe hacer primero.\"\n\nMAL:  \"Agregar un componente de selector de fechas\"\n\nBIEN: \"Como usuario, quiero poder filtrar tareas\n       por estado, para enfocarme en lo que\n       esta en progreso.\"\n\nMAL:  \"Implementar el filtrado\" ",
       "annotation": "Los buenos ejemplos explican QUIEN lo quiere, QUE quiere y POR QUE. Los malos son solo tareas técnicas sin contexto."
     },
     {

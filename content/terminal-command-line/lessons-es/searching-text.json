@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "grep en acción",
       "language": "bash",
-      "code": "# Find all TODO comments in your project\ngrep -rn \"TODO\" src/\n# src/app.js:14: // TODO: add error handling\n# src/utils.js:7: // TODO: refactor this function\n\n# Find where a function is defined\ngrep -rn \"function fetchUserData\" src/\n# src/api/users.js:12: function fetchUserData(userId) {\n\n# Find all console.log statements (to remove before production)\ngrep -rn \"console.log\" src/\n# src/app.js:8:   console.log('debug:', data);\n# src/utils.js:22:   console.log('result:', result);",
+      "code": "# Encontrar todos los comentarios TODO en tu proyecto\ngrep -rn \"TODO\" src/\n# src/app.js:14: // TODO: agregar manejo de errores\n# src/utils.js:7: // TODO: refactorizar esta funcion\n\n# Encontrar donde se define una funcion\ngrep -rn \"function fetchUserData\" src/\n# src/api/users.js:12: function fetchUserData(userId) {\n\n# Encontrar todos los console.log (para eliminarlos antes de produccion)\ngrep -rn \"console.log\" src/\n# src/app.js:8:   console.log('debug:', data);\n# src/utils.js:22:   console.log('resultado:', result);",
       "annotation": "La bandera -n agrega números de línea para que sepas exactamente dónde buscar. El formato de salida es nombreArchivo:númeroLínea: líneaCoincidente."
     },
     {

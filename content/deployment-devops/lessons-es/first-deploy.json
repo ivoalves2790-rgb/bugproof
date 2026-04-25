@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Usando el CLI de Vercel",
       "language": "bash",
-      "code": "# Install the Vercel CLI globally\nnpm install -g vercel\n\n# Deploy from your project directory\nvercel\n\n# Deploy to production\nvercel --prod",
+      "code": "# Instalar el CLI de Vercel globalmente\nnpm install -g vercel\n\n# Desplegar desde el directorio de tu proyecto\nvercel\n\n# Desplegar a produccion\nvercel --prod",
       "annotation": "El CLI de Vercel hace algunas preguntas en la primera ejecución, luego despliega tu proyecto. Así de simple."
     },
     {

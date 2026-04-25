@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Elegir el Tipo Correcto Importa",
       "language": "sql",
-      "code": "-- BAD: price as INTEGER loses decimal places\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price INTEGER  -- $49.99 becomes $49!\n);\n\n-- GOOD: price as DECIMAL keeps cents\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price DECIMAL(10, 2)  -- 10 digits total, 2 after the decimal\n);",
+      "code": "-- MAL: price como INTEGER pierde los decimales\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price INTEGER  -- $49.99 se vuelve $49!\n);\n\n-- BIEN: price como DECIMAL conserva los centavos\nCREATE TABLE products (\n  id INTEGER PRIMARY KEY,\n  name TEXT,\n  price DECIMAL(10, 2)  -- 10 digitos en total, 2 despues del decimal\n);",
       "annotation": "DECIMAL(10, 2) significa hasta 10 dígitos en total con 2 después del punto decimal. Esto almacena correctamente valores como 49.99, 1299.00 y 0.50. ¡Nunca uses INTEGER o FLOAT para dinero!"
     },
     {

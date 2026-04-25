@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Encadenando comandos como un profesional",
       "language": "bash",
-      "code": "# Count how many JavaScript files exist\nfind . -name \"*.js\" | wc -l\n\n# Save error logs to a file (overwrite)\ngrep \"ERROR\" server.log > errors.txt\n\n# Append today's errors to a running log\ngrep \"ERROR\" server.log >> all-errors.txt\n\n# Chain: find large files, sort by size, show top 5\ndu -sh * | sort -rh | head -5",
+      "code": "# Contar cuantos archivos JavaScript existen\nfind . -name \"*.js\" | wc -l\n\n# Guardar logs de error en un archivo (sobrescribir)\ngrep \"ERROR\" server.log > errors.txt\n\n# Agregar los errores de hoy a un log existente\ngrep \"ERROR\" server.log >> all-errors.txt\n\n# Encadenar: encontrar archivos grandes, ordenar por tamaño, mostrar los 5 primeros\ndu -sh * | sort -rh | head -5",
       "annotation": "Los pipes encadenan comandos (la salida se convierte en entrada para el siguiente comando). Las redirecciones guardan la salida en un archivo. Incluso puedes combinarlos: comando | filtro > archivo.txt"
     },
     {

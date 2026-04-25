@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Una Conversacion de Desvio de Alcance",
       "language": "text",
-      "code": "You: \"I'll build a simple task manager\"\nDay 1: \"Let me add categories too\"\nDay 3: \"Tags would be nice\"\nDay 5: \"What about recurring tasks?\"\nDay 7: \"Maybe a calendar view?\"\nDay 14: \"I should add notifications\"\nDay 30: *project abandoned*",
+      "code": "Tu: \"Voy a construir un gestor de tareas simple\"\nDia 1: \"Tambien agreguemos categorias\"\nDia 3: \"Las etiquetas serian buenas\"\nDia 5: \"¿Y tareas recurrentes?\"\nDia 7: \"¿Quiza una vista de calendario?\"\nDia 14: \"Deberia agregar notificaciones\"\nDia 30: *proyecto abandonado*",
       "annotation": "Cada funcionalidad por si sola parece pequeña, pero se acumulan. Cada funcionalidad significa más código, más bugs, más casos especiales."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Usando Variables de Entorno en JavaScript",
       "language": "javascript",
-      "code": "// Access an environment variable\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Running in production mode');\n} else {\n  console.log('Running in development mode');\n}",
+      "code": "// Acceder a una variable de entorno\nconst dbUrl = process.env.DATABASE_URL;\nconst apiKey = process.env.STRIPE_API_KEY;\nconst isProduction = process.env.NODE_ENV === 'production';\n\nif (isProduction) {\n  console.log('Corriendo en modo produccion');\n} else {\n  console.log('Corriendo en modo desarrollo');\n}",
       "annotation": "process.env te da acceso a todas las variables de entorno. Los valores vienen de fuera de tu código."
     },
     {

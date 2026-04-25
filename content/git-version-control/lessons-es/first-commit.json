@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Los comandos que usarás",
       "language": "bash",
-      "code": "git init                          # Start tracking this folder\ngit add .                         # Stage all files\ngit status                        # See what's staged\ngit commit -m \"Initial commit\"    # Save the snapshot",
+      "code": "git init                          # Empezar a rastrear esta carpeta\ngit add .                         # Preparar todos los archivos\ngit status                        # Ver que esta preparado\ngit commit -m \"Commit inicial\"    # Guardar la instantanea",
       "annotation": "No te preocupes por memorizar estos -- practicarás cada uno en el ejercicio."
     },
     {

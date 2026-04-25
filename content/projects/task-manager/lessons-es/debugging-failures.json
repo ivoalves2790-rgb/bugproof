@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Leyendo un Fallo de Test",
       "language": "text",
-      "code": "FAIL: 'should return tasks sorted by due date'\n  Expected: ['Task A (Jan 1)', 'Task B (Jan 5)']\n  Received: ['Task B (Jan 5)', 'Task A (Jan 1)']\n\nThis tells you: the sort order is reversed.\nCheck: Is the sort function wrong? Or did the test expect the wrong order?",
+      "code": "FALLA: 'deberia devolver tareas ordenadas por fecha limite'\n  Esperado: ['Tarea A (1 Ene)', 'Tarea B (5 Ene)']\n  Recibido: ['Tarea B (5 Ene)', 'Tarea A (1 Ene)']\n\nEsto te dice: el orden esta invertido.\nVerifica: ¿Esta mal la funcion de ordenamiento? ¿O el test esperaba el orden incorrecto?",
       "annotation": "Siempre lee los valores esperados vs recibidos. A menudo te dicen exactamente que salio mal."
     },
     {

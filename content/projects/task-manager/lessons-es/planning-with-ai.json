@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Estructurando una Sesión de Planificación con IA",
       "language": "text",
-      "code": "Step 1: Define the goal\n  \"I'm building a task manager for personal use\"\n\nStep 2: List the features (from your user stories)\n  \"Core features: create, complete, delete, due dates\"\n\nStep 3: Set constraints\n  \"Tech: Next.js + Supabase. Mobile-first. Ship in 2 weeks.\"\n\nStep 4: Ask for a plan, not code\n  \"Give me a project plan with milestones, not code yet\"",
+      "code": "Paso 1: Define el objetivo\n  \"Estoy construyendo un gestor de tareas para uso personal\"\n\nPaso 2: Lista las funcionalidades (de tus historias de usuario)\n  \"Funcionalidades clave: crear, completar, eliminar, fechas limite\"\n\nPaso 3: Establece restricciones\n  \"Tecnologia: Next.js + Supabase. Mobile-first. Lanzar en 2 semanas.\"\n\nPaso 4: Pide un plan, no codigo\n  \"Dame un plan de proyecto con hitos, todavia no codigo\" ",
       "annotation": "Observa: estas pidiendo un PLAN primero, no saltando directamente al código. Esto es lo que separa a los constructores reflexivos de los caoticos."
     },
     {

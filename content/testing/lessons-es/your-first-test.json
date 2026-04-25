@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "La estructura del archivo de test",
       "language": "javascript",
-      "code": "// tests/email.test.js\nconst { isValidEmail } = require('../src/email');\n\ndescribe('isValidEmail', () => {\n  test('returns true for valid emails', () => {\n    expect(isValidEmail('user@example.com')).toBe(true);\n  });\n\n  test('returns false for emails without @', () => {\n    expect(isValidEmail('userexample.com')).toBe(false);\n  });\n});",
+      "code": "// tests/email.test.js\nconst { isValidEmail } = require('../src/email');\n\ndescribe('isValidEmail', () => {\n  test('devuelve true para emails validos', () => {\n    expect(isValidEmail('user@example.com')).toBe(true);\n  });\n\n  test('devuelve false para emails sin @', () => {\n    expect(isValidEmail('userexample.com')).toBe(false);\n  });\n});",
       "annotation": "'describe' agrupa tests relacionados. Cada 'test' verifica un comportamiento específico. Esta estructura hace que la salida de los tests sea fácil de leer."
     },
     {

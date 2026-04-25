@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "El Peligro de Olvidar WHERE",
       "language": "sql",
-      "code": "-- This updates ONE user's email (safe)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- This updates EVERY user's email (catastrophic!)\nUPDATE users SET email = 'new@mail.com';",
+      "code": "-- Esto actualiza el email de UN usuario (seguro)\nUPDATE users SET email = 'new@mail.com' WHERE id = 42;\n\n-- Esto actualiza el email de TODOS los usuarios (catastrofico!)\nUPDATE users SET email = 'new@mail.com';",
       "annotation": "Sin WHERE, el UPDATE se aplica a TODAS las filas. Este es el desastre de bases de datos más común. Siempre verifica tu cláusula WHERE antes de ejecutar UPDATE o DELETE."
     },
     {

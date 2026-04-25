@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Una traza de pila real",
       "language": "text",
-      "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- YOUR code, start here\n    at renderWithHooks (react-dom.js:14985)  <-- framework, skip\n    at App (src/App.jsx:22)               <-- YOUR code, called UserCard",
+      "code": "TypeError: Cannot read properties of null\n    at UserCard (src/UserCard.jsx:8)      <-- TU codigo, empieza aqui\n    at renderWithHooks (react-dom.js:14985)  <-- framework, omitir\n    at App (src/App.jsx:22)               <-- TU codigo, llamo a UserCard",
       "annotation": "Comienza en la línea superior que menciona TUS archivos (UserCard.jsx:8). Ahí es donde ocurrió el fallo. App.jsx:22 es desde donde se llamó a UserCard."
     },
     {

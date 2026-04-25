@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Nuestro Stack de un Vistazo",
       "language": "text",
-      "code": "Frontend:  Next.js (React framework)\nBackend:   Supabase (PostgreSQL + Auth + APIs)\nLanguage:  TypeScript (type-safe JavaScript)\nDeploy:    Vercel (optimized for Next.js)",
+      "code": "Frontend:  Next.js (framework de React)\nBackend:   Supabase (PostgreSQL + Auth + APIs)\nLenguaje:  TypeScript (JavaScript con tipos)\nDeploy:    Vercel (optimizado para Next.js)",
       "annotation": "Cada pieza fue elegida porque resuelve una necesidad especifica para nuestro gestor de tareas y funciona bien con las demas. Eso es lo que un buen stack parece — herramientas que se complementan entre si."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Los Dos Comandos",
       "language": "bash",
-      "code": "# Development: start a local server with hot reloading\nnpm run dev\n\n# Production: create an optimized build\nnpm run build\nnpm start        # serve the built version",
+      "code": "# Desarrollo: levantar un servidor local con hot reloading\nnpm run dev\n\n# Produccion: crear un build optimizado\nnpm run build\nnpm start        # servir la version construida",
       "annotation": "Siempre prueba `npm run build` localmente antes de desplegar. Si falla en tu máquina, fallará en el servidor también."
     },
     {

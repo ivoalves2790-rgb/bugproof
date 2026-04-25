@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Comandos útiles del registro",
       "language": "bash",
-      "code": "git log                # Full history with details\ngit log --oneline      # Compact view: hash + message\ngit show a1b2c3d       # See exactly what changed in one commit",
+      "code": "git log                # Historial completo con detalles\ngit log --oneline      # Vista compacta: hash + mensaje\ngit show a1b2c3d       # Ver exactamente que cambio en un commit",
       "annotation": "Usa `git log --oneline` para una vista rápida, luego `git show <hash>` para profundizar en un commit específico."
     },
     {

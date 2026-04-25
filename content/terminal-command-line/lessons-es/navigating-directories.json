@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Rutas Absolutas vs Relativas",
       "language": "bash",
-      "code": "# Absolute path -- starts from root (/)\ncd /Users/you/projects/app\n\n# Relative path -- starts from where you are\ncd projects/app\n\n# Go up one level\ncd ..\n\n# Go home\ncd ~",
+      "code": "# Ruta absoluta -- empieza desde la raiz (/)\ncd /Users/you/projects/app\n\n# Ruta relativa -- empieza desde donde estas\ncd projects/app\n\n# Subir un nivel\ncd ..\n\n# Ir al home\ncd ~",
       "annotation": "Las rutas absolutas empiezan con / y funcionan desde cualquier lugar. Las rutas relativas dependen de tu ubicacion actual."
     },
     {

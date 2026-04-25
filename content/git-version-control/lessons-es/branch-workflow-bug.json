@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "El flujo correcto de fusión",
       "language": "bash",
-      "code": "git checkout -b feature/payments   # Create & switch to feature branch\n# ... do your work, make commits ...\ngit checkout main                  # Switch BACK to main\ngit merge feature/payments         # Merge feature INTO main",
+      "code": "git checkout -b feature/payments   # Crear y cambiar a la rama feature\n# ... haz tu trabajo, haz commits ...\ngit checkout main                  # Volver a main\ngit merge feature/payments         # Fusionar feature DENTRO de main",
       "annotation": "¡La dirección de la fusión importa! Te paras en main y traes la función -- no al revés."
     },
     {

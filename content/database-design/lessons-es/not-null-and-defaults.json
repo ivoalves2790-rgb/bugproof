@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "NOT NULL y DEFAULT",
       "language": "sql",
-      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name is required\n  email TEXT NOT NULL UNIQUE,      -- email is required and unique\n  bio TEXT DEFAULT '',             -- optional, defaults to empty string\n  is_active BOOLEAN DEFAULT true,  -- defaults to true for new users\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-set to current time\n);",
+      "code": "CREATE TABLE users (\n  id SERIAL PRIMARY KEY,\n  name TEXT NOT NULL,              -- name es requerido\n  email TEXT NOT NULL UNIQUE,      -- email es requerido y unico\n  bio TEXT DEFAULT '',             -- opcional, por defecto cadena vacia\n  is_active BOOLEAN DEFAULT true,  -- por defecto true para nuevos usuarios\n  created_at TIMESTAMP DEFAULT NOW()  -- auto-asignado a la hora actual\n);",
       "annotation": "NOT NULL significa que la columna es obligatoria. DEFAULT proporciona un valor cuando no se especifica uno. Usa NOT NULL para datos esenciales como nombre y email. Usa DEFAULT para campos que tienen un valor automático sensato."
     },
     {

@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Variables de Entorno en la Practica",
       "language": "text",
-      "code": "# .env.local (development - never committed)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Production (set in Vercel dashboard)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (committed - shows what vars are needed)\nDATABASE_URL=\nAPI_KEY=",
+      "code": "# .env.local (desarrollo - nunca se commitea)\nDATABASE_URL=postgresql://localhost:5432/taskmanager\nAPI_KEY=dev_key_12345\n\n# Produccion (configurado en el dashboard de Vercel)\nDATABASE_URL=postgresql://prod-server:5432/taskmanager\nAPI_KEY=prod_key_secret\n\n# .env.example (commiteado - muestra que variables se necesitan)\nDATABASE_URL=\nAPI_KEY=",
       "annotation": "Mantiene un archivo .env.example para que los nuevos desarrolladores sepan que variables configurar, sin exponer los valores reales."
     },
     {

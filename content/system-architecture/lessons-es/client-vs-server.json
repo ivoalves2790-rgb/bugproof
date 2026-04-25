@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "El Peligro de la Seguridad del Lado del Cliente",
       "language": "javascript",
-      "code": "// BAD: Client-side admin check\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Anyone can open DevTools and type:\n// user.role = 'admin'\n\n// GOOD: Server-side admin check\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Forbidden' });\n  }\n  res.json(adminData);\n});",
+      "code": "// MAL: Verificacion de admin del lado del cliente\nif (user.role === 'admin') {\n  showAdminPanel();\n}\n// Cualquiera puede abrir DevTools y escribir:\n// user.role = 'admin'\n\n// BIEN: Verificacion de admin del lado del servidor\napp.get('/admin', (req, res) => {\n  if (req.user.role !== 'admin') {\n    return res.status(403).json({ error: 'Prohibido' });\n  }\n  res.json(adminData);\n});",
       "annotation": "Las verificaciones del lado del cliente son para la experiencia de usuario (ocultar botones), pero la seguridad real debe ocurrir en el servidor donde el usuario no puede manipularla."
     },
     {

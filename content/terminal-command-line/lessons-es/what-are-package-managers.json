@@ -32,7 +32,7 @@
       "type": "code_example",
       "title": "Gestores de Paquetes en Acción",
       "language": "bash",
-      "code": "# Installing a package (all three do the same thing)\nnpm install axios\nyarn add axios\npnpm add axios\n\n# Installing all project dependencies\nnpm install\nyarn install\npnpm install",
+      "code": "# Instalando un paquete (los tres hacen lo mismo)\nnpm install axios\nyarn add axios\npnpm add axios\n\n# Instalando todas las dependencias del proyecto\nnpm install\nyarn install\npnpm install",
       "annotation": "Los tres comandos descargan la libreria 'axios' (para hacer peticiones HTTP) del registro de npm. Los comandos son ligeramente diferentes, pero el resultado es el mismo: el paquete aparece en tu carpeta node_modules."
     },
     {

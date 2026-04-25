@@ -17,7 +17,7 @@
       "type": "code_example",
       "title": "Errores Comunes de Login",
       "language": "text",
-      "code": "BAD: if (password === storedPassword)  // plain text comparison\nGOOD: if (await bcrypt.compare(password, hashedPassword))\n\nBAD: res.json({ token, password })  // leaking password in response\nGOOD: res.json({ token, user: { id, email } })",
+      "code": "MAL: if (password === storedPassword)  // comparacion de texto plano\nBIEN: if (await bcrypt.compare(password, hashedPassword))\n\nMAL: res.json({ token, password })  // filtrando contraseña en la respuesta\nBIEN: res.json({ token, user: { id, email } })",
       "annotation": "Siempre hashea las contrasenas y nunca incluyas datos sensibles en las respuestas de la API."
     },
     {

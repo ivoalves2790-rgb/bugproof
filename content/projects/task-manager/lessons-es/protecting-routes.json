@@ -17,7 +17,7 @@
       "type": "code_example",
       "title": "Las Dos Capas de Proteccion de Rutas",
       "language": "text",
-      "code": "Frontend: User visits /dashboard → Check if logged in → If not, redirect to /login\n\nBackend: API receives GET /api/tasks → Middleware checks auth token → If invalid, return 401\n                                      → If valid, only return THAT user's tasks",
+      "code": "Frontend: El usuario visita /dashboard → Verificar si esta logueado → Si no, redirigir a /login\n\nBackend: API recibe GET /api/tasks → Middleware verifica el token de auth → Si es invalido, devolver 401\n                                    → Si es valido, devolver solo las tareas de ESE usuario",
       "annotation": "La proteccion del frontend es para la experiencia del usuario (redireccion). La proteccion del backend es para la seguridad (bloqueo). Nunca confies solo en el frontend."
     },
     {

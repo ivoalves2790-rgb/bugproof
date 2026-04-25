@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Un problema de CLS en acción",
       "language": "html",
-      "code": "<!-- BAD: Image has no dimensions, causes layout shift -->\n<img src=\"/hero.jpg\">\n\n<!-- GOOD: Browser reserves space before image loads -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
+      "code": "<!-- MAL: La imagen no tiene dimensiones, causa desplazamiento del layout -->\n<img src=\"/hero.jpg\">\n\n<!-- BIEN: El navegador reserva espacio antes de cargar la imagen -->\n<img src=\"/hero.jpg\" width=\"800\" height=\"400\">",
       "annotation": "Sin width y height, el navegador no sabe cuánto espacio necesita la imagen. Cuando finalmente carga, todo lo de abajo salta hacia abajo -- eso es un cambio de layout."
     },
     {

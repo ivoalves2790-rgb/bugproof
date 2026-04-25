@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Identificando la diferencia",
       "language": "javascript",
-      "code": "// SyntaxError: missing closing bracket\nfunction greet( { console.log('hi'); }\n\n// ReferenceError: variable doesn't exist\nconsole.log(userName);\n\n// TypeError: wrong operation for this type\nconst num = 42;\nnum.toUpperCase();",
+      "code": "// SyntaxError: falta la llave de cierre\nfunction greet( { console.log('hola'); }\n\n// ReferenceError: la variable no existe\nconsole.log(userName);\n\n// TypeError: operacion incorrecta para este tipo\nconst num = 42;\nnum.toUpperCase();",
       "annotation": "Cada tipo de error apunta a un tipo diferente de error. SyntaxError significa gramática rota, ReferenceError significa un nombre faltante, TypeError significa una operación incompatible."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Usando Códigos de Estado en Express.js",
       "language": "javascript",
-      "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'User not found' });\n  }\n  res.status(200).json(user);\n});",
+      "code": "app.get('/users/:id', (req, res) => {\n  const user = findUser(req.params.id);\n  if (!user) {\n    return res.status(404).json({ error: 'Usuario no encontrado' });\n  }\n  res.status(200).json(user);\n});",
       "annotation": "El servidor establece explícitamente el código de estado. 404 le dice al navegador 'este usuario no existe' mientras que 200 significa 'aquí está el usuario que pediste.' El frontend puede verificar estos códigos para decidir qué mostrar."
     },
     {

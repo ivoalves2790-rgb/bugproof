@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Diferentes formas de preparar archivos",
       "language": "bash",
-      "code": "git add .                  # Stage ALL changed files\ngit add style.css          # Stage one specific file\ngit add src/login/*        # Stage all files in a folder\ngit add *.js               # Stage all JavaScript files",
+      "code": "git add .                  # Preparar TODOS los archivos modificados\ngit add style.css          # Preparar un archivo especifico\ngit add src/login/*        # Preparar todos los archivos en una carpeta\ngit add *.js               # Preparar todos los archivos JavaScript",
       "annotation": "`git add .` es conveniente pero peligroso cuando tienes archivos que no quieres incluir en el commit. Sé específico cuando sea importante."
     },
     {

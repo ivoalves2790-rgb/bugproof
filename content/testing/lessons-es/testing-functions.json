@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Un archivo de test completo",
       "language": "javascript",
-      "code": "const { isEven, double, clamp } = require('./math');\n\ntest('isEven returns true for even numbers', () => {\n  expect(isEven(4)).toBe(true);\n  expect(isEven(0)).toBe(true);\n});\n\ntest('isEven returns false for odd numbers', () => {\n  expect(isEven(3)).toBe(false);\n  expect(isEven(7)).toBe(false);\n});\n\ntest('double multiplies by 2', () => {\n  expect(double(5)).toBe(10);\n  expect(double(0)).toBe(0);\n});",
+      "code": "const { isEven, double, clamp } = require('./math');\n\ntest('isEven devuelve true para numeros pares', () => {\n  expect(isEven(4)).toBe(true);\n  expect(isEven(0)).toBe(true);\n});\n\ntest('isEven devuelve false para numeros impares', () => {\n  expect(isEven(3)).toBe(false);\n  expect(isEven(7)).toBe(false);\n});\n\ntest('double multiplica por 2', () => {\n  expect(double(5)).toBe(10);\n  expect(double(0)).toBe(0);\n});",
       "annotation": "Cada test tiene un nombre descriptivo que se lee como una oración. Cuando un test falla, el nombre te dice exactamente qué se rompió."
     },
     {

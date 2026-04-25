@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Diferente Configuración Por Entorno",
       "language": "bash",
-      "code": "# Development (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Production (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
+      "code": "# Desarrollo (.env.development)\nDATABASE_URL=postgresql://localhost:5432/myapp_dev\nSTRIPE_KEY=sk_test_abc123\nDEBUG=true\n\n# Staging (.env.staging)\nDATABASE_URL=postgresql://staging-db.example.com/myapp_staging\nSTRIPE_KEY=sk_test_xyz789\nDEBUG=false\n\n# Produccion (.env.production)\nDATABASE_URL=postgresql://prod-db.example.com/myapp\nSTRIPE_KEY=sk_live_real_key\nDEBUG=false",
       "annotation": "Nota cómo desarrollo usa localhost y claves de prueba, mientras producción usa servidores reales y claves API en vivo."
     },
     {

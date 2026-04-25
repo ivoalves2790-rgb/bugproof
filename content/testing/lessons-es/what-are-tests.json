@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Tu primer vistazo a un test",
       "language": "javascript",
-      "code": "// The function we want to test\nfunction add(a, b) {\n  return a + b;\n}\n\n// The test\ntest('adds 2 + 3 to equal 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
+      "code": "// La funcion que queremos testear\nfunction add(a, b) {\n  return a + b;\n}\n\n// El test\ntest('suma 2 + 3 igual a 5', () => {\n  expect(add(2, 3)).toBe(5);\n});",
       "annotation": "Este test llama a add(2, 3) y verifica si el resultado es 5. Si alguien accidentalmente rompe la función add, este test lo detectará."
     },
     {

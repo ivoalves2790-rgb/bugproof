@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Importa solo lo que necesitas",
       "language": "javascript",
-      "code": "// BAD: Imports the entire lodash library (70KB+)\nimport _ from 'lodash';\nconst sorted = _.sortBy(users, 'name');\n\n// GOOD: Imports just the function you need (2KB)\nimport sortBy from 'lodash/sortBy';\nconst sorted = sortBy(users, 'name');",
+      "code": "// MAL: Importa toda la libreria lodash (70KB+)\nimport _ from 'lodash';\nconst sorted = _.sortBy(users, 'name');\n\n// BIEN: Importa solo la funcion que necesitas (2KB)\nimport sortBy from 'lodash/sortBy';\nconst sorted = sortBy(users, 'name');",
       "annotation": "La primera importación trae más de 500 funciones de lodash. La segunda importación solo incluye sortBy y sus dependencias. Esto se llama tree-shaking, y puede reducir el tamaño de las bibliotecas en un 90%."
     },
     {

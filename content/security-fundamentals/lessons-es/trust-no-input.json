@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Manejo inseguro vs seguro de entradas",
       "language": "javascript",
-      "code": "// UNSAFE: directly using URL input in HTML\nconst name = req.query.name;\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;\n\n// SAFE: escape the input first\nconst name = escapeHtml(req.query.name);\ndocument.innerHTML = `<h1>Hello ${name}</h1>`;",
+      "code": "// INSEGURO: usar entrada de URL directamente en HTML\nconst name = req.query.name;\ndocument.innerHTML = `<h1>Hola ${name}</h1>`;\n\n// SEGURO: escapar la entrada primero\nconst name = escapeHtml(req.query.name);\ndocument.innerHTML = `<h1>Hola ${name}</h1>`;",
       "annotation": "Sin escapar, un atacante podría establecer name como una etiqueta de script y ejecutar código malicioso en los navegadores de tus usuarios. Siempre sanitiza o escapa la salida."
     },
     {

@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Esenciales Pre-Lanzamiento",
       "language": "text",
-      "code": "[ ] Production env vars set and verified\n[ ] HTTPS enabled (automatic on Vercel)\n[ ] Error tracking configured (Sentry, etc.)\n[ ] Database migrations applied\n[ ] Auth working in production environment\n[ ] Rollback plan: know how to revert to previous deploy\n[ ] Open Graph / social meta tags set\n[ ] 404 page configured",
+      "code": "[ ] Variables de entorno de produccion configuradas y verificadas\n[ ] HTTPS habilitado (automatico en Vercel)\n[ ] Tracking de errores configurado (Sentry, etc.)\n[ ] Migraciones de base de datos aplicadas\n[ ] Autenticacion funcionando en el ambiente de produccion\n[ ] Plan de rollback: saber como revertir al deploy anterior\n[ ] Open Graph / meta tags sociales configurados\n[ ] Pagina 404 configurada",
       "annotation": "Revisa cada punto. Una revisión de 10 minutos de la lista puede prevenir una emergencia de 10 horas el día del lanzamiento."
     },
     {

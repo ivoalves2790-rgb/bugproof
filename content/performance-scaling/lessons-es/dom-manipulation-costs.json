@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Layout thrashing",
       "language": "javascript",
-      "code": "// BAD: Forces layout recalculation on every iteration\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ reads layout each time!\n}\n\n// GOOD: Read once, then write in a batch\nconst width = container.offsetWidth; // one read\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // only writes\n}",
+      "code": "// MAL: Fuerza recalculo de layout en cada iteracion\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = container.offsetWidth + 'px';\n  //                      ^ lee el layout cada vez!\n}\n\n// BIEN: Lee una vez, luego escribe en bloque\nconst width = container.offsetWidth; // una sola lectura\nfor (let i = 0; i < items.length; i++) {\n  items[i].style.width = width + 'px'; // solo escrituras\n}",
       "annotation": "La versión mala lee offsetWidth dentro del bucle, lo que obliga al navegador a recalcular el layout en cada iteración porque la escritura anterior (style.width) lo invalidó. Esto se llama 'layout thrashing'."
     },
     {

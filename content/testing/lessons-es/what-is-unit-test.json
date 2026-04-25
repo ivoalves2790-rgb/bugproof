@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Un test unitario simple",
       "language": "javascript",
-      "code": "// The function (the 'unit' we're testing)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// The unit test\ntest('capitalizes the first letter', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
+      "code": "// La funcion (la 'unidad' que estamos testeando)\nfunction capitalize(str) {\n  return str.charAt(0).toUpperCase() + str.slice(1);\n}\n\n// El test unitario\ntest('capitaliza la primera letra', () => {\n  expect(capitalize('hello')).toBe('Hello');\n  expect(capitalize('world')).toBe('World');\n});",
       "annotation": "Este test se enfoca en una función y un comportamiento. No necesita una base de datos ni servidor. Se ejecuta en milisegundos."
     },
     {

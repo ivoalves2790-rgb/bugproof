@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Con bloqueo vs sin bloqueo",
       "language": "html",
-      "code": "<!-- BLOCKING: Browser stops everything to load this -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- NON-BLOCKING: Browser continues while loading -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
+      "code": "<!-- CON BLOQUEO: El navegador detiene todo para cargar esto -->\n<script src=\"/heavy-script.js\"></script>\n\n<!-- SIN BLOQUEO: El navegador continua mientras carga -->\n<script src=\"/heavy-script.js\" defer></script>\n<script src=\"/analytics.js\" async></script>",
       "annotation": "El atributo 'defer' descarga el script en paralelo y lo ejecuta después del análisis del HTML. El atributo 'async' descarga en paralelo y ejecuta tan pronto como esté listo."
     },
     {

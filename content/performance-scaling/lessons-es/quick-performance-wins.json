@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Verificando el tamaño de tu bundle",
       "language": "bash",
-      "code": "# See what's in your JavaScript bundle\nnpx webpack-bundle-analyzer dist/stats.json\n\n# Or for a quick size check\ndu -sh dist/\nls -lh dist/static/js/",
+      "code": "# Ver que hay en tu bundle de JavaScript\nnpx webpack-bundle-analyzer dist/stats.json\n\n# O para una revision rapida del tamaño\ndu -sh dist/\nls -lh dist/static/js/",
       "annotation": "Entender qué hay en tu bundle es el primer paso. A menudo encontrarás bibliotecas enormes siendo importadas cuando solo se necesita una parte pequeña."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Patrones comunes",
       "language": "bash",
-      "code": "# Copy a file into another directory\ncp config.json backup/config.json\n\n# Copy an entire folder\ncp -r src/ src-backup/\n\n# Move a file to a different folder\nmv todo.txt docs/todo.txt\n\n# Rename a file (move to same dir, new name)\nmv app.js index.js",
+      "code": "# Copiar un archivo a otro directorio\ncp config.json backup/config.json\n\n# Copiar una carpeta entera\ncp -r src/ src-backup/\n\n# Mover un archivo a otra carpeta\nmv todo.txt docs/todo.txt\n\n# Renombrar un archivo (mover al mismo dir, nuevo nombre)\nmv app.js index.js",
       "annotation": "Nota cómo renombrar es simplemente mv con un nuevo nombre en el mismo directorio. No hay un comando separado de 'rename' -- mv maneja tanto mover como renombrar."
     },
     {

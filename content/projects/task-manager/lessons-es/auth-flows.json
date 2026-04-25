@@ -17,7 +17,7 @@
       "type": "code_example",
       "title": "JWT vs Cookie de Sesión",
       "language": "text",
-      "code": "Session: Browser sends cookie → Server looks up session in DB → Returns user data\n\nJWT: Browser sends token in header → Server decodes token (no DB lookup) → Returns user data\n\nOAuth: User clicks 'Sign in with Google' → Google verifies identity → Your app gets a token",
+      "code": "Sesion: El navegador envia cookie → El servidor busca la sesion en la DB → Devuelve datos del usuario\n\nJWT: El navegador envia token en el header → El servidor decodifica el token (sin consulta a DB) → Devuelve datos del usuario\n\nOAuth: El usuario hace click en 'Iniciar sesion con Google' → Google verifica la identidad → Tu app recibe un token",
       "annotation": "Cada enfoque tiene diferentes ventajas y desventajas en cuanto a escalabilidad, seguridad y complejidad."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Una vulnerabilidad común en APIs",
       "language": "javascript",
-      "code": "// VULNERABLE: anyone can access any user's data\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// FIXED: check that the requester owns this data\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Forbidden' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
+      "code": "// VULNERABLE: cualquiera puede acceder a los datos de cualquier usuario\napp.get('/api/users/:id', (req, res) => {\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});\n\n// CORREGIDO: verificar que el solicitante es dueño de estos datos\napp.get('/api/users/:id', authMiddleware, (req, res) => {\n  if (req.user.id !== req.params.id) return res.status(403).json({ error: 'Prohibido' });\n  const user = db.findUser(req.params.id);\n  res.json(user);\n});",
       "annotation": "La versión vulnerable permite que cualquiera obtenga los datos de cualquier usuario solo cambiando el ID en la URL. La corrección agrega autenticación y verifica que solo puedas acceder a tus propios datos."
     },
     {

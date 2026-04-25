@@ -32,7 +32,7 @@
       "type": "code_example",
       "title": "El movimiento de rescate",
       "language": "bash",
-      "code": "# If you're in detached HEAD and want to keep your work:\ngit checkout -b rescue-branch\n\n# This creates a new branch right where you are,\n# anchoring your commits so they won't be lost.",
+      "code": "# Si estas en HEAD desprendido y quieres conservar tu trabajo:\ngit checkout -b rescue-branch\n\n# Esto crea una nueva rama justo donde estas,\n# anclando tus commits para que no se pierdan.",
       "annotation": "La solución es simple: solo crea una rama. Esto le da a tus commits un hogar para que Git no los elimine."
     },
     {

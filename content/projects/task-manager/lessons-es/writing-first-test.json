@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Un Test Unitario Simple",
       "language": "text",
-      "code": "test('addTask creates a task with correct title and pending status', () => {\n  // Arrange\n  const input = { title: 'Buy groceries' };\n  \n  // Act\n  const task = addTask(input);\n  \n  // Assert\n  expect(task.title).toBe('Buy groceries');\n  expect(task.status).toBe('pending');\n  expect(task.id).toBeDefined();\n});",
+      "code": "test('addTask crea una tarea con titulo correcto y estado pendiente', () => {\n  // Preparar\n  const input = { title: 'Comprar comestibles' };\n\n  // Actuar\n  const task = addTask(input);\n\n  // Verificar\n  expect(task.title).toBe('Comprar comestibles');\n  expect(task.status).toBe('pending');\n  expect(task.id).toBeDefined();\n});",
       "annotation": "El patron Preparar-Actuar-Afirmar mantiene los tests legibles y enfocados en un solo comportamiento."
     },
     {

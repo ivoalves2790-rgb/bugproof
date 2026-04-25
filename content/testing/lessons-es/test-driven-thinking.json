@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Pensando en una función",
       "language": "javascript",
-      "code": "// Task: write a function that calculates a tip\n// Test-driven thinking:\n// - calculateTip(100, 15) should return 15\n// - calculateTip(100, 0) should return 0\n// - calculateTip(0, 15) should return 0\n// - calculateTip(-50, 15) should... throw an error?\n// - calculateTip(100, 150) should... is a 150% tip valid?",
+      "code": "// Tarea: escribir una funcion que calcule una propina\n// Pensamiento orientado a tests:\n// - calculateTip(100, 15) deberia devolver 15\n// - calculateTip(100, 0) deberia devolver 0\n// - calculateTip(0, 15) deberia devolver 0\n// - calculateTip(-50, 15) deberia... lanzar un error?\n// - calculateTip(100, 150) deberia... ¿una propina del 150% es valida?",
       "annotation": "Nota cómo pensar en los tests ANTES de escribir código te ayuda a diseñar una mejor función. Descubres casos límite temprano."
     },
     {

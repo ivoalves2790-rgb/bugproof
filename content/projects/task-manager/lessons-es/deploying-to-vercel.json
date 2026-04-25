@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Errores Comunes del Primer Despliegue",
       "language": "text",
-      "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ You forgot to add env vars in Vercel dashboard\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript is stricter in production builds\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Case sensitivity: taskList.tsx vs TaskList.tsx (Linux is case-sensitive)",
+      "code": "Error: NEXT_PUBLIC_SUPABASE_URL is not defined\n→ Olvidaste agregar las variables de entorno en el dashboard de Vercel\n\nType error: Property 'title' does not exist on type 'never'\n→ TypeScript es mas estricto en builds de produccion\n\nError: Module not found: Can't resolve './components/TaskList'\n→ Sensibilidad a mayusculas: taskList.tsx vs TaskList.tsx (Linux distingue mayusculas y minusculas)",
       "annotation": "La mayoria de los fallos del primer despliegue son problemas de entorno o configuración de compilación, no bugs de código."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "chmod en práctica",
       "language": "bash",
-      "code": "# Make a script executable\nchmod +x deploy.sh\n\n# Give owner full access, group read-only, others nothing\nchmod 740 config.json\n\n# View current permissions\nls -la\n# -rwxr----- 1 user staff 2048 Mar 10 deploy.sh\n# -rwxr-x--- 1 user staff  512 Mar 10 config.json",
+      "code": "# Hacer un script ejecutable\nchmod +x deploy.sh\n\n# Dar al dueño acceso completo, al grupo solo lectura, a otros nada\nchmod 740 config.json\n\n# Ver los permisos actuales\nls -la\n# -rwxr----- 1 user staff 2048 Mar 10 deploy.sh\n# -rwxr-x--- 1 user staff  512 Mar 10 config.json",
       "annotation": "El sistema numérico: 7 = rwx (leer+escribir+ejecutar), 6 = rw- (leer+escribir), 5 = r-x (leer+ejecutar), 4 = r-- (solo lectura), 0 = --- (sin acceso). Cada dígito representa propietario, grupo, otros."
     },
     {

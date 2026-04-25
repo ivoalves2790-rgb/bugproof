@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Encontrando cosas rápido",
       "language": "bash",
-      "code": "# Find all JSON config files\nfind . -name \"*.json\"\n\n# Find directories named 'test' or 'tests'\nfind . -type d -name \"test*\"\n\n# Find all CSS files in the src folder only\nfind src/ -name \"*.css\"\n\n# Find files by partial name\nfind . -name \"*config*\"",
+      "code": "# Encontrar todos los archivos JSON de configuracion\nfind . -name \"*.json\"\n\n# Encontrar directorios llamados 'test' o 'tests'\nfind . -type d -name \"test*\"\n\n# Encontrar todos los archivos CSS solo en la carpeta src\nfind src/ -name \"*.css\"\n\n# Encontrar archivos por nombre parcial\nfind . -name \"*config*\" ",
       "annotation": "La bandera -name distingue mayúsculas de minúsculas. Usa -iname en su lugar para búsquedas sin distinción de mayúsculas (por ejemplo, encontrar 'README' ya sea README.md, Readme.md o readme.md)."
     },
     {

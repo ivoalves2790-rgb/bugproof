@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Antes y después del mocking",
       "language": "javascript",
-      "code": "// WITHOUT mocking: calls real API (slow, unreliable)\ntest('displays weather', async () => {\n  const weather = await fetchWeather('NYC'); // Real API call!\n  expect(weather.temp).toBeDefined();\n});\n\n// WITH mocking: fake the API response (fast, reliable)\ntest('displays weather', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'sunny'\n  });\n  const weather = await fetchWeather('NYC'); // Returns fake data!\n  expect(weather.temp).toBe(72);\n});",
+      "code": "// SIN mocking: llama a la API real (lento, poco confiable)\ntest('muestra el clima', async () => {\n  const weather = await fetchWeather('NYC'); // Llamada real a la API!\n  expect(weather.temp).toBeDefined();\n});\n\n// CON mocking: simula la respuesta de la API (rapido, confiable)\ntest('muestra el clima', async () => {\n  jest.spyOn(api, 'fetchWeather').mockResolvedValue({\n    temp: 72, condition: 'soleado'\n  });\n  const weather = await fetchWeather('NYC'); // Devuelve datos simulados!\n  expect(weather.temp).toBe(72);\n});",
       "annotation": "El mock devuelve datos falsos al instante. Tu test se ejecuta en milisegundos y funciona incluso cuando la API está caída."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Explorando con pwd y ls",
       "language": "bash",
-      "code": "pwd                    # Where am I right now?\nls                     # What's in this folder?\nls -la                 # Show ALL files (including hidden) with details",
+      "code": "pwd                    # ¿Donde estoy ahora mismo?\nls                     # ¿Que hay en esta carpeta?\nls -la                 # Mostrar TODOS los archivos (incluyendo ocultos) con detalles",
       "annotation": "'pwd' significa Print Working Directory (Imprimir Directorio de Trabajo) -- te dice tu ubicacion actual. 'ls' significa List (Listar) -- muestra lo que hay adentro."
     },
     {

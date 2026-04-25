@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Los Comandos Que Usarás",
       "language": "bash",
-      "code": "git add .\ngit commit -m \"Ready for production\"\ngit push origin main",
+      "code": "git add .\ngit commit -m \"Listo para produccion\"\ngit push origin main",
       "annotation": "Una vez que tu repositorio está conectado a una plataforma de hosting, hacer push a main a menudo es todo lo que necesitas para activar un despliegue."
     },
     {

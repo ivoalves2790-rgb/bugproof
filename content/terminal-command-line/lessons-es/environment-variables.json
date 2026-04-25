@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Trabajando con variables de entorno",
       "language": "bash",
-      "code": "# View the PATH variable\necho $PATH\n# /usr/local/bin:/usr/bin:/bin:/usr/sbin\n\n# Set a variable for this session\nexport DATABASE_URL=\"postgres://localhost:5432/mydb\"\n\n# Use it in a command\necho $DATABASE_URL\n# postgres://localhost:5432/mydb\n\n# Add a directory to PATH\nexport PATH=\"$PATH:/usr/local/go/bin\"",
+      "code": "# Ver la variable PATH\necho $PATH\n# /usr/local/bin:/usr/bin:/bin:/usr/sbin\n\n# Definir una variable para esta sesion\nexport DATABASE_URL=\"postgres://localhost:5432/mydb\"\n\n# Usarla en un comando\necho $DATABASE_URL\n# postgres://localhost:5432/mydb\n\n# Agregar un directorio al PATH\nexport PATH=\"$PATH:/usr/local/go/bin\" ",
       "annotation": "Las variables establecidas con export solo duran la sesión actual de terminal. Para hacerlas permanentes, agrega la línea de export a tu archivo de configuración de shell (~/.bashrc, ~/.zshrc, o similar)."
     },
     {

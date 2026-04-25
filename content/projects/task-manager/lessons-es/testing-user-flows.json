@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Un Test de Flujo de Usuario",
       "language": "text",
-      "code": "test('user can create and complete a task', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('New Task');\n  await fillInput('Task title', 'Buy milk');\n  await clickButton('Save');\n  \n  expect(await getText('.task-list')).toContain('Buy milk');\n  \n  await clickCheckbox('Buy milk');\n  expect(await getText('.completed-tasks')).toContain('Buy milk');\n});",
+      "code": "test('el usuario puede crear y completar una tarea', async () => {\n  await login('testuser@example.com', 'password');\n  await clickButton('Nueva Tarea');\n  await fillInput('Titulo de tarea', 'Comprar leche');\n  await clickButton('Guardar');\n\n  expect(await getText('.task-list')).toContain('Comprar leche');\n\n  await clickCheckbox('Comprar leche');\n  expect(await getText('.completed-tasks')).toContain('Comprar leche');\n});",
       "annotation": "Este test cubre el recorrido completo del usuario — login, crear y completar — detectando problemas de integración que los tests unitarios no encontrarian."
     },
     {

@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "React.lazy para división por rutas",
       "language": "jsx",
-      "code": "import React, { lazy, Suspense } from 'react';\n\n// These are loaded on-demand, not upfront\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
+      "code": "import React, { lazy, Suspense } from 'react';\n\n// Estos se cargan bajo demanda, no de entrada\nconst Dashboard = lazy(() => import('./pages/Dashboard'));\nconst Settings = lazy(() => import('./pages/Settings'));\nconst Admin = lazy(() => import('./pages/Admin'));\n\nfunction App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <Routes>\n        <Route path=\"/\" element={<Dashboard />} />\n        <Route path=\"/settings\" element={<Settings />} />\n        <Route path=\"/admin\" element={<Admin />} />\n      </Routes>\n    </Suspense>\n  );\n}",
       "annotation": "Cada componente de página está envuelto en lazy(), así que su archivo JavaScript solo se descarga cuando el usuario navega a esa ruta. Suspense muestra un fallback de carga mientras el fragmento se descarga."
     },
     {

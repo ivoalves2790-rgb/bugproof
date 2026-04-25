@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Comparación de velocidad",
       "language": "bash",
-      "code": "# Unit tests: test a single function\n# Speed: ~50 tests per second\nnpm run test:unit     # Done in 2 seconds\n\n# Integration tests: test API endpoints\n# Speed: ~5 tests per second\nnpm run test:int      # Done in 30 seconds\n\n# E2E tests: test full user flows in a browser\n# Speed: ~1 test per 10 seconds\nnpm run test:e2e      # Done in 5 minutes",
+      "code": "# Tests unitarios: prueban una sola funcion\n# Velocidad: ~50 tests por segundo\nnpm run test:unit     # Termina en 2 segundos\n\n# Tests de integracion: prueban endpoints de API\n# Velocidad: ~5 tests por segundo\nnpm run test:int      # Termina en 30 segundos\n\n# Tests E2E: prueban flujos completos de usuario en un navegador\n# Velocidad: ~1 test cada 10 segundos\nnpm run test:e2e      # Termina en 5 minutos",
       "annotation": "Los tests unitarios se ejecutan 100 veces más rápido que los tests E2E. Por eso quieres más de ellos."
     },
     {

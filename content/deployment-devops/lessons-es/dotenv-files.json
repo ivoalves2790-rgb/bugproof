@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Un Archivo .env Típico",
       "language": "bash",
-      "code": "# Database\nDATABASE_URL=postgresql://localhost:5432/myapp\n\n# API Keys\nSTRIPE_SECRET_KEY=sk_test_abc123\nNEXT_PUBLIC_API_URL=https://api.example.com\n\n# App Settings\nNODE_ENV=development\nPORT=3000",
+      "code": "# Base de datos\nDATABASE_URL=postgresql://localhost:5432/myapp\n\n# Llaves de API\nSTRIPE_SECRET_KEY=sk_test_abc123\nNEXT_PUBLIC_API_URL=https://api.example.com\n\n# Configuracion de la app\nNODE_ENV=development\nPORT=3000",
       "annotation": "Nota: Las variables con prefijo NEXT_PUBLIC_ se exponen al navegador en Next.js. Todas las demás permanecen solo en el servidor."
     },
     {

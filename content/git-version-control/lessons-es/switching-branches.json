@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "El flujo de trabajo para cambiar",
       "language": "bash",
-      "code": "git status                          # Check for uncommitted changes\ngit add .                           # Stage changes\ngit commit -m \"Save my progress\"    # Commit first!\ngit checkout main                   # Now safe to switch\ngit checkout -b feature/search-bar  # Create + switch in one step",
+      "code": "git status                          # Verificar cambios sin commitear\ngit add .                           # Preparar cambios\ngit commit -m \"Guardar mi progreso\" # Hacer commit primero!\ngit checkout main                   # Ahora es seguro cambiar\ngit checkout -b feature/search-bar  # Crear y cambiar en un solo paso",
       "annotation": "Siempre verifica `git status` antes de cambiar. Si muestra cambios, confírmalos primero."
     },
     {

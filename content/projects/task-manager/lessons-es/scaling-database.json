@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Correcciones Comunes de Rendimiento de Base de Datos",
       "language": "text",
-      "code": "SLOW: SELECT * FROM tasks WHERE user_id = 123\n  → No index on user_id, scans every row\n\nFAST: CREATE INDEX idx_tasks_user_id ON tasks(user_id);\n  → Database jumps directly to matching rows\n\nSLOW: Fetching 10,000 tasks then filtering in JavaScript\nFAST: SELECT * FROM tasks WHERE user_id = 123 LIMIT 20 OFFSET 0;\n  → Let the database do the filtering and pagination",
+      "code": "LENTO: SELECT * FROM tasks WHERE user_id = 123\n  → Sin indice en user_id, escanea cada fila\n\nRAPIDO: CREATE INDEX idx_tasks_user_id ON tasks(user_id);\n  → La base de datos salta directo a las filas que coinciden\n\nLENTO: Traer 10,000 tareas y luego filtrar en JavaScript\nRAPIDO: SELECT * FROM tasks WHERE user_id = 123 LIMIT 20 OFFSET 0;\n  → Deja que la base de datos haga el filtrado y la paginacion",
       "annotation": "Los indices y la paginacion son las dos optimizaciones de base de datos con mayor impacto. Resuelven el 80% de los problemas de rendimiento."
     },
     {

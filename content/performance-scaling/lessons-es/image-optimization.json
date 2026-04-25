@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Antes y después",
       "language": "jsx",
-      "code": "// BAD: Full-size unoptimized image\n<img src=\"/photos/product-4000x3000.png\" />\n\n// GOOD: Optimized with all the right attributes\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Blue running shoes\"\n/>",
+      "code": "// MAL: Imagen sin optimizar a tamaño completo\n<img src=\"/photos/product-4000x3000.png\" />\n\n// BIEN: Optimizada con todos los atributos correctos\n<img\n  src=\"/photos/product-400x300.webp\"\n  width={400}\n  height={300}\n  loading=\"lazy\"\n  alt=\"Zapatillas azules para correr\"\n/>",
       "annotation": "La versión optimizada usa formato WebP, tiene el tamaño para coincidir con su tamaño de visualización, reserva espacio con width/height, carga de forma diferida e incluye texto alt para accesibilidad."
     },
     {

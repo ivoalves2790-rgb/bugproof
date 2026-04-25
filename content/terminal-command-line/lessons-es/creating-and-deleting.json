@@ -32,7 +32,7 @@
       "type": "code_example",
       "title": "Creando una Estructura de Proyecto",
       "language": "bash",
-      "code": "mkdir my-app                    # Create project folder\ncd my-app                       # Move into it\nmkdir src                       # Create source folder\ntouch src/index.js              # Create main file\ntouch README.md                 # Create readme\nls                              # Verify: src  README.md",
+      "code": "mkdir my-app                    # Crear carpeta del proyecto\ncd my-app                       # Entrar en ella\nmkdir src                       # Crear carpeta de codigo fuente\ntouch src/index.js              # Crear archivo principal\ntouch README.md                 # Crear readme\nls                              # Verificar: src  README.md",
       "annotation": "Este es un patron comun -- creas una carpeta, te mueves adentro, luego construyes la estructura interna."
     },
     {

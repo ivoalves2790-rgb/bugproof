@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Comandos de npm Que Usaras Cada Dia",
       "language": "bash",
-      "code": "npm init -y                  # Create package.json with defaults\nnpm install express          # Install Express framework\nnpm install nodemon --save-dev  # Install dev-only tool\nnpm run dev                  # Run the 'dev' script",
+      "code": "npm init -y                  # Crear package.json con valores por defecto\nnpm install express          # Instalar el framework Express\nnpm install nodemon --save-dev  # Instalar herramienta solo para dev\nnpm run dev                  # Ejecutar el script 'dev'",
       "annotation": "La bandera -y en 'npm init -y' salta todas las preguntas y usa valores predeterminados. La bandera --save-dev marca un paquete como dependencia de desarrollo (solo necesario durante la programacion, no en producción)."
     },
     {

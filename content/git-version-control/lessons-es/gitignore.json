@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Cómo funciona .gitignore",
       "language": "bash",
-      "code": "# .gitignore file contents:\n.env              # Ignore this exact file\nnode_modules/     # Ignore this entire folder\n*.log             # Ignore all files ending in .log\n.DS_Store         # Ignore macOS system files",
+      "code": "# Contenido del archivo .gitignore:\n.env              # Ignorar este archivo exacto\nnode_modules/     # Ignorar esta carpeta entera\n*.log             # Ignorar todos los archivos terminados en .log\n.DS_Store         # Ignorar archivos del sistema de macOS",
       "annotation": "Cada línea es un patrón. Puedes usar `*` como comodín y `/` para carpetas. Las líneas que comienzan con `#` son comentarios."
     },
     {
@@ -34,7 +34,7 @@
       "type": "code_example",
       "title": "Comandos que usarás",
       "language": "bash",
-      "code": "echo \".env\" > .gitignore          # Create .gitignore with one rule\necho \"node_modules/\" >> .gitignore # Append another rule\ngit status                         # Verify ignored files are hidden",
+      "code": "echo \".env\" > .gitignore          # Crear .gitignore con una regla\necho \"node_modules/\" >> .gitignore # Agregar otra regla\ngit status                         # Verificar que los archivos ignorados esten ocultos",
       "annotation": "Usa `>` para crear/sobrescribir y `>>` para agregar al final. Siempre ejecuta `git status` después para confirmar que funcionó."
     },
     {

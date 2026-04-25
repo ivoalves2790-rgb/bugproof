@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Los comandos para ramificar",
       "language": "bash",
-      "code": "git branch                       # List all branches\ngit branch feature/dark-mode     # Create a new branch\ngit checkout feature/dark-mode   # Switch to it\n\n# Or do both at once:\ngit checkout -b feature/dark-mode",
+      "code": "git branch                       # Listar todas las ramas\ngit branch feature/dark-mode     # Crear una nueva rama\ngit checkout feature/dark-mode   # Cambiar a ella\n\n# O hacer ambas cosas a la vez:\ngit checkout -b feature/dark-mode",
       "annotation": "El atajo `git checkout -b <nombre>` crea Y cambia a la rama en un solo comando. Lo usarás mucho."
     },
     {

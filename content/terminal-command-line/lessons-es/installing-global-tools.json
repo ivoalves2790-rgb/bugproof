@@ -32,7 +32,7 @@
       "type": "code_example",
       "title": "Instalación Global vs npx",
       "language": "bash",
-      "code": "# Global install: permanently available\nnpm install -g vercel\nvercel --version          # Works from anywhere\n\n# npx: run once without installing\nnpx create-next-app my-app   # Downloads, runs, done\nnpx cowsay \"Hello World\"      # Fun one-time command",
+      "code": "# Instalacion global: disponible permanentemente\nnpm install -g vercel\nvercel --version          # Funciona desde cualquier lugar\n\n# npx: ejecutar una vez sin instalar\nnpx create-next-app my-app   # Descarga, ejecuta, termina\nnpx cowsay \"Hola Mundo\"      # Comando divertido de una sola vez",
       "annotation": "Las instalaciones globales permanecen en tu máquina hasta que las desinstales. npx descarga, ejecuta el comando y limpia. Usa npx para generadores de proyectos y herramientas de uso único."
     },
     {

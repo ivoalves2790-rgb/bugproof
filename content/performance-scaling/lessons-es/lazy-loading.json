@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Carga diferida de imágenes",
       "language": "html",
-      "code": "<!-- Loads immediately (good for hero/above-fold images) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Lazy loads when user scrolls near it -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
+      "code": "<!-- Carga inmediata (bueno para imagenes hero o above-the-fold) -->\n<img src=\"/hero.webp\" fetchpriority=\"high\">\n\n<!-- Carga diferida cuando el usuario se acerca con scroll -->\n<img src=\"/product-1.webp\" loading=\"lazy\">\n<img src=\"/product-2.webp\" loading=\"lazy\">\n<img src=\"/product-3.webp\" loading=\"lazy\">",
       "annotation": "El atributo nativo loading='lazy' del navegador retrasa la carga hasta que la imagen está cerca del viewport. ¡No se necesita JavaScript!"
     },
     {

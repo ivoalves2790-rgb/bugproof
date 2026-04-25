@@ -32,7 +32,7 @@
       "type": "code_example",
       "title": "Tu Primera Vista de Comandos de Terminal",
       "language": "bash",
-      "code": "pwd                    # Print where you are\nls                     # List files in current folder\ncd Documents           # Move into the Documents folder\nmkdir my-project       # Create a new folder",
+      "code": "pwd                    # Imprime donde estas\nls                     # Lista los archivos de la carpeta actual\ncd Documents           # Entra a la carpeta Documents\nmkdir my-project       # Crea una nueva carpeta",
       "annotation": "Estos son algunos de los comandos más comunes. Cada uno es una palabra corta en inglés o una abreviatura -- pwd significa 'print working directory' (imprimir directorio de trabajo), ls significa 'list' (listar)."
     },
     {

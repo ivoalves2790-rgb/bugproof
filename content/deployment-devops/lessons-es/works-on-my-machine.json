@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Un Error Traicionero",
       "language": "javascript",
-      "code": "// This works on Mac but fails on Linux\nimport Header from './components/header';\n// File is actually named: Header.js\n\n// This works locally but fails in production\nconst API = 'http://localhost:3001/api';\n// Production API is at https://api.myapp.com\n\n// This works when you have sharp installed globally\nconst sharp = require('sharp'); // Not in package.json!",
+      "code": "// Esto funciona en Mac pero falla en Linux\nimport Header from './components/header';\n// El archivo se llama: Header.js\n\n// Esto funciona localmente pero falla en produccion\nconst API = 'http://localhost:3001/api';\n// La API de produccion esta en https://api.myapp.com\n\n// Esto funciona cuando tienes sharp instalado globalmente\nconst sharp = require('sharp'); // No esta en package.json!",
       "annotation": "Cada uno de estos se ve correcto en tu máquina pero fallará en el servidor por diferentes razones."
     },
     {

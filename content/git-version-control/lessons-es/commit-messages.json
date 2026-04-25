@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Ejemplos buenos vs malos",
       "language": "bash",
-      "code": "# Good messages:\ngit commit -m \"Add email validation to signup form\"\ngit commit -m \"Fix crash when user uploads empty file\"\ngit commit -m \"Remove deprecated payment API calls\"\n\n# Bad messages:\ngit commit -m \"fix stuff\"\ngit commit -m \"WIP\"\ngit commit -m \"changes\"",
+      "code": "# Buenos mensajes:\ngit commit -m \"Agregar validacion de email al formulario de registro\"\ngit commit -m \"Corregir crash cuando el usuario sube un archivo vacio\"\ngit commit -m \"Eliminar llamadas obsoletas a la API de pagos\"\n\n# Malos mensajes:\ngit commit -m \"arreglar cosas\"\ngit commit -m \"WIP\"\ngit commit -m \"cambios\" ",
       "annotation": "Observa que los buenos mensajes comienzan con un verbo (Add, Fix, Remove) y describen un cambio específico."
     },
     {

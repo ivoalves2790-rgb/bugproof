@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Buena vs mala ubicación del log",
       "language": "javascript",
-      "code": "function double(x) {\n  // Bad: logs before the calculation\n  console.log('result:', result); // ReferenceError!\n  const result = x * 2;\n\n  // Good: logs after the calculation\n  console.log('result:', result); // Shows the actual value\n  return result;\n}",
+      "code": "function double(x) {\n  // Mal: hace log antes del calculo\n  console.log('resultado:', result); // ReferenceError!\n  const result = x * 2;\n\n  // Bien: hace log despues del calculo\n  console.log('resultado:', result); // Muestra el valor real\n  return result;\n}",
       "annotation": "Siempre coloca console.log después de la línea que crea o cambia el valor que quieres inspeccionar."
     },
     {

@@ -22,7 +22,7 @@
       "type": "code_example",
       "title": "Datos de Tareas: SQL vs NoSQL",
       "language": "text",
-      "code": "SQL (PostgreSQL):\n  tasks table: id | title | status | due_date | user_id\n  Clean, structured, easy to query and filter.\n\nNoSQL (MongoDB):\n  { title: '...', status: '...', due_date: '...', user: {...} }\n  Flexible, but relationships get messy fast.",
+      "code": "SQL (PostgreSQL):\n  tabla tasks: id | title | status | due_date | user_id\n  Limpio, estructurado, facil de consultar y filtrar.\n\nNoSQL (MongoDB):\n  { title: '...', status: '...', due_date: '...', user: {...} }\n  Flexible, pero las relaciones se vuelven complicadas rapido.",
       "annotation": "Cuando tus datos tienen estructura clara y relaciones (las tareas pertenecen a usuarios), SQL mantiene las cosas limpias. NoSQL brilla cuando las formas de datos son impredecibles."
     },
     {

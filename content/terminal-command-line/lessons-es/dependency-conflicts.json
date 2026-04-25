@@ -27,7 +27,7 @@
       "type": "code_example",
       "title": "Mensajes de Error Comunes y Su Significado",
       "language": "bash",
-      "code": "# Peer dependency conflict\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! peer react@\"^17.0.0\" from package-a@1.0.0\nnpm ERR! peer react@\"^18.0.0\" from package-b@2.0.0\n\n# Quick fixes\nnpm install --legacy-peer-deps   # Ignore peer conflicts\nnpm audit                        # Check for vulnerabilities\nnpm audit fix                    # Auto-fix what it can",
+      "code": "# Conflicto de peer dependency\nnpm ERR! ERESOLVE could not resolve\nnpm ERR! peer react@\"^17.0.0\" from package-a@1.0.0\nnpm ERR! peer react@\"^18.0.0\" from package-b@2.0.0\n\n# Soluciones rapidas\nnpm install --legacy-peer-deps   # Ignorar conflictos de peer\nnpm audit                        # Verificar vulnerabilidades\nnpm audit fix                    # Auto-arregla lo que pueda",
       "annotation": "ERESOLVE significa que dos paquetes no se ponen de acuerdo sobre que versión de una dependencia compartida usar. --legacy-peer-deps le dice a npm que instale de todos modos y te deja resolverlo. npm audit verifica problemas de seguridad conocidos en tus paquetes."
     },
     {

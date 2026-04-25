@@ -17,7 +17,7 @@
       "type": "code_example",
       "title": "Las Consultas Detras de Tu Gestor de Tareas",
       "language": "sql",
-      "code": "-- Create a task\nINSERT INTO tasks (title, user_id) VALUES ('Buy groceries', '...');\n\n-- Read all tasks for a user\nSELECT * FROM tasks WHERE user_id = '...' ORDER BY created_at DESC;\n\n-- Mark a task complete\nUPDATE tasks SET is_complete = true WHERE id = '...' AND user_id = '...';\n\n-- Delete a task\nDELETE FROM tasks WHERE id = '...' AND user_id = '...';",
+      "code": "-- Crear una tarea\nINSERT INTO tasks (title, user_id) VALUES ('Comprar comestibles', '...');\n\n-- Leer todas las tareas de un usuario\nSELECT * FROM tasks WHERE user_id = '...' ORDER BY created_at DESC;\n\n-- Marcar una tarea como completa\nUPDATE tasks SET is_complete = true WHERE id = '...' AND user_id = '...';\n\n-- Eliminar una tarea\nDELETE FROM tasks WHERE id = '...' AND user_id = '...';",
       "annotation": "Observa: cada UPDATE y DELETE incluye AND user_id = '...'. Esto previene que los usuarios modifiquen las tareas de otras personas. Nunca olvides este filtro."
     },
     {
