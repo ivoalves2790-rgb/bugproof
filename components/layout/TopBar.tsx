@@ -43,9 +43,12 @@ export function TopBar({ hearts: defaultHearts, streak: defaultStreak, xp: defau
   return (
     <header className="fixed top-0 left-0 right-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-surface px-4 md:pl-60" role="banner">
       {/* Mobile logo - only shown on mobile */}
-      <div className="flex items-center gap-2 md:hidden">
-        <img src="/icons/icon-192.svg" alt="Bugproof" width={24} height={24} className="rounded" />
+      <div className="flex items-baseline gap-2 md:hidden">
+        <img src="/icons/icon-192.svg" alt="Bugproof" width={24} height={24} className="rounded self-center" />
         <span className="font-bold">bug<span className="text-terminal-green">proof</span></span>
+        <span className="text-[10px] font-mono text-muted-foreground tabular-nums" aria-label="App version">
+          {process.env.NEXT_PUBLIC_APP_VERSION}
+        </span>
       </div>
 
       {/* Spacer for desktop */}

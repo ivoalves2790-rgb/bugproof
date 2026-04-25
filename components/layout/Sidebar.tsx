@@ -29,9 +29,12 @@ export function Sidebar() {
   return (
     <aside className="hidden md:flex md:w-56 md:flex-col md:fixed md:inset-y-0 border-r border-border bg-surface" role="navigation" aria-label="Main navigation">
       <div className="flex h-14 items-center px-4 border-b border-border">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <img src="/icons/icon-192.svg" alt="Bugproof" width={28} height={28} className="rounded" />
+        <Link href="/dashboard" className="flex items-baseline gap-2">
+          <img src="/icons/icon-192.svg" alt="Bugproof" width={28} height={28} className="rounded self-center" />
           <span className="text-lg font-bold">bug<span className="text-terminal-green">proof</span></span>
+          <span className="text-[10px] font-mono text-muted-foreground tabular-nums" aria-label="App version">
+            {process.env.NEXT_PUBLIC_APP_VERSION}
+          </span>
         </Link>
       </div>
 
