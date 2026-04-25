@@ -93,16 +93,11 @@ export function IncidentResponse({ exercise, onComplete }: IncidentResponseProps
     const nextNode = exercise.nodes[choice.nextNode];
 
     if (nextNode?.isEnd) {
-      // Evaluate and show final result
       const evalResult = evaluateIncidentResponse(newChoices, exercise);
       setResult(evalResult);
       setCurrentNodeId(choice.nextNode);
-
-      // Trigger typing for the end node narrative, then show results
-      setTimeout(() => {
-        setCompleted(true);
-        onComplete({ score: evalResult.score, maxScore: evalResult.maxScore });
-      }, 500);
+      setCompleted(true);
+      onComplete({ score: evalResult.score, maxScore: evalResult.maxScore });
     } else {
       setCurrentNodeId(choice.nextNode);
     }
